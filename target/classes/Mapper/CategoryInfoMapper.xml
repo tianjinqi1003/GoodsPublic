@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="goodsPublic.dao.CategoryInfoMapper">
+	<select id="getCategoryInfo" resultType="goodsPublic.entity.CategoryInfo">
+		select * from
+		category_table where accountId=#{accountId}
+	</select>
+	<insert id="saveCategoryInfo" parameterType="goodsPublic.entity.CategoryInfo">
+		insert into category_table
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="categoryName!=null">
+				categoryName,
+			</if>
+			<if test="categoryId!=null">
+				categoryId,
+			</if>
+			<if test="accountId!=null">
+				accountId
+			</if>
+			values
+		</trim>
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+		<if test="categoryName!=null">
+				#{categoryName},
+			</if>
+			<if test="categoryId!=null">
+				#{categoryId},
+			</if>
+			<if test="accountId!=null">
+				#{accountId}
+			</if>
+		</trim>
+	</insert>
+</mapper>

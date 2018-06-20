@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="goodsPublic.dao.PublicMapper">
+	<insert id="addGoodsPublic" parameterType="goodsPublic.entity.ShopArticleInfo" >
+		insert into public_goods
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="goodsNumber!=null">
+				goodsNumber,
+			</if>
+			<if test="title!=null">
+				title,
+			</if>
+			<if test="imgUrl!=null">
+				imgUrl,
+			</if>
+			<if test="htmlContent!=null">
+				htmlContent,
+			</if>
+			gmt_create
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+				<if test="goodsNumber!=null">
+				#{goodsNumber},
+			</if>
+			<if test="title!=null">
+				#{title},
+			</if>
+			<if test="imgUrl!=null">
+				#{imgUrl},
+			</if>
+			<if test="htmlContent!=null">
+				#{htmlContent},
+			</if>
+			now()
+		</trim>
+	</insert>
+	<select id="getAllGoodsMsg" resultType="goodsPublic.entity.ShopArticleInfo">
+		select * from public_goods
+		where goodsNumber=#{goodsNumber}
+	</select>
+</mapper>
