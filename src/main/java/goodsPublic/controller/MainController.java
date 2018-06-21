@@ -1,6 +1,8 @@
 package goodsPublic.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -89,7 +91,55 @@ public class MainController {
 		json=JsonUtil.getJsonFromObject(plan);
 		return json;
 	}
-
+	
+	/**
+	 * 编辑类别信息
+	 * */
+	@RequestMapping(value="/editCategory",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String editCategory(CategoryInfo categoryInfo) {
+		
+		int count=publicService.editCategory(categoryInfo);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(1);
+			plan.setMsg("类别编辑失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(0);
+			plan.setMsg("类别编辑成功");
+			plan.setUrl("/merchant/main/queryCategoryList");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
+	/**
+	 * 删除类别信息
+	 * @return
+	 */
+	@RequestMapping(value="/deleteCategory",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteCategory(String id) {
+		
+		int count=categoryService.deletCategoryInfo(id);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(1);
+			plan.setMsg("类别删除失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(0);
+			plan.setMsg("类别删除成功");
+			plan.setUrl("/merchant/main/queryCategoryList");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
 
 	//主操作页面接口
 	@RequestMapping(value="/show",method=RequestMethod.GET)
@@ -101,23 +151,37 @@ public class MainController {
 		//检查数据是否传过来
 		return "/merchant/show";
 	}
+	
 	//获得店铺名下的所有分类
-	@RequestMapping(value="/getCategory",produces="plain/text; charset=UTF-8")
-	@ResponseBody
+	@RequestMapping(value="/queryCategoryList")
 	public String getCategory(HttpServletRequest request) {
 		HttpSession session=request.getSession();
 		AccountMsg user=(AccountMsg) session.getAttribute("user");
-		AccountMsg SqlUser=userService.getUserLogin(user);
-		System.out.println("这是用来查询分类的用户："+SqlUser);
+		AccountMsg accountMsg=userService.getUserLogin(user);
+		System.out.println("这是用来查询分类的用户："+accountMsg);
 		//TODO  制作分类反馈信息
-		return "查出来了";
+		List<CategoryInfo> catList = categoryService.getCategory(accountMsg.getId());
+		System.out.println("size======="+catList.size());
+		request.setAttribute("categoryList", catList);
+		return "/merchant/categoryList";
 	}
+	
+	/**
+	 * 跳转到类别编辑页面
+	 * */
+	@RequestMapping(value="/goEditCategory")
+	public String goEditCategory(HttpServletRequest request, String id) {
+		CategoryInfo categoryInfo = categoryService.getById(id);
+		request.setAttribute("categoryInfo", categoryInfo);
+		return "/merchant/editCategory";
+	}
+	
 	//创建分类
 	@RequestMapping(value="/addCategory",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String addCategory(CategoryInfo categoryInfo) {
-		//categoryService.addCategory(categoryInfo);
+		categoryService.addCategory(categoryInfo);
 		
-		return "merchant/creatCategory";
+		return null;
 	}
 }

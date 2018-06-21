@@ -4,6 +4,13 @@ public class CategoryInfo {
 	private String categoryName;
 	private String categoryId;
 	private String accountId;
+	private String id;
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
 	public String getCategoryName() {
 		return categoryName;
 	}

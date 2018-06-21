@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.goodsPublic.util.PlanResult;
 
+import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.ShopArticleInfo;
 
 public interface PublicService {
@@ -13,4 +14,10 @@ public interface PublicService {
 	public int getGoodsByGoodsNumber(String goodsNumber);
 	//查询当前用户的
 	public PlanResult getGoodsByGN(String goodsNumber);
+	/**
+	 * 编辑类别
+	 * @param categoryInfo
+	 * @return
+	 */
+	public int editCategory(CategoryInfo categoryInfo);
 }

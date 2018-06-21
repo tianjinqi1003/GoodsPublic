@@ -14,13 +14,23 @@ public class CategoryServiceImpl implements CategoryService {
 	private CategoryInfoMapper categoryInfoMapper;
 	@Override
 	public List<CategoryInfo> getCategory(String accountId) {
-		categoryInfoMapper.getCategoryInfo(accountId);
-		return null;
+		List<CategoryInfo> list = categoryInfoMapper.getCategoryList(accountId);
+		return list;
 	}
 	@Override
 	public int addCategory(CategoryInfo categoryInfo) {
 		categoryInfoMapper.saveCategoryInfo(categoryInfo);
 		return 0;
+	}
+	@Override
+	public CategoryInfo getById(String id) {
+		// TODO Auto-generated method stub
+		return categoryInfoMapper.getById(id);
+	}
+	@Override
+	public int deletCategoryInfo(String id) {
+		// TODO Auto-generated method stub
+		return categoryInfoMapper.deletCategoryInfo(id);
 	}
 
 }

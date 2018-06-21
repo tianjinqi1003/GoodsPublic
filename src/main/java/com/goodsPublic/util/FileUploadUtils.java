@@ -34,12 +34,23 @@ public class FileUploadUtils {
 				//            String writeTempPath = "/home/terabithia";
 
 				
-			String avaPath ="http://120.27.5.36:8888/GoodsPublic/upload/"+fileName;
+			String avaPath ="/GoodsPublic/upload/"+fileName;
 //			String writeTempPath = request.getSession().getServletContext().getRealPath("/");
 			String realPath="D:\\resource\\";
+			System.out.println(avaPath);
+				/**
+				 * @author 马鹏昊
+				 * @desc 裁剪图片
+				 */
+				
 //			File storeFile =  new File(writeTempPath + "uploads/", fileName);
 			File storeFile =  new File(realPath, fileName);
 			FileUtils.copyInputStreamToFile(myFile.getInputStream(),storeFile );
+				//			uploadFileForFTP(client, fileName, writeTempPath + "\\" + fileName, "Resource\\htkApp\\upload\\" + folder);
+				//			uploadFileForFTP(client, fileName, writeTempPath + "/" + fileName, "Resource\\htkApp\\upload\\" + folder);
+				//			String avaPath = OtherUtils.getRootDirectory() + Globals.PROJECT_URL + Globals.PHOTO_URL + folder + fileName;
+				//			String avaPath = OtherUtils.getRootDirectory() + Globals.PROJECT_URL + Globals.PHOTO_URL + folder + newName;
+				//			String rjson = "{\"code\": 0,\"msg\": \"成功\",\"data\": {\"src\": \"" + avaPath + "\"}}";
 			JSONObject map = new JSONObject();
 			map.put("code", 0);
 			map.put("msg", "成功");

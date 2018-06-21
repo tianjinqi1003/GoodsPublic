@@ -70,6 +70,9 @@
 						</dd>
 					</dl></li>
 				<li class="layui-nav-item"><a href="javascript:;">商家信息</a></li>
+				<li class="layui-nav-item">
+					<a href="<%=basePath%>merchant/main/queryCategoryList">分类管理</a>
+				</li>
 			</ul>
 		</div>
 	</div>

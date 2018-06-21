@@ -2,6 +2,7 @@ package goodsPublic.dao;
 
 import java.util.List;
 
+import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.ShopArticleInfo;
 
 public interface PublicMapper {

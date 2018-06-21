@@ -1,20 +1,29 @@
 package goodsPublic.service.serviceImpl;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.goodsPublic.util.JsonUtil;
 import com.goodsPublic.util.PlanResult;
 
+import goodsPublic.dao.CategoryInfoMapper;
 import goodsPublic.dao.PublicMapper;
+import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.ShopArticleInfo;
 import goodsPublic.service.PublicService;
 @Service
 public class PublicServiceImpl implements PublicService {
 	@Autowired
 	private PublicMapper publicDao;
+	@Autowired
+	private CategoryInfoMapper categoryInfoDao;
 	
 	//发布商品接口，将商品保存在数据库中
 	@Override
@@ -51,6 +60,18 @@ public class PublicServiceImpl implements PublicService {
 		plan.setMsg("查询成功");
 		plan.setData(shopInfo);
 		return plan;
+	}
+
+	@Override
+	public int editCategory(CategoryInfo categoryInfo) {
+		// TODO Auto-generated method stub
+		
+		int count=0;
+		if(StringUtils.isEmpty(categoryInfo.getId()))
+			count=categoryInfoDao.saveCategoryInfo(categoryInfo);
+		else
+			count=categoryInfoDao.updateCategoryInfo(categoryInfo);
+		return count;
 	}
 	
 }
