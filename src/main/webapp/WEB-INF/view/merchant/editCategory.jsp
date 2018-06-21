@@ -79,10 +79,6 @@
 					var layer = layui.layer;
 					var element = layui.element;
 					 //监听导航点击
-					  element.on('nav(demo)', function(elem){
-					    //console.log(elem)
-					    layer.msg(elem.text());
-					  });
 					layedit = layui.layedit, upload = layui.upload,
 							form = layui.form;
 					form.on('submit(formDemo)', function(data) {
