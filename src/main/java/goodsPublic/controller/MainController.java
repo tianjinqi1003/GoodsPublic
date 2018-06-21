@@ -147,8 +147,6 @@ public class MainController {
 		System.out.println(goodsNumber);
 		PlanResult plan=publicService.getGoodsByGN(goodsNumber);
 		request.setAttribute("plan", plan.getData());
-		//TODO
-		//检查数据是否传过来
 		return "/merchant/show";
 	}
 	
@@ -159,7 +157,6 @@ public class MainController {
 		AccountMsg user=(AccountMsg) session.getAttribute("user");
 		AccountMsg accountMsg=userService.getUserLogin(user);
 		System.out.println("这是用来查询分类的用户："+accountMsg);
-		//TODO  制作分类反馈信息
 		List<CategoryInfo> catList = categoryService.getCategory(accountMsg.getId());
 		System.out.println("size======="+catList.size());
 		request.setAttribute("categoryList", catList);
