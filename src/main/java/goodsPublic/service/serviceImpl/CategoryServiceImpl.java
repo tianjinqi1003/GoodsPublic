@@ -1,5 +1,6 @@
 package goodsPublic.service.serviceImpl;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,10 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryInfoMapper.getById(id);
 	}
 	@Override
-	public int deletCategoryInfo(String id) {
+	public int deletCategoryInfo(String ids) {
 		// TODO Auto-generated method stub
-		return categoryInfoMapper.deletCategoryInfo(id);
+		List<String> idList = Arrays.asList(ids.split(","));
+		return categoryInfoMapper.deletCategoryInfo(idList);
 	}
 
 }

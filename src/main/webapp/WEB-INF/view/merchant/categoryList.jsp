@@ -9,10 +9,21 @@
 <%@include file="js.jsp"%>
 <script type="text/javascript">
 var baseUrl = "${pageContext.request.contextPath}";
-function deleteById(id){
+function deleteByIds(){
+	if($("#tab1 input[type='checkbox']:checked").length==0){
+		alert("请选择要删除的信息！");
+		return false;
+	}
+	var ids="";
+	$("#tab1 input[type='checkbox']").each(function(){
+		if($(this).prop("checked")){
+			ids+=","+$(this).attr("id").substring(2);
+		}
+	});
+	alert(ids.substring(1));
 	var url = baseUrl + "/merchant/main/deleteCategory"
 	$.post(url,
-		{id:id},
+		{ids:ids.substring(1)},
 		function(result){
 			location.href=location.href;
 		}
@@ -20,31 +31,40 @@ function deleteById(id){
 }
 </script>
 </head>
-<body>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
 	<%@include file="side.jsp"%>
-	<%@include file="foot.jsp"%>
-	<a href="<%=basePath%>merchant/main/goEditCategory" style="margin-left: 250px;">添加</a>
-	<table style="margin-left: 250px;">
+	<div class="layui-body">
+	<input type="button" value="添加" onclick="location.href='<%=basePath%>merchant/main/goEditCategory';"/>
+	<input type="button" value="删除" onclick="deleteByIds();"/>
+	<table id="tab1" class="layui-table">
 		<tr>
+			<td>操作</td>
 			<td>类别编号</td>
 			<td>类别名称</td>
 			<td>商户编号</td>
 			<td>编辑</td>
-			<td>删除</td>
 		</tr>
 		<c:forEach items="${requestScope.categoryList}" var="categoryInfo">
 		<tr>
+			<td>
+				<input type="checkbox" id="cb${categoryInfo.id }"/>
+			</td>
 			<td>${categoryInfo.categoryId }</td>
 			<td>${categoryInfo.categoryName }</td>
 			<td>${categoryInfo.accountId }</td>
 			<td>
 				<a href="<%=basePath%>merchant/main/goEditCategory?id=${categoryInfo.id }">编辑</a>
 			</td>
+			<!-- 
 			<td>
 				<input type="button" value="删除" onclick="deleteById(${categoryInfo.id });"/>
 			</td>
+			 -->
 		</tr>
 		</c:forEach>
 	</table>
+	</div>
+	<%@include file="foot.jsp"%>
 </body>
 </html>

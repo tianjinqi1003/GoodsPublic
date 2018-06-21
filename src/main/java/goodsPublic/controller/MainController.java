@@ -122,9 +122,9 @@ public class MainController {
 	 */
 	@RequestMapping(value="/deleteCategory",produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String deleteCategory(String id) {
+	public String deleteCategory(String ids) {
 		
-		int count=categoryService.deletCategoryInfo(id);
+		int count=categoryService.deletCategoryInfo(ids);
 		PlanResult plan=new PlanResult();
 		String json;
 		if(count==0) {

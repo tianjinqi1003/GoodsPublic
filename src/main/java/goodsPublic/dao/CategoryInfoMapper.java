@@ -10,7 +10,7 @@ public interface CategoryInfoMapper {
 	//修改分类
 	public int updateCategoryInfo(CategoryInfo categoryInfo);
 	//删除分类
-	public int deletCategoryInfo(String id);
+	public int deletCategoryInfo(List<String> idList);
 	//添加分类
 	public int saveCategoryInfo(CategoryInfo categoryInfo);
 	/**

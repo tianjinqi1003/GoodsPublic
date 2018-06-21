@@ -15,8 +15,8 @@ public interface CategoryService {
 	public CategoryInfo getById(String id);
 	/**
 	 * 删除类别
-	 * @param id
+	 * @param ids
 	 * @return
 	 */
-	public int deletCategoryInfo(String id);
+	public int deletCategoryInfo(String ids);
 }
