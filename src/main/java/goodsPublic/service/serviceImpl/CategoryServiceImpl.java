@@ -24,12 +24,10 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 	@Override
 	public CategoryInfo getById(String id) {
-		// TODO Auto-generated method stub
 		return categoryInfoMapper.getById(id);
 	}
 	@Override
 	public int deletCategoryInfo(String id) {
-		// TODO Auto-generated method stub
 		return categoryInfoMapper.deletCategoryInfo(id);
 	}
 
