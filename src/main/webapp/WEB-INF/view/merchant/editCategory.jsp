@@ -37,18 +37,6 @@
 							<div class="formList">
 								<div class="formLine clearfix">
 									<div class="layui-form-item">
-										<label class="layui-form-label">*商户编号</label>
-										<div class="layui-input-block">
-											<input type="text" name="accountId" value="${categoryInfo.accountId }" required
-												lay-verify="required" placeholder="请输入商户编号"
-												autocomplete="off" class="layui-input" maxlength="20">
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="formList">
-								<div class="formLine clearfix">
-									<div class="layui-form-item">
 										<label class="layui-form-label">*类别编号</label>
 										<div class="layui-input-block">
 											<input type="text" name="categoryId" value="${categoryInfo.categoryId }" required
@@ -74,8 +62,6 @@
 							<div class="layui-input-block">
 								<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
 								<button type="reset" class="layui-btn layui-btn-primary">重置</button>
-								<button type="button" class="layui-btn layui-btn-primary"
-									id="doHTML">制作html</button>
 							</div>
 						</div>
 					</form>

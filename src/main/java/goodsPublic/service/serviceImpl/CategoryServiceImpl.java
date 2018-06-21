@@ -25,14 +25,18 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 	@Override
 	public CategoryInfo getById(String id) {
-		// TODO Auto-generated method stub
 		return categoryInfoMapper.getById(id);
 	}
 	@Override
+<<<<<<< HEAD
 	public int deletCategoryInfo(String ids) {
 		// TODO Auto-generated method stub
 		List<String> idList = Arrays.asList(ids.split(","));
 		return categoryInfoMapper.deletCategoryInfo(idList);
+=======
+	public int deletCategoryInfo(String id) {
+		return categoryInfoMapper.deletCategoryInfo(id);
+>>>>>>> 70adeb36274a454c5592f37a2adcb116ef83bd85
 	}
 
 }
