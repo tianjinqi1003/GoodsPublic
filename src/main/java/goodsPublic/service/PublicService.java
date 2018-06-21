@@ -20,4 +20,10 @@ public interface PublicService {
 	 * @return
 	 */
 	public int editCategory(CategoryInfo categoryInfo);
+	/**
+	 * 生成show页面地址栏二维码
+	 * @param url
+	 * @param goodsNumber
+	 */
+	public void createShowUrlQrcode(String url, String goodsNumber);
 }

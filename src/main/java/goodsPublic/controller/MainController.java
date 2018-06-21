@@ -93,6 +93,25 @@ public class MainController {
 	}
 	
 	/**
+	 * 生成show页面地址栏二维码
+	 * @param url
+	 * @param goodsNumber
+	 */
+	@RequestMapping(value="/createShowUrlQrcode",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String createShowUrlQrcode(String url, String goodsNumber) {
+		
+		publicService.createShowUrlQrcode(url,goodsNumber);
+		
+		PlanResult plan=new PlanResult();
+		String json;
+		plan.setStatus(0);
+		plan.setUrl(url);
+		json=JsonUtil.getJsonFromObject(plan);
+		return json;
+	}
+	
+	/**
 	 * 编辑类别信息
 	 * */
 	@RequestMapping(value="/editCategory",produces="plain/text; charset=UTF-8")

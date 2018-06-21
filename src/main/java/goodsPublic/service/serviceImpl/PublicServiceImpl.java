@@ -1,10 +1,14 @@
 package goodsPublic.service.serviceImpl;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.swing.filechooser.FileSystemView;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import com.goodsPublic.util.JsonUtil;
 import com.goodsPublic.util.PlanResult;
+import com.goodsPublic.util.qrcode.Qrcode;
 
 import goodsPublic.dao.CategoryInfoMapper;
 import goodsPublic.dao.PublicMapper;
@@ -72,6 +77,18 @@ public class PublicServiceImpl implements PublicService {
 		else
 			count=categoryInfoDao.updateCategoryInfo(categoryInfo);
 		return count;
+	}
+
+	@Override
+	public void createShowUrlQrcode(String url, String goodsNumber) {
+		// TODO Auto-generated method stub
+		
+		if(publicDao.updateQrcode(url,goodsNumber)>0) {
+			//String path = FileSystemView.getFileSystemView().getHomeDirectory() + File.separator + "testQrcode";
+			String path = "D:/resource";
+	        String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
+	        Qrcode.createQrCode(url, path, fileName);
+		}
 	}
 	
 }

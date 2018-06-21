@@ -37,6 +37,9 @@
 			now()
 		</trim>
 	</insert>
+	<update id="updateQrcode" parameterType="java.lang.String">
+		update public_goods set qrCode=#{param1} where goodsNumber=#{param2}
+	</update>
 	<select id="getAllGoodsMsg" resultType="goodsPublic.entity.ShopArticleInfo">
 		select * from public_goods
 		where goodsNumber=#{goodsNumber}

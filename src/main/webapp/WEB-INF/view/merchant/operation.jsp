@@ -146,19 +146,28 @@
 									,content: '失败原因：'+json.msg
 								})
 							}else{
-								layer.open({
-									title : "是否预览",
-									btn : [ 'yes', 'no' ],
-									content:json.msg,
-									yes : function() {
-										console.log(json.data)
-										console.log(json.url)
-										window.location.href=baseUrl+json.url+"?goodsNumber="+json.data
-									},
-									no:function(){
-										
+								var url=location.href.substring(0,location.href.indexOf("GoodsPublic")-1)+baseUrl+json.url+"?goodsNumber="+json.data;
+								$.post(baseUrl + "/merchant/main/createShowUrlQrcode",
+									{url:url,goodsNumber:json.data},
+									function(json1){
+										if(json1.status==0){
+											layer.open({
+												title : "是否预览",
+												btn : [ 'yes', 'no' ],
+												content:json.msg,
+												yes : function() {
+													console.log(json.data)
+													console.log(json.url)
+													window.location.href=json1.url;
+													//window.location.href=baseUrl+json.url+"?goodsNumber="+json.data
+												},
+												no:function(){
+													
+												}
+											})
+										}
 									}
-								})
+								,"json");
 							}
 						})
 						return false;
