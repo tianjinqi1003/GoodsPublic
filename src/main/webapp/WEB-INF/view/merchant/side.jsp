@@ -56,6 +56,8 @@
 					href="<%=basePath%>merchant/main/index">首页</a></li>
 				<li class="layui-nav-item"><a
 					href="<%=basePath%>merchant/main/operation">商品发布</a></li>
+				<li class="layui-nav-item"><a
+					href="<%=basePath%>merchant/main/queryCategoryList">分类管理</a></li>
 				<li class="layui-nav-item"><a href="javascript:;"
 					class="getCategory">店内分类</a>
 					<dl class="layui-nav-child">
@@ -70,9 +72,6 @@
 						</dd>
 					</dl></li>
 				<li class="layui-nav-item"><a href="javascript:;">商家信息</a></li>
-				<li class="layui-nav-item">
-					<a href="<%=basePath%>merchant/main/queryCategoryList">分类管理</a>
-				</li>
 			</ul>
 		</div>
 	</div>
