@@ -74,7 +74,7 @@
 						 -->
 						 <c:forEach items="${requestScope.categoryList }" var="item">
 						 <dd>
-							<a href="javascript:;">${item.categoryName }</a>
+							<a href="<%=basePath%>merchant/main/queryGoodsList?categoryId=${item.categoryId}">${item.categoryName }</a>
 						 </dd>
 						 </c:forEach>
 					</dl>

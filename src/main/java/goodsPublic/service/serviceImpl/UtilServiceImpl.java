@@ -17,7 +17,7 @@ import com.google.code.kaptcha.Producer;
 import com.sun.image.codec.jpeg.JPEGCodec;
 import com.sun.image.codec.jpeg.JPEGImageEncoder;
 
-import goodsPublic.entity.ShopArticleInfo;
+import goodsPublic.entity.Goods;
 import goodsPublic.service.UtilService;
 
 @Service
@@ -50,7 +50,7 @@ public class UtilServiceImpl implements UtilService {
 	}
 
 	@Override
-	public String doHTML(ShopArticleInfo articleInfo ,HttpServletRequest request) {
+	public String doHTML(Goods articleInfo ,HttpServletRequest request) {
 		Map<String, Object> root = new HashMap<String, Object>();
 		//2.赋值
 		root.put("user_name", "胖先生");

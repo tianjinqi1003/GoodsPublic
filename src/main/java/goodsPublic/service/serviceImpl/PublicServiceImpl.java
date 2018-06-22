@@ -21,7 +21,7 @@ import com.goodsPublic.util.qrcode.Qrcode;
 import goodsPublic.dao.CategoryInfoMapper;
 import goodsPublic.dao.PublicMapper;
 import goodsPublic.entity.CategoryInfo;
-import goodsPublic.entity.ShopArticleInfo;
+import goodsPublic.entity.Goods;
 import goodsPublic.service.PublicService;
 @Service
 public class PublicServiceImpl implements PublicService {
@@ -32,7 +32,7 @@ public class PublicServiceImpl implements PublicService {
 	
 	//发布商品接口，将商品保存在数据库中
 	@Override
-	public void publicGoods(ShopArticleInfo articleInfo, HttpServletRequest request) {
+	public void publicGoods(Goods articleInfo, HttpServletRequest request) {
 		int a=publicDao.addGoodsPublic(articleInfo);
 	}
 	//展示商品接口，将商品从数据库中读取出来展示到对应的页面当中
@@ -41,7 +41,7 @@ public class PublicServiceImpl implements PublicService {
 	@Override
 	public int getGoodsByGoodsNumber(String goodsNumber) {
 		//查询商品列表
-		ShopArticleInfo shopInfo = publicDao.getAllGoodsMsg(goodsNumber);
+		Goods shopInfo = publicDao.getAllGoodsMsg(goodsNumber);
 		if(shopInfo!=null) {
 			if(goodsNumber.equals(shopInfo.getGoodsNumber())) {
 				return 1;
@@ -54,7 +54,7 @@ public class PublicServiceImpl implements PublicService {
 	@Override
 	public PlanResult getGoodsByGN(String goodsNumber) {
 		PlanResult plan=new PlanResult();
-		ShopArticleInfo shopInfo = publicDao.getAllGoodsMsg(goodsNumber);
+		Goods shopInfo = publicDao.getAllGoodsMsg(goodsNumber);
 		if(shopInfo==null) {
 			plan.setStatus(0);
 			plan.setMsg("查询失败，产品不存在");
@@ -89,6 +89,13 @@ public class PublicServiceImpl implements PublicService {
 	        String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
 	        Qrcode.createQrCode(url, path, fileName);
 		}
+	}
+
+	@Override
+	public List<Goods> queryGoodsList(String accountMsgId, String categoryId) {
+		// TODO Auto-generated method stub
+		
+		return publicDao.queryGoodsList(accountMsgId,categoryId);
 	}
 	
 }

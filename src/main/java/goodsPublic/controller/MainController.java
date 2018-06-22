@@ -21,7 +21,7 @@ import com.goodsPublic.util.PlanResult;
 
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
-import goodsPublic.entity.ShopArticleInfo;
+import goodsPublic.entity.Goods;
 import goodsPublic.service.CategoryService;
 import goodsPublic.service.PublicService;
 import goodsPublic.service.UserService;
@@ -79,7 +79,7 @@ public class MainController {
 	//富文本框接口
 	@RequestMapping(value="/addGoodsPublic",produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String addGoodsPublic(ShopArticleInfo articleInfo,HttpServletRequest request) {
+	public String addGoodsPublic(Goods articleInfo,HttpServletRequest request) {
 		int a=publicService.getGoodsByGoodsNumber(articleInfo.getGoodsNumber());
 		PlanResult plan=new PlanResult();
 		String json;
@@ -186,6 +186,17 @@ public class MainController {
 		System.out.println("size======="+catList.size());
 		request.setAttribute("categoryList", catList);
 		return "/merchant/categoryList";
+	}
+	
+	@RequestMapping(value="/queryGoodsList")
+	public String queryGoodsList(HttpServletRequest request, String categoryId) {
+		
+		HttpSession session=request.getSession();
+		AccountMsg user=(AccountMsg) session.getAttribute("user");
+		AccountMsg accountMsg=userService.getUserLogin(user);
+		List<Goods> goodsList = publicService.queryGoodsList(accountMsg.getId(),categoryId);
+		request.setAttribute("goodsList", goodsList);
+		return "/merchant/goodsList";
 	}
 	
 	/**

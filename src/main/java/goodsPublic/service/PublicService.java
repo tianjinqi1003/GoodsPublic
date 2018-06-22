@@ -1,15 +1,17 @@
 package goodsPublic.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.goodsPublic.util.PlanResult;
 
 import goodsPublic.entity.CategoryInfo;
-import goodsPublic.entity.ShopArticleInfo;
+import goodsPublic.entity.Goods;
 
 public interface PublicService {
 	//保存商品到数据库
-	public void publicGoods(ShopArticleInfo articleInfo,HttpServletRequest request);
+	public void publicGoods(Goods articleInfo,HttpServletRequest request);
 	//获得所有跟当前用户有关的商品列表
 	public int getGoodsByGoodsNumber(String goodsNumber);
 	//查询当前用户的
@@ -26,4 +28,11 @@ public interface PublicService {
 	 * @param goodsNumber
 	 */
 	public void createShowUrlQrcode(String url, String goodsNumber);
+	/**
+	 * 查询商品
+	 * @param accountMsgId
+	 * @param categoryId
+	 * @return
+	 */
+	public List<Goods> queryGoodsList(String accountMsgId, String categoryId);
 }

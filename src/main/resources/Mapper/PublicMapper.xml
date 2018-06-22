@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="goodsPublic.dao.PublicMapper">
-	<insert id="addGoodsPublic" parameterType="goodsPublic.entity.ShopArticleInfo" >
+	<insert id="addGoodsPublic" parameterType="goodsPublic.entity.Goods" >
 		insert into public_goods
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="categoryId!=null">
@@ -46,8 +46,11 @@
 	<update id="updateQrcode" parameterType="java.lang.String">
 		update public_goods set qrCode=#{param1} where goodsNumber=#{param2}
 	</update>
-	<select id="getAllGoodsMsg" resultType="goodsPublic.entity.ShopArticleInfo">
+	<select id="getAllGoodsMsg" resultType="goodsPublic.entity.Goods">
 		select * from public_goods
 		where goodsNumber=#{goodsNumber}
+	</select>
+	<select id="queryGoodsList" resultType="goodsPublic.entity.Goods">
+		select * from public_goods where accountNumber=#{param1} and category_id=#{param2}
 	</select>
 </mapper>
