@@ -11,8 +11,8 @@
 	<div class="layui-layout layui-layout-admin">
 		<%@include file="side.jsp"%>
 		<div class="layui-body">
-			<h1>这个是用来展示的首页</h1>
-			<div id="addCategory">创建商品分类</div>
+			<div></div>
+			<div></div>
 		</div>
 		<%@include file="foot.jsp"%>
 	</div>
@@ -20,25 +20,6 @@
 		layui.use([ 'element', "layer" ], function() {
 			var layer = layui.layer;
 			var element = layui.element;
-			$("#addCategory").on("click",function(){
-				layer.open({
-					title:"添加分类",
-					content:$("#motaikunag"),
-					area:"50%",
-					 btn: ['添加','取消'],
-					 yes:function(index,layero){
-						 console.log(index)
-						 console.log(layero)
-						console.log("这个是添加按钮")
-					},
-					btn2:function(index){
-						console.log(index)
-						console.log("这个是取消按钮")
-					}
-				})
-				//TODO
-				//这里制作弹出框，然后添加创建商品分类的部分
-			})
 		});
 	</script>
 </body>
