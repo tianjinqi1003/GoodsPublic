@@ -209,6 +209,14 @@ public class MainController {
 		return "/merchant/editCategory";
 	}
 	
+	@RequestMapping(value="/goEditGoods")
+	public String goEditGoods(HttpServletRequest request, String id) {
+		
+		Goods goods=publicService.getGoodsById(id);
+		request.setAttribute("goods", goods);
+		return "/merchant/editGoods";
+	}
+	
 	//创建分类
 	@RequestMapping(value="/addCategory",produces="plain/text; charset=UTF-8")
 	@ResponseBody

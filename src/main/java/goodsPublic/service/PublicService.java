@@ -35,4 +35,10 @@ public interface PublicService {
 	 * @return
 	 */
 	public List<Goods> queryGoodsList(String accountMsgId, String categoryId);
+	/**
+	 * 根据id查询商品
+	 * @param id
+	 * @return
+	 */
+	public Goods getGoodsById(String id);
 }

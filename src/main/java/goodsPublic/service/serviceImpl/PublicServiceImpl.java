@@ -97,5 +97,12 @@ public class PublicServiceImpl implements PublicService {
 		
 		return publicDao.queryGoodsList(accountMsgId,categoryId);
 	}
+
+	@Override
+	public Goods getGoodsById(String id) {
+		// TODO Auto-generated method stub
+		
+		return publicDao.getGoodsById(id);
+	}
 	
 }
