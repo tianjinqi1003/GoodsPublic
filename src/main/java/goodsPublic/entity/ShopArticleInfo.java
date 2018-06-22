@@ -24,7 +24,15 @@ public class ShopArticleInfo implements Serializable {
 
     private int status;//备用状态码
     
+    private int categoryId;//类别id
     
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
 
 	public String getGoodsNumber() {
 		return goodsNumber;

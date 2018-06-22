@@ -10,7 +10,7 @@ public interface UserService {
 	//通过信息查找对应的账户
 	public AccountMsg getUserLogin(AccountMsg user);
 	//检查账户信息
-	public int checkUser(AccountMsg user);
+	public AccountMsg checkUser(AccountMsg user);
 	//用户注册保存
 	public int saveUser(AccountMsg msg);
 	//用户之间的传递操作

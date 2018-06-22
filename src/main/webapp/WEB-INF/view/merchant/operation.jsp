@@ -79,7 +79,10 @@
 							<div class="layui-form-item">
 								<label class="layui-form-label">店铺分类</label>
 								<div class="layui-input-inline select-input">
-									<select id="shopCategory" lay-verify="required">
+									<select id="shopCategory" name="categoryId" lay-verify="required">
+										<c:forEach items="${requestScope.categoryList }" var="item">
+										<option value="${item.categoryId }">${item.categoryName }</option>
+										</c:forEach>
 									</select>
 								</div>
 							</div>

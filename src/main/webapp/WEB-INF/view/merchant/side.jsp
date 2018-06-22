@@ -61,6 +61,7 @@
 				<li class="layui-nav-item"><a href="javascript:;"
 					class="getCategory">店内分类</a>
 					<dl class="layui-nav-child">
+						<!-- 
 						<dd>
 							<a href="javascript:;">选项一</a>
 						</dd>
@@ -70,7 +71,14 @@
 						<dd>
 							<a href="javascript:;">选项三</a>
 						</dd>
-					</dl></li>
+						 -->
+						 <c:forEach items="${requestScope.categoryList }" var="item">
+						 <dd>
+							<a href="javascript:;">${item.categoryName }</a>
+						 </dd>
+						 </c:forEach>
+					</dl>
+				</li>
 				<li class="layui-nav-item"><a href="javascript:;">商家信息</a></li>
 			</ul>
 		</div>

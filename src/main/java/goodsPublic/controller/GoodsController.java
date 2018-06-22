@@ -2,6 +2,8 @@ package goodsPublic.controller;
 
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,8 @@ import com.goodsPublic.util.JsonUtil;
 import com.goodsPublic.util.PlanResult;
 
 import goodsPublic.entity.AccountMsg;
+import goodsPublic.entity.CategoryInfo;
+import goodsPublic.service.CategoryService;
 import goodsPublic.service.UserService;
 import goodsPublic.service.UtilService;
 
@@ -26,6 +30,8 @@ public class GoodsController {
 	private UtilService utilService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private CategoryService categoryService;
 
 	//登录接口
 		@RequestMapping(value="/login",method=RequestMethod.GET)
@@ -50,13 +56,14 @@ public class GoodsController {
 		//获得session当中已经储存好的验证码
 		String verifyCode = (String) session.getAttribute("验证码");
 		//检查用户信息是否正确
-		int a =userService.checkUser(user);
-		if(a==0) {
+		AccountMsg resultUser =userService.checkUser(user);
+		if(resultUser!=null) {
 			//检测输入的验证码以及储存的验证码
 			if(verifyCode.equals(loginVCode)) {
 				System.out.println("账号通过");
-				model.addAttribute("user",user);
-				session.setAttribute("user",user);
+				model.addAttribute("user",resultUser);
+				session.setAttribute("user",resultUser);
+				
 				plan.setStatus(0);
 				plan.setMsg("验证通过");
 				plan.setUrl("/merchant/main/index");

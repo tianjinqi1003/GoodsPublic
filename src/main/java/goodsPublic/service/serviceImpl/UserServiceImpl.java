@@ -49,11 +49,11 @@ public class UserServiceImpl implements UserService {
 		return a;
 	}
 	@Override
-	public int checkUser(AccountMsg user) {
+	public AccountMsg checkUser(AccountMsg user) {
 		AccountMsg resultUser=userMapper.getUser(user);
 		if(resultUser==null) {
-			return 1;
+			return resultUser;
 		}
-		return 0;
+		return resultUser;
 	}
 }

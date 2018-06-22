@@ -121,7 +121,7 @@ body {
             	console.log(json)
             	if(json.status==0){
             		layer.msg(json.msg, {icon: 6});
-            		window.location.href=baseUrl+json.url
+            		window.location.href=baseUrl+json.url;
             	}else if(json.status==1){
             		layer.alert(json.msg,{icon:5})
             	}

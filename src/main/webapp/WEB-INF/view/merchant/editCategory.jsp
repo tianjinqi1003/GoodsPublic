@@ -34,6 +34,7 @@
 						<div class="layui-form-item">
 							<h3>基本信息</h3>
 							<input type="hidden" name="id" value="${categoryInfo.id }" required>
+							<input type="hidden" name="accountId" value="${sessionScope.user.id }" required>
 							<div class="formList">
 								<div class="formLine clearfix">
 									<div class="layui-form-item">
