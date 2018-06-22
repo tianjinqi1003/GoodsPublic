@@ -75,7 +75,6 @@
 								<td>操作</td>
 								<td>类别编号</td>
 								<td>类别名称</td>
-								<td>商户编号</td>
 								<td>编辑</td>
 							</tr>
 							<c:forEach items="${requestScope.categoryList}"
@@ -84,7 +83,6 @@
 									<td><input type="checkbox" id="cb${categoryInfo.id }" /></td>
 									<td>${categoryInfo.categoryId }</td>
 									<td>${categoryInfo.categoryName }</td>
-									<td>${categoryInfo.accountId }</td>
 									<td><a
 										href="<%=basePath%>merchant/main/goEditCategory?id=${categoryInfo.id }">编辑</a>
 									</td>
