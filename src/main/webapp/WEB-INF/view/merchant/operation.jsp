@@ -52,6 +52,7 @@
 						class="layui-form">
 						<div class="layui-form-item">
 							<h3>基本信息</h3>
+							<input type="hidden" name="accountNumber" value="${sessionScope.user.id }" required/>
 							<div class="formList">
 								<div class="formLine clearfix">
 									<div class="layui-form-item">
@@ -79,7 +80,7 @@
 							<div class="layui-form-item">
 								<label class="layui-form-label">店铺分类</label>
 								<div class="layui-input-inline select-input">
-									<select id="shopCategory" name="categoryId" lay-verify="required">
+									<select id="shopCategory" name="category_id" lay-verify="required">
 										<c:forEach items="${requestScope.categoryList }" var="item">
 										<option value="${item.categoryId }">${item.categoryName }</option>
 										</c:forEach>

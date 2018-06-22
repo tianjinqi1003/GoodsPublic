@@ -79,8 +79,8 @@ public class MainController {
 	//富文本框接口
 	@RequestMapping(value="/addGoodsPublic",produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String addGoodsPublic(Goods articleInfo,HttpServletRequest request) {
-		int a=publicService.getGoodsByGoodsNumber(articleInfo.getGoodsNumber());
+	public String addGoodsPublic(Goods goods,HttpServletRequest request) {
+		int a=publicService.getGoodsByGoodsNumber(goods.getGoodsNumber());
 		PlanResult plan=new PlanResult();
 		String json;
 		if(a==1) {
@@ -89,12 +89,12 @@ public class MainController {
 			json=JsonUtil.getJsonFromObject(plan);
 			return json;
 		}
-		publicService.publicGoods(articleInfo, request);
+		publicService.publicGoods(goods, request);
 		//return  "{'code': 1,'msg': 'success'}";
 		plan.setStatus(0);
 		plan.setMsg("商品发布成功");
 		plan.setUrl("/merchant/main/show");
-		plan.setData(articleInfo.getGoodsNumber());
+		plan.setData(goods.getGoodsNumber());
 		json=JsonUtil.getJsonFromObject(plan);
 		return json;
 	}
@@ -143,6 +143,35 @@ public class MainController {
 	}
 	
 	/**
+	 * 编辑商品信息
+	 * */
+	@RequestMapping(value="/editGoods",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String editGoods(Goods goods) {
+		
+		String json="";
+		try {
+			int count=publicService.editGoods(goods);
+			PlanResult plan=new PlanResult();
+			if(count==0) {
+				plan.setStatus(1);
+				plan.setMsg("商品编辑失败");
+				json=JsonUtil.getJsonFromObject(plan);
+			}
+			else {
+				plan.setStatus(0);
+				plan.setMsg("商品编辑成功");
+				plan.setUrl("/merchant/main/queryGoodsList");
+				json=JsonUtil.getJsonFromObject(plan);
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return json;
+	}
+	
+	/**
 	 * 删除类别信息
 	 * @return
 	 */
@@ -183,7 +212,6 @@ public class MainController {
 		AccountMsg user=(AccountMsg) session.getAttribute("user");
 		AccountMsg accountMsg=userService.getUserLogin(user);
 		List<CategoryInfo> catList = categoryService.getCategory(accountMsg.getId());
-		System.out.println("size======="+catList.size());
 		request.setAttribute("categoryList", catList);
 		return "/merchant/categoryList";
 	}

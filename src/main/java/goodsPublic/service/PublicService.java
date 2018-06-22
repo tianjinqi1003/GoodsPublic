@@ -11,7 +11,7 @@ import goodsPublic.entity.Goods;
 
 public interface PublicService {
 	//保存商品到数据库
-	public void publicGoods(Goods articleInfo,HttpServletRequest request);
+	public void publicGoods(Goods goods,HttpServletRequest request);
 	//获得所有跟当前用户有关的商品列表
 	public int getGoodsByGoodsNumber(String goodsNumber);
 	//查询当前用户的
@@ -41,4 +41,10 @@ public interface PublicService {
 	 * @return
 	 */
 	public Goods getGoodsById(String id);
+	/**
+	 * 编辑商品
+	 * @param goods
+	 * @return
+	 */
+	public int editGoods(Goods goods);
 }

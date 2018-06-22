@@ -34,5 +34,11 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public Goods getGoodsById(@Param("id")String id);
+	/**
+	 * 编辑商品
+	 * @param goods
+	 * @return
+	 */
+	public int updateGoods(Goods goods);
 	
 }

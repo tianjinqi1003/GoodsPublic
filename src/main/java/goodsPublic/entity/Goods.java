@@ -10,11 +10,17 @@ public class Goods implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-    private String title;//产品名称
+	private int id;//主键
+
+	private String title;//产品名称
 
     private String imgUrl;//产品缩略图地址
+    
+    private String qrCode;//二维码缩略图地址
 
-    private String goodsNumber; //产品编号
+	private String accountNumber; //商户编号
+
+	private String goodsNumber; //产品编号
 
     private String htmlContent;//产品描述
 
@@ -25,6 +31,14 @@ public class Goods implements Serializable {
 	private int status;//备用状态码
     
     private int category_id;//类别id
+	
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
     
 	public int getCategory_id() {
 		return category_id;
@@ -34,6 +48,14 @@ public class Goods implements Serializable {
 		this.category_id = category_id;
 	}
 
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+	
 	public String getGoodsNumber() {
 		return goodsNumber;
 	}
@@ -58,6 +80,13 @@ public class Goods implements Serializable {
 		this.imgUrl = imgUrl;
 	}
 
+    public String getQrCode() {
+		return qrCode;
+	}
+
+	public void setQrCode(String qrCode) {
+		this.qrCode = qrCode;
+	}
 
 	public String getHtmlContent() {
 		return htmlContent;

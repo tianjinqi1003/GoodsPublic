@@ -32,8 +32,8 @@ public class PublicServiceImpl implements PublicService {
 	
 	//发布商品接口，将商品保存在数据库中
 	@Override
-	public void publicGoods(Goods articleInfo, HttpServletRequest request) {
-		int a=publicDao.addGoodsPublic(articleInfo);
+	public void publicGoods(Goods goods, HttpServletRequest request) {
+		int a=publicDao.addGoodsPublic(goods);
 	}
 	//展示商品接口，将商品从数据库中读取出来展示到对应的页面当中
 	
@@ -103,6 +103,13 @@ public class PublicServiceImpl implements PublicService {
 		// TODO Auto-generated method stub
 		
 		return publicDao.getGoodsById(id);
+	}
+
+	@Override
+	public int editGoods(Goods goods) {
+		// TODO Auto-generated method stub
+		
+		return publicDao.updateGoods(goods);
 	}
 	
 }

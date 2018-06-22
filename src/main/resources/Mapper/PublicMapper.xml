@@ -6,8 +6,11 @@
 	<insert id="addGoodsPublic" parameterType="goodsPublic.entity.Goods" >
 		insert into public_goods
 		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="categoryId!=null">
+			<if test="category_id!=null">
 				category_id,
+			</if>
+			<if test="accountNumber!=null">
+				accountNumber,
 			</if>
 			<if test="goodsNumber!=null">
 				goodsNumber,
@@ -25,8 +28,11 @@
 		</trim>
 		values
 		<trim prefix="(" suffix=")" suffixOverrides=",">
-			<if test="categoryId!=null">
-				#{categoryId},
+			<if test="category_id!=null">
+				#{category_id},
+			</if>
+			<if test="accountNumber!=null">
+				#{accountNumber},
 			</if>
 			<if test="goodsNumber!=null">
 				#{goodsNumber},
@@ -45,6 +51,23 @@
 	</insert>
 	<update id="updateQrcode" parameterType="java.lang.String">
 		update public_goods set qrCode=#{param1} where goodsNumber=#{param2}
+	</update>
+	<update id="updateGoods" parameterType="goodsPublic.entity.Goods">
+		update public_goods set 
+		<if test="category_id!=null">
+			category_id=#{category_id},
+		</if>
+		<if test="title!=null">
+			title=#{title},
+		</if>
+		<if test="imgUrl!=null">
+			imgUrl=#{imgUrl},
+		</if>
+		<if test="htmlContent!=null">
+			htmlContent=#{htmlContent},
+		</if>
+		gmt_modified=now()
+		where id=#{id}
 	</update>
 	<select id="getAllGoodsMsg" resultType="goodsPublic.entity.Goods">
 		select * from public_goods
