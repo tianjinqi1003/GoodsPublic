@@ -245,6 +245,14 @@ public class MainController {
 		return "/merchant/editGoods";
 	}
 	
+	@RequestMapping(value="/goAccountInfo")
+	public String goAccountInfo(HttpServletRequest request, String accountId) {
+		
+		AccountMsg accountMsg=publicService.getAccountById(accountId);
+		request.setAttribute("accountMsg", accountMsg);
+		return "/merchant/accountInfo";
+	}
+	
 	//创建分类
 	@RequestMapping(value="/addCategory",produces="plain/text; charset=UTF-8")
 	@ResponseBody

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
 
@@ -16,11 +17,11 @@ public interface PublicMapper {
 	public Goods getAllGoodsMsg(String goodsNumber);
 	/**
 	 * 更新二维码链接
-	 * @param url
+	 * @param avaPath
 	 * @param goodsNumber
 	 * @return
 	 */
-	public int updateQrcode(@Param("url")String url, @Param("goodsNumber")String goodsNumber);
+	public int updateQrcode(@Param("avaPath")String avaPath, @Param("goodsNumber")String goodsNumber);
 	/**
 	 * 查询商品
 	 * @param accountMsgId
@@ -40,5 +41,11 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public int updateGoods(Goods goods);
+	/**
+	 * 根据id查询商家信息
+	 * @param accountId
+	 * @return
+	 */
+	public AccountMsg getAccountById(String accountId);
 	
 }

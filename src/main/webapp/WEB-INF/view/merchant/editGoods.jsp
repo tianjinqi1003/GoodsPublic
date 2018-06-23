@@ -129,13 +129,13 @@
 								})
 							}else{
 								layer.open({
-									title : "编辑成功",
+									title : "编辑成功1",
 									btn : [ 'yes', 'no' ],
 									content:json.msg,
 									yes : function() {
 										console.log(json.data)
 										console.log(json.url)
-										window.location.href=baseUrl+json.url
+										window.location.href=baseUrl+json.url+"?categoryId="+'${param.categoryId}';
 									},
 									no:function(){
 										

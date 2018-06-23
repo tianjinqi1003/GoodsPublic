@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.goodsPublic.util.PlanResult;
 
+import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
 
@@ -47,4 +48,10 @@ public interface PublicService {
 	 * @return
 	 */
 	public int editGoods(Goods goods);
+	/**
+	 * 根据id查询商家信息
+	 * @param accountId
+	 * @return
+	 */
+	public AccountMsg getAccountById(String accountId);
 }

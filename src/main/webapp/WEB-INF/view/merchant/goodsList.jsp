@@ -7,6 +7,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>商品列表</title>
 <%@include file="js.jsp"%>
+<script type="text/javascript">
+function previewImg(src){
+	$("#previewDiv").css("display","block");
+	$("#previewDiv img").attr("src",src);
+}
+
+function unPreviewImg(o){
+	$(o).css("display","none");
+	$(o).find("img").attr("src","");
+}
+</script>
 </head>
 <body class="layui-layout-body">
 	<div class="layui-layout layui-layout-admin">
@@ -29,10 +40,12 @@
 							<td>${goods.goodsNumber }</td>
 							<td>${goods.title }</td>
 							<td>
-								<img alt="" src="${goods.imgUrl }" width="50" height="50"/>
+								<img alt="" src="${goods.imgUrl }" width="50" height="50" onmousemove="previewImg(this.src);"/>
 							</td>
-							<td>${goods.qrCode }</td>
-							<td><a href="<%=basePath%>merchant/main/goEditGoods?id=${goods.id}">编辑</a></td>
+							<td>
+								<img alt="" src="${goods.qrCode }" width="50" height="50" onmousemove="previewImg(this.src);"/>
+							</td>
+							<td><a href="<%=basePath%>merchant/main/goEditGoods?id=${goods.id}&categoryId=${param.categoryId}">编辑</a></td>
 						</tr>
 						</c:forEach>
 					</table>
@@ -41,6 +54,8 @@
 		</div>
 		<%@include file="foot.jsp"%>
 	</div>
-
+	<div id="previewDiv" style="width: 300px;height: 300px;margin: 0 auto;margin-top: 100px;position: relative;z-index: 998;display: none;" onmouseout="unPreviewImg(this);">
+		<img alt="" src="/GoodsPublic/upload/1529719265643.jpg" width="300" height="300"/>
+	</div>
 </body>
 </html>

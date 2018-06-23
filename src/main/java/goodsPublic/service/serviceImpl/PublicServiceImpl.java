@@ -20,6 +20,7 @@ import com.goodsPublic.util.qrcode.Qrcode;
 
 import goodsPublic.dao.CategoryInfoMapper;
 import goodsPublic.dao.PublicMapper;
+import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
 import goodsPublic.service.PublicService;
@@ -82,11 +83,12 @@ public class PublicServiceImpl implements PublicService {
 	@Override
 	public void createShowUrlQrcode(String url, String goodsNumber) {
 		// TODO Auto-generated method stub
-		
-		if(publicDao.updateQrcode(url,goodsNumber)>0) {
+
+        String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
+		String avaPath="/GoodsPublic/upload/"+fileName;
+		if(publicDao.updateQrcode(avaPath,goodsNumber)>0) {
 			//String path = FileSystemView.getFileSystemView().getHomeDirectory() + File.separator + "testQrcode";
 			String path = "D:/resource";
-	        String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
 	        Qrcode.createQrCode(url, path, fileName);
 		}
 	}
@@ -110,6 +112,12 @@ public class PublicServiceImpl implements PublicService {
 		// TODO Auto-generated method stub
 		
 		return publicDao.updateGoods(goods);
+	}
+
+	@Override
+	public AccountMsg getAccountById(String accountId) {
+		// TODO Auto-generated method stub
+		return publicDao.getAccountById(accountId);
 	}
 	
 }

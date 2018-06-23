@@ -114,4 +114,11 @@ public class GoodsController {
 		plan.setUrl("/merchant/login");
 		return JsonUtil.getJsonFromObject(plan);
 	}
+	
+	@RequestMapping(value="/exit")
+	public String exit(HttpSession session) {
+		
+		session.invalidate();
+		return "/merchant/login";
+	}
 }

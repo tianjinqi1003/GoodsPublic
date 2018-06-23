@@ -60,7 +60,7 @@
 		<if test="title!=null">
 			title=#{title},
 		</if>
-		<if test="imgUrl!=null">
+		<if test="imgUrl!=''&amp;imgUrl!=null">
 			imgUrl=#{imgUrl},
 		</if>
 		<if test="htmlContent!=null">
@@ -78,5 +78,8 @@
 	</select>
 	<select id="getGoodsById" resultType="goodsPublic.entity.Goods">
 		select * from public_goods where id=#{param1}
+	</select>
+	<select id="getAccountById" resultType="goodsPublic.entity.AccountMsg">
+		select * from account_info where id=#{param1}
 	</select>
 </mapper>
