@@ -63,7 +63,8 @@ public class GoodsController {
 				System.out.println("账号通过");
 				model.addAttribute("user",resultUser);
 				session.setAttribute("user",resultUser);
-				
+				List<CategoryInfo> catList = categoryService.getCategory(resultUser.getId());
+				session.setAttribute("categoryList", catList);
 				plan.setStatus(0);
 				plan.setMsg("验证通过");
 				plan.setUrl("/merchant/main/index");

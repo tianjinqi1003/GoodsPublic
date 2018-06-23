@@ -17,4 +17,8 @@ public interface CategoryInfoMapper {
 	 * 根据id查询
 	 * */
 	public CategoryInfo getById(String id);
+	/*
+	 * 根据分类id查询对应分类
+	 */
+	public CategoryInfo	getByCategoryId(String categoryId);
 }

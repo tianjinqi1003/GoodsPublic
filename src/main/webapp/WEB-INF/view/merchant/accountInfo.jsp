@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,9 +21,14 @@
 	background-color: #fff;
 }
 </style>
+<script type="text/javascript">
+layui.use(['element'],function(){
+	var element = layui.element;
+});
+</script>
 </head>
 <body>
-<div class="layui-layout layui-layout-admin">
+	<div class="layui-layout layui-layout-admin">
 		<%@include file="side.jsp"%>
 		<div class="layui-body">
 			<div class="mainContent">

@@ -3,6 +3,7 @@ package goodsPublic.service;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.goodsPublic.util.PlanResult;
 
@@ -22,7 +23,7 @@ public interface PublicService {
 	 * @param categoryInfo
 	 * @return
 	 */
-	public int editCategory(CategoryInfo categoryInfo);
+	public int editCategory(CategoryInfo categoryInfo,HttpSession session);
 	/**
 	 * 生成show页面地址栏二维码
 	 * @param url

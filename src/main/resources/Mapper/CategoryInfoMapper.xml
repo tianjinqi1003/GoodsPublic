@@ -56,4 +56,8 @@
 		#{id}
 		</foreach> 
 	</delete>
+	<select id="getByCategoryId">
+		select * from 
+		category_table where categoryId=#{categoryId}
+	</select>
 </mapper>

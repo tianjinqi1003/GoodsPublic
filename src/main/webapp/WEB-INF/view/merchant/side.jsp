@@ -72,7 +72,7 @@
 							<a href="javascript:;">选项三</a>
 						</dd>
 						 -->
-						 <c:forEach items="${requestScope.categoryList }" var="item">
+						 <c:forEach items="${sessionScope.categoryList }" var="item">
 						 <dd>
 							<a href="<%=basePath%>merchant/main/queryGoodsList?categoryId=${item.categoryId}">${item.categoryName }</a>
 						 </dd>

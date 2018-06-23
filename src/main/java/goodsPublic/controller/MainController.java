@@ -46,7 +46,6 @@ public class MainController {
 		AccountMsg accountMsg = (AccountMsg)request.getSession().getAttribute("user");
 		List<CategoryInfo> catList = categoryService.getCategory(accountMsg.getId());
 		request.setAttribute("categoryList", catList);
-		
 		return "/merchant/index";
 	}
 	//商品发布页面接口
@@ -123,20 +122,23 @@ public class MainController {
 	 * */
 	@RequestMapping(value="/editCategory",produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String editCategory(CategoryInfo categoryInfo) {
+	public String editCategory(CategoryInfo categoryInfo,HttpSession session) {
 		
-		int count=publicService.editCategory(categoryInfo);
+		int count=publicService.editCategory(categoryInfo,session);
 		PlanResult plan=new PlanResult();
 		String json;
 		if(count==0) {
 			plan.setStatus(1);
-			plan.setMsg("类别编辑失败");
+			plan.setMsg("分类编辑失败");
 			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
+		}else if(count==1){
 			plan.setStatus(0);
-			plan.setMsg("类别编辑成功");
+			plan.setMsg("分类编辑成功");
 			plan.setUrl("/merchant/main/queryCategoryList");
+			json=JsonUtil.getJsonFromObject(plan);
+		}else {
+			plan.setStatus(1);
+			plan.setMsg("分类已存在");
 			json=JsonUtil.getJsonFromObject(plan);
 		}
 		return json;
@@ -178,7 +180,7 @@ public class MainController {
 	@RequestMapping(value="/deleteCategory",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String deleteCategory(String ids) {
-		
+		//TODO 针对分类的动态进行实时调整更新
 		int count=categoryService.deletCategoryInfo(ids);
 		PlanResult plan=new PlanResult();
 		String json;

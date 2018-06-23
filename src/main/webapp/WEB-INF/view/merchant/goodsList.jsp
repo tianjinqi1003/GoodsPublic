@@ -17,6 +17,9 @@ function unPreviewImg(o){
 	$(o).css("display","none");
 	$(o).find("img").attr("src","");
 }
+layui.use(['element'],function(){
+	var element = layui.element;
+});
 </script>
 </head>
 <body class="layui-layout-body">

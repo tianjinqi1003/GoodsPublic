@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,16 +63,25 @@ public class PublicServiceImpl implements PublicService {
 		plan.setData(shopInfo);
 		return plan;
 	}
-
 	@Override
-	public int editCategory(CategoryInfo categoryInfo) {
-		// TODO Auto-generated method stub
-		
+	public int editCategory(CategoryInfo categoryInfo,HttpSession session) {
+		// TODO 针对分类实时动态的调整（未测）
 		int count=0;
-		if(StringUtils.isEmpty(categoryInfo.getId()))
-			count=categoryInfoDao.saveCategoryInfo(categoryInfo);
-		else
+		if(StringUtils.isEmpty(categoryInfo.getId())) {
+			CategoryInfo resultCate=categoryInfoDao.getByCategoryId(categoryInfo.getCategoryId());
+			if(resultCate==null) {
+				count=categoryInfoDao.saveCategoryInfo(categoryInfo);
+				List<CategoryInfo> catList = categoryInfoDao.getCategoryList(categoryInfo.getAccountId());
+				session.setAttribute("categoryList", catList);
+				return count;
+			}
+			//当分类id重复时返回2表示分类已存在
+			return 2;
+		}else{
 			count=categoryInfoDao.updateCategoryInfo(categoryInfo);
+			List<CategoryInfo> catList = categoryInfoDao.getCategoryList(categoryInfo.getAccountId());
+			session.setAttribute("categoryList", catList);
+		}
 		return count;
 	}
 
