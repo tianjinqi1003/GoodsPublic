@@ -65,9 +65,10 @@
 									<div class="layui-form-item">
 										<label class="layui-form-label">*内容</label>
 										<div class="layui-input-block">
-											<textarea rows="3" cols="27" name="htmlContent" required
-												lay-verify="required"  placeholder="请输入内容"
-												autocomplete="off" class="layui-input">${requestScope.goods.htmlContent }</textarea>
+											<!-- 内容主体区域 -->
+											<textarea id="htmlContent" style="display: none;" name="htmlContent">
+												${requestScope.goods.htmlContent }
+											</textarea>
 										</div>
 									</div>
 								</div>
@@ -145,6 +146,10 @@
 						})
 						return false;
 					})
+					
+					editIndex = layedit.build('htmlContent', {
+						height : 500
+					}); //建立编辑器
 				});
 		
 		$(document).on("click", ".uploadImg", function () {
