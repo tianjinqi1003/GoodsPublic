@@ -56,7 +56,7 @@
 		#{id}
 		</foreach> 
 	</delete>
-	<select id="getByCategoryId">
+	<select id="getByCategoryId" resultType="goodsPublic.entity.CategoryInfo">
 		select * from 
 		category_table where categoryId=#{categoryId}
 	</select>

@@ -184,9 +184,9 @@ public class MainController {
 	 */
 	@RequestMapping(value="/deleteCategory",produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String deleteCategory(String ids) {
+	public String deleteCategory(String ids, HttpSession session) {
 		//TODO 针对分类的动态进行实时调整更新
-		int count=categoryService.deletCategoryInfo(ids);
+		int count=categoryService.deletCategoryInfo(ids,session);
 		PlanResult plan=new PlanResult();
 		String json;
 		if(count==0) {

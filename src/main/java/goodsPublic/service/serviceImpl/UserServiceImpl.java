@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import goodsPublic.entity.AccountMsg;
-import goodsPublic.entity.LoginUser;
 import goodsPublic.service.UserService;
 import goodsPublic.dao.UserMapper;
 /**
@@ -16,7 +15,6 @@ import goodsPublic.dao.UserMapper;
  */
 @Service
 public class UserServiceImpl implements UserService {
-	private final static String userRole="a"; 
 	@Autowired
 	private UserMapper userMapper;
 	@Override

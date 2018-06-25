@@ -20,7 +20,7 @@ public interface CategoryService {
 	 * @param ids
 	 * @return
 	 */
-	public int deletCategoryInfo(String ids);
+	public int deletCategoryInfo(String ids, HttpSession session);
 	/**
 	 * 编辑类别
 	 * @param categoryInfo
