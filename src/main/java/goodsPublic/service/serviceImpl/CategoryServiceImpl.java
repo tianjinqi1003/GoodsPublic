@@ -3,12 +3,20 @@ package goodsPublic.service.serviceImpl;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import goodsPublic.dao.CategoryInfoMapper;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.service.CategoryService;
+/**
+ * 这个是主要负责分类操作的服务层
+ * @author Administrator
+ *
+ */
 @Service
 public class CategoryServiceImpl implements CategoryService {
 	@Autowired
@@ -32,6 +40,27 @@ public class CategoryServiceImpl implements CategoryService {
 		// TODO Auto-generated method stub
 		List<String> idList = Arrays.asList(ids.split(","));
 		return categoryInfoMapper.deletCategoryInfo(idList);
+	}
+	@Override
+	public int editCategory(CategoryInfo categoryInfo,HttpSession session) {
+		// TODO 针对分类实时动态的调整（未测）
+		int count=0;
+		if(StringUtils.isEmpty(categoryInfo.getId())) {
+			CategoryInfo resultCate=categoryInfoMapper.getByCategoryId(categoryInfo.getCategoryId());
+			if(resultCate==null) {
+				count=categoryInfoMapper.saveCategoryInfo(categoryInfo);
+				List<CategoryInfo> catList = categoryInfoMapper.getCategoryList(categoryInfo.getAccountId());
+				session.setAttribute("categoryList", catList);
+				return count;
+			}
+			//当分类id重复时返回2表示分类已存在
+			return 2;
+		}else{
+			count=categoryInfoMapper.updateCategoryInfo(categoryInfo);
+			List<CategoryInfo> catList = categoryInfoMapper.getCategoryList(categoryInfo.getAccountId());
+			session.setAttribute("categoryList", catList);
+		}
+		return count;
 	}
 
 }

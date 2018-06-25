@@ -2,6 +2,8 @@ package goodsPublic.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import goodsPublic.entity.CategoryInfo;
 
 public interface CategoryService {
@@ -19,4 +21,10 @@ public interface CategoryService {
 	 * @return
 	 */
 	public int deletCategoryInfo(String ids);
+	/**
+	 * 编辑类别
+	 * @param categoryInfo
+	 * @return
+	 */
+	int editCategory(CategoryInfo categoryInfo, HttpSession session);
 }

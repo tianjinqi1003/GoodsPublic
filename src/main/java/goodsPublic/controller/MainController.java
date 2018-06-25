@@ -124,7 +124,7 @@ public class MainController {
 	@ResponseBody
 	public String editCategory(CategoryInfo categoryInfo,HttpSession session) {
 		
-		int count=publicService.editCategory(categoryInfo,session);
+		int count=categoryService.editCategory(categoryInfo,session);
 		PlanResult plan=new PlanResult();
 		String json;
 		if(count==0) {

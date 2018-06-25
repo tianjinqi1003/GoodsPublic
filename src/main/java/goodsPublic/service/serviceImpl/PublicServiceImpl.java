@@ -20,6 +20,11 @@ import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
 import goodsPublic.service.PublicService;
+/**
+ * 这是用来处理商品的对应接口
+ * @author Administrator
+ *
+ */
 @Service
 public class PublicServiceImpl implements PublicService {
 	@Autowired
@@ -62,27 +67,6 @@ public class PublicServiceImpl implements PublicService {
 		plan.setMsg("查询成功");
 		plan.setData(shopInfo);
 		return plan;
-	}
-	@Override
-	public int editCategory(CategoryInfo categoryInfo,HttpSession session) {
-		// TODO 针对分类实时动态的调整（未测）
-		int count=0;
-		if(StringUtils.isEmpty(categoryInfo.getId())) {
-			CategoryInfo resultCate=categoryInfoDao.getByCategoryId(categoryInfo.getCategoryId());
-			if(resultCate==null) {
-				count=categoryInfoDao.saveCategoryInfo(categoryInfo);
-				List<CategoryInfo> catList = categoryInfoDao.getCategoryList(categoryInfo.getAccountId());
-				session.setAttribute("categoryList", catList);
-				return count;
-			}
-			//当分类id重复时返回2表示分类已存在
-			return 2;
-		}else{
-			count=categoryInfoDao.updateCategoryInfo(categoryInfo);
-			List<CategoryInfo> catList = categoryInfoDao.getCategoryList(categoryInfo.getAccountId());
-			session.setAttribute("categoryList", catList);
-		}
-		return count;
 	}
 
 	@Override

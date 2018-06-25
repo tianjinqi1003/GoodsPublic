@@ -9,6 +9,11 @@ import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.LoginUser;
 import goodsPublic.service.UserService;
 import goodsPublic.dao.UserMapper;
+/**
+ * 用来处理客户信息的服务层
+ * @author Administrator
+ *
+ */
 @Service
 public class UserServiceImpl implements UserService {
 	private final static String userRole="a"; 

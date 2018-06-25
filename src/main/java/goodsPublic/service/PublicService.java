@@ -18,12 +18,7 @@ public interface PublicService {
 	public int getGoodsByGoodsNumber(String goodsNumber);
 	//查询当前用户的
 	public PlanResult getGoodsByGN(String goodsNumber);
-	/**
-	 * 编辑类别
-	 * @param categoryInfo
-	 * @return
-	 */
-	public int editCategory(CategoryInfo categoryInfo,HttpSession session);
+
 	/**
 	 * 生成show页面地址栏二维码
 	 * @param url
