@@ -77,7 +77,7 @@
 								<td>类别名称</td>
 								<td>编辑</td>
 							</tr>
-							<c:forEach items="${requestScope.categoryList}"
+							<c:forEach items="${sessionScope.categoryList}"
 								var="categoryInfo">
 								<tr>
 									<td><input type="checkbox" id="cb${categoryInfo.id }" /></td>

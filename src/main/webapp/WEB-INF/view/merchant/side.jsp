@@ -33,18 +33,15 @@
 	<div class="layui-header">
 		<div class="layui-logo">二维码产品发布系统</div>
 		<ul class="layui-nav layui-layout-right">
-			<li class="layui-nav-item"><a href="javascript:;"> <img
-					src="http://t.cn/RCzsdCq" class="layui-nav-img">${sessionScope.user.nickName }
-			</a>
-				<dl class="layui-nav-child">
-					<dd>
-						<a href="">基本资料</a>
-					</dd>
-					<dd>
-						<a href="">安全设置</a>
-					</dd>
-				</dl></li>
-			<li class="layui-nav-item"><a href="<%=basePath%>merchant/exit">退了</a></li>
+			<li class="layui-nav-item">
+				<a href="javascript:;"> 
+					<img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+					${sessionScope.user.nickName }
+				</a>
+			</li>
+			<li class="layui-nav-item">
+				<a href="<%=basePath%>merchant/exit">退了</a>
+			</li>
 		</ul>
 	</div>
 
@@ -72,11 +69,20 @@
 							<a href="javascript:;">选项三</a>
 						</dd>
 						 -->
-						 <c:forEach items="${sessionScope.categoryList }" var="item">
-						 <dd>
-							<a href="<%=basePath%>merchant/main/queryGoodsList?categoryId=${item.categoryId}">${item.categoryName }</a>
-						 </dd>
-						 </c:forEach>
+						 <c:choose>
+						 <c:when test="${empty sessionScope.categoryList}">
+							 <dd>
+							 	<a href="<%=basePath%>merchant/main/goEditCategory">暂无分类</a>
+							 </dd>
+						 </c:when>
+						 <c:otherwise>
+							 <c:forEach items="${sessionScope.categoryList }" var="item">
+							 <dd>
+								<a href="<%=basePath%>merchant/main/queryGoodsList?categoryId=${item.categoryId}">${item.categoryName }</a>
+							 </dd>
+							 </c:forEach>
+						 </c:otherwise>
+						 </c:choose>
 					</dl>
 				</li>
 				<li class="layui-nav-item"><a href="<%=basePath%>merchant/main/goAccountInfo?accountId=${sessionScope.user.id }">商家信息</a></li>

@@ -34,10 +34,10 @@ public class GoodsController {
 	private CategoryService categoryService;
 
 	//登录接口
-		@RequestMapping(value="/login",method=RequestMethod.GET)
-		public String login() {
-			return "/merchant/login";
-		}
+	@RequestMapping(value="/login",method=RequestMethod.GET)
+	public String login() {
+		return "/merchant/login";
+	}
 		
 	//登录接口
 	@RequestMapping(value="/login",method=RequestMethod.POST,produces="plain/text; charset=UTF-8")
