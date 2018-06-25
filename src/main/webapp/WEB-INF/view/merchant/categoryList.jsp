@@ -20,11 +20,12 @@
 				ids += "," + $(this).attr("id").substring(2);
 			}
 		});
-		alert(ids.substring(1));
+		//alert(ids.substring(1));
 		var url = baseUrl + "/merchant/main/deleteCategory"
 		$.post(url, {
 			ids : ids.substring(1)
 		}, function(result) {
+			alert(result.msg)
 			location.href = location.href;
 		}, "json");
 	}

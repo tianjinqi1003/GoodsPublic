@@ -47,13 +47,16 @@ body {
 .mainMsg {
 	padding: 0 10px;
 }
-.imgContent{
+
+.imgContent {
 	height: 100%;
 }
-.imgItme{
+
+.imgItme {
 	text-align: center;
 }
-.imgUrl{
+
+.imgUrl {
 	width: 80%
 }
 </style>
@@ -65,17 +68,16 @@ body {
 			<div class="contentBody">${plan.title}</div>
 			<div class="imgContent">
 				<div class="imgItme">
-				<img class="imgUrl" src="${plan.imgUrl }">
+					<img class="imgUrl" src="${plan.imgUrl }">
 				</div>
 			</div>
 			<div class="changeBtm">
-				<a href="javascript:;" class="active">商品简介</a> <a href="javascript:;">公司介绍</a>
-				<a href="javascript:;">3</a>
+				<a href="javascript:;" class="active">商品简介</a> 
+				<a href="javascript:;">公司介绍</a>
 			</div>
 			<div class="msgContent">
 				<div class="mainMsg" style="display: block;">
-				${plan.htmlContent}
-				</div>
+					${plan.htmlContent}</div>
 				<div class="mainMsg" style="display: none;">公司啥啥啥……</div>
 			</div>
 			<script type="text/javascript">
