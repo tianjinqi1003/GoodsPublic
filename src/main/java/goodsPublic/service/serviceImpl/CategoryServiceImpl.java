@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import goodsPublic.dao.CategoryInfoMapper;
+import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.service.CategoryService;
 /**
@@ -36,10 +37,18 @@ public class CategoryServiceImpl implements CategoryService {
 		return categoryInfoMapper.getById(id);
 	}
 	@Override
-	public int deletCategoryInfo(String ids) {
+	public int deletCategoryInfo(String ids, HttpSession session) {
 		// TODO Auto-generated method stub
+		int count=0;
 		List<String> idList = Arrays.asList(ids.split(","));
-		return categoryInfoMapper.deletCategoryInfo(idList);
+		count=categoryInfoMapper.deletCategoryInfo(idList);
+		//提取已经登录的用户信息
+		AccountMsg resultUser=(AccountMsg) session.getAttribute("user");
+		//通过用户信息查询对应店铺的分类信息
+		List<CategoryInfo> cateList=categoryInfoMapper.getCategoryList(resultUser.getId());
+		//将分类信息进行保存
+		session.setAttribute("categoryList", cateList);
+		return count;
 	}
 	@Override
 	public int editCategory(CategoryInfo categoryInfo,HttpSession session) {
