@@ -41,21 +41,26 @@ public class MainController {
 	//主页接口
 	@RequestMapping("/index")
 	public String toIndex(HttpServletRequest request) {
-		
+
+		/*
 		//填充首页店内分类模块的子模块名称
 		AccountMsg accountMsg = (AccountMsg)request.getSession().getAttribute("user");
 		List<CategoryInfo> catList = categoryService.getCategory(accountMsg.getId());
 		request.setAttribute("categoryList", catList);
+		*/
 		return "/merchant/index";
 	}
 	//商品发布页面接口
 	@RequestMapping("/operation")
 	public String SayHellow(Model model,HttpServletRequest request) {
+		
+		/*
 		HttpSession session=request.getSession();
 		AccountMsg accountMsg=(AccountMsg) session.getAttribute("user");
 		System.out.println(accountMsg);
 		List<CategoryInfo> catList = categoryService.getCategory(accountMsg.getId());
 		request.setAttribute("categoryList", catList);
+		*/
 		return "/merchant/operation";
 	}
 
@@ -210,11 +215,14 @@ public class MainController {
 	//获得店铺名下的所有分类
 	@RequestMapping(value="/queryCategoryList")
 	public String getCategory(HttpServletRequest request) {
+		
+		/*
 		HttpSession session=request.getSession();
 		AccountMsg user=(AccountMsg) session.getAttribute("user");
 		AccountMsg accountMsg=userService.getUserLogin(user);
 		List<CategoryInfo> catList = categoryService.getCategory(accountMsg.getId());
 		request.setAttribute("categoryList", catList);
+		*/
 		return "/merchant/categoryList";
 	}
 	
