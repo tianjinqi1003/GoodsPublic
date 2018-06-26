@@ -83,13 +83,6 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public List<Goods> queryGoodsList(String accountMsgId, String categoryId) {
-		// TODO Auto-generated method stub
-		
-		return publicDao.queryGoodsList(accountMsgId,categoryId);
-	}
-
-	@Override
 	public Goods getGoodsById(String id) {
 		// TODO Auto-generated method stub
 		
@@ -107,6 +100,19 @@ public class PublicServiceImpl implements PublicService {
 	public AccountMsg getAccountById(String accountId) {
 		// TODO Auto-generated method stub
 		return publicDao.getAccountById(accountId);
+	}
+
+	@Override
+	public int queryGoodsForInt(String accountId, String categoryId) {
+		// TODO Auto-generated method stub
+		return publicDao.queryGoodsForInt(accountId,categoryId);
+	}
+
+	@Override
+	public List<Goods> queryGoodsList(String accountId, String categoryId, int page, int rows, String sort,
+			String order) {
+		// TODO Auto-generated method stub
+		return publicDao.queryGoodsList(accountId, categoryId, (page-1)*rows, rows, sort, order);
 	}
 	
 }

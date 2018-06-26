@@ -47,28 +47,22 @@
 
 	<div class="layui-side layui-bg-black">
 		<div class="layui-side-scroll">
-			<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo"
-				style="margin-right: 10px;">
-				<li class="layui-nav-item"><a
-					href="<%=basePath%>merchant/main/index">首页</a></li>
-				<li class="layui-nav-item"><a
-					href="<%=basePath%>merchant/main/operation">商品发布</a></li>
-				<li class="layui-nav-item"><a
-					href="<%=basePath%>merchant/main/queryCategoryList">分类管理</a></li>
-				<li class="layui-nav-item"><a href="javascript:;"
-					class="getCategory">店内分类</a>
+			<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 10px;">
+				<div style="border: #f3f3f4 solid 1px;width: 92%;margin: 0 auto;margin-top: 5px;">
+				<li class="layui-nav-item">
+					<a href="<%=basePath%>merchant/main/index">首页</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="<%=basePath%>merchant/main/goCategoryList">分类管理</a>
+				</li>
+				<li class="layui-nav-item">
+					<a href="<%=basePath%>merchant/main/goAccountInfo?accountId=${sessionScope.user.id }">商家信息</a>
+				</li>
+				</div>
+				<!-- 
+				<li class="layui-nav-item">
+					<a href="javascript:;" class="getCategory">店内分类</a>
 					<dl class="layui-nav-child">
-						<!-- 
-						<dd>
-							<a href="javascript:;">选项一</a>
-						</dd>
-						<dd>
-							<a href="javascript:;">选项二</a>
-						</dd>
-						<dd>
-							<a href="javascript:;">选项三</a>
-						</dd>
-						 -->
 						 <c:choose>
 						 <c:when test="${empty sessionScope.categoryList}">
 							 <dd>
@@ -79,24 +73,33 @@
 							 <c:forEach items="${sessionScope.categoryList }" var="item">
 							 <dd>
 								<a href="<%=basePath%>merchant/main/queryGoodsList?categoryId=${item.categoryId}">${item.categoryName }</a>
+								<a href="<%=basePath%>merchant/main/operation" style="margin-top: -40px;margin-left: 90px;">|&nbsp;添加</a>
 							 </dd>
 							 </c:forEach>
 						 </c:otherwise>
 						 </c:choose>
 					</dl>
 				</li>
-				<li class="layui-nav-item"><a href="<%=basePath%>merchant/main/goAccountInfo?accountId=${sessionScope.user.id }">商家信息</a></li>
+				 -->
+				 <div style="border: #f3f3f4 solid 1px;width: 92%;margin: 0 auto;margin-top: 5px;">
+				 <c:choose>
+				 <c:when test="${empty sessionScope.categoryList}">
+					 <li class="layui-nav-item">
+					 	<a href="<%=basePath%>merchant/main/goEditCategory">暂无分类</a>
+					 </li>
+				 </c:when>
+				 <c:otherwise>
+					 <c:forEach items="${sessionScope.categoryList }" var="item">
+					 <li class="layui-nav-item">
+					 	<a href="<%=basePath%>merchant/main/goGoodsList?categoryId=${item.categoryId}">${item.categoryName }</a>
+						<a href="<%=basePath%>merchant/main/operation" style="margin-top: -45px;margin-left: 90px;">|&nbsp;添加</a>
+					 </li>
+					 </c:forEach>
+				 </c:otherwise>
+				 </c:choose>
+				 </div>
 			</ul>
 		</div>
 	</div>
-	<script type="text/javascript">
-		var baseUrl = "${pageContext.request.contextPath}"
-		$(".getCategory").on("click", function() {
-			var url = baseUrl+"/merchant/main/getCategory"
-			$.post(url,function(result) {
-				console.log(result)
-			})
-		})
-	</script>
 </body>
 </html>

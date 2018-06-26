@@ -73,8 +73,11 @@
 		select * from public_goods
 		where goodsNumber=#{goodsNumber}
 	</select>
+	<select id="queryGoodsForInt" resultType="java.lang.Integer">
+		select count(*) from public_goods where accountNumber=#{param1} and category_id=#{param2}
+	</select>
 	<select id="queryGoodsList" resultType="goodsPublic.entity.Goods">
-		select * from public_goods where accountNumber=#{param1} and category_id=#{param2}
+		select * from public_goods where accountNumber=#{param1} and category_id=#{param2} limit ${param3},${param4}
 	</select>
 	<select id="getGoodsById" resultType="goodsPublic.entity.Goods">
 		select * from public_goods where id=#{param1}

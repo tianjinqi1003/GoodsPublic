@@ -1,7 +1,10 @@
 package goodsPublic.controller;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -213,8 +216,12 @@ public class MainController {
 	}
 	
 	//获得店铺名下的所有分类
-	@RequestMapping(value="/queryCategoryList")
-	public String getCategory(HttpServletRequest request) {
+	/**
+	 * 跳转至分类页面
+	 * @return
+	 */
+	@RequestMapping(value="/goCategoryList")
+	public String goCategoryList() {
 		
 		/*
 		HttpSession session=request.getSession();
@@ -226,15 +233,47 @@ public class MainController {
 		return "/merchant/categoryList";
 	}
 	
-	@RequestMapping(value="/queryGoodsList")
-	public String queryGoodsList(HttpServletRequest request, String categoryId) {
+	@RequestMapping(value="/queryCategoryList")
+	@ResponseBody
+	public Map<String, Object> queryCategoryList(HttpSession session,int page,int rows,String sort,String order) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		//List<Map<String, Object>> companyList = companyDao.queryCompanyList(input, startTime, endTime, page, rows, sort, order);
 		
+		List<CategoryInfo> catList = (List<CategoryInfo>)session.getAttribute("categoryList");
+		List<CategoryInfo> catList1 = new ArrayList<CategoryInfo>();
+		for (int i = (page-1)*rows; i < page*rows-1; i++) {
+			if(i>=catList.size())
+				break;
+			catList1.add(catList.get(i));
+		}
+		jsonMap.put("total", catList1.size());
+		jsonMap.put("rows", catList1);
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/goGoodsList")
+	public String goGoodsList() {
+
+		return "/merchant/goodsList";
+	}
+	
+	@RequestMapping(value="/queryGoodsList")
+	@ResponseBody
+	public Map<String, Object> queryGoodsList(String accountId,String categoryId,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		/*
 		HttpSession session=request.getSession();
 		AccountMsg user=(AccountMsg) session.getAttribute("user");
 		AccountMsg accountMsg=userService.getUserLogin(user);
-		List<Goods> goodsList = publicService.queryGoodsList(accountMsg.getId(),categoryId);
-		request.setAttribute("goodsList", goodsList);
-		return "/merchant/goodsList";
+		*/
+		int count = publicService.queryGoodsForInt(accountId, categoryId);
+		List<Goods> goodsList = publicService.queryGoodsList(accountId, categoryId, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		jsonMap.put("rows", goodsList);
+		return jsonMap;
 	}
 	
 	/**
