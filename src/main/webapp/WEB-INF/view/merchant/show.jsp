@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title></title>
+<title>测试标题</title>
 <style type="text/css">
 body {
 	zoom: 1;
@@ -72,13 +72,14 @@ body {
 				</div>
 			</div>
 			<div class="changeBtm">
-				<a href="javascript:;" class="active">商品简介</a> 
-				<a href="javascript:;">公司介绍</a>
+				<a href="javascript:;" class="active">1</a> <a href="javascript:;">2</a>
+				<a href="javascript:;">3</a>
 			</div>
 			<div class="msgContent">
 				<div class="mainMsg" style="display: block;">
 					${plan.htmlContent}</div>
-				<div class="mainMsg" style="display: none;">公司啥啥啥……</div>
+				<div class="mainMsg" style="display: none;">2</div>
+				<div class="mainMsg" style="display: none;">3</div>
 			</div>
 			<script type="text/javascript">
 				function GetRequest() {
