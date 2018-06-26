@@ -40,7 +40,7 @@
 				</a>
 			</li>
 			<li class="layui-nav-item">
-				<a href="<%=basePath%>merchant/exit">退了</a>
+				<a href="<%=basePath%>merchant/exit">退出</a>
 			</li>
 		</ul>
 	</div>
