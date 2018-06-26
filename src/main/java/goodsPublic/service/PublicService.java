@@ -26,13 +26,6 @@ public interface PublicService {
 	 */
 	public void createShowUrlQrcode(String url, String goodsNumber);
 	/**
-	 * 查询商品
-	 * @param accountMsgId
-	 * @param categoryId
-	 * @return
-	 */
-	public List<Goods> queryGoodsList(String accountMsgId, String categoryId);
-	/**
 	 * 根据id查询商品
 	 * @param id
 	 * @return
@@ -50,4 +43,23 @@ public interface PublicService {
 	 * @return
 	 */
 	public AccountMsg getAccountById(String accountId);
+	/**
+	 * 查询商品数量
+	 * @param accountId
+	 * @param categoryId
+	 * @return
+	 */
+	public int queryGoodsForInt(String accountId, String categoryId);
+	/**
+	 * 查询商品信息
+	 * @param accountId
+	 * @param categoryId
+	 * @param page
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
+	public List<Goods> queryGoodsList(String accountId, String categoryId, int page, int rows, String sort,
+			String order);
 }
