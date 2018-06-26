@@ -139,9 +139,9 @@ body {
                 if (/(^\_)|(\__)|(\_+$)/.test(value)) {
                     return '用户名首尾不能出现下划线\'_\'';
                 }
-                if(!/^1[3|4|5|7|8][0-9]{9}$/.test(value)){
-                    return '请输入正确用户名（手机号）';
-                }
+              //  if(!/^1[3|4|5|7|8][0-9]{9}$/.test(value)){
+             //       return '请输入正确用户名（手机号）';
+              //  }
             },
             verifyCode: function (value) {
                 if (value === '') {

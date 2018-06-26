@@ -133,11 +133,12 @@ body .beg-login-bg {
 			form.on('submit(formDemo)', function(data) {
 				url=baseUrl+"/merchant/regist"
 				$.post(url,data.field,function(result){
-					var json=JSON.parse(result)
-					if(json.status==0){
-						
+					console.log(result)
+					//var json=JSON.parse(result)
+					if(result.status==0){
+						window.location.href=baseUrl+result.url
 					}
-				})
+				},"json")
 				console.log("===111===")
 				return false
 			});
