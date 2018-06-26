@@ -7,10 +7,10 @@
 		select * from
 		category_table where accountId=#{accountId}
 	</select>
-	<select id="getById" resultType="goodsPublic.entity.CategoryInfo">
+	<!-- <select id="getById" resultType="goodsPublic.entity.CategoryInfo">
 		select * from 
 		category_table where id=#{id}
-	</select>
+	</select> -->
 	<insert id="saveCategoryInfo" parameterType="goodsPublic.entity.CategoryInfo">
 		insert into category_table
 		<trim prefix="(" suffix=")" suffixOverrides=",">

@@ -9,13 +9,6 @@
 <%@include file="js.jsp"%>
 <script type="text/javascript">
 $(function(){
-	$("#add_but").linkbutton({
-		iconCls:"icon-add",
-		onclick:function(){
-			location.href="<%=basePath%>merchant/main/goEditCategory";
-		}
-	});
-	
 	$("#remove_but").linkbutton({
 		iconCls:"icon-remove",
 		onclick:function(){
@@ -33,8 +26,9 @@ $(function(){
 		columns:[[
             {field:"categoryId",title:"类别编号",width:100,sortable:true},
             {field:"categoryName",title:"类别名称",width:100,sortable:true},
-            {field:"id",title:"操作",width:100,formatter:function(value){
-            	return "<a href=\"queryCompany.action?index=2&nav=2&id="+value+"&edit=true\">编辑</a>";
+            {field:"id",title:"操作",width:100,formatter:function(value,row){
+            	//return "<a href=\"${pageContext.request.contextPath}/merchant/main/goEditCategory?id="+value+"\">编辑</a>";
+            	return "<a onclick=\"getCategory('"+row.categoryId+"','"+row.categoryName+"')\">编辑</a>";
             }}
         ]],
         onLoadSuccess:function(data){
@@ -43,9 +37,41 @@ $(function(){
 				$(this).datagrid("mergeCells",{index:0,field:"CompanyId",colspan:3});
 				data.total=0;
 			}
+			initEditDiv();
 		}
 	});
+	
 });
+
+function getCategory(categoryId,categoryName){
+	$("#categoryId").val(categoryId);
+	$("#categoryName").val(categoryName);
+}
+
+function initEditDiv(){
+	var rowsCount=tab1.datagrid("getRows").length;
+	$("#edit_div").dialog({
+		title:"添加分类",
+		width:setFitWidthInParent("body"),
+		height:200,
+		top:rowsCount*25+200,
+		left:210,
+		buttons:[
+           {text:"添加",id:"ok_but",iconCls:"icon-ok",handler:function(){
+        	   checkReg();
+           }}
+        ]
+	});
+	
+	$("#edit_div table").css("width","100%");
+	$("#edit_div table td").css("padding-left","50px");
+	$("#edit_div table td").css("font-size","20px");
+	$("#edit_div table tr").css("height","45px");
+	
+	$("#ok_but").css("left","45%");
+	$("#ok_but").css("position","absolute");
+	$(".dialog-button .l-btn-text").css("font-size","20px");
+}
 
 var baseUrl = "${pageContext.request.contextPath}";
 function deleteByIds() {
@@ -81,12 +107,35 @@ function setFitWidthInParent(o){
 <body>
 <div class="layui-layout layui-layout-admin">
 	<%@include file="side.jsp"%>
-	<div style="margin-top:5px;margin-left: 210px;">
+	<div id="tab1_div" style="margin-top:5px;margin-left: 210px;">
 		<div id="toolbar">
-			<a id="add_but">添加</a>
 			<a id="remove_but">删除</a>
 		</div>
 		<table id="tab1">
+		</table>
+	</div>
+	
+	<div id="edit_div">
+		<input type="hidden" id="id" value="${sessionScope.user.id }"/>
+		<table>
+		  <tr>
+			<td align="right">
+				类别编号：
+			</td>
+			<td>
+				<input id="categoryId" type="text" value="" onfocus="focusCategoryId()" onblur="checkCategoryId()"/>
+				<span style="color: #f00;">*</span>
+			</td>
+		  </tr>
+		  <tr>
+			<td align="right">
+				类别名称：
+			</td>
+			<td>
+				<input id="categoryName" type="text" value="" maxlength="20" onfocus="focusCategoryName()" onblur="checkCategoryName()"/>
+				<span style="color: #f00;">*</span>
+			</td>
+		  </tr>
 		</table>
 	</div>
 	<%@include file="foot.jsp"%>

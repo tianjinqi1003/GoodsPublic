@@ -14,7 +14,9 @@ public interface CategoryService {
 	/**
 	 * 根据id查询
 	 * */
+	/*
 	public CategoryInfo getById(String id);
+	*/
 	/**
 	 * 删除类别
 	 * @param ids

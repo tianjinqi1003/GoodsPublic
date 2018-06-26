@@ -32,10 +32,12 @@ public class CategoryServiceImpl implements CategoryService {
 		categoryInfoMapper.saveCategoryInfo(categoryInfo);
 		return 0;
 	}
+	/*
 	@Override
 	public CategoryInfo getById(String id) {
 		return categoryInfoMapper.getById(id);
 	}
+	*/
 	@Override
 	public int deletCategoryInfo(String ids, HttpSession session) {
 		// TODO Auto-generated method stub

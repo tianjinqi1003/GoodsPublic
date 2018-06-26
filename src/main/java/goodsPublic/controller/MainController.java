@@ -263,11 +263,6 @@ public class MainController {
 	public Map<String, Object> queryGoodsList(String accountId,String categoryId,int page,int rows,String sort,String order) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		/*
-		HttpSession session=request.getSession();
-		AccountMsg user=(AccountMsg) session.getAttribute("user");
-		AccountMsg accountMsg=userService.getUserLogin(user);
-		*/
 		int count = publicService.queryGoodsForInt(accountId, categoryId);
 		List<Goods> goodsList = publicService.queryGoodsList(accountId, categoryId, page, rows, sort, order);
 		
@@ -279,12 +274,14 @@ public class MainController {
 	/**
 	 * 跳转到类别编辑页面
 	 * */
+	/*
 	@RequestMapping(value="/goEditCategory")
 	public String goEditCategory(HttpServletRequest request, String id) {
 		CategoryInfo categoryInfo = categoryService.getById(id);
 		request.setAttribute("categoryInfo", categoryInfo);
 		return "/merchant/editCategory";
 	}
+	*/
 	
 	@RequestMapping(value="/goEditGoods")
 	public String goEditGoods(HttpServletRequest request, String id) {
