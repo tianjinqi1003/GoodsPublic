@@ -156,7 +156,6 @@ public class MainController {
 	 * 编辑商品信息
 	 * */
 	@RequestMapping(value="/editGoods",produces="plain/text; charset=UTF-8")
-	@ResponseBody
 	public String editGoods(Goods goods) {
 		
 		String json="";
@@ -171,14 +170,13 @@ public class MainController {
 			else {
 				plan.setStatus(0);
 				plan.setMsg("商品编辑成功");
-				plan.setUrl("/merchant/main/queryGoodsList");
-				json=JsonUtil.getJsonFromObject(plan);
 			}
+			json=JsonUtil.getJsonFromObject(plan);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return json;
+		return "../..//merchant/main/goGoodsList?categoryId="+goods.getCategory_id()+"&json="+json;
 	}
 	
 	/**
@@ -306,5 +304,11 @@ public class MainController {
 		categoryService.addCategory(categoryInfo);
 		
 		return null;
+	}
+
+	@RequestMapping(value="/goDemo")
+	public String goDemo() {
+		
+		return "/merchant/demo";
 	}
 }
