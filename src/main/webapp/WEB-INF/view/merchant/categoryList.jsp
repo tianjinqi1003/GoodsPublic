@@ -11,7 +11,7 @@
 $(function(){
 	$("#remove_but").linkbutton({
 		iconCls:"icon-remove",
-		onclick:function(){
+		onClick:function(){
 			deleteByIds();
 		}
 	});
@@ -28,7 +28,7 @@ $(function(){
             {field:"categoryName",title:"类别名称",width:100,sortable:true},
             {field:"id",title:"操作",width:100,formatter:function(value,row){
             	//return "<a href=\"${pageContext.request.contextPath}/merchant/main/goEditCategory?id="+value+"\">编辑</a>";
-            	return "<a onclick=\"getCategory('"+row.categoryId+"','"+row.categoryName+"')\">编辑</a>";
+            	return "<a onclick=\"getCategory('"+row.id+"','"+row.categoryId+"','"+row.categoryName+"')\">编辑</a>";
             }}
         ]],
         onLoadSuccess:function(data){
@@ -43,7 +43,8 @@ $(function(){
 	
 });
 
-function getCategory(categoryId,categoryName){
+function getCategory(id,categoryId,categoryName){
+	$("#id").val(id);
 	$("#categoryId").val(categoryId);
 	$("#categoryName").val(categoryName);
 }
@@ -57,8 +58,8 @@ function initEditDiv(){
 		top:rowsCount*25+200,
 		left:210,
 		buttons:[
-           {text:"添加",id:"ok_but",iconCls:"icon-ok",handler:function(){
-        	   checkReg();
+           {text:"提交",id:"ok_but",iconCls:"icon-ok",handler:function(){
+        	   checkEdit();
            }}
         ]
 	});
@@ -73,24 +74,70 @@ function initEditDiv(){
 	$(".dialog-button .l-btn-text").css("font-size","20px");
 }
 
+function checkEdit(){
+	if(checkCategoryName()){
+		editCategory();
+	}
+}
+
+function editCategory(){
+	var id=$("#id").val();
+	var accountId=$("#accountId").val();
+	var categoryId=$("#categoryId").val();
+	var categoryName=$("#categoryName").val();
+	$.post("editCategory",
+		{id:id,accountId:accountId,categoryId:categoryId,categoryName:categoryName},
+		function(data){
+			if(data.status==1){
+				$.messager.alert("编辑失败",data.msg,"info");
+			}
+			else{
+				$.messager.confirm("编辑成功", data.msg, function(r){
+					if (r){
+						location.href=location.href;
+					}
+				});
+			}
+		}
+	,"json");
+}
+
+function focusCategoryName(){
+	var categoryName = $("#categoryName").val();
+	if(categoryName=="类别名称不能为空"){
+		$("#categoryName").val("");
+		$("#categoryName").css("color", "#555555");
+	}
+}
+
+//验证类别名称
+function checkCategoryName(){
+	var categoryName = $("#categoryName").val();
+	if(categoryName==null||categoryName==""||categoryName=="类别名称不能为空"){
+		$("#categoryName").css("color","#E15748");
+    	$("#categoryName").val("类别名称不能为空");
+    	return false;
+	}
+	else
+		return true;
+}
+
 var baseUrl = "${pageContext.request.contextPath}";
 function deleteByIds() {
-	if ($("#tab1 input[type='checkbox']:checked").length == 0) {
-		alert("请选择要删除的信息！");
+	var rows=tab1.datagrid("getSelections");
+	if (rows.length == 0) {
+		$.messager.alert("提示","请选择要删除的信息！","warning");
 		return false;
 	}
 	var ids = "";
-	$("#tab1 input[type='checkbox']").each(function() {
-		if ($(this).prop("checked")) {
-			ids += "," + $(this).attr("id").substring(2);
-		}
-	});
-	//alert(ids.substring(1));
+	for (var i = 0; i < rows.length; i++) {
+		ids += "," + rows[i].id;
+	}
 	var url = baseUrl + "/merchant/main/deleteCategory"
 	$.post(url, {
 		ids : ids.substring(1)
 	}, function(result) {
-		alert(result.msg)
+		$.messager.alert("提示",result.msg);
 		location.href = location.href;
 	}, "json");
 }
@@ -116,7 +163,8 @@ function setFitWidthInParent(o){
 	</div>
 	
 	<div id="edit_div">
-		<input type="hidden" id="id" value="${sessionScope.user.id }"/>
+		<input type="hidden" id="id" value=""/>
+		<input type="hidden" id="accountId" value="${sessionScope.user.id }"/>
 		<table>
 		  <tr>
 			<td align="right">
