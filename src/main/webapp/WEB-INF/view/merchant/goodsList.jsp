@@ -92,7 +92,7 @@ function setFitWidthInParent(o){
 	<%@include file="foot.jsp"%>
 </div>
 <div id="previewDiv"
-	style="width: 300px; height: 300px; margin: 0 auto; margin-top: 100px; position: relative; z-index: 998; display: none;"
+	style="width: 300px; height: 300px; margin: 0 auto; margin-top: -200px; position:relative; z-index: 998; display: none;"
 	onmouseout="unPreviewImg(this);">
 	<img alt="" src="/GoodsPublic/upload/1529719265643.jpg" width="300"
 		height="300" />

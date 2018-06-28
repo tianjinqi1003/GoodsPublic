@@ -92,7 +92,7 @@
 					 <c:forEach items="${sessionScope.categoryList }" var="item">
 					 <li class="layui-nav-item">
 					 	<a href="<%=basePath%>merchant/main/goGoodsList?categoryId=${item.categoryId}">${item.categoryName }</a>
-						<a href="<%=basePath%>merchant/main/operation" style="margin-top: -45px;margin-left: 90px;">|&nbsp;添加</a>
+						<a href="<%=basePath%>merchant/main/operation?categoryId=${item.categoryId}" style="margin-top: -45px;margin-left: 90px;">|&nbsp;添加</a>
 					 </li>
 					 </c:forEach>
 				 </c:otherwise>

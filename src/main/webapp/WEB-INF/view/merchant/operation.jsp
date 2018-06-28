@@ -4,206 +4,200 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>商品发布</title>
 <%@include file="js.jsp"%>
-<style type="text/css">
-.mainContent {
-	justify-content: center;
-	display: flex;
-	height: 100%;
-	background-color: #f3f3f4;
+<link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/themes/default/default.css" />
+<link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css" />
+<script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/kindeditor.js"></script>
+<script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
+<script type="text/javascript">
+var baseUrl = "${pageContext.request.contextPath}"
+KindEditor.ready(function(K) {
+	var editor1 = K.create('textarea[name="htmlContent"]', {
+		cssPath : '<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css',
+		uploadJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/upload_json.jsp',
+		fileManagerJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/file_manager_json.jsp',
+		allowFileManager : true
+	});
+	prettyPrint();
+});
+
+$(function(){
+	if('${requestScope.json}'!=''){
+		var json=JSON.parse('${requestScope.json}');
+		if(json.status==0){
+			var goodsNumber=json.data;
+			var url=location.href.substring(0,location.href.indexOf("GoodsPublic")-1)+baseUrl+json.url+"?goodsNumber="+goodsNumber;
+			$.post(baseUrl + "/merchant/main/createShowUrlQrcode",
+				{url:url,goodsNumber:goodsNumber},
+				function(json1){
+					if(json1.status==0){
+						$.messager.confirm("提示", json.msg+"，是否预览？", function(r){
+							if (r){
+								window.location.href=json1.url;
+							}
+						});
+					}
+				}
+			,"json");
+		}
+	}
+	
+	$("#edit_div").dialog({
+		title:"添加商品",
+		width:setFitWidthInParent("body"),
+		height:520,
+		top:65,
+		left:210,
+		buttons:[
+           {text:"提交",id:"ok_but",iconCls:"icon-ok",handler:function(){
+        	   checkEdit();
+           }}
+        ]
+	});
+	
+	$("#edit_div table").css("width","100%");
+	$("#edit_div table td").css("padding-left","50px");
+	$("#edit_div table td").css("font-size","20px");
+	$("#edit_div table tr").css("height","45px");
+	
+	$("#ok_but").css("left","45%");
+	$("#ok_but").css("position","absolute");
+	$(".dialog-button .l-btn-text").css("font-size","20px");
+});
+
+function checkEdit(){
+	if(checkGoodsNumber()){
+		if(checkTitle()){
+			document.getElementById("sub_but").click();
+		}
+	}
 }
 
-.formContent {
-	width: 60%;
-	justify-content: center;
-	display: flex;
-	background-color: #fff;
+function checkGoodsNumber(){
+	var flag=false;
+	var goodsNumber = $("#goodsNumber").val();
+	if(goodsNumber==null||goodsNumber==""||goodsNumber=="商品编号不能为空"){
+		$("#goodsNumber").css("color","#E15748");
+    	$("#goodsNumber").val("商品编号不能为空");
+    	flag=false;
+	}
+	else{
+		$.ajaxSetup({async:false});
+		$.post("checkGoodsNumber",
+			{goodsNumber:goodsNumber},
+			function(data){
+				if(data.status==1){
+					alert(data.msg);
+					flag=false;
+				}
+				else
+					flag=true;
+			}
+		,"json");
+	}
+	return flag;
 }
 
-.uploadImg {
-	display: block;
-	width: 175px;
-	height: 175px;
-	border: 1px dashed #ccc;
-	cursor: pointer;
-	margin: 6px 0px;
+function focusTitle(){
+	var title = $("#title").val();
+	if(title=="商品名称不能为空"){
+		$("#title").val("");
+		$("#title").css("color", "#555555");
+	}
 }
 
-.uploadImg img {
-	width: 100%;
-	height: 100%;
+//验证商品名称
+function checkTitle(){
+	var title = $("#title").val();
+	if(title==null||title==""||title=="商品名称不能为空"){
+		$("#title").css("color","#E15748");
+    	$("#title").val("商品名称不能为空");
+    	return false;
+	}
+	else
+		return true;
 }
 
-.uploadImg input {
-	display: none;
+function showQrcodePic(obj){
+	var $file = $(obj);
+    var fileObj = $file[0];
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var $img = $("#uploadImg");
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        $img.attr("src", dataURL);
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
 }
-</style>
+
+function setFitWidthInParent(o){
+	var width=$(o).css("width");
+	return width.substring(0,width.length-2)-250;
+}
+</script>
 </head>
-<body class="layui-layout-body">
+<body>
 	<div class="layui-layout layui-layout-admin">
 		<%@include file="side.jsp"%>
-		<div class="layui-body">
-			<div class="mainContent">
-				<div class="formContent">
-					<form method="post" enctype="multipart/form-data"
-						class="layui-form">
-						<div class="layui-form-item">
-							<h3>基本信息</h3>
-							<input type="hidden" name="accountNumber" value="${sessionScope.user.id }" required/>
-							<div class="formList">
-								<div class="formLine clearfix">
-									<div class="layui-form-item">
-										<label class="layui-form-label">*商品名称</label>
-										<div class="layui-input-block">
-											<input type="text" name="title" required
-												lay-verify="required" placeholder="请输入商品名称"
-												autocomplete="off" class="layui-input" maxlength="20">
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="formList">
-								<div class="formLine clearfix">
-									<div class="layui-form-item">
-										<label class="layui-form-label">*商品编号</label>
-										<div class="layui-input-block">
-											<input type="text" name="goodsNumber" required
-												lay-verify="required" placeholder="请输入商品编号"
-												autocomplete="off" class="layui-input" maxlength="20">
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="layui-form-item">
-								<label class="layui-form-label">店铺分类</label>
-								<div class="layui-input-inline select-input">
-									<select id="shopCategory" name="category_id" lay-verify="required">
-										<c:forEach items="${sessionScope.categoryList }" var="item">
-										<option value="${item.categoryId }">${item.categoryName }</option>
-										</c:forEach>
-									</select>
-								</div>
-							</div>
-							<div class="layui-form-item layui-form-text">
-								<label class="layui-form-label">图片</label>
-								<div class="layui-input-block">
-									<div
-										style='border: 1px dashed #ccc; max-width: 180px; border-radius: 3px;'>
-										<label style='cursor: pointer'> 
-										<img
-											style='width: 100px; height: 100px' src="" class='uploadImg'
-											id='uploadImg' /> <input hidden='hidden' name='imgUrl'
-											id='imgUrl_' />
-										</label>
-									</div>
-								</div>
-							</div>
-							<!-- 内容主体区域 -->
-							<div class="layui-form-item">
-								<textarea id="demo" style="display: none;" name="htmlContent"></textarea>
-							</div>
-							<div class="layui-form-item"></div>
-							<div class="layui-input-block">
-								<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
-								<button type="reset" class="layui-btn layui-btn-primary">重置</button>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
+		<div id="edit_div">
+			<form id="form1" name="form1" method="post" action="addGoodsPublic" enctype="multipart/form-data">
+			<input type="hidden" id="accountNumber" name="accountNumber" value="${sessionScope.user.id }"/>
+			<input type="hidden" id="category_id" name="category_id" value="${param.categoryId }"/>
+			<table>
+			  <tr>
+				<td align="right">
+					商品编号
+				</td>
+				<td>
+					<input id="goodsNumber" name="goodsNumber" type="text" onfocus="focusGoodsNumber()" onblur="checkGoodsNumber()"/>
+					<span style="color: #f00;">*</span>
+				</td>
+			  </tr>
+			  <tr>
+				<td align="right">
+					商品名称
+				</td>
+				<td>
+					<input id="title" name="title" type="text" onfocus="focusTitle()" onblur="checkTitle()"/>
+					<span style="color: #f00;">*</span>
+				</td>
+			  </tr>
+			  <tr>
+				<td align="right">
+					图片
+				</td>
+				<td>
+					<img style='width: 100px; height: 100px' src="" class='uploadImg' id='uploadImg' />
+					<input type="file" name="file" onchange="showQrcodePic(this)"/>
+				</td>
+			  </tr>
+			  <tr>
+				<td align="right">
+					内容
+				</td>
+				<td>
+					<br>
+					<textarea id="htmlContent" name="htmlContent" cols="100" rows="8" style="width:700px;height:200px;visibility:hidden;"></textarea>
+					<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
+				</td>
+			  </tr>
+			</table>
+			</form>
 		</div>
 		<%@include file="foot.jsp"%>
 	</div>
-	<script>
-		//JavaScript代码区域
-		var baseUrl = "${pageContext.request.contextPath}"
-		var editIndex;
-		layui.use([ 'element', 'upload', 'layedit', 'form', "layer" ],
-				function() {
-					var layer = layui.layer;
-					var element = layui.element;
-					 //监听导航点击
-					layedit = layui.layedit, upload = layui.upload,
-							form = layui.form;
-					form.on('submit(formDemo)', function(data) {
-						console.log(data.elem) //被执行事件的元素DOM对象，一般为button对象
-						console.log(data.form) //被执行提交的form对象，一般在存在form标签时才会返回
-						if (editIndex !== undefined) {
-							data.field.htmlContent = layedit
-									.getContent(editIndex);
-						}
-						console.log(data.field) //当前容器的全部表单字段，名值对形式：{name: value}
-						layedit.getContent(editIndex);
-						var url = baseUrl + "/merchant/main/addGoodsPublic"
-						$.post(url, data.field, function(result) {
-							var json=JSON.parse(result); 
-							if(json.status==1){
-								layer.open({
-									title:"发布失败"
-									,content: '失败原因：'+json.msg
-								})
-							}else{
-								var url=location.href.substring(0,location.href.indexOf("GoodsPublic")-1)+baseUrl+json.url+"?goodsNumber="+json.data;
-								$.post(baseUrl + "/merchant/main/createShowUrlQrcode",
-									{url:url,goodsNumber:json.data},
-									function(json1){
-										if(json1.status==0){
-											layer.open({
-												title : "是否预览",
-												btn : [ 'yes', 'no' ],
-												content:json.msg,
-												yes : function() {
-													console.log(json.data)
-													console.log(json.url)
-													window.location.href=json1.url;
-													//window.location.href=baseUrl+json.url+"?goodsNumber="+json.data
-												},
-												no:function(){
-													
-												}
-											})
-										}
-									}
-								,"json");
-							}
-						})
-						return false;
-					})
-					layedit.set({
-						uploadImage : {
-							url : baseUrl + '/merchant/main/upload',
-							type : 'post'
-						}
-					});
-					editIndex = layedit.build('demo', {
-						height : 500
-					}); //建立编辑器
-				});
-		 $(document).on("click", ".uploadImg", function () {
-		        var ele = this;
-		        //上传资讯图片
-		        var uploadInst = upload.render({
-		            elem: ele //绑定元素
-		            ,url: baseUrl + '/merchant/main/upload' //上传接口
-		            ,accept: 'images'
-		            ,exts: 'jpg|png|gif|bmp|jpeg'
-		            ,auto: true
-		            ,done: function(res){
-		                //上传完毕回调
-		                $("#imgUrl_").val(res.data.src);
-		                <%--const rootDirectory = "${staticFilePath}";--%>
-		               // const rootDirectory = "http://120.27.5.36:8500/htkApp/";
-		                $(ele).attr('src',res.data.src);
-		            }
-		            ,error: function(){
-		                //请求异常回调
-		                layer_msg("exceptin", "上传图片失败");
-		            }
-		        });
-		    });
-	</script>
 </body>
 </html>

@@ -28,6 +28,7 @@ import goodsPublic.entity.Goods;
 import goodsPublic.service.CategoryService;
 import goodsPublic.service.PublicService;
 import goodsPublic.service.UserService;
+import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/merchant/main")
@@ -85,24 +86,56 @@ public class MainController {
 
 	//富文本框接口
 	@RequestMapping(value="/addGoodsPublic",produces="plain/text; charset=UTF-8")
+	public String addGoodsPublic(Goods goods,HttpServletRequest request,@RequestParam(value="file")  MultipartFile file) {
+		
+		try {
+			PlanResult plan=new PlanResult();
+			String jsonStr = FileUploadUtils.appUploadContentImg(request,file,"");
+			JSONObject fileJson = JSONObject.fromObject(jsonStr);
+			if("成功".equals(fileJson.get("msg"))) {
+				JSONObject dataJO = (JSONObject)fileJson.get("data");
+				goods.setImgUrl(dataJO.get("src").toString());
+			}
+			
+			String json;
+			if(publicService.addGoodsPublic(goods)>0) {
+				//return  "{'code': 1,'msg': 'success'}";
+				
+				plan.setStatus(0);
+				plan.setMsg("商品发布成功");
+				plan.setUrl("/merchant/main/show");
+				plan.setData(goods.getGoodsNumber());
+			}
+			json=JsonUtil.getJsonFromObject(plan);
+			JSONObject js = JSONObject.fromObject(json);
+			request.setAttribute("json", js);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "../../merchant/main/operation?";
+	}
+	
+	/**
+	 * 验证商品编号
+	 * @param goodsNumber
+	 * @return
+	 */
+	@RequestMapping(value="/checkGoodsNumber",produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String addGoodsPublic(Goods goods,HttpServletRequest request) {
-		int a=publicService.getGoodsByGoodsNumber(goods.getGoodsNumber());
+	public String checkGoodsNumber(String goodsNumber) {
+		int count=publicService.getGoodsByGoodsNumber(goodsNumber);
 		PlanResult plan=new PlanResult();
 		String json;
-		if(a==1) {
+		if(count==1) {
 			plan.setStatus(1);
 			plan.setMsg("商品编码重复");
 			json=JsonUtil.getJsonFromObject(plan);
-			return json;
 		}
-		publicService.publicGoods(goods, request);
-		//return  "{'code': 1,'msg': 'success'}";
-		plan.setStatus(0);
-		plan.setMsg("商品发布成功");
-		plan.setUrl("/merchant/main/show");
-		plan.setData(goods.getGoodsNumber());
-		json=JsonUtil.getJsonFromObject(plan);
+		else {
+			plan.setStatus(0);
+			json=JsonUtil.getJsonFromObject(plan);
+		}
 		return json;
 	}
 	
@@ -113,7 +146,7 @@ public class MainController {
 	 */
 	@RequestMapping(value="/createShowUrlQrcode",produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String createShowUrlQrcode(String url, String goodsNumber) {
+	public String createShowUrlQrcode(String url, String goodsNumber,HttpServletRequest request) {
 		
 		publicService.createShowUrlQrcode(url,goodsNumber);
 		
@@ -156,10 +189,17 @@ public class MainController {
 	 * 编辑商品信息
 	 * */
 	@RequestMapping(value="/editGoods",produces="plain/text; charset=UTF-8")
-	public String editGoods(Goods goods) {
+	public String editGoods(Goods goods,HttpServletRequest request,@RequestParam(value="file")  MultipartFile file) {
 		
 		String json="";
 		try {
+			String jsonStr = FileUploadUtils.appUploadContentImg(request,file,"");
+			JSONObject fileJson = JSONObject.fromObject(jsonStr);
+			if("成功".equals(fileJson.get("msg"))) {
+				JSONObject dataJO = (JSONObject)fileJson.get("data");
+				goods.setImgUrl(dataJO.get("src").toString());
+			}
+			
 			int count=publicService.editGoods(goods);
 			PlanResult plan=new PlanResult();
 			if(count==0) {

@@ -34,8 +34,8 @@ public class PublicServiceImpl implements PublicService {
 	
 	//发布商品接口，将商品保存在数据库中
 	@Override
-	public void publicGoods(Goods goods, HttpServletRequest request) {
-		int a=publicDao.addGoodsPublic(goods);
+	public int addGoodsPublic(Goods goods) {
+		return publicDao.addGoodsPublic(goods);
 	}
 	//展示商品接口，将商品从数据库中读取出来展示到对应的页面当中
 	

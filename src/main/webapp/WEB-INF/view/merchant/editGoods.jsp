@@ -76,6 +76,28 @@ function checkTitle(){
 		return true;
 }
 
+function showQrcodePic(obj){
+	var $file = $(obj);
+    var fileObj = $file[0];
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var $img = $("#uploadImg");
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        $img.attr("src", dataURL);
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
+}
+
 function setFitWidthInParent(o){
 	var width=$(o).css("width");
 	return width.substring(0,width.length-2)-250;
@@ -86,7 +108,7 @@ function setFitWidthInParent(o){
 <div class="layui-layout layui-layout-admin">
 		<%@include file="side.jsp"%>
 		<div id="edit_div">
-			<form id="form1" name="form1" method="post" action="editGoods">
+			<form id="form1" name="form1" method="post" action="editGoods" enctype="multipart/form-data">
 			<input type="hidden" id="id" name="id" value="${requestScope.goods.id }"/>
 			<input type="hidden" id="accountNumber" name="accountNumber" value="${sessionScope.user.id }"/>
 			<table>
@@ -110,21 +132,21 @@ function setFitWidthInParent(o){
 			  </tr>
 			  <tr>
 				<td align="right">
-					内容
-				</td>
-				<td>
-					<textarea id="htmlContent" name="htmlContent" cols="100" rows="8" style="width:700px;height:200px;visibility:hidden;"><%=htmlspecialchars(goods.getHtmlContent())%></textarea>
-					<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
-					<span style="color: #f00;">*</span>
-				</td>
-			  </tr>
-			  <tr>
-				<td align="right">
 					图片
 				</td>
 				<td>
 					<img style='width: 100px; height: 100px' src="${requestScope.goods.imgUrl }" class='uploadImg' id='uploadImg' /> 
-					<input type='hidden' id='imgUrl'  name='imgUrl'/>
+					<input type="file" name="file" onchange="showQrcodePic(this)"/>
+				</td>
+			  </tr>
+			  <tr>
+				<td align="right">
+					内容
+				</td>
+				<td>
+					<br>
+					<textarea id="htmlContent" name="htmlContent" cols="100" rows="8" style="width:700px;height:200px;visibility:hidden;"><%=htmlspecialchars(goods.getHtmlContent())%></textarea>
+					<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
 				</td>
 			  </tr>
 			</table>

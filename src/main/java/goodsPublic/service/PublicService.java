@@ -13,7 +13,7 @@ import goodsPublic.entity.Goods;
 
 public interface PublicService {
 	//保存商品到数据库
-	public void publicGoods(Goods goods,HttpServletRequest request);
+	public int addGoodsPublic(Goods goods);
 	//获得所有跟当前用户有关的商品列表
 	public int getGoodsByGoodsNumber(String goodsNumber);
 	//查询当前用户的
