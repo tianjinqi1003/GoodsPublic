@@ -33,8 +33,8 @@ $(function(){
         ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
-				$(this).datagrid("appendRow",{CompanyId:"<div style=\"text-align:center;\">暂无数据<div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"CompanyId",colspan:3});
+				$(this).datagrid("appendRow",{categoryId:"<div style=\"text-align:center;\">暂无分类</div>"});
+				$(this).datagrid("mergeCells",{index:0,field:"categoryId",colspan:3});
 				data.total=0;
 			}
 			initEditDiv();
@@ -52,7 +52,7 @@ function getCategory(id,categoryId,categoryName){
 function initEditDiv(){
 	var rowsCount=tab1.datagrid("getRows").length;
 	$("#edit_div").dialog({
-		title:"添加分类",
+		title:"添加/编辑分类",
 		width:setFitWidthInParent("body"),
 		height:200,
 		top:rowsCount*25+200,

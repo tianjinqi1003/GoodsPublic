@@ -33,13 +33,26 @@ public class GoodsController {
 	@Autowired
 	private CategoryService categoryService;
 
-	//登录接口
+	/**
+	 * 跳转至登录页面
+	 * @return
+	 */
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public String login() {
 		return "/merchant/login";
 	}
 		
-	//登录接口
+	/**
+	 * 登录接口
+	 * @param model
+	 * @param userName
+	 * @param password
+	 * @param rememberMe
+	 * @param role
+	 * @param loginVCode
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST,produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String login(Model model,String userName,String password,
@@ -79,7 +92,12 @@ public class GoodsController {
 		return JsonUtil.getJsonFromObject(plan);
 	}
 	
-	//为登录页面获取验证码
+	/**
+	 * 为登录页面获取验证码
+	 * @param session
+	 * @param identity
+	 * @param response
+	 */
 	@RequestMapping("/login/captcha")
 	public void getKaptchaImageByMerchant(HttpSession session, String identity, HttpServletResponse response) {
 		utilService.getKaptchaImageByMerchant(session, identity, response);

@@ -31,8 +31,8 @@ $(function(){
         ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
-				$(this).datagrid("appendRow",{CompanyId:"<div style=\"text-align:center;\">暂无数据<div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"CompanyId",colspan:3});
+				$(this).datagrid("appendRow",{goodsNumber:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/operation?categoryId=${param.categoryId}\">点击添加商品</a><div>"});
+				$(this).datagrid("mergeCells",{index:0,field:"goodsNumber",colspan:5});
 				data.total=0;
 			}
 		}

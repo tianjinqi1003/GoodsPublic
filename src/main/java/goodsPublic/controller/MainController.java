@@ -42,9 +42,12 @@ public class MainController {
 	@Autowired
 	private CategoryService categoryService;
 	
-	//主页接口
+	/**
+	 * 跳转到主页
+	 * @return
+	 */
 	@RequestMapping("/index")
-	public String toIndex(HttpServletRequest request) {
+	public String toIndex() {
 
 		/*
 		//填充首页店内分类模块的子模块名称
@@ -54,9 +57,13 @@ public class MainController {
 		*/
 		return "/merchant/index";
 	}
-	//商品发布页面接口
+	
+	/**
+	 * 跳转至商品发布页面
+	 * @return
+	 */
 	@RequestMapping("/operation")
-	public String SayHellow(Model model,HttpServletRequest request) {
+	public String SayHellow() {
 		
 		/*
 		HttpSession session=request.getSession();
@@ -68,7 +75,12 @@ public class MainController {
 		return "/merchant/operation";
 	}
 
-	//图片图片上传接口
+	/**
+	 * 图片上传接口
+	 * @param file
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/upload",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String upload(@RequestParam  MultipartFile file,HttpServletRequest request) {
@@ -84,23 +96,29 @@ public class MainController {
 		}
 	}
 
-	//富文本框接口
+	/**
+	 * 添加商品
+	 * @param goods
+	 * @param request
+	 * @param file
+	 * @return
+	 */
 	@RequestMapping(value="/addGoodsPublic",produces="plain/text; charset=UTF-8")
 	public String addGoodsPublic(Goods goods,HttpServletRequest request,@RequestParam(value="file")  MultipartFile file) {
 		
 		try {
-			PlanResult plan=new PlanResult();
-			String jsonStr = FileUploadUtils.appUploadContentImg(request,file,"");
-			JSONObject fileJson = JSONObject.fromObject(jsonStr);
-			if("成功".equals(fileJson.get("msg"))) {
-				JSONObject dataJO = (JSONObject)fileJson.get("data");
-				goods.setImgUrl(dataJO.get("src").toString());
+			if(file.getSize()>0) {
+				String jsonStr = FileUploadUtils.appUploadContentImg(request,file,"");
+				JSONObject fileJson = JSONObject.fromObject(jsonStr);
+				if("成功".equals(fileJson.get("msg"))) {
+					JSONObject dataJO = (JSONObject)fileJson.get("data");
+					goods.setImgUrl(dataJO.get("src").toString());
+				}
 			}
 			
 			String json;
+			PlanResult plan=new PlanResult();
 			if(publicService.addGoodsPublic(goods)>0) {
-				//return  "{'code': 1,'msg': 'success'}";
-				
 				plan.setStatus(0);
 				plan.setMsg("商品发布成功");
 				plan.setUrl("/merchant/main/show");
@@ -159,7 +177,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 编辑类别信息
+	 * 添加/编辑类别信息
 	 * */
 	@RequestMapping(value="/editCategory",produces="plain/text; charset=UTF-8")
 	@ResponseBody
@@ -193,11 +211,13 @@ public class MainController {
 		
 		String json="";
 		try {
-			String jsonStr = FileUploadUtils.appUploadContentImg(request,file,"");
-			JSONObject fileJson = JSONObject.fromObject(jsonStr);
-			if("成功".equals(fileJson.get("msg"))) {
-				JSONObject dataJO = (JSONObject)fileJson.get("data");
-				goods.setImgUrl(dataJO.get("src").toString());
+			if(file.getSize()>0) {
+				String jsonStr = FileUploadUtils.appUploadContentImg(request,file,"");
+				JSONObject fileJson = JSONObject.fromObject(jsonStr);
+				if("成功".equals(fileJson.get("msg"))) {
+					JSONObject dataJO = (JSONObject)fileJson.get("data");
+					goods.setImgUrl(dataJO.get("src").toString());
+				}
 			}
 			
 			int count=publicService.editGoods(goods);
@@ -216,7 +236,7 @@ public class MainController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "../..//merchant/main/goGoodsList?categoryId="+goods.getCategory_id()+"&json="+json;
+		return "../../merchant/main/goGoodsList?categoryId="+goods.getCategory_id()+"&json="+json;
 	}
 	
 	/**
@@ -244,7 +264,12 @@ public class MainController {
 		return json;
 	}
 
-	//主操作页面接口
+	/**
+	 * 跳转至商品展示页
+	 * @param goodsNumber
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/show",method=RequestMethod.GET)
 	public String Show(String goodsNumber,HttpServletRequest request) {
 		System.out.println(goodsNumber);
@@ -253,7 +278,6 @@ public class MainController {
 		return "/merchant/show";
 	}
 	
-	//获得店铺名下的所有分类
 	/**
 	 * 跳转至分类页面
 	 * @return
@@ -271,6 +295,15 @@ public class MainController {
 		return "/merchant/categoryList";
 	}
 	
+	/**
+	 * 跳转至分类查询页
+	 * @param session
+	 * @param page
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
 	@RequestMapping(value="/queryCategoryList")
 	@ResponseBody
 	public Map<String, Object> queryCategoryList(HttpSession session,int page,int rows,String sort,String order) {
@@ -290,12 +323,26 @@ public class MainController {
 		return jsonMap;
 	}
 
+	/**
+	 * 跳转至商品查询页面
+	 * @return
+	 */
 	@RequestMapping(value="/goGoodsList")
 	public String goGoodsList() {
 
 		return "/merchant/goodsList";
 	}
 	
+	/**
+	 * 查询商品信息
+	 * @param accountId
+	 * @param categoryId
+	 * @param page
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
 	@RequestMapping(value="/queryGoodsList")
 	@ResponseBody
 	public Map<String, Object> queryGoodsList(String accountId,String categoryId,int page,int rows,String sort,String order) {
@@ -321,6 +368,12 @@ public class MainController {
 	}
 	*/
 	
+	/**
+	 * 跳转至编辑商品页面
+	 * @param request
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value="/goEditGoods")
 	public String goEditGoods(HttpServletRequest request, String id) {
 		
@@ -329,6 +382,12 @@ public class MainController {
 		return "/merchant/editGoods";
 	}
 	
+	/**
+	 * 跳转至商户信息页面
+	 * @param request
+	 * @param accountId
+	 * @return
+	 */
 	@RequestMapping(value="/goAccountInfo")
 	public String goAccountInfo(HttpServletRequest request, String accountId) {
 		
@@ -337,6 +396,7 @@ public class MainController {
 		return "/merchant/accountInfo";
 	}
 	
+	/**
 	//创建分类
 	@RequestMapping(value="/addCategory",produces="plain/text; charset=UTF-8")
 	@ResponseBody
@@ -345,10 +405,5 @@ public class MainController {
 		
 		return null;
 	}
-
-	@RequestMapping(value="/goDemo")
-	public String goDemo() {
-		
-		return "/merchant/demo";
-	}
+	**/
 }

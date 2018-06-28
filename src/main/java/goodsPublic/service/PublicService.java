@@ -12,11 +12,26 @@ import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
 
 public interface PublicService {
-	//保存商品到数据库
+
+	/**
+	 * 保存商品到数据库
+	 * @param goods
+	 * @return
+	 */
 	public int addGoodsPublic(Goods goods);
-	//获得所有跟当前用户有关的商品列表
+
+	/**
+	 * 获得所有跟当前用户有关的商品列表
+	 * @param goodsNumber
+	 * @return
+	 */
 	public int getGoodsByGoodsNumber(String goodsNumber);
-	//查询当前用户的
+
+	/**
+	 * 查询当前用户的
+	 * @param goodsNumber
+	 * @return
+	 */
 	public PlanResult getGoodsByGN(String goodsNumber);
 
 	/**
