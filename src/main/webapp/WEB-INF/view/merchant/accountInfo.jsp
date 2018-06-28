@@ -6,73 +6,60 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>商家信息</title>
 <%@include file="js.jsp"%>
-<style type="text/css">
-.mainContent {
-	justify-content: center;
-	display: flex;
-	height: 100%;
-	background-color: #f3f3f4;
-}
-
-.formContent {
-	width: 60%;
-	justify-content: center;
-	display: flex;
-	background-color: #fff;
-}
-</style>
 <script type="text/javascript">
-layui.use(['element'],function(){
-	var element = layui.element;
+$(function(){
+	$("#edit_div").dialog({
+		title:"基本信息",
+		width:setFitWidthInParent("body"),
+		height:500,
+		top:65,
+		left:210
+	});
+	
+	$("#edit_div table").css("width","50%");
+	$("#edit_div table td").css("padding-left","50px");
+	$("#edit_div table td").css("font-size","20px");
+	$("#edit_div table tr").css("height","45px");
 });
+	
+function setFitWidthInParent(o){
+	var width=$(o).css("width");
+	return width.substring(0,width.length-2)-250;
+}
 </script>
 </head>
 <body>
-	<div class="layui-layout layui-layout-admin">
-		<%@include file="side.jsp"%>
-		<div class="layui-body">
-			<div class="mainContent">
-				<div class="formContent">
-					<form method="post" enctype="multipart/form-data"
-						class="layui-form">
-						<div class="layui-form-item">
-							<h3>基本信息</h3>
-							<div class="formList">
-								<div class="formLine clearfix">
-									<div class="layui-form-item">
-										<label class="layui-form-label">昵称</label>
-										<div class="layui-input-block">
-											<label class="layui-form-label">${requestScope.accountMsg.nickName }</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="formList">
-								<div class="formLine clearfix">
-									<div class="layui-form-item">
-										<label class="layui-form-label">手机号</label>
-										<div class="layui-input-block">
-											<label class="layui-form-label">${requestScope.accountMsg.phone }</label>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="formList">
-								<div class="formLine clearfix">
-									<div class="layui-form-item">
-										<label class="layui-form-label">邮箱</label>
-										<div class="layui-input-block">
-											<label class="layui-form-label">${requestScope.accountMsg.email }</label>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
-				</div>
-			</div>
-		</div>
-		<%@include file="foot.jsp"%>
+<div class="layui-layout layui-layout-admin">
+	<%@include file="side.jsp"%>
+	<div id="edit_div">
+		  <table>
+			  <tr>
+				<td align="right">
+					昵称
+				</td>
+				<td>
+					${requestScope.accountMsg.nickName }
+				</td>
+			  </tr>
+			  <tr>
+				<td align="right">
+					手机号
+				</td>
+				<td>
+					${requestScope.accountMsg.phone }
+				</td>
+			  </tr>
+			  <tr>
+				<td align="right">
+					邮箱
+				</td>
+				<td>
+					${requestScope.accountMsg.email }
+				</td>
+			  </tr>
+		  </table>
 	</div>
+	<%@include file="foot.jsp"%>
+</div>
 </body>
 </html>
