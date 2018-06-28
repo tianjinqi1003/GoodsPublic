@@ -33,31 +33,26 @@
 	<div class="layui-header">
 		<div class="layui-logo">二维码产品发布系统</div>
 		<ul class="layui-nav layui-layout-right">
-			<li class="layui-nav-item">
-				<a href="javascript:;"> 
-					<img src="http://t.cn/RCzsdCq" class="layui-nav-img">
+			<li class="layui-nav-item"><a href="javascript:;"> <img
+					src="http://t.cn/RCzsdCq" class="layui-nav-img">
 					${sessionScope.user.nickName }
-				</a>
-			</li>
-			<li class="layui-nav-item">
-				<a href="<%=basePath%>merchant/exit">退出</a>
+			</a></li>
+			<li class="layui-nav-item"><a href="<%=basePath%>merchant/exit">退出</a>
 			</li>
 		</ul>
 	</div>
 
 	<div class="layui-side layui-bg-black">
 		<div class="layui-side-scroll">
-			<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo" style="margin-right: 10px;">
-				<div style="border: #f3f3f4 solid 1px;width: 92%;margin: 0 auto;margin-top: 5px;">
-				<li class="layui-nav-item">
-					<a href="<%=basePath%>merchant/main/index">首页</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="<%=basePath%>merchant/main/goCategoryList">分类管理</a>
-				</li>
-				<li class="layui-nav-item">
-					<a href="<%=basePath%>merchant/main/goAccountInfo?accountId=${sessionScope.user.id }">商家信息</a>
-				</li>
+			<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo"
+				style="margin-right: 10px;">
+				<div
+					style="border: #f3f3f4 solid 1px; width: 92%; margin: 0 auto; margin-top: 5px;">
+					<li class="layui-nav-item"><a
+						href="<%=basePath%>merchant/main/goAccountInfo?accountId=${sessionScope.user.id }">商家信息</a>
+					</li>
+					<li class="layui-nav-item"><a
+						href="<%=basePath%>merchant/main/goCategoryList">分类管理</a></li>
 				</div>
 				<!-- 
 				<li class="layui-nav-item">
@@ -66,7 +61,7 @@
 						 <c:choose>
 						 <c:when test="${empty sessionScope.categoryList}">
 							 <dd>
-							 	<a href="<%=basePath%>merchant/main/goEditCategory">暂无分类</a>
+							 	<a href="<%=basePath%>merchant/main/goCategoryList">暂无分类</a>
 							 </dd>
 						 </c:when>
 						 <c:otherwise>
@@ -81,23 +76,24 @@
 					</dl>
 				</li>
 				 -->
-				 <div style="border: #f3f3f4 solid 1px;width: 92%;margin: 0 auto;margin-top: 5px;">
-				 <c:choose>
-				 <c:when test="${empty sessionScope.categoryList}">
-					 <li class="layui-nav-item">
-					 	<a href="<%=basePath%>merchant/main/goEditCategory">暂无分类</a>
-					 </li>
-				 </c:when>
-				 <c:otherwise>
-					 <c:forEach items="${sessionScope.categoryList }" var="item">
-					 <li class="layui-nav-item">
-					 	<a href="<%=basePath%>merchant/main/goGoodsList?categoryId=${item.categoryId}">${item.categoryName }</a>
-						<a href="<%=basePath%>merchant/main/operation?categoryId=${item.categoryId}" style="margin-top: -45px;margin-left: 90px;">|&nbsp;添加</a>
-					 </li>
-					 </c:forEach>
-				 </c:otherwise>
-				 </c:choose>
-				 </div>
+				<div
+					style="border: #f3f3f4 solid 1px; width: 92%; margin: 0 auto; margin-top: 5px;">
+					<c:choose>
+						<c:when test="${empty sessionScope.categoryList}">
+							<li class="layui-nav-item"><a
+								href="<%=basePath%>merchant/main/goEditCategory">暂无分类</a></li>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${sessionScope.categoryList }" var="item">
+								<li class="layui-nav-item"><a
+									href="<%=basePath%>merchant/main/goGoodsList?categoryId=${item.categoryId}">${item.categoryName }</a>
+									<a
+									href="<%=basePath%>merchant/main/operation?categoryId=${item.categoryId}"
+									style="margin-top: -45px; margin-left: 90px;">|&nbsp;添加</a></li>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
+				</div>
 			</ul>
 		</div>
 	</div>

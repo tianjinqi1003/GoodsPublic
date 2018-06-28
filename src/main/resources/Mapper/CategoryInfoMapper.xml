@@ -58,6 +58,6 @@
 	</delete>
 	<select id="getByCategoryId" resultType="goodsPublic.entity.CategoryInfo">
 		select * from 
-		category_table where categoryId=#{categoryId}
+		category_table where categoryId=#{categoryId} and accountId=#{accountId}
 	</select>
 </mapper>

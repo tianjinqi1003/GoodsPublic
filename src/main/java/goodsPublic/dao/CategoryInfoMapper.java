@@ -2,6 +2,8 @@ package goodsPublic.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import goodsPublic.entity.CategoryInfo;
 
 public interface CategoryInfoMapper {
@@ -18,7 +20,7 @@ public interface CategoryInfoMapper {
 	 * */
 	public CategoryInfo getById(String id);
 	/*
-	 * 根据分类id查询对应分类
+	 * 根据分类id与商铺id查询对应分类
 	 */
-	public CategoryInfo	getByCategoryId(String categoryId);
+	public CategoryInfo	getByCategoryId(@Param("categoryId")String categoryId,@Param("accountId")String accountId);
 }

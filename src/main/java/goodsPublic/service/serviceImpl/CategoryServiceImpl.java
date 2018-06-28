@@ -57,7 +57,7 @@ public class CategoryServiceImpl implements CategoryService {
 		// TODO 针对分类实时动态的调整（未测）
 		int count=0;
 		if(StringUtils.isEmpty(categoryInfo.getId())) {
-			CategoryInfo resultCate=categoryInfoMapper.getByCategoryId(categoryInfo.getCategoryId());
+			CategoryInfo resultCate=categoryInfoMapper.getByCategoryId(categoryInfo.getCategoryId(),categoryInfo.getAccountId());
 			if(resultCate==null) {
 				count=categoryInfoMapper.saveCategoryInfo(categoryInfo);
 				List<CategoryInfo> catList = categoryInfoMapper.getCategoryList(categoryInfo.getAccountId());
