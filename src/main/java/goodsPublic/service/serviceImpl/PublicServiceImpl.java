@@ -114,5 +114,11 @@ public class PublicServiceImpl implements PublicService {
 		// TODO Auto-generated method stub
 		return publicDao.queryGoodsList(accountId, categoryId, (page-1)*rows, rows, sort, order);
 	}
+
+	@Override
+	public int editAccountInfo(AccountMsg accountMsg) {
+		// TODO Auto-generated method stub
+		return publicDao.editAccountInfo(accountMsg);
+	}
 	
 }

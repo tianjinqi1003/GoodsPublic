@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -201,6 +200,34 @@ public class MainController {
 			json=JsonUtil.getJsonFromObject(plan);
 		}
 		return json;
+	}
+	
+	/**
+	 * 编辑商户信息
+	 * @param accountMsg
+	 * @param request
+	 * @param file
+	 * @return
+	 */
+	@RequestMapping(value="/editAccountInfo")
+	public String editAccountInfo(AccountMsg accountMsg,HttpServletRequest request,@RequestParam(value="file")  MultipartFile file) {
+		
+		try {
+			if(file.getSize()>0) {
+				String jsonStr = FileUploadUtils.appUploadContentImg(request,file,"");
+				JSONObject fileJson = JSONObject.fromObject(jsonStr);
+				if("成功".equals(fileJson.get("msg"))) {
+					JSONObject dataJO = (JSONObject)fileJson.get("data");
+					accountMsg.setAvatar_img(dataJO.get("src").toString());
+				}
+			}
+			
+			publicService.editAccountInfo(accountMsg);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "../../merchant/main/goAccountInfo?accountId="+accountMsg.getId()+"&";
 	}
 	
 	/**

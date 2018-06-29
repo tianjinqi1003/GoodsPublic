@@ -10,8 +10,63 @@ public class AccountMsg {
 	private String email;
 	private String createTime;
 	private String createUser;
+	private String avatar_img;
+	private String companyName;
+	private String companyAddress;
+	private String postcode;
+	private String quotient;
+	private String fax;
+	private String countCode;
+	private String recordNumber;
 	
-	
+	public String getAvatar_img() {
+		return avatar_img;
+	}
+	public void setAvatar_img(String avatar_img) {
+		this.avatar_img = avatar_img;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+	public String getCompanyAddress() {
+		return companyAddress;
+	}
+	public void setCompanyAddress(String companyAddress) {
+		this.companyAddress = companyAddress;
+	}
+	public String getPostcode() {
+		return postcode;
+	}
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+	public String getQuotient() {
+		return quotient;
+	}
+	public void setQuotient(String quotient) {
+		this.quotient = quotient;
+	}
+	public String getFax() {
+		return fax;
+	}
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+	public String getCountCode() {
+		return countCode;
+	}
+	public void setCountCode(String countCode) {
+		this.countCode = countCode;
+	}
+	public String getRecordNumber() {
+		return recordNumber;
+	}
+	public void setRecordNumber(String recordNumber) {
+		this.recordNumber = recordNumber;
+	}
 	public String getId() {
 		return id;
 	}
@@ -60,12 +115,6 @@ public class AccountMsg {
 	}
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
-	}
-	public String getCreateUser() {
-		return createUser;
-	}
-	public void setCreateUser(String createUser) {
-		this.createUser = createUser;
 	}
 	@Override
 	public String toString() {

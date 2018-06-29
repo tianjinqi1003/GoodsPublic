@@ -77,4 +77,11 @@ public interface PublicService {
 	 */
 	public List<Goods> queryGoodsList(String accountId, String categoryId, int page, int rows, String sort,
 			String order);
+
+	/**
+	 * 编辑商户信息
+	 * @param accountMsg
+	 * @return
+	 */
+	public int editAccountInfo(AccountMsg accountMsg);
 }

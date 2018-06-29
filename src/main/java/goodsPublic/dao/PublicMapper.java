@@ -54,5 +54,11 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public int queryGoodsForInt(String accountId, String categoryId);
+	/**
+	 * 编辑商户信息
+	 * @param accountMsg
+	 * @return
+	 */
+	public int editAccountInfo(AccountMsg accountMsg);
 	
 }
