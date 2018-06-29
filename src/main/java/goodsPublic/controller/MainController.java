@@ -42,21 +42,21 @@ public class MainController {
 	@Autowired
 	private CategoryService categoryService;
 	
-	/**
-	 * 跳转到主页
-	 * @return
-	 */
-	@RequestMapping("/index")
-	public String toIndex() {
-
-		/*
-		//填充首页店内分类模块的子模块名称
-		AccountMsg accountMsg = (AccountMsg)request.getSession().getAttribute("user");
-		List<CategoryInfo> catList = categoryService.getCategory(accountMsg.getId());
-		request.setAttribute("categoryList", catList);
-		*/
-		return "/merchant/index";
-	}
+//	/**
+//	 * 跳转到主页
+//	 * @return
+//	 */
+//	@RequestMapping("/index")
+//	public String toIndex() {
+//
+//		/*
+//		//填充首页店内分类模块的子模块名称
+//		AccountMsg accountMsg = (AccountMsg)request.getSession().getAttribute("user");
+//		List<CategoryInfo> catList = categoryService.getCategory(accountMsg.getId());
+//		request.setAttribute("categoryList", catList);
+//		*/
+//		return "/merchant/index";
+//	}
 	
 	/**
 	 * 跳转至商品发布页面
@@ -390,7 +390,6 @@ public class MainController {
 	 */
 	@RequestMapping(value="/goAccountInfo")
 	public String goAccountInfo(HttpServletRequest request, String accountId) {
-		
 		AccountMsg accountMsg=publicService.getAccountById(accountId);
 		request.setAttribute("accountMsg", accountMsg);
 		return "/merchant/accountInfo";

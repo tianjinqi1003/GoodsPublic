@@ -81,7 +81,7 @@
 					<c:choose>
 						<c:when test="${empty sessionScope.categoryList}">
 							<li class="layui-nav-item"><a
-								href="<%=basePath%>merchant/main/goEditCategory">暂无分类</a></li>
+								href="<%=basePath%>merchant/main/goCategoryList">暂无分类</a></li>
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${sessionScope.categoryList }" var="item">

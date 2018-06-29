@@ -80,7 +80,7 @@ public class GoodsController {
 				session.setAttribute("categoryList", catList);
 				plan.setStatus(0);
 				plan.setMsg("验证通过");
-				plan.setUrl("/merchant/main/index");
+				plan.setUrl("/merchant/main/goAccountInfo?accountId="+resultUser.getId());
 				return JsonUtil.getJsonFromObject(plan);
 			}
 			plan.setStatus(1);
