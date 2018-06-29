@@ -41,11 +41,11 @@ public class UserServiceImpl implements UserService {
 	    }
 	@Override
 	public int saveUser(AccountMsg msg) {
-		AccountMsg msg1=userMapper.getUser(msg);
-		if(msg1!=null) {
+		int a=userMapper.getUserCount(msg);
+		if(a>0) {
 			return 2;
 		}
-		int a =userMapper.saveUser(msg);
+		a =userMapper.saveUser(msg);
 		if(a!=0) {
 			return a;
 		}

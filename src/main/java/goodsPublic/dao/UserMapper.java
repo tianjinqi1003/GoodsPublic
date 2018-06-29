@@ -11,4 +11,6 @@ public interface UserMapper {
 	public int saveUser(AccountMsg msg);
 	//通过用户信息查询用户
 	public AccountMsg getUser(AccountMsg msg);
+	//查询数据库中用户数量（有限定条件）
+	public int getUserCount(AccountMsg msg);
 }

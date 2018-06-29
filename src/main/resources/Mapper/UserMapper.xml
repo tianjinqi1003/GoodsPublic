@@ -65,5 +65,23 @@
 				email=#{email}
 			</if>
 		</trim>
+	</select><select id="getUserCount"  resultType="int">
+		select count(*) from
+		account_info
+		where
+		<trim prefix="" suffix="" suffixOverrides="or">
+			<if test="userName!=null">
+				userName=#{userName} or
+			</if>
+			<if test="nickName!=null">
+				nickName=#{nickName} or
+			</if>
+			<if test="phone!=null">
+				phone=#{phone} or
+			</if>
+			<if test="email!=null">
+				email=#{email}
+			</if>
+		</trim>
 	</select>
 </mapper>

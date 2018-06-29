@@ -134,9 +134,10 @@ body .beg-login-bg {
 				url=baseUrl+"/merchant/regist"
 				$.post(url,data.field,function(result){
 					console.log(result)
-					//var json=JSON.parse(result)
 					if(result.status==0){
 						window.location.href=baseUrl+result.url
+					}else if(result.status==2){
+						alert(result.msg)
 					}
 				},"json")
 				console.log("===111===")
