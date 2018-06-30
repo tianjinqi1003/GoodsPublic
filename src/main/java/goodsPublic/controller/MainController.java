@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -288,6 +289,44 @@ public class MainController {
 			plan.setUrl("/merchant/main/queryCategoryList");
 			json=JsonUtil.getJsonFromObject(plan);
 		}
+		return json;
+	}
+	
+	/**
+	 * 根据商户号、类别编号验证是否有商品
+	 * @param accountNumber
+	 * @param categoryIds
+	 * @return
+	 */
+	@RequestMapping(value="/checkGoodsCount",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String checkGoodsCount(String accountNumber, String categoryIds, String ids) {
+		
+		String categoryIds1="";//用来记录有商品的分类编号
+		String ids1="";//用来记录无商品的分类id
+		String[] idArr = ids.split(",");
+		String[] catArr = categoryIds.split(",");
+		for (int i = 0; i < catArr.length; i++) {
+			int count = publicService.queryGoodsForInt(accountNumber, catArr[i]);
+			if(count>0)
+				categoryIds1+=","+catArr[i];
+			else
+				ids1+=","+idArr[i];
+		}
+		
+		PlanResult plan=new PlanResult();
+		String json;
+		if(!StringUtils.isEmpty(categoryIds1)) {
+			categoryIds1=categoryIds1.substring(1);
+			plan.setStatus(1);
+			plan.setMsg("分类"+categoryIds1+"下存在商品，是否先删除其他分类？");
+		}
+		else {
+			plan.setStatus(0);
+		}
+		ids1=ids1.substring(1);
+		plan.setData(ids1);
+		json=JsonUtil.getJsonFromObject(plan);
 		return json;
 	}
 

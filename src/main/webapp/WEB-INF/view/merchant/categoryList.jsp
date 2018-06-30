@@ -81,8 +81,10 @@ function initEditDiv(){
 }
 
 function checkEdit(){
-	if(checkCategoryName()){
-		editCategory();
+	if(checkCategoryId()){
+		if(checkCategoryName()){
+			editCategory();
+		}
 	}
 }
 
@@ -106,6 +108,26 @@ function editCategory(){
 			}
 		}
 	,"json");
+}
+
+function focusCategoryId(){
+	var categoryId = $("#categoryId").val();
+	if(categoryId=="类别编号不能为空"){
+		$("#categoryId").val("");
+		$("#categoryId").css("color", "#555555");
+	}
+}
+
+//验证类别编号
+function checkCategoryId(){
+	var categoryId = $("#categoryId").val();
+	if(categoryId==null||categoryId==""||categoryId=="类别编号不能为空"){
+		$("#categoryId").css("color","#E15748");
+    	$("#categoryId").val("类别编号不能为空");
+    	return false;
+	}
+	else
+		return true;
 }
 
 function focusCategoryName(){
@@ -135,17 +157,40 @@ function deleteByIds() {
 		$.messager.alert("提示","请选择要删除的信息！","warning");
 		return false;
 	}
-	var ids = "";
-	for (var i = 0; i < rows.length; i++) {
-		ids += "," + rows[i].id;
-	}
-	var url = baseUrl + "/merchant/main/deleteCategory"
-	$.post(url, {
-		ids : ids.substring(1)
-	}, function(result) {
-		$.messager.alert("提示",result.msg);
-		location.href = location.href;
-	}, "json");
+	
+	$.messager.confirm("提示","确定要删除吗？",function(r){
+		if(r){
+			var ids = "";
+			var categoryIds = "";
+			for (var i = 0; i < rows.length; i++) {
+				ids += "," + rows[i].id;
+				categoryIds += "," + rows[i].categoryId;
+			}
+			ids=ids.substring(1);
+			categoryIds=categoryIds.substring(1);
+			
+			$.ajaxSetup({async:false});
+			$.post(baseUrl + "/merchant/main/checkGoodsCount",
+				{accountNumber:'${sessionScope.user.id}',categoryIds:categoryIds,ids:ids},
+				function(result){
+					if(result.status==1){
+						$.messager.confirm("提示",result.msg,function(r){
+							if(r){
+								var url = baseUrl + "/merchant/main/deleteCategory"
+								$.post(url, {
+									ids : result.data
+								}, function(result) {
+									alert(result.msg);
+									location.href = location.href;
+								}, "json");
+							}
+						});
+					}
+				}
+			,"json");
+			
+		}
+	});
 }
 layui.use(['element'],function(){
 	var element = layui.element;
@@ -177,7 +222,7 @@ function setFitWidthInParent(o){
 				类别编号：
 			</td>
 			<td>
-				<input id="categoryId" type="text" value="" onfocus="focusCategoryId()" onblur="checkCategoryId()"/>
+				<input id="categoryId" type="text" value="" maxlength="11" onfocus="focusCategoryId()" onblur="checkCategoryId()"/>
 				<span style="color: #f00;">*</span>
 			</td>
 		  </tr>

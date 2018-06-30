@@ -84,4 +84,5 @@ public interface PublicService {
 	 * @return
 	 */
 	public int editAccountInfo(AccountMsg accountMsg);
+
 }

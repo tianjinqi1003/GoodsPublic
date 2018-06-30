@@ -120,5 +120,5 @@ public class PublicServiceImpl implements PublicService {
 		// TODO Auto-generated method stub
 		return publicDao.editAccountInfo(accountMsg);
 	}
-	
+
 }

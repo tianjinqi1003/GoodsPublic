@@ -76,6 +76,14 @@ function checkEdit(){
 	}
 }
 
+function focusGoodsNumber(){
+	var goodsNumber = $("#goodsNumber").val();
+	if(goodsNumber=="商品编号不能为空"){
+		$("#goodsNumber").val("");
+		$("#goodsNumber").css("color", "#555555");
+	}
+}
+
 function checkGoodsNumber(){
 	var flag=false;
 	var goodsNumber = $("#goodsNumber").val();
