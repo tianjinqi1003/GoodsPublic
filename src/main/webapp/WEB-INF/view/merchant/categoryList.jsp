@@ -51,9 +51,10 @@ function getCategory(id,categoryId,categoryName){
 
 function initEditDiv(){
 	var rowsCount=tab1.datagrid("getRows").length;
+	var diaWidth=setFitWidthInParent("body");
 	$("#edit_div").dialog({
 		title:"添加/编辑分类",
-		width:setFitWidthInParent("body"),
+		width:diaWidth,
 		height:200,
 		top:rowsCount*25+200,
 		left:210,
@@ -70,8 +71,8 @@ function initEditDiv(){
 	$("#edit_div table tr").css("height","45px");
 	
 	$(".panel.window").css("padding","0px");
-	$(".panel.window").css("width","1108px"); 
-	$(".panel-body.panel-body-noborder.window-body").css("width","1106px"); 
+	$(".panel.window").css("width",diaWidth-2+"px"); 
+	$(".panel-body.panel-body-noborder.window-body").css("width",diaWidth-4+"px"); 
 	$(".panel-body.panel-body-noborder.window-body").css("height","155px"); 
 	
 	$("#ok_but").css("left","45%");
