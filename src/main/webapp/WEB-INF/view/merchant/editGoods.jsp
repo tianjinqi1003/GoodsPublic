@@ -30,9 +30,9 @@ $(function(){
 	$("#edit_div").dialog({
 		title:"编辑商品",
 		width:setFitWidthInParent("body"),
-		height:500,
-		top:65,
-		left:210,
+		height:setFitHeightInParent(".layui-side"),
+		top:60,
+		left:200,
 		buttons:[
            {text:"提交",id:"ok_but",iconCls:"icon-ok",handler:function(){
         	   checkEdit();
@@ -100,7 +100,12 @@ function showQrcodePic(obj){
 
 function setFitWidthInParent(o){
 	var width=$(o).css("width");
-	return width.substring(0,width.length-2)-250;
+	return width.substring(0,width.length-2)-200;
+}
+
+function setFitHeightInParent(o){
+	var height=$(o).css("height");
+	return height.substring(0,height.length-2)-44;
 }
 </script>
 </head>
@@ -142,6 +147,7 @@ function setFitWidthInParent(o){
 			  <tr>
 				<td align="right">
 					内容
+					<div style="font-size: 10px;color: #f00;">（最多可以输入6000字）</div>
 				</td>
 				<td>
 					<br>

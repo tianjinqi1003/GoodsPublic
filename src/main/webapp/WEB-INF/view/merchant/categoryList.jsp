@@ -69,6 +69,11 @@ function initEditDiv(){
 	$("#edit_div table td").css("font-size","20px");
 	$("#edit_div table tr").css("height","45px");
 	
+	$(".panel.window").css("padding","0px");
+	$(".panel.window").css("width","1108px"); 
+	$(".panel-body.panel-body-noborder.window-body").css("width","1106px"); 
+	$(".panel-body.panel-body-noborder.window-body").css("height","155px"); 
+	
 	$("#ok_but").css("left","45%");
 	$("#ok_but").css("position","absolute");
 	$(".dialog-button .l-btn-text").css("font-size","20px");
