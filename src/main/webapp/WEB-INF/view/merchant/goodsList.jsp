@@ -37,11 +37,25 @@ $(function(){
 				$(this).datagrid("mergeCells",{index:0,field:"goodsNumber",colspan:5});
 				data.total=0;
 			}
+			reSizeCol();
 		}
 	});
 	
 	$("#previewDiv").css("margin-top",($(document).height()/2-150)+"px");
 });
+
+//重设列宽
+function reSizeCol(){
+	var width=$(".panel.datagrid").css("width");
+	width=width.substring(0,width.length-2);
+	var cols=$(".datagrid-htable tr td");
+	var colCount=cols.length;
+	width=width-colCount*2;
+	cols.css("width",width/colCount+"px");
+	cols=$(".datagrid-btable tr").eq(0).find("td");
+	colCount=cols.length;
+	cols.css("width",width/colCount+"px");
+}
 
 //预览图片
 function previewImg(src) {

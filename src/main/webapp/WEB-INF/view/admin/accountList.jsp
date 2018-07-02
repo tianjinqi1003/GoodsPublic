@@ -15,12 +15,12 @@ $(function(){
 		pagination:true,
 		pageSize:10,
 		columns:[[
-            {field:"phone",title:"手机号",width:100},
-            {field:"nickName",title:"昵称",width:100},
-            {field:"email",title:"邮箱",width:100},
-            {field:"role",title:"权限",width:100},
-            {field:"gmt_create",title:"注册时间",width:100},
-            {field:"id",title:"操作",width:100,formatter:function(value,row){
+            {field:"phone",title:"手机号"},
+            {field:"nickName",title:"昵称"},
+            {field:"email",title:"邮箱"},
+            {field:"role",title:"权限"},
+            {field:"gmt_create",title:"注册时间"},
+            {field:"id",title:"操作",formatter:function(value,row){
             	var status=row.accountStatus;
             	var str;
             	if(status=="-2")
@@ -38,9 +38,23 @@ $(function(){
 				$(this).datagrid("mergeCells",{index:0,field:"phone",colspan:6});
 				data.total=0;
 			}
+			reSizeCol();
 		}
 	});
 });
+
+//重设列宽
+function reSizeCol(){
+	var width=$(".panel.datagrid").css("width");
+	width=width.substring(0,width.length-2);
+	var cols=$(".datagrid-htable tr td");
+	var colCount=cols.length;
+	width=width-colCount*2;
+	cols.css("width",width/colCount+"px");
+	cols=$(".datagrid-btable tr").eq(0).find("td");
+	colCount=cols.length;
+	cols.css("width",width/colCount+"px");
+}
 
 function updateStatus(id,status){
 	
