@@ -337,13 +337,6 @@ public class MainController {
 	@RequestMapping(value="/goCategoryList")
 	public String goCategoryList() {
 		
-		/*
-		HttpSession session=request.getSession();
-		AccountMsg user=(AccountMsg) session.getAttribute("user");
-		AccountMsg accountMsg=userService.getUserLogin(user);
-		List<CategoryInfo> catList = categoryService.getCategory(accountMsg.getId());
-		request.setAttribute("categoryList", catList);
-		*/
 		return "/merchant/categoryList";
 	}
 	

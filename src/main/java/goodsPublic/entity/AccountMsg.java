@@ -18,7 +18,14 @@ public class AccountMsg {
 	private String fax;
 	private String countCode;
 	private String recordNumber;
+	private String accountStatus;
 	
+	public String getAccountStatus() {
+		return accountStatus;
+	}
+	public void setAccountStatus(String accountStatus) {
+		this.accountStatus = accountStatus;
+	}
 	public String getAvatar_img() {
 		return avatar_img;
 	}

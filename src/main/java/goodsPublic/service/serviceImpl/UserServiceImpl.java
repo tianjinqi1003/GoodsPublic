@@ -17,28 +17,7 @@ import goodsPublic.dao.UserMapper;
 public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapper userMapper;
-	@Override
-	public List<AccountMsg> getUserList() {
-		AccountMsg user=new AccountMsg();
-		List<AccountMsg> list=userMapper.getUserListByUser(user);
-		return list;
-	}
-	@Override
-	 public AccountMsg getUserLogin(AccountMsg user) {  
-	        List<AccountMsg> list = userMapper.getUserListByUser(user);  
-	        if(list.size() == 0){  
-	            return null;  
-	        }else{  
-	        	for(AccountMsg info:list) {
-	        		if(info.getPassWord().equals(user.getPassWord())) {
-	        			 return info; 
-	        		}else{  
-		                return null;  
-		            } 
-	        	}
-	        }
-	        return null;
-	    }
+	
 	@Override
 	public int saveUser(AccountMsg msg) {
 		int a=userMapper.getUserCount(msg);
@@ -58,5 +37,23 @@ public class UserServiceImpl implements UserService {
 			return resultUser;
 		}
 		return resultUser;
+	}
+	@Override
+	public int queryAccountForInt() {
+		// TODO Auto-generated method stub
+		
+		return userMapper.queryAccountForInt();
+	}
+	@Override
+	public List<AccountMsg> queryAccountList(int page, int rows, String sort, String order) {
+		// TODO Auto-generated method stub
+		
+		return userMapper.queryAccountList((page-1)*rows, rows, sort, order);
+	}
+	@Override
+	public int updateAccountStatus(String id, String status) {
+		// TODO Auto-generated method stub
+		
+		return userMapper.updateAccountStatus(id,status);
 	}
 }
