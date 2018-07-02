@@ -8,7 +8,7 @@ public class AccountMsg {
 	private String passWord1;
 	private String phone;
 	private String email;
-	private String createTime;
+	private String gmt_create;
 	private String createUser;
 	private String avatar_img;
 	private String companyName;
@@ -117,16 +117,16 @@ public class AccountMsg {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getCreateTime() {
-		return createTime;
+	public String getGmt_create() {
+		return gmt_create;
 	}
-	public void setCreateTime(String createTime) {
-		this.createTime = createTime;
+	public void setGmt_create(String gmt_create) {
+		this.gmt_create = gmt_create;
 	}
 	@Override
 	public String toString() {
 		return "AccountMsg [userName=" + userName + ", passWord=" + passWord + ", nickName=" + nickName + ", passWord1="
-				+ passWord1 + ", phone=" + phone + ", email=" + email + ", createTime=" + createTime + ", createUser="
+				+ passWord1 + ", phone=" + phone + ", email=" + email + ", gmt_create=" + gmt_create + ", createUser="
 				+ createUser + "]";
 	}
 	

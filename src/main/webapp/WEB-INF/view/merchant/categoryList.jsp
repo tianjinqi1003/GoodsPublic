@@ -37,11 +37,25 @@ $(function(){
 				$(this).datagrid("mergeCells",{index:0,field:"categoryId",colspan:3});
 				data.total=0;
 			}
+			reSizeCol();
 			initEditDiv();
 		}
 	});
 	
 });
+
+//重设列宽
+function reSizeCol(){
+	var width=$(".panel.datagrid").css("width");
+	width=width.substring(0,width.length-2);
+	var cols=$(".datagrid-htable tr td");
+	var colCount=cols.length;
+	width=width-colCount*2;
+	cols.css("width",width/colCount+"px");
+	cols=$(".datagrid-btable tr").eq(0).find("td");
+	colCount=cols.length;
+	cols.css("width",width/colCount+"px");
+}
 
 function getCategory(id,categoryId,categoryName){
 	$("#id").val(id);
