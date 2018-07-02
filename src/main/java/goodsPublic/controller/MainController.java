@@ -337,10 +337,14 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping(value="/show",method=RequestMethod.GET)
-	public String Show(String goodsNumber,HttpServletRequest request) {
+	public String Show(String accountNumber,String goodsNumber,HttpServletRequest request) {
+		System.out.println(accountNumber);
 		System.out.println(goodsNumber);
 		PlanResult plan=publicService.getGoodsByGN(goodsNumber);
 		request.setAttribute("plan", plan.getData());
+		
+		AccountMsg accountMsg = publicService.getAccountById(accountNumber);
+		request.setAttribute("accountMsg", accountMsg);
 		return "/merchant/show";
 	}
 	

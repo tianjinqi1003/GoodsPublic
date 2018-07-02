@@ -18,7 +18,10 @@ body {
 	width: 100%;
 	margin: 0 auto;
 }
-
+.msgContent{
+	word-break: break-all;
+	word-wrap: break-word;
+}
 .contentBody {
 	height: 60px;
 	background: #15bc7e;
@@ -78,9 +81,13 @@ body {
 			</div>
 			<div class="msgContent">
 				<div class="mainMsg" style="display: block;">
-					${plan.htmlContent}</div>
+					${plan.htmlContent}
+				</div>
 				<div class="mainMsg" style="display: none;">2</div>
-				<div class="mainMsg" style="display: none;">3</div>
+				<div class="mainMsg" style="display: none;">
+					<div>电话：${accountMsg.phone}</div>
+					<div>地址：${accountMsg.companyAddress}</div>
+				</div>
 			</div>
 			<script type="text/javascript">
 				function GetRequest() {

@@ -19,7 +19,7 @@ $(function(){
 		columns:[[
             {field:"goodsNumber",title:"编号",width:100},
             {field:"title",title:"标题",width:100,formatter:function(value,row){
-            	return "<a href=\"${pageContext.request.contextPath}/merchant/main/show?goodsNumber="+row.goodsNumber+"\">"+value+"</a>";
+            	return "<a href=\"${pageContext.request.contextPath}/merchant/main/show?accountNumber="+row.accountNumber+"&goodsNumber="+row.goodsNumber+"\">"+value+"</a>";
             }},
             {field:"imgUrl",title:"图标",width:100,formatter:function(value){
             	return "<img alt=\"\" src=\""+value+"\" width=\"50\" height=\"50\" onclick=\"previewImg(this.src);\" />";
