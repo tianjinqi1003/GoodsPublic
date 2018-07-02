@@ -42,22 +42,6 @@ public class MainController {
 	@Autowired
 	private CategoryService categoryService;
 	
-//	/**
-//	 * 跳转到主页
-//	 * @return
-//	 */
-//	@RequestMapping("/index")
-//	public String toIndex() {
-//
-//		/*
-//		//填充首页店内分类模块的子模块名称
-//		AccountMsg accountMsg = (AccountMsg)request.getSession().getAttribute("user");
-//		List<CategoryInfo> catList = categoryService.getCategory(accountMsg.getId());
-//		request.setAttribute("categoryList", catList);
-//		*/
-//		return "/merchant/index";
-//	}
-	
 	/**
 	 * 跳转至商品发布页面
 	 * @return
@@ -337,13 +321,11 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping(value="/show",method=RequestMethod.GET)
-	public String Show(String accountNumber,String goodsNumber,HttpServletRequest request) {
-		System.out.println(accountNumber);
+	public String Show(String goodsNumber,HttpServletRequest request) {
 		System.out.println(goodsNumber);
 		PlanResult plan=publicService.getGoodsByGN(goodsNumber);
 		request.setAttribute("plan", plan.getData());
-		
-		AccountMsg accountMsg = publicService.getAccountById(accountNumber);
+		AccountMsg accountMsg = publicService.getAccountById(((Goods)plan.getData()).getAccountNumber());
 		request.setAttribute("accountMsg", accountMsg);
 		return "/merchant/show";
 	}
