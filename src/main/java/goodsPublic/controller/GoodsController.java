@@ -60,6 +60,7 @@ public class GoodsController {
 		System.out.println("===登录接口===");
 		//返回值的json
 		PlanResult plan=new PlanResult();
+		//TODO在这附近添加登录储存信息步骤，将用户的账号以及密码储存到shiro框架的管理配置当中方便后续查询
 		//用来储存用户的用户信息
 		AccountMsg user=new AccountMsg();
 		user.setUserName(userName);
