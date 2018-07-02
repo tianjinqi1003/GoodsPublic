@@ -76,8 +76,7 @@
 					</dl>
 				</li>
 				 -->
-				<div
-					style="border: #f3f3f4 solid 1px; width: 92%; margin: 0 auto; margin-top: 5px;">
+				<div style="border: #f3f3f4 solid 1px; width: 92%; margin: 0 auto; margin-top: 5px;">
 					<c:choose>
 						<c:when test="${empty sessionScope.categoryList}">
 							<li class="layui-nav-item"><a
