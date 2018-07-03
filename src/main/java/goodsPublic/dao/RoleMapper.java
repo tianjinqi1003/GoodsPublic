@@ -8,5 +8,5 @@ import java.util.Set;
  *
  */
 public interface RoleMapper {
-	Set<String> getRoleList();
+	Set<String> getRoleList(String id);
 }
