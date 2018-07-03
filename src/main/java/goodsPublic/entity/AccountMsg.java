@@ -1,24 +1,25 @@
 package goodsPublic.entity;
 
 public class AccountMsg {
-	private String id;
-	private String userName;
-	private String passWord;
-	private String nickName;
-	private String passWord1;
-	private String phone;
-	private String email;
-	private String gmt_create;
-	private String createUser;
-	private String avatar_img;
-	private String companyName;
-	private String companyAddress;
+	private String id;//用户id
+	private String userName;//用户名
+	private String passWord;//密码
+	private String nickName;//昵称
+	private String passWord1;//备用密码
+	private String phone;//电话号
+	private String email;//邮箱
+	private String gmt_create;//创建时间
+	private String createUser;//创建人
+	private String avatar_img;//用户头像
+	private String companyName;//公司名称
+	private String companyAddress;//公司地址
 	private String postcode;
 	private String quotient;
 	private String fax;
 	private String countCode;
 	private String recordNumber;
 	private String accountStatus;
+	private String role;
 	
 	public AccountMsg(String userName,String passWord) {
 		this.userName=userName;
@@ -29,6 +30,21 @@ public class AccountMsg {
 		super();
 	}
 	
+	public String getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	public String getAccountStatus() {
 		return accountStatus;
@@ -133,12 +149,17 @@ public class AccountMsg {
 	public void setGmt_create(String gmt_create) {
 		this.gmt_create = gmt_create;
 	}
+
 	@Override
 	public String toString() {
-		return "AccountMsg [userName=" + userName + ", passWord=" + passWord + ", nickName=" + nickName + ", passWord1="
-				+ passWord1 + ", phone=" + phone + ", email=" + email + ", gmt_create=" + gmt_create + ", createUser="
-				+ createUser + "]";
+		return "AccountMsg [id=" + id + ", userName=" + userName + ", passWord=" + passWord + ", nickName=" + nickName
+				+ ", passWord1=" + passWord1 + ", phone=" + phone + ", email=" + email + ", gmt_create=" + gmt_create
+				+ ", createUser=" + createUser + ", avatar_img=" + avatar_img + ", companyName=" + companyName
+				+ ", companyAddress=" + companyAddress + ", postcode=" + postcode + ", quotient=" + quotient + ", fax="
+				+ fax + ", countCode=" + countCode + ", recordNumber=" + recordNumber + ", accountStatus="
+				+ accountStatus + ", role=" + role + "]";
 	}
+	
 	
 	
 }

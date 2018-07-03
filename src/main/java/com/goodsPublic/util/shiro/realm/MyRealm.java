@@ -15,15 +15,15 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import goodsPublic.dao.RoleMapper;
 import goodsPublic.dao.UserMapper;
 import goodsPublic.entity.AccountMsg;
+import goodsPublic.service.RoleService;
 
 public class MyRealm extends AuthorizingRealm{
 	@Autowired
 	private UserMapper userMapper;
 	@Autowired
-	private RoleMapper roleMapper;
+	private RoleService roleService;
 	/**
 	 * 为账号进行授权并进行验证
 	 */
@@ -34,20 +34,16 @@ public class MyRealm extends AuthorizingRealm{
 		if(msg.getId()==null) {
 			return info;
 		}
-		 try {
-			 Set<String> roleNames = new HashSet<String>();  
-				Set<String> permissions = new HashSet<String>();
-				//TODO添加对应的方法
-				//储存角色（管理员、普通用户之类的）
-				roleNames.add("administrator");//添加角色
-				//储存权限
-				permissions.add("newPage");  //添加权限
-				info.setRoles(roleNames);
-				info.setStringPermissions(permissions);  
-				return info; 
-		 }catch (Exception e) {
-			// TODO: handle exception
-			 return info;
+		try {
+			Set<String> roleNames =roleService.getRoleListByUserId(msg.getId());  
+			Set<String> permissions =roleService.getPermissionByUserId(msg.getRole());
+			//TODO添加对应的方法
+			info.setRoles(roleNames);
+			info.setStringPermissions(permissions);  
+			return info; 
+		}catch (Exception e) {
+			e.printStackTrace();
+			return info;
 		}
 	}
 

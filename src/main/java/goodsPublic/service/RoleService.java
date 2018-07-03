@@ -15,5 +15,8 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public interface RoleService {
-	public Set<String> getRoleListByUserId(Long userId);
+	//通过商户id查询用户角色
+	public Set<String> getRoleListByUserId(String userId);
+	//通过商户id查询角色权限
+	public Set<String> getPermissionByUserId(String id);
 }

@@ -8,5 +8,9 @@ import java.util.Set;
  *
  */
 public interface RoleMapper {
+	//通过商户id来获得商户的角色
 	Set<String> getRoleList(String id);
+	//通过商户id来获得商户的权限
+	Set<String> getPermissions(String id);
+	
 }

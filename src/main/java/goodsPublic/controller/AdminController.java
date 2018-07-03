@@ -31,7 +31,7 @@ public class AdminController {
 	@RequestMapping(value="/goAccountList")
 	public String goAccountList() {
 		  Subject subject = SecurityUtils.getSubject();
-		 if(subject.hasRole("admin")){
+		 if(subject.hasRole("firstUser")){
 	           //有权限
 	        	System.out.println("有");
 	        }else{
