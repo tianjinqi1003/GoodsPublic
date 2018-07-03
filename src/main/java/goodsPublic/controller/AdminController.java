@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +15,6 @@ import com.goodsPublic.util.JsonUtil;
 import com.goodsPublic.util.PlanResult;
 
 import goodsPublic.entity.AccountMsg;
-import goodsPublic.entity.Goods;
 import goodsPublic.service.UserService;
 
 @Controller
@@ -31,7 +30,14 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/goAccountList")
 	public String goAccountList() {
-
+		  Subject subject = SecurityUtils.getSubject();
+		 if(subject.hasRole("admin")){
+	           //有权限
+	        	System.out.println("有");
+	        }else{
+	           // 无权限
+	        	System.out.println("没有");
+	        }
 		return "/admin/accountList";
 	}
 	
@@ -46,11 +52,9 @@ public class AdminController {
 	@RequestMapping(value="/queryAccountList")
 	@ResponseBody
 	public Map<String, Object> queryAccountList(int page,int rows,String sort,String order) {
-		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		int count = userService.queryAccountForInt();
 		List<AccountMsg> accList = userService.queryAccountList(page, rows, sort, order);
-		
 		jsonMap.put("total", count);
 		jsonMap.put("rows", accList);
 		return jsonMap;
@@ -65,7 +69,6 @@ public class AdminController {
 	@RequestMapping(value="/updateAccountStatus",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String updateAccountStatus(String id, String status) {
-		
 		int count=userService.updateAccountStatus(id,status);
 		PlanResult plan=new PlanResult();
 		String json;

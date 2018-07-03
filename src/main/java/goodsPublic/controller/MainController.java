@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,15 +28,12 @@ import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
 import goodsPublic.service.CategoryService;
 import goodsPublic.service.PublicService;
-import goodsPublic.service.UserService;
 import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/merchant/main")
 public class MainController {
 
-	@Autowired
-	private UserService userService;
 	@Autowired
 	private PublicService publicService;
 	
@@ -48,14 +46,6 @@ public class MainController {
 	 */
 	@RequestMapping("/operation")
 	public String SayHellow() {
-		
-		/*
-		HttpSession session=request.getSession();
-		AccountMsg accountMsg=(AccountMsg) session.getAttribute("user");
-		System.out.println(accountMsg);
-		List<CategoryInfo> catList = categoryService.getCategory(accountMsg.getId());
-		request.setAttribute("categoryList", catList);
-		*/
 		return "/merchant/operation";
 	}
 
@@ -89,7 +79,6 @@ public class MainController {
 	 */
 	@RequestMapping(value="/addGoodsPublic",produces="plain/text; charset=UTF-8")
 	public String addGoodsPublic(Goods goods,HttpServletRequest request,@RequestParam(value="file")  MultipartFile file) {
-		
 		try {
 			if(file.getSize()>0) {
 				String jsonStr = FileUploadUtils.appUploadContentImg(request,file,"");
@@ -149,9 +138,7 @@ public class MainController {
 	@RequestMapping(value="/createShowUrlQrcode",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String createShowUrlQrcode(String url, String goodsNumber,HttpServletRequest request) {
-		
 		publicService.createShowUrlQrcode(url,goodsNumber);
-		
 		PlanResult plan=new PlanResult();
 		String json;
 		plan.setStatus(0);
@@ -166,7 +153,6 @@ public class MainController {
 	@RequestMapping(value="/editCategory",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String editCategory(CategoryInfo categoryInfo,HttpSession session) {
-		
 		int count=categoryService.editCategory(categoryInfo,session);
 		PlanResult plan=new PlanResult();
 		String json;
@@ -196,7 +182,6 @@ public class MainController {
 	 */
 	@RequestMapping(value="/editAccountInfo")
 	public String editAccountInfo(AccountMsg accountMsg,HttpServletRequest request,@RequestParam(value="file")  MultipartFile file) {
-		
 		try {
 			if(file.getSize()>0) {
 				String jsonStr = FileUploadUtils.appUploadContentImg(request,file,"");
@@ -206,7 +191,6 @@ public class MainController {
 					accountMsg.setAvatar_img(dataJO.get("src").toString());
 				}
 			}
-			
 			publicService.editAccountInfo(accountMsg);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -220,7 +204,6 @@ public class MainController {
 	 * */
 	@RequestMapping(value="/editGoods",produces="plain/text; charset=UTF-8")
 	public String editGoods(Goods goods,HttpServletRequest request,@RequestParam(value="file")  MultipartFile file) {
-		
 		String json="";
 		try {
 			if(file.getSize()>0) {
@@ -285,7 +268,6 @@ public class MainController {
 	@RequestMapping(value="/checkGoodsCount",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String checkGoodsCount(String accountNumber, String categoryIds, String ids) {
-		
 		String categoryIds1="";//用来记录有商品的分类编号
 		String ids1="";//用来记录无商品的分类id
 		String[] idArr = ids.split(",");
@@ -354,8 +336,6 @@ public class MainController {
 	public Map<String, Object> queryCategoryList(HttpSession session,int page,int rows,String sort,String order) {
 
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		//List<Map<String, Object>> companyList = companyDao.queryCompanyList(input, startTime, endTime, page, rows, sort, order);
-		
 		List<CategoryInfo> catList = (List<CategoryInfo>)session.getAttribute("categoryList");
 		List<CategoryInfo> catList1 = new ArrayList<CategoryInfo>();
 		for (int i = (page-1)*rows; i < page*rows-1; i++) {
@@ -402,18 +382,6 @@ public class MainController {
 	}
 	
 	/**
-	 * 跳转到类别编辑页面
-	 * */
-	/*
-	@RequestMapping(value="/goEditCategory")
-	public String goEditCategory(HttpServletRequest request, String id) {
-		CategoryInfo categoryInfo = categoryService.getById(id);
-		request.setAttribute("categoryInfo", categoryInfo);
-		return "/merchant/editCategory";
-	}
-	*/
-	
-	/**
 	 * 跳转至编辑商品页面
 	 * @param request
 	 * @param id
@@ -421,7 +389,6 @@ public class MainController {
 	 */
 	@RequestMapping(value="/goEditGoods")
 	public String goEditGoods(HttpServletRequest request, String id) {
-		
 		Goods goods=publicService.getGoodsById(id);
 		request.setAttribute("goods", goods);
 		return "/merchant/editGoods";
@@ -434,20 +401,10 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping(value="/goAccountInfo")
-	public String goAccountInfo(HttpServletRequest request, String accountId) {
-		AccountMsg accountMsg=publicService.getAccountById(accountId);
-		request.setAttribute("accountMsg", accountMsg);
+	public String goAccountInfo(HttpServletRequest request) {
+		AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
+		request.setAttribute("accountMsg", msg);
 		return "/merchant/accountInfo";
 	}
 	
-	/**
-	//创建分类
-	@RequestMapping(value="/addCategory",produces="plain/text; charset=UTF-8")
-	@ResponseBody
-	public String addCategory(CategoryInfo categoryInfo) {
-		categoryService.addCategory(categoryInfo);
-		
-		return null;
-	}
-	**/
 }

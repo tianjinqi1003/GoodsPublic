@@ -20,6 +20,16 @@ public class AccountMsg {
 	private String recordNumber;
 	private String accountStatus;
 	
+	public AccountMsg(String userName,String passWord) {
+		this.userName=userName;
+		this.passWord=passWord;
+	}
+	
+	public AccountMsg() {
+		super();
+	}
+	
+
 	public String getAccountStatus() {
 		return accountStatus;
 	}

@@ -76,45 +76,10 @@
 		<property name="maxInMemorySize" value="40960" />
 	</bean>
 
-
-	<mvc:annotation-driven/>
-
-
-	<bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
-		<property name="connectionFactory" ref="jedisConnFactory" />
-	</bean>
-
-	<bean id="jedisConnFactory"
-		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
-		<property name="hostName" value="120.27.5.36" />
-		<property name="port" value="6379" />
-		<property name="usePool" value="false" />
-		<constructor-arg ref="redisSentinelConfiguration" />
-	</bean>
-
-	<bean id="redisSentinelConfiguration"
-		class="org.springframework.data.redis.connection.RedisSentinelConfiguration">
-		<property name="master">
-			<bean class="org.springframework.data.redis.connection.RedisNode">
-				<property name="name" value="mymaster"></property>
-			</bean>
-		</property>
-		<property name="sentinels">
-			<set>
-				<bean class="org.springframework.data.redis.connection.RedisNode">
-					<constructor-arg index="0" value="120.27.5.36" />
-					<constructor-arg index="1" value="6379" />
-				</bean>
-				<bean class="org.springframework.data.redis.connection.RedisNode">
-					<constructor-arg index="0" value="120.27.5.36" />
-					<constructor-arg index="1" value="6379" />
-				</bean>
-				<bean class="org.springframework.data.redis.connection.RedisNode">
-					<constructor-arg index="0" value="120.27.5.36" />
-					<constructor-arg index="1" value="6379" />
-				</bean>
-			</set>
-		</property>
-	</bean>
+	<mvc:annotation-driven />
+     <mvc:default-servlet-handler />
+         <!-- 静态资源过滤 -->
+         <mvc:resources location="/resource/" mapping="/resource/**"/>
+	
 
 </beans>

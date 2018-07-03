@@ -14,24 +14,21 @@
     </bean>  
 
     <!-- 項目自定义的Realm -->  
-    <bean id="myShiroRealm" class="util.shiro.realm.MyRealm">  
+    <bean id="myShiroRealm" class="com.goodsPublic.util.shiro.realm.MyRealm">  
         <property name="cacheManager" ref="cacheManager" />  
     </bean>  
 
     <!-- Shiro Filter -->  
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">  
         <property name="securityManager" ref="securityManager" />  
-        <property name="loginUrl" value="/login" />  
-        <property name="successUrl" value="/info" />  
-        <property name="unauthorizedUrl" value="/hello" />  
+        <property name="loginUrl" value="/merchant/login" />  
         <property name="filterChainDefinitions">  
             <value>  
-                /hello = authc  
-                /info = authc
-                /checkLogin= anon  
-                /logout= anon  
-                /static/**=anon
-                /** = authc  
+            	/merchant/login=anon
+            	/merchant/login/captcha=anon
+            	/merchant/regist=anon
+            	/resource/**=anon
+             	/**=authc
             </value>  
         </property>  
     </bean>  
