@@ -124,6 +124,7 @@ body .beg-login-bg {
 			</form>
 		</div>
 	</div>
+	<script type="text/javascript" src="<%=basePath %>resource/js/MD5.js"></script>
 	<script type="text/javascript">
 	var baseUrl="${pageContext.request.contextPath}"
 		layui.use('form', function() {
@@ -132,6 +133,7 @@ body .beg-login-bg {
 			//监听提交
 			form.on('submit(formDemo)', function(data) {
 				url=baseUrl+"/merchant/regist"
+				data.field.passWord=MD5(data.field.passWord).toUpperCase();
 				$.post(url,data.field,function(result){
 					console.log(result)
 					if(result.status==0){

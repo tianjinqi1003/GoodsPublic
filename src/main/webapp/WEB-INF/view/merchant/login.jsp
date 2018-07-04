@@ -95,6 +95,7 @@ body {
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="<%=basePath %>resource/js/MD5.js"></script>
 <script type="text/javascript">
     //更换验证码
     var baseUrl="${pageContext.request.contextPath}"
@@ -112,7 +113,7 @@ body {
             var url=baseUrl + "/merchant/login"
             var params = {
                     userName: data.field.userName,
-                    password: data.field.password,
+                    password: MD5(data.field.password).toUpperCase(),
                     rememberMe : data.field.rememberMe,
                     loginVCode:data.field.loginVCode
             };

@@ -46,8 +46,7 @@
 		<div class="layui-side-scroll">
 			<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo"
 				style="margin-right: 10px;">
-				<div
-					style="border: #f3f3f4 solid 1px; width: 92%; margin: 0 auto; margin-top: 5px;">
+				<div style="border: #f3f3f4 solid 1px; width: 92%; margin: 0 auto; margin-top: 5px;">
 					<li class="layui-nav-item"><a
 						href="<%=basePath%>merchant/main/goAccountInfo?accountId=${sessionScope.user.id }">商家信息</a>
 					</li>
@@ -94,6 +93,17 @@
 					</c:choose>
 				</div>
 			</ul>
+			<shiro:hasRole  name="admin">
+  			<!--  有权限   -->
+			<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo"
+				style="margin-right: 10px;">
+				<div style="border: #f3f3f4 solid 1px; width: 92%; margin: 0 auto; margin-top: 5px;">
+					<li class="layui-nav-item">
+						<a href="<%=basePath%>admin/goAccountList">商户查询</a>
+					</li>
+				</div>
+			</ul>
+			</shiro:hasRole>
 		</div>
 	</div>
 </body>
