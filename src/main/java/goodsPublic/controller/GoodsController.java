@@ -190,8 +190,9 @@ public class GoodsController {
 	
 	@RequestMapping(value="/exit")
 	public String exit(HttpSession session) {
-		
-		session.invalidate();
+		System.out.println("退出接口");
+		 Subject currentUser = SecurityUtils.getSubject();       
+	       currentUser.logout();    
 		return "/merchant/login";
 	}
 }
