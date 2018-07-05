@@ -32,10 +32,10 @@
 color:#000;
 }
 .layui-nav,.layui-side{
-background-color: #0ff;
+background-color: #cff6fb;
 }
 .layui-layout-admin .layui-header{
-background-color: #fff;
+background-color:  #cff6fb;
 }
 
 </style>
