@@ -28,10 +28,20 @@
 	padding-left: 15px;
 	margin: 0px auto;
 }
+.layui-nav .layui-nav-item a{
+color:#000;
+}
+.layui-nav,.layui-side{
+background-color: #0ff;
+}
+.layui-layout-admin .layui-header{
+background-color: #fff;
+}
+
 </style>
 </head>
 <body>
-	<div class="layui-header">
+	<div class="layui-header ">
 		<div class="layui-logo">二维码产品发布系统</div>
 		<ul class="layui-nav layui-layout-right">
 			<li class="layui-nav-item"><a href="javascript:;"> <img
@@ -43,7 +53,7 @@
 		</ul>
 	</div>
 
-	<div class="layui-side layui-bg-black">
+	<div class="layui-side ">
 		<div class="layui-side-scroll">
 			<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo"
 				style="margin-right: 10px;">
