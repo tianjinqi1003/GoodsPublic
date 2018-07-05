@@ -81,17 +81,26 @@ function initEditDiv(){
 	
 	$("#edit_div table").css("width","100%");
 	$("#edit_div table td").css("padding-left","50px");
-	$("#edit_div table td").css("font-size","20px");
+	$("#edit_div table td").css("font-size","15px");
 	$("#edit_div table tr").css("height","45px");
 	
 	$(".panel.window").css("padding","0px");
 	$(".panel.window").css("width",diaWidth-2+"px"); 
+	$(".panel.window").css("background","linear-gradient(to bottom,#F4F4F4 0,#F4F4F4 20%)"); 
+	$(".window,.window .window-body").css("border-color","#ddd");
+	//$(".window .window-header").css("padding","0px 0px -6px 0px");
+	$(".panel.window .panel-title").css("color","#000");
+	$(".panel.window .panel-title").css("font-size","15px");
+	$(".panel.window .panel-title").css("padding-left","10px");
+	
+	$(".panel-header, .panel-body").css("border-color","#ddd");
+	
 	$(".panel-body.panel-body-noborder.window-body").css("width",diaWidth-4+"px"); 
 	$(".panel-body.panel-body-noborder.window-body").css("height","155px"); 
 	
 	$("#ok_but").css("left","45%");
 	$("#ok_but").css("position","absolute");
-	$(".dialog-button .l-btn-text").css("font-size","20px");
+	$(".dialog-button .l-btn-text").css("font-size","15px");
 }
 
 function checkEdit(){

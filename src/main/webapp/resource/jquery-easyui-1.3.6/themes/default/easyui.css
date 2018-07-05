@@ -180,7 +180,9 @@
 }
 .window .window-header {
   background: transparent;
+  /*
   padding: 0px 0px 6px 0px;
+  */
 }
 .window .window-body {
   border-width: 1px;
