@@ -191,12 +191,14 @@ public class MainController {
 					accountMsg.setAvatar_img(dataJO.get("src").toString());
 				}
 			}
-			publicService.editAccountInfo(accountMsg);
+			AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
+			accountMsg.setId(msg.getId());
+			int a=publicService.editAccountInfo(accountMsg);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "../../merchant/main/goAccountInfo?accountId="+accountMsg.getId()+"&";
+		return "/merchant/accountInfo";
 	}
 	
 	/**
