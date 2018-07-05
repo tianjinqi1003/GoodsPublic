@@ -26,6 +26,12 @@ $(function(){
 	$("#edit_div table td").css("font-size","15px");
 	$("#edit_div table tr").css("height","45px");
 	
+	$("#edit_div table tr").mousemove(function(){
+		$(this).css("background-color","#ddd");
+	}).mouseout(function(){
+		$(this).css("background-color","#fff");
+	});
+	
 	$(".panel.window").css("background","linear-gradient(to bottom,#F4F4F4 0,#F4F4F4 20%)"); 
 	$(".window,.window .window-body").css("border-color","#ddd");
 	$(".panel.window .panel-title").css("color","#000");
@@ -117,7 +123,7 @@ function setFitHeightInParent(o){
 				<td align="right">
 					网站Logo
 				</td>
-				<td>
+				<td style="padding-top: 7px;padding-bottom: 5px;">
 					<img style="width: 100px; height: 100px" src="${requestScope.accountMsg.avatar_img }" class="uploadImg" id="uploadImg" /> 
 					<input type="file" name="file" onchange="showAvatarImg(this)"/>
 				</td>
@@ -187,7 +193,7 @@ function setFitHeightInParent(o){
 				<td align="right">
 					统计代码
 				</td>
-				<td>
+				<td style="padding-top: 7px;padding-bottom: 5px;">
 					<textarea id="countCode" name="countCode" rows="3" cols="28">${requestScope.accountMsg.countCode }</textarea>
 				</td>
 			  </tr>
@@ -200,6 +206,16 @@ function setFitHeightInParent(o){
 				</td>
 			  </tr>
 		  </table>
+		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -45px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -66px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -46px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -46px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -46px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -46px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -46px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -46px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -46px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -113px;"></div>
 		  <input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
 		  </form>
 	</div>

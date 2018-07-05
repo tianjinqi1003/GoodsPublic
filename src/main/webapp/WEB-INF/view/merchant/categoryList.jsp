@@ -93,6 +93,12 @@ function initEditDiv(){
 	$("#edit_div table td").css("font-size","15px");
 	$("#edit_div table tr").css("height","45px");
 	
+	$("#edit_div table tr").mousemove(function(){
+		$(this).css("background-color","#ddd");
+	}).mouseout(function(){
+		$(this).css("background-color","#fff");
+	});
+	
 	$(".panel.window").css("padding","0px");
 	$(".panel.window").css("width",diaWidth-2+"px"); 
 	$(".panel.window").css("background","linear-gradient(to bottom,#F4F4F4 0,#F4F4F4 20%)"); 
@@ -267,6 +273,7 @@ function setFitWidthInParent(o){
 			</td>
 		  </tr>
 		</table>
+		<div style="height: 1px;width: 100%;background-color: #00f;margin-top: -45px;"></div>
 	</div>
 	<%@include file="foot.jsp"%>
 </div>

@@ -63,6 +63,12 @@ $(function(){
 	$("#edit_div table td").css("font-size","15px");
 	$("#edit_div table tr").css("height","45px");
 	
+	$("#edit_div table tr").mousemove(function(){
+		$(this).css("background-color","#ddd");
+	}).mouseout(function(){
+		$(this).css("background-color","#fff");
+	});
+	
 	$(".panel.window").css("background","linear-gradient(to bottom,#F4F4F4 0,#F4F4F4 20%)"); 
 	$(".window,.window .window-body").css("border-color","#ddd");
 	$(".panel.window .panel-title").css("color","#000");
@@ -200,7 +206,7 @@ function setFitHeightInParent(o){
 				<td align="right">
 					图片
 				</td>
-				<td>
+				<td style="padding-top: 7px;padding-bottom: 5px;">
 					<img style='width: 100px; height: 100px' src="" class='uploadImg' id='uploadImg' />
 					<input type="file" name="file" onchange="showQrcodePic(this)"/>
 				</td>
@@ -217,6 +223,9 @@ function setFitHeightInParent(o){
 				</td>
 			  </tr>
 			</table>
+			<div style="height: 1px;width: 100%;background-color: #00f;margin-top: -520px;"></div>
+			<div style="height: 1px;width: 100%;background-color: #00f;margin-top: -113px;"></div>
+			<div style="height: 1px;width: 100%;background-color: #00f;margin-top: -46px;"></div>
 			</form>
 		</div>
 		<%@include file="foot.jsp"%>
