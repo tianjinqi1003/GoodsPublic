@@ -204,7 +204,7 @@ function setFitHeightInParent(o){
 				</td>
 				<td>
 					<br>
-					<textarea id="htmlContent" name="htmlContent" cols="100" rows="8" style="width:700px;height:200px;visibility:hidden;"></textarea>
+					<textarea id="htmlContent" name="htmlContent" cols="100" rows="8" style="width:700px;height:500px;visibility:hidden;"></textarea>
 					<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
 				</td>
 			  </tr>
