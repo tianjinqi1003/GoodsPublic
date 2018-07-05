@@ -37,12 +37,21 @@ $(function(){
 				$(this).datagrid("mergeCells",{index:0,field:"categoryId",colspan:3});
 				data.total=0;
 			}
+			
+			resetTabStyle();
 			reSizeCol();
 			initEditDiv();
 		}
 	});
 	
 });
+
+function resetTabStyle(){
+	$(".panel-header").css("background","linear-gradient(to bottom,#F4F4F4 0,#F4F4F4 20%)");
+	$(".panel-header .panel-title").css("color","#000");
+	$(".panel-header .panel-title").css("font-size","15px");
+	$(".panel-header .panel-title").css("padding-left","10px");
+}
 
 //重设列宽
 function reSizeCol(){
@@ -88,7 +97,6 @@ function initEditDiv(){
 	$(".panel.window").css("width",diaWidth-2+"px"); 
 	$(".panel.window").css("background","linear-gradient(to bottom,#F4F4F4 0,#F4F4F4 20%)"); 
 	$(".window,.window .window-body").css("border-color","#ddd");
-	//$(".window .window-header").css("padding","0px 0px -6px 0px");
 	$(".panel.window .panel-title").css("color","#000");
 	$(".panel.window .panel-title").css("font-size","15px");
 	$(".panel.window .panel-title").css("padding-left","10px");

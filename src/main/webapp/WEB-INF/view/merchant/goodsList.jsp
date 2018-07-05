@@ -10,7 +10,7 @@
 <script type="text/javascript">
 $(function(){
 	tab1=$("#tab1").datagrid({
-		title:"商品列表&nbsp;|&nbsp;<a href=\"<%=basePath%>merchant/main/operation?categoryId=${param.categoryId}\" class=\"panel-title\">发布新商品</a>",
+		title:"商品列表&nbsp;|<a href=\"<%=basePath%>merchant/main/operation?categoryId=${param.categoryId}\" class=\"panel-title\">发布新商品</a>",
 		url:"queryGoodsList",
 		width:setFitWidthInParent("body"),
 		pagination:true,
@@ -37,6 +37,13 @@ $(function(){
 				$(this).datagrid("mergeCells",{index:0,field:"goodsNumber",colspan:5});
 				data.total=0;
 			}
+			
+			$(".panel-header").css("background","linear-gradient(to bottom,#F4F4F4 0,#F4F4F4 20%)");
+			$(".panel-header .panel-title").css("color","#000");
+			$(".panel-header .panel-title").css("font-size","15px");
+			$(".panel-header .panel-title").css("padding-left","10px");
+			$(".panel-header, .panel-body").css("border-color","#ddd");
+			
 			reSizeCol();
 		}
 	});

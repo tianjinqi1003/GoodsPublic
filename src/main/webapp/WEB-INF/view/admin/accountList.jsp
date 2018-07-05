@@ -38,6 +38,13 @@ $(function(){
 				$(this).datagrid("mergeCells",{index:0,field:"phone",colspan:6});
 				data.total=0;
 			}
+
+			$(".panel-header").css("background","linear-gradient(to bottom,#F4F4F4 0,#F4F4F4 20%)");
+			$(".panel-header .panel-title").css("color","#000");
+			$(".panel-header .panel-title").css("font-size","15px");
+			$(".panel-header .panel-title").css("padding-left","10px");
+			$(".panel-header, .panel-body").css("border-color","#ddd");
+			
 			reSizeCol();
 		}
 	});
