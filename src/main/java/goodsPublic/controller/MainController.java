@@ -191,7 +191,8 @@ public class MainController {
 					accountMsg.setAvatar_img(dataJO.get("src").toString());
 				}
 			}
-			publicService.editAccountInfo(accountMsg);
+			int count=publicService.editAccountInfo(accountMsg);
+			System.out.println("count====="+count);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
