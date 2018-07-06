@@ -22,6 +22,7 @@ $(function(){
 	});
 	
 	$("#edit_div table").css("width","100%");
+	$("#edit_div table").css("magin","-100px");
 	$("#edit_div table td").css("padding-left","50px");
 	$("#edit_div table td").css("font-size","15px");
 	$("#edit_div table tr").css("height","45px");
