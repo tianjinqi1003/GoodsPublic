@@ -27,7 +27,7 @@
             	/merchant/login=anon
             	/merchant/login/captcha=anon
             	/merchant/regist=anon
-            	/merchant/show=anon
+            	/merchant/main/show=anon
             	/resource/**=anon
              	/**=authc
             </value>  

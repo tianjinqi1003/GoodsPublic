@@ -125,7 +125,7 @@ function setFitHeightInParent(o){
 					网站Logo
 				</td>
 				<td style="padding-top: 7px;padding-bottom: 5px;">
-					<img style="width: 100px; height: 100px" src="${requestScope.accountMsg.avatar_img }" class="uploadImg" id="uploadImg" /> 
+					<img style="width: 100px; height: 100px;max-height: 100px;max-width: 100px;min-height: 100px;min-width: 100px;" src="${requestScope.accountMsg.avatar_img }" class="uploadImg" id="uploadImg" /> 
 					<input type="file" name="file" onchange="showAvatarImg(this)"/>
 				</td>
 			  </tr>
@@ -195,7 +195,7 @@ function setFitHeightInParent(o){
 					统计代码
 				</td>
 				<td style="padding-top: 7px;padding-bottom: 5px;">
-					<textarea id="countCode" name="countCode" rows="3" cols="28">${requestScope.accountMsg.countCode }</textarea>
+					<textarea id="countCode" name="countCode" rows="3" cols="28" style="max-height: 45px;min-height: 45px">${requestScope.accountMsg.countCode }</textarea>
 				</td>
 			  </tr>
 			  <tr>
