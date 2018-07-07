@@ -76,8 +76,8 @@ body {
 				</div>
 			</div>
 			<div class="changeBtm">
-				<a href="javascript:;" class="active">1</a> <a href="javascript:;">2</a>
-				<a href="javascript:;">3</a>
+				<a href="javascript:;" class="active">商品介绍</a> <a href="javascript:;">旗下产品</a>
+				<a href="javascript:;">公司简介</a>
 			</div>
 			<div class="msgContent">
 				<div class="mainMsg" style="display: block;">

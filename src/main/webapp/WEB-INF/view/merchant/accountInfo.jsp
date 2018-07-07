@@ -125,7 +125,7 @@ function setFitHeightInParent(o){
 					网站Logo
 				</td>
 				<td style="padding-top: 7px;padding-bottom: 5px;">
-					<img style="width: 100px; height: 100px;max-height: 100px;max-width: 100px;min-height: 100px;min-width: 100px;" src="${requestScope.accountMsg.avatar_img }" class="uploadImg" id="uploadImg" /> 
+					<img style="width: 100px; height: 100px;max-height: 100px;max-width: 100px;min-height: 100px;min-width: 100px;padding-bottom: 6px;" src="${requestScope.accountMsg.avatar_img }" class="uploadImg" id="uploadImg" /> 
 					<input type="file" name="file" onchange="showAvatarImg(this)"/>
 				</td>
 			  </tr>
