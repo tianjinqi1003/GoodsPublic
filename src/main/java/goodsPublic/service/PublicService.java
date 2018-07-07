@@ -84,5 +84,9 @@ public interface PublicService {
 	 * @return
 	 */
 	public int editAccountInfo(AccountMsg accountMsg);
+	/**
+	 * 根据用户信息查询用户名下有多少条商品
+	 */
+	public int getGoodsListByMsg();
 
 }

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.goodsPublic.util.FileUploadUtils;
+import com.goodsPublic.util.FinalState;
 import com.goodsPublic.util.JsonUtil;
 import com.goodsPublic.util.PlanResult;
 
@@ -80,26 +82,38 @@ public class MainController {
 	@RequestMapping(value="/addGoodsPublic",produces="plain/text; charset=UTF-8")
 	public String addGoodsPublic(Goods goods,HttpServletRequest request,@RequestParam(value="file")  MultipartFile file) {
 		try {
-			if(file.getSize()>0) {
-				String jsonStr = FileUploadUtils.appUploadContentImg(request,file,"");
-				JSONObject fileJson = JSONObject.fromObject(jsonStr);
-				if("成功".equals(fileJson.get("msg"))) {
-					JSONObject dataJO = (JSONObject)fileJson.get("data");
-					goods.setImgUrl(dataJO.get("src").toString());
-				}
-			}
-			
-			String json;
-			PlanResult plan=new PlanResult();
-			if(publicService.addGoodsPublic(goods)>0) {
-				plan.setStatus(0);
-				plan.setMsg("商品发布成功");
-				plan.setUrl("/merchant/main/show");
-				plan.setData(goods.getGoodsNumber());
-			}
-			json=JsonUtil.getJsonFromObject(plan);
-			JSONObject js = JSONObject.fromObject(json);
-			request.setAttribute("json", js);
+			//TODO对商品发布增加权限检测
+			  Subject subject = SecurityUtils.getSubject();
+				 if(subject.hasRole(FinalState.UserLevel1)){
+					 if(file.getSize()>0) {
+							String jsonStr = FileUploadUtils.appUploadContentImg(request,file,"");
+							JSONObject fileJson = JSONObject.fromObject(jsonStr);
+							if("成功".equals(fileJson.get("msg"))) {
+								JSONObject dataJO = (JSONObject)fileJson.get("data");
+								goods.setImgUrl(dataJO.get("src").toString());
+							}
+						}
+						String json;
+						PlanResult plan=new PlanResult();
+						int result =publicService.getGoodsListByMsg();
+						//TODO想办法获取条件权限
+						int a=publicService.addGoodsPublic(goods);
+						if(a>0) {
+							plan.setStatus(0);
+							plan.setMsg("商品发布成功");
+							plan.setUrl("/merchant/main/show");
+							plan.setData(goods.getGoodsNumber());
+						}
+						json=JsonUtil.getJsonFromObject(plan);
+						JSONObject js = JSONObject.fromObject(json);
+						request.setAttribute("json", js);
+			        }else if(subject.hasRole(FinalState.UserLevel2)){
+			           // 无权限
+			        	System.out.println("中级会员");
+			        }else if(subject.hasRole(FinalState.UserLevel2)) {
+			        	
+			        }else {
+			        }
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

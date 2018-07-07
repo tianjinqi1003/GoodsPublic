@@ -46,7 +46,7 @@ background-color:  #cff6fb;
 		<ul class="layui-nav layui-layout-right">
 			<li class="layui-nav-item"><a href="javascript:;"> <img
 					src="http://t.cn/RCzsdCq" class="layui-nav-img">
-					${sessionScope.user.nickName }
+					${requestScope.accountMsg.nickName }
 			</a></li>
 			<li class="layui-nav-item"><a href="<%=basePath%>merchant/exit">退出</a>
 			</li>

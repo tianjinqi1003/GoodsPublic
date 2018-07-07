@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +30,6 @@ import goodsPublic.service.PublicService;
 public class PublicServiceImpl implements PublicService {
 	@Autowired
 	private PublicMapper publicDao;
-	@Autowired
-	private CategoryInfoMapper categoryInfoDao;
 	
 	//发布商品接口，将商品保存在数据库中
 	@Override
@@ -119,6 +118,14 @@ public class PublicServiceImpl implements PublicService {
 	public int editAccountInfo(AccountMsg accountMsg) {
 		// TODO Auto-generated method stub
 		return publicDao.editAccountInfo(accountMsg);
+	}
+
+	@Override
+	public int getGoodsListByMsg() {
+		AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
+		int a=publicDao.getGoodsListByMsg(msg);
+		//TODO
+		return 0;
 	}
 
 }

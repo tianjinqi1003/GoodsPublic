@@ -122,4 +122,7 @@
 	<select id="getAccountById" resultType="goodsPublic.entity.AccountMsg">
 		select * from account_info where id=#{param1}
 	</select>
+	<select id="getGoodsListByMsg" resultType="int">
+		select count(*) from public_goods where accountNumber=#{id}
+	</select>
 </mapper>
