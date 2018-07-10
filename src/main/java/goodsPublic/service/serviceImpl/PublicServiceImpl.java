@@ -125,7 +125,7 @@ public class PublicServiceImpl implements PublicService {
 		AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
 		int a=publicDao.getGoodsListByMsg(msg);
 		//TODO
-		return 0;
+		return a;
 	}
 
 }
