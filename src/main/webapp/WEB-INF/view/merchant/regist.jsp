@@ -6,6 +6,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>新用户注册</title>
 <%@include file="js.jsp"%>
+<script type="text/javascript">
+$(function(){
+	
+});
+</script>
 <style>
 .register_content {
 	width: 53%;
@@ -123,6 +128,7 @@ body .beg-login-bg {
 				</div>
 			</form>
 		</div>
+				<div style="height: 1px;width: 100%;background-color: #00f;margin-top: -88px;"></div>
 	</div>
 	<script type="text/javascript" src="<%=basePath %>resource/js/MD5.js"></script>
 	<script type="text/javascript">

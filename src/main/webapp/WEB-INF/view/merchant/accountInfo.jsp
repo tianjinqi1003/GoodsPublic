@@ -194,7 +194,7 @@ function setFitHeightInParent(o){
 					统计代码
 				</td>
 				<td style="padding-top: 7px;padding-bottom: 5px;">
-					<textarea id="countCode" name="countCode" rows="3" cols="28">${requestScope.accountMsg.countCode }</textarea>
+					<textarea id="countCode" name="countCode" rows="3" cols="28" style="width: 212px;height: 51px;min-height: 51px;max-height: 51px;">${requestScope.accountMsg.countCode }</textarea>
 				</td>
 			  </tr>
 			  <tr>

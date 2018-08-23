@@ -80,6 +80,13 @@ $(function(){
 	$("#ok_but").css("left","45%");
 	$("#ok_but").css("position","absolute");
 	$(".dialog-button .l-btn-text").css("font-size","15px");
+	
+	var editor=$(".ke-container.ke-container-default");
+	editor.css("min-width","700px");
+	editor.css("max-width","700px");
+	editor.css("min-height","500px");
+	editor.css("max-height","500px");
+	alert(editor.html());
 });
 
 function checkEdit(){
