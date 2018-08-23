@@ -88,6 +88,7 @@ public class MainController {
 				 if(subject.hasRole(FinalState.UserLevel1)){
 					 System.out.println("初级会员");
 					 int count=publicService.getGoodsListByMsg();
+					 System.out.println(count);
 //					 if(file.getSize()>0) {
 //							String jsonStr = FileUploadUtils.appUploadContentImg(request,file,"");
 //							JSONObject fileJson = JSONObject.fromObject(jsonStr);
