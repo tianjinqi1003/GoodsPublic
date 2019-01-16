@@ -46,57 +46,7 @@ public class GoodsController {
 		return "/merchant/login";
 	}
 		
-//	/**
-//	 * 登录接口
-//	 * @param model
-//	 * @param userName
-//	 * @param password
-//	 * @param rememberMe
-//	 * @param role
-//	 * @param loginVCode
-//	 * @param request
-//	 * @return
-//	 */
-//	@RequestMapping(value="/login",method=RequestMethod.POST,produces="plain/text; charset=UTF-8")
-//	@ResponseBody
-//	public String login(Model model,String userName,String password,
-//			String rememberMe,String role,String loginVCode,HttpServletRequest request) {
-//		System.out.println("===登录接口===");
-//		//返回值的json
-//		PlanResult plan=new PlanResult();
-//		//TODO在这附近添加登录储存信息步骤，将用户的账号以及密码储存到shiro框架的管理配置当中方便后续查询
-//		//用来储存用户的用户信息
-//		AccountMsg user=new AccountMsg();
-//		user.setUserName(userName);
-//		user.setPassWord(password);
-//		//获得session
-//		HttpSession session = request.getSession();
-//		//获得session当中已经储存好的验证码
-//		String verifyCode = (String) session.getAttribute("验证码");
-//		//检查用户信息是否正确
-//		AccountMsg resultUser =userService.checkUser(user);
-//		if(resultUser!=null) {
-//			//检测输入的验证码以及储存的验证码
-//			if(verifyCode.equals(loginVCode)) {
-//				System.out.println("账号通过");
-//				model.addAttribute("user",resultUser);
-//				session.setAttribute("user",resultUser);
-//				List<CategoryInfo> catList = categoryService.getCategory(resultUser.getId());
-//				session.setAttribute("categoryList", catList);
-//				plan.setStatus(0);
-//				plan.setMsg("验证通过");
-//				plan.setUrl("/merchant/main/goAccountInfo?accountId="+resultUser.getId());
-//				return JsonUtil.getJsonFromObject(plan);
-//			}
-//			plan.setStatus(1);
-//			plan.setMsg("验证码错误");
-//			return JsonUtil.getJsonFromObject(plan);
-//		}
-//		plan.setStatus(0);
-//		plan.setMsg("用户不存在");
-//		return JsonUtil.getJsonFromObject(plan);
-//	}
-		
+
 	/**
 	 * 登录接口
 	 * @param model

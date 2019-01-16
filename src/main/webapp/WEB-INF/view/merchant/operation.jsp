@@ -86,7 +86,7 @@ $(function(){
 	editor.css("max-width","700px");
 	editor.css("min-height","500px");
 	editor.css("max-height","500px");
-	alert(editor.html());
+	//alert(editor.html());
 });
 
 function checkEdit(){

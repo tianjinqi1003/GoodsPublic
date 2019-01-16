@@ -60,5 +60,9 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public int editAccountInfo(AccountMsg accountMsg);
+	/**
+	 * 根据商户信息查询名下商品条目数量
+	 */
+	public int getGoodsListByMsg(AccountMsg accountMsg);
 	
 }
