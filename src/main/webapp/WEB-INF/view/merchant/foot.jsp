@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div class="layui-footer">
+	<div class="layui-footer" style="border-top:#86B9D6 solid 1px;background-color: #F5FAFE;">
 			<!-- 底部固定区域 -->
 			© layui.com - 底部固定区域
 		</div>

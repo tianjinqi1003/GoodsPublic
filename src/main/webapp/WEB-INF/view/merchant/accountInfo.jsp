@@ -21,10 +21,18 @@ $(function(){
         ]
 	});
 	
-	$("#edit_div table").css("width","100%");
+	$("#edit_div table").css("width","800px");
+	$("#edit_div table").css("magin","-100px");
 	$("#edit_div table td").css("padding-left","50px");
+	$("#edit_div table td").css("padding-right","20px");
 	$("#edit_div table td").css("font-size","15px");
 	$("#edit_div table tr").css("height","45px");
+	$("#edit_div table tr").each(function(){
+		$(this).find("td").eq(0).css("color","#006699");
+		$(this).find("td").eq(0).css("border-right","#CAD9EA solid 1px");
+		$(this).find("td").eq(0).css("font-weight","bold");
+		$(this).find("td").eq(0).css("background-color","#F5FAFE");
+	});
 	
 	$("#edit_div table tr").mousemove(function(){
 		$(this).css("background-color","#ddd");
@@ -32,16 +40,27 @@ $(function(){
 		$(this).css("background-color","#fff");
 	});
 	
-	$(".panel.window").css("background","linear-gradient(to bottom,#F4F4F4 0,#F4F4F4 20%)"); 
-	$(".window,.window .window-body").css("border-color","#ddd");
+	$(".panel.window").css("width","783px");
+	$(".panel.window").css("margin-top","20px");
+	$(".panel.window").css("margin-left",initWindowMarginLeft());
+	$(".panel.window").css("background","linear-gradient(to bottom,#E7F4FD 0,#E7F4FD 20%)");
 	$(".panel.window .panel-title").css("color","#000");
 	$(".panel.window .panel-title").css("font-size","15px");
 	$(".panel.window .panel-title").css("padding-left","10px");
 	
 	$(".panel-header, .panel-body").css("border-color","#ddd");
 	
+	//以下的是表格下面的面板
+	$(".window-shadow").css("width","800px");
+	$(".window-shadow").css("margin-top","20px");
+	$(".window-shadow").css("margin-left",initWindowMarginLeft());
+	$(".window-shadow").css("background","#E7F4FD");
+	
+	$(".window,.window .window-body").css("border-color","#ddd");
+	
 	$("#ok_but").css("left","45%");
 	$("#ok_but").css("position","absolute");
+	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","15px");
 });
 
@@ -100,7 +119,15 @@ function setFitWidthInParent(o){
 	
 function setFitHeightInParent(o){
 	var height=$(o).css("height");
-	return height.substring(0,height.length-2)-44;
+	return height.substring(0,height.length-2)-188;
+}
+
+function initWindowMarginLeft(){
+	var editDivWidth=$("#edit_div").css("width");
+	editDivWidth=editDivWidth.substring(0,editDivWidth.length-2);
+	var pwWidth=$(".panel.window").css("width");
+	pwWidth=pwWidth.substring(0,pwWidth.length-2);
+	return ((editDivWidth-pwWidth)/2)+"px";
 }
 </script>
 </head>
@@ -124,7 +151,7 @@ function setFitHeightInParent(o){
 					网站Logo
 				</td>
 				<td style="padding-top: 7px;padding-bottom: 5px;">
-					<img style="width: 100px; height: 100px" src="${requestScope.accountMsg.avatar_img }" class="uploadImg" id="uploadImg" /> 
+					<img style="width: 100px; height: 100px;max-height: 100px;max-width: 100px;min-height: 100px;min-width: 100px;padding-bottom: 6px;" src="${requestScope.accountMsg.avatar_img }" class="uploadImg" id="uploadImg" /> 
 					<input type="file" name="file" onchange="showAvatarImg(this)"/>
 				</td>
 			  </tr>
@@ -206,16 +233,16 @@ function setFitHeightInParent(o){
 				</td>
 			  </tr>
 		  </table>
-		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -45px;"></div>
-		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -66px;"></div>
-		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -46px;"></div>
-		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -46px;"></div>
-		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -46px;"></div>
-		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -46px;"></div>
-		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -46px;"></div>
-		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -46px;"></div>
-		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -46px;"></div>
-		  <div style="height: 1px;width: 100%;background-color: #00f;margin-top: -113px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -45px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -66px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -46px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -46px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -46px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -46px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -46px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -46px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -46px;"></div>
+		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -113px;"></div>
 		  <input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
 		  </form>
 	</div>

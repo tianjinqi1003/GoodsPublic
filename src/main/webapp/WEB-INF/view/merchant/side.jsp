@@ -32,21 +32,27 @@
 color:#000;
 }
 .layui-nav,.layui-side{
-background-color: #0ff;
+background-color: #FAFDFE;
+}
+.layui-side{
+border-right:#86B9D6 solid 1px;
 }
 .layui-layout-admin .layui-header{
-background-color: #fff;
+background-color:  #E7F4FD;
 }
 
 </style>
 </head>
 <body>
 	<div class="layui-header ">
-		<div class="layui-logo">二维码产品发布系统</div>
+		<div class="layui-logo">
+			<img alt="" src="<%=basePath%>resource/images/qrcode.png"/>
+			<a>二维码产品发布系统</a>
+		</div>
 		<ul class="layui-nav layui-layout-right">
 			<li class="layui-nav-item"><a href="javascript:;"> <img
 					src="http://t.cn/RCzsdCq" class="layui-nav-img">
-					${sessionScope.user.nickName }
+					${requestScope.accountMsg.nickName }
 			</a></li>
 			<li class="layui-nav-item"><a href="<%=basePath%>merchant/exit">退出</a>
 			</li>
@@ -57,7 +63,7 @@ background-color: #fff;
 		<div class="layui-side-scroll">
 			<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo"
 				style="margin-right: 10px;">
-				<div style="border: #f3f3f4 solid 1px; width: 92%; margin: 0 auto; margin-top: 5px;">
+				<div style="width: 92%; margin: 0 auto; margin-top: 20px;border: #CAD9EA solid 1px;background-color: #F5FAFE;">
 					<li class="layui-nav-item"><a
 						href="<%=basePath%>merchant/main/goAccountInfo?accountId=${sessionScope.user.id }">商家信息</a>
 					</li>
@@ -86,7 +92,7 @@ background-color: #fff;
 					</dl>
 				</li>
 				 -->
-				<div style="border: #f3f3f4 solid 1px; width: 92%; margin: 0 auto; margin-top: 5px;">
+				<div style="width: 92%; margin: 0 auto; margin-top: 5px;border: #CAD9EA solid 1px;background-color: #F5FAFE;">
 					<c:choose>
 						<c:when test="${empty sessionScope.categoryList}">
 							<li class="layui-nav-item"><a
