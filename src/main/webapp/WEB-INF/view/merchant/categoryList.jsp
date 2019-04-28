@@ -47,10 +47,17 @@ $(function(){
 });
 
 function resetTabStyle(){
-	$(".panel-header").css("background","linear-gradient(to bottom,#F4F4F4 0,#F4F4F4 20%)");
-	$(".panel-header .panel-title").css("color","#000");
-	$(".panel-header .panel-title").css("font-size","15px");
-	$(".panel-header .panel-title").css("padding-left","10px");
+	$(".panel.datagrid").css("width","788px");
+	$(".panel.datagrid").css("margin-left",initTab1WindowMarginLeft());
+
+	$(".panel.datagrid .panel-header").css("background","linear-gradient(to bottom,#E7F4FD 0,#E7F4FD 20%)");
+	$(".panel.datagrid .panel-header .panel-title").css("color","#000");
+	$(".panel.datagrid .panel-header .panel-title").css("font-size","15px");
+	$(".panel.datagrid .panel-header .panel-title").css("padding-left","10px");
+	
+	$(".panel.datagrid .datagrid-toolbar").css("background","#F5FAFE");
+	$(".panel.datagrid .datagrid-header-row").css("background","#E7F4FD");
+	$(".panel.datagrid .datagrid-pager.pagination").css("background","#F5FAFE");
 }
 
 //重设列宽
@@ -88,7 +95,7 @@ function initEditDiv(){
         ]
 	});
 	
-	$("#edit_div table").css("width","100%");
+	$("#edit_div table").css("width","800px");
 	$("#edit_div table td").css("padding-left","50px");
 	$("#edit_div table td").css("font-size","15px");
 	$("#edit_div table tr").css("height","45px");
@@ -98,10 +105,12 @@ function initEditDiv(){
 	}).mouseout(function(){
 		$(this).css("background-color","#fff");
 	});
-	
+
 	$(".panel.window").css("padding","0px");
-	$(".panel.window").css("width",diaWidth-2+"px"); 
-	$(".panel.window").css("background","linear-gradient(to bottom,#F4F4F4 0,#F4F4F4 20%)"); 
+	$(".panel.window").css("width","783px");
+	$(".panel.window").css("margin-top","40px");
+	$(".panel.window").css("margin-left",initEditWindowMarginLeft());
+	$(".panel.window").css("background","linear-gradient(to bottom,#E7F4FD 0,#E7F4FD 20%)"); 
 	$(".window,.window .window-body").css("border-color","#ddd");
 	$(".panel.window .panel-title").css("color","#000");
 	$(".panel.window .panel-title").css("font-size","15px");
@@ -109,11 +118,19 @@ function initEditDiv(){
 	
 	$(".panel-header, .panel-body").css("border-color","#ddd");
 	
+
+	//以下的是表格下面的面板
+	$(".window-shadow").css("width","783px");
+	$(".window-shadow").css("margin-top","40px");
+	$(".window-shadow").css("margin-left",initEditWindowMarginLeft());
+	$(".window-shadow").css("background","#E7F4FD");
+	
 	$(".panel-body.panel-body-noborder.window-body").css("width",diaWidth-4+"px"); 
 	$(".panel-body.panel-body-noborder.window-body").css("height","155px"); 
 	
 	$("#ok_but").css("left","45%");
 	$("#ok_but").css("position","absolute");
+	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","15px");
 }
 
@@ -235,14 +252,30 @@ layui.use(['element'],function(){
 
 function setFitWidthInParent(o){
 	var width=$(o).css("width");
-	return width.substring(0,width.length-2)-250;
+	return width.substring(0,width.length-2)-210;
+}
+
+function initTab1WindowMarginLeft(){
+	var tab1DivWidth=$("#tab1_div").css("width");
+	tab1DivWidth=tab1DivWidth.substring(0,tab1DivWidth.length-2);
+	var pdWidth=$(".panel.datagrid").css("width");
+	pdWidth=pdWidth.substring(0,pdWidth.length-2);
+	return ((tab1DivWidth-pdWidth)/2)+"px";
+}
+
+function initEditWindowMarginLeft(){
+	var editDivWidth=$("#edit_div").css("width");
+	editDivWidth=editDivWidth.substring(0,editDivWidth.length-2);
+	var pwWidth=$(".panel.window").css("width");
+	pwWidth=pwWidth.substring(0,pwWidth.length-2);
+	return ((editDivWidth-pwWidth)/2)+"px";
 }
 </script>
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
 	<%@include file="side.jsp"%>
-	<div id="tab1_div" style="margin-top:5px;margin-left: 210px;">
+	<div id="tab1_div" style="margin-top:20px;margin-left: 200px;">
 		<div id="toolbar">
 			<a id="remove_but">删除</a>
 		</div>
@@ -273,7 +306,7 @@ function setFitWidthInParent(o){
 			</td>
 		  </tr>
 		</table>
-		<div style="height: 1px;width: 100%;background-color: #00f;margin-top: -45px;"></div>
+		<div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -45px;"></div>
 	</div>
 	<%@include file="foot.jsp"%>
 </div>
