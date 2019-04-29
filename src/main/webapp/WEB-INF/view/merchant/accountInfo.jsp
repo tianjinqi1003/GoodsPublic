@@ -119,7 +119,7 @@ function setFitWidthInParent(o){
 	
 function setFitHeightInParent(o){
 	var height=$(o).css("height");
-	return height.substring(0,height.length-2)-188;
+	return height.substring(0,height.length-2)-98;
 }
 
 function initWindowMarginLeft(){

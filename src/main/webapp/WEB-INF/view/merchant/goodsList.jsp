@@ -44,12 +44,26 @@ $(function(){
 			$(".panel-header .panel-title").css("padding-left","10px");
 			$(".panel-header, .panel-body").css("border-color","#ddd");
 			
+			resetTabStyle();
 			reSizeCol();
 		}
 	});
 	
 	$("#previewDiv").css("margin-top",($(document).height()/2-150)+"px");
 });
+
+function resetTabStyle(){
+	$(".panel.datagrid").css("margin-left",initTab1WindowMarginLeft());
+
+	$(".panel.datagrid .panel-header").css("background","linear-gradient(to bottom,#E7F4FD 0,#E7F4FD 20%)");
+	$(".panel.datagrid .panel-header .panel-title").css("color","#000");
+	$(".panel.datagrid .panel-header .panel-title").css("font-size","15px");
+	$(".panel.datagrid .panel-header .panel-title").css("padding-left","10px");
+	
+	$(".panel.datagrid .datagrid-toolbar").css("background","#F5FAFE");
+	$(".panel.datagrid .datagrid-header-row").css("background","#E7F4FD");
+	$(".panel.datagrid .datagrid-pager.pagination").css("background","#F5FAFE");
+}
 
 //重设列宽
 function reSizeCol(){
@@ -83,6 +97,14 @@ function setFitWidthInParent(o){
 	var width=$(o).css("width");
 	return width.substring(0,width.length-2)-250;
 }
+
+function initTab1WindowMarginLeft(){
+	var tab1DivWidth=$("#tab1_div").css("width");
+	tab1DivWidth=tab1DivWidth.substring(0,tab1DivWidth.length-2);
+	var pdWidth=$(".panel.datagrid").css("width");
+	pdWidth=pdWidth.substring(0,pdWidth.length-2);
+	return ((tab1DivWidth-pdWidth)/2)+"px";
+}
 </script>
 <style type="text/css">
 </style>
@@ -93,7 +115,7 @@ function setFitWidthInParent(o){
 </div>
 <div class="layui-layout layui-layout-admin">
 	<%@include file="side.jsp"%>
-	<div style="margin-top:5px;margin-left: 210px;">
+	<div id="tab1_div" style="margin-top:20px;margin-left: 210px;">
 		 <table id="tab1">
 		 </table>
 	</div>
