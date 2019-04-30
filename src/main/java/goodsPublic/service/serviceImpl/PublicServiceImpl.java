@@ -115,6 +115,12 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
+	public List<Goods> queryGoodsList(int categoryID) {
+		// TODO Auto-generated method stub
+		return publicDao.queryGoodsListByCateId(categoryID);
+	}
+
+	@Override
 	public int editAccountInfo(AccountMsg accountMsg) {
 		// TODO Auto-generated method stub
 		return publicDao.editAccountInfo(accountMsg);

@@ -29,6 +29,13 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public List<Goods> queryGoodsList(String accountId, String categoryId, int start, int rows, String sort, String order);
+	
+	/**
+	 * 根据类别id查询商品
+	 * @param categoryID
+	 * @return
+	 */
+	public List<Goods> queryGoodsListByCateId(int categoryID);
 	/**
 	 * 根据id查询商品
 	 * @param id

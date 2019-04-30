@@ -1,7 +1,9 @@
 package goodsPublic.controller;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -326,8 +328,16 @@ public class MainController {
 	@RequestMapping(value="/show",method=RequestMethod.GET)
 	public String Show(String goodsNumber,HttpServletRequest request) {
 		System.out.println(goodsNumber);
+		Date date = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/dd HH:mm:ss");
+		request.setAttribute("searchTime", sdf.format(date));
 		PlanResult plan=publicService.getGoodsByGN(goodsNumber);
-		request.setAttribute("plan", plan.getData());
+		Goods goods = (Goods)plan.getData();
+		request.setAttribute("plan", goods);
+		
+		List<Goods> goodsList = publicService.queryGoodsList(goods.getCategory_id());
+		request.setAttribute("flagGoodsList", goodsList);
+		
 		AccountMsg accountMsg = publicService.getAccountById(((Goods)plan.getData()).getAccountNumber());
 		request.setAttribute("accountMsg", accountMsg);
 		return "/merchant/show";

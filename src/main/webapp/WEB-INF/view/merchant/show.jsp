@@ -105,7 +105,7 @@ body {
 							<img alt="" src="<%=basePath%>resource/images/001.png" style="float:right;margin-top:8px;margin-right:10px;font-size: 25px;"/>
 						</div>
 						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
-							<span style="margin-left:20px;color: #686868;">查询时间：1997-07-01</span>
+							<span style="margin-left:20px;color: #686868;">查询时间：${searchTime }</span>
 						</div>
 						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
 							<span style="margin-left:20px;color: #686868;">查询次数：1</span>
@@ -130,16 +130,16 @@ body {
 							<img alt="" src="<%=basePath%>resource/images/001.png" style="float:right;margin-top:8px;margin-right:10px;font-size: 25px;"/>
 						</div>
 						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
-							<span style="margin-left:20px;color: #686868;">公司名称：青岛华凌科技</span>
+							<span style="margin-left:20px;color: #686868;">公司名称：${accountMsg.companyName}</span>
 						</div>
 						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
-							<span style="margin-left:20px;color: #686868;">联系电话：110</span>
+							<span style="margin-left:20px;color: #686868;">联系电话：${accountMsg.phone}</span>
 						</div>
 						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
-							<span style="margin-left:20px;color: #686868;">公司传真：110</span>
+							<span style="margin-left:20px;color: #686868;">公司传真：${accountMsg.fax}</span>
 						</div>
 						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
-							<span style="margin-left:20px;color: #686868;">公司地址：110</span>
+							<span style="margin-left:20px;color: #686868;">公司地址：${accountMsg.companyAddress}</span>
 						</div>
 					</div>
 					<div class="mainMsg" style="display: none;">
@@ -147,9 +147,11 @@ body {
 							<span style="margin-left:20px;">旗下产品</span>
 							<img alt="" src="<%=basePath%>resource/images/001.png" style="float:right;margin-top:8px;margin-right:10px;font-size: 25px;"/>
 						</div>
+						<c:forEach items="${flagGoodsList }" var="goods">
 						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
-							<span style="margin-left:20px;color: #686868;">aaaaa</span>
+							<span style="margin-left:20px;color: #686868;" onclick="goFlagGoods('${goods.goodsNumber }');">${goods.title }</span>
 						</div>
+						</c:forEach>
 					</div>
 					<div class="mainMsg" style="display: none;">
 						<div style="width: 100%;height: 50px;line-height: 50px;background-color: #E5E5E5;">
@@ -157,13 +159,13 @@ body {
 							<img alt="" src="<%=basePath%>resource/images/001.png" style="float:right;margin-top:8px;margin-right:10px;font-size: 25px;"/>
 						</div>
 						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
-							<span style="margin-left:20px;color: #686868;">公司名称：aaa</span>
+							<span style="margin-left:20px;color: #686868;">公司名称：${accountMsg.companyName}</span>
 						</div>
 						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
 							<span style="margin-left:20px;color: #686868;">联系电话：${accountMsg.phone}</span>
 						</div>
 						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
-							<span style="margin-left:20px;color: #686868;">公司传真：</span>
+							<span style="margin-left:20px;color: #686868;">公司传真：${accountMsg.fax}</span>
 						</div>
 						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
 							<span style="margin-left:20px;color: #686868;">公司地址：${accountMsg.companyAddress}</span>
@@ -172,6 +174,7 @@ body {
 				</div>
 			</div>
 			<script type="text/javascript">
+				var baseUrl = "${pageContext.request.contextPath}";
 				function GetRequest() {
 					var url = location.search; //获取url中"?"符后的字串  
 					var theRequest = new Object();
@@ -208,6 +211,11 @@ body {
 														+ index + ')').show();
 									});
 				})
+				
+				function goFlagGoods(goodsNumber){
+					var url=location.href.substring(0,location.href.indexOf("GoodsPublic")-1)+baseUrl+"/merchant/main/show?goodsNumber="+goodsNumber;
+					window.location.href=url;
+				}
 			</script>
 		</div>
 	</div>

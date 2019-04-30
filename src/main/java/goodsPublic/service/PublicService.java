@@ -79,6 +79,13 @@ public interface PublicService {
 			String order);
 
 	/**
+	 * 根据类别编号，查询商品信息
+	 * @param categoryID
+	 * @return
+	 */
+	public List<Goods> queryGoodsList(int categoryID);
+
+	/**
 	 * 编辑商户信息
 	 * @param accountMsg
 	 * @return
