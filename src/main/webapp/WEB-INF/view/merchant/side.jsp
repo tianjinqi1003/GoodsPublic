@@ -37,6 +37,8 @@
 	position: absolute;
 }
 .layui-nav .first-level{
+    font-size: 15px;
+	font-weight: bold;
 	background-color: #E7F4FD;
 }
 .layui-nav,.layui-side{

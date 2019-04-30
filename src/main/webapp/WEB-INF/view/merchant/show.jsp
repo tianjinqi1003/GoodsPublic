@@ -11,7 +11,7 @@ body {
 	zoom: 1;
 	font-family: '微软雅黑';
 	color: #666;
-	background: #f5f5f5;
+	background-color: #F5F5F5;
 }
 
 .mainContent {
@@ -21,6 +21,8 @@ body {
 .msgContent{
 	word-break: break-all;
 	word-wrap: break-word;
+	margin-top: 60px;
+	position: absolute;
 }
 .contentBody {
 	height: 60px;
@@ -29,7 +31,6 @@ body {
 	text-align: center;
 	line-height: 60px;
 	color: #fff;
-	position: relative;
 }
 
 .changeBtm {
@@ -48,12 +49,22 @@ body {
 	margin-left: 10px;
 }
 
+.changeBtm .active {
+    outline: 0;
+    color:#fff;
+	background-color: #15BC7E;
+}
+
 .mainMsg {
+	width:300px;
 	padding: 0 10px;
 }
 
 .imgContent {
-	height: 100%;
+	width: 100%;
+	height:265px;
+	margin-top: 15px;
+	background-color: #fff;
 }
 
 .imgItme {
@@ -61,7 +72,8 @@ body {
 }
 
 .imgUrl {
-	width: 80%
+	width: 256px;
+	height:256px;
 }
 </style>
 <%@include file="js.jsp"%>
@@ -69,26 +81,94 @@ body {
 <body>
 	<div id="context">
 		<div class="mainContent">
-			<div class="contentBody">${plan.title}</div>
+			<div class="contentBody">
+				<!-- 
+				${plan.title}
+				 -->
+				产品追溯详情
+			</div>
 			<div class="imgContent">
 				<div class="imgItme">
 					<img class="imgUrl" src="${plan.imgUrl }">
 				</div>
 			</div>
-			<!-- 
-			<div class="changeBtm">
-				<a href="javascript:;" class="active">商品介绍</a> <a href="javascript:;">旗下产品</a>
-				<a href="javascript:;">公司简介</a>
-			</div>
-			 -->
-			<div class="msgContent">
-				<div class="mainMsg" style="display: block;">
-					${plan.htmlContent}
+			<div style="background-color: #F5F5F5;width: 100%;height: 320px;">
+				<div class="changeBtm">
+					<a href="javascript:;" class="active">商品介绍</a> 
+					<a href="javascript:;">旗下产品</a>
+					<a href="javascript:;">公司简介</a>
 				</div>
-				<div class="mainMsg" style="display: none;">2</div>
-				<div class="mainMsg" style="display: none;">
-					<div>电话：${accountMsg.phone}</div>
-					<div>地址：${accountMsg.companyAddress}</div>
+				<div class="msgContent">
+					<div class="mainMsg" style="display: block;">
+						<div style="width: 100%;height: 50px;line-height: 50px;background-color: #E5E5E5;">
+							<span style="margin-left:20px;">查询信息</span>
+							<img alt="" src="<%=basePath%>resource/images/001.png" style="float:right;margin-top:8px;margin-right:10px;font-size: 25px;"/>
+						</div>
+						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
+							<span style="margin-left:20px;color: #686868;">查询时间：1997-07-01</span>
+						</div>
+						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
+							<span style="margin-left:20px;color: #686868;">查询次数：1</span>
+						</div>
+						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
+							<span style="margin-left:20px;color: #686868;">商品编码：</span>
+						</div>
+						<div style="width: 100%;height: 50px;line-height: 50px;margin-top:15px;background-color: #E5E5E5;">
+							<span style="margin-left:20px;">产品信息</span>
+							<img alt="" src="<%=basePath%>resource/images/001.png" style="float:right;margin-top:8px;margin-right:10px;font-size: 25px;"/>
+						</div>
+						<div>
+							<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
+								<span style="margin-left:10px;color: #686868;">${plan.title}</span>
+							</div>
+							<div style="width: 100%;background-color: #fff;">
+								${plan.htmlContent}
+							</div>
+						</div>
+						<div style="width: 100%;height: 50px;line-height: 50px;margin-top:15px;background-color: #E5E5E5;">
+							<span style="margin-left:20px;">企业信息</span>
+							<img alt="" src="<%=basePath%>resource/images/001.png" style="float:right;margin-top:8px;margin-right:10px;font-size: 25px;"/>
+						</div>
+						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
+							<span style="margin-left:20px;color: #686868;">公司名称：青岛华凌科技</span>
+						</div>
+						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
+							<span style="margin-left:20px;color: #686868;">联系电话：110</span>
+						</div>
+						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
+							<span style="margin-left:20px;color: #686868;">公司传真：110</span>
+						</div>
+						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
+							<span style="margin-left:20px;color: #686868;">公司地址：110</span>
+						</div>
+					</div>
+					<div class="mainMsg" style="display: none;">
+						<div style="width: 100%;height: 50px;line-height: 50px;background-color: #E5E5E5;">
+							<span style="margin-left:20px;">旗下产品</span>
+							<img alt="" src="<%=basePath%>resource/images/001.png" style="float:right;margin-top:8px;margin-right:10px;font-size: 25px;"/>
+						</div>
+						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
+							<span style="margin-left:20px;color: #686868;">aaaaa</span>
+						</div>
+					</div>
+					<div class="mainMsg" style="display: none;">
+						<div style="width: 100%;height: 50px;line-height: 50px;background-color: #E5E5E5;">
+							<span style="margin-left:20px;">公司简介</span>
+							<img alt="" src="<%=basePath%>resource/images/001.png" style="float:right;margin-top:8px;margin-right:10px;font-size: 25px;"/>
+						</div>
+						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
+							<span style="margin-left:20px;color: #686868;">公司名称：aaa</span>
+						</div>
+						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
+							<span style="margin-left:20px;color: #686868;">联系电话：${accountMsg.phone}</span>
+						</div>
+						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
+							<span style="margin-left:20px;color: #686868;">公司传真：</span>
+						</div>
+						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
+							<span style="margin-left:20px;color: #686868;">公司地址：${accountMsg.companyAddress}</span>
+						</div>
+					</div>
 				</div>
 			</div>
 			<script type="text/javascript">
@@ -119,8 +199,7 @@ body {
 										var index = $(this).index() + 1;
 										for (var i = 0; i < $('.changeBtm a')
 												.get().length; i++) {
-											$('.changeBtm a').removeClass(
-													'active');
+											$('.changeBtm a').removeClass('active');
 											$('.msgContent div.mainMsg').hide();
 										}
 										$(this).attr('class', 'active');
