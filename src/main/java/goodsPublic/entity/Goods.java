@@ -16,7 +16,7 @@ public class Goods implements Serializable {
 
     private String imgUrl;//产品缩略图地址
     
-    private String qrCode;//二维码缩略图地址
+	private String qrCode;//二维码缩略图地址
 
 	private String accountNumber; //商户编号
 

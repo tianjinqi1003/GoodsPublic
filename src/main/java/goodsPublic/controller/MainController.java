@@ -215,6 +215,7 @@ public class MainController {
 			AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
 			accountMsg.setId(msg.getId());
 			int a=publicService.editAccountInfo(accountMsg);
+			System.out.println("a==="+a);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

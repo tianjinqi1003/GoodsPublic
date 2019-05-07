@@ -176,6 +176,7 @@ function initWindowMarginLeft(){
 					<span style="color: #f00;">*</span>
 				</td>
 			  </tr>
+			  </tr>
 			  <tr>
 				<td align="right">
 					图片

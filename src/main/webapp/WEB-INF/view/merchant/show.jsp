@@ -6,6 +6,20 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <title>测试标题</title>
+<script type="text/javascript"
+	src="../../resource/js/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+$(function(){
+	$("#mainMsg1 #htmlContent_div").find("img").each(function(){
+		var title=$(this).attr("title");
+		if(title!=""&title!=null){
+			$(this).click(function(){
+				location.href=title;
+			});
+		}
+	});
+})
+</script>
 <style type="text/css">
 body {
 	zoom: 1;
@@ -56,7 +70,7 @@ body {
 }
 
 .mainMsg {
-	width:300px;
+	width:350px;
 	padding: 0 10px;
 }
 
@@ -92,14 +106,14 @@ body {
 					<img class="imgUrl" src="${plan.imgUrl }">
 				</div>
 			</div>
-			<div style="background-color: #F5F5F5;width: 100%;height: 320px;">
+			<div style="background-color: #F5F5F5;width: 350px;height: 320px;margin: 0 auto;">
 				<div class="changeBtm">
 					<a href="javascript:;" class="active">商品介绍</a> 
 					<a href="javascript:;">旗下产品</a>
 					<a href="javascript:;">公司简介</a>
 				</div>
 				<div class="msgContent">
-					<div class="mainMsg" style="display: block;">
+					<div class="mainMsg" id="mainMsg1" style="display: block;">
 						<div style="width: 100%;height: 50px;line-height: 50px;background-color: #E5E5E5;">
 							<span style="margin-left:20px;">查询信息</span>
 							<img alt="" src="<%=basePath%>resource/images/001.png" style="float:right;margin-top:8px;margin-right:10px;font-size: 25px;"/>
@@ -121,7 +135,7 @@ body {
 							<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
 								<span style="margin-left:10px;color: #686868;">${plan.title}</span>
 							</div>
-							<div style="width: 100%;background-color: #fff;">
+							<div id="htmlContent_div" style="width: 100%;background-color: #fff;">
 								${plan.htmlContent}
 							</div>
 						</div>
@@ -150,6 +164,9 @@ body {
 						<c:forEach items="${flagGoodsList }" var="goods">
 						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
 							<span style="margin-left:20px;color: #686868;" onclick="goFlagGoods('${goods.goodsNumber }');">${goods.title }</span>
+						</div>
+						<div style="width: 100%;height: 260px;background-color: #fff;">
+							<img alt="" src="${goods.imgUrl }" onclick="location.href='/GoodsPublic/merchant/main/show?goodsNumber=${goods.goodsNumber }';" style="width: 256px;height:256px;">
 						</div>
 						</c:forEach>
 					</div>
