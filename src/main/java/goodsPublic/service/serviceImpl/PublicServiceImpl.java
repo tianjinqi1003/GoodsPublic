@@ -20,6 +20,8 @@ import goodsPublic.dao.PublicMapper;
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
+import goodsPublic.entity.GoodsAttrSet;
+import goodsPublic.entity.HtmlTemplate;
 import goodsPublic.service.PublicService;
 /**
  * 这是用来处理商品的对应接口
@@ -132,6 +134,18 @@ public class PublicServiceImpl implements PublicService {
 		int a=publicDao.getGoodsListByMsg(msg);
 		//TODO
 		return a;
+	}
+
+	@Override
+	public GoodsAttrSet getGoodsAttrSetByAccountId(String accountId) {
+		// TODO Auto-generated method stub
+		return publicDao.getGoodsAttrSetByAccountId(accountId);
+	}
+
+	@Override
+	public HtmlTemplate getHtmlTemplateByTypeAccountId(String type, String accountId) {
+		// TODO Auto-generated method stub
+		return publicDao.getHtmlTemplateByTypeAccountId(type,accountId);
 	}
 
 }

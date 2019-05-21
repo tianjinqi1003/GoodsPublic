@@ -10,6 +10,8 @@ import com.goodsPublic.util.PlanResult;
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
+import goodsPublic.entity.GoodsAttrSet;
+import goodsPublic.entity.HtmlTemplate;
 
 public interface PublicService {
 
@@ -95,5 +97,20 @@ public interface PublicService {
 	 * 根据用户信息查询用户名下有多少条商品
 	 */
 	public int getGoodsListByMsg();
+
+	/**
+	 * 根据商家编号获得商品属性设置
+	 * @param accountId
+	 * @return
+	 */
+	public GoodsAttrSet getGoodsAttrSetByAccountId(String accountId);
+
+	/**
+	 * 根据模板类型、商家编号获得页面模板
+	 * @param type
+	 * @param accountId
+	 * @return
+	 */
+	public HtmlTemplate getHtmlTemplateByTypeAccountId(String type, String accountId);
 
 }

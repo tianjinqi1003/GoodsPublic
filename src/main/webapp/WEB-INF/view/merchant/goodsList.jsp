@@ -28,7 +28,7 @@ $(function(){
             	return "<img alt=\"\" src=\""+value+"\" width=\"50\" height=\"50\" onclick=\"previewImg(this.src);\" />";
             }},
             {field:"id",title:"操作",width:100,formatter:function(value){
-            	return "<a href=\"${pageContext.request.contextPath}/merchant/main/goEditGoods?id="+value+"&categoryId=${param.categoryId}\">编辑</a>";
+            	return "<a href=\"${pageContext.request.contextPath}/merchant/main/goEditGoods?id="+value+"&categoryId=${param.categoryId}&accountId=${sessionScope.user.id}\">编辑</a>";
             }}
         ]],
         onLoadSuccess:function(data){

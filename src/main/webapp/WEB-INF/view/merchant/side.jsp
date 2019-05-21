@@ -138,7 +138,7 @@
 									<a href="<%=basePath%>merchant/main/goGoodsList?categoryId=${item.categoryId}">
 										&nbsp;&nbsp;&nbsp;${item.categoryName }
 									</a>
-									<a href="<%=basePath%>merchant/main/operation?categoryId=${item.categoryId}" style="margin-top: -45px; margin-left: 90px;">
+									<a href="<%=basePath%>merchant/main/operation?categoryId=${item.categoryId}&accountId=${sessionScope.user.id}" style="margin-top: -45px; margin-left: 90px;">
 										|&nbsp;添加
 									</a>
 								</li>

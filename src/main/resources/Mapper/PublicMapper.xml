@@ -128,4 +128,10 @@
 	<select id="getGoodsListByMsg" resultType="int">
 		select count(*) from public_goods where accountNumber=#{id}
 	</select>
+	<select id="getGoodsAttrSetByAccountId" resultType="goodsPublic.entity.GoodsAttrSet">
+		select * from goods_attr_set where accountNumber=#{accountNumber}
+	</select>
+	<select id="getHtmlTemplateByTypeAccountId" resultType="goodsPublic.entity.HtmlTemplate">
+		select * from html_template where type=#{type} and accountNumber=#{accountNumber}
+	</select>
 </mapper>

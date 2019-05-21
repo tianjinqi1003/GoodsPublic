@@ -153,6 +153,8 @@ function initWindowMarginLeft(){
 <body>
 <div class="layui-layout layui-layout-admin">
 		<%@include file="side.jsp"%>
+		${requestScope.htmlContent }
+		<!-- 
 		<div id="edit_div">
 			<form id="form1" name="form1" method="post" action="editGoods" enctype="multipart/form-data">
 			<input type="hidden" id="id" name="id" value="${requestScope.goods.id }"/>
@@ -160,7 +162,7 @@ function initWindowMarginLeft(){
 			<table>
 			  <tr>
 				<td align="right">
-					类别编号
+					${requestScope.goodsAttrSet.category_id }
 				</td>
 				<td>
 					<input id="category_id" name="category_id" type="text" value="${requestScope.goods.category_id }" onfocus="focusCategoryId()" onblur="checkCategoryId()"/>
@@ -169,7 +171,7 @@ function initWindowMarginLeft(){
 			  </tr>
 			  <tr>
 				<td align="right">
-					商品名称
+					${requestScope.goodsAttrSet.title }
 				</td>
 				<td>
 					<input id="title" name="title" type="text" value="${requestScope.goods.title }" maxlength="20" onfocus="focusTitle()" onblur="checkTitle()"/>
@@ -179,7 +181,7 @@ function initWindowMarginLeft(){
 			  </tr>
 			  <tr>
 				<td align="right">
-					图片
+					${requestScope.goodsAttrSet.imgUrl }
 				</td>
 				<td style="padding-top: 7px;padding-bottom: 5px;">
 					<img style='width: 100px; height: 100px' src="${requestScope.goods.imgUrl }" class='uploadImg' id='uploadImg' /> 
@@ -188,12 +190,12 @@ function initWindowMarginLeft(){
 			  </tr>
 			  <tr>
 				<td align="right">
-					内容
+					${requestScope.goodsAttrSet.htmlContent }
 					<div style="font-size: 10px;color: #f00;">（最多可以输入6000字）</div>
 				</td>
 				<td>
 					<br>
-					<textarea id="htmlContent" name="htmlContent" cols="100" rows="8" style="width:700px;height:200px;visibility:hidden;"><%=htmlspecialchars(goods.getHtmlContent())%></textarea>
+					<textarea id="htmlContent" name="htmlContent" cols="100" rows="8" style="width:700px;height:200px;visibility:hidden;"></textarea>
 					<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
 				</td>
 			  </tr>
@@ -203,6 +205,7 @@ function initWindowMarginLeft(){
 			<div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -46px;"></div>
 			</form>
 		</div>
+		 -->
 		<%@include file="foot.jsp"%>
 	</div>
 <script>

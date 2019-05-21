@@ -1,6 +1,8 @@
 package goodsPublic.controller;
 
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,6 +32,8 @@ import com.goodsPublic.util.PlanResult;
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
+import goodsPublic.entity.GoodsAttrSet;
+import goodsPublic.entity.HtmlTemplate;
 import goodsPublic.service.CategoryService;
 import goodsPublic.service.PublicService;
 import net.sf.json.JSONObject;
@@ -49,7 +53,32 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping("/operation")
-	public String SayHellow() {
+	public String SayHellow(HttpServletRequest request, String accountId, String categoryId) {
+		HtmlTemplate htmlTemplate=publicService.getHtmlTemplateByTypeAccountId("operation",accountId);
+		String htmlContent = htmlTemplate.getHtmlContent();
+		GoodsAttrSet goodsAttrSet=publicService.getGoodsAttrSetByAccountId(accountId);
+		Field[] fieldArr = goodsAttrSet.getClass().getDeclaredFields();
+		for(Field field : fieldArr) {
+			String name = field.getName();
+			System.out.println("Name==="+name);
+			String type = field.getGenericType().toString();//获取属性类型
+		    if (type.equals("class java.lang.String")) {
+		        try {
+		            Method m = goodsAttrSet.getClass().getMethod("get" + name.substring(0, 1).toUpperCase() + name.substring(1));
+		            String value = (String) m.invoke(goodsAttrSet);
+		            if (null != value) {
+		    			System.out.println("value==="+value);
+		    			htmlContent = htmlContent.replaceAll("goodsAttrSet."+name, value);
+		            }
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
+		    }
+		}
+		htmlContent = htmlContent.replaceAll("sessionScope.user.id", accountId).replaceAll("param.categoryId", categoryId);
+		//System.out.println("HtmlContent==="+htmlContent);
+		request.setAttribute("htmlContent", htmlContent);
+		//aaa
 		return "/merchant/operation";
 	}
 
@@ -215,7 +244,6 @@ public class MainController {
 			AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
 			accountMsg.setId(msg.getId());
 			int a=publicService.editAccountInfo(accountMsg);
-			System.out.println("a==="+a);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -420,10 +448,75 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping(value="/goEditGoods")
-	public String goEditGoods(HttpServletRequest request, String id) {
+	public String goEditGoods(HttpServletRequest request, String id , String categoryId, String accountId) {
+		HtmlTemplate htmlTemplate=publicService.getHtmlTemplateByTypeAccountId("editGoods",accountId);
+		String htmlContent = htmlTemplate.getHtmlContent();
+		GoodsAttrSet goodsAttrSet=publicService.getGoodsAttrSetByAccountId(accountId);
+		Field[] goodsAttrField = goodsAttrSet.getClass().getDeclaredFields();
+		for(Field field : goodsAttrField) {
+			String name = field.getName();
+			System.out.println("Name==="+name);
+			String type = field.getGenericType().toString();//获取属性类型
+		    if (type.equals("class java.lang.String")) {
+		        try {
+		            Method m = goodsAttrSet.getClass().getMethod("get" + name.substring(0, 1).toUpperCase() + name.substring(1));
+		            String value = (String) m.invoke(goodsAttrSet);
+		            if (null != value) {
+		    			System.out.println("value==="+value);
+		    			htmlContent = htmlContent.replaceAll("goodsAttrSet."+name, value);
+		            }
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		        }
+		    }
+		}
+		
 		Goods goods=publicService.getGoodsById(id);
-		request.setAttribute("goods", goods);
+		Field[] goodsField = goods.getClass().getDeclaredFields();
+		for(Field field : goodsField) {
+			String name = field.getName();
+			String type = field.getGenericType().toString();
+			if (type.equals("class java.lang.String")) {
+				try {
+					Method m = goods.getClass().getMethod("get" + name.substring(0, 1).toUpperCase() + name.substring(1));
+		            String value = (String) m.invoke(goods);
+		            if (null != value) {
+		            	if("htmlContent".equals(name))
+		            		value=htmlspecialchars(value);
+		    			htmlContent = htmlContent.replaceAll("goods."+name, value);
+		            }
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			if (type.equals("int")) {
+				try {
+					Method m = goods.getClass().getMethod("get" + name.substring(0, 1).toUpperCase() + name.substring(1));
+					Integer value = (Integer)m.invoke(goods);
+					if (null != value) {
+						htmlContent = htmlContent.replaceAll("goods."+name, String.valueOf(value));
+					}
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
+
+		htmlContent = htmlContent.replaceAll("sessionScope.user.id", accountId).replaceAll("param.categoryId", categoryId);
+		System.out.println("htmlContent==="+htmlContent);
+		request.setAttribute("htmlContent", htmlContent);
+		//aaa
 		return "/merchant/editGoods";
+	}
+	
+	private String htmlspecialchars(String str) {
+		str = str.replaceAll("&", "&amp;");
+		str = str.replaceAll("<", "&lt;");
+		str = str.replaceAll(">", "&gt;");
+		str = str.replaceAll("\"", "&quot;");
+		return str;
 	}
 	
 	/**

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
+<%@ page language="java" contentType="text/html; charset=utf-8" 
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
@@ -213,6 +213,8 @@ function initWindowMarginLeft(){
 <body>
 	<div class="layui-layout layui-layout-admin">
 		<%@include file="side.jsp"%>
+		${requestScope.htmlContent }
+		<!-- 
 		<div id="edit_div">
 			<form id="form1" name="form1" method="post" action="addGoodsPublic" enctype="multipart/form-data">
 			<input type="hidden" id="accountNumber" name="accountNumber" value="${sessionScope.user.id }"/>
@@ -220,7 +222,7 @@ function initWindowMarginLeft(){
 			<table>
 			  <tr>
 				<td align="right">
-					商品编号
+					${requestScope.goodsAttrSet.goodsNumber }
 				</td>
 				<td>
 					<input id="goodsNumber" name="goodsNumber" type="text" onfocus="focusGoodsNumber()" onblur="checkGoodsNumber()"/>
@@ -229,7 +231,7 @@ function initWindowMarginLeft(){
 			  </tr>
 			  <tr>
 				<td align="right">
-					商品名称
+					${requestScope.goodsAttrSet.title }
 				</td>
 				<td>
 					<input id="title" name="title" type="text" onfocus="focusTitle()" onblur="checkTitle()"/>
@@ -238,7 +240,7 @@ function initWindowMarginLeft(){
 			  </tr>
 			  <tr>
 				<td align="right">
-					图片
+					${requestScope.goodsAttrSet.imgUrl }
 				</td>
 				<td style="padding-top: 7px;padding-bottom: 5px;">
 					<img style='width: 100px; height: 100px' src="" class='uploadImg' id='uploadImg' />
@@ -247,7 +249,7 @@ function initWindowMarginLeft(){
 			  </tr>
 			  <tr>
 				<td align="right">
-					内容
+					${requestScope.goodsAttrSet.htmlContent }
 					<div style="font-size: 10px;color: #f00;">（最多可以输入6000字）</div>
 				</td>
 				<td>
@@ -262,6 +264,7 @@ function initWindowMarginLeft(){
 			<div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -46px;"></div>
 			</form>
 		</div>
+		 -->
 		<%@include file="foot.jsp"%>
 	</div>
 </body>
