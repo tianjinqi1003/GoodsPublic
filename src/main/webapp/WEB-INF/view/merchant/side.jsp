@@ -149,6 +149,20 @@
 						</c:otherwise>
 					</c:choose>
 				</div>
+				<div style="width: 92%; margin: 0 auto; margin-top: 20px;border: #CAD9EA solid 1px;background-color: #F5FAFE;">
+					<li class="layui-nav-item first-level">
+						<a>
+							标签管理
+						</a>
+					</li>
+					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
+					<li class="layui-nav-item">
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
+						<a href="<%=basePath%>merchant/main/goGoodsLabelSetList?accountId=${sessionScope.user.id }">
+							&nbsp;&nbsp;&nbsp;标签查询
+						</a>
+					</li>
+				</div>
 			</ul>
 			<shiro:hasRole  name="admin">
   			<!--  有权限   -->

@@ -20,7 +20,7 @@ import goodsPublic.dao.PublicMapper;
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
-import goodsPublic.entity.GoodsAttrSet;
+import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlTemplate;
 import goodsPublic.service.PublicService;
 /**
@@ -137,15 +137,39 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public GoodsAttrSet getGoodsAttrSetByAccountId(String accountId) {
+	public List<GoodsLabelSet> getGoodsLabelSetByAccountId(String accountId) {
 		// TODO Auto-generated method stub
-		return publicDao.getGoodsAttrSetByAccountId(accountId);
+		return publicDao.getGoodsLabelSetByAccountId(accountId);
 	}
 
 	@Override
 	public HtmlTemplate getHtmlTemplateByTypeAccountId(String type, String accountId) {
 		// TODO Auto-generated method stub
 		return publicDao.getHtmlTemplateByTypeAccountId(type,accountId);
+	}
+
+	@Override
+	public int queryGoodsLabelSetForInt(String accountNumber) {
+		// TODO Auto-generated method stub
+		return publicDao.queryGoodsLabelSetForInt(accountNumber);
+	}
+
+	@Override
+	public List<GoodsLabelSet> queryGoodsLabelSetList(String accountNumber, int page, int rows, String sort, String order) {
+		// TODO Auto-generated method stub
+		return publicDao.queryGoodsLabelSetList(accountNumber, (page-1)*rows, rows, sort, order);
+	}
+
+	@Override
+	public GoodsLabelSet getGoodsLabelSetById(String id) {
+		// TODO Auto-generated method stub
+		return publicDao.getGoodsLabelSetById(id);
+	}
+
+	@Override
+	public int editGoodsLabelSet(GoodsLabelSet goodsLabelSet) {
+		// TODO Auto-generated method stub
+		return publicDao.editGoodsLabelSet(goodsLabelSet);
 	}
 
 }

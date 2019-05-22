@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" 
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -213,14 +215,54 @@ function initWindowMarginLeft(){
 <body>
 	<div class="layui-layout layui-layout-admin">
 		<%@include file="side.jsp"%>
-		${requestScope.htmlContent }
-		<!-- 
 		<div id="edit_div">
 			<form id="form1" name="form1" method="post" action="addGoodsPublic" enctype="multipart/form-data">
 			<input type="hidden" id="accountNumber" name="accountNumber" value="${sessionScope.user.id }"/>
 			<input type="hidden" id="category_id" name="category_id" value="${param.categoryId }"/>
 			<table>
-			  <tr>
+			  <c:forEach items="${requestScope.glsList }" var="goodsLabelSet">
+			  	  <c:if test="${goodsLabelSet.isShow }">
+					  <c:choose>
+					  	  <c:when test="${goodsLabelSet.key eq 'imgUrl' }">
+						  	  <tr style="border-bottom: #CAD9EA solid 1px;">
+								<td align="right">
+									${goodsLabelSet.label }
+								</td>
+								<td style="padding-top: 7px;padding-bottom: 5px;">
+									<img style='width: 100px; height: 100px' src="" class='uploadImg' id='uploadImg' />
+									<input type="file" name="file" onchange="showQrcodePic(this)"/>
+								</td>
+							  </tr>
+					  	  </c:when>
+						  <c:when test="${goodsLabelSet.key eq 'htmlContent' }">
+						  	<tr style="border-bottom: #CAD9EA solid 1px;">
+								<td align="right">
+									${goodsLabelSet.label }
+									<div style="font-size: 10px;color: #f00;">（最多可以输入6000字）</div>
+								</td>
+								<td>
+									<br>
+									<textarea id="htmlContent" name="htmlContent" cols="100" rows="8" style="width:700px;height:500px;visibility:hidden;"></textarea>
+									<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
+								</td>
+							  </tr>
+						  </c:when>
+						  <c:otherwise>
+							  <tr style="border-bottom: #CAD9EA solid 1px;">
+								<td align="right">
+									${goodsLabelSet.label }
+								</td>
+								<td>
+									<input id="${goodsLabelSet.key }" name="${goodsLabelSet.key }" type="text" onfocus="focus${fn:toUpperCase(fn:substring(goodsLabelSet.key,0,1)) }${fn:substring(goodsLabelSet.key,1,goodsLabelSet.key.length()) }()" onblur="check${fn:toUpperCase(fn:substring(goodsLabelSet.key,0,1)) }${fn:substring(goodsLabelSet.key,1,goodsLabelSet.key.length()) }()"/>
+									<span style="color: #f00;">*</span>
+								</td>
+							  </tr>
+						  </c:otherwise>
+					  </c:choose>
+				  </c:if>
+			  </c:forEach>
+			  <!-- 
+			  <tr style="border-bottom: #CAD9EA solid 1px;">
 				<td align="right">
 					${requestScope.goodsAttrSet.goodsNumber }
 				</td>
@@ -229,7 +271,7 @@ function initWindowMarginLeft(){
 					<span style="color: #f00;">*</span>
 				</td>
 			  </tr>
-			  <tr>
+			  <tr style="border-bottom: #CAD9EA solid 1px;">
 				<td align="right">
 					${requestScope.goodsAttrSet.title }
 				</td>
@@ -238,7 +280,7 @@ function initWindowMarginLeft(){
 					<span style="color: #f00;">*</span>
 				</td>
 			  </tr>
-			  <tr>
+			  <tr style="border-bottom: #CAD9EA solid 1px;">
 				<td align="right">
 					${requestScope.goodsAttrSet.imgUrl }
 				</td>
@@ -247,7 +289,7 @@ function initWindowMarginLeft(){
 					<input type="file" name="file" onchange="showQrcodePic(this)"/>
 				</td>
 			  </tr>
-			  <tr>
+			  <tr style="border-bottom: #CAD9EA solid 1px;">
 				<td align="right">
 					${requestScope.goodsAttrSet.htmlContent }
 					<div style="font-size: 10px;color: #f00;">（最多可以输入6000字）</div>
@@ -258,13 +300,13 @@ function initWindowMarginLeft(){
 					<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
 				</td>
 			  </tr>
-			</table>
 			<div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -515px;"></div>
 			<div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -120px;"></div>
 			<div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -46px;"></div>
+			 -->
+			</table>
 			</form>
 		</div>
-		 -->
 		<%@include file="foot.jsp"%>
 	</div>
 </body>

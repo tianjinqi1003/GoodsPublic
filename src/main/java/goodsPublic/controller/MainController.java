@@ -32,7 +32,7 @@ import com.goodsPublic.util.PlanResult;
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
-import goodsPublic.entity.GoodsAttrSet;
+import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlTemplate;
 import goodsPublic.service.CategoryService;
 import goodsPublic.service.PublicService;
@@ -56,7 +56,8 @@ public class MainController {
 	public String SayHellow(HttpServletRequest request, String accountId, String categoryId) {
 		HtmlTemplate htmlTemplate=publicService.getHtmlTemplateByTypeAccountId("operation",accountId);
 		String htmlContent = htmlTemplate.getHtmlContent();
-		GoodsAttrSet goodsAttrSet=publicService.getGoodsAttrSetByAccountId(accountId);
+		List<GoodsLabelSet> glsList = publicService.getGoodsLabelSetByAccountId(accountId);
+		/*
 		Field[] fieldArr = goodsAttrSet.getClass().getDeclaredFields();
 		for(Field field : fieldArr) {
 			String name = field.getName();
@@ -77,7 +78,8 @@ public class MainController {
 		}
 		htmlContent = htmlContent.replaceAll("sessionScope.user.id", accountId).replaceAll("param.categoryId", categoryId);
 		//System.out.println("HtmlContent==="+htmlContent);
-		request.setAttribute("htmlContent", htmlContent);
+		*/
+		request.setAttribute("glsList", glsList);
 		//aaa
 		return "/merchant/operation";
 	}
@@ -451,16 +453,16 @@ public class MainController {
 	public String goEditGoods(HttpServletRequest request, String id , String categoryId, String accountId) {
 		HtmlTemplate htmlTemplate=publicService.getHtmlTemplateByTypeAccountId("editGoods",accountId);
 		String htmlContent = htmlTemplate.getHtmlContent();
-		GoodsAttrSet goodsAttrSet=publicService.getGoodsAttrSetByAccountId(accountId);
-		Field[] goodsAttrField = goodsAttrSet.getClass().getDeclaredFields();
+		List<GoodsLabelSet> goodsLabelSet=publicService.getGoodsLabelSetByAccountId(accountId);
+		Field[] goodsAttrField = goodsLabelSet.get(0).getClass().getDeclaredFields();
 		for(Field field : goodsAttrField) {
 			String name = field.getName();
 			System.out.println("Name==="+name);
 			String type = field.getGenericType().toString();//获取属性类型
 		    if (type.equals("class java.lang.String")) {
 		        try {
-		            Method m = goodsAttrSet.getClass().getMethod("get" + name.substring(0, 1).toUpperCase() + name.substring(1));
-		            String value = (String) m.invoke(goodsAttrSet);
+		            Method m = goodsLabelSet.get(0).getClass().getMethod("get" + name.substring(0, 1).toUpperCase() + name.substring(1));
+		            String value = (String) m.invoke(goodsLabelSet.get(0));
 		            if (null != value) {
 		    			System.out.println("value==="+value);
 		    			htmlContent = htmlContent.replaceAll("goodsAttrSet."+name, value);
@@ -530,6 +532,74 @@ public class MainController {
 		AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
 		request.setAttribute("accountMsg", msg);
 		return "/merchant/accountInfo";
+	}
+	
+	/**
+	 * 跳转至标签查询页面
+	 * @return
+	 */
+	@RequestMapping(value="/goGoodsLabelSetList")
+	public String goGoodsLabelSetList() {
+
+		return "/merchant/goodsLabelSetList";
+	}
+	
+	/**
+	 * 查询标签信息
+	 * @param accountNumber
+	 * @param page
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
+	@RequestMapping(value="/queryGoodsLabelSetList")
+	@ResponseBody
+	public Map<String, Object> queryGoodsLabelSetList(String accountNumber,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count = publicService.queryGoodsLabelSetForInt(accountNumber);
+		List<GoodsLabelSet> glsList = publicService.queryGoodsLabelSetList(accountNumber, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		jsonMap.put("rows", glsList);
+		return jsonMap;
+	}
+	
+	/**
+	 * 跳转至编辑标签页面
+	 * @param request
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/goEditGoodsLabelSet")
+	public String goEditGoodsLabelSet(HttpServletRequest request, String id) {
+		GoodsLabelSet goodsLabelSet=publicService.getGoodsLabelSetById(id);
+		request.setAttribute("goodsLabelSet", goodsLabelSet);
+		return "/merchant/editGoodsLabelSet";
+	}
+	
+	/**
+	 * 编辑商品标签
+	 * @param goodsLabelSet
+	 * @return
+	 */
+	@RequestMapping(value="/editGoodsLabelSet")
+	@ResponseBody
+	public Map<String, Object> editGoodsLabelSet(GoodsLabelSet goodsLabelSet) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=publicService.editGoodsLabelSet(goodsLabelSet);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑标签成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑标签失败！");
+		}
+		return jsonMap;
 	}
 	
 }

@@ -10,7 +10,7 @@ import com.goodsPublic.util.PlanResult;
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
-import goodsPublic.entity.GoodsAttrSet;
+import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlTemplate;
 
 public interface PublicService {
@@ -103,7 +103,7 @@ public interface PublicService {
 	 * @param accountId
 	 * @return
 	 */
-	public GoodsAttrSet getGoodsAttrSetByAccountId(String accountId);
+	public List<GoodsLabelSet> getGoodsLabelSetByAccountId(String accountId);
 
 	/**
 	 * 根据模板类型、商家编号获得页面模板
@@ -112,5 +112,37 @@ public interface PublicService {
 	 * @return
 	 */
 	public HtmlTemplate getHtmlTemplateByTypeAccountId(String type, String accountId);
+
+	/**
+	 * 查询标签数量
+	 * @param accountNumber
+	 * @return
+	 */
+	public int queryGoodsLabelSetForInt(String accountNumber);
+	
+	/**
+	 * 根据商户号，查询标签信息
+	 * @param accountNumber
+	 * @param page
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
+	public List<GoodsLabelSet> queryGoodsLabelSetList(String accountNumber, int page, int rows, String sort, String order);
+
+	/**
+	 * 根据id查询标签信息
+	 * @param id
+	 * @return
+	 */
+	public GoodsLabelSet getGoodsLabelSetById(String id);
+
+	/**
+	 * 编辑商品标签
+	 * @param goodsLabelSet
+	 * @return
+	 */
+	public int editGoodsLabelSet(GoodsLabelSet goodsLabelSet);
 
 }

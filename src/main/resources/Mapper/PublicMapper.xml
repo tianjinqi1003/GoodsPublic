@@ -128,10 +128,32 @@
 	<select id="getGoodsListByMsg" resultType="int">
 		select count(*) from public_goods where accountNumber=#{id}
 	</select>
-	<select id="getGoodsAttrSetByAccountId" resultType="goodsPublic.entity.GoodsAttrSet">
-		select * from goods_attr_set where accountNumber=#{accountNumber}
+	<select id="getGoodsLabelSetByAccountId" resultType="goodsPublic.entity.GoodsLabelSet">
+		select * from goods_label_set where accountNumber=#{accountNumber} order by sort
 	</select>
 	<select id="getHtmlTemplateByTypeAccountId" resultType="goodsPublic.entity.HtmlTemplate">
 		select * from html_template where type=#{type} and accountNumber=#{accountNumber}
 	</select>
+	<select id="queryGoodsLabelSetForInt" resultType="java.lang.Integer">
+		select count(*) from goods_label_set where accountNumber=#{param1}
+	</select>
+	<select id="queryGoodsLabelSetList" resultType="goodsPublic.entity.GoodsLabelSet">
+		select * from goods_label_set where accountNumber=#{param1} order by module limit ${param2},${param3}
+	</select>
+	<select id="getGoodsLabelSetById" resultType="goodsPublic.entity.GoodsLabelSet">
+		select * from goods_label_set where id=#{param1}
+	</select>
+	<update id="editGoodsLabelSet" parameterType="goodsPublic.entity.GoodsLabelSet">
+		update goods_label_set set
+		<if test="label!=null">
+			label=#{label},
+		</if>
+		<if test="module!=null">
+			module=#{module},
+		</if>
+		isShow=#{isShow},
+		isPublic=#{isPublic},
+		sort=#{sort}
+		where id=#{id}
+	</update>
 </mapper>

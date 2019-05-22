@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
-import goodsPublic.entity.GoodsAttrSet;
+import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlTemplate;
 
 public interface PublicMapper {
@@ -78,7 +78,7 @@ public interface PublicMapper {
 	 * @param accountId
 	 * @return
 	 */
-	public GoodsAttrSet getGoodsAttrSetByAccountId(@Param("accountNumber") String accountId);
+	public List<GoodsLabelSet> getGoodsLabelSetByAccountId(@Param("accountNumber") String accountId);
 	/**
 	 * 根据模板类型、商家编号获得页面模板
 	 * @param type
@@ -86,5 +86,32 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public HtmlTemplate getHtmlTemplateByTypeAccountId(@Param("type") String type,@Param("accountNumber") String accountId);
-	
+	/**
+	 * 查询标签数量
+	 * @param accountNumber
+	 * @return
+	 */
+	public int queryGoodsLabelSetForInt(String accountNumber);
+	/**
+	 * 根据商户号，查询标签信息
+	 * @param accountNumber
+	 * @param start
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
+	public List<GoodsLabelSet> queryGoodsLabelSetList(String accountNumber, int start, int rows, String sort, String order);
+	/**
+	 * 根据id查询标签信息
+	 * @param id
+	 * @return
+	 */
+	public GoodsLabelSet getGoodsLabelSetById(String id);
+	/**
+	 * 编辑商品标签
+	 * @param goodsLabelSet
+	 * @return
+	 */
+	public int editGoodsLabelSet(GoodsLabelSet goodsLabelSet);
 }
