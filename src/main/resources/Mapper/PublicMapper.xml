@@ -128,11 +128,8 @@
 	<select id="getGoodsListByMsg" resultType="int">
 		select count(*) from public_goods where accountNumber=#{id}
 	</select>
-	<select id="getGoodsLabelSetByAccountId" resultType="goodsPublic.entity.GoodsLabelSet">
-		select * from goods_label_set where accountNumber=#{accountNumber} order by sort
-	</select>
-	<select id="getHtmlTemplateByTypeAccountId" resultType="goodsPublic.entity.HtmlTemplate">
-		select * from html_template where type=#{type} and accountNumber=#{accountNumber}
+	<select id="getGoodsLabelSetByModuleAccountId" resultType="goodsPublic.entity.GoodsLabelSet">
+		select * from goods_label_set where module=#{module} and accountNumber=#{accountNumber} order by sort
 	</select>
 	<select id="queryGoodsLabelSetForInt" resultType="java.lang.Integer">
 		select count(*) from goods_label_set where accountNumber=#{param1}

@@ -54,9 +54,7 @@ public class MainController {
 	 */
 	@RequestMapping("/operation")
 	public String SayHellow(HttpServletRequest request, String accountId, String categoryId) {
-		HtmlTemplate htmlTemplate=publicService.getHtmlTemplateByTypeAccountId("operation",accountId);
-		String htmlContent = htmlTemplate.getHtmlContent();
-		List<GoodsLabelSet> glsList = publicService.getGoodsLabelSetByAccountId(accountId);
+		List<GoodsLabelSet> glsList = publicService.getGoodsLabelSetByModuleAccountId("operation",accountId);
 		/*
 		Field[] fieldArr = goodsAttrSet.getClass().getDeclaredFields();
 		for(Field field : fieldArr) {
@@ -451,9 +449,8 @@ public class MainController {
 	 */
 	@RequestMapping(value="/goEditGoods")
 	public String goEditGoods(HttpServletRequest request, String id , String categoryId, String accountId) {
-		HtmlTemplate htmlTemplate=publicService.getHtmlTemplateByTypeAccountId("editGoods",accountId);
-		String htmlContent = htmlTemplate.getHtmlContent();
-		List<GoodsLabelSet> goodsLabelSet=publicService.getGoodsLabelSetByAccountId(accountId);
+		List<GoodsLabelSet> glsList=publicService.getGoodsLabelSetByModuleAccountId("editGoods",accountId);
+		/*
 		Field[] goodsAttrField = goodsLabelSet.get(0).getClass().getDeclaredFields();
 		for(Field field : goodsAttrField) {
 			String name = field.getName();
@@ -508,8 +505,10 @@ public class MainController {
 
 		htmlContent = htmlContent.replaceAll("sessionScope.user.id", accountId).replaceAll("param.categoryId", categoryId);
 		System.out.println("htmlContent==="+htmlContent);
-		request.setAttribute("htmlContent", htmlContent);
-		//aaa
+		*/
+		request.setAttribute("glsList", glsList);
+		Goods goods=publicService.getGoodsById(id);
+		request.setAttribute("goods", goods);
 		return "/merchant/editGoods";
 	}
 	

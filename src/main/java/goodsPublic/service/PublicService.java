@@ -100,18 +100,11 @@ public interface PublicService {
 
 	/**
 	 * 根据商家编号获得商品属性设置
-	 * @param accountId
+	 * @param module
+	 * @param accountId 
 	 * @return
 	 */
-	public List<GoodsLabelSet> getGoodsLabelSetByAccountId(String accountId);
-
-	/**
-	 * 根据模板类型、商家编号获得页面模板
-	 * @param type
-	 * @param accountId
-	 * @return
-	 */
-	public HtmlTemplate getHtmlTemplateByTypeAccountId(String type, String accountId);
+	public List<GoodsLabelSet> getGoodsLabelSetByModuleAccountId(String module, String accountId);
 
 	/**
 	 * 查询标签数量

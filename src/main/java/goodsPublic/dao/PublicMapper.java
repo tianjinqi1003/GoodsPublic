@@ -75,17 +75,11 @@ public interface PublicMapper {
 	public int getGoodsListByMsg(AccountMsg accountMsg);
 	/**
 	 * 根据商家编号获得商品属性设置
-	 * @param accountId
+	 * @param module
+	 * @param accountId 
 	 * @return
 	 */
-	public List<GoodsLabelSet> getGoodsLabelSetByAccountId(@Param("accountNumber") String accountId);
-	/**
-	 * 根据模板类型、商家编号获得页面模板
-	 * @param type
-	 * @param accountId
-	 * @return
-	 */
-	public HtmlTemplate getHtmlTemplateByTypeAccountId(@Param("type") String type,@Param("accountNumber") String accountId);
+	public List<GoodsLabelSet> getGoodsLabelSetByModuleAccountId(@Param("module") String module, @Param("accountNumber") String accountId);
 	/**
 	 * 查询标签数量
 	 * @param accountNumber

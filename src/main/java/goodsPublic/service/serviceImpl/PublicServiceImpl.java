@@ -137,15 +137,9 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public List<GoodsLabelSet> getGoodsLabelSetByAccountId(String accountId) {
+	public List<GoodsLabelSet> getGoodsLabelSetByModuleAccountId(String module, String accountId) {
 		// TODO Auto-generated method stub
-		return publicDao.getGoodsLabelSetByAccountId(accountId);
-	}
-
-	@Override
-	public HtmlTemplate getHtmlTemplateByTypeAccountId(String type, String accountId) {
-		// TODO Auto-generated method stub
-		return publicDao.getHtmlTemplateByTypeAccountId(type,accountId);
+		return publicDao.getGoodsLabelSetByModuleAccountId(module,accountId);
 	}
 
 	@Override
