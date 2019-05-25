@@ -18,7 +18,19 @@ $(function(){
 		columns:[[
             {field:"label",title:"标签名称",width:100},
             {field:"module",title:"所属模块",width:100,formatter:function(value){
-            	return value=="operation"?"商品添加":"商品编辑";
+            	var text;
+            	switch(value){
+            	case "operation":
+            		text="商品添加";
+            		break;
+            	case "editGoods":
+            		text="商品编辑";
+            		break;
+            	case "goodsList":
+            		text="商品列表";
+            		break;
+            	}
+            	return text;
             }},
             {field:"isShow",title:"是否显示",width:100,formatter:function(value){
             	return value?"是":"否";

@@ -129,7 +129,7 @@
 		select count(*) from public_goods where accountNumber=#{id}
 	</select>
 	<select id="getGoodsLabelSetByModuleAccountId" resultType="goodsPublic.entity.GoodsLabelSet">
-		select * from goods_label_set where module=#{module} and accountNumber=#{accountNumber} order by sort
+		select * from goods_label_set where module=#{module} and accountNumber=#{accountNumber} and isShow=1 order by sort
 	</select>
 	<select id="queryGoodsLabelSetForInt" resultType="java.lang.Integer">
 		select count(*) from goods_label_set where accountNumber=#{param1}

@@ -36,6 +36,7 @@ import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlTemplate;
 import goodsPublic.service.CategoryService;
 import goodsPublic.service.PublicService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
@@ -414,8 +415,18 @@ public class MainController {
 	 */
 	@RequestMapping(value="/goGoodsList")
 	public String goGoodsList() {
-
+		
 		return "/merchant/goodsList";
+	}
+	
+	@RequestMapping(value="/getGoodsListColumns")
+	@ResponseBody
+	public Map<String, Object> getGoodsListColumns(HttpServletRequest request, String accountId){
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		List<GoodsLabelSet> glsList=publicService.getGoodsLabelSetByModuleAccountId("goodsList",accountId);
+		jsonMap.put("glsList", glsList);
+		return jsonMap;
 	}
 	
 	/**
@@ -510,14 +521,6 @@ public class MainController {
 		Goods goods=publicService.getGoodsById(id);
 		request.setAttribute("goods", goods);
 		return "/merchant/editGoods";
-	}
-	
-	private String htmlspecialchars(String str) {
-		str = str.replaceAll("&", "&amp;");
-		str = str.replaceAll("<", "&lt;");
-		str = str.replaceAll(">", "&gt;");
-		str = str.replaceAll("\"", "&quot;");
-		return str;
 	}
 	
 	/**
