@@ -139,4 +139,10 @@ public interface PublicService {
 	 */
 	public int editGoodsLabelSet(GoodsLabelSet goodsLabelSet);
 
+	/**
+	 * 根据商户号初始化商品标签
+	 * @param accountNumber
+	 */
+	public void initGoodsLabelSet(String accountNumber);
+
 }

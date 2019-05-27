@@ -114,4 +114,19 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public int editGoodsLabelSet(GoodsLabelSet goodsLabelSet);
+	/**
+	 * 验证商品标签是否存在
+	 * @param key
+	 * @param module
+	 * @param accountNumber
+	 * @return
+	 */
+	public int checkGoodsLabelExist(@Param("key") String key, @Param("module") String module, @Param("accountNumber") String accountNumber);
+	/**
+	 * 添加商品标签
+	 * @param key
+	 * @param module
+	 * @param accountNumber
+	 */
+	public void insertGoodsLabel(@Param("key") String key, @Param("module") String module, @Param("accountNumber") String accountNumber);
 }

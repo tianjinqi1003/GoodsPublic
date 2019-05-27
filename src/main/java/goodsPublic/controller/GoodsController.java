@@ -24,6 +24,7 @@ import com.goodsPublic.util.PlanResult;
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.service.CategoryService;
+import goodsPublic.service.PublicService;
 import goodsPublic.service.UserService;
 import goodsPublic.service.UtilService;
 
@@ -36,6 +37,8 @@ public class GoodsController {
 	private UserService userService;
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private PublicService publicService;
 
 	/**
 	 * 跳转至登录页面
@@ -86,6 +89,7 @@ public class GoodsController {
 			List<CategoryInfo> catList = categoryService.getCategory(msg.getId());
 			session.setAttribute("categoryList", catList);
 			session.setAttribute("user", msg);
+			
 			plan.setStatus(0);
 			plan.setMsg("验证通过");
 			plan.setUrl("/merchant/main/goAccountInfo");
@@ -135,6 +139,10 @@ public class GoodsController {
 		plan.setMsg("注册成功");
 		plan.setData(msg);
 		plan.setUrl("/merchant/login");
+		
+		AccountMsg resultUser=userService.checkUser(msg);
+		publicService.initGoodsLabelSet(resultUser.getId());
+		
 		return JsonUtil.getJsonFromObject(plan);
 	}
 	

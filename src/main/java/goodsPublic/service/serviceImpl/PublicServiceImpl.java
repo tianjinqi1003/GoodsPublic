@@ -253,4 +253,65 @@ public class PublicServiceImpl implements PublicService {
 		return publicDao.editGoodsLabelSet(goodsLabelSet);
 	}
 
+	@Override
+	public void initGoodsLabelSet(String accountNumber) {
+		// TODO Auto-generated method stub
+		String[] moduleArr= {"operation","editGoods","goodsList"};
+		int maxSize=50;
+		String[] keyArr=null;
+		for (String module : moduleArr) {
+			switch (module) {
+			case "operation":
+				keyArr=new String[maxSize];
+				keyArr[0]="goodsNumber";
+				keyArr[1]="title";
+				keyArr[2]="imgUrl";
+				keyArr[3]="htmlContent";
+				for(int i = 4;i < maxSize;i++) {
+					keyArr[i]="key"+(i-3);
+				}
+				
+				for (String key : keyArr) {
+					if(publicDao.checkGoodsLabelExist(key,module,accountNumber)==0)
+						publicDao.insertGoodsLabel(key,module,accountNumber);
+				}
+				keyArr=null;
+				break;
+			case "editGoods":
+				keyArr=new String[maxSize];
+				keyArr[0]="category_id";
+				keyArr[1]="title";
+				keyArr[2]="imgUrl";
+				keyArr[3]="htmlContent";
+				for(int i = 4;i < maxSize;i++) {
+					keyArr[i]="key"+(i-3);
+				}
+				
+				for (String key : keyArr) {
+					if(publicDao.checkGoodsLabelExist(key,module,accountNumber)==0)
+						publicDao.insertGoodsLabel(key,module,accountNumber);
+				}
+				keyArr=null;
+				break;
+			case "goodsList":
+				keyArr=new String[maxSize];
+				keyArr[0]="goodsNumber";
+				keyArr[1]="title";
+				keyArr[2]="imgUrl";
+				keyArr[3]="qrCode";
+				keyArr[4]="id";
+				for(int i = 5;i < maxSize;i++) {
+					keyArr[i]="key"+(i-4);
+				}
+				
+				for (String key : keyArr) {
+					if(publicDao.checkGoodsLabelExist(key,module,accountNumber)==0)
+						publicDao.insertGoodsLabel(key,module,accountNumber);
+				}
+				keyArr=null;
+				break;
+			}
+		}
+	}
+
 }

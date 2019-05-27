@@ -167,4 +167,10 @@
 		sort=#{sort}
 		where id=#{id}
 	</update>
+	<select id="checkGoodsLabelExist" resultType="java.lang.Integer">
+		select count(*) from goods_label_set where `key`=#{key} and module=#{module} and accountNumber=#{accountNumber}
+	</select>
+	<insert id="insertGoodsLabel">
+		insert into goods_label_set(`key`,module,isShow,isPublic,accountNumber,sort) values(#{key},#{module},0,0,#{accountNumber},0)
+	</insert>
 </mapper>
