@@ -227,7 +227,7 @@ function initWindowMarginLeft(){
 					  	  <c:when test="${goodsLabelSet.key eq 'imgUrl' }">
 						  	  <tr style="border-bottom: #CAD9EA solid 1px;">
 								<td align="right">
-									${goodsLabelSet.label }
+									<span style="color:${goodsLabelSet.isPublic?'#00F5FF':'#006699' };">${goodsLabelSet.label }</span>
 								</td>
 								<td style="padding-top: 7px;padding-bottom: 5px;">
 									<img style='width: 100px; height: 100px' src="" class='uploadImg' id='uploadImg' />
@@ -238,7 +238,7 @@ function initWindowMarginLeft(){
 						  <c:when test="${goodsLabelSet.key eq 'htmlContent' }">
 						  	<tr style="border-bottom: #CAD9EA solid 1px;">
 								<td align="right">
-									${goodsLabelSet.label }
+									<span style="color:${goodsLabelSet.isPublic?'#00F5FF':'#006699' };">${goodsLabelSet.label }</span>
 									<div style="font-size: 10px;color: #f00;">（最多可以输入6000字）</div>
 								</td>
 								<td>
@@ -251,7 +251,7 @@ function initWindowMarginLeft(){
 						  <c:otherwise>
 							  <tr style="border-bottom: #CAD9EA solid 1px;">
 								<td align="right">
-									${goodsLabelSet.label }
+									<span style="color:${goodsLabelSet.isPublic?'#00F5FF':'#006699' };">${goodsLabelSet.label }</span>
 								</td>
 								<td>
 									<input id="${goodsLabelSet.key }" name="${goodsLabelSet.key }" type="text" onfocus="focus${fn:toUpperCase(fn:substring(goodsLabelSet.key,0,1)) }${fn:substring(goodsLabelSet.key,1,goodsLabelSet.key.length()) }()" onblur="check${fn:toUpperCase(fn:substring(goodsLabelSet.key,0,1)) }${fn:substring(goodsLabelSet.key,1,goodsLabelSet.key.length()) }()"/>

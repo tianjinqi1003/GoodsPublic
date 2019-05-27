@@ -51,9 +51,10 @@ public interface PublicService {
 	/**
 	 * 编辑商品
 	 * @param goods
+	 * @param glsList 
 	 * @return
 	 */
-	public int editGoods(Goods goods);
+	public int editGoods(Goods goods, List<GoodsLabelSet> glsList);
 	/**
 	 * 根据id查询商家信息
 	 * @param accountId

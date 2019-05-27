@@ -268,7 +268,8 @@ public class MainController {
 				}
 			}
 			
-			int count=publicService.editGoods(goods);
+			List<GoodsLabelSet> glsList = publicService.getGoodsLabelSetByModuleAccountId("editGoods", goods.getAccountNumber());
+			int count=publicService.editGoods(goods,glsList);
 			PlanResult plan=new PlanResult();
 			if(count==0) {
 				plan.setStatus(1);

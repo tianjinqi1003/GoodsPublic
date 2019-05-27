@@ -52,7 +52,7 @@
 	<update id="updateQrcode" parameterType="java.lang.String">
 		update public_goods set qrCode=#{param1} where goodsNumber=#{param2}
 	</update>
-	<update id="updateGoods" parameterType="goodsPublic.entity.Goods">
+	<update id="updateSingleGoods" parameterType="goodsPublic.entity.Goods">
 		update public_goods set 
 		<if test="category_id!=null">
 			category_id=#{category_id},
@@ -68,6 +68,20 @@
 		</if>
 		gmt_modified=now()
 		where id=#{id}
+	</update>
+	<update id="updatePublicGoods" parameterType="goodsPublic.entity.Goods">
+		update public_goods set 
+		<if test="title!=null">
+			title=#{title},
+		</if>
+		<if test="imgUrl!=''&amp;imgUrl!=null">
+			imgUrl=#{imgUrl},
+		</if>
+		<if test="htmlContent!=null">
+			htmlContent=#{htmlContent},
+		</if>
+		gmt_modified=now()
+		where category_id=#{category_id} and accountNumber=#{accountNumber}
 	</update>
 	<update id="editAccountInfo" parameterType="goodsPublic.entity.AccountMsg">
 		update account_info set 

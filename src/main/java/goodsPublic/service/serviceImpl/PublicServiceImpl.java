@@ -1,13 +1,12 @@
 package goodsPublic.service.serviceImpl;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,13 +14,10 @@ import org.springframework.stereotype.Service;
 import com.goodsPublic.util.PlanResult;
 import com.goodsPublic.util.qrcode.Qrcode;
 
-import goodsPublic.dao.CategoryInfoMapper;
 import goodsPublic.dao.PublicMapper;
 import goodsPublic.entity.AccountMsg;
-import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
-import goodsPublic.entity.HtmlTemplate;
 import goodsPublic.service.PublicService;
 /**
  * 这是用来处理商品的对应接口
@@ -91,10 +87,101 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public int editGoods(Goods goods) {
+	public int editGoods(Goods goods, List<GoodsLabelSet> glsList) {
 		// TODO Auto-generated method stub
+
+		Goods singleGoods=null;
+		Goods publicGoods=null;
+		try {
+			Class<?> singleClass = Class.forName("goodsPublic.entity.Goods");
+			Class<?> publicClass = Class.forName("goodsPublic.entity.Goods");
+			for (GoodsLabelSet goodsLabelSet : glsList) {
+				String keyName = goodsLabelSet.getKey();
+				String methodName = "set" + keyName.substring(0, 1).toUpperCase() + keyName.substring(1);
+				//String methodName1 = "get" + keyName.substring(0, 1).toUpperCase() + keyName.substring(1);
+				Boolean isPublic = goodsLabelSet.getIsPublic();
+				if(isPublic) {
+					if(publicGoods==null)
+						publicGoods=(Goods)publicClass.newInstance();
+					Object valueObj=getGoodsValueByKeyName(keyName,goods);
+					if(valueObj==null)
+						continue;
+					Method method = null;
+					if(valueObj instanceof Integer) {
+						method = publicClass.getMethod(methodName, Integer.class);
+					}
+					else if(valueObj instanceof String)
+						method = publicClass.getMethod(methodName, String.class);
+					method.invoke(publicGoods, new Object[] {valueObj});
+				}
+				else {
+					if(singleGoods==null)
+						singleGoods=(Goods)singleClass.newInstance();
+					Object valueObj=getGoodsValueByKeyName(keyName,goods);
+					if(valueObj==null)
+						continue;
+					Method method = null;
+					if(valueObj instanceof Integer) {
+						method = singleClass.getMethod(methodName, Integer.class);
+					}
+					else if(valueObj instanceof String)
+						method = singleClass.getMethod(methodName, String.class);
+					method.invoke(singleGoods, new Object[] {valueObj});
+				}
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		return publicDao.updateGoods(goods);
+		int count=0;
+		if(singleGoods!=null)
+			singleGoods.setId(goods.getId());
+			count+=publicDao.updateSingleGoods(singleGoods);
+		if(publicGoods!=null) {
+			publicGoods.setCategory_id(goods.getCategory_id());
+			publicGoods.setAccountNumber(goods.getAccountNumber());
+			count+=publicDao.updatePublicGoods(publicGoods);
+		}
+		return count;
+	}
+
+	private Object getGoodsValueByKeyName(String keyName, Goods goods) throws Exception {
+		// TODO Auto-generated method stub
+		Field[] fieldArr = goods.getClass().getDeclaredFields();
+		for(Field field : fieldArr) {
+			String name = field.getName();
+			if(keyName.equals(name)) {
+	            //System.out.println("name==="+name);
+				//String type = field.getGenericType().toString();//获取属性类型
+				Method m = goods.getClass().getMethod("get" + name.substring(0, 1).toUpperCase() + name.substring(1));
+	            Object value = m.invoke(goods);
+	            //System.out.println("value==="+value);
+	            return value;
+			}
+		}
+		return null;
 	}
 
 	@Override

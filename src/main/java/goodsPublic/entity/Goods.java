@@ -30,7 +30,7 @@ public class Goods implements Serializable {
 
 	private int status;//备用状态码
     
-    private int category_id;//类别id
+    private Integer category_id;//类别id
 	
     public int getId() {
 		return id;
@@ -40,11 +40,11 @@ public class Goods implements Serializable {
 		this.id = id;
 	}
     
-	public int getCategory_id() {
+	public Integer getCategory_id() {
 		return category_id;
 	}
 
-	public void setCategory_id(int category_id) {
+	public void setCategory_id(Integer category_id) {
 		this.category_id = category_id;
 	}
 

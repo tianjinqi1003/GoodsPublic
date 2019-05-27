@@ -45,11 +45,17 @@ public interface PublicMapper {
 	 */
 	public Goods getGoodsById(@Param("id")String id);
 	/**
-	 * 编辑商品
-	 * @param goods
+	 * 编辑单个商品
+	 * @param singleGoods
 	 * @return
 	 */
-	public int updateGoods(Goods goods);
+	public int updateSingleGoods(Goods singleGoods);
+	/**
+	 * 编辑同一类别下的商品
+	 * @param publicGoods
+	 * @return
+	 */
+	public int updatePublicGoods(Goods publicGoods);
 	/**
 	 * 根据id查询商家信息
 	 * @param accountId
