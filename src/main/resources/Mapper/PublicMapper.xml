@@ -342,6 +342,144 @@
 		<if test="htmlContent!=null">
 			htmlContent=#{htmlContent},
 		</if>
+		<if test="key1!=null">
+				key1=#{key1},
+		</if>
+		<if test="key2!=null">
+			key2=#{key2},
+		</if>
+		<if test="key3!=null">
+			key3=#{key3},
+		</if>
+		<if test="key4!=null">
+			key4=#{key4},
+		</if>
+		<if test="key5!=null">
+			key5=#{key5},
+		</if>
+		<if test="key6!=null">
+			key6=#{key6},
+		</if>
+		<if test="key7!=null">
+			key7=#{key7},
+		</if>
+		<if test="key8!=null">
+			key8=#{key8},
+		</if>
+		<if test="key9!=null">
+			key9=#{key9},
+		</if>
+		<if test="key10!=null">
+			key10=#{key10},
+		</if>
+		<if test="key11!=null">
+			key11=#{key11},
+		</if>
+		<if test="key12!=null">
+			key12=#{key12},
+		</if>
+		<if test="key13!=null">
+			key13=#{key13},
+		</if>
+		<if test="key14!=null">
+			key14=#{key14},
+		</if>
+		<if test="key15!=null">
+			key15=#{key15},
+		</if>
+		<if test="key16!=null">
+			key16=#{key16},
+		</if>
+		<if test="key17!=null">
+			key17=#{key17},
+		</if>
+		<if test="key18!=null">
+			key18=#{key18},
+		</if>
+		<if test="key19!=null">
+			key19=#{key19},
+		</if>
+		<if test="key20!=null">
+			key20=#{key20},
+		</if>
+		<if test="key21!=null">
+			key21=#{key21},
+		</if>
+		<if test="key22!=null">
+			key22=#{key22},
+		</if>
+		<if test="key23!=null">
+			key23=#{key23},
+		</if>
+		<if test="key24!=null">
+			key24=#{key24},
+		</if>
+		<if test="key25!=null">
+			key25=#{key25},
+		</if>
+		<if test="key26!=null">
+			key26=#{key26},
+		</if>
+		<if test="key27!=null">
+			key27=#{key27},
+		</if>
+		<if test="key28!=null">
+			key28=#{key28},
+		</if>
+		<if test="key29!=null">
+			key29=#{key29},
+		</if>
+		<if test="key30!=null">
+			key30=#{key30},
+		</if>
+		<if test="key31!=null">
+			key31=#{key31},
+		</if>
+		<if test="key32!=null">
+			key32=#{key32},
+		</if>
+		<if test="key33!=null">
+			key33=#{key33},
+		</if>
+		<if test="key34!=null">
+			key34=#{key34},
+		</if>
+		<if test="key35!=null">
+			key35=#{key35},
+		</if>
+		<if test="key36!=null">
+			key36=#{key36},
+		</if>
+		<if test="key37!=null">
+			key37=#{key37},
+		</if>
+		<if test="key38!=null">
+			key38=#{key38},
+		</if>
+		<if test="key39!=null">
+			key39=#{key39},
+		</if>
+		<if test="key40!=null">
+			key40=#{key40},
+		</if>
+		<if test="key41!=null">
+			key41=#{key41},
+		</if>
+		<if test="key42!=null">
+			key42=#{key42},
+		</if>
+		<if test="key43!=null">
+			key43=#{key43},
+		</if>
+		<if test="key44!=null">
+			key44=#{key44},
+		</if>
+		<if test="key45!=null">
+			key45=#{key45},
+		</if>
+		<if test="key46!=null">
+			key46=#{key46},
+		</if>
 		gmt_modified=now()
 		where id=#{id}
 	</update>
@@ -355,6 +493,144 @@
 		</if>
 		<if test="htmlContent!=null">
 			htmlContent=#{htmlContent},
+		</if>
+		<if test="key1!=null">
+				key1=#{key1},
+		</if>
+		<if test="key2!=null">
+			key2=#{key2},
+		</if>
+		<if test="key3!=null">
+			key3=#{key3},
+		</if>
+		<if test="key4!=null">
+			key4=#{key4},
+		</if>
+		<if test="key5!=null">
+			key5=#{key5},
+		</if>
+		<if test="key6!=null">
+			key6=#{key6},
+		</if>
+		<if test="key7!=null">
+			key7=#{key7},
+		</if>
+		<if test="key8!=null">
+			key8=#{key8},
+		</if>
+		<if test="key9!=null">
+			key9=#{key9},
+		</if>
+		<if test="key10!=null">
+			key10=#{key10},
+		</if>
+		<if test="key11!=null">
+			key11=#{key11},
+		</if>
+		<if test="key12!=null">
+			key12=#{key12},
+		</if>
+		<if test="key13!=null">
+			key13=#{key13},
+		</if>
+		<if test="key14!=null">
+			key14=#{key14},
+		</if>
+		<if test="key15!=null">
+			key15=#{key15},
+		</if>
+		<if test="key16!=null">
+			key16=#{key16},
+		</if>
+		<if test="key17!=null">
+			key17=#{key17},
+		</if>
+		<if test="key18!=null">
+			key18=#{key18},
+		</if>
+		<if test="key19!=null">
+			key19=#{key19},
+		</if>
+		<if test="key20!=null">
+			key20=#{key20},
+		</if>
+		<if test="key21!=null">
+			key21=#{key21},
+		</if>
+		<if test="key22!=null">
+			key22=#{key22},
+		</if>
+		<if test="key23!=null">
+			key23=#{key23},
+		</if>
+		<if test="key24!=null">
+			key24=#{key24},
+		</if>
+		<if test="key25!=null">
+			key25=#{key25},
+		</if>
+		<if test="key26!=null">
+			key26=#{key26},
+		</if>
+		<if test="key27!=null">
+			key27=#{key27},
+		</if>
+		<if test="key28!=null">
+			key28=#{key28},
+		</if>
+		<if test="key29!=null">
+			key29=#{key29},
+		</if>
+		<if test="key30!=null">
+			key30=#{key30},
+		</if>
+		<if test="key31!=null">
+			key31=#{key31},
+		</if>
+		<if test="key32!=null">
+			key32=#{key32},
+		</if>
+		<if test="key33!=null">
+			key33=#{key33},
+		</if>
+		<if test="key34!=null">
+			key34=#{key34},
+		</if>
+		<if test="key35!=null">
+			key35=#{key35},
+		</if>
+		<if test="key36!=null">
+			key36=#{key36},
+		</if>
+		<if test="key37!=null">
+			key37=#{key37},
+		</if>
+		<if test="key38!=null">
+			key38=#{key38},
+		</if>
+		<if test="key39!=null">
+			key39=#{key39},
+		</if>
+		<if test="key40!=null">
+			key40=#{key40},
+		</if>
+		<if test="key41!=null">
+			key41=#{key41},
+		</if>
+		<if test="key42!=null">
+			key42=#{key42},
+		</if>
+		<if test="key43!=null">
+			key43=#{key43},
+		</if>
+		<if test="key44!=null">
+			key44=#{key44},
+		</if>
+		<if test="key45!=null">
+			key45=#{key45},
+		</if>
+		<if test="key46!=null">
+			key46=#{key46},
 		</if>
 		gmt_modified=now()
 		where category_id=#{category_id} and accountNumber=#{accountNumber}
