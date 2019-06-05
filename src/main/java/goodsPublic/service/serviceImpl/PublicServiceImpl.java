@@ -250,25 +250,29 @@ public class PublicServiceImpl implements PublicService {
 	@Override
 	public int editGoodsLabelSet(GoodsLabelSet goodsLabelSet) {
 		// TODO Auto-generated method stub
-		return publicDao.editGoodsLabelSet(goodsLabelSet);
+		int count=0;
+		count+=publicDao.editGoodsLabelSetById(goodsLabelSet);
+		count+=publicDao.editOtherGoodsLabelSetNameByKeyAccountNumber(goodsLabelSet);
+		return count;
 	}
 
 	@Override
 	public void initGoodsLabelSet(String accountNumber) {
 		// TODO Auto-generated method stub
 		String[] moduleArr= {"operation","editGoods","goodsList"};
-		int maxSize=50;
+		int maxSize=51;
 		String[] keyArr=null;
 		for (String module : moduleArr) {
 			switch (module) {
 			case "operation":
 				keyArr=new String[maxSize];
-				keyArr[0]="goodsNumber";
-				keyArr[1]="title";
-				keyArr[2]="imgUrl";
-				keyArr[3]="htmlContent";
-				for(int i = 4;i < maxSize;i++) {
-					keyArr[i]="key"+(i-3);
+				keyArr[0]="category_id";
+				keyArr[1]="goodsNumber";
+				keyArr[2]="title";
+				keyArr[3]="imgUrl";
+				keyArr[4]="htmlContent";
+				for(int i = 5;i < maxSize;i++) {
+					keyArr[i]="key"+(i-4);
 				}
 				
 				for (String key : keyArr) {
@@ -280,11 +284,12 @@ public class PublicServiceImpl implements PublicService {
 			case "editGoods":
 				keyArr=new String[maxSize];
 				keyArr[0]="category_id";
-				keyArr[1]="title";
-				keyArr[2]="imgUrl";
-				keyArr[3]="htmlContent";
-				for(int i = 4;i < maxSize;i++) {
-					keyArr[i]="key"+(i-3);
+				keyArr[1]="goodsNumber";
+				keyArr[2]="title";
+				keyArr[3]="imgUrl";
+				keyArr[4]="htmlContent";
+				for(int i = 5;i < maxSize;i++) {
+					keyArr[i]="key"+(i-4);
 				}
 				
 				for (String key : keyArr) {
@@ -295,13 +300,14 @@ public class PublicServiceImpl implements PublicService {
 				break;
 			case "goodsList":
 				keyArr=new String[maxSize];
-				keyArr[0]="goodsNumber";
-				keyArr[1]="title";
-				keyArr[2]="imgUrl";
-				keyArr[3]="qrCode";
-				keyArr[4]="id";
-				for(int i = 5;i < maxSize;i++) {
-					keyArr[i]="key"+(i-4);
+				keyArr[0]="category_id";
+				keyArr[1]="goodsNumber";
+				keyArr[2]="title";
+				keyArr[3]="imgUrl";
+				keyArr[4]="qrCode";
+				keyArr[5]="id";
+				for(int i = 6;i < maxSize;i++) {
+					keyArr[i]="key"+(i-5);
 				}
 				
 				for (String key : keyArr) {

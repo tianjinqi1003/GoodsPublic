@@ -24,6 +24,144 @@
 			<if test="htmlContent!=null">
 				htmlContent,
 			</if>
+			<if test="key1!=null">
+				key1,
+			</if>
+			<if test="key2!=null">
+				key2,
+			</if>
+			<if test="key3!=null">
+				key3,
+			</if>
+			<if test="key4!=null">
+				key4,
+			</if>
+			<if test="key5!=null">
+				key5,
+			</if>
+			<if test="key6!=null">
+				key6,
+			</if>
+			<if test="key7!=null">
+				key7,
+			</if>
+			<if test="key8!=null">
+				key8,
+			</if>
+			<if test="key9!=null">
+				key9,
+			</if>
+			<if test="key10!=null">
+				key10,
+			</if>
+			<if test="key11!=null">
+				key11,
+			</if>
+			<if test="key12!=null">
+				key12,
+			</if>
+			<if test="key13!=null">
+				key13,
+			</if>
+			<if test="key14!=null">
+				key14,
+			</if>
+			<if test="key15!=null">
+				key15,
+			</if>
+			<if test="key16!=null">
+				key16,
+			</if>
+			<if test="key17!=null">
+				key17,
+			</if>
+			<if test="key18!=null">
+				key18,
+			</if>
+			<if test="key19!=null">
+				key19,
+			</if>
+			<if test="key20!=null">
+				key20,
+			</if>
+			<if test="key21!=null">
+				key21,
+			</if>
+			<if test="key22!=null">
+				key22,
+			</if>
+			<if test="key23!=null">
+				key23,
+			</if>
+			<if test="key24!=null">
+				key24,
+			</if>
+			<if test="key25!=null">
+				key25,
+			</if>
+			<if test="key26!=null">
+				key26,
+			</if>
+			<if test="key27!=null">
+				key27,
+			</if>
+			<if test="key28!=null">
+				key28,
+			</if>
+			<if test="key29!=null">
+				key29,
+			</if>
+			<if test="key30!=null">
+				key30,
+			</if>
+			<if test="key31!=null">
+				key31,
+			</if>
+			<if test="key32!=null">
+				key32,
+			</if>
+			<if test="key33!=null">
+				key33,
+			</if>
+			<if test="key34!=null">
+				key34,
+			</if>
+			<if test="key35!=null">
+				key35,
+			</if>
+			<if test="key36!=null">
+				key36,
+			</if>
+			<if test="key37!=null">
+				key37,
+			</if>
+			<if test="key38!=null">
+				key38,
+			</if>
+			<if test="key39!=null">
+				key39,
+			</if>
+			<if test="key40!=null">
+				key40,
+			</if>
+			<if test="key41!=null">
+				key41,
+			</if>
+			<if test="key42!=null">
+				key42,
+			</if>
+			<if test="key43!=null">
+				key43,
+			</if>
+			<if test="key44!=null">
+				key44,
+			</if>
+			<if test="key45!=null">
+				key45,
+			</if>
+			<if test="key46!=null">
+				key46,
+			</if>
 			gmt_create
 		</trim>
 		values
@@ -45,6 +183,144 @@
 			</if>
 			<if test="htmlContent!=null">
 				#{htmlContent},
+			</if>
+			<if test="key1!=null">
+				#{key1},
+			</if>
+			<if test="key2!=null">
+				#{key2},
+			</if>
+			<if test="key3!=null">
+				#{key3},
+			</if>
+			<if test="key4!=null">
+				#{key4},
+			</if>
+			<if test="key5!=null">
+				#{key5},
+			</if>
+			<if test="key6!=null">
+				#{key6},
+			</if>
+			<if test="key7!=null">
+				#{key7},
+			</if>
+			<if test="key8!=null">
+				#{key8},
+			</if>
+			<if test="key9!=null">
+				#{key9},
+			</if>
+			<if test="key10!=null">
+				#{key10},
+			</if>
+			<if test="key11!=null">
+				#{key11},
+			</if>
+			<if test="key12!=null">
+				#{key12},
+			</if>
+			<if test="key13!=null">
+				#{key13},
+			</if>
+			<if test="key14!=null">
+				#{key14},
+			</if>
+			<if test="key15!=null">
+				#{key15},
+			</if>
+			<if test="key16!=null">
+				#{key16},
+			</if>
+			<if test="key17!=null">
+				#{key17},
+			</if>
+			<if test="key18!=null">
+				#{key18},
+			</if>
+			<if test="key19!=null">
+				#{key19},
+			</if>
+			<if test="key20!=null">
+				#{key20},
+			</if>
+			<if test="key21!=null">
+				#{key21},
+			</if>
+			<if test="key22!=null">
+				#{key22},
+			</if>
+			<if test="key23!=null">
+				#{key23},
+			</if>
+			<if test="key24!=null">
+				#{key24},
+			</if>
+			<if test="key25!=null">
+				#{key25},
+			</if>
+			<if test="key26!=null">
+				#{key26},
+			</if>
+			<if test="key27!=null">
+				#{key27},
+			</if>
+			<if test="key28!=null">
+				#{key28},
+			</if>
+			<if test="key29!=null">
+				#{key29},
+			</if>
+			<if test="key30!=null">
+				#{key30},
+			</if>
+			<if test="key31!=null">
+				#{key31},
+			</if>
+			<if test="key32!=null">
+				#{key32},
+			</if>
+			<if test="key33!=null">
+				#{key33},
+			</if>
+			<if test="key34!=null">
+				#{key34},
+			</if>
+			<if test="key35!=null">
+				#{key35},
+			</if>
+			<if test="key36!=null">
+				#{key36},
+			</if>
+			<if test="key37!=null">
+				#{key37},
+			</if>
+			<if test="key38!=null">
+				#{key38},
+			</if>
+			<if test="key39!=null">
+				#{key39},
+			</if>
+			<if test="key40!=null">
+				#{key40},
+			</if>
+			<if test="key41!=null">
+				#{key41},
+			</if>
+			<if test="key42!=null">
+				#{key42},
+			</if>
+			<if test="key43!=null">
+				#{key43},
+			</if>
+			<if test="key44!=null">
+				#{key44},
+			</if>
+			<if test="key45!=null">
+				#{key45},
+			</if>
+			<if test="key46!=null">
+				#{key46},
 			</if>
 			now()
 		</trim>
@@ -154,7 +430,7 @@
 	<select id="getGoodsLabelSetById" resultType="goodsPublic.entity.GoodsLabelSet">
 		select * from goods_label_set where id=#{param1}
 	</select>
-	<update id="editGoodsLabelSet" parameterType="goodsPublic.entity.GoodsLabelSet">
+	<update id="editGoodsLabelSetById" parameterType="goodsPublic.entity.GoodsLabelSet">
 		update goods_label_set set
 		<if test="label!=null">
 			label=#{label},
@@ -164,13 +440,21 @@
 		</if>
 		isShow=#{isShow},
 		isPublic=#{isPublic},
+		isCheck=#{isCheck},
 		sort=#{sort}
 		where id=#{id}
+	</update>
+	<update id="editOtherGoodsLabelSetNameByKeyAccountNumber" parameterType="goodsPublic.entity.GoodsLabelSet">
+		update goods_label_set set
+		<if test="label!=null">
+			label=#{label}
+		</if>
+		where `key`=#{key} and accountNumber=#{accountNumber} and module!=#{module}
 	</update>
 	<select id="checkGoodsLabelExist" resultType="java.lang.Integer">
 		select count(*) from goods_label_set where `key`=#{key} and module=#{module} and accountNumber=#{accountNumber}
 	</select>
 	<insert id="insertGoodsLabel">
-		insert into goods_label_set(`key`,module,isShow,isPublic,accountNumber,sort) values(#{key},#{module},0,0,#{accountNumber},0)
+		insert into goods_label_set(`key`,module,isShow,isPublic,isCheck,accountNumber,sort) values(#{key},#{module},0,0,0,#{accountNumber},0)
 	</insert>
 </mapper>

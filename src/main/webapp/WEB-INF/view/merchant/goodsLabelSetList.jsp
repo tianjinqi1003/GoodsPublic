@@ -38,6 +38,9 @@ $(function(){
             {field:"isPublic",title:"是否公有",width:100,formatter:function(value){
             	return value?"是":"否";
             }},
+            {field:"isCheck",title:"是否要验证",width:100,formatter:function(value){
+            	return value?"是":"否";
+            }},
             {field:"id",title:"操作",width:100,formatter:function(value){
             	return "<a href=\"${pageContext.request.contextPath}/merchant/main/goEditGoodsLabelSet?id="+value+"\">编辑</a>";
             }}
@@ -45,7 +48,7 @@ $(function(){
         onLoadSuccess:function(data){
 			if(data.total==0){
 				$(this).datagrid("appendRow",{goodsNumber:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/operation?categoryId=${param.categoryId}\">点击添加模板</a><div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"key",colspan:5});
+				$(this).datagrid("mergeCells",{index:0,field:"label",colspan:6});
 				data.total=0;
 			}
 			

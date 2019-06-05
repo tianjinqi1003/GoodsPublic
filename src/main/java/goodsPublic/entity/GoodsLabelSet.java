@@ -15,6 +15,7 @@ public class GoodsLabelSet implements Serializable {
 	private String module;//所属模块
 	private Boolean isShow;//是否在商品编辑页显示
 	private Boolean isPublic;//是否是公有属性
+	private Boolean isCheck;//是否要验证
 	private String accountNumber;//商家编号
 	private int sort;//排序
 
@@ -53,6 +54,12 @@ public class GoodsLabelSet implements Serializable {
 	}
 	public void setIsPublic(Boolean isPublic) {
 		this.isPublic = isPublic;
+	}
+	public Boolean getIsCheck() {
+		return isCheck;
+	}
+	public void setIsCheck(Boolean isCheck) {
+		this.isCheck = isCheck;
 	}
 	public String getAccountNumber() {
 		return accountNumber;

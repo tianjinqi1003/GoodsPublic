@@ -110,12 +110,24 @@ $(function(){
 	//alert(editor.html());
 });
 
+var editFlag=true;
 function checkEdit(){
+	/*
 	if(checkGoodsNumber()){
 		if(checkTitle()){
 			document.getElementById("sub_but").click();
 		}
 	}
+	*/
+	$("table tr").each(function(){
+		if(editFlag)
+			$(this).find("td").eq(1).find("input").blur();
+		else
+			return editFlag;
+			
+	});
+	if(editFlag)
+		document.getElementById("sub_but").click();
 }
 
 function focusGoodsNumber(){
@@ -169,6 +181,28 @@ function checkTitle(){
 	}
 	else
 		return true;
+}
+
+function focusKey(key,label){
+	var keyVal = $("#"+key).val();
+	if(keyVal==label+"不能为空"){
+		$("#"+key).val("");
+		$("#"+key).css("color", "#555555");
+	}
+}
+
+function checkKey(key,label){
+	var keyVal = $("#"+key).val();
+	if(keyVal==null||keyVal==""||keyVal==label+"不能为空"){
+		$("#"+key).css("color","#E15748");
+    	$("#"+key).val(label+"不能为空");
+    	editFlag=false;
+    	return false;
+	}
+	else{
+		editFlag=true;
+		return true;
+	}
 }
 
 function showQrcodePic(obj){
@@ -244,7 +278,6 @@ function initWindowMarginLeft(){
 								<td>
 									<br>
 									<textarea id="htmlContent" name="htmlContent" cols="100" rows="8" style="width:700px;height:500px;visibility:hidden;"></textarea>
-									<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
 								</td>
 							  </tr>
 						  </c:when>
@@ -254,14 +287,25 @@ function initWindowMarginLeft(){
 									<span style="color:${goodsLabelSet.isPublic?'#00F5FF':'#006699' };">${goodsLabelSet.label }</span>
 								</td>
 								<td>
+									<!-- 
 									<input id="${goodsLabelSet.key }" name="${goodsLabelSet.key }" type="text" onfocus="focus${fn:toUpperCase(fn:substring(goodsLabelSet.key,0,1)) }${fn:substring(goodsLabelSet.key,1,goodsLabelSet.key.length()) }()" onblur="check${fn:toUpperCase(fn:substring(goodsLabelSet.key,0,1)) }${fn:substring(goodsLabelSet.key,1,goodsLabelSet.key.length()) }()"/>
-									<span style="color: #f00;">*</span>
+									 -->
+									 <c:choose>
+									 	<c:when test="${goodsLabelSet.isCheck }">
+											<input id="${goodsLabelSet.key }" name="${goodsLabelSet.key }" type="text" onfocus="focusKey('${goodsLabelSet.key }','${goodsLabelSet.label }')" onblur="checkKey('${goodsLabelSet.key }','${goodsLabelSet.label }')"/>
+											<span style="color: #f00;">*</span>
+									 	</c:when>
+									 	<c:otherwise>
+											<input id="${goodsLabelSet.key }" name="${goodsLabelSet.key }" type="text" />
+									 	</c:otherwise>
+									 </c:choose>
 								</td>
 							  </tr>
 						  </c:otherwise>
 					  </c:choose>
 				  </c:if>
 			  </c:forEach>
+			  <input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
 			  <!-- 
 			  <tr style="border-bottom: #CAD9EA solid 1px;">
 				<td align="right">

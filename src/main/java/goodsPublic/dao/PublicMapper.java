@@ -113,7 +113,13 @@ public interface PublicMapper {
 	 * @param goodsLabelSet
 	 * @return
 	 */
-	public int editGoodsLabelSet(GoodsLabelSet goodsLabelSet);
+	public int editGoodsLabelSetById(GoodsLabelSet goodsLabelSet);
+	/**
+	 * 编辑其他对应商品标签
+	 * @param goodsLabelSet
+	 * @return
+	 */
+	public int editOtherGoodsLabelSetNameByKeyAccountNumber(GoodsLabelSet goodsLabelSet);
 	/**
 	 * 验证商品标签是否存在
 	 * @param key

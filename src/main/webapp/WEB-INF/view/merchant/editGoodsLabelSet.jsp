@@ -89,6 +89,15 @@ $(function(){
 			$(this).combobox("setValue", '${requestScope.goodsLabelSet.isPublic }');
 		}
 	});
+	
+	$("#isCheck").combobox({
+		valueField:"value",
+		textField:"text",
+		data:[{"value":"","text":"请选择"},{"value":"true","text":"是"},{"value":"false","text":"否"}],
+		onLoadSuccess:function(){
+			$(this).combobox("setValue", '${requestScope.goodsLabelSet.isCheck }');
+		}
+	});
 });
 
 function checkEdit(){
@@ -96,8 +105,10 @@ function checkEdit(){
 		if(checkModule()){
 			if(checkIsShow()){
 				if(checkIsPublic()){
-					if(checkSort()){
-						editGoodsLabelSet();
+					if(checkIsCheck()){
+						if(checkSort()){
+							editGoodsLabelSet();
+						}
 					}
 				}
 			}
@@ -107,14 +118,17 @@ function checkEdit(){
 
 function editGoodsLabelSet(){
 	var id=$("#id").val();
+	var key=$("#key").val();
+	var accountNumber=$("#accountNumber").val();
 	var label=$("#label").val();
 	var module = $("#module").combobox("getValue");
 	var isShow = $("#isShow").combobox("getValue");
 	var isPublic = $("#isPublic").combobox("getValue");
+	var isCheck = $("#isCheck").combobox("getValue");
 	var sort = $("#sort").val();
 	
 	$.post("editGoodsLabelSet",
-		{id:id,label:label,module:module,isShow:isShow,isPublic:isPublic,sort:sort},
+		{id:id,key:key,accountNumber:accountNumber,label:label,module:module,isShow:isShow,isPublic:isPublic,isCheck:isCheck,sort:sort},
 		function(data){
 			if(data.message=="ok"){
 				alert(data.info);
@@ -180,6 +194,17 @@ function checkIsPublic(){
 		return true;
 }
 
+//验证是否要验证
+function checkIsCheck(){
+	var isCheck = $("#isCheck").combobox("getValue");
+	if(isCheck==null||isCheck==""){
+	  	alert("请选择是否要验证");
+	  	return false;
+	}
+	else
+		return true;
+}
+
 function focusSort(){
 	var sort = $("#sort").val();
 	if(sort=="排序不能为空"){
@@ -233,6 +258,7 @@ function initWindowMarginLeft(){
 				</td>
 				<td>
 					<span>${requestScope.goodsLabelSet.key }</span>
+					<input type="hidden" id="key" name="key" value="${requestScope.goodsLabelSet.key }"/>
 				</td>
 			  </tr>
 			  <tr style="border-bottom: #CAD9EA solid 1px;">
@@ -251,6 +277,7 @@ function initWindowMarginLeft(){
 				<td>
 					<input id="module" name="module" />
 					<span style="color: #f00;">*</span>
+					<input type="hidden" id="module" name="module" value="${requestScope.goodsLabelSet.module }"/>
 				</td>
 			  </tr>
 			  <tr style="border-bottom: #CAD9EA solid 1px;">
@@ -268,6 +295,15 @@ function initWindowMarginLeft(){
 				</td>
 				<td>
 					<input id="isPublic" name="isPublic" />
+					<span style="color: #f00;">*</span>
+				</td>
+			  </tr>
+			  <tr style="border-bottom: #CAD9EA solid 1px;">
+				<td align="right">
+					是否要验证
+				</td>
+				<td>
+					<input id="isCheck" name="isCheck" />
 					<span style="color: #f00;">*</span>
 				</td>
 			  </tr>
