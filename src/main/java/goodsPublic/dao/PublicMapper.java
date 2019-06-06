@@ -35,9 +35,10 @@ public interface PublicMapper {
 	/**
 	 * 根据类别id查询商品
 	 * @param categoryID
+	 * @param accountId 
 	 * @return
 	 */
-	public List<Goods> queryGoodsListByCateId(int categoryID);
+	public List<Goods> queryGoodsListByCateId(int categoryID, String accountId);
 	/**
 	 * 根据id查询商品
 	 * @param id

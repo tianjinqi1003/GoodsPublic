@@ -132,12 +132,32 @@ body {
 							<img alt="" src="<%=basePath%>resource/images/001.png" style="float:right;margin-top:8px;margin-right:10px;font-size: 25px;"/>
 						</div>
 						<div>
+							<!-- 
 							<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
 								<span style="margin-left:10px;color: #686868;">${plan.title}</span>
 							</div>
 							<div id="htmlContent_div" style="width: 100%;background-color: #fff;">
 								${plan.htmlContent}
 							</div>
+							 -->
+							<c:forEach items="${requestScope.glsList }" var="goodsLabelSet">
+								<c:if test="${goodsLabelSet.isShow }">
+									<c:choose>
+										<c:when test="${goodsLabelSet.key eq 'imgUrl' }">
+										</c:when>
+										<c:when test="${goodsLabelSet.key eq 'htmlContent' }">
+											<div id="htmlContent_div" style="width: 100%;background-color: #fff;">
+												${goodsLabelSet.label }:${plan.htmlContent}
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
+												<span style="margin-left:10px;color: #686868;">${goodsLabelSet.label }:${plan[goodsLabelSet.key]}</span>
+											</div>
+										</c:otherwise>
+									</c:choose>
+								</c:if>
+							</c:forEach>
 						</div>
 						<div style="width: 100%;height: 50px;line-height: 50px;margin-top:15px;background-color: #E5E5E5;">
 							<span style="margin-left:20px;">企业信息</span>
@@ -163,10 +183,10 @@ body {
 						</div>
 						<c:forEach items="${flagGoodsList }" var="goods">
 						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
-							<span style="margin-left:20px;color: #686868;" onclick="goFlagGoods('${goods.goodsNumber }');">${goods.title }</span>
+							<span style="margin-left:20px;color: #686868;" onclick="goFlagGoods('${goods.goodsNumber }','${sessionScope.user.id}');">${goods.title }</span>
 						</div>
 						<div style="width: 100%;height: 260px;background-color: #fff;">
-							<img alt="" src="${goods.imgUrl }" onclick="location.href='/GoodsPublic/merchant/main/show?goodsNumber=${goods.goodsNumber }';" style="width: 256px;height:256px;">
+							<img alt="" src="${goods.imgUrl }" onclick="location.href='/GoodsPublic/merchant/main/show?goodsNumber=${goods.goodsNumber }&accountId=${sessionScope.user.id}';" style="width: 256px;height:256px;">
 						</div>
 						</c:forEach>
 					</div>
@@ -229,8 +249,8 @@ body {
 									});
 				})
 				
-				function goFlagGoods(goodsNumber){
-					var url=location.href.substring(0,location.href.indexOf("GoodsPublic")-1)+baseUrl+"/merchant/main/show?goodsNumber="+goodsNumber;
+				function goFlagGoods(goodsNumber,accountId){
+					var url=location.href.substring(0,location.href.indexOf("GoodsPublic")-1)+baseUrl+"/merchant/main/show?goodsNumber="+goodsNumber+"&accountId="+accountId;
 					window.location.href=url;
 				}
 			</script>

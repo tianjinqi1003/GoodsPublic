@@ -84,9 +84,10 @@ public interface PublicService {
 	/**
 	 * 根据类别编号，查询商品信息
 	 * @param categoryID
+	 * @param accountId 
 	 * @return
 	 */
-	public List<Goods> queryGoodsList(int categoryID);
+	public List<Goods> queryGoodsList(int categoryID, String accountId);
 
 	/**
 	 * 编辑商户信息

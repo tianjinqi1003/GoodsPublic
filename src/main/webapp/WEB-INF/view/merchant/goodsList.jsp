@@ -19,7 +19,6 @@ $(function(){
 				var column={field:gls.key,title:gls.label,width:100};
 				columns.push(column);
 			}
-			console.log(columns);
 			
 			tab1=$("#tab1").datagrid({
 				title:"商品列表&nbsp;|<a href=\"<%=basePath%>merchant/main/operation?categoryId=${param.categoryId}&accountId=${sessionScope.user.id}\" class=\"panel-title\">发布新商品</a>",
@@ -87,7 +86,7 @@ function resetColumnsHtml(){
 			switch(fields[columnIndex]){
 				case "title":
 					var goodsNumber=$("#tab1_div tr.datagrid-row[datagrid-row-index="+rowIndex+"] td[field='goodsNumber'] div").text();
-					tdDiv.html("<a href=\"${pageContext.request.contextPath}/merchant/main/show?goodsNumber="+goodsNumber+"\">"+tdValue+"</a>");
+					tdDiv.html("<a href=\"${pageContext.request.contextPath}/merchant/main/show?goodsNumber="+goodsNumber+"&accountId="+'${sessionScope.user.id}'+"\">"+tdValue+"</a>");
 					break;
 				case "imgUrl":
 				case "qrCode":

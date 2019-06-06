@@ -683,7 +683,7 @@
 		select * from public_goods where accountNumber=#{param1} and category_id=#{param2} limit ${param3},${param4}
 	</select>
 	<select id="queryGoodsListByCateId" resultType="goodsPublic.entity.Goods">
-		select goodsNumber,title,imgUrl,category_id from public_goods where category_id=#{param1}
+		select goodsNumber,title,imgUrl,category_id from public_goods where category_id=#{param1} and accountNumber=#{param2}
 	</select>
 	<select id="getGoodsById" resultType="goodsPublic.entity.Goods">
 		select * from public_goods where id=#{param1}
