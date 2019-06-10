@@ -18,6 +18,34 @@ $(function(){
 			});
 		}
 	});
+
+	var ht=$("#htmlContent_div").html();
+	$("#glsList_div #goodsLabelSet_div").each(function(){
+		var label=$(this).attr("attr-label");
+		var key=$(this).attr("attr-key");
+		var value=$(this).attr("attr-value");
+		
+		var repKeyStr="{goodsLabelSet."+key+"}";
+		ht=ht.replace(repKeyStr,label);
+		
+		var repValStr="{plan."+key+"}";
+		ht=ht.replace(repValStr,value);
+		console.log(label+","+key+","+value);
+	});
+	$("#htmlContent_div").html(ht);
+	/*
+	var reg=/\"/g;
+	var ht=$("#htmlContent_div").html();
+	//ht=ht.replace(reg,'\'');
+	var div=$("<div></div>")
+	div.append(ht);
+	console.log(div.html());
+	*/
+	//$("#htmlContent_div").empty();
+	//$("#htmlContent_div").html("<div>aaaaaaaa</div>");
+	//$("#htmlContent_div").html(ht);
+	//$("#htmlContent_div").append("<div>pppppppppp</div>");
+	//$("#htmlContent_div").append($($("#htmlContent_div").html()));
 })
 </script>
 <style type="text/css">
@@ -136,10 +164,11 @@ body {
 							<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
 								<span style="margin-left:10px;color: #686868;">${plan.title}</span>
 							</div>
+							 -->
 							<div id="htmlContent_div" style="width: 100%;background-color: #fff;">
 								${plan.htmlContent}
 							</div>
-							 -->
+							<!-- 
 							<c:forEach items="${requestScope.glsList }" var="goodsLabelSet">
 								<c:if test="${goodsLabelSet.isShow }">
 									<c:choose>
@@ -158,6 +187,23 @@ body {
 									</c:choose>
 								</c:if>
 							</c:forEach>
+							 -->
+							 <div id="glsList_div" style="display: none;">
+								<c:forEach items="${requestScope.glsList }" var="goodsLabelSet">
+									<c:if test="${goodsLabelSet.isShow }">
+										<c:choose>
+											<c:when test="${goodsLabelSet.key eq 'imgUrl' }">
+											</c:when>
+											<c:when test="${goodsLabelSet.key eq 'htmlContent' }">
+											</c:when>
+											<c:otherwise>
+												<div id="goodsLabelSet_div" attr-label="${goodsLabelSet.label }" attr-key="${goodsLabelSet.key }" attr-value="${plan[goodsLabelSet.key]}">
+												</div>
+											</c:otherwise>
+										</c:choose>
+									</c:if>
+								</c:forEach>
+							 </div>
 						</div>
 						<div style="width: 100%;height: 50px;line-height: 50px;margin-top:15px;background-color: #E5E5E5;">
 							<span style="margin-left:20px;">企业信息</span>
@@ -183,10 +229,10 @@ body {
 						</div>
 						<c:forEach items="${flagGoodsList }" var="goods">
 						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
-							<span style="margin-left:20px;color: #686868;" onclick="goFlagGoods('${goods.goodsNumber }','${sessionScope.user.id}');">${goods.title }</span>
+							<span style="margin-left:20px;color: #686868;" onclick="goFlagGoods('${goods.goodsNumber }','${param.accountId}');">${goods.title }</span>
 						</div>
 						<div style="width: 100%;height: 260px;background-color: #fff;">
-							<img alt="" src="${goods.imgUrl }" onclick="location.href='/GoodsPublic/merchant/main/show?goodsNumber=${goods.goodsNumber }&accountId=${sessionScope.user.id}';" style="width: 256px;height:256px;">
+							<img alt="" src="${goods.imgUrl }" onclick="location.href='/GoodsPublic/merchant/main/show?goodsNumber=${goods.goodsNumber }&accountId=${param.accountId}';" style="width: 256px;height:256px;">
 						</div>
 						</c:forEach>
 					</div>

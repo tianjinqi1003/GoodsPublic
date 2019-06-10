@@ -217,7 +217,14 @@ function initWindowMarginLeft(){
 									</td>
 									<td>
 										<br>
-										<textarea id="htmlContent" name="htmlContent" cols="100" rows="8" style="width:700px;height:500px;visibility:hidden;"><%=htmlspecialchars(goods.getHtmlContent()) %></textarea>
+										<c:choose>
+											<c:when test="${requestScope.goods.htmlContent eq null }">
+												<textarea id="htmlContent" name="htmlContent" cols="100" rows="8" style="width:700px;height:500px;visibility:hidden;"></textarea>
+											</c:when>
+											<c:otherwise>
+												<textarea id="htmlContent" name="htmlContent" cols="100" rows="8" style="width:700px;height:500px;visibility:hidden;"><%=htmlspecialchars(goods.getHtmlContent()) %></textarea>
+											</c:otherwise>
+										</c:choose>
 									</td>
 								  </tr>
 							  </c:when>
