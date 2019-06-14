@@ -30,7 +30,7 @@ $(function(){
 		
 		var repValStr="{plan."+key+"}";
 		ht=ht.replace(repValStr,value);
-		console.log(label+","+key+","+value);
+		//console.log(label+","+key+","+value);
 	});
 	$("#htmlContent_div").html(ht);
 	/*
@@ -113,7 +113,7 @@ body {
 	text-align: center;
 }
 
-.imgUrl {
+.avatarImg {
 	width: 256px;
 	height:256px;
 }
@@ -131,7 +131,7 @@ body {
 			</div>
 			<div class="imgContent">
 				<div class="imgItme">
-					<img class="imgUrl" src="${plan.imgUrl }">
+					<img class="avatarImg" src="${accountMsg.avatar_img }">
 				</div>
 			</div>
 			<div style="background-color: #F5F5F5;width: 350px;height: 320px;margin: 0 auto;">
@@ -192,8 +192,6 @@ body {
 								<c:forEach items="${requestScope.glsList }" var="goodsLabelSet">
 									<c:if test="${goodsLabelSet.isShow }">
 										<c:choose>
-											<c:when test="${goodsLabelSet.key eq 'imgUrl' }">
-											</c:when>
 											<c:when test="${goodsLabelSet.key eq 'htmlContent' }">
 											</c:when>
 											<c:otherwise>
