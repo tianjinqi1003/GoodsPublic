@@ -10,15 +10,6 @@
 	src="../../resource/js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 $(function(){
-	$("#mainMsg1 #htmlContent_div").find("img").each(function(){
-		var title=$(this).attr("title");
-		if(title!=""&title!=null){
-			$(this).click(function(){
-				location.href=title;
-			});
-		}
-	});
-
 	var ht=$("#htmlContent_div").html();
 	$("#glsList_div #goodsLabelSet_div").each(function(){
 		var label=$(this).attr("attr-label");
@@ -33,20 +24,32 @@ $(function(){
 		//console.log(label+","+key+","+value);
 	});
 	$("#htmlContent_div").html(ht);
-	/*
-	var reg=/\"/g;
-	var ht=$("#htmlContent_div").html();
-	//ht=ht.replace(reg,'\'');
-	var div=$("<div></div>")
-	div.append(ht);
-	console.log(div.html());
-	*/
-	//$("#htmlContent_div").empty();
-	//$("#htmlContent_div").html("<div>aaaaaaaa</div>");
-	//$("#htmlContent_div").html(ht);
-	//$("#htmlContent_div").append("<div>pppppppppp</div>");
-	//$("#htmlContent_div").append($($("#htmlContent_div").html()));
+	
+	$("#mainMsg1 #htmlContent_div").find("img").each(function(){
+		var title=$(this).attr("title");
+		if(title!=""&title!=null){
+			$(this).click(function(){
+				location.href=title;
+			});
+		}
+	});
+	
+	$("#mainMsg1 #htmlContent_div #imgUrl_img").click(function(){
+		previewImg($(this).attr("src"));
+	});
 })
+
+//预览图片
+function previewImg(src) {
+	$("#previewDiv").css("display", "block");
+	$("#previewDiv img").attr("src", src);
+}
+
+//关闭预览
+function unPreviewImg(o) {
+	$(o).css("display", "none");
+	$(o).find("img").attr("src", "");
+}
 </script>
 <style type="text/css">
 body {
@@ -121,6 +124,9 @@ body {
 <%@include file="js.jsp"%>
 </head>
 <body>
+	<div id="previewDiv" style="width: 100%;height: 300px;margin-top:680px;position:absolute;text-align: center;display:none;z-index: 1;" onclick="unPreviewImg(this);">
+		<img alt="" src="" style="width: 300px; height: 300px; margin: 0 auto;" />
+	</div>
 	<div id="context">
 		<div class="mainContent">
 			<div class="contentBody">

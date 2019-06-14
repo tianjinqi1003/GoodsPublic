@@ -333,6 +333,7 @@ function initWindowMarginLeft(){
 
 <%!
 private String htmlspecialchars(String str) {
+	//System.out.println(str);
 	str = str.replaceAll("&", "&amp;");
 	str = str.replaceAll("<", "&lt;");
 	str = str.replaceAll(">", "&gt;");
