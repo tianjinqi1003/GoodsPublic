@@ -18,6 +18,8 @@ import goodsPublic.dao.PublicMapper;
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
+import goodsPublic.entity.HtmlGoodsSPZS;
+import goodsPublic.entity.ModuleSPZS;
 import goodsPublic.service.PublicService;
 /**
  * 这是用来处理商品的对应接口
@@ -34,6 +36,13 @@ public class PublicServiceImpl implements PublicService {
 	public int addGoodsPublic(Goods goods) {
 		return publicDao.addGoodsPublic(goods);
 	}
+
+	@Override
+	public int addHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoods) {
+		// TODO Auto-generated method stub
+		return publicDao.addHtmlGoodsSPZS(htmlGoods);
+	}
+	
 	//展示商品接口，将商品从数据库中读取出来展示到对应的页面当中
 	
 	//获得所有跟当前用户有关的商品列表(1代表已存在，0代表不存在)
@@ -197,10 +206,23 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
+	public int queryHtmlGoodsSPZSForInt(String accountId) {
+		// TODO Auto-generated method stub
+		return publicDao.queryHtmlGoodsSPZSForInt(accountId);
+	}
+
+	@Override
 	public List<Goods> queryGoodsList(String accountId, String categoryId, int page, int rows, String sort,
 			String order) {
 		// TODO Auto-generated method stub
 		return publicDao.queryGoodsList(accountId, categoryId, (page-1)*rows, rows, sort, order);
+	}
+
+	@Override
+	public List<HtmlGoodsSPZS> queryHtmlGoodsSPZSList(String accountId, int page, int rows, String sort,
+			String order) {
+		// TODO Auto-generated method stub
+		return publicDao.queryHtmlGoodsSPZSList(accountId, (page-1)*rows, rows, sort, order);
 	}
 
 	@Override
@@ -318,6 +340,26 @@ public class PublicServiceImpl implements PublicService {
 				break;
 			}
 		}
+	}
+
+	@Override
+	public Object getModuleSPZSByType(String type) {
+		// TODO Auto-generated method stub
+		
+		Object obj=null;
+		switch (type) {
+		case "spxq":
+			List<ModuleSPZS> spxqList = publicDao.getModuleSPZSByType(type);
+			obj=spxqList;
+			break;
+		}
+		return obj;
+	}
+
+	@Override
+	public HtmlGoodsSPZS getHtmlGoods(String goodsNumber, String accountId) {
+		// TODO Auto-generated method stub
+		return publicDao.getHtmlGoods(goodsNumber,accountId);
 	}
 
 }

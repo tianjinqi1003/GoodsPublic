@@ -163,6 +163,69 @@
 						</a>
 					</li>
 				</div>
+				<div style="width: 92%; margin: 0 auto; margin-top: 20px;border: #CAD9EA solid 1px;background-color: #F5FAFE;">
+					<li class="layui-nav-item first-level">
+						<a>
+							模板快速生成
+						</a>
+					</li>
+					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
+					<li class="layui-nav-item">
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
+						<a href="<%=basePath%>merchant/main/goHtmlGoodsSPZSList?trade=spzs&accountId=${sessionScope.user.id }">
+							&nbsp;&nbsp;&nbsp;商品展示
+						</a>
+					</li>
+					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
+					<li class="layui-nav-item">
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
+						<a href="">
+							&nbsp;&nbsp;&nbsp;多媒体资料
+						</a>
+					</li>
+					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
+					<li class="layui-nav-item">
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
+						<a href="">
+							&nbsp;&nbsp;&nbsp;建筑施工
+						</a>
+					</li>
+					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
+					<li class="layui-nav-item">
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
+						<a href="">
+							&nbsp;&nbsp;&nbsp;设备巡检
+						</a>
+					</li>
+					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
+					<li class="layui-nav-item">
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
+						<a href="">
+							&nbsp;&nbsp;&nbsp;物资标识
+						</a>
+					</li>
+					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
+					<li class="layui-nav-item">
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
+						<a href="">
+							&nbsp;&nbsp;&nbsp;无纸化记录
+						</a>
+					</li>
+					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
+					<li class="layui-nav-item">
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
+						<a href="">
+							&nbsp;&nbsp;&nbsp;其他应用
+						</a>
+					</li>
+					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
+					<li class="layui-nav-item">
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
+						<a href="">
+							&nbsp;&nbsp;&nbsp;自定义模板
+						</a>
+					</li>
+				</div>
 			</ul>
 			<shiro:hasRole  name="admin">
   			<!--  有权限   -->

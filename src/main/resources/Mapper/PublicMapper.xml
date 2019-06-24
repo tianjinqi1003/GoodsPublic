@@ -325,6 +325,112 @@
 			now()
 		</trim>
 	</insert>
+	<insert id="addHtmlGoodsSPZS" parameterType="goodsPublic.entity.HtmlGoodsSPZS">
+		insert into html_goods
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="productName!=null">
+				productName,
+			</if>
+			<if test="spxqName1!=null">
+				spxqName1,
+			</if>
+			<if test="spxqValue1!=null">
+				spxqValue1,
+			</if>
+			<if test="spxqName2!=null">
+				spxqName2,
+			</if>
+			<if test="spxqValue2!=null">
+				spxqValue2,
+			</if>
+			<if test="spxqName3!=null">
+				spxqName3,
+			</if>
+			<if test="spxqValue3!=null">
+				spxqValue3,
+			</if>
+			<if test="spxqName4!=null">
+				spxqName4,
+			</if>
+			<if test="spxqValue4!=null">
+				spxqValue4,
+			</if>
+			<if test="spxqName5!=null">
+				spxqName5,
+			</if>
+			<if test="spxqValue5!=null">
+				spxqValue5,
+			</if>
+			<if test="spxqName6!=null">
+				spxqName6,
+			</if>
+			<if test="spxqValue6!=null">
+				spxqValue6,
+			</if>
+			<if test="qrCode!=null">
+				qrCode,
+			</if>
+				gmtCreate,
+			<if test="goodsNumber!=null">
+				goodsNumber,
+			</if>
+			<if test="accountNumber!=null">
+				accountNumber,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="productName!=null">
+				#{productName},
+			</if>
+			<if test="spxqName1!=null">
+				#{spxqName1},
+			</if>
+			<if test="spxqValue1!=null">
+				#{spxqValue1},
+			</if>
+			<if test="spxqName2!=null">
+				#{spxqName2},
+			</if>
+			<if test="spxqValue2!=null">
+				#{spxqValue2},
+			</if>
+			<if test="spxqName3!=null">
+				#{spxqName3},
+			</if>
+			<if test="spxqValue3!=null">
+				#{spxqValue3},
+			</if>
+			<if test="spxqName4!=null">
+				#{spxqName4},
+			</if>
+			<if test="spxqValue4!=null">
+				#{spxqValue4},
+			</if>
+			<if test="spxqName5!=null">
+				#{spxqName5},
+			</if>
+			<if test="spxqValue5!=null">
+				#{spxqValue5},
+			</if>
+			<if test="spxqName6!=null">
+				#{spxqName6},
+			</if>
+			<if test="spxqValue6!=null">
+				#{spxqValue6},
+			</if>
+			<if test="qrCode!=null">
+				#{qrCode},
+			</if>
+				now(),
+			<if test="goodsNumber!=null">
+				#{goodsNumber},
+			</if>
+			<if test="accountNumber!=null">
+				#{accountNumber},
+			</if>
+		</trim>
+	</insert>
 	<update id="updateQrcode" parameterType="java.lang.String">
 		update public_goods set qrCode=#{param1} where goodsNumber=#{param2}
 	</update>
@@ -679,8 +785,14 @@
 	<select id="queryGoodsForInt" resultType="java.lang.Integer">
 		select count(*) from public_goods where accountNumber=#{param1} and category_id=#{param2}
 	</select>
+	<select id="queryHtmlGoodsSPZSForInt" resultType="java.lang.Integer">
+		select count(*) from html_goods_spzs where accountNumber=#{param1}
+	</select>
 	<select id="queryGoodsList" resultType="goodsPublic.entity.Goods">
 		select * from public_goods where accountNumber=#{param1} and category_id=#{param2} limit ${param3},${param4}
+	</select>
+	<select id="queryHtmlGoodsSPZSList" resultType="goodsPublic.entity.HtmlGoodsSPZS">
+		select * from html_goods_spzs where accountNumber=#{param1} limit ${param2},${param3}
 	</select>
 	<select id="queryGoodsListByCateId" resultType="goodsPublic.entity.Goods">
 		select goodsNumber,title,imgUrl,category_id from public_goods where category_id=#{param1} and accountNumber=#{param2}
@@ -733,4 +845,10 @@
 	<insert id="insertGoodsLabel">
 		insert into goods_label_set(`key`,module,isShow,isPublic,isCheck,accountNumber,sort) values(#{key},#{module},0,0,0,#{accountNumber},0)
 	</insert>
+	<select id="getModuleSPZSByType" resultType="goodsPublic.entity.ModuleSPZS">
+		select * from module_spzs where type=#{param1}
+	</select>
+	<select id="getHtmlGoods" resultType="goodsPublic.entity.HtmlGoodsSPZS">
+		select * from html_goods_spzs where goodsNumber=#{param1} and accountNumber=#{param2}
+	</select>
 </mapper>

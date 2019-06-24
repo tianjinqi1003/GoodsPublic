@@ -28,12 +28,15 @@ import com.goodsPublic.util.FileUploadUtils;
 import com.goodsPublic.util.FinalState;
 import com.goodsPublic.util.JsonUtil;
 import com.goodsPublic.util.PlanResult;
+import com.goodsPublic.util.qrcode.Qrcode;
 
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
+import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.HtmlTemplate;
+import goodsPublic.entity.ModuleSPZS;
 import goodsPublic.service.CategoryService;
 import goodsPublic.service.PublicService;
 import net.sf.json.JSONArray;
@@ -156,6 +159,33 @@ public class MainController {
 			e.printStackTrace();
 		}
 		return "../../merchant/main/operation?";
+	}
+	
+	@RequestMapping(value="/addHtmlGoodsSPZS",produces="plain/text; charset=UTF-8")
+	public String addHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoods,HttpServletRequest request) {
+
+		String addr = request.getLocalAddr();
+		int port = request.getLocalPort();
+		String contextPath = request.getContextPath();
+		String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoods.getGoodsNumber()+"&accountId="+htmlGoods.getAccountNumber();
+		
+		String goodsNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		htmlGoods.setGoodsNumber(goodsNumber);
+		
+		String fileName = goodsNumber + ".jpg";
+		String avaPath="/GoodsPublic/upload/"+fileName;
+		String path = "D:/resource";
+        Qrcode.createQrCode(url, path, fileName);
+		
+		htmlGoods.setQrCode(avaPath);
+		int a=publicService.addHtmlGoodsSPZS(htmlGoods);
+		request.setAttribute("htmlGoods", "htmlGoods");
+		return "../../merchant/main/goBrowseHtmlGoodsSPZS?";
+	}
+	
+	@RequestMapping("/goBrowseHtmlGoodsSPZS")
+	public String goBrowseHtmlGoods() {
+		return "/merchant/spzs/browseHtmlGoods";
 	}
 	
 	/**
@@ -378,6 +408,14 @@ public class MainController {
 		return "/merchant/show";
 	}
 	
+	@RequestMapping(value="/goShowHtmlGoods",method=RequestMethod.GET)
+	public String goShowHtmlGoods(String goodsNumber,String accountId,HttpServletRequest request) {
+		
+		HtmlGoodsSPZS htmlGoods = publicService.getHtmlGoods(goodsNumber,accountId);
+		request.setAttribute("htmlGoods", htmlGoods);
+		return "/merchant/showHtmlGoods";
+	}
+	
 	/**
 	 * 跳转至分类页面
 	 * @return
@@ -454,6 +492,19 @@ public class MainController {
 		
 		jsonMap.put("total", count);
 		jsonMap.put("rows", goodsList);
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/queryHtmlGoodsSPZSList")
+	@ResponseBody
+	public Map<String, Object> queryHtmlGoodsSPZSList(String accountId,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count = publicService.queryHtmlGoodsSPZSForInt(accountId);
+		List<HtmlGoodsSPZS> htmlGoodsList = publicService.queryHtmlGoodsSPZSList(accountId, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		jsonMap.put("rows", htmlGoodsList);
 		return jsonMap;
 	}
 	
@@ -549,6 +600,35 @@ public class MainController {
 	public String goGoodsLabelSetList() {
 
 		return "/merchant/goodsLabelSetList";
+	}
+	
+	/**
+	 * 跳转至商品展示模板快速生成页面
+	 * @return
+	 */
+	@RequestMapping(value="/goHtmlGoodsSPZSList")
+	public String goHtmlGoodsSPZSList() {
+		
+		return "/merchant/spzs/htmlGoodsList";
+	}
+	
+	/**
+	 * 跳转至模板编辑页面
+	 * @param type
+	 * @return
+	 */
+	@RequestMapping(value="/goEditModule")
+	public String goEditModule(HttpServletRequest request, String trade) {
+		
+		String url=null;
+		switch (trade) {
+		case "spzs":
+			List<ModuleSPZS> spxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq");
+			request.setAttribute("spxqList", spxqList);
+			url="/merchant/spzs/editModule";
+			break;
+		}
+		return url;
 	}
 	
 	/**

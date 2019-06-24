@@ -11,6 +11,7 @@ import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
+import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.HtmlTemplate;
 
 public interface PublicService {
@@ -21,6 +22,13 @@ public interface PublicService {
 	 * @return
 	 */
 	public int addGoodsPublic(Goods goods);
+
+	/**
+	 * 保存商品模板内容到数据库
+	 * @param htmlGoods
+	 * @return
+	 */
+	public int addHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoods);
 
 	/**
 	 * 获得所有跟当前用户有关的商品列表
@@ -68,6 +76,14 @@ public interface PublicService {
 	 * @return
 	 */
 	public int queryGoodsForInt(String accountId, String categoryId);
+
+	/**
+	 * 查询模板商品数量
+	 * @param accountId
+	 * @return
+	 */
+	public int queryHtmlGoodsSPZSForInt(String accountId);
+	
 	/**
 	 * 查询商品信息
 	 * @param accountId
@@ -88,6 +104,18 @@ public interface PublicService {
 	 * @return
 	 */
 	public List<Goods> queryGoodsList(int categoryID, String accountId);
+
+	/**
+	 * 根据模板类型、商户编号，查询商品信息
+	 * @param accountId
+	 * @param page
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
+	public List<HtmlGoodsSPZS> queryHtmlGoodsSPZSList(String accountId, int page, int rows, String sort,
+			String order);
 
 	/**
 	 * 编辑商户信息
@@ -145,5 +173,14 @@ public interface PublicService {
 	 * @param accountNumber
 	 */
 	public void initGoodsLabelSet(String accountNumber);
+
+	/**
+	 * 根据类型查询商品展示模板
+	 * @param type
+	 * @return
+	 */
+	public Object getModuleSPZSByType(String type);
+
+	public HtmlGoodsSPZS getHtmlGoods(String goodsNumber, String accountId);
 
 }
