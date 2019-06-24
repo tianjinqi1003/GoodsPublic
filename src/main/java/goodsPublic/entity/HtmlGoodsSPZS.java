@@ -22,6 +22,9 @@ public class HtmlGoodsSPZS implements Serializable {
 	private String spxqValue5;
 	private String spxqName6;
 	private String spxqValue6;
+	private String memo1;
+	private String memo2;
+	private String memo3;
 	private String qrCode;
 	private String gmtCreate;
 	private String goodsNumber;
@@ -109,6 +112,24 @@ public class HtmlGoodsSPZS implements Serializable {
 	}
 	public void setSpxqValue6(String spxqValue6) {
 		this.spxqValue6 = spxqValue6;
+	}
+	public String getMemo1() {
+		return memo1;
+	}
+	public void setMemo1(String memo1) {
+		this.memo1 = memo1;
+	}
+	public String getMemo2() {
+		return memo2;
+	}
+	public void setMemo2(String memo2) {
+		this.memo2 = memo2;
+	}
+	public String getMemo3() {
+		return memo3;
+	}
+	public void setMemo3(String memo3) {
+		this.memo3 = memo3;
 	}
 	public String getQrCode() {
 		return qrCode;

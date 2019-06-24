@@ -326,7 +326,7 @@
 		</trim>
 	</insert>
 	<insert id="addHtmlGoodsSPZS" parameterType="goodsPublic.entity.HtmlGoodsSPZS">
-		insert into html_goods
+		insert into html_goods_spzs
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="productName!=null">
 				productName,
@@ -366,6 +366,15 @@
 			</if>
 			<if test="spxqValue6!=null">
 				spxqValue6,
+			</if>
+			<if test="memo1!=null">
+				memo1,
+			</if>
+			<if test="memo2!=null">
+				memo2,
+			</if>
+			<if test="memo3!=null">
+				memo3,
 			</if>
 			<if test="qrCode!=null">
 				qrCode,
@@ -418,6 +427,15 @@
 			</if>
 			<if test="spxqValue6!=null">
 				#{spxqValue6},
+			</if>
+			<if test="memo1!=null">
+				#{memo1},
+			</if>
+			<if test="memo2!=null">
+				#{memo2},
+			</if>
+			<if test="memo3!=null">
+				#{memo3},
 			</if>
 			<if test="qrCode!=null">
 				#{qrCode},
@@ -845,7 +863,10 @@
 	<insert id="insertGoodsLabel">
 		insert into goods_label_set(`key`,module,isShow,isPublic,isCheck,accountNumber,sort) values(#{key},#{module},0,0,0,#{accountNumber},0)
 	</insert>
-	<select id="getModuleSPZSByType" resultType="goodsPublic.entity.ModuleSPZS">
+	<select id="getModuleSPZSBySPXQ" resultType="goodsPublic.entity.ModuleSPZS">
+		select * from module_spzs where type=#{param1}
+	</select>
+	<select id="getModuleSPZSByMemo" resultType="goodsPublic.entity.ModuleSPZS">
 		select * from module_spzs where type=#{param1}
 	</select>
 	<select id="getHtmlGoods" resultType="goodsPublic.entity.HtmlGoodsSPZS">

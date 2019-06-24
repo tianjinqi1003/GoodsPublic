@@ -167,6 +167,11 @@ public interface PublicMapper {
 	 * @param type 
 	 * @return
 	 */
-	public List<ModuleSPZS> getModuleSPZSByType(String type);
+	public List<ModuleSPZS> getModuleSPZSBySPXQ(String type);
 	public HtmlGoodsSPZS getHtmlGoods(String goodsNumber, String accountId);
+	/**
+	 * @param type
+	 * @return
+	 */
+	public ModuleSPZS getModuleSPZSByMemo(String type);
 }

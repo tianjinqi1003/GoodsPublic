@@ -162,29 +162,37 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/addHtmlGoodsSPZS",produces="plain/text; charset=UTF-8")
-	public String addHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoods,HttpServletRequest request) {
+	public String addHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS,HttpServletRequest request) {
 
 		String addr = request.getLocalAddr();
 		int port = request.getLocalPort();
 		String contextPath = request.getContextPath();
-		String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoods.getGoodsNumber()+"&accountId="+htmlGoods.getAccountNumber();
+		String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
 		
 		String goodsNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-		htmlGoods.setGoodsNumber(goodsNumber);
+		htmlGoodsSPZS.setGoodsNumber(goodsNumber);
 		
 		String fileName = goodsNumber + ".jpg";
 		String avaPath="/GoodsPublic/upload/"+fileName;
 		String path = "D:/resource";
         Qrcode.createQrCode(url, path, fileName);
 		
-		htmlGoods.setQrCode(avaPath);
-		int a=publicService.addHtmlGoodsSPZS(htmlGoods);
-		request.setAttribute("htmlGoods", "htmlGoods");
-		return "../../merchant/main/goBrowseHtmlGoodsSPZS?";
+        htmlGoodsSPZS.setQrCode(avaPath);
+		int a=publicService.addHtmlGoodsSPZS(htmlGoodsSPZS);
+		return "../../merchant/main/goBrowseHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
 	}
 	
+	/**
+	 * 这个是显示商品的模板内容，用于后台商户浏览
+	 * @param goodsNumber
+	 * @param accountNumber
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/goBrowseHtmlGoodsSPZS")
-	public String goBrowseHtmlGoods() {
+	public String goBrowseHtmlGoods(String goodsNumber, String accountNumber, HttpServletRequest request) {
+		HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoods(goodsNumber,accountNumber);
+		request.setAttribute("htmlGoodsSPZS", htmlGoodsSPZS);
 		return "/merchant/spzs/browseHtmlGoods";
 	}
 	
@@ -408,12 +416,19 @@ public class MainController {
 		return "/merchant/show";
 	}
 	
-	@RequestMapping(value="/goShowHtmlGoods",method=RequestMethod.GET)
-	public String goShowHtmlGoods(String goodsNumber,String accountId,HttpServletRequest request) {
+	/**
+	 * 这个是显示商品的模板内容，用于前端手机上显示
+	 * @param goodsNumber
+	 * @param accountId
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/goShowHtmlGoodsSPZS",method=RequestMethod.GET)
+	public String goShowHtmlGoodsSPZS(String goodsNumber,String accountId,HttpServletRequest request) {
 		
-		HtmlGoodsSPZS htmlGoods = publicService.getHtmlGoods(goodsNumber,accountId);
-		request.setAttribute("htmlGoods", htmlGoods);
-		return "/merchant/showHtmlGoods";
+		HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoods(goodsNumber,accountId);
+		request.setAttribute("htmlGoodsSPZS", htmlGoodsSPZS);
+		return "/merchant/spzs/showHtmlGoods";
 	}
 	
 	/**
@@ -625,8 +640,20 @@ public class MainController {
 		case "spzs":
 			List<ModuleSPZS> spxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq");
 			request.setAttribute("spxqList", spxqList);
+			
+			String memo1 = (String)publicService.getModuleSPZSByType("memo1");
+			request.setAttribute("memo1", memo1);
+			
+			String memo2 = (String)publicService.getModuleSPZSByType("memo2");
+			request.setAttribute("memo2", memo2);
+			
+			String memo3 = (String)publicService.getModuleSPZSByType("memo3");
+			request.setAttribute("memo3", memo3);
+			
+			String image1 = (String)publicService.getModuleSPZSByType("image1");
+			request.setAttribute("image1", image1);
+			
 			url="/merchant/spzs/editModule";
-			break;
 		}
 		return url;
 	}

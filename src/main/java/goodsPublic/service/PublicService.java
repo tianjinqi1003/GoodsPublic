@@ -183,4 +183,5 @@ public interface PublicService {
 
 	public HtmlGoodsSPZS getHtmlGoods(String goodsNumber, String accountId);
 
+
 }

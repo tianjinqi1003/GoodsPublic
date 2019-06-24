@@ -172,7 +172,7 @@
 					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
 					<li class="layui-nav-item">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-						<a href="<%=basePath%>merchant/main/goHtmlGoodsSPZSList?trade=spzs&accountId=${sessionScope.user.id }">
+						<a href="<%=basePath%>merchant/main/goHtmlGoodsSPZSList?accountId=${sessionScope.user.id }">
 							&nbsp;&nbsp;&nbsp;商品展示
 						</a>
 					</li>

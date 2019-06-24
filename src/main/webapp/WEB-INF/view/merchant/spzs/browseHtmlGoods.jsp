@@ -9,10 +9,59 @@
 <body>
 <div>预览</div>
 <div>
-	${requestScope.htmlGoods.htmlContent }
+	<table id="spxq_tab">
+		<tr>
+			<td>
+				${requestScope.htmlGoodsSPZS.spxqName1 }
+			</td>
+			<td>
+				${requestScope.htmlGoodsSPZS.spxqValue1 }
+			</td>
+		</tr>
+		<tr>
+			<td>
+				${requestScope.htmlGoodsSPZS.spxqName2 }
+			</td>
+			<td>
+				${requestScope.htmlGoodsSPZS.spxqValue2 }
+			</td>
+		</tr>
+		<tr>
+			<td>
+				${requestScope.htmlGoodsSPZS.spxqName3 }
+			</td>
+			<td>
+				${requestScope.htmlGoodsSPZS.spxqValue3 }
+			</td>
+		</tr>
+		<tr>
+			<td>
+				${requestScope.htmlGoodsSPZS.spxqName4 }
+			</td>
+			<td>
+				${requestScope.htmlGoodsSPZS.spxqValue4 }
+			</td>
+		</tr>
+		<tr>
+			<td>
+				${requestScope.htmlGoodsSPZS.spxqName5 }
+			</td>
+			<td>
+				${requestScope.htmlGoodsSPZS.spxqValue5 }
+			</td>
+		</tr>
+		<tr>
+			<td>
+				${requestScope.htmlGoodsSPZS.spxqName6 }
+			</td>
+			<td>
+				${requestScope.htmlGoodsSPZS.spxqValue6 }
+			</td>
+		</tr>
+	</table>
 </div>
 <div>
-	<img alt="" src="${requestScope.htmlGoods.qrCode }" />
+	<img alt="" src="${requestScope.htmlGoodsSPZS.qrCode }" />
 </div>
 </body>
 </html>

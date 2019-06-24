@@ -22,15 +22,20 @@ $(function(){
 		width:setFitWidthInParent("body"),
 		pagination:true,
 		pageSize:10,
-		queryParams:{trade:'${param.trade}',accountId:'${sessionScope.user.id}'},
+		queryParams:{accountId:'${sessionScope.user.id}'},
 		columns:[[
 			{field:"productName",title:"名称",width:100},
             {field:"gmtCreate",title:"创建时间",width:100},
-            {field:"id",title:"操作",width:100}
+            {field:"id",title:"操作",width:100,formatter:function(){
+            	var str="<a>详情</a>"
+            	+"<a>编辑</a>"
+            	+"<a>删除</a>";
+            	return str;
+            }}
 	    ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
-				$(this).datagrid("appendRow",{productName:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/goEditModule?trade=${param.trade}\">点击生成商品模板</a><div>"});
+				$(this).datagrid("appendRow",{productName:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/goEditModule?trade=spzs\">点击生成商品模板</a><div>"});
 				$(this).datagrid("mergeCells",{index:0,field:"productName",colspan:3});
 				data.total=0;
 			}
