@@ -654,6 +654,12 @@ public class MainController {
 			String image1 = (String)publicService.getModuleSPZSByType("image1");
 			request.setAttribute("image1", image1);
 			
+			String image2 = (String)publicService.getModuleSPZSByType("image2");
+			request.setAttribute("image2", image2);
+			
+			String image3 = (String)publicService.getModuleSPZSByType("image3");
+			request.setAttribute("image3", image3);
+			
 			url="/merchant/spzs/editModule";
 		}
 		return url;

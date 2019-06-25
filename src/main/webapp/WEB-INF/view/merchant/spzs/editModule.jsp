@@ -45,45 +45,63 @@ $(function(){
 	
 });
 
+function showOptionDiv(o){
+	//console.log($("#image1_div").css("margin-top"));
+	$("#option_div").css("display","block");
+}
+
+function hideOptionDiv(){
+	$("#option_div").css("display","none");
+}
+
 function addHtmlGoodsSPZS(){
 	document.getElementById("sub_but").click();
 }
 </script>
 </head>
-<body>
+<body style="background-color: #eee;">
 <div>编辑</div>
 <form id="form1" name="form1" method="post" action="addHtmlGoodsSPZS" enctype="multipart/form-data">
-<div id="main_div">
+<div id="main_div" style="width: 650px;margin: 0 auto;background-color: #fff;">
 	<div>
-		<textarea id="memo1" name="memo1" cols="100" rows="8" style="width:700px;height:150px;visibility:hidden;"><%=htmlspecialchars(memo1) %></textarea>
+		<input type="text" id="productName" name="productName" placeholder="请输入标题" style="width: 100%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;"/>
 	</div>
-	<div id="image1_div">
-		<img alt="" src="${requestScope.image1 }" style="width: 200px;height: 200px;">
+	<div id="image1_div" style="width: 650px;height: 650px;line-height:600px;text-align: center;">
+		<img alt="" src="${requestScope.image1 }" style="width: 600px;height: 600px;margin-top: 25px;">
 	</div>
 	<div>
-		<table id="spxq_tab" style="width: 500px;">
-			<tr height="60">
-				<td colspan="2" style="text-align: center;background-color: #999;">商品详情</td>
+		<textarea id="memo1" name="memo1" cols="100" rows="8" style="width:650px;height:150px;visibility:hidden;"><%=htmlspecialchars(memo1) %></textarea>
+	</div>
+	<div style="margin-top: 20px;">
+		<table id="spxq_tab" style="width: 600px;margin: 0 auto;border: #eee solid 1px;" onmousemove="showOptionDiv(this);">
+			<tr style="height:60px;">
+				<td colspan="2" style="text-align: center;background-color: #eee;">商品详情</td>
 			</tr>
 		<c:forEach items="${requestScope.spxqList }" var="spxq" varStatus="status">
 			<tr height="50">
 				<input type="hidden" name="spxqName${status.index+1 }" value="${spxq.name }" />
 				<input type="hidden" name="spxqValue${status.index+1 }" value="${spxq.value }" />
-				<td>
+				<td style="width:30%;border: #eee solid 1px;padding-left: 20px;">
 					${spxq.name }
 				</td>
-				<td>
+				<td style="width:70%;border: #eee solid 1px;">
 					${spxq.value }
 				</td>
 			</tr>
 		</c:forEach>
 		</table>
 	</div>
-	<div>
-		<textarea id="memo2" name="memo2" cols="100" rows="8" style="width:700px;height:150px;visibility:hidden;"><%=htmlspecialchars(memo2) %></textarea>
+	<div style="margin-top: 20px;">
+		<textarea id="memo2" name="memo2" cols="100" rows="8" style="width:650px;height:220px;visibility:hidden;"><%=htmlspecialchars(memo2) %></textarea>
 	</div>
-	<div>
-		<textarea id="memo3" name="memo3" cols="100" rows="8" style="width:700px;height:150px;visibility:hidden;"><%=htmlspecialchars(memo3) %></textarea>
+	<div id="image2_div" style="width: 650px;height: 650px;line-height:600px;text-align: center;">
+		<img alt="" src="${requestScope.image2 }" style="width: 600px;height: 600px;margin-top: 25px;">
+	</div>
+	<div id="image3_div" style="width: 650px;height: 650px;line-height:600px;text-align: center;">
+		<img alt="" src="${requestScope.image3 }" style="width: 600px;height: 600px;margin-top: 25px;">
+	</div>
+	<div style="margin-top: 20px;">
+		<textarea id="memo3" name="memo3" cols="100" rows="8" style="width:650px;height:550px;visibility:hidden;"><%=htmlspecialchars(memo3) %></textarea>
 	</div>
 </div>
 	<input type="hidden" id="accountNumber_hid" name="accountNumber" value="${sessionScope.user.id }" />
@@ -92,6 +110,13 @@ function addHtmlGoodsSPZS(){
 	<input type="button" value="生成二维码" onclick="addHtmlGoodsSPZS();"/>
 </div>
 </form>
+<div id="option_div" style="width:100%;position:absolute;margin-top: -500px;display:none;z-index: 1;">
+	<div style="width: 150px;margin:0 auto;">
+		<a>编辑</a>|
+		<a>删除</a>|
+		<a onclick="hideOptionDiv();">关闭</a>
+	</div>
+</div>
 </body>
 </html>
 
