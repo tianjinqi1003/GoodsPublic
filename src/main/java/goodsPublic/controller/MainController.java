@@ -164,13 +164,14 @@ public class MainController {
 	@RequestMapping(value="/addHtmlGoodsSPZS",produces="plain/text; charset=UTF-8")
 	public String addHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS,HttpServletRequest request) {
 
+		String goodsNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+		htmlGoodsSPZS.setGoodsNumber(goodsNumber);
+		
 		String addr = request.getLocalAddr();
 		int port = request.getLocalPort();
 		String contextPath = request.getContextPath();
-		String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
-		
-		String goodsNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-		htmlGoodsSPZS.setGoodsNumber(goodsNumber);
+		//String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
+		String url = "http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
 		
 		String fileName = goodsNumber + ".jpg";
 		String avaPath="/GoodsPublic/upload/"+fileName;

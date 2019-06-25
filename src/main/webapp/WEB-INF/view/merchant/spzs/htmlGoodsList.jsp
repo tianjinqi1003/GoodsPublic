@@ -7,7 +7,15 @@
 <title>商品展示模板列表</title>
 <%@include file="../js.jsp"%>
 <script type="text/javascript">
+var path='<%=basePath %>';
 $(function(){
+	$("#add_but").linkbutton({
+		iconCls:"icon-add",
+		onClick:function(){
+			location.href=path+"merchant/main/goEditModule?trade=spzs";
+		}
+	});
+	
 	$("#remove_but").linkbutton({
 		iconCls:"icon-remove",
 		onClick:function(){
@@ -60,6 +68,7 @@ function setFitWidthInParent(o){
 	<%@include file="../side.jsp"%>
 	<div id="tab1_div" style="margin-top:20px;margin-left: 200px;">
 		<div id="toolbar">
+			<a id="add_but">添加</a>
 			<a id="remove_but">删除</a>
 		</div>
 		<table id="tab1">
