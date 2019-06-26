@@ -22,6 +22,14 @@ public class HtmlGoodsSPZS implements Serializable {
 	private String spxqValue5;
 	private String spxqName6;
 	private String spxqValue6;
+	private String spxqName7;
+	private String spxqValue7;
+	private String spxqName8;
+	private String spxqValue8;
+	private String spxqName9;
+	private String spxqValue9;
+	private String spxqName10;
+	private String spxqValue10;
 	private String memo1;
 	private String memo2;
 	private String memo3;
@@ -112,6 +120,54 @@ public class HtmlGoodsSPZS implements Serializable {
 	}
 	public void setSpxqValue6(String spxqValue6) {
 		this.spxqValue6 = spxqValue6;
+	}
+	public String getSpxqName7() {
+		return spxqName7;
+	}
+	public void setSpxqName7(String spxqName7) {
+		this.spxqName7 = spxqName7;
+	}
+	public String getSpxqValue7() {
+		return spxqValue7;
+	}
+	public void setSpxqValue7(String spxqValue7) {
+		this.spxqValue7 = spxqValue7;
+	}
+	public String getSpxqName8() {
+		return spxqName8;
+	}
+	public void setSpxqName8(String spxqName8) {
+		this.spxqName8 = spxqName8;
+	}
+	public String getSpxqValue8() {
+		return spxqValue8;
+	}
+	public void setSpxqValue8(String spxqValue8) {
+		this.spxqValue8 = spxqValue8;
+	}
+	public String getSpxqName9() {
+		return spxqName9;
+	}
+	public void setSpxqName9(String spxqName9) {
+		this.spxqName9 = spxqName9;
+	}
+	public String getSpxqValue9() {
+		return spxqValue9;
+	}
+	public void setSpxqValue9(String spxqValue9) {
+		this.spxqValue9 = spxqValue9;
+	}
+	public String getSpxqName10() {
+		return spxqName10;
+	}
+	public void setSpxqName10(String spxqName10) {
+		this.spxqName10 = spxqName10;
+	}
+	public String getSpxqValue10() {
+		return spxqValue10;
+	}
+	public void setSpxqValue10(String spxqValue10) {
+		this.spxqValue10 = spxqValue10;
 	}
 	public String getMemo1() {
 		return memo1;

@@ -170,8 +170,8 @@ public class MainController {
 		String addr = request.getLocalAddr();
 		int port = request.getLocalPort();
 		String contextPath = request.getContextPath();
-		//String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
-		String url = "http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
+		String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
+		//String url = "http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
 		
 		String fileName = goodsNumber + ".jpg";
 		String avaPath="/GoodsPublic/upload/"+fileName;
@@ -651,14 +651,14 @@ public class MainController {
 			String memo3 = (String)publicService.getModuleSPZSByType("memo3");
 			request.setAttribute("memo3", memo3);
 			
-			String image1 = (String)publicService.getModuleSPZSByType("image1");
-			request.setAttribute("image1", image1);
+			List<ModuleSPZS> image1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1");
+			request.setAttribute("image1List", image1List);
 			
-			String image2 = (String)publicService.getModuleSPZSByType("image2");
-			request.setAttribute("image2", image2);
+			List<ModuleSPZS> image2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2");
+			request.setAttribute("image2List", image2List);
 			
-			String image3 = (String)publicService.getModuleSPZSByType("image3");
-			request.setAttribute("image3", image3);
+			List<ModuleSPZS> image3List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image3");
+			request.setAttribute("image3List", image3List);
 			
 			url="/merchant/spzs/editModule";
 		}

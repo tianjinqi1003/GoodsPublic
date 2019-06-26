@@ -349,15 +349,15 @@ public class PublicServiceImpl implements PublicService {
 		Object obj=null;
 		switch (type) {
 		case "spxq":
+		case "image1":
+		case "image2":
+		case "image3":
 			List<ModuleSPZS> spxqList = publicDao.getModuleSPZSBySPXQ(type);
 			obj=spxqList;
 			break;
 		case "memo1":
 		case "memo2":
 		case "memo3":
-		case "image1":
-		case "image2":
-		case "image3":
 			ModuleSPZS moduleSPZS = publicDao.getModuleSPZSByMemo(type);
 			obj=moduleSPZS.getValue();
 			break;
