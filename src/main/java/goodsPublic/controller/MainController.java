@@ -162,24 +162,76 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/addHtmlGoodsSPZS",produces="plain/text; charset=UTF-8")
-	public String addHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS,HttpServletRequest request) {
-
-		String goodsNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-		htmlGoodsSPZS.setGoodsNumber(goodsNumber);
+	public String addHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS,
+			@RequestParam(value="file2_1") MultipartFile file2_1,
+			@RequestParam(value="file2_2") MultipartFile file2_2,
+			@RequestParam(value="file2_3") MultipartFile file2_3,
+			@RequestParam(value="file2_4") MultipartFile file2_4,
+			@RequestParam(value="file2_5",required=false) MultipartFile file2_5,
+			HttpServletRequest request) {
 		
-		String addr = request.getLocalAddr();
-		int port = request.getLocalPort();
-		String contextPath = request.getContextPath();
-		String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
-		//String url = "http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
+		System.out.println("111111111111111"+file2_1);
+		System.out.println("111111111111111"+file2_2);
+		System.out.println("111111111111111"+file2_3);
+		System.out.println("111111111111111"+file2_4);
+		System.out.println("111111111111111"+file2_5);
+		try {
+			MultipartFile[] file2Arr=new MultipartFile[5];
+			file2Arr[0]=file2_1;
+			file2Arr[1]=file2_2;
+			file2Arr[2]=file2_3;
+			file2Arr[3]=file2_4;
+			file2Arr[4]=file2_5;
+			for (int i = 0; i < file2Arr.length; i++) {
+				String jsonStr = null;
+				if(file2Arr[i]!=null&&file2Arr[i].getSize()>0) {
+					jsonStr = FileUploadUtils.appUploadContentImg(request,file2Arr[i],"");
+					JSONObject fileJson = JSONObject.fromObject(jsonStr);
+					if("成功".equals(fileJson.get("msg"))) {
+						JSONObject dataJO = (JSONObject)fileJson.get("data");
+						switch (i) {
+						case 0:
+							htmlGoodsSPZS.setImage2_1(dataJO.get("src").toString());
+							break;
+						case 1:
+							htmlGoodsSPZS.setImage2_2(dataJO.get("src").toString());
+							break;
+						case 2:
+							htmlGoodsSPZS.setImage2_3(dataJO.get("src").toString());
+							break;
+						case 3:
+							htmlGoodsSPZS.setImage2_4(dataJO.get("src").toString());
+							break;
+						case 4:
+							htmlGoodsSPZS.setImage2_5(dataJO.get("src").toString());
+							break;
+						}
+					}
+				}
+			}
 		
-		String fileName = goodsNumber + ".jpg";
-		String avaPath="/GoodsPublic/upload/"+fileName;
-		String path = "D:/resource";
-        Qrcode.createQrCode(url, path, fileName);
-		
-        htmlGoodsSPZS.setQrCode(avaPath);
-		int a=publicService.addHtmlGoodsSPZS(htmlGoodsSPZS);
+			/*
+			String goodsNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+			htmlGoodsSPZS.setGoodsNumber(goodsNumber);
+			
+			String addr = request.getLocalAddr();
+			int port = request.getLocalPort();
+			String contextPath = request.getContextPath();
+			String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
+			//String url = "http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
+			
+			String fileName = goodsNumber + ".jpg";
+			String avaPath="/GoodsPublic/upload/"+fileName;
+			String path = "D:/resource";
+	        Qrcode.createQrCode(url, path, fileName);
+			
+	        htmlGoodsSPZS.setQrCode(avaPath);
+			int a=publicService.addHtmlGoodsSPZS(htmlGoodsSPZS);
+			*/
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return "../../merchant/main/goBrowseHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
 	}
 	

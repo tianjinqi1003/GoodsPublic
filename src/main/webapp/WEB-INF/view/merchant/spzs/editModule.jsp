@@ -54,6 +54,7 @@ function hideOptionDiv(o){
 }
 
 function addHtmlGoodsSPZS(){
+	renameFile();
 	document.getElementById("sub_but").click();
 }
 
@@ -100,6 +101,13 @@ function editTdAfter(input){
 
 function closeTabModBgDiv(){
 	$("#tabModBg_div").css("display","none");
+}
+
+function renameFile(){
+	$("#uploadFile_div input[type='file']").each(function(i){
+		$(this).attr("name","file2_"+(i+1));
+		console.log($(this).attr("name"));
+	});
 }
 
 function closeImageModBgDiv(){
@@ -149,7 +157,10 @@ function removeInSPXQTab(){
 }
 
 function uploadImage(){
-	document.getElementById("uploadImage_inp").click();
+	var uuid=createUUID();
+	$("#uuid_hid").val(uuid);
+	$("#uploadFile_div").append("<input type=\"file\" id=\"uploadFile_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic(this)\"/>");
+	document.getElementById("uploadFile_inp").click();
 }
 
 function deleteImage(o){
@@ -157,14 +168,30 @@ function deleteImage(o){
 }
 
 function showQrcodePic(obj){
-	var imageTab=$("#imageMod_div table");
-	imageTab.find("tr").append("<td><img id=\"uploadImg\" style=\"width:100px;height:100px;\"/></td>");
+	var uuid=$("#uuid_hid").val();
+	var file=$(obj);
+	file.attr("id","file"+uuid);
+	file.attr("name","file"+uuid);
+	file.removeAttr("onchange");
+	file.css("display","none");
+	var fileHtml=file.prop("outerHTML");
 	
+	var imageTab=$("#imageMod_div table");
+	var length=imageTab.find("td[id^='file_td']").length;
+	imageTab.find("#upload_td").before("<td id=\"file_td0\" style=\"width: 25%;\">"
+			+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
+			+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+			//+"<input type=\"file\" id=\"file2_1\" name=\"file"+uuid+"\" onchange=\"showQrcodePic(this)\" style=\"display: none;\"/>"
+			+fileHtml
+		+"</td>");
+
 	var $file = $(obj);
     var fileObj = $file[0];
+    file=$file;
+	alert(file[0].files[0].size);
     var windowURL = window.URL || window.webkitURL;
     var dataURL;
-    var $img = $("#uploadImg");
+    var $img = $("#img"+uuid);
 
     if (fileObj && fileObj.files && fileObj.files[0]) {
         dataURL = windowURL.createObjectURL(fileObj.files[0]);
@@ -179,6 +206,20 @@ function showQrcodePic(obj){
         imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
 
     }
+}
+
+function createUUID() {
+    var s = [];
+    var hexDigits = "0123456789abcdef";
+    for (var i = 0; i < 36; i++) {
+        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+    }
+    s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
+    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
+    s[8] = s[13] = s[18] = s[23] = "-";
+ 
+    var uuid = s.join("");
+    return uuid;
 }
 </script>
 </head>
@@ -233,23 +274,32 @@ function showQrcodePic(obj){
 		<div id="tab_div">
 			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
 				<tr>
-					<td style="width: 25%;">
+					<td id="file_td0" style="width: 25%;">
 						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
-						<img id="item_img" alt="" src="/GoodsPublic/resource/images/spzs/573ab1fc91d98528915519d96dc2e6ec.png">
+						<img id="img2_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/spzs/41116eb627d54a623813c01bcadd05ce.png">
+						<!-- 
+						<input type="file" id="file2_1" name="file2_1" onchange="showQrcodePic(this)" style="display: none;"/>
+						 -->
 					</td>
+					<!-- 
 					<td style="width: 25%;">
 						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
 						<img alt="" src="/GoodsPublic/resource/images/spzs/573ab1fc91d98528915519d96dc2e6ec.png">
+						<input type="file" id="image2_2" onchange="showQrcodePic(this)" style="display: none;"/>
 					</td>
-					<td>
+					 -->
+					<td id="upload_td">
 						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage();">
 					</td>
 				</tr>
 			</table>
-			<input type="file" id="uploadImage_inp" onchange="showQrcodePic(this)"/>
+			<div id="uploadFile_div" style="display: none;">
+				<input type="file" id="file2_1" name="file" onchange="showQrcodePic(this)" />
+			</div>
+			<input type="hidden" id="uuid_hid"/>
 		</div>
 		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
-			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="removeInSPXQTab();">确&nbsp;认</div>
+			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeImageModBgDiv();">确&nbsp;认</div>
 			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeImageModBgDiv();">取&nbsp;消</div>
 		</div>
 	</div>

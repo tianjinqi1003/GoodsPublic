@@ -30,6 +30,11 @@ public class HtmlGoodsSPZS implements Serializable {
 	private String spxqValue9;
 	private String spxqName10;
 	private String spxqValue10;
+	private String image2_1;
+	private String image2_2;
+	private String image2_3;
+	private String image2_4;
+	private String image2_5;
 	private String memo1;
 	private String memo2;
 	private String memo3;
@@ -168,6 +173,36 @@ public class HtmlGoodsSPZS implements Serializable {
 	}
 	public void setSpxqValue10(String spxqValue10) {
 		this.spxqValue10 = spxqValue10;
+	}
+	public String getImage2_1() {
+		return image2_1;
+	}
+	public void setImage2_1(String image2_1) {
+		this.image2_1 = image2_1;
+	}
+	public String getImage2_2() {
+		return image2_2;
+	}
+	public void setImage2_2(String image2_2) {
+		this.image2_2 = image2_2;
+	}
+	public String getImage2_3() {
+		return image2_3;
+	}
+	public void setImage2_3(String image2_3) {
+		this.image2_3 = image2_3;
+	}
+	public String getImage2_4() {
+		return image2_4;
+	}
+	public void setImage2_4(String image2_4) {
+		this.image2_4 = image2_4;
+	}
+	public String getImage2_5() {
+		return image2_5;
+	}
+	public void setImage2_5(String image2_5) {
+		this.image2_5 = image2_5;
 	}
 	public String getMemo1() {
 		return memo1;
