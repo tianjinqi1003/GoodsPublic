@@ -103,7 +103,7 @@
 	<div style="width:650px;margin-top: 20px;">
 		${requestScope.htmlGoodsSPZS.memo2 }
 	</div>
-	<div id="image2_div" style="width: 650px;text-align: center;">
+	<div id="image2_div" style="width: 650px;text-align: center;margin-top: 20px;">
 		<c:if test="${requestScope.htmlGoodsSPZS.image2_1 ne null }">
 			<img alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }" style="width: 600px;height: 600px;margin-top: 25px;">
 		</c:if>
@@ -118,6 +118,23 @@
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsSPZS.image2_5 ne null }">
 			<img alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }" style="width: 600px;height: 600px;margin-top: 25px;">
+		</c:if>
+	</div>
+	<div id="image3_div" style="width: 650px;text-align: center;margin-top: 20px;">
+		<c:if test="${requestScope.htmlGoodsSPZS.image3_1 ne null }">
+			<img alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }" style="width: 600px;height: 600px;margin-top: 25px;">
+		</c:if>
+		<c:if test="${requestScope.htmlGoodsSPZS.image3_2 ne null }">
+			<img alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }" style="width: 600px;height: 600px;margin-top: 25px;">
+		</c:if>
+		<c:if test="${requestScope.htmlGoodsSPZS.image3_3 ne null }">
+			<img alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }" style="width: 600px;height: 600px;margin-top: 25px;">
+		</c:if>
+		<c:if test="${requestScope.htmlGoodsSPZS.image3_4 ne null }">
+			<img alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }" style="width: 600px;height: 600px;margin-top: 25px;">
+		</c:if>
+		<c:if test="${requestScope.htmlGoodsSPZS.image3_5 ne null }">
+			<img alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }" style="width: 600px;height: 600px;margin-top: 25px;">
 		</c:if>
 	</div>
 	<div style="width:650px;margin-top: 20px;">

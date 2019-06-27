@@ -268,7 +268,7 @@ public class MainController {
 							htmlGoodsSPZS.setImage2_1("/GoodsPublic/resource/images/spzs/41116eb627d54a623813c01bcadd05ce.png");
 							break;
 						case 10:
-							
+							htmlGoodsSPZS.setImage3_1("/GoodsPublic/resource/images/spzs/573ab1fc91d98528915519d96dc2e6ec.png");
 							break;
 						}
 					}
@@ -281,8 +281,8 @@ public class MainController {
 			String addr = request.getLocalAddr();
 			int port = request.getLocalPort();
 			String contextPath = request.getContextPath();
-			String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
-			//String url = "http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
+			//String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
+			String url = "http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
 			
 			String fileName = goodsNumber + ".jpg";
 			String avaPath="/GoodsPublic/upload/"+fileName;

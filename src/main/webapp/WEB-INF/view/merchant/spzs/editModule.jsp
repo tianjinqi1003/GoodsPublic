@@ -58,23 +58,62 @@ function addHtmlGoodsSPZS(){
 	document.getElementById("sub_but").click();
 }
 
-function openImageModBgDiv(){
+function openImage1ModBgDiv(){
+	$("#image1ModBg_div").css("display","block");
+}
+
+function openImage2ModBgDiv(){
 	$("#image2ModBg_div").css("display","block");
 }
 
+function openImage3ModBgDiv(){
+	$("#image3ModBg_div").css("display","block");
+}
+
+function deleteImage1Div(){
+	$("#image1_div").remove();
+}
+
+function deleteImage2Div(){
+	$("#image2_div").remove();
+}
+
+function deleteImage3Div(){
+	$("#image3_div").remove();
+}
+
 function renameFile(){
+	$("#uploadFile1_div input[type='file']").each(function(i){
+		$(this).attr("name","file1_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
 	$("#uploadFile2_div input[type='file']").each(function(i){
 		$(this).attr("name","file2_"+(i+1));
 		//console.log($(this).attr("name"));
 	});
+	$("#uploadFile3_div input[type='file']").each(function(i){
+		$(this).attr("name","file3_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
 }
 
-function closeImageModBgDiv(){
+function closeImage1ModBgDiv(){
+	$("#image1ModBg_div").css("display","none");
+}
+
+function closeImage2ModBgDiv(){
 	$("#image2ModBg_div").css("display","none");
 }
 
-function deleteImageDiv(){
-	$("#image2_div").remove();
+function closeImage3ModBgDiv(){
+	$("#image3ModBg_div").css("display","none");
+}
+
+function uploadImage1(){
+	var uuid=createUUID();
+	$("#uuid_hid1").val(uuid);
+	$("#uploadFile1_div").append("<input type=\"file\" id=\"uploadFile1_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic1(this)\"/>");
+	document.getElementById("uploadFile1_inp").click();
 }
 
 function uploadImage2(){
@@ -84,8 +123,54 @@ function uploadImage2(){
 	document.getElementById("uploadFile2_inp").click();
 }
 
+function uploadImage3(){
+	var uuid=createUUID();
+	$("#uuid_hid3").val(uuid);
+	$("#uploadFile3_div").append("<input type=\"file\" id=\"uploadFile3_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic3(this)\"/>");
+	document.getElementById("uploadFile3_inp").click();
+}
+
 function deleteImage(o){
 	$(o).parent().remove();
+}
+
+function showQrcodePic1(obj){
+	var uuid=$("#uuid_hid1").val();
+	var file=$(obj);
+	file.attr("id","file"+uuid);
+	file.attr("name","file"+uuid);
+	file.removeAttr("onchange");
+	file.css("display","none");
+	var fileHtml=file.prop("outerHTML");
+	
+	var imageTab=$("#image1Mod_div table");
+	var length=imageTab.find("td[id^='file_td']").length;
+	imageTab.find("#upload_td").before("<td id=\"file_td0\" style=\"width: 25%;\">"
+			+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
+			+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+			+fileHtml
+		+"</td>");
+
+	var $file = $(obj);
+    var fileObj = $file[0];
+    file=$file;
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var $img = $("#img"+uuid);
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        $img.attr("src", dataURL);
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
 }
 
 function showQrcodePic2(obj){
@@ -97,12 +182,51 @@ function showQrcodePic2(obj){
 	file.css("display","none");
 	var fileHtml=file.prop("outerHTML");
 	
-	var imageTab=$("#imageMod_div table");
+	var imageTab=$("#image2Mod_div table");
 	var length=imageTab.find("td[id^='file_td']").length;
 	imageTab.find("#upload_td").before("<td id=\"file_td0\" style=\"width: 25%;\">"
 			+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
 			+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
 			//+"<input type=\"file\" id=\"file2_1\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\" style=\"display: none;\"/>"
+			+fileHtml
+		+"</td>");
+
+	var $file = $(obj);
+    var fileObj = $file[0];
+    file=$file;
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var $img = $("#img"+uuid);
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        $img.attr("src", dataURL);
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
+}
+
+function showQrcodePic3(obj){
+	var uuid=$("#uuid_hid3").val();
+	var file=$(obj);
+	file.attr("id","file"+uuid);
+	file.attr("name","file"+uuid);
+	file.removeAttr("onchange");
+	file.css("display","none");
+	var fileHtml=file.prop("outerHTML");
+	
+	var imageTab=$("#image3Mod_div table");
+	var length=imageTab.find("td[id^='file_td']").length;
+	imageTab.find("#upload_td").before("<td id=\"file_td0\" style=\"width: 25%;\">"
+			+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
+			+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
 			+fileHtml
 		+"</td>");
 
@@ -157,11 +281,41 @@ function changeSPXQTrIfShow(index,o){
 </head>
 <body style="background-color: #eee;">
 <form id="form1" name="form1" method="post" action="addHtmlGoodsSPZS" enctype="multipart/form-data">
-<div id="image2ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
-	<div id="imageMod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
+<div id="image1ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
+	<div id="image1Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
 		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
 			<span style="margin-left: 20px;">图片模块</span>
-			<span style="float: right;margin-right: 20px;cursor: pointer;" onclick="closeImageModBgDiv();">关闭</span>
+			<span style="float: right;margin-right: 20px;cursor: pointer;" onclick="closeImage1ModBgDiv();">关闭</span>
+		</div>
+		<div id="tab_div">
+			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
+				<tr>
+					<td id="file_td0" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
+						<img id="img1_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/spzs/22ad5cebe49933335608eeb6356e6ab9.png">
+					</td>
+					<td id="upload_td">
+						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
+					</td>
+				</tr>
+			</table>
+			<div id="uploadFile1_div" style="display: none;">
+				<input type="file" id="file1_1" name="file" onchange="showQrcodePic1(this)" />
+			</div>
+			<input type="hidden" id="uuid_hid1"/>
+		</div>
+		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
+			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeImage1ModBgDiv();">确&nbsp;认</div>
+			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeImage1ModBgDiv();">取&nbsp;消</div>
+		</div>
+	</div>
+</div>
+
+<div id="image2ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
+	<div id="image2Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
+		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
+			<span style="margin-left: 20px;">图片模块</span>
+			<span style="float: right;margin-right: 20px;cursor: pointer;" onclick="closeImage2ModBgDiv();">关闭</span>
 		</div>
 		<div id="tab_div">
 			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
@@ -191,8 +345,38 @@ function changeSPXQTrIfShow(index,o){
 			<input type="hidden" id="uuid_hid2"/>
 		</div>
 		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
-			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeImageModBgDiv();">确&nbsp;认</div>
-			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeImageModBgDiv();">取&nbsp;消</div>
+			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeImage2ModBgDiv();">确&nbsp;认</div>
+			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeImage2ModBgDiv();">取&nbsp;消</div>
+		</div>
+	</div>
+</div>
+
+<div id="image3ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
+	<div id="image3Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
+		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
+			<span style="margin-left: 20px;">图片模块</span>
+			<span style="float: right;margin-right: 20px;cursor: pointer;" onclick="closeImage3ModBgDiv();">关闭</span>
+		</div>
+		<div id="tab_div">
+			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
+				<tr>
+					<td id="file_td0" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
+						<img id="img3_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/spzs/\573ab1fc91d98528915519d96dc2e6ec.png">
+					</td>
+					<td id="upload_td">
+						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage3();">
+					</td>
+				</tr>
+			</table>
+			<div id="uploadFile3_div" style="display: none;">
+				<input type="file" id="file3_1" name="file" onchange="showQrcodePic3(this)" />
+			</div>
+			<input type="hidden" id="uuid_hid3"/>
+		</div>
+		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
+			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeImage3ModBgDiv();">确&nbsp;认</div>
+			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeImage3ModBgDiv();">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
@@ -202,9 +386,17 @@ function changeSPXQTrIfShow(index,o){
 		<input type="text" id="productName" name="productName" placeholder="请输入标题" style="width: 100%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;"/>
 	</div>
 	<div id="image1_div" style="width: 650px;text-align: center;">
-		<c:forEach items="${requestScope.image1List }" var="image1" varStatus="status">
-		<img alt="" src="${image1.value }" style="width: 600px;height: 600px;margin-top: 25px;">
-		</c:forEach>
+		<div id="option_div" style="width:650px;position:absolute;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<div id="but_div" style="width:100px;height:30px;line-height:30px;margin:0 auto;margin-top: 50px;text-align:center;z-index: 1;background-color: #fff;border-radius:5px;display:none; ">
+				<a onclick="openImage1ModBgDiv();">编辑</a>|
+				<a onclick="deleteImage1Div();">删除</a>
+			</div>
+		</div>
+		<div onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<c:forEach items="${requestScope.image1List }" var="image1" varStatus="status">
+			<img alt="" src="${image1.value }" style="width: 600px;height: 600px;margin-top: 25px;">
+			</c:forEach>
+		</div>
 	</div>
 	<div style="margin-top: 25px;">
 		<textarea id="memo1" name="memo1" cols="100" rows="8" style="width:650px;height:150px;visibility:hidden;"><%=htmlspecialchars(memo1) %></textarea>
@@ -236,8 +428,8 @@ function changeSPXQTrIfShow(index,o){
 	<div id="image2_div" style="width: 650px;text-align: center;margin-top: 25px;">
 		<div id="option_div" style="width:650px;position:absolute;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<div id="but_div" style="width:100px;height:30px;line-height:30px;margin:0 auto;margin-top: 50px;text-align:center;z-index: 1;background-color: #fff;border-radius:5px;display:none; ">
-				<a onclick="openImageModBgDiv();">编辑</a>|
-				<a onclick="deleteImageDiv();">删除</a>
+				<a onclick="openImage2ModBgDiv();">编辑</a>|
+				<a onclick="deleteImage2Div();">删除</a>
 			</div>
 		</div>
 		<div onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
@@ -247,9 +439,17 @@ function changeSPXQTrIfShow(index,o){
 		</div>
 	</div>
 	<div id="image3_div" style="width: 650px;text-align: center;margin-top: 25px;">
-		<c:forEach items="${requestScope.image3List }" var="image3" varStatus="status">
-		<img alt="" src="${image3.value }" style="width: 600px;height: 600px;margin-top: 25px;">
-		</c:forEach>
+		<div id="option_div" style="width:650px;position:absolute;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<div id="but_div" style="width:100px;height:30px;line-height:30px;margin:0 auto;margin-top: 50px;text-align:center;z-index: 1;background-color: #fff;border-radius:5px;display:none; ">
+				<a onclick="openImage3ModBgDiv();">编辑</a>|
+				<a onclick="deleteImage3Div();">删除</a>
+			</div>
+		</div>
+		<div onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<c:forEach items="${requestScope.image3List }" var="image3" varStatus="status">
+			<img alt="" src="${image3.value }" style="width: 600px;height: 600px;margin-top: 25px;">
+			</c:forEach>
+		</div>
 	</div>
 	<div style="margin-top: 20px;">
 		<textarea id="memo3" name="memo3" cols="100" rows="8" style="width:650px;height:550px;visibility:hidden;"><%=htmlspecialchars(memo3) %></textarea>
