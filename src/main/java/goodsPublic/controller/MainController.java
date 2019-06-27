@@ -163,10 +163,10 @@ public class MainController {
 	
 	@RequestMapping(value="/addHtmlGoodsSPZS",produces="plain/text; charset=UTF-8")
 	public String addHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS,
-			@RequestParam(value="file2_1") MultipartFile file2_1,
-			@RequestParam(value="file2_2") MultipartFile file2_2,
-			@RequestParam(value="file2_3") MultipartFile file2_3,
-			@RequestParam(value="file2_4") MultipartFile file2_4,
+			@RequestParam(value="file2_1",required=false) MultipartFile file2_1,
+			@RequestParam(value="file2_2",required=false) MultipartFile file2_2,
+			@RequestParam(value="file2_3",required=false) MultipartFile file2_3,
+			@RequestParam(value="file2_4",required=false) MultipartFile file2_4,
 			@RequestParam(value="file2_5",required=false) MultipartFile file2_5,
 			HttpServletRequest request) {
 		

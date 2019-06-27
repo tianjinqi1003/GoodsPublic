@@ -82,7 +82,7 @@ function openTabModBgDiv(){
 }
 
 function openImageModBgDiv(){
-	$("#imageModBg_div").css("display","block");
+	$("#image2ModBg_div").css("display","block");
 }
 
 function editTdBefore(td){
@@ -111,7 +111,7 @@ function renameFile(){
 }
 
 function closeImageModBgDiv(){
-	$("#imageModBg_div").css("display","none");
+	$("#image2ModBg_div").css("display","none");
 }
 
 function addSPXQTabTr(index){
@@ -156,19 +156,19 @@ function removeInSPXQTab(){
 	closeTabModBgDiv();
 }
 
-function uploadImage(){
+function uploadImage2(){
 	var uuid=createUUID();
-	$("#uuid_hid").val(uuid);
-	$("#uploadFile_div").append("<input type=\"file\" id=\"uploadFile_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic(this)\"/>");
-	document.getElementById("uploadFile_inp").click();
+	$("#uuid_hid2").val(uuid);
+	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\"/>");
+	document.getElementById("uploadFile2_inp").click();
 }
 
 function deleteImage(o){
 	$(o).parent().remove();
 }
 
-function showQrcodePic(obj){
-	var uuid=$("#uuid_hid").val();
+function showQrcodePic2(obj){
+	var uuid=$("#uuid_hid2").val();
 	var file=$(obj);
 	file.attr("id","file"+uuid);
 	file.attr("name","file"+uuid);
@@ -181,7 +181,7 @@ function showQrcodePic(obj){
 	imageTab.find("#upload_td").before("<td id=\"file_td0\" style=\"width: 25%;\">"
 			+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
 			+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
-			//+"<input type=\"file\" id=\"file2_1\" name=\"file"+uuid+"\" onchange=\"showQrcodePic(this)\" style=\"display: none;\"/>"
+			//+"<input type=\"file\" id=\"file2_1\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\" style=\"display: none;\"/>"
 			+fileHtml
 		+"</td>");
 
@@ -265,7 +265,7 @@ function createUUID() {
 	</div>
 </div>
 
-<div id="imageModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
+<div id="image2ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
 	<div id="imageMod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
 		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
 			<span style="margin-left: 20px;">图片模块</span>
@@ -278,25 +278,25 @@ function createUUID() {
 						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
 						<img id="img2_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/spzs/41116eb627d54a623813c01bcadd05ce.png">
 						<!-- 
-						<input type="file" id="file2_1" name="file2_1" onchange="showQrcodePic(this)" style="display: none;"/>
+						<input type="file" id="file2_1" name="file2_1" onchange="showQrcodePic2(this)" style="display: none;"/>
 						 -->
 					</td>
 					<!-- 
 					<td style="width: 25%;">
 						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
 						<img alt="" src="/GoodsPublic/resource/images/spzs/573ab1fc91d98528915519d96dc2e6ec.png">
-						<input type="file" id="image2_2" onchange="showQrcodePic(this)" style="display: none;"/>
+						<input type="file" id="image2_2" onchange="showQrcodePic2(this)" style="display: none;"/>
 					</td>
 					 -->
 					<td id="upload_td">
-						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage();">
+						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
 					</td>
 				</tr>
 			</table>
-			<div id="uploadFile_div" style="display: none;">
-				<input type="file" id="file2_1" name="file" onchange="showQrcodePic(this)" />
+			<div id="uploadFile2_div" style="display: none;">
+				<input type="file" id="file2_1" name="file" onchange="showQrcodePic2(this)" />
 			</div>
-			<input type="hidden" id="uuid_hid"/>
+			<input type="hidden" id="uuid_hid2"/>
 		</div>
 		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
 			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeImageModBgDiv();">确&nbsp;认</div>
