@@ -58,55 +58,14 @@ function addHtmlGoodsSPZS(){
 	document.getElementById("sub_but").click();
 }
 
-function openTabModBgDiv(){
-	$("#tabModBg_div").css("display","block");
-	var table=$("#tabModBg_div table");
-	table.empty();
-	table.append("<tr style=\"height: 50px;background-color: #eee;\">"
-			+"<td colspan=\"2\" style=\"text-align: center;\">商品详情</td>"
-			+"<td style=\"text-align: center;\">操作</td>"
-		+"</tr>");
-	$("#spxq_tab tr[id^='tr']").each(function(i){
-		var name=$(this).find("td").eq(0).text();
-		var value=$(this).find("td").eq(1).text();
-		
-		table.append("<tr id=\"tr"+(i+1)+"\" style=\"height: 40px;background-color: #fff;\">"
-				+"<td style=\"width: 20%;border: #eee solid 1px;padding-left: 20px;\" onclick=\"editTdBefore(this);\">"+name+"</td>"
-				+"<td style=\"width: 60%;border: #eee solid 1px;padding-left: 20px;\" onclick=\"editTdBefore(this);\">"+value+"</td>"
-				+"<td style=\"width: 20%;border: #eee solid 1px;padding-left: 20px;\">"
-				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/002.png\" onclick=\"addSPXQTabTr("+(i+1)+")\"/>"
-				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/003.png\" onclick=\"removeSPXQTabTr("+(i+1)+")\"/>"
-				+"</td>"
-			+"</tr>");
-	});
-}
-
 function openImageModBgDiv(){
 	$("#image2ModBg_div").css("display","block");
 }
 
-function editTdBefore(td){
-	var text=$(td).text();
-	$(td).html("<input type=\"text\" value=\""+text+"\" onblur=\"editTdAfter(this);\"/>");
-	$(td).find("input")[0].focus();
-	$(td).removeAttr("onclick");
-}
-
-function editTdAfter(input){
-	var value=$(input).val();
-	var td=$(input).parent();
-	td.text(value);
-	td.attr("onclick","editTdBefore(this)");
-}
-
-function closeTabModBgDiv(){
-	$("#tabModBg_div").css("display","none");
-}
-
 function renameFile(){
-	$("#uploadFile_div input[type='file']").each(function(i){
+	$("#uploadFile2_div input[type='file']").each(function(i){
 		$(this).attr("name","file2_"+(i+1));
-		console.log($(this).attr("name"));
+		//console.log($(this).attr("name"));
 	});
 }
 
@@ -114,46 +73,8 @@ function closeImageModBgDiv(){
 	$("#image2ModBg_div").css("display","none");
 }
 
-function addSPXQTabTr(index){
-	$("#tabModBg_div table tr").eq(index).after("<tr id=\"tr"+(index+1)+"\" style=\"height: 40px;background-color: #fff;\">"
-			+"<td style=\"width: 20%;border: #eee solid 1px;padding-left: 20px;\" onclick=\"editTdBefore(this);\"></td>"
-			+"<td style=\"width: 60%;border: #eee solid 1px;padding-left: 20px;\" onclick=\"editTdBefore(this);\"></td>"
-			+"<td style=\"width: 20%;border: #eee solid 1px;padding-left: 20px;\">"
-			+"<img alt=\"\" src=\"/GoodsPublic/resource/images/002.png\" onclick=\"addSPXQTabTr("+(index+1)+")\"/>"
-			+"<img alt=\"\" src=\"/GoodsPublic/resource/images/003.png\" onclick=\"removeSPXQTabTr("+(index+1)+")\"/>"
-			+"</td>"
-		+"</tr>");
-}
-
-function removeSPXQTabTr(index){
-	$("#tabModBg_div table tr").eq(index).remove();
-}
-
-function deleteSPXQDiv(){
-	$("#spxq_div").remove();
-}
-
 function deleteImageDiv(){
 	$("#image2_div").remove();
-}
-
-function removeInSPXQTab(){
-	var spxqTab=$("#spxq_div #spxq_tab");
-	spxqTab.find("tr[id^='tr']").remove();
-	
-	$("#tabModBg_div table tr[id^='tr']").each(function(i){
-		var name=$(this).find("td").eq(0).text();
-		var value=$(this).find("td").eq(1).text();
-		console.log(name+","+value);
-		
-		spxqTab.append("<tr id=\"tr"+(i+1)+"\" height=\"50\">"
-						+"<input type=\"hidden\" name=\"spxqName"+(i+1)+"\" value=\""+name+"\"/>"
-						+"<input type=\"hidden\" name=\"spxqValue"+(i+1)+"\" value=\""+value+"\"/>"
-						+"<td style=\"width:30%;border: #eee solid 1px;padding-left: 20px;\">"+name+"</td>"
-						+"<td style=\"width:70%;border: #eee solid 1px;\">"+value+"</td>"
-					+"</tr>");
-	});
-	closeTabModBgDiv();
 }
 
 function uploadImage2(){
@@ -188,7 +109,6 @@ function showQrcodePic2(obj){
 	var $file = $(obj);
     var fileObj = $file[0];
     file=$file;
-	alert(file[0].files[0].size);
     var windowURL = window.URL || window.webkitURL;
     var dataURL;
     var $img = $("#img"+uuid);
@@ -221,50 +141,22 @@ function createUUID() {
     var uuid = s.join("");
     return uuid;
 }
+
+function changeSPXQTrIfShow(index,o){
+	var ifShow=$("#spxqIfShow"+index).val();
+	if(ifShow=="true"){
+		$("#spxqIfShow"+index).val(false);
+		$(o).val("隐藏");
+	}
+	else{
+		$("#spxqIfShow"+index).val(true);
+		$(o).val("显示");
+	}
+}
 </script>
 </head>
 <body style="background-color: #eee;">
 <form id="form1" name="form1" method="post" action="addHtmlGoodsSPZS" enctype="multipart/form-data">
-
-<div id="tabModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
-	<div id="tabMod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
-		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
-			<span style="margin-left: 20px;">表格模块</span>
-			<span style="float: right;margin-right: 20px;cursor: pointer;" onclick="closeTabModBgDiv();">关闭</span>
-		</div>
-		<div id="tab_div">
-			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
-				<!-- 
-				<tr style="height: 50px;background-color: #eee;">
-					<td colspan="2" style="text-align: center;">商品详情</td>
-					<td style="text-align: center;">操作</td>
-				</tr>
-				<tr style="height: 40px;background-color: #fff;">
-					<td style="width: 20%;border: #eee solid 1px;padding-left: 20px;">aaa</td>
-					<td style="width: 60%;border: #eee solid 1px;padding-left: 20px;">bbb</td>
-					<td style="width: 20%;border: #eee solid 1px;padding-left: 20px;">
-						<img alt="" src="/GoodsPublic/resource/images/002.png"/>
-						<img alt="" src="/GoodsPublic/resource/images/003.png"/>
-					</td>
-				</tr>
-				<tr style="height: 40px;background-color: #fff;">
-					<td style="width: 20%;border: #eee solid 1px;padding-left: 20px;">aaa</td>
-					<td style="width: 60%;border: #eee solid 1px;padding-left: 20px;">bbb</td>
-					<td style="width: 20%;border: #eee solid 1px;padding-left: 20px;">
-						<img alt="" src="/GoodsPublic/resource/images/002.png"/>
-						<img alt="" src="/GoodsPublic/resource/images/003.png"/>
-					</td>
-				</tr>
-				 -->
-			</table>
-		</div>
-		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
-			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="removeInSPXQTab();">确&nbsp;认</div>
-			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeTabModBgDiv();">取&nbsp;消</div>
-		</div>
-	</div>
-</div>
-
 <div id="image2ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
 	<div id="imageMod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
 		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
@@ -318,22 +210,22 @@ function createUUID() {
 		<textarea id="memo1" name="memo1" cols="100" rows="8" style="width:650px;height:150px;visibility:hidden;"><%=htmlspecialchars(memo1) %></textarea>
 	</div>
 	<div id="spxq_div" style="margin-top: 20px;">
-		<div id="option_div" style="width:650px;position:absolute;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<div id="but_div" style="width:100px;height:30px;line-height:30px;margin:0 auto;margin-top: 30px;text-align:center;z-index: 1;background-color: #fff;border-radius:5px;display:none; ">
-				<a onclick="openTabModBgDiv();">编辑</a>|
-				<a onclick="deleteSPXQDiv();">删除</a>
-			</div>
-		</div>
-		<table id="spxq_tab" style="width: 600px;margin: 0 auto;border: #eee solid 1px;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<table id="spxq_tab" style="width: 600px;margin: 0 auto;border: #eee solid 1px;">
 			<tr style="height:60px;">
 				<td colspan="2" style="text-align: center;background-color: #eee;">商品详情</td>
+				<td style="text-align: center;background-color: #eee;">操作</td>
 			</tr>
 			<c:forEach items="${requestScope.spxqList }" var="spxq" varStatus="status">
 			<tr id="tr${status.index+1 }" height="50">
 				<input type="hidden" name="spxqName${status.index+1 }" value="${spxq.name }" />
-				<input type="hidden" name="spxqValue${status.index+1 }" value="${spxq.value }" />
-				<td style="width:30%;border: #eee solid 1px;padding-left: 20px;">${spxq.name }</td>
-				<td style="width:70%;border: #eee solid 1px;">${spxq.value }</td>
+				<td style="width:20%;border: #eee solid 1px;padding-left: 20px;">${spxq.name }</td>
+				<td style="width:70%;border: #eee solid 1px;padding-left: 20px;">
+					<input type="text" name="spxqValue${status.index+1 }" />
+				</td>
+				<td style="width:10%;border: #eee solid 1px;text-align: center;">
+					<input type="hidden" id="spxqIfShow${status.index+1 }" name="spxqIfShow${status.index+1 }" value="true" />
+					<input type="button" value="显示" onclick="changeSPXQTrIfShow(${status.index+1 },this)"/>
+				</td>
 			</tr>
 			</c:forEach>
 		</table>

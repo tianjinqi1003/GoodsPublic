@@ -337,11 +337,17 @@
 			<if test="spxqValue1!=null">
 				spxqValue1,
 			</if>
+			<if test="spxqIfShow1!=null">
+				spxqIfShow1,
+			</if>
 			<if test="spxqName2!=null">
 				spxqName2,
 			</if>
 			<if test="spxqValue2!=null">
 				spxqValue2,
+			</if>
+			<if test="spxqIfShow2!=null">
+				spxqIfShow2,
 			</if>
 			<if test="spxqName3!=null">
 				spxqName3,
@@ -349,11 +355,17 @@
 			<if test="spxqValue3!=null">
 				spxqValue3,
 			</if>
+			<if test="spxqIfShow3!=null">
+				spxqIfShow3,
+			</if>
 			<if test="spxqName4!=null">
 				spxqName4,
 			</if>
 			<if test="spxqValue4!=null">
 				spxqValue4,
+			</if>
+			<if test="spxqIfShow4!=null">
+				spxqIfShow4,
 			</if>
 			<if test="spxqName5!=null">
 				spxqName5,
@@ -361,11 +373,62 @@
 			<if test="spxqValue5!=null">
 				spxqValue5,
 			</if>
+			<if test="spxqIfShow5!=null">
+				spxqIfShow5,
+			</if>
 			<if test="spxqName6!=null">
 				spxqName6,
 			</if>
 			<if test="spxqValue6!=null">
 				spxqValue6,
+			</if>
+			<if test="spxqIfShow6!=null">
+				spxqIfShow6,
+			</if>
+			<if test="image1_1!=null">
+				image1_1,
+			</if>
+			<if test="image1_2!=null">
+				image1_2,
+			</if>
+			<if test="image1_3!=null">
+				image1_3,
+			</if>
+			<if test="image1_4!=null">
+				image1_4,
+			</if>
+			<if test="image1_5!=null">
+				image1_5,
+			</if>
+			<if test="image2_1!=null">
+				image2_1,
+			</if>
+			<if test="image2_2!=null">
+				image2_2,
+			</if>
+			<if test="image2_3!=null">
+				image2_3,
+			</if>
+			<if test="image2_4!=null">
+				image2_4,
+			</if>
+			<if test="image2_5!=null">
+				image2_5,
+			</if>
+			<if test="image3_1!=null">
+				image3_1,
+			</if>
+			<if test="image3_2!=null">
+				image3_2,
+			</if>
+			<if test="image3_3!=null">
+				image3_3,
+			</if>
+			<if test="image3_4!=null">
+				image3_4,
+			</if>
+			<if test="image3_5!=null">
+				image3_5,
 			</if>
 			<if test="memo1!=null">
 				memo1,
@@ -398,11 +461,17 @@
 			<if test="spxqValue1!=null">
 				#{spxqValue1},
 			</if>
+			<if test="spxqIfShow1!=null">
+				#{spxqIfShow1},
+			</if>
 			<if test="spxqName2!=null">
 				#{spxqName2},
 			</if>
 			<if test="spxqValue2!=null">
 				#{spxqValue2},
+			</if>
+			<if test="spxqIfShow2!=null">
+				#{spxqIfShow2},
 			</if>
 			<if test="spxqName3!=null">
 				#{spxqName3},
@@ -410,11 +479,17 @@
 			<if test="spxqValue3!=null">
 				#{spxqValue3},
 			</if>
+			<if test="spxqIfShow3!=null">
+				#{spxqIfShow3},
+			</if>
 			<if test="spxqName4!=null">
 				#{spxqName4},
 			</if>
 			<if test="spxqValue4!=null">
 				#{spxqValue4},
+			</if>
+			<if test="spxqIfShow4!=null">
+				#{spxqIfShow4},
 			</if>
 			<if test="spxqName5!=null">
 				#{spxqName5},
@@ -422,11 +497,62 @@
 			<if test="spxqValue5!=null">
 				#{spxqValue5},
 			</if>
+			<if test="spxqIfShow5!=null">
+				#{spxqIfShow5},
+			</if>
 			<if test="spxqName6!=null">
 				#{spxqName6},
 			</if>
 			<if test="spxqValue6!=null">
 				#{spxqValue6},
+			</if>
+			<if test="spxqIfShow6!=null">
+				#{spxqIfShow6},
+			</if>
+			<if test="image1_1!=null">
+				#{image1_1},
+			</if>
+			<if test="image1_2!=null">
+				#{image1_2},
+			</if>
+			<if test="image1_3!=null">
+				#{image1_3},
+			</if>
+			<if test="image1_4!=null">
+				#{image1_4},
+			</if>
+			<if test="image1_5!=null">
+				#{image1_5},
+			</if>
+			<if test="image2_1!=null">
+				#{image2_1},
+			</if>
+			<if test="image2_2!=null">
+				#{image2_2},
+			</if>
+			<if test="image2_3!=null">
+				#{image2_3},
+			</if>
+			<if test="image2_4!=null">
+				#{image2_4},
+			</if>
+			<if test="image2_5!=null">
+				#{image2_5},
+			</if>
+			<if test="image3_1!=null">
+				#{image3_1},
+			</if>
+			<if test="image3_2!=null">
+				#{image3_2},
+			</if>
+			<if test="image3_3!=null">
+				#{image3_3},
+			</if>
+			<if test="image3_4!=null">
+				#{image3_4},
+			</if>
+			<if test="image3_5!=null">
+				#{image3_5},
 			</if>
 			<if test="memo1!=null">
 				#{memo1},
