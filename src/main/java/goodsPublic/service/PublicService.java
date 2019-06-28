@@ -181,7 +181,9 @@ public interface PublicService {
 	 */
 	public Object getModuleSPZSByType(String type);
 
-	public HtmlGoodsSPZS getHtmlGoods(String goodsNumber, String accountId);
+	public HtmlGoodsSPZS getHtmlGoodsSPZS(String goodsNumber, String accountId);
+
+	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS);
 
 
 }

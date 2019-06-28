@@ -21,6 +21,7 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public int addHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoods);
+	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS);
 	//修改发布的产品信息
 	public int updataGoodsPublic(Goods articleInfo);
 	//查询所有的产品信息
@@ -168,7 +169,7 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public List<ModuleSPZS> getModuleSPZSBySPXQ(String type);
-	public HtmlGoodsSPZS getHtmlGoods(String goodsNumber, String accountId);
+	public HtmlGoodsSPZS getHtmlGoodsSPZS(String goodsNumber, String accountId);
 	/**
 	 * @param type
 	 * @return

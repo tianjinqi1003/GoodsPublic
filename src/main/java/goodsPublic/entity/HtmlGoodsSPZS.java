@@ -56,6 +56,7 @@ public class HtmlGoodsSPZS implements Serializable {
 	private String memo3;
 	private String qrCode;
 	private String gmtCreate;
+	private String gmtModified;
 	private String goodsNumber;
 	private String accountNumber;
 	public int getId() {
@@ -345,6 +346,12 @@ public class HtmlGoodsSPZS implements Serializable {
 	}
 	public void setGmtCreate(String gmtCreate) {
 		this.gmtCreate = gmtCreate;
+	}
+	public String getGmtModified() {
+		return gmtModified;
+	}
+	public void setGmtModified(String gmtModified) {
+		this.gmtModified = gmtModified;
 	}
 	public String getGoodsNumber() {
 		return goodsNumber;

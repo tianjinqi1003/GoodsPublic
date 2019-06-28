@@ -298,6 +298,109 @@ public class MainController {
 		return "../../merchant/main/goBrowseHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
 	}
 	
+	@RequestMapping(value="/finishEditHtmlGoodsSPZS",produces="plain/text; charset=UTF-8")
+	public String finishEditHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file1_2",required=false) MultipartFile file1_2,
+			@RequestParam(value="file1_3",required=false) MultipartFile file1_3,
+			@RequestParam(value="file1_4",required=false) MultipartFile file1_4,
+			@RequestParam(value="file1_5",required=false) MultipartFile file1_5,
+			@RequestParam(value="file2_1",required=false) MultipartFile file2_1,
+			@RequestParam(value="file2_2",required=false) MultipartFile file2_2,
+			@RequestParam(value="file2_3",required=false) MultipartFile file2_3,
+			@RequestParam(value="file2_4",required=false) MultipartFile file2_4,
+			@RequestParam(value="file2_5",required=false) MultipartFile file2_5,
+			@RequestParam(value="file3_1",required=false) MultipartFile file3_1,
+			@RequestParam(value="file3_2",required=false) MultipartFile file3_2,
+			@RequestParam(value="file3_3",required=false) MultipartFile file3_3,
+			@RequestParam(value="file3_4",required=false) MultipartFile file3_4,
+			@RequestParam(value="file3_5",required=false) MultipartFile file3_5,
+			HttpServletRequest request) {
+		
+		try {
+			MultipartFile[] fileArr=new MultipartFile[15];
+			fileArr[0]=file1_1;
+			fileArr[1]=file1_2;
+			fileArr[2]=file1_3;
+			fileArr[3]=file1_4;
+			fileArr[4]=file1_5;
+			fileArr[5]=file2_1;
+			fileArr[6]=file2_2;
+			fileArr[7]=file2_3;
+			fileArr[8]=file2_4;
+			fileArr[9]=file2_5;
+			fileArr[10]=file3_1;
+			fileArr[11]=file3_2;
+			fileArr[12]=file3_3;
+			fileArr[13]=file3_4;
+			fileArr[14]=file3_5;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						jsonStr = FileUploadUtils.appUploadContentImg(request,fileArr[i],"");
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								htmlGoodsSPZS.setImage1_1(dataJO.get("src").toString());
+								break;
+							case 1:
+								htmlGoodsSPZS.setImage1_2(dataJO.get("src").toString());
+								break;
+							case 2:
+								htmlGoodsSPZS.setImage1_3(dataJO.get("src").toString());
+								break;
+							case 3:
+								htmlGoodsSPZS.setImage1_4(dataJO.get("src").toString());
+								break;
+							case 4:
+								htmlGoodsSPZS.setImage1_5(dataJO.get("src").toString());
+								break;
+							case 5:
+								htmlGoodsSPZS.setImage2_1(dataJO.get("src").toString());
+								break;
+							case 6:
+								htmlGoodsSPZS.setImage2_2(dataJO.get("src").toString());
+								break;
+							case 7:
+								htmlGoodsSPZS.setImage2_3(dataJO.get("src").toString());
+								break;
+							case 8:
+								htmlGoodsSPZS.setImage2_4(dataJO.get("src").toString());
+								break;
+							case 9:
+								htmlGoodsSPZS.setImage2_5(dataJO.get("src").toString());
+								break;
+							case 10:
+								htmlGoodsSPZS.setImage3_1(dataJO.get("src").toString());
+								break;
+							case 11:
+								htmlGoodsSPZS.setImage3_2(dataJO.get("src").toString());
+								break;
+							case 12:
+								htmlGoodsSPZS.setImage3_3(dataJO.get("src").toString());
+								break;
+							case 13:
+								htmlGoodsSPZS.setImage3_4(dataJO.get("src").toString());
+								break;
+							case 14:
+								htmlGoodsSPZS.setImage3_5(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+				}
+			}
+			int a=publicService.editHtmlGoodsSPZS(htmlGoodsSPZS);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "../../merchant/main/goBrowseHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
+	}
+	
 	/**
 	 * 这个是显示商品的模板内容，用于后台商户浏览
 	 * @param goodsNumber
@@ -307,7 +410,7 @@ public class MainController {
 	 */
 	@RequestMapping("/goBrowseHtmlGoodsSPZS")
 	public String goBrowseHtmlGoods(String goodsNumber, String accountNumber, HttpServletRequest request) {
-		HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoods(goodsNumber,accountNumber);
+		HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(goodsNumber,accountNumber);
 		request.setAttribute("htmlGoodsSPZS", htmlGoodsSPZS);
 		return "/merchant/spzs/browseHtmlGoods";
 	}
@@ -542,7 +645,7 @@ public class MainController {
 	@RequestMapping(value="/goShowHtmlGoodsSPZS",method=RequestMethod.GET)
 	public String goShowHtmlGoodsSPZS(String goodsNumber,String accountId,HttpServletRequest request) {
 		
-		HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoods(goodsNumber,accountId);
+		HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(goodsNumber,accountId);
 		request.setAttribute("htmlGoodsSPZS", htmlGoodsSPZS);
 		return "/merchant/spzs/showHtmlGoods";
 	}
@@ -744,7 +847,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 跳转至模板编辑页面
+	 * 跳转至模板添加页面
 	 * @param type
 	 * @return
 	 */
@@ -776,6 +879,28 @@ public class MainController {
 			request.setAttribute("image3List", image3List);
 			
 			url="/merchant/spzs/addModule";
+			break;
+		}
+		return url;
+	}
+	
+	/**
+	 * 跳转至模板编辑页面
+	 * @param request
+	 * @param trade
+	 * @param goodsNumber
+	 * @return
+	 */
+	@RequestMapping(value="/goEditModule")
+	public String goEditModule(HttpServletRequest request, String trade, String goodsNumber, String accountNumber) {
+		
+		String url=null;
+		switch (trade) {
+		case "spzs":
+			HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(goodsNumber,accountNumber);
+			request.setAttribute("htmlGoodsSPZS", htmlGoodsSPZS);
+			url="/merchant/spzs/editModule";
+			break;
 		}
 		return url;
 	}

@@ -43,6 +43,12 @@ public class PublicServiceImpl implements PublicService {
 		return publicDao.addHtmlGoodsSPZS(htmlGoods);
 	}
 	
+	@Override
+	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS) {
+		// TODO Auto-generated method stub
+		return publicDao.editHtmlGoodsSPZS(htmlGoodsSPZS);
+	}
+	
 	//展示商品接口，将商品从数据库中读取出来展示到对应的页面当中
 	
 	//获得所有跟当前用户有关的商品列表(1代表已存在，0代表不存在)
@@ -366,9 +372,9 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public HtmlGoodsSPZS getHtmlGoods(String goodsNumber, String accountId) {
+	public HtmlGoodsSPZS getHtmlGoodsSPZS(String goodsNumber, String accountId) {
 		// TODO Auto-generated method stub
-		return publicDao.getHtmlGoods(goodsNumber,accountId);
+		return publicDao.getHtmlGoodsSPZS(goodsNumber,accountId);
 	}
 
 }

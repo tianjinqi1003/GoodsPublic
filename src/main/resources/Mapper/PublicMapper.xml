@@ -575,6 +575,122 @@
 			</if>
 		</trim>
 	</insert>
+	<update id="editHtmlGoodsSPZS" parameterType="goodsPublic.entity.HtmlGoodsSPZS">
+		update html_goods_spzs set
+		<if test="productName!=null">
+			productName=#{productName},
+		</if>
+		<if test="spxqName1!=null">
+			spxqName1=#{spxqName1},
+		</if>
+		<if test="spxqValue1!=null">
+			spxqValue1=#{spxqValue1},
+		</if>
+		<if test="spxqIfShow1!=null">
+			spxqIfShow1=#{spxqIfShow1},
+		</if>
+		<if test="spxqName2!=null">
+			spxqName2=#{spxqName2},
+		</if>
+		<if test="spxqValue2!=null">
+			spxqValue2=#{spxqValue2},
+		</if>
+		<if test="spxqIfShow2!=null">
+			spxqIfShow2=#{spxqIfShow2},
+		</if>
+		<if test="spxqName3!=null">
+			spxqName3=#{spxqName3},
+		</if>
+		<if test="spxqValue3!=null">
+			spxqValue3=#{spxqValue3},
+		</if>
+		<if test="spxqIfShow3!=null">
+			spxqIfShow3=#{spxqIfShow3},
+		</if>
+		<if test="spxqName4!=null">
+			spxqName4=#{spxqName4},
+		</if>
+		<if test="spxqValue4!=null">
+			spxqValue4=#{spxqValue4},
+		</if>
+		<if test="spxqIfShow4!=null">
+			spxqIfShow4=#{spxqIfShow4},
+		</if>
+		<if test="spxqName5!=null">
+			spxqName5=#{spxqName5},
+		</if>
+		<if test="spxqValue5!=null">
+			spxqValue5=#{spxqValue5},
+		</if>
+		<if test="spxqIfShow5!=null">
+			spxqIfShow5=#{spxqIfShow5},
+		</if>
+		<if test="spxqName6!=null">
+			spxqName6=#{spxqName6},
+		</if>
+		<if test="spxqValue6!=null">
+			spxqValue6=#{spxqValue6},
+		</if>
+		<if test="spxqIfShow6!=null">
+			spxqIfShow6=#{spxqIfShow6},
+		</if>
+		<if test="image1_1!=null">
+			image1_1=#{image1_1},
+		</if>
+		<if test="image1_2!=null">
+			image1_2=#{image1_2},
+		</if>
+		<if test="image1_3!=null">
+			image1_3=#{image1_3},
+		</if>
+		<if test="image1_4!=null">
+			image1_4=#{image1_4},
+		</if>
+		<if test="image1_5!=null">
+			image1_5=#{image1_5},
+		</if>
+		<if test="image2_1!=null">
+			image2_1=#{image2_1},
+		</if>
+		<if test="image2_2!=null">
+			image2_2=#{image2_2},
+		</if>
+		<if test="image2_3!=null">
+			image2_3=#{image2_3},
+		</if>
+		<if test="image2_4!=null">
+			image2_4=#{image2_4},
+		</if>
+		<if test="image2_5!=null">
+			image2_5=#{image2_5},
+		</if>
+		<if test="image3_1!=null">
+			image3_1=#{image3_1},
+		</if>
+		<if test="image3_2!=null">
+			image3_2=#{image3_2},
+		</if>
+		<if test="image3_3!=null">
+			image3_3=#{image3_3},
+		</if>
+		<if test="image3_4!=null">
+			image3_4=#{image3_4},
+		</if>
+		<if test="image3_5!=null">
+			image3_5=#{image3_5},
+		</if>
+		<if test="memo1!=null">
+			memo1=#{memo1},
+		</if>
+		<if test="memo2!=null">
+			memo2=#{memo2},
+		</if>
+		<if test="memo3!=null">
+			memo3=#{memo3},
+		</if>
+		gmtCreate=now()
+		where id=#{id}
+	</update>
 	<update id="updateQrcode" parameterType="java.lang.String">
 		update public_goods set qrCode=#{param1} where goodsNumber=#{param2}
 	</update>
@@ -995,7 +1111,7 @@
 	<select id="getModuleSPZSByMemo" resultType="goodsPublic.entity.ModuleSPZS">
 		select * from module_spzs where type=#{param1}
 	</select>
-	<select id="getHtmlGoods" resultType="goodsPublic.entity.HtmlGoodsSPZS">
+	<select id="getHtmlGoodsSPZS" resultType="goodsPublic.entity.HtmlGoodsSPZS">
 		select * from html_goods_spzs where goodsNumber=#{param1} and accountNumber=#{param2}
 	</select>
 </mapper>
