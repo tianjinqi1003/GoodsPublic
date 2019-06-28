@@ -8,33 +8,33 @@
 <title>预览</title>
 <%@include file="../js.jsp"%>
 </head>
-<body style="background-color: #eee;">
-<div id="main_div" style="width: 800px;margin: 0 auto;background-color: #eee;">
+<body style="background-color: #fbfbfb;">
+<div id="main_div" style="width: 800px;margin: 0 auto;background-color: #fbfbfb;">
 	<div style="width: 100%;height: 60px;border:1px solid #a7e1c4;background-color: #ebf8f2;">
 		<img alt="" src="/GoodsPublic/resource/images/006.png" style="width: 30px;height: 30px;margin-top: 15px;margin-left: 30px;">
 		<span style="margin-top: 18px;margin-left: 30px;font-size: 15px;position: absolute;">生码成功！</span>
-		<a style="float: right;margin-top: 18px;margin-right: 50px;color: #357bb3;">新建二维码</a>
-		<a style="float: right;margin-top: 18px;margin-right: 40px;color: #357bb3;">返回列表页</a>
+		<a href="${pageContext.request.contextPath}/merchant/main/goAddModule?trade=spzs" style="float: right;margin-top: 18px;margin-right: 50px;color: #357bb3;">新建二维码</a>
+		<a href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsSPZSList" style="float: right;margin-top: 18px;margin-right: 40px;color: #357bb3;">返回列表页</a>
 	</div>
 	<div id="left_div" style="width: 350px;margin-top: 20px;background-color: #fff;float: left;">
 		<div style="width: 95%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;">
 			${requestScope.htmlGoodsSPZS.productName }
 		</div>
-		<div id="image1_div" style="width: 650px;text-align: center;">
+		<div id="image1_div" style="width: 95%;text-align: center;">
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_1 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image1_1 }" style="width: 600px;height: 600px;margin-top: 25px;">
+				<img alt="" src="${requestScope.htmlGoodsSPZS.image1_1 }" style="width: 95%;height: 300px;margin-top: 25px;">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_2 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image1_2 }" style="width: 600px;height: 600px;margin-top: 25px;">
+				<img alt="" src="${requestScope.htmlGoodsSPZS.image1_2 }" style="width: 95%;height: 300px;margin-top: 25px;">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_3 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image1_3 }" style="width: 600px;height: 600px;margin-top: 25px;">
+				<img alt="" src="${requestScope.htmlGoodsSPZS.image1_3 }" style="width: 95%;height: 300px;margin-top: 25px;">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_4 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image1_4 }" style="width: 600px;height: 600px;margin-top: 25px;">
+				<img alt="" src="${requestScope.htmlGoodsSPZS.image1_4 }" style="width: 95%;height: 300px;margin-top: 25px;">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_5 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image1_5 }" style="width: 600px;height: 600px;margin-top: 25px;">
+				<img alt="" src="${requestScope.htmlGoodsSPZS.image1_5 }" style="width: 95%;height: 300px;margin-top: 25px;">
 			</c:if>
 		</div>
 		<div style="width:95%;margin-top: 20px;">
@@ -43,7 +43,7 @@
 		<div style="margin-top: 20px;">
 			<table id="spxq_tab" style="width: 95%;margin: 0 auto;border: #eee solid 1px;">
 				<tr height="60">
-					<td colspan="2" style="text-align: center;background-color: #eee;">商品详情</td>
+					<td colspan="2" style="text-align: center;background-color: #fbfbfb;">商品详情</td>
 				</tr>
 				<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow1 }">
 				<tr height="50">
@@ -112,36 +112,36 @@
 		</div>
 		<div id="image2_div" style="width: 95%;text-align: center;margin-top: 20px;">
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_1 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }" style="width: 600px;height: 600px;margin-top: 25px;">
+				<img alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }" style="width: 95%;height: 300px;margin-top: 25px;">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_2 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image2_2 }" style="width: 600px;height: 600px;margin-top: 25px;">
+				<img alt="" src="${requestScope.htmlGoodsSPZS.image2_2 }" style="width: 95%;height: 300px;margin-top: 25px;">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_3 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image2_3 }" style="width: 600px;height: 600px;margin-top: 25px;">
+				<img alt="" src="${requestScope.htmlGoodsSPZS.image2_3 }" style="width: 95%;height: 300px;margin-top: 25px;">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_4 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image2_4 }" style="width: 600px;height: 600px;margin-top: 25px;">
+				<img alt="" src="${requestScope.htmlGoodsSPZS.image2_4 }" style="width: 95%;height: 300px;margin-top: 25px;">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_5 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }" style="width: 600px;height: 600px;margin-top: 25px;">
+				<img alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }" style="width: 95%;height: 300px;margin-top: 25px;">
 			</c:if>
 		</div>
 		<div id="image3_div" style="width: 95%;text-align: center;margin-top: 20px;">
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_1 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }" style="width: 600px;height: 600px;margin-top: 25px;">
+				<img alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }" style="width: 95%;height: 300px;margin-top: 25px;">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_2 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }" style="width: 600px;height: 600px;margin-top: 25px;">
+				<img alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }" style="width: 95%;height: 300px;margin-top: 25px;">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_3 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }" style="width: 600px;height: 600px;margin-top: 25px;">
+				<img alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }" style="width: 95%;height: 300px;margin-top: 25px;">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_4 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }" style="width: 600px;height: 600px;margin-top: 25px;">
+				<img alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }" style="width: 95%;height: 300px;margin-top: 25px;">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_5 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }" style="width: 600px;height: 600px;margin-top: 25px;">
+				<img alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }" style="width: 95%;height: 300px;margin-top: 25px;">
 			</c:if>
 		</div>
 		<div style="width:95%;margin-top: 20px;">

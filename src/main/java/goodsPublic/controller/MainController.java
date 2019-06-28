@@ -748,8 +748,8 @@ public class MainController {
 	 * @param type
 	 * @return
 	 */
-	@RequestMapping(value="/goEditModule")
-	public String goEditModule(HttpServletRequest request, String trade) {
+	@RequestMapping(value="/goAddModule")
+	public String goAddModule(HttpServletRequest request, String trade) {
 		
 		String url=null;
 		switch (trade) {
@@ -775,7 +775,7 @@ public class MainController {
 			List<ModuleSPZS> image3List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image3");
 			request.setAttribute("image3List", image3List);
 			
-			url="/merchant/spzs/editModule";
+			url="/merchant/spzs/addModule";
 		}
 		return url;
 	}
