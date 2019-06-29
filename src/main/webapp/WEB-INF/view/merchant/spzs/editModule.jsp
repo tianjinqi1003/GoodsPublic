@@ -56,6 +56,45 @@ function hideOptionDiv(o){
 	$(o).parent().find("#but_div").css("display","none");
 }
 
+function saveEditHtmlGoodsSPZS(){
+	renameFile();
+	
+	var formData = new FormData($("#form1")[0]);
+	 
+	$.ajax({
+		type:"post",
+		url:"saveEditHtmlGoodsSPZS",
+		dataType: "json",
+		data:formData,
+		cache: false,
+		processData: false,
+		contentType: false,
+		success: function (data){
+			if(data.status==1){
+				$("#saveStatus_div").css("display","block");
+				setTimeout("hideSaveStatusDiv()",3000);
+			}
+			else{
+				$("#saveStatus_div").css("display","none");
+			}
+			$("#saveStatus_div").text(data.msg);
+		}
+	});
+	/*
+	$.post("saveEditHtmlGoodsSPZS",
+		$("#form1").serialize(),
+		function(){
+	
+		}
+	,"json");
+	*/
+}
+
+function hideSaveStatusDiv(){
+	$("#saveStatus_div").text("");
+	$("#saveStatus_div").css("display","none");
+}
+
 function finishEditHtmlGoodsSPZS(){
 	renameFile();
 	document.getElementById("sub_but").click();
@@ -452,7 +491,7 @@ function goBack(){
 				</td>
 				<td style="width:10%;border: #eee solid 1px;text-align: center;">
 					<input type="hidden" id="spxqIfShow2" name="spxqIfShow2" value="${requestScope.htmlGoodsSPZS.spxqIfShow2 }" />
-					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow2?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(1,this)"/>
+					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow2?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(2,this)"/>
 				</td>
 			</tr>
 			
@@ -464,7 +503,7 @@ function goBack(){
 				</td>
 				<td style="width:10%;border: #eee solid 1px;text-align: center;">
 					<input type="hidden" id="spxqIfShow3" name="spxqIfShow3" value="${requestScope.htmlGoodsSPZS.spxqIfShow3 }" />
-					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow3?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(1,this)"/>
+					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow3?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(3,this)"/>
 				</td>
 			</tr>
 			
@@ -476,7 +515,7 @@ function goBack(){
 				</td>
 				<td style="width:10%;border: #eee solid 1px;text-align: center;">
 					<input type="hidden" id="spxqIfShow4" name="spxqIfShow4" value="${requestScope.htmlGoodsSPZS.spxqIfShow4 }" />
-					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow4?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(1,this)"/>
+					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow4?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(4,this)"/>
 				</td>
 			</tr>
 			
@@ -488,7 +527,7 @@ function goBack(){
 				</td>
 				<td style="width:10%;border: #eee solid 1px;text-align: center;">
 					<input type="hidden" id="spxqIfShow5" name="spxqIfShow5" value="${requestScope.htmlGoodsSPZS.spxqIfShow5 }" />
-					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow5?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(1,this)"/>
+					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow5?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(5,this)"/>
 				</td>
 			</tr>
 			
@@ -500,7 +539,7 @@ function goBack(){
 				</td>
 				<td style="width:10%;border: #eee solid 1px;text-align: center;">
 					<input type="hidden" id="spxqIfShow6" name="spxqIfShow6" value="${requestScope.htmlGoodsSPZS.spxqIfShow6 }" />
-					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow6?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(1,this)"/>
+					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow6?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(6,this)"/>
 				</td>
 			</tr>
 			
@@ -566,8 +605,9 @@ function goBack(){
 <div id="right_div" style="width: 150px;height: 200px;text-align: center;">
 	<img style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.qrCode }">
 	<div style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;margin-top:15px;border:1px solid #eee;background-color:#fff;border-radius:3px;">预览</div>
-	<div style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;margin-top:15px;border:1px solid #eee;background-color:#fff;border-radius:3px;">保存</div>
+	<div style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;margin-top:15px;border:1px solid #eee;background-color:#fff;border-radius:3px;" onclick="saveEditHtmlGoodsSPZS();">保存</div>
 	<div style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;margin-top:15px;color:#fff;background-color:#4caf50;border-radius:3px;" onclick="finishEditHtmlGoodsSPZS();">完成编辑</div>
+	<div id="saveStatus_div" style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;margin-top:15px;color:#4caf50;display: none;"></div>
 </div>
 	<input type="hidden" id="id" name="id" value="${requestScope.htmlGoodsSPZS.id }" />
 	<input type="hidden" id="goodsNumber" name="goodsNumber" value="${requestScope.htmlGoodsSPZS.goodsNumber }" />

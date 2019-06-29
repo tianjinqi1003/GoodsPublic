@@ -1114,4 +1114,10 @@
 	<select id="getHtmlGoodsSPZS" resultType="goodsPublic.entity.HtmlGoodsSPZS">
 		select * from html_goods_spzs where goodsNumber=#{param1} and accountNumber=#{param2}
 	</select>
+	<delete id="deleteHtmlGoodsSPZSByIds">
+		delete from html_goods_spzs where 1=1
+		<foreach collection="list" item="id" open=" and cast(id as char) in (" separator="," close=")">
+		#{id}
+		</foreach>
+	</delete>
 </mapper>

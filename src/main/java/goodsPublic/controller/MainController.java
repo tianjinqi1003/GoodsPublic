@@ -317,6 +317,70 @@ public class MainController {
 			@RequestParam(value="file3_5",required=false) MultipartFile file3_5,
 			HttpServletRequest request) {
 		
+		editHtmlGoodsSPZS(htmlGoodsSPZS,file1_1,file1_2,file1_3,file1_4,file1_5,file2_1,file2_2,file2_3,file2_4,file2_5,file3_1,file3_2,file3_3,file3_4,file3_5,request);
+		
+		return "../../merchant/main/goBrowseHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
+	}
+	
+	@RequestMapping(value="/saveEditHtmlGoodsSPZS",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String saveEditHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file1_2",required=false) MultipartFile file1_2,
+			@RequestParam(value="file1_3",required=false) MultipartFile file1_3,
+			@RequestParam(value="file1_4",required=false) MultipartFile file1_4,
+			@RequestParam(value="file1_5",required=false) MultipartFile file1_5,
+			@RequestParam(value="file2_1",required=false) MultipartFile file2_1,
+			@RequestParam(value="file2_2",required=false) MultipartFile file2_2,
+			@RequestParam(value="file2_3",required=false) MultipartFile file2_3,
+			@RequestParam(value="file2_4",required=false) MultipartFile file2_4,
+			@RequestParam(value="file2_5",required=false) MultipartFile file2_5,
+			@RequestParam(value="file3_1",required=false) MultipartFile file3_1,
+			@RequestParam(value="file3_2",required=false) MultipartFile file3_2,
+			@RequestParam(value="file3_3",required=false) MultipartFile file3_3,
+			@RequestParam(value="file3_4",required=false) MultipartFile file3_4,
+			@RequestParam(value="file3_5",required=false) MultipartFile file3_5,
+			HttpServletRequest request) {
+		
+		PlanResult plan=new PlanResult();
+		String json;
+		int count = editHtmlGoodsSPZS(htmlGoodsSPZS,file1_1,file1_2,file1_3,file1_4,file1_5,file2_1,file2_2,file2_3,file2_4,file2_5,file3_1,file3_2,file3_3,file3_4,file3_5,request);
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("内容保存失败！");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("内容保存成功！");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
+	/**
+	 * 提交编辑好的商品展示的模板内容
+	 * @param htmlGoodsSPZS
+	 * @param file1_1
+	 * @param file1_2
+	 * @param file1_3
+	 * @param file1_4
+	 * @param file1_5
+	 * @param file2_1
+	 * @param file2_2
+	 * @param file2_3
+	 * @param file2_4
+	 * @param file2_5
+	 * @param file3_1
+	 * @param file3_2
+	 * @param file3_3
+	 * @param file3_4
+	 * @param file3_5
+	 * @param request
+	 * @return
+	 */
+	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS, MultipartFile file1_1, MultipartFile file1_2, MultipartFile file1_3, MultipartFile file1_4, MultipartFile file1_5, MultipartFile file2_1, MultipartFile file2_2, MultipartFile file2_3, MultipartFile file2_4, MultipartFile file2_5, MultipartFile file3_1, MultipartFile file3_2, MultipartFile file3_3, MultipartFile file3_4, MultipartFile file3_5, HttpServletRequest request) {
+		int count = 0;
 		try {
 			MultipartFile[] fileArr=new MultipartFile[15];
 			fileArr[0]=file1_1;
@@ -393,12 +457,14 @@ public class MainController {
 					}
 				}
 			}
-			int a=publicService.editHtmlGoodsSPZS(htmlGoodsSPZS);
+			count=publicService.editHtmlGoodsSPZS(htmlGoodsSPZS);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "../../merchant/main/goBrowseHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
+		finally {
+			return count;
+		}
 	}
 	
 	/**
@@ -564,6 +630,27 @@ public class MainController {
 		else {
 			plan.setStatus(0);
 			plan.setMsg("类别删除成功");
+			plan.setUrl("/merchant/main/queryCategoryList");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
+	@RequestMapping(value="/deleteHtmlGoodsSPZSByIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteHtmlGoodsSPZSByIds(String ids) {
+		
+		int count=publicService.deleteHtmlGoodsSPZSByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除商品展示信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除商品展示信息成功");
 			plan.setUrl("/merchant/main/queryCategoryList");
 			json=JsonUtil.getJsonFromObject(plan);
 		}

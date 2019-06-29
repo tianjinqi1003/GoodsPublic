@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -375,6 +376,15 @@ public class PublicServiceImpl implements PublicService {
 	public HtmlGoodsSPZS getHtmlGoodsSPZS(String goodsNumber, String accountId) {
 		// TODO Auto-generated method stub
 		return publicDao.getHtmlGoodsSPZS(goodsNumber,accountId);
+	}
+
+	@Override
+	public int deleteHtmlGoodsSPZSByIds(String ids) {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<String> idList = Arrays.asList(ids.split(","));
+		count=publicDao.deleteHtmlGoodsSPZSByIds(idList);
+		return count;
 	}
 
 }

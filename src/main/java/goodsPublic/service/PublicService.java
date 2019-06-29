@@ -185,5 +185,7 @@ public interface PublicService {
 
 	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS);
 
+	public int deleteHtmlGoodsSPZSByIds(String ids);
+
 
 }

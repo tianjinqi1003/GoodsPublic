@@ -19,7 +19,7 @@ $(function(){
 	$("#remove_but").linkbutton({
 		iconCls:"icon-remove",
 		onClick:function(){
-			//deleteByIds();
+			deleteByIds();
 		}
 	});
 	
@@ -37,7 +37,7 @@ $(function(){
             {field:"id",title:"操作",width:150,formatter:function(value,row){
             	var str="<a href=\"${pageContext.request.contextPath}/merchant/main/goBrowseHtmlGoodsSPZS?goodsNumber="+row.goodsNumber+"&accountNumber="+row.accountNumber+"\">详情</a>"
             	+"&nbsp;|&nbsp;<a href=\"${pageContext.request.contextPath}/merchant/main/goEditModule?trade=spzs&goodsNumber="+row.goodsNumber+"&accountNumber="+row.accountNumber+"\">编辑</a>"
-            	+"&nbsp;|&nbsp;<a>删除</a>";
+            	+"&nbsp;|&nbsp;<a onclick=\"deleteByIds("+value+")\">删除</a>";
             	return str;
             }}
 	    ]],
@@ -56,6 +56,37 @@ $(function(){
 		}
 	});
 });
+
+function deleteHtmlGoodsSPZS() {
+	var rows=tab1.datagrid("getSelections");
+	if (rows.length == 0) {
+		$.messager.alert("提示","请选择要删除的信息！","warning");
+		return false;
+	}
+	
+	var ids = "";
+	for (var i = 0; i < rows.length; i++) {
+		ids += "," + rows[i].id;
+	}
+	ids=ids.substring(1);
+	deleteByIds(ids);
+}
+
+function deleteByIds(ids){
+	$.messager.confirm("提示","确定要删除吗？",function(r){
+		if(r){
+			$.post("deleteHtmlGoodsSPZSByIds",
+				{ids:ids},
+				function(result){
+					if(result.status==1){
+						tab1.datagrid("reload");
+					}
+					alert(result.msg);
+				}
+			,"json");
+		}
+	});
+}
 
 function setFitWidthInParent(o){
 	var width=$(o).css("width");

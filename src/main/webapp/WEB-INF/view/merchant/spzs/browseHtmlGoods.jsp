@@ -7,6 +7,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>预览</title>
 <%@include file="../js.jsp"%>
+<script type="text/javascript">
+function editContent(goodsNumber,accountNumber){
+	location.href="${pageContext.request.contextPath}/merchant/main/goEditModule?trade=spzs&goodsNumber="+goodsNumber+"&accountNumber="+accountNumber;
+}
+</script>
 </head>
 <body style="background-color: #fbfbfb;">
 <div id="main_div" style="width: 800px;margin: 0 auto;background-color: #fbfbfb;">
@@ -171,7 +176,7 @@
 		</div>
 		<div style="width: 350px;height: 1px;margin-left:20px; background-color: #eee;"></div>
 		<div style="width: 100%;height: 50px;margin-top:15px;">
-			<div style="float: left;width: 100px;height: 30px;line-height: 30px;text-align:center;margin-left:25px;color:#fff;background-color: #4caf50;border-radius:3px;">编辑内容</div>
+			<div style="float: left;width: 100px;height: 30px;line-height: 30px;text-align:center;margin-left:25px;color:#fff;background-color: #4caf50;border-radius:3px;" onclick="editContent(${requestScope.htmlGoodsSPZS.goodsNumber },${requestScope.htmlGoodsSPZS.accountNumber });">编辑内容</div>
 			<div style="float: left;width:250px;margin-top: 5px;margin-left: 10px;">
 				<a style="color: #357bb3;">创建副本</a>
 				<a style="color: #357bb3;">删除</a>

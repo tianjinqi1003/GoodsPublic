@@ -175,4 +175,5 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public ModuleSPZS getModuleSPZSByMemo(String type);
+	public int deleteHtmlGoodsSPZSByIds(List<String> idList);
 }
