@@ -1,0 +1,165 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>编辑</title>
+<%@include file="../js.jsp"%>
+<script type="text/javascript">
+$(function(){
+	var bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
+	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
+	var middleDivHeight=$("#middle_div").css("height").substring(0,$("#middle_div").css("height").length-2);
+	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
+	$("#right_div").css("margin-top","-"+parseInt(middleDivHeight)+"px");
+});
+
+function showOptionDiv(o){
+	$(o).parent().find("#but_div").css("display","block");
+}
+
+function hideOptionDiv(o){
+	$(o).parent().find("#but_div").css("display","none");
+}
+
+function addHtmlGoodsJZSG(){
+	renameFile();
+	document.getElementById("sub_but").click();
+}
+</script>
+</head>
+<body style="background-color: #fbfbfb;">
+<form id="form1" name="form1" method="post" action="addHtmlGoodsSPZS" enctype="multipart/form-data">
+<div id="image1ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
+	<div id="image1Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
+		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
+			<span style="margin-left: 20px;">图片模块</span>
+			<span style="float: right;margin-right: 20px;cursor: pointer;" onclick="closeImage1ModBgDiv();">关闭</span>
+		</div>
+		<div id="tab_div">
+			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
+				<tr>
+					<td id="file_td0" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
+						<img id="img1_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/spzs/22ad5cebe49933335608eeb6356e6ab9.png">
+					</td>
+					<td id="upload_td">
+						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
+					</td>
+				</tr>
+			</table>
+			<div id="uploadFile1_div" style="display: none;">
+				<input type="file" id="file1_1" name="file" onchange="showQrcodePic1(this)" />
+			</div>
+			<input type="hidden" id="uuid_hid1"/>
+		</div>
+		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
+			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeImage1ModBgDiv();">确&nbsp;认</div>
+			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeImage1ModBgDiv();">取&nbsp;消</div>
+		</div>
+	</div>
+</div>
+
+<div id="image2ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
+	<div id="image2Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
+		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
+			<span style="margin-left: 20px;">图片模块</span>
+			<span style="float: right;margin-right: 20px;cursor: pointer;" onclick="closeImage2ModBgDiv();">关闭</span>
+		</div>
+		<div id="tab_div">
+			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
+				<tr>
+					<td id="file_td0" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
+						<img id="img2_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/spzs/41116eb627d54a623813c01bcadd05ce.png">
+						<!-- 
+						<input type="file" id="file2_1" name="file2_1" onchange="showQrcodePic2(this)" style="display: none;"/>
+						 -->
+					</td>
+					<!-- 
+					<td style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
+						<img alt="" src="/GoodsPublic/resource/images/spzs/573ab1fc91d98528915519d96dc2e6ec.png">
+						<input type="file" id="image2_2" onchange="showQrcodePic2(this)" style="display: none;"/>
+					</td>
+					 -->
+					<td id="upload_td">
+						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
+					</td>
+				</tr>
+			</table>
+			<div id="uploadFile2_div" style="display: none;">
+				<input type="file" id="file2_1" name="file" onchange="showQrcodePic2(this)" />
+			</div>
+			<input type="hidden" id="uuid_hid2"/>
+		</div>
+		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
+			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeImage2ModBgDiv();">确&nbsp;认</div>
+			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeImage2ModBgDiv();">取&nbsp;消</div>
+		</div>
+	</div>
+</div>
+
+<div style="width: 100%;height: 50px;line-height: 50px;background-color: #fff;">
+	<div style="float:left;width: 70px;height: 30px;line-height: 30px;text-align:center;margin-top:10px;margin-left:20px;border:1px solid #eee;border-radius:3px;" onclick="goBack();">&lt返回</div>
+	<div style="width:200px;margin:0 auto;font-size:18px;font-weight: bold;text-align: center;">施工人员信息展示</div>
+	<div style="float:right;height: 30px;line-height: 30px;text-align:center;margin-top:-40px;margin-right:20px;border-radius:3px;">我的二维码&nbsp;${sessionScope.user.userName }</div>
+</div>
+<div id="middle_div" style="width: 650px;margin: 0 auto;margin-top: 25px;background-color: #fff;">
+	<div>
+		<input type="text" id="productName" name="productName" placeholder="请输入标题" style="width: 100%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;"/>
+	</div>
+	<div id="image1_div" style="width: 650px;text-align: center;">
+		<div id="option_div" style="width:650px;position:absolute;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<div id="but_div" style="width:100px;height:30px;line-height:30px;margin:0 auto;margin-top: 50px;text-align:center;z-index: 1;background-color: #fff;border-radius:5px;display:none; ">
+				<a onclick="openImage1ModBgDiv();">编辑</a>|
+				<a onclick="deleteImage1Div();">删除</a>
+			</div>
+		</div>
+		<div onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<c:forEach items="${requestScope.image1List }" var="image1" varStatus="status">
+			<img alt="" src="${image1.value }" style="width: 600px;height: 600px;margin-top: 25px;">
+			</c:forEach>
+		</div>
+	</div>
+	<div id="ryxx_div" style="margin-top: 20px;">
+		<table id="ryxx_tab" style="width: 600px;margin: 0 auto;border: #eee solid 1px;">
+			<c:forEach items="${requestScope.ryxxList }" var="ryxx" varStatus="status">
+			<tr id="tr${status.index+1 }" height="50">
+				<input type="hidden" name="ryxxName${status.index+1 }" value="${ryxx.name }" />
+				<td style="width:20%;border: #eee solid 1px;padding-left: 20px;">${ryxx.name }</td>
+				<td style="width:70%;border: #eee solid 1px;padding-left: 20px;">
+					<input type="text" name="ryxxValue${status.index+1 }" />
+				</td>
+				<td style="width:10%;border: #eee solid 1px;text-align: center;">
+					<input type="hidden" id="ryxxIfShow${status.index+1 }" name="ryxxIfShow${status.index+1 }" value="true" />
+					<input type="button" value="显示" onclick="changeryxxTrIfShow(${status.index+1 },this)"/>
+				</td>
+			</tr>
+			</c:forEach>
+		</table>
+	</div>
+	<div id="image2_div" style="width: 650px;text-align: center;margin-top: 25px;">
+		<div id="option_div" style="width:650px;position:absolute;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<div id="but_div" style="width:100px;height:30px;line-height:30px;margin:0 auto;margin-top: 50px;text-align:center;z-index: 1;background-color: #fff;border-radius:5px;display:none; ">
+				<a onclick="openImage2ModBgDiv();">编辑</a>|
+				<a onclick="deleteImage2Div();">删除</a>
+			</div>
+		</div>
+		<div onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<c:forEach items="${requestScope.image2List }" var="image2" varStatus="status">
+			<img alt="" src="${image2.value }" style="width: 600px;height: 600px;margin-top: 25px;">
+			</c:forEach>
+		</div>
+	</div>
+</div>
+<div id="right_div" style="width: 150px;height: 200px;text-align: center;">
+	<img style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/007.png">
+	<div style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;margin-top:15px;color:#fff;background-color:#4caf50;border-radius:3px;" onclick="addHtmlGoodsJZSG();">生成二维码</div>
+</div>
+	<input type="hidden" id="accountNumber_hid" name="accountNumber" value="${sessionScope.user.id }" />
+	<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
+</form>
+</body>
+</html>
