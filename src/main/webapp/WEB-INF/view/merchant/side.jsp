@@ -186,7 +186,7 @@
 					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
 					<li class="layui-nav-item">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-						<a href="">
+						<a href="<%=basePath%>merchant/main/goHtmlGoodsJZSGList?accountId=${sessionScope.user.id }">
 							&nbsp;&nbsp;&nbsp;建筑施工
 						</a>
 					</li>

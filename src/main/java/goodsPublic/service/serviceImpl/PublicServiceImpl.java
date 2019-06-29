@@ -19,7 +19,9 @@ import goodsPublic.dao.PublicMapper;
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
+import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
+import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
 import goodsPublic.service.PublicService;
 /**
@@ -217,6 +219,12 @@ public class PublicServiceImpl implements PublicService {
 		// TODO Auto-generated method stub
 		return publicDao.queryHtmlGoodsSPZSForInt(accountId);
 	}
+	
+	@Override
+	public int queryHtmlGoodsJZSGForInt(String accountId) {
+		// TODO Auto-generated method stub
+		return publicDao.queryHtmlGoodsJZSGForInt(accountId);
+	}
 
 	@Override
 	public List<Goods> queryGoodsList(String accountId, String categoryId, int page, int rows, String sort,
@@ -230,6 +238,13 @@ public class PublicServiceImpl implements PublicService {
 			String order) {
 		// TODO Auto-generated method stub
 		return publicDao.queryHtmlGoodsSPZSList(accountId, (page-1)*rows, rows, sort, order);
+	}
+	
+	@Override
+	public List<HtmlGoodsJZSG> queryHtmlGoodsJZSGList(String accountId, int page, int rows, String sort,
+			String order) {
+		// TODO Auto-generated method stub
+		return publicDao.queryHtmlGoodsJZSGList(accountId, (page-1)*rows, rows, sort, order);
 	}
 
 	@Override
@@ -367,6 +382,22 @@ public class PublicServiceImpl implements PublicService {
 		case "memo3":
 			ModuleSPZS moduleSPZS = publicDao.getModuleSPZSByMemo(type);
 			obj=moduleSPZS.getValue();
+			break;
+		}
+		return obj;
+	}
+	
+	@Override
+	public Object getModuleJZSGByType(String type) {
+		// TODO Auto-generated method stub
+		
+		Object obj=null;
+		switch (type) {
+		case "ryxx":
+		case "image1":
+		case "image2":
+			List<ModuleJZSG> spxqList = publicDao.getModuleJZSGByType(type);
+			obj=spxqList;
 			break;
 		}
 		return obj;

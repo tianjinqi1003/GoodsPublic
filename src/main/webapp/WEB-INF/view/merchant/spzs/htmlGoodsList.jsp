@@ -19,7 +19,7 @@ $(function(){
 	$("#remove_but").linkbutton({
 		iconCls:"icon-remove",
 		onClick:function(){
-			deleteByIds();
+			deleteHtmlGoodsSPZS();
 		}
 	});
 	

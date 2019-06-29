@@ -1,8 +1,6 @@
 package goodsPublic.controller;
 
 
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,12 +32,12 @@ import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
+import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
-import goodsPublic.entity.HtmlTemplate;
+import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
 import goodsPublic.service.CategoryService;
 import goodsPublic.service.PublicService;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
@@ -829,6 +827,19 @@ public class MainController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/queryHtmlGoodsJZSGList")
+	@ResponseBody
+	public Map<String, Object> queryHtmlGoodsJZSGList(String accountId,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count = publicService.queryHtmlGoodsJZSGForInt(accountId);
+		List<HtmlGoodsJZSG> htmlGoodsList = publicService.queryHtmlGoodsJZSGList(accountId, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		jsonMap.put("rows", htmlGoodsList);
+		return jsonMap;
+	}
+	
 	/**
 	 * 跳转至编辑商品页面
 	 * @param request
@@ -934,6 +945,16 @@ public class MainController {
 	}
 	
 	/**
+	 * 跳转至建筑施工模板快速生成页面
+	 * @return
+	 */
+	@RequestMapping(value="/goHtmlGoodsJZSGList")
+	public String goHtmlGoodsJZSGList() {
+		
+		return "/merchant/jzsg/htmlGoodsList";
+	}
+	
+	/**
 	 * 跳转至模板添加页面
 	 * @param type
 	 * @return
@@ -966,6 +987,18 @@ public class MainController {
 			request.setAttribute("image3List", image3List);
 			
 			url="/merchant/spzs/addModule";
+			break;
+		case "jzsg":
+			List<ModuleJZSG> ryxxList = (List<ModuleJZSG>)publicService.getModuleJZSGByType("ryxx");
+			request.setAttribute("ryxxList", ryxxList);
+			
+			List<ModuleJZSG> jzsgImage1List = (List<ModuleJZSG>)publicService.getModuleJZSGByType("image1");
+			request.setAttribute("image1List", jzsgImage1List);
+			
+			List<ModuleJZSG> jzsgImage2List = (List<ModuleJZSG>)publicService.getModuleJZSGByType("image2");
+			request.setAttribute("image2List", jzsgImage2List);
+			
+			url="/merchant/jzsg/addModule";
 			break;
 		}
 		return url;

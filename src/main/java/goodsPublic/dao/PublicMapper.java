@@ -5,11 +5,11 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import goodsPublic.entity.AccountMsg;
-import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
+import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
-import goodsPublic.entity.HtmlTemplate;
+import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
 
 public interface PublicMapper {
@@ -51,6 +51,18 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public List<HtmlGoodsSPZS> queryHtmlGoodsSPZSList(String accountId, int i, int rows, String sort,
+			String order);
+	
+	/**
+	 * 查询建筑施工模板内容
+	 * @param accountId
+	 * @param i
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
+	public List<HtmlGoodsJZSG> queryHtmlGoodsJZSGList(String accountId, int i, int rows, String sort,
 			String order);
 	
 	/**
@@ -97,6 +109,12 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public int queryHtmlGoodsSPZSForInt(String accountId);
+	/**
+	 * 查询建筑施工模板内容数量
+	 * @param accountId
+	 * @return
+	 */
+	public int queryHtmlGoodsJZSGForInt(String accountId);
 	/**
 	 * 编辑商户信息
 	 * @param accountMsg
@@ -169,6 +187,7 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public List<ModuleSPZS> getModuleSPZSBySPXQ(String type);
+	public List<ModuleJZSG> getModuleJZSGByType(String type);
 	public HtmlGoodsSPZS getHtmlGoodsSPZS(String goodsNumber, String accountId);
 	/**
 	 * @param type

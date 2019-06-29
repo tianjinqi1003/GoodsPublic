@@ -11,6 +11,7 @@ import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
+import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.HtmlTemplate;
 
@@ -78,11 +79,18 @@ public interface PublicService {
 	public int queryGoodsForInt(String accountId, String categoryId);
 
 	/**
-	 * 查询模板商品数量
+	 * 查询商品模板内容数量
 	 * @param accountId
 	 * @return
 	 */
 	public int queryHtmlGoodsSPZSForInt(String accountId);
+	
+	/**
+	 * 查询建筑施工模板内容数量
+	 * @param accountId
+	 * @return
+	 */
+	public int queryHtmlGoodsJZSGForInt(String accountId);
 	
 	/**
 	 * 查询商品信息
@@ -115,6 +123,18 @@ public interface PublicService {
 	 * @return
 	 */
 	public List<HtmlGoodsSPZS> queryHtmlGoodsSPZSList(String accountId, int page, int rows, String sort,
+			String order);
+	
+	/**
+	 * 根据模板类型、商户编号，查询建筑施工模板内容信息
+	 * @param accountId
+	 * @param page
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
+	public List<HtmlGoodsJZSG> queryHtmlGoodsJZSGList(String accountId, int page, int rows, String sort,
 			String order);
 
 	/**
@@ -180,6 +200,13 @@ public interface PublicService {
 	 * @return
 	 */
 	public Object getModuleSPZSByType(String type);
+	
+	/**
+	 * 根据类型查询建筑施工模板
+	 * @param type
+	 * @return
+	 */
+	public Object getModuleJZSGByType(String type);
 
 	public HtmlGoodsSPZS getHtmlGoodsSPZS(String goodsNumber, String accountId);
 
