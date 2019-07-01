@@ -187,7 +187,7 @@ function changeRYXXTrIfShow(index,o){
 }
 
 function goBack(){
-	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsRYXXList;";
+	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsJZSGList;";
 }
 </script>
 </head>

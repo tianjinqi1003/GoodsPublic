@@ -25,7 +25,7 @@
 		<property name="filterChainDefinitions">
 			<value>
 				/merchant/main/show=anon
-				/merchant/main/goShowHtmlGoodsSPZS=anon
+				/merchant/main/goShowHtmlGoods=anon
 				/merchant/login=anon
 				/merchant/login/captcha=anon
 				/merchant/regist=anon

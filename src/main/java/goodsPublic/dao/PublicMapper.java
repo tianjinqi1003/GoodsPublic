@@ -23,6 +23,7 @@ public interface PublicMapper {
 	public int addHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoods);
 	public int addHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoods);
 	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS);
+	public int editHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG);
 	//修改发布的产品信息
 	public int updataGoodsPublic(Goods articleInfo);
 	//查询所有的产品信息
@@ -197,4 +198,5 @@ public interface PublicMapper {
 	 */
 	public ModuleSPZS getModuleSPZSByMemo(String type);
 	public int deleteHtmlGoodsSPZSByIds(List<String> idList);
+	public int deleteHtmlGoodsJZSGByIds(List<String> idList);
 }

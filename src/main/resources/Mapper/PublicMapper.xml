@@ -635,6 +635,42 @@
 			<if test="ryxxIfShow6!=null">
 				ryxxIfShow6,
 			</if>
+			<if test="ryxxName7!=null">
+				ryxxName7,
+			</if>
+			<if test="ryxxValue7!=null">
+				ryxxValue7,
+			</if>
+			<if test="ryxxIfShow7!=null">
+				ryxxIfShow7,
+			</if>
+			<if test="ryxxName8!=null">
+				ryxxName8,
+			</if>
+			<if test="ryxxValue8!=null">
+				ryxxValue8,
+			</if>
+			<if test="ryxxIfShow8!=null">
+				ryxxIfShow8,
+			</if>
+			<if test="ryxxName9!=null">
+				ryxxName9,
+			</if>
+			<if test="ryxxValue9!=null">
+				ryxxValue9,
+			</if>
+			<if test="ryxxIfShow9!=null">
+				ryxxIfShow9,
+			</if>
+			<if test="ryxxName10!=null">
+				ryxxName10,
+			</if>
+			<if test="ryxxValue10!=null">
+				ryxxValue10,
+			</if>
+			<if test="ryxxIfShow10!=null">
+				ryxxIfShow10,
+			</if>
 			<if test="image1_1!=null">
 				image1_1,
 			</if>
@@ -722,6 +758,42 @@
 			</if>
 			<if test="ryxxIfShow6!=null">
 				#{ryxxIfShow6},
+			</if>
+			<if test="ryxxName7!=null">
+				#{ryxxName7},
+			</if>
+			<if test="ryxxValue7!=null">
+				#{ryxxValue7},
+			</if>
+			<if test="ryxxIfShow7!=null">
+				#{ryxxIfShow7},
+			</if>
+			<if test="ryxxName8!=null">
+				#{ryxxName8},
+			</if>
+			<if test="ryxxValue8!=null">
+				#{ryxxValue8},
+			</if>
+			<if test="ryxxIfShow8!=null">
+				#{ryxxIfShow8},
+			</if>
+			<if test="ryxxName9!=null">
+				#{ryxxName9},
+			</if>
+			<if test="ryxxValue9!=null">
+				#{ryxxValue9},
+			</if>
+			<if test="ryxxIfShow9!=null">
+				#{ryxxIfShow9},
+			</if>
+			<if test="ryxxName10!=null">
+				#{ryxxName10},
+			</if>
+			<if test="ryxxValue10!=null">
+				#{ryxxValue10},
+			</if>
+			<if test="ryxxIfShow10!=null">
+				#{ryxxIfShow10},
 			</if>
 			<if test="image1_1!=null">
 				#{image1_1},
@@ -866,7 +938,123 @@
 		<if test="memo3!=null">
 			memo3=#{memo3},
 		</if>
-		gmtCreate=now()
+		gmtModified=now()
+		where id=#{id}
+	</update>
+	<update id="editHtmlGoodsJZSG" parameterType="goodsPublic.entity.HtmlGoodsJZSG">
+		update html_goods_jzsg set
+		<if test="title!=null">
+			title=#{title},
+		</if>
+		<if test="ryxxName1!=null">
+			ryxxName1=#{ryxxName1},
+		</if>
+		<if test="ryxxValue1!=null">
+			ryxxValue1=#{ryxxValue1},
+		</if>
+		<if test="ryxxIfShow1!=null">
+			ryxxIfShow1=#{ryxxIfShow1},
+		</if>
+		<if test="ryxxName2!=null">
+			ryxxName2=#{ryxxName2},
+		</if>
+		<if test="ryxxValue2!=null">
+			ryxxValue2=#{ryxxValue2},
+		</if>
+		<if test="ryxxIfShow2!=null">
+			ryxxIfShow2=#{ryxxIfShow2},
+		</if>
+		<if test="ryxxName3!=null">
+			ryxxName3=#{ryxxName3},
+		</if>
+		<if test="ryxxValue3!=null">
+			ryxxValue3=#{ryxxValue3},
+		</if>
+		<if test="ryxxIfShow3!=null">
+			ryxxIfShow3=#{ryxxIfShow3},
+		</if>
+		<if test="ryxxName4!=null">
+			ryxxName4=#{ryxxName4},
+		</if>
+		<if test="ryxxValue4!=null">
+			ryxxValue4=#{ryxxValue4},
+		</if>
+		<if test="ryxxIfShow4!=null">
+			ryxxIfShow4=#{ryxxIfShow4},
+		</if>
+		<if test="ryxxName5!=null">
+			ryxxName5=#{ryxxName5},
+		</if>
+		<if test="ryxxValue5!=null">
+			ryxxValue5=#{ryxxValue5},
+		</if>
+		<if test="ryxxIfShow5!=null">
+			ryxxIfShow5=#{ryxxIfShow5},
+		</if>
+		<if test="ryxxName6!=null">
+			ryxxName6=#{ryxxName6},
+		</if>
+		<if test="ryxxValue6!=null">
+			ryxxValue6=#{ryxxValue6},
+		</if>
+		<if test="ryxxIfShow6!=null">
+			ryxxIfShow6=#{ryxxIfShow6},
+		</if>
+		<if test="ryxxName7!=null">
+			ryxxName7=#{ryxxName7},
+		</if>
+		<if test="ryxxValue7!=null">
+			ryxxValue7=#{ryxxValue7},
+		</if>
+		<if test="ryxxIfShow7!=null">
+			ryxxIfShow7=#{ryxxIfShow7},
+		</if>
+		<if test="ryxxName8!=null">
+			ryxxName8=#{ryxxName8},
+		</if>
+		<if test="ryxxValue8!=null">
+			ryxxValue8=#{ryxxValue8},
+		</if>
+		<if test="ryxxIfShow8!=null">
+			ryxxIfShow8=#{ryxxIfShow8},
+		</if>
+		<if test="ryxxName9!=null">
+			ryxxName9=#{ryxxName9},
+		</if>
+		<if test="ryxxValue9!=null">
+			ryxxValue9=#{ryxxValue9},
+		</if>
+		<if test="ryxxIfShow9!=null">
+			ryxxIfShow9=#{ryxxIfShow9},
+		</if>
+		<if test="ryxxName10!=null">
+			ryxxName10=#{ryxxName10},
+		</if>
+		<if test="ryxxValue10!=null">
+			ryxxValue10=#{ryxxValue10},
+		</if>
+		<if test="ryxxIfShow10!=null">
+			ryxxIfShow10=#{ryxxIfShow10},
+		</if>
+		<if test="image1_1!=null">
+			image1_1=#{image1_1},
+		</if>
+		<if test="image1_2!=null">
+			image1_2=#{image1_2},
+		</if>
+		<if test="image1_3!=null">
+			image1_3=#{image1_3},
+		</if>
+		<if test="image2_1!=null">
+			image2_1=#{image2_1},
+		</if>
+		<if test="image2_2!=null">
+			image2_2=#{image2_2},
+		</if>
+		<if test="image2_3!=null">
+			image2_3=#{image2_3},
+		</if>
+		gmtModified=now()
 		where id=#{id}
 	</update>
 	<update id="updateQrcode" parameterType="java.lang.String">
@@ -1306,6 +1494,12 @@
 	</select>
 	<delete id="deleteHtmlGoodsSPZSByIds">
 		delete from html_goods_spzs where 1=1
+		<foreach collection="list" item="id" open=" and cast(id as char) in (" separator="," close=")">
+		#{id}
+		</foreach>
+	</delete>
+	<delete id="deleteHtmlGoodsJZSGByIds">
+		delete from html_goods_jzsg where 1=1
 		<foreach collection="list" item="id" open=" and cast(id as char) in (" separator="," close=")">
 		#{id}
 		</foreach>

@@ -58,6 +58,12 @@ public class PublicServiceImpl implements PublicService {
 		return publicDao.editHtmlGoodsSPZS(htmlGoodsSPZS);
 	}
 	
+	@Override
+	public int editHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG) {
+		// TODO Auto-generated method stub
+		return publicDao.editHtmlGoodsJZSG(htmlGoodsJZSG);
+	}
+	
 	//展示商品接口，将商品从数据库中读取出来展示到对应的页面当中
 	
 	//获得所有跟当前用户有关的商品列表(1代表已存在，0代表不存在)
@@ -427,6 +433,15 @@ public class PublicServiceImpl implements PublicService {
 		int count=0;
 		List<String> idList = Arrays.asList(ids.split(","));
 		count=publicDao.deleteHtmlGoodsSPZSByIds(idList);
+		return count;
+	}
+	
+	@Override
+	public int deleteHtmlGoodsJZSGByIds(String ids) {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<String> idList = Arrays.asList(ids.split(","));
+		count=publicDao.deleteHtmlGoodsJZSGByIds(idList);
 		return count;
 	}
 

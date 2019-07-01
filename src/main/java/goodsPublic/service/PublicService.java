@@ -220,8 +220,12 @@ public interface PublicService {
 	public HtmlGoodsJZSG getHtmlGoodsJZSG(String userNumber, String accountId);
 
 	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS);
+	
+	public int editHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG);
 
 	public int deleteHtmlGoodsSPZSByIds(String ids);
+	
+	public int deleteHtmlGoodsJZSGByIds(String ids);
 
 
 }

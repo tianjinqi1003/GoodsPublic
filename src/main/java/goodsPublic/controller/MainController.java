@@ -279,8 +279,8 @@ public class MainController {
 			String addr = request.getLocalAddr();
 			int port = request.getLocalPort();
 			String contextPath = request.getContextPath();
-			//String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
-			String url = "http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/goShowHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
+			//String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoods?trade=spzs&goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
+			String url = "http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=spzs&goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
 			
 			String fileName = goodsNumber + ".jpg";
 			String avaPath="/GoodsPublic/upload/"+fileName;
@@ -310,7 +310,7 @@ public class MainController {
 		System.out.println("111111111111111"+file2_2);
 		System.out.println("111111111111111"+file2_3);
 		try {
-			MultipartFile[] fileArr=new MultipartFile[15];
+			MultipartFile[] fileArr=new MultipartFile[6];
 			fileArr[0]=file1_1;
 			fileArr[1]=file1_2;
 			fileArr[2]=file1_3;
@@ -366,8 +366,8 @@ public class MainController {
 			String addr = request.getLocalAddr();
 			int port = request.getLocalPort();
 			String contextPath = request.getContextPath();
-			//String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoodsJZSG?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
-			String url = "http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/goShowHtmlGoodsJZSG?userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountId="+htmlGoodsJZSG.getAccountNumber();
+			//String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoods?trade=jzsg&userNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
+			String url = "http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jzsg&userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountId="+htmlGoodsJZSG.getAccountNumber();
 			
 			String fileName = userNumber + ".jpg";
 			String avaPath="/GoodsPublic/upload/"+fileName;
@@ -407,6 +407,21 @@ public class MainController {
 		return "../../merchant/main/goBrowseHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
 	}
 	
+	@RequestMapping(value="/finishEditHtmlGoodsJZSG",produces="plain/text; charset=UTF-8")
+	public String finishEditHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file1_2",required=false) MultipartFile file1_2,
+			@RequestParam(value="file1_3",required=false) MultipartFile file1_3,
+			@RequestParam(value="file2_1",required=false) MultipartFile file2_1,
+			@RequestParam(value="file2_2",required=false) MultipartFile file2_2,
+			@RequestParam(value="file2_3",required=false) MultipartFile file2_3,
+			HttpServletRequest request) {
+		
+		editHtmlGoodsJZSG(htmlGoodsJZSG,file1_1,file1_2,file1_3,file2_1,file2_2,file2_3,request);
+		
+		return "../../merchant/main/goBrowseHtmlGoodsJZSG?userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountNumber="+htmlGoodsJZSG.getAccountNumber();
+	}
+	
 	@RequestMapping(value="/saveEditHtmlGoodsSPZS",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String saveEditHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS,
@@ -430,6 +445,33 @@ public class MainController {
 		PlanResult plan=new PlanResult();
 		String json;
 		int count = editHtmlGoodsSPZS(htmlGoodsSPZS,file1_1,file1_2,file1_3,file1_4,file1_5,file2_1,file2_2,file2_3,file2_4,file2_5,file3_1,file3_2,file3_3,file3_4,file3_5,request);
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("内容保存失败！");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("内容保存成功！");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
+	@RequestMapping(value="/saveEditHtmlGoodsJZSG",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String saveEditHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file1_2",required=false) MultipartFile file1_2,
+			@RequestParam(value="file1_3",required=false) MultipartFile file1_3,
+			@RequestParam(value="file2_1",required=false) MultipartFile file2_1,
+			@RequestParam(value="file2_2",required=false) MultipartFile file2_2,
+			@RequestParam(value="file2_3",required=false) MultipartFile file2_3,
+			HttpServletRequest request) {
+		
+		PlanResult plan=new PlanResult();
+		String json;
+		int count = editHtmlGoodsJZSG(htmlGoodsJZSG,file1_1,file1_2,file1_3,file2_1,file2_2,file2_3,request);
 		if(count==0) {
 			plan.setStatus(0);
 			plan.setMsg("内容保存失败！");
@@ -543,6 +585,58 @@ public class MainController {
 				}
 			}
 			count=publicService.editHtmlGoodsSPZS(htmlGoodsSPZS);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return count;
+		}
+	}
+	
+	public int editHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG, MultipartFile file1_1, MultipartFile file1_2, MultipartFile file1_3, MultipartFile file2_1, MultipartFile file2_2, MultipartFile file2_3, HttpServletRequest request) {
+		int count = 0;
+		try {
+			MultipartFile[] fileArr=new MultipartFile[6];
+			fileArr[0]=file1_1;
+			fileArr[1]=file1_2;
+			fileArr[2]=file1_3;
+			fileArr[3]=file2_1;
+			fileArr[4]=file2_2;
+			fileArr[5]=file2_3;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						jsonStr = FileUploadUtils.appUploadContentImg(request,fileArr[i],"");
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								htmlGoodsJZSG.setImage1_1(dataJO.get("src").toString());
+								break;
+							case 1:
+								htmlGoodsJZSG.setImage1_2(dataJO.get("src").toString());
+								break;
+							case 2:
+								htmlGoodsJZSG.setImage1_3(dataJO.get("src").toString());
+								break;
+							case 3:
+								htmlGoodsJZSG.setImage2_1(dataJO.get("src").toString());
+								break;
+							case 4:
+								htmlGoodsJZSG.setImage2_2(dataJO.get("src").toString());
+								break;
+							case 5:
+								htmlGoodsJZSG.setImage2_3(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+				}
+			}
+			count=publicService.editHtmlGoodsJZSG(htmlGoodsJZSG);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -750,7 +844,26 @@ public class MainController {
 		else {
 			plan.setStatus(1);
 			plan.setMsg("删除商品展示信息成功");
-			plan.setUrl("/merchant/main/queryCategoryList");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
+	@RequestMapping(value="/deleteHtmlGoodsJZSGByIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteHtmlGoodsJZSGByIds(String ids) {
+		
+		int count=publicService.deleteHtmlGoodsJZSGByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除建筑施工信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除建筑施工信息成功");
 			json=JsonUtil.getJsonFromObject(plan);
 		}
 		return json;
@@ -822,18 +935,29 @@ public class MainController {
 	}
 	
 	/**
-	 * 这个是显示商品的模板内容，用于前端手机上显示
+	 * 这个是显示各行业的模板内容，用于前端手机上显示
 	 * @param goodsNumber
 	 * @param accountId
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="/goShowHtmlGoodsSPZS",method=RequestMethod.GET)
-	public String goShowHtmlGoodsSPZS(String goodsNumber,String accountId,HttpServletRequest request) {
+	@RequestMapping(value="/goShowHtmlGoods",method=RequestMethod.GET)
+	public String goShowHtmlGoods(String trade,String goodsNumber,String accountId,HttpServletRequest request) {
 		
-		HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(goodsNumber,accountId);
-		request.setAttribute("htmlGoodsSPZS", htmlGoodsSPZS);
-		return "/merchant/spzs/showHtmlGoods";
+		String url=null;
+		switch (trade) {
+		case "spzs":
+			HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(goodsNumber,accountId);
+			request.setAttribute("htmlGoodsSPZS", htmlGoodsSPZS);
+			url = "/merchant/spzs/showHtmlGoods";
+			break;
+		case "jzsg":
+			HtmlGoodsJZSG htmlGoodsJZSG = publicService.getHtmlGoodsJZSG(request.getParameter("userNumber"),accountId);
+			request.setAttribute("htmlGoodsJZSG", htmlGoodsJZSG);
+			url = "/merchant/jzsg/showHtmlGoods";
+			break;
+		}
+		return url;
 	}
 	
 	/**
