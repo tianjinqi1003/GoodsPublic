@@ -30,6 +30,13 @@ public interface PublicService {
 	 * @return
 	 */
 	public int addHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoods);
+	
+	/**
+	 * 保存建筑施工模板内容到数据库
+	 * @param htmlGoods
+	 * @return
+	 */
+	public int addHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoods);
 
 	/**
 	 * 获得所有跟当前用户有关的商品列表
@@ -209,6 +216,8 @@ public interface PublicService {
 	public Object getModuleJZSGByType(String type);
 
 	public HtmlGoodsSPZS getHtmlGoodsSPZS(String goodsNumber, String accountId);
+	
+	public HtmlGoodsJZSG getHtmlGoodsJZSG(String userNumber, String accountId);
 
 	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS);
 

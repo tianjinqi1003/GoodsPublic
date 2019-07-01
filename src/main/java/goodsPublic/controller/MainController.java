@@ -296,6 +296,93 @@ public class MainController {
 		return "../../merchant/main/goBrowseHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
 	}
 	
+	@RequestMapping(value="/addHtmlGoodsJZSG",produces="plain/text; charset=UTF-8")
+	public String addHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file1_2",required=false) MultipartFile file1_2,
+			@RequestParam(value="file1_3",required=false) MultipartFile file1_3,
+			@RequestParam(value="file2_1",required=false) MultipartFile file2_1,
+			@RequestParam(value="file2_2",required=false) MultipartFile file2_2,
+			@RequestParam(value="file2_3",required=false) MultipartFile file2_3,
+			HttpServletRequest request) {
+		
+		System.out.println("111111111111111"+file2_1);
+		System.out.println("111111111111111"+file2_2);
+		System.out.println("111111111111111"+file2_3);
+		try {
+			MultipartFile[] fileArr=new MultipartFile[15];
+			fileArr[0]=file1_1;
+			fileArr[1]=file1_2;
+			fileArr[2]=file1_3;
+			fileArr[3]=file2_1;
+			fileArr[4]=file2_2;
+			fileArr[5]=file2_3;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						jsonStr = FileUploadUtils.appUploadContentImg(request,fileArr[i],"");
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								htmlGoodsJZSG.setImage1_1(dataJO.get("src").toString());
+								break;
+							case 1:
+								htmlGoodsJZSG.setImage1_2(dataJO.get("src").toString());
+								break;
+							case 2:
+								htmlGoodsJZSG.setImage1_3(dataJO.get("src").toString());
+								break;
+							case 3:
+								htmlGoodsJZSG.setImage2_1(dataJO.get("src").toString());
+								break;
+							case 4:
+								htmlGoodsJZSG.setImage2_2(dataJO.get("src").toString());
+								break;
+							case 5:
+								htmlGoodsJZSG.setImage2_3(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+					else {
+						switch (i) {
+						case 0:
+							htmlGoodsJZSG.setImage1_1("/GoodsPublic/resource/images/jzsg/bf0b334d871019cf3b2359e22b405d1c.png");
+							break;
+						case 3:
+							htmlGoodsJZSG.setImage2_1("/GoodsPublic/resource/images/jzsg/43a339cd90f1a6b00c0c256d49d6a119.png");
+							break;
+						}
+					}
+				}
+			}
+			
+			String userNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+			htmlGoodsJZSG.setUserNumber(userNumber);
+			
+			String addr = request.getLocalAddr();
+			int port = request.getLocalPort();
+			String contextPath = request.getContextPath();
+			//String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoodsJZSG?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
+			String url = "http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/goShowHtmlGoodsJZSG?userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountId="+htmlGoodsJZSG.getAccountNumber();
+			
+			String fileName = userNumber + ".jpg";
+			String avaPath="/GoodsPublic/upload/"+fileName;
+			String path = "D:/resource";
+			Qrcode.createQrCode(url, path, fileName);
+			
+			htmlGoodsJZSG.setQrCode(avaPath);
+			int a=publicService.addHtmlGoodsJZSG(htmlGoodsJZSG);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "../../merchant/main/goBrowseHtmlGoodsJZSG?userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountNumber="+htmlGoodsJZSG.getAccountNumber();
+	}
+	
 	@RequestMapping(value="/finishEditHtmlGoodsSPZS",produces="plain/text; charset=UTF-8")
 	public String finishEditHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS,
 			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
@@ -473,10 +560,24 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping("/goBrowseHtmlGoodsSPZS")
-	public String goBrowseHtmlGoods(String goodsNumber, String accountNumber, HttpServletRequest request) {
+	public String goBrowseHtmlGoodsSPZS(String goodsNumber, String accountNumber, HttpServletRequest request) {
 		HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(goodsNumber,accountNumber);
 		request.setAttribute("htmlGoodsSPZS", htmlGoodsSPZS);
 		return "/merchant/spzs/browseHtmlGoods";
+	}
+	
+	/**
+	 * 这个是显示建筑施工的模板内容，用于后台商户浏览
+	 * @param goodsNumber
+	 * @param accountNumber
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/goBrowseHtmlGoodsJZSG")
+	public String goBrowseHtmlGoodsJZSG(String userNumber, String accountNumber, HttpServletRequest request) {
+		HtmlGoodsJZSG htmlGoodsJZSG = publicService.getHtmlGoodsJZSG(userNumber,accountNumber);
+		request.setAttribute("htmlGoodsJZSG", htmlGoodsJZSG);
+		return "/merchant/jzsg/browseHtmlGoods";
 	}
 	
 	/**
@@ -1020,6 +1121,11 @@ public class MainController {
 			HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(goodsNumber,accountNumber);
 			request.setAttribute("htmlGoodsSPZS", htmlGoodsSPZS);
 			url="/merchant/spzs/editModule";
+			break;
+		case "jzsg":
+			HtmlGoodsJZSG htmlGoodsJZSG = publicService.getHtmlGoodsJZSG(request.getParameter("userNumber"),accountNumber);
+			request.setAttribute("htmlGoodsJZSG", htmlGoodsJZSG);
+			url="/merchant/jzsg/editModule";
 			break;
 		}
 		return url;

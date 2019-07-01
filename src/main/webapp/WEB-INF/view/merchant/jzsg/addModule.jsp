@@ -27,10 +27,172 @@ function addHtmlGoodsJZSG(){
 	renameFile();
 	document.getElementById("sub_but").click();
 }
+
+function openImage1ModBgDiv(){
+	$("#image1ModBg_div").css("display","block");
+}
+
+function openImage2ModBgDiv(){
+	$("#image2ModBg_div").css("display","block");
+}
+
+function deleteImage1Div(){
+	$("#image1_div").remove();
+}
+
+function deleteImage2Div(){
+	$("#image2_div").remove();
+}
+
+function renameFile(){
+	$("#uploadFile1_div input[type='file']").each(function(i){
+		$(this).attr("name","file1_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
+	$("#uploadFile2_div input[type='file']").each(function(i){
+		$(this).attr("name","file2_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
+}
+
+function closeImage1ModBgDiv(){
+	$("#image1ModBg_div").css("display","none");
+}
+
+function closeImage2ModBgDiv(){
+	$("#image2ModBg_div").css("display","none");
+}
+
+function uploadImage1(){
+	var uuid=createUUID();
+	$("#uuid_hid1").val(uuid);
+	$("#uploadFile1_div").append("<input type=\"file\" id=\"uploadFile1_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic1(this)\"/>");
+	document.getElementById("uploadFile1_inp").click();
+}
+
+function uploadImage2(){
+	var uuid=createUUID();
+	$("#uuid_hid2").val(uuid);
+	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\"/>");
+	document.getElementById("uploadFile2_inp").click();
+}
+
+function deleteImage(o){
+	$(o).parent().remove();
+}
+
+function showQrcodePic1(obj){
+	var uuid=$("#uuid_hid1").val();
+	var file=$(obj);
+	file.attr("id","file"+uuid);
+	file.attr("name","file"+uuid);
+	file.removeAttr("onchange");
+	file.css("display","none");
+	var fileHtml=file.prop("outerHTML");
+	
+	var imageTab=$("#image1Mod_div table");
+	var length=imageTab.find("td[id^='file_td']").length;
+	imageTab.find("#upload_td").before("<td id=\"file_td0\" style=\"width: 25%;\">"
+			+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
+			+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+			+fileHtml
+		+"</td>");
+
+	var $file = $(obj);
+    var fileObj = $file[0];
+    file=$file;
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var $img = $("#img"+uuid);
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        $img.attr("src", dataURL);
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
+}
+
+function showQrcodePic2(obj){
+	var uuid=$("#uuid_hid2").val();
+	var file=$(obj);
+	file.attr("id","file"+uuid);
+	file.attr("name","file"+uuid);
+	file.removeAttr("onchange");
+	file.css("display","none");
+	var fileHtml=file.prop("outerHTML");
+	
+	var imageTab=$("#image2Mod_div table");
+	var length=imageTab.find("td[id^='file_td']").length;
+	imageTab.find("#upload_td").before("<td id=\"file_td0\" style=\"width: 25%;\">"
+			+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
+			+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+			//+"<input type=\"file\" id=\"file2_1\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\" style=\"display: none;\"/>"
+			+fileHtml
+		+"</td>");
+
+	var $file = $(obj);
+    var fileObj = $file[0];
+    file=$file;
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var $img = $("#img"+uuid);
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        $img.attr("src", dataURL);
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
+}
+
+function createUUID() {
+    var s = [];
+    var hexDigits = "0123456789abcdef";
+    for (var i = 0; i < 36; i++) {
+        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+    }
+    s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
+    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
+    s[8] = s[13] = s[18] = s[23] = "-";
+ 
+    var uuid = s.join("");
+    return uuid;
+}
+
+function changeRYXXTrIfShow(index,o){
+	var ifShow=$("#ryxxIfShow"+index).val();
+	if(ifShow=="true"){
+		$("#ryxxIfShow"+index).val(false);
+		$(o).val("隐藏");
+	}
+	else{
+		$("#ryxxIfShow"+index).val(true);
+		$(o).val("显示");
+	}
+}
+
+function goBack(){
+	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsRYXXList;";
+}
 </script>
 </head>
 <body style="background-color: #fbfbfb;">
-<form id="form1" name="form1" method="post" action="addHtmlGoodsSPZS" enctype="multipart/form-data">
+<form id="form1" name="form1" method="post" action="addHtmlGoodsJZSG" enctype="multipart/form-data">
 <div id="image1ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
 	<div id="image1Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
 		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
@@ -42,7 +204,7 @@ function addHtmlGoodsJZSG(){
 				<tr>
 					<td id="file_td0" style="width: 25%;">
 						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
-						<img id="img1_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/spzs/22ad5cebe49933335608eeb6356e6ab9.png">
+						<img id="img1_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/jzsg/bf0b334d871019cf3b2359e22b405d1c.png">
 					</td>
 					<td id="upload_td">
 						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
@@ -72,7 +234,7 @@ function addHtmlGoodsJZSG(){
 				<tr>
 					<td id="file_td0" style="width: 25%;">
 						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
-						<img id="img2_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/spzs/41116eb627d54a623813c01bcadd05ce.png">
+						<img id="img2_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/jzsg/43a339cd90f1a6b00c0c256d49d6a119.png">
 						<!-- 
 						<input type="file" id="file2_1" name="file2_1" onchange="showQrcodePic2(this)" style="display: none;"/>
 						 -->
@@ -108,7 +270,7 @@ function addHtmlGoodsJZSG(){
 </div>
 <div id="middle_div" style="width: 650px;margin: 0 auto;margin-top: 25px;background-color: #fff;">
 	<div>
-		<input type="text" id="productName" name="productName" placeholder="请输入标题" style="width: 100%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;"/>
+		<input type="text" id="title" name="title" placeholder="请输入标题" style="width: 100%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;"/>
 	</div>
 	<div id="image1_div" style="width: 650px;text-align: center;">
 		<div id="option_div" style="width:650px;position:absolute;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
@@ -134,7 +296,7 @@ function addHtmlGoodsJZSG(){
 				</td>
 				<td style="width:10%;border: #eee solid 1px;text-align: center;">
 					<input type="hidden" id="ryxxIfShow${status.index+1 }" name="ryxxIfShow${status.index+1 }" value="true" />
-					<input type="button" value="显示" onclick="changeryxxTrIfShow(${status.index+1 },this)"/>
+					<input type="button" value="显示" onclick="changeRYXXTrIfShow(${status.index+1 },this)"/>
 				</td>
 			</tr>
 			</c:forEach>
