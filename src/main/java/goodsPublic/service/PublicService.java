@@ -2,18 +2,14 @@ package goodsPublic.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import com.goodsPublic.util.PlanResult;
 
 import goodsPublic.entity.AccountMsg;
-import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
+import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
-import goodsPublic.entity.HtmlTemplate;
 
 public interface PublicService {
 
@@ -93,6 +89,13 @@ public interface PublicService {
 	public int queryHtmlGoodsSPZSForInt(String accountId);
 	
 	/**
+	 * 查询多媒体资料模板内容数量
+	 * @param accountId
+	 * @return
+	 */
+	public int queryHtmlGoodsDMTZLForInt(String accountId);
+	
+	/**
 	 * 查询建筑施工模板内容数量
 	 * @param accountId
 	 * @return
@@ -130,6 +133,9 @@ public interface PublicService {
 	 * @return
 	 */
 	public List<HtmlGoodsSPZS> queryHtmlGoodsSPZSList(String accountId, int page, int rows, String sort,
+			String order);
+	
+	public List<HtmlGoodsDMTZL> queryHtmlGoodsDMTZLList(String accountId, int page, int rows, String sort,
 			String order);
 	
 	/**
@@ -207,6 +213,8 @@ public interface PublicService {
 	 * @return
 	 */
 	public Object getModuleSPZSByType(String type);
+	
+	public Object getModuleDMTZLByType(String type);
 	
 	/**
 	 * 根据类型查询建筑施工模板

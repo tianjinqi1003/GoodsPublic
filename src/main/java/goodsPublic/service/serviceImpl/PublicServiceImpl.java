@@ -19,8 +19,10 @@ import goodsPublic.dao.PublicMapper;
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
+import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
+import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
 import goodsPublic.service.PublicService;
@@ -233,6 +235,12 @@ public class PublicServiceImpl implements PublicService {
 	}
 	
 	@Override
+	public int queryHtmlGoodsDMTZLForInt(String accountId) {
+		// TODO Auto-generated method stub
+		return publicDao.queryHtmlGoodsDMTZLForInt(accountId);
+	}
+	
+	@Override
 	public int queryHtmlGoodsJZSGForInt(String accountId) {
 		// TODO Auto-generated method stub
 		return publicDao.queryHtmlGoodsJZSGForInt(accountId);
@@ -250,6 +258,13 @@ public class PublicServiceImpl implements PublicService {
 			String order) {
 		// TODO Auto-generated method stub
 		return publicDao.queryHtmlGoodsSPZSList(accountId, (page-1)*rows, rows, sort, order);
+	}
+	
+	@Override
+	public List<HtmlGoodsDMTZL> queryHtmlGoodsDMTZLList(String accountId, int page, int rows, String sort,
+			String order) {
+		// TODO Auto-generated method stub
+		return publicDao.queryHtmlGoodsDMTZLList(accountId, (page-1)*rows, rows, sort, order);
 	}
 	
 	@Override
@@ -394,6 +409,26 @@ public class PublicServiceImpl implements PublicService {
 		case "memo3":
 			ModuleSPZS moduleSPZS = publicDao.getModuleSPZSByMemo(type);
 			obj=moduleSPZS.getValue();
+			break;
+		}
+		return obj;
+	}
+	
+	@Override
+	public Object getModuleDMTZLByType(String type) {
+		// TODO Auto-generated method stub
+		
+		Object obj=null;
+		switch (type) {
+		case "embed1":
+		case "image1":
+			List<ModuleDMTZL> spxqList = publicDao.getModuleDMTZLByType(type);
+			obj=spxqList;
+			break;
+		case "memo1":
+		case "memo2":
+			ModuleDMTZL moduleDMTZL = publicDao.getModuleDMTZLByMemo(type);
+			obj=moduleDMTZL.getText();
 			break;
 		}
 		return obj;

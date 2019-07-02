@@ -1414,6 +1414,9 @@
 	<select id="queryHtmlGoodsSPZSForInt" resultType="java.lang.Integer">
 		select count(*) from html_goods_spzs where accountNumber=#{param1}
 	</select>
+	<select id="queryHtmlGoodsDMTZLForInt" resultType="java.lang.Integer">
+		select count(*) from html_goods_dmtzl where accountNumber=#{param1}
+	</select>
 	<select id="queryHtmlGoodsJZSGForInt" resultType="java.lang.Integer">
 		select count(*) from html_goods_jzsg where accountNumber=#{param1}
 	</select>
@@ -1422,6 +1425,9 @@
 	</select>
 	<select id="queryHtmlGoodsSPZSList" resultType="goodsPublic.entity.HtmlGoodsSPZS">
 		select * from html_goods_spzs where accountNumber=#{param1} limit ${param2},${param3}
+	</select>
+	<select id="queryHtmlGoodsDMTZLList" resultType="goodsPublic.entity.HtmlGoodsDMTZL">
+		select * from html_goods_dmtzl where accountNumber=#{param1} limit ${param2},${param3}
 	</select>
 	<select id="queryHtmlGoodsJZSGList" resultType="goodsPublic.entity.HtmlGoodsJZSG">
 		select * from html_goods_jzsg where accountNumber=#{param1} limit ${param2},${param3}
@@ -1480,11 +1486,17 @@
 	<select id="getModuleSPZSBySPXQ" resultType="goodsPublic.entity.ModuleSPZS">
 		select * from module_spzs where type=#{param1}
 	</select>
+	<select id="getModuleDMTZLByType" resultType="goodsPublic.entity.ModuleDMTZL">
+		select * from module_dmtzl where type=#{param1}
+	</select>
 	<select id="getModuleJZSGByType" resultType="goodsPublic.entity.ModuleJZSG">
 		select * from module_jzsg where type=#{param1}
 	</select>
 	<select id="getModuleSPZSByMemo" resultType="goodsPublic.entity.ModuleSPZS">
 		select * from module_spzs where type=#{param1}
+	</select>
+	<select id="getModuleDMTZLByMemo" resultType="goodsPublic.entity.ModuleDMTZL">
+		select * from module_dmtzl where type=#{param1}
 	</select>
 	<select id="getHtmlGoodsSPZS" resultType="goodsPublic.entity.HtmlGoodsSPZS">
 		select * from html_goods_spzs where goodsNumber=#{param1} and accountNumber=#{param2}

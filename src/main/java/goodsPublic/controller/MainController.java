@@ -32,8 +32,10 @@ import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
+import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
+import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
 import goodsPublic.service.CategoryService;
@@ -1052,6 +1054,19 @@ public class MainController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/queryHtmlGoodsDMTZLList")
+	@ResponseBody
+	public Map<String, Object> queryHtmlGoodsDMTZLList(String accountId,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count = publicService.queryHtmlGoodsDMTZLForInt(accountId);
+		List<HtmlGoodsDMTZL> htmlGoodsList = publicService.queryHtmlGoodsDMTZLList(accountId, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		jsonMap.put("rows", htmlGoodsList);
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/queryHtmlGoodsJZSGList")
 	@ResponseBody
 	public Map<String, Object> queryHtmlGoodsJZSGList(String accountId,int page,int rows,String sort,String order) {
@@ -1179,6 +1194,12 @@ public class MainController {
 		return "/merchant/jzsg/htmlGoodsList";
 	}
 	
+	@RequestMapping(value="/goHtmlGoodsDMTZLList")
+	public String goHtmlGoodsDMTZLList() {
+		
+		return "/merchant/dmtzl/htmlGoodsList";
+	}
+	
 	/**
 	 * 跳转至模板添加页面
 	 * @param type
@@ -1212,6 +1233,22 @@ public class MainController {
 			request.setAttribute("image3List", image3List);
 			
 			url="/merchant/spzs/addModule";
+			break;
+		case "dmtzl":
+
+			List<ModuleDMTZL> dmtzlEmbed1List = (List<ModuleDMTZL>)publicService.getModuleDMTZLByType("embed1");
+			request.setAttribute("embed1List", dmtzlEmbed1List);
+			
+			List<ModuleDMTZL> dmtzlImage1List = (List<ModuleDMTZL>)publicService.getModuleDMTZLByType("image1");
+			request.setAttribute("image1List", dmtzlImage1List);
+			
+			String dmtzlMemo1 = (String)publicService.getModuleDMTZLByType("memo1");
+			request.setAttribute("memo1", dmtzlMemo1);
+			
+			String dmtzlMemo2 = (String)publicService.getModuleDMTZLByType("memo2");
+			request.setAttribute("memo2", dmtzlMemo2);
+			
+			url="/merchant/dmtzl/addModule";
 			break;
 		case "jzsg":
 			List<ModuleJZSG> ryxxList = (List<ModuleJZSG>)publicService.getModuleJZSGByType("ryxx");
