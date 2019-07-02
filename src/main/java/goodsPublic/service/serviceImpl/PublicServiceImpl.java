@@ -49,6 +49,12 @@ public class PublicServiceImpl implements PublicService {
 	}
 	
 	@Override
+	public int addHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoods) {
+		// TODO Auto-generated method stub
+		return publicDao.addHtmlGoodsDMTZL(htmlGoods);
+	}
+	
+	@Override
 	public int addHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoods) {
 		// TODO Auto-generated method stub
 		return publicDao.addHtmlGoodsJZSG(htmlGoods);
@@ -454,6 +460,12 @@ public class PublicServiceImpl implements PublicService {
 	public HtmlGoodsSPZS getHtmlGoodsSPZS(String goodsNumber, String accountId) {
 		// TODO Auto-generated method stub
 		return publicDao.getHtmlGoodsSPZS(goodsNumber,accountId);
+	}
+	
+	@Override
+	public HtmlGoodsDMTZL getHtmlGoodsDMTZL(String goodsNumber, String accountId) {
+		// TODO Auto-generated method stub
+		return publicDao.getHtmlGoodsDMTZL(goodsNumber,accountId);
 	}
 	
 	@Override

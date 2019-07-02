@@ -298,6 +298,92 @@ public class MainController {
 		return "../../merchant/main/goBrowseHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
 	}
 	
+	@RequestMapping(value="/addHtmlGoodsDMTZL",produces="plain/text; charset=UTF-8")
+	public String addHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoodsDMTZL,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file1_2",required=false) MultipartFile file1_2,
+			@RequestParam(value="file1_3",required=false) MultipartFile file1_3,
+			@RequestParam(value="file1_4",required=false) MultipartFile file1_4,
+			@RequestParam(value="file1_5",required=false) MultipartFile file1_5,
+			@RequestParam(value="file2_1",required=false) MultipartFile file2_1,
+			HttpServletRequest request) {
+		
+		System.out.println("111111111111111"+file2_1);
+		
+		try {
+			MultipartFile[] fileArr=new MultipartFile[6];
+			fileArr[0]=file1_1;
+			fileArr[1]=file1_2;
+			fileArr[2]=file1_3;
+			fileArr[3]=file1_4;
+			fileArr[4]=file1_5;
+			fileArr[5]=file2_1;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						jsonStr = FileUploadUtils.appUploadContentImg(request,fileArr[i],"");
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								htmlGoodsDMTZL.setImage1_1(dataJO.get("src").toString());
+								break;
+							case 1:
+								htmlGoodsDMTZL.setImage1_2(dataJO.get("src").toString());
+								break;
+							case 2:
+								htmlGoodsDMTZL.setImage1_3(dataJO.get("src").toString());
+								break;
+							case 3:
+								htmlGoodsDMTZL.setImage1_4(dataJO.get("src").toString());
+								break;
+							case 4:
+								htmlGoodsDMTZL.setImage1_5(dataJO.get("src").toString());
+								break;
+							case 5:
+								htmlGoodsDMTZL.setEmbed1_1(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+					else {
+						switch (i) {
+						case 0:
+							htmlGoodsDMTZL.setImage1_1("/GoodsPublic/resource/images/dmtzl/c769d75fc7033f7218ca8bcb0c08624e.jpg");
+							break;
+						case 5:
+							htmlGoodsDMTZL.setEmbed1_1("/GoodsPublic/resource/embed/dmtzl/d707ea145302bad9422553804f43d669_conv.H_57_5.mp4");
+							break;
+						}
+					}
+				}
+			}
+			
+			String goodsNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+			htmlGoodsDMTZL.setGoodsNumber(goodsNumber);
+			
+			String addr = request.getLocalAddr();
+			int port = request.getLocalPort();
+			String contextPath = request.getContextPath();
+			//String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoods?trade=dmtzl&goodsNumber="+htmlGoodsDMTZL.getGoodsNumber()+"&accountId="+htmlGoodsDMTZL.getAccountNumber();
+			String url = "http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=dmtzl&goodsNumber="+htmlGoodsDMTZL.getGoodsNumber()+"&accountId="+htmlGoodsDMTZL.getAccountNumber();
+			
+			String fileName = goodsNumber + ".jpg";
+			String avaPath="/GoodsPublic/upload/"+fileName;
+			String path = "D:/resource";
+			Qrcode.createQrCode(url, path, fileName);
+			
+			htmlGoodsDMTZL.setQrCode(avaPath);
+			int a=publicService.addHtmlGoodsDMTZL(htmlGoodsDMTZL);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "../../merchant/main/goBrowseHtmlGoodsDMTZL?goodsNumber="+htmlGoodsDMTZL.getGoodsNumber()+"&accountNumber="+htmlGoodsDMTZL.getAccountNumber();
+	}
+	
 	@RequestMapping(value="/addHtmlGoodsJZSG",produces="plain/text; charset=UTF-8")
 	public String addHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG,
 			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
@@ -662,9 +748,16 @@ public class MainController {
 		return "/merchant/spzs/browseHtmlGoods";
 	}
 	
+	@RequestMapping("/goBrowseHtmlGoodsDMTZL")
+	public String goBrowseHtmlGoodsDMTZL(String goodsNumber, String accountNumber, HttpServletRequest request) {
+		HtmlGoodsDMTZL htmlGoodsDMTZL = publicService.getHtmlGoodsDMTZL(goodsNumber,accountNumber);
+		request.setAttribute("htmlGoodsDMTZL", htmlGoodsDMTZL);
+		return "/merchant/dmtzl/browseHtmlGoods";
+	}
+	
 	/**
 	 * 这个是显示建筑施工的模板内容，用于后台商户浏览
-	 * @param goodsNumber
+	 * @param userNumber
 	 * @param accountNumber
 	 * @param request
 	 * @return
@@ -952,6 +1045,11 @@ public class MainController {
 			HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(goodsNumber,accountId);
 			request.setAttribute("htmlGoodsSPZS", htmlGoodsSPZS);
 			url = "/merchant/spzs/showHtmlGoods";
+			break;
+		case "dmtzl":
+			HtmlGoodsDMTZL htmlGoodsDMTZL = publicService.getHtmlGoodsDMTZL(goodsNumber,accountId);
+			request.setAttribute("htmlGoodsDMTZL", htmlGoodsDMTZL);
+			url = "/merchant/dmtzl/showHtmlGoods";
 			break;
 		case "jzsg":
 			HtmlGoodsJZSG htmlGoodsJZSG = publicService.getHtmlGoodsJZSG(request.getParameter("userNumber"),accountId);
@@ -1282,6 +1380,11 @@ public class MainController {
 			HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(goodsNumber,accountNumber);
 			request.setAttribute("htmlGoodsSPZS", htmlGoodsSPZS);
 			url="/merchant/spzs/editModule";
+			break;
+		case "dmtzl":
+			HtmlGoodsDMTZL htmlGoodsDMTZL = publicService.getHtmlGoodsDMTZL(goodsNumber,accountNumber);
+			request.setAttribute("htmlGoodsDMTZL", htmlGoodsDMTZL);
+			url="/merchant/dmtzl/editModule";
 			break;
 		case "jzsg":
 			HtmlGoodsJZSG htmlGoodsJZSG = publicService.getHtmlGoodsJZSG(request.getParameter("userNumber"),accountNumber);

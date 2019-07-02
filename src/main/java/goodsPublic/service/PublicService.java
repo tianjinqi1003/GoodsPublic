@@ -27,6 +27,8 @@ public interface PublicService {
 	 */
 	public int addHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoods);
 	
+	public int addHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoods);
+	
 	/**
 	 * 保存建筑施工模板内容到数据库
 	 * @param htmlGoods
@@ -224,6 +226,8 @@ public interface PublicService {
 	public Object getModuleJZSGByType(String type);
 
 	public HtmlGoodsSPZS getHtmlGoodsSPZS(String goodsNumber, String accountId);
+	
+	public HtmlGoodsDMTZL getHtmlGoodsDMTZL(String goodsNumber, String accountId);
 	
 	public HtmlGoodsJZSG getHtmlGoodsJZSG(String userNumber, String accountId);
 

@@ -23,6 +23,7 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public int addHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoods);
+	public int addHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoods);
 	public int addHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoods);
 	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS);
 	public int editHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG);
@@ -203,6 +204,7 @@ public interface PublicMapper {
 	public List<ModuleDMTZL> getModuleDMTZLByType(String type);
 	public List<ModuleJZSG> getModuleJZSGByType(String type);
 	public HtmlGoodsSPZS getHtmlGoodsSPZS(String goodsNumber, String accountId);
+	public HtmlGoodsDMTZL getHtmlGoodsDMTZL(String goodsNumber, String accountId);
 	public HtmlGoodsJZSG getHtmlGoodsJZSG(String userNumber, String accountId);
 	/**
 	 * @param type

@@ -59,7 +59,7 @@ function hideOptionDiv(o){
 	$(o).parent().find("#but_div").css("display","none");
 }
 
-function addHtmlGoodsSPZS(){
+function addHtmlGoodsDMTZL(){
 	renameFile();
 	document.getElementById("sub_but").click();
 }
@@ -153,7 +153,7 @@ function goBack(){
 </script>
 </head>
 <body style="background-color: #fbfbfb;">
-<form id="form1" name="form1" method="post" action="addHtmlGoodsSPZS" enctype="multipart/form-data">
+<form id="form1" name="form1" method="post" action="addHtmlGoodsDMTZL" enctype="multipart/form-data">
 <div id="image1ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
 	<div id="image1Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
 		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
@@ -222,7 +222,7 @@ function goBack(){
 </div>
 <div id="right_div" style="width: 150px;height: 200px;text-align: center;">
 	<img style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/007.png">
-	<div style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;margin-top:15px;color:#fff;background-color:#4caf50;border-radius:3px;" onclick="addHtmlGoodsSPZS();">生成二维码</div>
+	<div style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;margin-top:15px;color:#fff;background-color:#4caf50;border-radius:3px;" onclick="addHtmlGoodsDMTZL();">生成二维码</div>
 </div>
 	<input type="hidden" id="accountNumber_hid" name="accountNumber" value="${sessionScope.user.id }" />
 	<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />

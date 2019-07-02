@@ -15,6 +15,9 @@ public class HtmlGoodsDMTZL implements Serializable {
 	private String image1_3;
 	private String image1_4;
 	private String image1_5;
+	private String embed1_1;
+	private String memo1;
+	private String memo2;
 	private String qrCode;
 	private String gmtCreate;
 	private String gmtModified;
@@ -61,6 +64,24 @@ public class HtmlGoodsDMTZL implements Serializable {
 	}
 	public void setImage1_5(String image1_5) {
 		this.image1_5 = image1_5;
+	}
+	public String getEmbed1_1() {
+		return embed1_1;
+	}
+	public void setEmbed1_1(String embed1_1) {
+		this.embed1_1 = embed1_1;
+	}
+	public String getMemo1() {
+		return memo1;
+	}
+	public void setMemo1(String memo1) {
+		this.memo1 = memo1;
+	}
+	public String getMemo2() {
+		return memo2;
+	}
+	public void setMemo2(String memo2) {
+		this.memo2 = memo2;
 	}
 	public String getQrCode() {
 		return qrCode;

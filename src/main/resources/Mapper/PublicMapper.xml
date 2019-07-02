@@ -575,6 +575,88 @@
 			</if>
 		</trim>
 	</insert>
+	<insert id="addHtmlGoodsDMTZL" parameterType="goodsPublic.entity.HtmlGoodsDMTZL">
+		insert into html_goods_dmtzl
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="title!=null">
+				title,
+			</if>
+			<if test="image1_1!=null">
+				image1_1,
+			</if>
+			<if test="image1_2!=null">
+				image1_2,
+			</if>
+			<if test="image1_3!=null">
+				image1_3,
+			</if>
+			<if test="image1_4!=null">
+				image1_4,
+			</if>
+			<if test="image1_5!=null">
+				image1_5,
+			</if>
+			<if test="embed1_1!=null">
+				embed1_1,
+			</if>
+			<if test="memo1!=null">
+				memo1,
+			</if>
+			<if test="memo2!=null">
+				memo2,
+			</if>
+			<if test="qrCode!=null">
+				qrCode,
+			</if>
+				gmtCreate,
+			<if test="goodsNumber!=null">
+				goodsNumber,
+			</if>
+			<if test="accountNumber!=null">
+				accountNumber,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="title!=null">
+				#{title},
+			</if>
+			<if test="image1_1!=null">
+				#{image1_1},
+			</if>
+			<if test="image1_2!=null">
+				#{image1_2},
+			</if>
+			<if test="image1_3!=null">
+				#{image1_3},
+			</if>
+			<if test="image1_4!=null">
+				#{image1_4},
+			</if>
+			<if test="image1_5!=null">
+				#{image1_5},
+			</if>
+			<if test="embed1_1!=null">
+				#{embed1_1},
+			</if>
+			<if test="memo1!=null">
+				#{memo1},
+			</if>
+			<if test="memo2!=null">
+				#{memo2},
+			</if>
+			<if test="qrCode!=null">
+				#{qrCode},
+			</if>
+				now(),
+			<if test="goodsNumber!=null">
+				#{goodsNumber},
+			</if>
+			<if test="accountNumber!=null">
+				#{accountNumber},
+			</if>
+		</trim>
+	</insert>
 	<insert id="addHtmlGoodsJZSG" parameterType="goodsPublic.entity.HtmlGoodsJZSG">
 		insert into html_goods_jzsg
 		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -1500,6 +1582,9 @@
 	</select>
 	<select id="getHtmlGoodsSPZS" resultType="goodsPublic.entity.HtmlGoodsSPZS">
 		select * from html_goods_spzs where goodsNumber=#{param1} and accountNumber=#{param2}
+	</select>
+	<select id="getHtmlGoodsDMTZL" resultType="goodsPublic.entity.HtmlGoodsDMTZL">
+		select * from html_goods_dmtzl where goodsNumber=#{param1} and accountNumber=#{param2}
 	</select>
 	<select id="getHtmlGoodsJZSG" resultType="goodsPublic.entity.HtmlGoodsJZSG">
 		select * from html_goods_jzsg where userNumber=#{param1} and accountNumber=#{param2}
