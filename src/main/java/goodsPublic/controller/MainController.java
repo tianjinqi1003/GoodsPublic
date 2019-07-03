@@ -1038,6 +1038,26 @@ public class MainController {
 		return json;
 	}
 	
+	@RequestMapping(value="/deleteHtmlGoodsDMTZLByIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteHtmlGoodsDMTZLByIds(String ids) {
+		
+		int count=publicService.deleteHtmlGoodsDMTZLByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除多媒体资料信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除多媒体资料信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
 	@RequestMapping(value="/deleteHtmlGoodsJZSGByIds",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String deleteHtmlGoodsJZSGByIds(String ids) {
@@ -1367,29 +1387,25 @@ public class MainController {
 	}
 	
 	/**
-	 * 跳转至商品展示模板快速生成页面
+	 * 跳转至行业模板快速生成页面
 	 * @return
 	 */
-	@RequestMapping(value="/goHtmlGoodsSPZSList")
-	public String goHtmlGoodsSPZSList() {
+	@RequestMapping(value="/goHtmlGoodsList")
+	public String goHtmlGoodsList(String trade) {
 		
-		return "/merchant/spzs/htmlGoodsList";
-	}
-	
-	/**
-	 * 跳转至建筑施工模板快速生成页面
-	 * @return
-	 */
-	@RequestMapping(value="/goHtmlGoodsJZSGList")
-	public String goHtmlGoodsJZSGList() {
-		
-		return "/merchant/jzsg/htmlGoodsList";
-	}
-	
-	@RequestMapping(value="/goHtmlGoodsDMTZLList")
-	public String goHtmlGoodsDMTZLList() {
-		
-		return "/merchant/dmtzl/htmlGoodsList";
+		String url = null;
+		switch (trade) {
+		case "spzs":
+			url="/merchant/spzs/htmlGoodsList";
+			break;
+		case "dmtzl":
+			url="/merchant/dmtzl/htmlGoodsList";
+			break;
+		case "jzsg":
+			url="/merchant/jzsg/htmlGoodsList";
+			break;
+		}
+		return url;
 	}
 	
 	/**

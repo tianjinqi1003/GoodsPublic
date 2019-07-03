@@ -214,5 +214,6 @@ public interface PublicMapper {
 	public ModuleSPZS getModuleSPZSByMemo(String type);
 	public ModuleDMTZL getModuleDMTZLByMemo(String type);
 	public int deleteHtmlGoodsSPZSByIds(List<String> idList);
+	public int deleteHtmlGoodsDMTZLByIds(List<String> idList);
 	public int deleteHtmlGoodsJZSGByIds(List<String> idList);
 }

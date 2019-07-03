@@ -19,7 +19,7 @@ $(function(){
 	$("#remove_but").linkbutton({
 		iconCls:"icon-remove",
 		onClick:function(){
-			deleteHtmlGoodsSPZS();
+			deleteHtmlGoodsDMTZL();
 		}
 	});
 	
@@ -57,7 +57,7 @@ $(function(){
 	});
 });
 
-function deleteHtmlGoodsSPZS() {
+function deleteHtmlGoodsDMTZL() {
 	var rows=tab1.datagrid("getSelections");
 	if (rows.length == 0) {
 		$.messager.alert("提示","请选择要删除的信息！","warning");
@@ -75,7 +75,7 @@ function deleteHtmlGoodsSPZS() {
 function deleteByIds(ids){
 	$.messager.confirm("提示","确定要删除吗？",function(r){
 		if(r){
-			$.post("deleteHtmlGoodsSPZSByIds",
+			$.post("deleteHtmlGoodsDMTZLByIds",
 				{ids:ids},
 				function(result){
 					if(result.status==1){

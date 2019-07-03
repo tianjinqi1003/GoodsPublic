@@ -283,7 +283,7 @@ function changeSPXQTrIfShow(index,o){
 }
 
 function goBack(){
-	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsSPZSList;";
+	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=spzs";
 }
 </script>
 </head>

@@ -170,7 +170,7 @@ function createUUID() {
 }
 
 function goBack(){
-	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsDMTZLList";
+	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=dmtzl";
 }
 </script>
 </head>

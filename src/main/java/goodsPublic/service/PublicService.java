@@ -239,6 +239,8 @@ public interface PublicService {
 
 	public int deleteHtmlGoodsSPZSByIds(String ids);
 	
+	public int deleteHtmlGoodsDMTZLByIds(String ids);
+	
 	public int deleteHtmlGoodsJZSGByIds(String ids);
 
 

@@ -148,7 +148,7 @@ function createUUID() {
 }
 
 function goBack(){
-	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsSPZSList;";
+	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=dmtzl";
 }
 </script>
 </head>
@@ -191,7 +191,7 @@ function goBack(){
 </div>
 <div id="middle_div" style="width: 650px;margin: 0 auto;margin-top: 25px;background-color: #fff;">
 	<div>
-		<input type="text" id="productName" name="productName" placeholder="请输入标题" style="width: 100%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;"/>
+		<input type="text" id="title" name="title" placeholder="请输入标题" style="width: 100%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;"/>
 	</div>
 	<div style="margin-top: 25px;">
 		<textarea id="memo1" name="memo1" cols="100" rows="8" style="width:650px;height:150px;visibility:hidden;"><%=htmlspecialchars(memo1) %></textarea>

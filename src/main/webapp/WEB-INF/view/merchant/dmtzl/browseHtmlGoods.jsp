@@ -18,7 +18,7 @@ function editContent(goodsNumber,accountNumber){
 		<img alt="" src="/GoodsPublic/resource/images/006.png" style="width: 30px;height: 30px;margin-top: 15px;margin-left: 30px;">
 		<span style="margin-top: 18px;margin-left: 30px;font-size: 15px;position: absolute;">生码成功！</span>
 		<a href="${pageContext.request.contextPath}/merchant/main/goAddModule?trade=dmtzl" style="float: right;margin-top: 18px;margin-right: 50px;color: #357bb3;">新建二维码</a>
-		<a href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsDMTZLList" style="float: right;margin-top: 18px;margin-right: 40px;color: #357bb3;">返回列表页</a>
+		<a href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=dmtzl" style="float: right;margin-top: 18px;margin-right: 40px;color: #357bb3;">返回列表页</a>
 	</div>
 	<div id="left_div" style="width: 350px;margin-top: 20px;background-color: #fff;float: left;">
 		<div style="width: 95%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;">
