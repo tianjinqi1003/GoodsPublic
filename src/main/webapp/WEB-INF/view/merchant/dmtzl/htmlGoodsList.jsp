@@ -35,8 +35,8 @@ $(function(){
 			{field:"title",title:"标题",width:200},
             {field:"gmtCreate",title:"创建时间",width:200},
             {field:"id",title:"操作",width:150,formatter:function(value,row){
-            	var str="<a href=\"${pageContext.request.contextPath}/merchant/main/goBrowseHtmlGoodsSPZS?goodsNumber="+row.goodsNumber+"&accountNumber="+row.accountNumber+"\">详情</a>"
-            	+"&nbsp;|&nbsp;<a href=\"${pageContext.request.contextPath}/merchant/main/goEditModule?trade=spzs&goodsNumber="+row.goodsNumber+"&accountNumber="+row.accountNumber+"\">编辑</a>"
+            	var str="<a href=\"${pageContext.request.contextPath}/merchant/main/goBrowseHtmlGoodsDMTZL?goodsNumber="+row.goodsNumber+"&accountNumber="+row.accountNumber+"\">详情</a>"
+            	+"&nbsp;|&nbsp;<a href=\"${pageContext.request.contextPath}/merchant/main/goEditModule?trade=dmtzl&goodsNumber="+row.goodsNumber+"&accountNumber="+row.accountNumber+"\">编辑</a>"
             	+"&nbsp;|&nbsp;<a onclick=\"deleteByIds("+value+")\">删除</a>";
             	return str;
             }}

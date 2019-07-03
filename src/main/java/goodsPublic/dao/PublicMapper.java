@@ -26,6 +26,7 @@ public interface PublicMapper {
 	public int addHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoods);
 	public int addHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoods);
 	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS);
+	public int editHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoodsDMTZL);
 	public int editHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG);
 	//修改发布的产品信息
 	public int updataGoodsPublic(Goods articleInfo);

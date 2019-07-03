@@ -57,7 +57,7 @@ function saveEdithtmlGoodsDMTZL(){
 	 
 	$.ajax({
 		type:"post",
-		url:"saveEdithtmlGoodsDMTZL",
+		url:"saveEditHtmlGoodsDMTZL",
 		dataType: "json",
 		data:formData,
 		cache: false,
@@ -170,12 +170,12 @@ function createUUID() {
 }
 
 function goBack(){
-	location.href="${pageContext.request.contextPath}/merchant/main/gohtmlGoodsDMTZLList;";
+	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsDMTZLList";
 }
 </script>
 </head>
 <body style="background-color: #fbfbfb;">
-<form id="form1" name="form1" method="post" action="finishEdithtmlGoodsDMTZL" enctype="multipart/form-data">
+<form id="form1" name="form1" method="post" action="finishEditHtmlGoodsDMTZL" enctype="multipart/form-data">
 <div id="image1ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
 	<div id="image1Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
 		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">

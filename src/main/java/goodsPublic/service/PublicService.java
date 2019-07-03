@@ -233,6 +233,8 @@ public interface PublicService {
 
 	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS);
 	
+	public int editHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoodsDMTZL);
+	
 	public int editHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG);
 
 	public int deleteHtmlGoodsSPZSByIds(String ids);

@@ -495,6 +495,21 @@ public class MainController {
 		return "../../merchant/main/goBrowseHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
 	}
 	
+	@RequestMapping(value="/finishEditHtmlGoodsDMTZL",produces="plain/text; charset=UTF-8")
+	public String finishEditHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoodsDMTZL,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file1_2",required=false) MultipartFile file1_2,
+			@RequestParam(value="file1_3",required=false) MultipartFile file1_3,
+			@RequestParam(value="file1_4",required=false) MultipartFile file1_4,
+			@RequestParam(value="file1_5",required=false) MultipartFile file1_5,
+			@RequestParam(value="file2_1",required=false) MultipartFile file2_1,
+			HttpServletRequest request) {
+		
+		editHtmlGoodsDMTZL(htmlGoodsDMTZL,file1_1,file1_2,file1_3,file1_4,file1_5,file2_1,request);
+		
+		return "../../merchant/main/goBrowseHtmlGoodsDMTZL?goodsNumber="+htmlGoodsDMTZL.getGoodsNumber()+"&accountNumber="+htmlGoodsDMTZL.getAccountNumber();
+	}
+	
 	@RequestMapping(value="/finishEditHtmlGoodsJZSG",produces="plain/text; charset=UTF-8")
 	public String finishEditHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG,
 			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
@@ -533,6 +548,33 @@ public class MainController {
 		PlanResult plan=new PlanResult();
 		String json;
 		int count = editHtmlGoodsSPZS(htmlGoodsSPZS,file1_1,file1_2,file1_3,file1_4,file1_5,file2_1,file2_2,file2_3,file2_4,file2_5,file3_1,file3_2,file3_3,file3_4,file3_5,request);
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("内容保存失败！");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("内容保存成功！");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
+	@RequestMapping(value="/saveEditHtmlGoodsDMTZL",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String saveEditHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoodsDMTZL,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file1_2",required=false) MultipartFile file1_2,
+			@RequestParam(value="file1_3",required=false) MultipartFile file1_3,
+			@RequestParam(value="file1_4",required=false) MultipartFile file1_4,
+			@RequestParam(value="file1_5",required=false) MultipartFile file1_5,
+			@RequestParam(value="file2_1",required=false) MultipartFile file2_1,
+			HttpServletRequest request) {
+		
+		PlanResult plan=new PlanResult();
+		String json;
+		int count = editHtmlGoodsDMTZL(htmlGoodsDMTZL,file1_1,file1_2,file1_3,file1_4,file1_5,file2_1,request);
 		if(count==0) {
 			plan.setStatus(0);
 			plan.setMsg("内容保存失败！");
@@ -673,6 +715,58 @@ public class MainController {
 				}
 			}
 			count=publicService.editHtmlGoodsSPZS(htmlGoodsSPZS);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return count;
+		}
+	}
+	
+	public int editHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoodsDMTZL, MultipartFile file1_1, MultipartFile file1_2, MultipartFile file1_3, MultipartFile file1_4, MultipartFile file1_5, MultipartFile file2_1, HttpServletRequest request) {
+		int count = 0;
+		try {
+			MultipartFile[] fileArr=new MultipartFile[6];
+			fileArr[0]=file1_1;
+			fileArr[1]=file1_2;
+			fileArr[2]=file1_3;
+			fileArr[3]=file1_4;
+			fileArr[4]=file1_5;
+			fileArr[5]=file2_1;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						jsonStr = FileUploadUtils.appUploadContentImg(request,fileArr[i],"");
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								htmlGoodsDMTZL.setImage1_1(dataJO.get("src").toString());
+								break;
+							case 1:
+								htmlGoodsDMTZL.setImage1_2(dataJO.get("src").toString());
+								break;
+							case 2:
+								htmlGoodsDMTZL.setImage1_3(dataJO.get("src").toString());
+								break;
+							case 3:
+								htmlGoodsDMTZL.setImage1_4(dataJO.get("src").toString());
+								break;
+							case 4:
+								htmlGoodsDMTZL.setImage1_5(dataJO.get("src").toString());
+								break;
+							case 5:
+								htmlGoodsDMTZL.setEmbed1_1(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+				}
+			}
+			count=publicService.editHtmlGoodsDMTZL(htmlGoodsDMTZL);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
