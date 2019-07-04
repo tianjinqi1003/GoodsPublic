@@ -72,7 +72,7 @@
 	<div class="layui-side ">
 		<div class="layui-side-scroll">
 			<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo"
-				style="margin-right: 10px;">
+				style="margin-right: 10px;height: 800px;overflow-y:scroll;">
 				<div style="width: 92%; margin: 0 auto; margin-top: 20px;border: #CAD9EA solid 1px;background-color: #F5FAFE;">
 					<li class="layui-nav-item first-level">
 						<a>
@@ -223,6 +223,20 @@
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
 						<a href="">
 							&nbsp;&nbsp;&nbsp;自定义模板
+						</a>
+					</li>
+				</div>
+				<div style="width: 92%; margin: 0 auto; margin-top: 20px;border: #CAD9EA solid 1px;background-color: #F5FAFE;">
+					<li class="layui-nav-item first-level">
+						<a>
+							vip付费管理
+						</a>
+					</li>
+					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
+					<li class="layui-nav-item">
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
+						<a href="<%=basePath%>merchant/main/goFeePrice?accountId=${sessionScope.user.id }">
+							&nbsp;&nbsp;&nbsp;付费
 						</a>
 					</li>
 				</div>

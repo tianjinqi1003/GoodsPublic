@@ -22,6 +22,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alipay.api.AlipayApiException;
+import com.alipay.api.AlipayClient;
+import com.alipay.api.DefaultAlipayClient;
+import com.alipay.api.request.AlipayTradePrecreateRequest;
+import com.alipay.api.response.AlipayTradePrecreateResponse;
+import com.goodsPublic.config.AlipayConfig;
 import com.goodsPublic.util.FileUploadUtils;
 import com.goodsPublic.util.FinalState;
 import com.goodsPublic.util.JsonUtil;
@@ -1386,6 +1392,12 @@ public class MainController {
 		return "/merchant/goodsLabelSetList";
 	}
 	
+	@RequestMapping(value="/goFeePrice")
+	public String goFeePrice() {
+		
+		return "/merchant/fee/price";
+	}
+	
 	/**
 	 * 跳转至行业模板快速生成页面
 	 * @return
@@ -1561,6 +1573,71 @@ public class MainController {
 			jsonMap.put("info", "编辑标签失败！");
 		}
 		return jsonMap;
+	}
+	
+	public static void main(String[] args) {
+		
+		try {
+			AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.URL,AlipayConfig.APPID,AlipayConfig.RSA_PRIVATE_KEY,AlipayConfig.FORMAT,AlipayConfig.CHARSET,AlipayConfig.ALIPAY_PUBLIC_KEY,AlipayConfig.SIGNTYPE);
+			AlipayTradePrecreateRequest request = new AlipayTradePrecreateRequest();	
+			request.setBizContent("{" +
+			"\"out_trade_no\":\"20180320010101001\"," +
+			"\"total_amount\":\"0.01\"," +
+			"\"subject\":\"Iphone6 16G\","+
+			"\"seller_id\":\"2018091961456482\"," +
+			"\"discountable_amount\":\"8.88\","+
+			"\"goods_detail\":[{"+
+			"\"goods_id\":\"apple-01\"," +
+			"\"goods_name\":\"ipad\","+
+			"\"quantity\":\"1\","+
+			"\"price\":\"2000\","+
+			"\"goods_category\":\"34543238\","+
+			"\"categories_tree\":\"124868003|126232002|126252004\","+
+			"\"body\":\"特价手机\","+
+			"\"show_url\":\"http://www.alipay.com/xxx.jpg\""+
+			"}],"+
+			"\"body\":\"Iphone6 16G\","+
+			"\"operator_id\":\"yx_001\","+
+			"\"store_id\":\"NJ_001\","+
+"\"disable_pay_channels\":\"pcredit,moneyFund,debitCardExpress\","+
+"\"enable_pay_channels\":\"pcredit,moneyFund,debitCardExpress\","+
+"\"terminal_id\":\"NJ_T_001\","+
+"\"extend_params\":{"+
+"\"sys_service_provider_id\":\"2088511833207846\","+
+"\"industry_reflux_info\":\"{\"scene_code\":\"metro_tradeorder\",\"channel\":\"xxxx\",\"scene_data\":{\"asset_name\":\"ALIPAY\"}}\"," +
+"\"card_type\":\"S0JP0000\""+
+			"},"+
+			"\"timeout_express\":\"90m\","+
+			"\"settle_info\":{"+
+			"\"settle_detail_infos\":[{"+
+			"\"trans_in_type\":\"cardSerialNo\","+
+			"\"trans_in\":\"A0001\","+
+			"\"summary_dimension\":\"A0001\","+
+			"\"settle_entity_id\":\"2088xxxxx;ST_0001\","+
+			"\"settle_entity_type\":\"SecondMerchant、Store\","+
+			"\"amount\":\"0.1\""+
+			"}]}," +
+			"\"business_params\":\"{\"data\":\"123\"},"+
+			"\"qr_code_timeout_express\":\"90m\""+
+			" }");
+			AlipayTradePrecreateResponse response = alipayClient.execute(request);
+			if(response.isSuccess()){
+			System.out.println("调用成功");
+			String qrCode = response.getQrCode();
+			System.out.println("------qrCode-------"+qrCode);
+			// 需要修改为运行机器上的路径
+			//String filePath = String.format("/Users/sudo/Desktop/qr- %s.png",response.getOutTradeNo());
+			//将生成的二维码存放到指定路径
+			//ZxingUtils.getQRCodeImge(response.getQrCode(), 256, filePath);
+			} else {
+			System.out.println("调用失败");
+			}
+		} catch (AlipayApiException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 }

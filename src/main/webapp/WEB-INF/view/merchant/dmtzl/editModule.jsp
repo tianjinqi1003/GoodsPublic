@@ -86,8 +86,16 @@ function finishEdithtmlGoodsDMTZL(){
 	document.getElementById("sub_but").click();
 }
 
+function openEmbed1ModBgDiv(){
+	$("#embed1ModBg_div").css("display","block");
+}
+
 function openImage1ModBgDiv(){
 	$("#image1ModBg_div").css("display","block");
+}
+
+function deleteEmbed1Div(){
+	$("#embed1_div").remove();
 }
 
 function deleteImage1Div(){
@@ -101,8 +109,19 @@ function renameFile(){
 	});
 }
 
+function closeEmbed1ModBgDiv(){
+	$("#embed1ModBg_div").css("display","none");
+}
+
 function closeImage1ModBgDiv(){
 	$("#image1ModBg_div").css("display","none");
+}
+
+function uploadEmbed1(){
+	var uuid=createUUID();
+	$("#uuid_hid1").val(uuid);
+	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodeEmbed1(this)\"/>");
+	document.getElementById("uploadFile2_inp").click();
 }
 
 function uploadImage1(){
@@ -114,6 +133,46 @@ function uploadImage1(){
 
 function deleteImage(o){
 	$(o).parent().remove();
+}
+
+function showQrcodeEmbed1(obj){
+	var uuid=$("#uuid_hid1").val();
+	var file=$(obj);
+	file.attr("id","file"+uuid);
+	file.attr("name","file"+uuid);
+	file.removeAttr("onchange");
+	file.css("display","none");
+	var fileHtml=file.prop("outerHTML");
+	
+	var embedShowDiv=$("#embed1Mod_div #embedShow_div");
+	var embedTag;
+	if (!!window.ActiveXObject || "ActiveXObject" in window)
+		embedTag="embed";
+	else
+		embedTag="iframe";
+	embedShowDiv.html("<"+embedTag+" id=\"embed"+uuid+"\" style=\"width: 100%;height: 300px;\" alt=\"\">"
+			+fileHtml);
+
+	var $file = $(obj);
+    var fileObj = $file[0];
+    file=$file;
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var $embed = $("#embed"+uuid);
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        $embed.attr("src", dataURL);
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
 }
 
 function showQrcodePic1(obj){
@@ -176,6 +235,29 @@ function goBack(){
 </head>
 <body style="background-color: #fbfbfb;">
 <form id="form1" name="form1" method="post" action="finishEditHtmlGoodsDMTZL" enctype="multipart/form-data">
+<div id="embed1ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
+	<div id="embed1Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
+		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
+			<span style="margin-left: 20px;">视频模块</span>
+			<span style="float: right;margin-right: 20px;cursor: pointer;" onclick="closeEmbed1ModBgDiv();">关闭</span>
+		</div>
+		<div>
+			<div id="embedShow_div" style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
+				<embed id="embed1_1" style="width: 100%;height: 300px;" alt="" src="/GoodsPublic/resource/embed/dmtzl/d707ea145302bad9422553804f43d669_conv.H_57_5.mp4">
+			</div>
+			<div style="width:100px;height:33px;line-height:33px;text-align:center;color:#999;margin:0 auto;margin-top: 15px;border: #999 solid 1px;border-radius:5px;" onclick="uploadEmbed1();">重新上传</div>
+			<div id="uploadFile2_div" style="display: none;">
+				<input type="file" id="file2_1" name="file" onchange="showQrcodeEmbed1(this)" />
+			</div>
+			<input type="hidden" id="uuid_hid1"/>
+		</div>
+		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
+			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeEmbed1ModBgDiv();">确&nbsp;认</div>
+			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeEmbed1ModBgDiv();">取&nbsp;消</div>
+		</div>
+	</div>
+</div>
+
 <div id="image1ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
 	<div id="image1Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
 		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
@@ -221,8 +303,8 @@ function goBack(){
 	<div id="embed1_div" style="width: 650px;text-align: center;margin-top: 25px;">
 		<div id="option_div" style="width:650px;position:absolute;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<div id="but_div" style="width:100px;height:30px;line-height:30px;margin:0 auto;margin-top: 50px;text-align:center;z-index: 1;background-color: #fff;border-radius:5px;display:none; ">
-				<a onclick="">编辑</a>|
-				<a onclick="">删除</a>
+				<a onclick="openEmbed1ModBgDiv();">编辑</a>|
+				<a onclick="deleteEmbed1Div();">删除</a>
 			</div>
 		</div>
 		<div onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">

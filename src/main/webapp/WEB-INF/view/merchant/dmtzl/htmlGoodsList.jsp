@@ -43,7 +43,7 @@ $(function(){
 	    ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
-				$(this).datagrid("appendRow",{title:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/goAddModule?trade=dmtzl\">点击生成商品模板</a><div>"});
+				$(this).datagrid("appendRow",{title:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/goAddModule?trade=dmtzl\">点击生成多媒体资料模板</a><div>"});
 				$(this).datagrid("mergeCells",{index:0,field:"title",colspan:3});
 				data.total=0;
 			}
