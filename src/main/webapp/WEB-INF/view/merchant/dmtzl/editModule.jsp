@@ -204,7 +204,7 @@ function showQrcodePic1(obj){
     if(tdLength%4==0){
     	var tr=imageTab.find("tr").eq(imageTab.find("tr").length-1);
     	tr.append(tdHtml)
-    	imageTab.append("<tr>"+$("#upload_td").prop("outerHTML")+"</tr>");
+    	imageTab.append("<tr>"+$("#image1Mod_div table #upload_td").prop("outerHTML")+"</tr>");
     	tr.find("td[id^='upload_td']").remove();
     }
     else{

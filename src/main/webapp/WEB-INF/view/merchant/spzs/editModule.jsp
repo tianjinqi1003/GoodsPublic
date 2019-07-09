@@ -172,8 +172,25 @@ function uploadImage3(){
 	document.getElementById("uploadFile3_inp").click();
 }
 
-function deleteImage(o){
-	$(o).parent().remove();
+function deleteImage1(o){
+	var td=$(o).parent();
+	var uuid=td.attr("id").substring(7);
+	$("#image1_div #list_div img[id='img"+uuid+"']").remove();
+	td.remove();
+}
+
+function deleteImage2(o){
+	var td=$(o).parent();
+	var uuid=td.attr("id").substring(7);
+	$("#image2_div #list_div img[id='img"+uuid+"']").remove();
+	td.remove();
+}
+
+function deleteImage3(o){
+	var td=$(o).parent();
+	var uuid=td.attr("id").substring(7);
+	$("#image3_div #list_div img[id='img"+uuid+"']").remove();
+	td.remove();
 }
 
 function showQrcodePic1(obj){
@@ -184,25 +201,38 @@ function showQrcodePic1(obj){
 	file.removeAttr("onchange");
 	file.css("display","none");
 	var fileHtml=file.prop("outerHTML");
+	var tdHtml="<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
+				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage1(this);\">"
+				+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+				+fileHtml
+			+"</td>";
 	
 	var imageTab=$("#image1Mod_div table");
-	var length=imageTab.find("td[id^='file_td']").length;
-	imageTab.find("#upload_td").before("<td id=\"file_td0\" style=\"width: 25%;\">"
-			+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
-			+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
-			+fileHtml
-		+"</td>");
+	//var length=imageTab.find("td[id^='file_td']").length;
+    var tdLength=imageTab.find("td").length;
+    if(tdLength%4==0){
+    	var tr=imageTab.find("tr").eq(imageTab.find("tr").length-1);
+    	tr.append(tdHtml)
+    	imageTab.append("<tr>"+$("#image1Mod_div table #upload_td").prop("outerHTML")+"</tr>");
+    	tr.find("td[id^='upload_td']").remove();
+    }
+    else{
+		imageTab.find("#upload_td").before(tdHtml);
+    }
 
 	var $file = $(obj);
     var fileObj = $file[0];
     file=$file;
     var windowURL = window.URL || window.webkitURL;
     var dataURL;
-    var $img = $("#img"+uuid);
+    var $img = $("#image1Mod_div table #img"+uuid);
 
     if (fileObj && fileObj.files && fileObj.files[0]) {
         dataURL = windowURL.createObjectURL(fileObj.files[0]);
         $img.attr("src", dataURL);
+
+        var listDiv=$("#image1_div #list_div");
+        listDiv.append("<img id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\" style=\"width: 600px;height: 600px;margin-top: 25px;\">");
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -223,26 +253,38 @@ function showQrcodePic2(obj){
 	file.removeAttr("onchange");
 	file.css("display","none");
 	var fileHtml=file.prop("outerHTML");
+	var tdHtml="<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
+				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage2(this);\">"
+				+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+				+fileHtml
+			+"</td>";
 	
 	var imageTab=$("#image2Mod_div table");
-	var length=imageTab.find("td[id^='file_td']").length;
-	imageTab.find("#upload_td").before("<td id=\"file_td0\" style=\"width: 25%;\">"
-			+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
-			+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
-			//+"<input type=\"file\" id=\"file2_1\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\" style=\"display: none;\"/>"
-			+fileHtml
-		+"</td>");
+	//var length=imageTab.find("td[id^='file_td']").length;
+    var tdLength=imageTab.find("td").length;
+    if(tdLength%4==0){
+    	var tr=imageTab.find("tr").eq(imageTab.find("tr").length-1);
+    	tr.append(tdHtml)
+    	imageTab.append("<tr>"+$("#image2Mod_div table #upload_td").prop("outerHTML")+"</tr>");
+    	tr.find("td[id^='upload_td']").remove();
+    }
+    else{
+		imageTab.find("#upload_td").before(tdHtml);
+    }
 
 	var $file = $(obj);
     var fileObj = $file[0];
     file=$file;
     var windowURL = window.URL || window.webkitURL;
     var dataURL;
-    var $img = $("#img"+uuid);
+    var $img = $("#image2Mod_div table #img"+uuid);
 
     if (fileObj && fileObj.files && fileObj.files[0]) {
         dataURL = windowURL.createObjectURL(fileObj.files[0]);
         $img.attr("src", dataURL);
+
+        var listDiv=$("#image2_div #list_div");
+        listDiv.append("<img id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\" style=\"width: 600px;height: 600px;margin-top: 25px;\">");
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -263,25 +305,38 @@ function showQrcodePic3(obj){
 	file.removeAttr("onchange");
 	file.css("display","none");
 	var fileHtml=file.prop("outerHTML");
+	var tdHtml="<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
+				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage3(this);\">"
+				+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+				+fileHtml
+			+"</td>";
 	
 	var imageTab=$("#image3Mod_div table");
-	var length=imageTab.find("td[id^='file_td']").length;
-	imageTab.find("#upload_td").before("<td id=\"file_td0\" style=\"width: 25%;\">"
-			+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
-			+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
-			+fileHtml
-		+"</td>");
+	//var length=imageTab.find("td[id^='file_td']").length;
+	var tdLength=imageTab.find("td").length;
+    if(tdLength%4==0){
+    	var tr=imageTab.find("tr").eq(imageTab.find("tr").length-1);
+    	tr.append(tdHtml)
+    	imageTab.append("<tr>"+$("#image3Mod_div table #upload_td").prop("outerHTML")+"</tr>");
+    	tr.find("td[id^='upload_td']").remove();
+    }
+    else{
+		imageTab.find("#upload_td").before(tdHtml);
+    }
 
 	var $file = $(obj);
     var fileObj = $file[0];
     file=$file;
     var windowURL = window.URL || window.webkitURL;
     var dataURL;
-    var $img = $("#img"+uuid);
+    var $img = $("#image3Mod_div table #img"+uuid);
 
     if (fileObj && fileObj.files && fileObj.files[0]) {
         dataURL = windowURL.createObjectURL(fileObj.files[0]);
         $img.attr("src", dataURL);
+
+        var listDiv=$("#image3_div #list_div");
+        listDiv.append("<img id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\" style=\"width: 600px;height: 600px;margin-top: 25px;\">");
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -335,15 +390,52 @@ function goBack(){
 		</div>
 		<div id="tab_div">
 			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
+				<c:if test="${requestScope.htmlGoodsSPZS.image1_1 ne null||requestScope.htmlGoodsSPZS.image1_2 ne null||requestScope.htmlGoodsSPZS.image1_3 ne null||requestScope.htmlGoodsSPZS.image1_4 ne null }">
 				<tr>
-					<td id="file_td0" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
-						<img id="img1_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/spzs/22ad5cebe49933335608eeb6356e6ab9.png">
+					<c:if test="${requestScope.htmlGoodsSPZS.image1_1 ne null }">
+					<td id="file_td1_1" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage1(this);">
+						<img id="img1_1" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image1_1 }">
 					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsSPZS.image1_2 ne null }">
+					<td id="file_td1_2" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage1(this);">
+						<img id="img1_2" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image1_2 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsSPZS.image1_3 ne null }">
+					<td id="file_td1_3" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage1(this);">
+						<img id="img1_3" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image1_3 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsSPZS.image1_4 ne null }">
+					<td id="file_td1_4" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage1(this);">
+						<img id="img1_4" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image1_4 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsSPZS.image1_5 eq null }">
+					<td id="upload_td">
+						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
+					</td>
+					</c:if>
+				</tr>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsSPZS.image1_5 ne null}">
+				<tr>
+					<c:if test="${requestScope.htmlGoodsSPZS.image1_5 ne null }">
+					<td id="file_td1_5" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage1(this);">
+						<img id="img1_5" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image1_5 }">
+					</td>
+					</c:if>
 					<td id="upload_td">
 						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
 					</td>
 				</tr>
+				</c:if>
 			</table>
 			<div id="uploadFile1_div" style="display: none;">
 				<input type="file" id="file1_1" name="file" onchange="showQrcodePic1(this)" />
@@ -365,25 +457,52 @@ function goBack(){
 		</div>
 		<div id="tab_div">
 			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
+				<c:if test="${requestScope.htmlGoodsSPZS.image2_1 ne null||requestScope.htmlGoodsSPZS.image2_2 ne null||requestScope.htmlGoodsSPZS.image2_3 ne null||requestScope.htmlGoodsSPZS.image2_4 ne null }">
 				<tr>
-					<td id="file_td0" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
-						<img id="img2_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/spzs/41116eb627d54a623813c01bcadd05ce.png">
-						<!-- 
-						<input type="file" id="file2_1" name="file2_1" onchange="showQrcodePic2(this)" style="display: none;"/>
-						 -->
+					<c:if test="${requestScope.htmlGoodsSPZS.image2_1 ne null }">
+					<td id="file_td2_1" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage2(this);">
+						<img id="img2_1" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }">
 					</td>
-					<!-- 
-					<td style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
-						<img alt="" src="/GoodsPublic/resource/images/spzs/573ab1fc91d98528915519d96dc2e6ec.png">
-						<input type="file" id="image2_2" onchange="showQrcodePic2(this)" style="display: none;"/>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsSPZS.image2_2 ne null }">
+					<td id="file_td2_2" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage2(this);">
+						<img id="img2_2" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image2_2 }">
 					</td>
-					 -->
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsSPZS.image2_3 ne null }">
+					<td id="file_td2_3" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage2(this);">
+						<img id="img2_3" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image2_3 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsSPZS.image2_4 ne null }">
+					<td id="file_td2_4" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage2(this);">
+						<img id="img2_4" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image2_4 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsSPZS.image2_5 eq null }">
+					<td id="upload_td">
+						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
+					</td>
+					</c:if>
+				</tr>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsSPZS.image2_5 ne null}">
+				<tr>
+					<c:if test="${requestScope.htmlGoodsSPZS.image2_5 ne null }">
+					<td id="file_td2_5" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage2(this);">
+						<img id="img2_5" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }">
+					</td>
+					</c:if>
 					<td id="upload_td">
 						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
 					</td>
 				</tr>
+				</c:if>
 			</table>
 			<div id="uploadFile2_div" style="display: none;">
 				<input type="file" id="file2_1" name="file" onchange="showQrcodePic2(this)" />
@@ -405,15 +524,52 @@ function goBack(){
 		</div>
 		<div id="tab_div">
 			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
+				<c:if test="${requestScope.htmlGoodsSPZS.image3_1 ne null||requestScope.htmlGoodsSPZS.image3_2 ne null||requestScope.htmlGoodsSPZS.image3_3 ne null||requestScope.htmlGoodsSPZS.image3_4 ne null }">
 				<tr>
-					<td id="file_td0" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
-						<img id="img3_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/spzs/\573ab1fc91d98528915519d96dc2e6ec.png">
+					<c:if test="${requestScope.htmlGoodsSPZS.image3_1 ne null }">
+					<td id="file_td3_1" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage3(this);">
+						<img id="img3_1" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }">
 					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsSPZS.image3_2 ne null }">
+					<td id="file_td3_2" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage3(this);">
+						<img id="img3_2" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsSPZS.image3_3 ne null }">
+					<td id="file_td3_3" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage3(this);">
+						<img id="img3_3" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsSPZS.image3_4 ne null }">
+					<td id="file_td3_4" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage3(this);">
+						<img id="img3_4" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsSPZS.image3_5 eq null }">
+					<td id="upload_td">
+						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage3();">
+					</td>
+					</c:if>
+				</tr>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsSPZS.image3_5 ne null}">
+				<tr>
+					<c:if test="${requestScope.htmlGoodsSPZS.image3_5 ne null }">
+					<td id="file_td3_5" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage3(this);">
+						<img id="img3_5" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }">
+					</td>
+					</c:if>
 					<td id="upload_td">
 						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage3();">
 					</td>
 				</tr>
+				</c:if>
 			</table>
 			<div id="uploadFile3_div" style="display: none;">
 				<input type="file" id="file3_1" name="file" onchange="showQrcodePic3(this)" />
@@ -443,9 +599,9 @@ function goBack(){
 				<a onclick="deleteImage1Div();">删除</a>
 			</div>
 		</div>
-		<div onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_1 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image1_1 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img id="img1_1" alt="" src="${requestScope.htmlGoodsSPZS.image1_1 }" style="width: 600px;height: 600px;margin-top: 25px;">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_2 ne null }">
 			<img alt="" src="${requestScope.htmlGoodsSPZS.image1_2 }" style="width: 600px;height: 600px;margin-top: 25px;">
@@ -555,9 +711,9 @@ function goBack(){
 				<a onclick="deleteImage2Div();">删除</a>
 			</div>
 		</div>
-		<div onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_1 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img id="img2_1" alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }" style="width: 600px;height: 600px;margin-top: 25px;">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_2 ne null }">
 			<img alt="" src="${requestScope.htmlGoodsSPZS.image2_2 }" style="width: 600px;height: 600px;margin-top: 25px;">
@@ -580,9 +736,9 @@ function goBack(){
 				<a onclick="deleteImage3Div();">删除</a>
 			</div>
 		</div>
-		<div onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_1 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img id="img3_1" alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }" style="width: 600px;height: 600px;margin-top: 25px;">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_2 ne null }">
 			<img alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }" style="width: 600px;height: 600px;margin-top: 25px;">

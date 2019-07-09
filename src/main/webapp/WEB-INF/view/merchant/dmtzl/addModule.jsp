@@ -180,7 +180,7 @@ function showQrcodePic1(obj){
     if(tdLength%4==0){
     	var tr=imageTab.find("tr").eq(imageTab.find("tr").length-1);
     	tr.append(tdHtml)
-    	imageTab.append("<tr>"+$("#upload_td").prop("outerHTML")+"</tr>");
+    	imageTab.append("<tr>"+$("#image1Mod_div table #upload_td").prop("outerHTML")+"</tr>");
     	tr.find("td[id^='upload_td']").remove();
     }
     else{
@@ -323,7 +323,7 @@ function goBack(){
 		</div>
 		<div id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:forEach items="${requestScope.image1List }" var="image1" varStatus="status">
-			<img alt="" src="${image1.url }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img id="img1_1" alt="" src="${image1.url }" style="width: 600px;height: 600px;margin-top: 25px;">
 			</c:forEach>
 		</div>
 	</div>
