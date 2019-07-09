@@ -114,7 +114,10 @@ function uploadImage1(){
 }
 
 function deleteImage(o){
-	$(o).parent().remove();
+	var td=$(o).parent();
+	var uuid=td.attr("id").substring(7);
+	$("#image1_div #list_div img[id='img"+uuid+"']").remove();
+	td.remove();
 }
 
 function showQrcodeEmbed1(obj){
@@ -165,25 +168,38 @@ function showQrcodePic1(obj){
 	file.removeAttr("onchange");
 	file.css("display","none");
 	var fileHtml=file.prop("outerHTML");
+	var tdHtml="<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
+				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
+				+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+				+fileHtml
+			+"</td>";
 	
 	var imageTab=$("#image1Mod_div table");
-	var length=imageTab.find("td[id^='file_td']").length;
-	imageTab.find("#upload_td").before("<td id=\"file_td0\" style=\"width: 25%;\">"
-			+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
-			+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
-			+fileHtml
-		+"</td>");
+	//var length=imageTab.find("td[id^='file_td']").length;
+    var tdLength=imageTab.find("td").length;
+    if(tdLength%4==0){
+    	var tr=imageTab.find("tr").eq(imageTab.find("tr").length-1);
+    	tr.append(tdHtml)
+    	imageTab.append("<tr>"+$("#upload_td").prop("outerHTML")+"</tr>");
+    	tr.find("td[id^='upload_td']").remove();
+    }
+    else{
+		imageTab.find("#upload_td").before(tdHtml);
+    }
 
 	var $file = $(obj);
     var fileObj = $file[0];
     file=$file;
     var windowURL = window.URL || window.webkitURL;
     var dataURL;
-    var $img = $("#img"+uuid);
+    var $img = $("#image1Mod_div table #img"+uuid);
 
     if (fileObj && fileObj.files && fileObj.files[0]) {
         dataURL = windowURL.createObjectURL(fileObj.files[0]);
         $img.attr("src", dataURL);
+        
+        var listDiv=$("#image1_div #list_div");
+        listDiv.append("<img id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\" style=\"width: 600px;height: 600px;margin-top: 25px;\">");
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -249,7 +265,7 @@ function goBack(){
 		<div id="tab_div">
 			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
 				<tr>
-					<td id="file_td0" style="width: 25%;">
+					<td id="file_td1_1" style="width: 25%;">
 						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
 						<img id="img1_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/dmtzl/c769d75fc7033f7218ca8bcb0c08624e.jpg">
 					</td>
@@ -305,7 +321,7 @@ function goBack(){
 				<a onclick="deleteImage1Div();">删除</a>
 			</div>
 		</div>
-		<div onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:forEach items="${requestScope.image1List }" var="image1" varStatus="status">
 			<img alt="" src="${image1.url }" style="width: 600px;height: 600px;margin-top: 25px;">
 			</c:forEach>

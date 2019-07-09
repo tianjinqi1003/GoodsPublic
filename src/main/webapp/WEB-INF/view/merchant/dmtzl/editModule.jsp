@@ -192,26 +192,23 @@ function showQrcodePic1(obj){
 	file.removeAttr("onchange");
 	file.css("display","none");
 	var fileHtml=file.prop("outerHTML");
+	var tdHtml="<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
+				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
+				+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+				+fileHtml
+			+"</td>";
 	
 	var imageTab=$("#image1Mod_div table");
 	//var length=imageTab.find("td[id^='file_td']").length;
     var tdLength=imageTab.find("td").length;
     if(tdLength%4==0){
     	var tr=imageTab.find("tr").eq(imageTab.find("tr").length-1);
-    	tr.append("<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
-				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
-				+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
-				+fileHtml
-			+"</td>")
+    	tr.append(tdHtml)
     	imageTab.append("<tr>"+$("#upload_td").prop("outerHTML")+"</tr>");
     	tr.find("td[id^='upload_td']").remove();
     }
     else{
-		imageTab.find("#upload_td").before("<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
-				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
-				+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
-				+fileHtml
-			+"</td>");
+		imageTab.find("#upload_td").before(tdHtml);
     }
 
 	var $file = $(obj);
