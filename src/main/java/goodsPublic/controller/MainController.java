@@ -1180,6 +1180,12 @@ public class MainController {
 		return url;
 	}
 	
+	@RequestMapping(value="/kaiTong")
+	public String kaiTong() {
+		System.out.println("开通商户......");
+		return null;
+	}
+	
 	/**
 	 * 跳转至分类页面
 	 * @return

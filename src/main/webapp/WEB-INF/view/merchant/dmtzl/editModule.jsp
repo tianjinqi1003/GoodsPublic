@@ -107,6 +107,10 @@ function renameFile(){
 		$(this).attr("name","file1_"+(i+1));
 		//console.log($(this).attr("name"));
 	});
+	$("#uploadFile2_div input[type='file']").each(function(i){
+		$(this).attr("name","file2_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
 }
 
 function closeEmbed1ModBgDiv(){
@@ -120,7 +124,7 @@ function closeImage1ModBgDiv(){
 function uploadEmbed1(){
 	var uuid=createUUID();
 	$("#uuid_hid1").val(uuid);
-	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodeEmbed1(this)\"/>");
+	$("#uploadFile2_div").html("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodeEmbed1(this)\"/>");
 	document.getElementById("uploadFile2_inp").click();
 }
 
@@ -132,7 +136,10 @@ function uploadImage1(){
 }
 
 function deleteImage(o){
-	$(o).parent().remove();
+	var td=$(o).parent();
+	var uuid=td.attr("id").substring(7);
+	$("#image1_div #list_div img[id='img"+uuid+"']").remove();
+	td.remove();
 }
 
 function showQrcodeEmbed1(obj){
@@ -163,6 +170,8 @@ function showQrcodeEmbed1(obj){
     if (fileObj && fileObj.files && fileObj.files[0]) {
         dataURL = windowURL.createObjectURL(fileObj.files[0]);
         $embed.attr("src", dataURL);
+        
+        $("#embed1_div #embed1_1").replaceWith("<"+embedTag+" id=\"embed1_1\" src=\""+dataURL+"\" style=\"width: 600px;height: 300px;margin-top: 25px;\"/>");
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -185,23 +194,39 @@ function showQrcodePic1(obj){
 	var fileHtml=file.prop("outerHTML");
 	
 	var imageTab=$("#image1Mod_div table");
-	var length=imageTab.find("td[id^='file_td']").length;
-	imageTab.find("#upload_td").before("<td id=\"file_td0\" style=\"width: 25%;\">"
-			+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
-			+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
-			+fileHtml
-		+"</td>");
+	//var length=imageTab.find("td[id^='file_td']").length;
+    var tdLength=imageTab.find("td").length;
+    if(tdLength%4==0){
+    	var tr=imageTab.find("tr").eq(imageTab.find("tr").length-1);
+    	tr.append("<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
+				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
+				+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+				+fileHtml
+			+"</td>")
+    	imageTab.append("<tr>"+$("#upload_td").prop("outerHTML")+"</tr>");
+    	tr.find("td[id^='upload_td']").remove();
+    }
+    else{
+		imageTab.find("#upload_td").before("<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
+				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
+				+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+				+fileHtml
+			+"</td>");
+    }
 
 	var $file = $(obj);
     var fileObj = $file[0];
     file=$file;
     var windowURL = window.URL || window.webkitURL;
     var dataURL;
-    var $img = $("#img"+uuid);
+    var $img = $("#image1Mod_div table #img"+uuid);
 
     if (fileObj && fileObj.files && fileObj.files[0]) {
         dataURL = windowURL.createObjectURL(fileObj.files[0]);
         $img.attr("src", dataURL);
+        
+        var listDiv=$("#image1_div #list_div");
+        listDiv.append("<img id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\" style=\"width: 600px;height: 600px;margin-top: 25px;\">");
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -243,7 +268,7 @@ function goBack(){
 		</div>
 		<div>
 			<div id="embedShow_div" style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
-				<embed id="embed1_1" style="width: 100%;height: 300px;" alt="" src="/GoodsPublic/resource/embed/dmtzl/d707ea145302bad9422553804f43d669_conv.H_57_5.mp4">
+				<embed id="embed1_1" style="width: 100%;height: 300px;" alt="" src="${requestScope.htmlGoodsDMTZL.embed1_1 }">
 			</div>
 			<div style="width:100px;height:33px;line-height:33px;text-align:center;color:#999;margin:0 auto;margin-top: 15px;border: #999 solid 1px;border-radius:5px;" onclick="uploadEmbed1();">重新上传</div>
 			<div id="uploadFile2_div" style="display: none;">
@@ -266,15 +291,52 @@ function goBack(){
 		</div>
 		<div id="tab_div">
 			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
+				<c:if test="${requestScope.htmlGoodsDMTZL.image1_1 ne null||requestScope.htmlGoodsDMTZL.image1_2 ne null||requestScope.htmlGoodsDMTZL.image1_3 ne null||requestScope.htmlGoodsDMTZL.image1_4 ne null }">
 				<tr>
-					<td id="file_td0" style="width: 25%;">
+					<c:if test="${requestScope.htmlGoodsDMTZL.image1_1 ne null }">
+					<td id="file_td1_1" style="width: 25%;">
 						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
-						<img id="img1_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/spzs/22ad5cebe49933335608eeb6356e6ab9.png">
+						<img id="img1_1" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsDMTZL.image1_1 }">
 					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsDMTZL.image1_2 ne null }">
+					<td id="file_td1_2" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
+						<img id="img1_2" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsDMTZL.image1_2 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsDMTZL.image1_3 ne null }">
+					<td id="file_td1_3" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
+						<img id="img1_3" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsDMTZL.image1_3 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsDMTZL.image1_4 ne null }">
+					<td id="file_td1_4" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
+						<img id="img1_4" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsDMTZL.image1_4 }">
+					</td>
+					</c:if>
+					<c:if test="${requestScope.htmlGoodsDMTZL.image1_5 eq null }">
+					<td id="upload_td">
+						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
+					</td>
+					</c:if>
+				</tr>
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsDMTZL.image1_5 ne null}">
+				<tr>
+					<c:if test="${requestScope.htmlGoodsDMTZL.image1_5 ne null }">
+					<td id="file_td1_5" style="width: 25%;">
+						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
+						<img id="img1_5" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsDMTZL.image1_5 }">
+					</td>
+					</c:if>
 					<td id="upload_td">
 						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
 					</td>
 				</tr>
+				</c:if>
 			</table>
 			<div id="uploadFile1_div" style="display: none;">
 				<input type="file" id="file1_1" name="file" onchange="showQrcodePic1(this)" />
@@ -290,7 +352,7 @@ function goBack(){
 
 <div style="width: 100%;height: 50px;line-height: 50px;background-color: #fff;">
 	<div style="float:left;width: 70px;height: 30px;line-height: 30px;text-align:center;margin-top:10px;margin-left:20px;border:1px solid #eee;border-radius:3px;" onclick="goBack();">&lt返回</div>
-	<div style="width:200px;margin:0 auto;font-size:18px;font-weight: bold;text-align: center;">红酒介绍-案例</div>
+	<div style="width:200px;margin:0 auto;font-size:18px;font-weight: bold;text-align: center;">多媒体资料</div>
 	<div style="float:right;height: 30px;line-height: 30px;text-align:center;margin-top:-40px;margin-right:20px;border-radius:3px;">我的二维码&nbsp;${sessionScope.user.userName }</div>
 </div>
 <div id="middle_div" style="width: 650px;margin: 0 auto;margin-top: 25px;background-color: #fff;">
@@ -309,7 +371,7 @@ function goBack(){
 		</div>
 		<div onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:if test="${requestScope.htmlGoodsDMTZL.embed1_1 ne null }">
-			<embed alt="" src="${requestScope.htmlGoodsDMTZL.embed1_1 }" style="width: 600px;height: 300px;margin-top: 25px;"/>
+			<embed id="embed1_1" alt="" src="${requestScope.htmlGoodsDMTZL.embed1_1 }" style="width: 600px;height: 300px;margin-top: 25px;"/>
 			</c:if>
 		</div>
 	</div>
@@ -323,9 +385,9 @@ function goBack(){
 				<a onclick="deleteImage1Div();">删除</a>
 			</div>
 		</div>
-		<div onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:if test="${requestScope.htmlGoodsDMTZL.image1_1 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsDMTZL.image1_1 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img id="img1_1" alt="" src="${requestScope.htmlGoodsDMTZL.image1_1 }" style="width: 600px;height: 600px;margin-top: 25px;">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsDMTZL.image1_2 ne null }">
 			<img alt="" src="${requestScope.htmlGoodsDMTZL.image1_2 }" style="width: 600px;height: 600px;margin-top: 25px;">
