@@ -17,13 +17,26 @@ import goodsPublic.entity.ModuleSPZS;
 public interface PublicMapper {
 	//保存发布的产品信息
 	public int addGoodsPublic(Goods articleInfo);
+	
 	/**
 	 * 保存发布的产品模板内容信息
 	 * @param htmlGoods
 	 * @return
 	 */
 	public int addHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoods);
+	
+	/**
+	 * 添加多媒体资料模板内容
+	 * @param htmlGoods
+	 * @return
+	 */
 	public int addHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoods);
+	
+	/**
+	 * 添加建筑施工模板内容
+	 * @param htmlGoods
+	 * @return
+	 */
 	public int addHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoods);
 	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS);
 	public int editHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoodsDMTZL);
@@ -32,6 +45,7 @@ public interface PublicMapper {
 	public int updataGoodsPublic(Goods articleInfo);
 	//查询所有的产品信息
 	public Goods getAllGoodsMsg(String goodsNumber);
+	
 	/**
 	 * 更新二维码链接
 	 * @param avaPath
@@ -39,6 +53,7 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public int updateQrcode(@Param("avaPath")String avaPath, @Param("goodsNumber")String goodsNumber);
+	
 	/**
 	 * 查询商品
 	 * @param accountMsgId
@@ -48,7 +63,7 @@ public interface PublicMapper {
 	public List<Goods> queryGoodsList(String accountId, String categoryId, int start, int rows, String sort, String order);
 	
 	/**
-	 * 查询模板商品
+	 * 根据商户编号，查询商品展示模板内容
 	 * @param accountId
 	 * @param i
 	 * @param rows
@@ -59,11 +74,20 @@ public interface PublicMapper {
 	public List<HtmlGoodsSPZS> queryHtmlGoodsSPZSList(String accountId, int i, int rows, String sort,
 			String order);
 	
+	/**
+	 * 根据商户编号，查询多媒体资料模板内容
+	 * @param accountId
+	 * @param i
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
 	public List<HtmlGoodsDMTZL> queryHtmlGoodsDMTZLList(String accountId, int i, int rows, String sort,
 			String order);
 	
 	/**
-	 * 查询建筑施工模板内容
+	 * 根据商户编号，查询建筑施工模板内容
 	 * @param accountId
 	 * @param i
 	 * @param rows
@@ -196,24 +220,84 @@ public interface PublicMapper {
 	 * @param accountNumber
 	 */
 	public void insertGoodsLabel(@Param("key") String key, @Param("module") String module, @Param("accountNumber") String accountNumber);
+	
 	/**
 	 * 根据类型，查询商品展示模板列表
 	 * @param type 
 	 * @return
 	 */
 	public List<ModuleSPZS> getModuleSPZSBySPXQ(String type);
-	public List<ModuleDMTZL> getModuleDMTZLByType(String type);
-	public List<ModuleJZSG> getModuleJZSGByType(String type);
-	public HtmlGoodsSPZS getHtmlGoodsSPZS(String goodsNumber, String accountId);
-	public HtmlGoodsDMTZL getHtmlGoodsDMTZL(String goodsNumber, String accountId);
-	public HtmlGoodsJZSG getHtmlGoodsJZSG(String userNumber, String accountId);
+	
 	/**
+	 * 根据类型，查询多媒体资料模板列表
+	 * @param type
+	 * @return
+	 */
+	public List<ModuleDMTZL> getModuleDMTZLByType(String type);
+	
+	/**
+	 * 根据类型，查询建筑施工模板列表
+	 * @param type
+	 * @return
+	 */
+	public List<ModuleJZSG> getModuleJZSGByType(String type);
+	
+	/**
+	 * 获得商品展示模板内容
+	 * @param goodsNumber
+	 * @param accountId
+	 * @return
+	 */
+	public HtmlGoodsSPZS getHtmlGoodsSPZS(String goodsNumber, String accountId);
+	
+	/**
+	 * 获得多媒体资料模板内容
+	 * @param goodsNumber
+	 * @param accountId
+	 * @return
+	 */
+	public HtmlGoodsDMTZL getHtmlGoodsDMTZL(String goodsNumber, String accountId);
+	
+	/**
+	 * 获得建筑施工模板内容
+	 * @param userNumber
+	 * @param accountId
+	 * @return
+	 */
+	public HtmlGoodsJZSG getHtmlGoodsJZSG(String userNumber, String accountId);
+	
+	/**
+	 * 根据备注类型，获得商品展示模板对应的值
 	 * @param type
 	 * @return
 	 */
 	public ModuleSPZS getModuleSPZSByMemo(String type);
+	
+	/**
+	 * 根据备注类型，获得多媒体资料模板对应的值
+	 * @param type
+	 * @return
+	 */
 	public ModuleDMTZL getModuleDMTZLByMemo(String type);
+	
+	/**
+	 * 根据id删除商品展示模板内容
+	 * @param idList
+	 * @return
+	 */
 	public int deleteHtmlGoodsSPZSByIds(List<String> idList);
+	
+	/**
+	 * 根据id删除多媒体资料模板内容
+	 * @param idList
+	 * @return
+	 */
 	public int deleteHtmlGoodsDMTZLByIds(List<String> idList);
+	
+	/**
+	 * 根据id删除建筑施工模板内容
+	 * @param idList
+	 * @return
+	 */
 	public int deleteHtmlGoodsJZSGByIds(List<String> idList);
 }

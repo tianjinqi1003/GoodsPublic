@@ -27,6 +27,11 @@ public interface PublicService {
 	 */
 	public int addHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoods);
 	
+	/**
+	 * 添加多媒体资料模板内容
+	 * @param htmlGoods
+	 * @return
+	 */
 	public int addHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoods);
 	
 	/**
@@ -126,7 +131,7 @@ public interface PublicService {
 	public List<Goods> queryGoodsList(int categoryID, String accountId);
 
 	/**
-	 * 根据模板类型、商户编号，查询商品信息
+	 * 根据商户编号，查询商品展示模板内容
 	 * @param accountId
 	 * @param page
 	 * @param rows
@@ -137,11 +142,20 @@ public interface PublicService {
 	public List<HtmlGoodsSPZS> queryHtmlGoodsSPZSList(String accountId, int page, int rows, String sort,
 			String order);
 	
+	/**
+	 * 根据商户编号，查询多媒体资料模板内容
+	 * @param accountId
+	 * @param page
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
 	public List<HtmlGoodsDMTZL> queryHtmlGoodsDMTZLList(String accountId, int page, int rows, String sort,
 			String order);
 	
 	/**
-	 * 根据模板类型、商户编号，查询建筑施工模板内容信息
+	 * 根据商户编号，查询建筑施工模板内容信息
 	 * @param accountId
 	 * @param page
 	 * @param rows
@@ -216,6 +230,11 @@ public interface PublicService {
 	 */
 	public Object getModuleSPZSByType(String type);
 	
+	/**
+	 * 根据类型查询多媒体资料模板
+	 * @param type
+	 * @return
+	 */
 	public Object getModuleDMTZLByType(String type);
 	
 	/**
@@ -225,22 +244,70 @@ public interface PublicService {
 	 */
 	public Object getModuleJZSGByType(String type);
 
+	/**
+	 * 获得商品展示模板内容
+	 * @param goodsNumber
+	 * @param accountId
+	 * @return
+	 */
 	public HtmlGoodsSPZS getHtmlGoodsSPZS(String goodsNumber, String accountId);
 	
+	/**
+	 * 获得多媒体资料模板内容
+	 * @param goodsNumber
+	 * @param accountId
+	 * @return
+	 */
 	public HtmlGoodsDMTZL getHtmlGoodsDMTZL(String goodsNumber, String accountId);
 	
+	/**
+	 * 获得建筑施工模板内容
+	 * @param userNumber
+	 * @param accountId
+	 * @return
+	 */
 	public HtmlGoodsJZSG getHtmlGoodsJZSG(String userNumber, String accountId);
 
+	/**
+	 * 编辑商品展示模板内容
+	 * @param htmlGoodsSPZS
+	 * @return
+	 */
 	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS);
 	
+	/**
+	 * 编辑多媒体资料模板内容
+	 * @param htmlGoodsDMTZL
+	 * @return
+	 */
 	public int editHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoodsDMTZL);
 	
+	/**
+	 * 编辑建筑施工模板内容
+	 * @param htmlGoodsJZSG
+	 * @return
+	 */
 	public int editHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG);
 
+	/**
+	 * 根据id删除商品展示模板内容
+	 * @param ids
+	 * @return
+	 */
 	public int deleteHtmlGoodsSPZSByIds(String ids);
 	
+	/**
+	 * 根据id删除多媒体资料模板内容
+	 * @param ids
+	 * @return
+	 */
 	public int deleteHtmlGoodsDMTZLByIds(String ids);
 	
+	/**
+	 * 根据id删除建筑施工模板内容
+	 * @param ids
+	 * @return
+	 */
 	public int deleteHtmlGoodsJZSGByIds(String ids);
 
 

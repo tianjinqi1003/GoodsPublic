@@ -167,6 +167,27 @@ public class MainController {
 		return "../../merchant/main/operation?";
 	}
 	
+	/**
+	 * 添加商品展示模板内容
+	 * @param htmlGoodsSPZS
+	 * @param file1_1
+	 * @param file1_2
+	 * @param file1_3
+	 * @param file1_4
+	 * @param file1_5
+	 * @param file2_1
+	 * @param file2_2
+	 * @param file2_3
+	 * @param file2_4
+	 * @param file2_5
+	 * @param file3_1
+	 * @param file3_2
+	 * @param file3_3
+	 * @param file3_4
+	 * @param file3_5
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/addHtmlGoodsSPZS",produces="plain/text; charset=UTF-8")
 	public String addHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS,
 			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
@@ -304,6 +325,18 @@ public class MainController {
 		return "../../merchant/main/goBrowseHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
 	}
 	
+	/**
+	 * 添加多媒体资料模板内容
+	 * @param htmlGoodsDMTZL
+	 * @param file1_1
+	 * @param file1_2
+	 * @param file1_3
+	 * @param file1_4
+	 * @param file1_5
+	 * @param file2_1
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/addHtmlGoodsDMTZL",produces="plain/text; charset=UTF-8")
 	public String addHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoodsDMTZL,
 			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
@@ -390,6 +423,18 @@ public class MainController {
 		return "../../merchant/main/goBrowseHtmlGoodsDMTZL?goodsNumber="+htmlGoodsDMTZL.getGoodsNumber()+"&accountNumber="+htmlGoodsDMTZL.getAccountNumber();
 	}
 	
+	/**
+	 * 添加建筑施工模板内容
+	 * @param htmlGoodsJZSG
+	 * @param file1_1
+	 * @param file1_2
+	 * @param file1_3
+	 * @param file2_1
+	 * @param file2_2
+	 * @param file2_3
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/addHtmlGoodsJZSG",produces="plain/text; charset=UTF-8")
 	public String addHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG,
 			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
@@ -477,6 +522,27 @@ public class MainController {
 		return "../../merchant/main/goBrowseHtmlGoodsJZSG?userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountNumber="+htmlGoodsJZSG.getAccountNumber();
 	}
 	
+	/**
+	 * 完成编辑商品展示模板内容
+	 * @param htmlGoodsSPZS
+	 * @param file1_1
+	 * @param file1_2
+	 * @param file1_3
+	 * @param file1_4
+	 * @param file1_5
+	 * @param file2_1
+	 * @param file2_2
+	 * @param file2_3
+	 * @param file2_4
+	 * @param file2_5
+	 * @param file3_1
+	 * @param file3_2
+	 * @param file3_3
+	 * @param file3_4
+	 * @param file3_5
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/finishEditHtmlGoodsSPZS",produces="plain/text; charset=UTF-8")
 	public String finishEditHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS,
 			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
@@ -501,6 +567,18 @@ public class MainController {
 		return "../../merchant/main/goBrowseHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
 	}
 	
+	/**
+	 * 完成编辑多媒体资料模板内容
+	 * @param htmlGoodsDMTZL
+	 * @param file1_1
+	 * @param file1_2
+	 * @param file1_3
+	 * @param file1_4
+	 * @param file1_5
+	 * @param file2_1
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/finishEditHtmlGoodsDMTZL",produces="plain/text; charset=UTF-8")
 	public String finishEditHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoodsDMTZL,
 			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
@@ -516,6 +594,18 @@ public class MainController {
 		return "../../merchant/main/goBrowseHtmlGoodsDMTZL?goodsNumber="+htmlGoodsDMTZL.getGoodsNumber()+"&accountNumber="+htmlGoodsDMTZL.getAccountNumber();
 	}
 	
+	/**
+	 * 完成编辑建筑施工模板内容
+	 * @param htmlGoodsJZSG
+	 * @param file1_1
+	 * @param file1_2
+	 * @param file1_3
+	 * @param file2_1
+	 * @param file2_2
+	 * @param file2_3
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/finishEditHtmlGoodsJZSG",produces="plain/text; charset=UTF-8")
 	public String finishEditHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG,
 			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
@@ -531,6 +621,27 @@ public class MainController {
 		return "../../merchant/main/goBrowseHtmlGoodsJZSG?userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountNumber="+htmlGoodsJZSG.getAccountNumber();
 	}
 	
+	/**
+	 * 保存编辑商品展示模板内容
+	 * @param htmlGoodsSPZS
+	 * @param file1_1
+	 * @param file1_2
+	 * @param file1_3
+	 * @param file1_4
+	 * @param file1_5
+	 * @param file2_1
+	 * @param file2_2
+	 * @param file2_3
+	 * @param file2_4
+	 * @param file2_5
+	 * @param file3_1
+	 * @param file3_2
+	 * @param file3_3
+	 * @param file3_4
+	 * @param file3_5
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/saveEditHtmlGoodsSPZS",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String saveEditHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS,
@@ -567,6 +678,18 @@ public class MainController {
 		return json;
 	}
 	
+	/**
+	 * 保存编辑多媒体资料模板内容
+	 * @param htmlGoodsDMTZL
+	 * @param file1_1
+	 * @param file1_2
+	 * @param file1_3
+	 * @param file1_4
+	 * @param file1_5
+	 * @param file2_1
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/saveEditHtmlGoodsDMTZL",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String saveEditHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoodsDMTZL,
@@ -594,6 +717,18 @@ public class MainController {
 		return json;
 	}
 	
+	/**
+	 * 保存编辑建筑施工模板内容
+	 * @param htmlGoodsJZSG
+	 * @param file1_1
+	 * @param file1_2
+	 * @param file1_3
+	 * @param file2_1
+	 * @param file2_2
+	 * @param file2_3
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/saveEditHtmlGoodsJZSG",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String saveEditHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG,
@@ -730,6 +865,18 @@ public class MainController {
 		}
 	}
 	
+	/**
+	 * 编辑多媒体资料模板内容
+	 * @param htmlGoodsDMTZL
+	 * @param file1_1
+	 * @param file1_2
+	 * @param file1_3
+	 * @param file1_4
+	 * @param file1_5
+	 * @param file2_1
+	 * @param request
+	 * @return
+	 */
 	public int editHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoodsDMTZL, MultipartFile file1_1, MultipartFile file1_2, MultipartFile file1_3, MultipartFile file1_4, MultipartFile file1_5, MultipartFile file2_1, HttpServletRequest request) {
 		int count = 0;
 		try {
@@ -782,6 +929,18 @@ public class MainController {
 		}
 	}
 	
+	/**
+	 * 编辑建筑施工模板内容
+	 * @param htmlGoodsJZSG
+	 * @param file1_1
+	 * @param file1_2
+	 * @param file1_3
+	 * @param file2_1
+	 * @param file2_2
+	 * @param file2_3
+	 * @param request
+	 * @return
+	 */
 	public int editHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG, MultipartFile file1_1, MultipartFile file1_2, MultipartFile file1_3, MultipartFile file2_1, MultipartFile file2_2, MultipartFile file2_3, HttpServletRequest request) {
 		int count = 0;
 		try {
@@ -1024,6 +1183,11 @@ public class MainController {
 		return json;
 	}
 	
+	/**
+	 * 根据id删除商品展示模板内容
+	 * @param ids
+	 * @return
+	 */
 	@RequestMapping(value="/deleteHtmlGoodsSPZSByIds",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String deleteHtmlGoodsSPZSByIds(String ids) {
@@ -1044,6 +1208,11 @@ public class MainController {
 		return json;
 	}
 	
+	/**
+	 * 根据id删除多媒体资料模板内容
+	 * @param ids
+	 * @return
+	 */
 	@RequestMapping(value="/deleteHtmlGoodsDMTZLByIds",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String deleteHtmlGoodsDMTZLByIds(String ids) {
@@ -1064,6 +1233,11 @@ public class MainController {
 		return json;
 	}
 	
+	/**
+	 * 根据id删除建筑施工模板内容
+	 * @param ids
+	 * @return
+	 */
 	@RequestMapping(value="/deleteHtmlGoodsJZSGByIds",produces="plain/text; charset=UTF-8")
 	@ResponseBody
 	public String deleteHtmlGoodsJZSGByIds(String ids) {
@@ -1265,6 +1439,15 @@ public class MainController {
 		return jsonMap;
 	}
 	
+	/**
+	 * 根据商户编号，查询商品展示模板内容
+	 * @param accountId
+	 * @param page
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
 	@RequestMapping(value="/queryHtmlGoodsSPZSList")
 	@ResponseBody
 	public Map<String, Object> queryHtmlGoodsSPZSList(String accountId,int page,int rows,String sort,String order) {
@@ -1278,6 +1461,15 @@ public class MainController {
 		return jsonMap;
 	}
 	
+	/**
+	 * 根据商户编号，查询多媒体资料模板内容
+	 * @param accountId
+	 * @param page
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
 	@RequestMapping(value="/queryHtmlGoodsDMTZLList")
 	@ResponseBody
 	public Map<String, Object> queryHtmlGoodsDMTZLList(String accountId,int page,int rows,String sort,String order) {
@@ -1291,6 +1483,15 @@ public class MainController {
 		return jsonMap;
 	}
 	
+	/**
+	 * 根据商户编号，查询建筑施工模板内容信息
+	 * @param accountId
+	 * @param page
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
 	@RequestMapping(value="/queryHtmlGoodsJZSGList")
 	@ResponseBody
 	public Map<String, Object> queryHtmlGoodsJZSGList(String accountId,int page,int rows,String sort,String order) {
