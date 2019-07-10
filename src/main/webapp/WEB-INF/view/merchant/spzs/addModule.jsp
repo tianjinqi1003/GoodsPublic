@@ -15,6 +15,7 @@
 <%@include file="../js.jsp"%>
 <link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/themes/default/default.css" />
 <link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css" />
+<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/addModule.css" />
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/kindeditor.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
@@ -163,9 +164,9 @@ function showQrcodePic1(obj){
 	file.removeAttr("onchange");
 	file.css("display","none");
 	var fileHtml=file.prop("outerHTML");
-	var tdHtml="<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
-				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage1(this);\">"
-				+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+	var tdHtml="<td class=\"file_td\" id=\"file_td"+uuid+"\">"
+				+"<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteImage1(this);\">"
+				+"<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\">"
 				+fileHtml
 			+"</td>";
 	
@@ -194,7 +195,7 @@ function showQrcodePic1(obj){
         $img.attr("src", dataURL);
         
         var listDiv=$("#image1_div #list_div");
-        listDiv.append("<img id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\" style=\"width: 600px;height: 600px;margin-top: 25px;\">");
+        listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -215,9 +216,9 @@ function showQrcodePic2(obj){
 	file.removeAttr("onchange");
 	file.css("display","none");
 	var fileHtml=file.prop("outerHTML");
-	var tdHtml="<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
-				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage2(this);\">"
-				+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+	var tdHtml="<td class=\"file_td\" id=\"file_td"+uuid+"\">"
+				+"<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteImage2(this);\">"
+				+"<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\">"
 				+fileHtml
 			+"</td>";
 	
@@ -267,9 +268,9 @@ function showQrcodePic3(obj){
 	file.removeAttr("onchange");
 	file.css("display","none");
 	var fileHtml=file.prop("outerHTML");
-	var tdHtml="<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
-				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage3(this);\">"
-				+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+	var tdHtml="<td class=\"file_td\" id=\"file_td"+uuid+"\">"
+				+"<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteImage3(this);\">"
+				+"<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\">"
 				+fileHtml
 			+"</td>";
 	
@@ -344,48 +345,48 @@ function goBack(){
 </head>
 <body style="background-color: #fbfbfb;">
 <form id="form1" name="form1" method="post" action="addHtmlGoodsSPZS" enctype="multipart/form-data">
-<div id="image1ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
-	<div id="image1Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
-		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
-			<span style="margin-left: 20px;">图片模块</span>
-			<span style="float: right;margin-right: 20px;cursor: pointer;" onclick="closeImage1ModBgDiv();">关闭</span>
+<div class="image1ModBg_div" id="image1ModBg_div">
+	<div class="image1Mod_div" id="image1Mod_div">
+		<div class="title_div">
+			<span class="title_span">图片模块</span>
+			<span class="close_span" onclick="closeImage1ModBgDiv();">关闭</span>
 		</div>
 		<div id="tab_div">
-			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
+			<table>
 				<tr>
-					<td id="file_td1_1" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage1(this);">
-						<img id="img1_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/spzs/22ad5cebe49933335608eeb6356e6ab9.png">
+					<td class="file_td" id="file_td1_1">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
+						<img class="item_img" id="img1_1" alt="" src="/GoodsPublic/resource/images/spzs/22ad5cebe49933335608eeb6356e6ab9.png">
 					</td>
 					<td id="upload_td">
 						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
 					</td>
 				</tr>
 			</table>
-			<div id="uploadFile1_div" style="display: none;">
+			<div class="uploadFile1_div" id="uploadFile1_div">
 				<input type="file" id="file1_1" name="file" onchange="showQrcodePic1(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid1"/>
 		</div>
-		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
-			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeImage1ModBgDiv();">确&nbsp;认</div>
-			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeImage1ModBgDiv();">取&nbsp;消</div>
+		<div class="but_div" id="but_div">
+			<div class="confirm_div" onclick="closeImage1ModBgDiv();">确&nbsp;认</div>
+			<div class="cancel_div" onclick="closeImage1ModBgDiv();">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
 
-<div id="image2ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
-	<div id="image2Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
-		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
-			<span style="margin-left: 20px;">图片模块</span>
-			<span style="float: right;margin-right: 20px;cursor: pointer;" onclick="closeImage2ModBgDiv();">关闭</span>
+<div class="image2ModBg_div" id="image2ModBg_div">
+	<div class="image2Mod_div" id="image2Mod_div">
+		<div class="title_div">
+			<span class="title_span">图片模块</span>
+			<span class="close_span" onclick="closeImage2ModBgDiv();">关闭</span>
 		</div>
 		<div id="tab_div">
-			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
+			<table>
 				<tr>
-					<td id="file_td2_1" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage2(this);">
-						<img id="img2_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/spzs/41116eb627d54a623813c01bcadd05ce.png">
+					<td class="file_td" id="file_td2_1">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
+						<img class="item_img" id="img2_1" alt="" src="/GoodsPublic/resource/images/spzs/41116eb627d54a623813c01bcadd05ce.png">
 						<!-- 
 						<input type="file" id="file2_1" name="file2_1" onchange="showQrcodePic2(this)" style="display: none;"/>
 						 -->
@@ -402,87 +403,87 @@ function goBack(){
 					</td>
 				</tr>
 			</table>
-			<div id="uploadFile2_div" style="display: none;">
+			<div class="uploadFile2_div" id="uploadFile2_div">
 				<input type="file" id="file2_1" name="file" onchange="showQrcodePic2(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid2"/>
 		</div>
-		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
-			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeImage2ModBgDiv();">确&nbsp;认</div>
-			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeImage2ModBgDiv();">取&nbsp;消</div>
+		<div class="but_div" id="but_div">
+			<div class="confirm_div" onclick="closeImage2ModBgDiv();">确&nbsp;认</div>
+			<div class="cancel_div" onclick="closeImage2ModBgDiv();">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
 
-<div id="image3ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
-	<div id="image3Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
-		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
-			<span style="margin-left: 20px;">图片模块</span>
-			<span style="float: right;margin-right: 20px;cursor: pointer;" onclick="closeImage3ModBgDiv();">关闭</span>
+<div class="image3ModBg_div" id="image3ModBg_div">
+	<div class="image3Mod_div" id="image3Mod_div">
+		<div class="title_div">
+			<span class="title_span">图片模块</span>
+			<span class="close_span" onclick="closeImage3ModBgDiv();">关闭</span>
 		</div>
 		<div id="tab_div">
-			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
+			<table>
 				<tr>
-					<td id="file_td3_1" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage3(this);">
-						<img id="img3_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/spzs/\573ab1fc91d98528915519d96dc2e6ec.png">
+					<td class="file_td" id="file_td3_1">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage3(this);">
+						<img class="item_img" id="img3_1" alt="" src="/GoodsPublic/resource/images/spzs/\573ab1fc91d98528915519d96dc2e6ec.png">
 					</td>
 					<td id="upload_td">
 						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage3();">
 					</td>
 				</tr>
 			</table>
-			<div id="uploadFile3_div" style="display: none;">
+			<div class="uploadFile3_div" id="uploadFile3_div">
 				<input type="file" id="file3_1" name="file" onchange="showQrcodePic3(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid3"/>
 		</div>
-		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
-			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeImage3ModBgDiv();">确&nbsp;认</div>
-			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeImage3ModBgDiv();">取&nbsp;消</div>
+		<div class="but_div" id="but_div">
+			<div class="confirm_div" onclick="closeImage3ModBgDiv();">确&nbsp;认</div>
+			<div class="cancel_div" onclick="closeImage3ModBgDiv();">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
 
-<div style="width: 100%;height: 50px;line-height: 50px;background-color: #fff;">
-	<div style="float:left;width: 70px;height: 30px;line-height: 30px;text-align:center;margin-top:10px;margin-left:20px;border:1px solid #eee;border-radius:3px;" onclick="goBack();">&lt返回</div>
-	<div style="width:200px;margin:0 auto;font-size:18px;font-weight: bold;text-align: center;">红酒介绍-案例</div>
-	<div style="float:right;height: 30px;line-height: 30px;text-align:center;margin-top:-40px;margin-right:20px;border-radius:3px;">我的二维码&nbsp;${sessionScope.user.userName }</div>
+<div class="top_div">
+	<div class="return_div" onclick="goBack();">&lt返回</div>
+	<div class="title_div">红酒介绍-案例</div>
+	<div class="myQrcode_div">我的二维码&nbsp;${sessionScope.user.userName }</div>
 </div>
-<div id="middle_div" style="width: 650px;margin: 0 auto;margin-top: 25px;background-color: #fff;">
+<div class="middle_div" id="middle_div">
 	<div>
-		<input type="text" id="productName" name="productName" placeholder="请输入标题" style="width: 100%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;"/>
+		<input class="productName_input" type="text" id="productName" name="productName" placeholder="请输入标题"/>
 	</div>
-	<div id="image1_div" style="width: 650px;text-align: center;">
-		<div id="option_div" style="width:650px;position:absolute;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<div id="but_div" style="width:100px;height:30px;line-height:30px;margin:0 auto;margin-top: 50px;text-align:center;z-index: 1;background-color: #fff;border-radius:5px;display:none; ">
+	<div class="image1_div" id="image1_div">
+		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<div class="but_div" id="but_div">
 				<a onclick="openImage1ModBgDiv();">编辑</a>|
 				<a onclick="deleteImage1Div();">删除</a>
 			</div>
 		</div>
-		<div id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:forEach items="${requestScope.image1List }" var="image1" varStatus="status">
-			<img id="img1_1" alt="" src="${image1.value }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" id="img1_1" alt="" src="${image1.value }">
 			</c:forEach>
 		</div>
 	</div>
-	<div style="margin-top: 25px;">
-		<textarea id="memo1" name="memo1" cols="100" rows="8" style="width:650px;height:150px;visibility:hidden;"><%=htmlspecialchars(memo1) %></textarea>
+	<div class="memo1_div">
+		<textarea class="memo1_ta" id="memo1" name="memo1" cols="100" rows="8"><%=htmlspecialchars(memo1) %></textarea>
 	</div>
-	<div id="spxq_div" style="margin-top: 20px;">
-		<table id="spxq_tab" style="width: 600px;margin: 0 auto;border: #eee solid 1px;">
-			<tr style="height:60px;">
-				<td colspan="2" style="text-align: center;background-color: #fbfbfb;">商品详情</td>
-				<td style="text-align: center;background-color: #fbfbfb;">操作</td>
+	<div class="spxq_div" id="spxq_div">
+		<table class="spxq_tab" id="spxq_tab">
+			<tr class="head_tr">
+				<td class="spxq_td" colspan="2">商品详情</td>
+				<td class="cz_td">操作</td>
 			</tr>
 			<c:forEach items="${requestScope.spxqList }" var="spxq" varStatus="status">
-			<tr id="tr${status.index+1 }" height="50">
+			<tr class="item_tr" id="tr${status.index+1 }" height="50">
 				<input type="hidden" name="spxqName${status.index+1 }" value="${spxq.name }" />
-				<td style="width:20%;border: #eee solid 1px;padding-left: 20px;">${spxq.name }</td>
-				<td style="width:70%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="name_td">${spxq.name }</td>
+				<td class="value_td">
 					<input type="text" name="spxqValue${status.index+1 }" />
 				</td>
-				<td style="width:10%;border: #eee solid 1px;text-align: center;">
+				<td class="cz_td">
 					<input type="hidden" id="spxqIfShow${status.index+1 }" name="spxqIfShow${status.index+1 }" value="true" />
 					<input type="button" value="显示" onclick="changeSPXQTrIfShow(${status.index+1 },this)"/>
 				</td>
