@@ -7,182 +7,183 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>预览</title>
 <%@include file="../js.jsp"%>
+<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/browseHtmlGoods.css" />
 <script type="text/javascript">
 function editContent(goodsNumber,accountNumber){
 	location.href="${pageContext.request.contextPath}/merchant/main/goEditModule?trade=spzs&goodsNumber="+goodsNumber+"&accountNumber="+accountNumber;
 }
 </script>
 </head>
-<body style="background-color: #fbfbfb;">
-<div id="main_div" style="width: 800px;margin: 0 auto;background-color: #fbfbfb;">
-	<div style="width: 100%;height: 60px;border:1px solid #a7e1c4;background-color: #ebf8f2;">
-		<img alt="" src="/GoodsPublic/resource/images/006.png" style="width: 30px;height: 30px;margin-top: 15px;margin-left: 30px;">
-		<span style="margin-top: 18px;margin-left: 30px;font-size: 15px;position: absolute;">生码成功！</span>
-		<a href="${pageContext.request.contextPath}/merchant/main/goAddModule?trade=spzs" style="float: right;margin-top: 18px;margin-right: 50px;color: #357bb3;">新建二维码</a>
-		<a href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=spzs" style="float: right;margin-top: 18px;margin-right: 40px;color: #357bb3;">返回列表页</a>
+<body>
+<div class="main_div" id="main_div">
+	<div class="top_div">
+		<img class="createSuccess_img" alt="" src="/GoodsPublic/resource/images/006.png">
+		<span class="createSuccess_span">生码成功！</span>
+		<a class="createQrcode_a" href="${pageContext.request.contextPath}/merchant/main/goAddModule?trade=spzs">新建二维码</a>
+		<a class="return_a" href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=spzs">返回列表页</a>
 	</div>
-	<div id="left_div" style="width: 350px;margin-top: 20px;background-color: #fff;float: left;">
-		<div style="width: 95%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;">
+	<div class="left_div" id="left_div">
+		<div class="productName_div">
 			${requestScope.htmlGoodsSPZS.productName }
 		</div>
-		<div id="image1_div" style="width: 95%;text-align: center;">
+		<div class="image1_div" id="image1_div">
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_1 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image1_1 }" style="width: 95%;height: 300px;margin-top: 25px;">
+				<img class="image1_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_1 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_2 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image1_2 }" style="width: 95%;height: 300px;margin-top: 25px;">
+				<img class="image1_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_2 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_3 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image1_3 }" style="width: 95%;height: 300px;margin-top: 25px;">
+				<img class="image1_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_3 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_4 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image1_4 }" style="width: 95%;height: 300px;margin-top: 25px;">
+				<img class="image1_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_4 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_5 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image1_5 }" style="width: 95%;height: 300px;margin-top: 25px;">
+				<img class="image1_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_5 }">
 			</c:if>
 		</div>
-		<div style="width:95%;margin-top: 20px;">
+		<div class="memo1_div">
 			${requestScope.htmlGoodsSPZS.memo1 }
 		</div>
-		<div style="margin-top: 20px;">
-			<table id="spxq_tab" style="width: 95%;margin: 0 auto;border: #eee solid 1px;">
+		<div class="spxq_div">
+			<table class="spxq_tab" id="spxq_tab">
 				<tr height="60">
-					<td colspan="2" style="text-align: center;background-color: #fbfbfb;">商品详情</td>
+					<td class="head_td" colspan="2">商品详情</td>
 				</tr>
 				<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow1 }">
 				<tr height="50">
-					<td style="width:25%;border: #eee solid 1px;padding-left: 20px;">
+					<td class="name_td">
 						${requestScope.htmlGoodsSPZS.spxqName1 }
 					</td>
-					<td style="width:75%;border: #eee solid 1px;padding-left: 20px;">
+					<td class="value_td">
 						${requestScope.htmlGoodsSPZS.spxqValue1 }
 					</td>
 				</tr>
 				</c:if>
 				<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow2 }">
 				<tr height="50">
-					<td style="width:25%;border: #eee solid 1px;padding-left: 20px;">
+					<td class="name_td">
 						${requestScope.htmlGoodsSPZS.spxqName2 }
 					</td>
-					<td style="width:75%;border: #eee solid 1px;padding-left: 20px;">
+					<td class="value_td">
 						${requestScope.htmlGoodsSPZS.spxqValue2 }
 					</td>
 				</tr>
 				</c:if>
 				<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow3 }">
 				<tr height="50">
-					<td style="width:25%;border: #eee solid 1px;padding-left: 20px;">
+					<td class="name_td">
 						${requestScope.htmlGoodsSPZS.spxqName3 }
 					</td>
-					<td style="width:75%;border: #eee solid 1px;padding-left: 20px;">
+					<td class="value_td">
 						${requestScope.htmlGoodsSPZS.spxqValue3 }
 					</td>
 				</tr>
 				</c:if>
 				<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow4 }">
 				<tr height="50">
-					<td style="width:25%;border: #eee solid 1px;padding-left: 20px;">
+					<td class="name_td">
 						${requestScope.htmlGoodsSPZS.spxqName4 }
 					</td>
-					<td style="width:75%;border: #eee solid 1px;padding-left: 20px;">
+					<td class="value_td">
 						${requestScope.htmlGoodsSPZS.spxqValue4 }
 					</td>
 				</tr>
 				</c:if>
 				<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow5 }">
 				<tr height="50">
-					<td style="width:25%;border: #eee solid 1px;padding-left: 20px;">
+					<td class="name_td">
 						${requestScope.htmlGoodsSPZS.spxqName5 }
 					</td>
-					<td style="width:75%;border: #eee solid 1px;padding-left: 20px;">
+					<td class="value_td">
 						${requestScope.htmlGoodsSPZS.spxqValue5 }
 					</td>
 				</tr>
 				</c:if>
 				<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow6 }">
 				<tr height="50">
-					<td style="width:25%;border: #eee solid 1px;padding-left: 20px;">
+					<td class="name_td">
 						${requestScope.htmlGoodsSPZS.spxqName6 }
 					</td>
-					<td style="width:75%;border: #eee solid 1px;padding-left: 20px;">
+					<td class="value_td">
 						${requestScope.htmlGoodsSPZS.spxqValue6 }
 					</td>
 				</tr>
 				</c:if>
 			</table>
 		</div>
-		<div style="width:95%;margin-top: 20px;">
+		<div class="memo2_div">
 			${requestScope.htmlGoodsSPZS.memo2 }
 		</div>
-		<div id="image2_div" style="width: 95%;text-align: center;margin-top: 20px;">
+		<div class="image2_div" id="image2_div">
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_1 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }" style="width: 95%;height: 300px;margin-top: 25px;">
+				<img class="image2_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_2 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image2_2 }" style="width: 95%;height: 300px;margin-top: 25px;">
+				<img class="image2_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_2 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_3 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image2_3 }" style="width: 95%;height: 300px;margin-top: 25px;">
+				<img class="image2_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_3 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_4 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image2_4 }" style="width: 95%;height: 300px;margin-top: 25px;">
+				<img class="image2_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_4 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_5 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }" style="width: 95%;height: 300px;margin-top: 25px;">
+				<img class="image2_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }">
 			</c:if>
 		</div>
-		<div id="image3_div" style="width: 95%;text-align: center;margin-top: 20px;">
+		<div class="image3_div" id="image3_div">
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_1 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }" style="width: 95%;height: 300px;margin-top: 25px;">
+				<img class="image3_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_2 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }" style="width: 95%;height: 300px;margin-top: 25px;">
+				<img class="image3_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_3 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }" style="width: 95%;height: 300px;margin-top: 25px;">
+				<img class="image3_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_4 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }" style="width: 95%;height: 300px;margin-top: 25px;">
+				<img class="image3_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_5 ne null }">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }" style="width: 95%;height: 300px;margin-top: 25px;">
+				<img class="image3_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }">
 			</c:if>
 		</div>
-		<div style="width:95%;margin-top: 20px;">
+		<div class="memo3_div">
 			${requestScope.htmlGoodsSPZS.memo3 }
 		</div>
 	</div>
-	<div style="width:400px;height: 280px;margin-top:20px;margin-left:50px;background-color: #fff;float: left;">
-		<div style="width: 100%;height: 200px;">
-			<div style="float: left;width:120px;height: 120px;margin-top:15px;margin-left: 15px;">
-				<img alt="" src="${requestScope.htmlGoodsSPZS.qrCode }" style="width: 120px;height: 120px;" />
-				<div style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;border:1px solid #eee;border-radius:3px;">下载二维码</div>
+	<div class="right_div">
+		<div class="qrcode_div">
+			<div class="downloadQrcode1_div">
+				<img class="qrcode_img" alt="" src="${requestScope.htmlGoodsSPZS.qrCode }" />
+				<div class="downloadQrcode2_div">下载二维码</div>
 			</div>
-			<div style="float: left;width:250px;margin-top:20px;margin-left: 10px;">
-				<div style="width: 100%;height: 25px;">
-					<a style="color: #357bb3;">排版打印</a>
+			<div class="option1_div">
+				<div class="pbdy_div">
+					<a class="pbdy_a">排版打印</a>
 				</div>
-				<div style="width: 100%;height: 25px;">
-					<a style="color: #357bb3;">下载其他格式</a>
+				<div class="xzqtgs_div">
+					<a class="xzqtgs_a">下载其他格式</a>
 				</div>
-				<div style="width: 100%;height: 25px;">
-					<a style="color: #357bb3;">二维码美化</a>
+				<div class="ewmmh_div">
+					<a class="ewmmh_a">二维码美化</a>
 				</div>
-				<div style="width: 100%;height: 25px;">
-					<a style="color: #357bb3;">换个美化模板</a>
+				<div class="hgmhmb_div">
+					<a class="hgmhmb_a">换个美化模板</a>
 				</div>
-			</div>
-		</div>
-		<div style="width: 350px;height: 1px;margin-left:20px; background-color: #eee;"></div>
-		<div style="width: 100%;height: 50px;margin-top:15px;">
-			<div style="float: left;width: 100px;height: 30px;line-height: 30px;text-align:center;margin-left:25px;color:#fff;background-color: #4caf50;border-radius:3px;" onclick="editContent(${requestScope.htmlGoodsSPZS.goodsNumber },${requestScope.htmlGoodsSPZS.accountNumber });">编辑内容</div>
-			<div style="float: left;width:250px;margin-top: 5px;margin-left: 10px;">
-				<a style="color: #357bb3;">创建副本</a>
-				<a style="color: #357bb3;">删除</a>
 			</div>
 		</div>
-		<div style="width: 350px;height: 1px;margin-left:20px; background-color: #eee;"></div>
+		<div class="line1_div"></div>
+		<div class="option2_div">
+			<div class="editContent_div" onclick="editContent(${requestScope.htmlGoodsSPZS.goodsNumber },${requestScope.htmlGoodsSPZS.accountNumber });">编辑内容</div>
+			<div class="option3_div">
+				<a class="createCopy_a">创建副本</a>
+				<a class="delete_a">删除</a>
+			</div>
+		</div>
+		<div class="line2_div"></div>
 	</div>
 </div>
 </body>
