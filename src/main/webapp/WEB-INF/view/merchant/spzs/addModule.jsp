@@ -247,7 +247,7 @@ function showQrcodePic2(obj){
         $img.attr("src", dataURL);
         
         var listDiv=$("#image2_div #list_div");
-        listDiv.append("<img id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\" style=\"width: 600px;height: 600px;margin-top: 25px;\">");
+        listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -299,7 +299,7 @@ function showQrcodePic3(obj){
         $img.attr("src", dataURL);
 
         var listDiv=$("#image3_div #list_div");
-        listDiv.append("<img id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\" style=\"width: 600px;height: 600px;margin-top: 25px;\">");
+        listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -491,42 +491,42 @@ function goBack(){
 			</c:forEach>
 		</table>
 	</div>
-	<div style="margin-top: 20px;">
-		<textarea id="memo2" name="memo2" cols="100" rows="8" style="width:650px;height:220px;visibility:hidden;"><%=htmlspecialchars(memo2) %></textarea>
+	<div class="memo2_div">
+		<textarea class="memo2_ta" id="memo2" name="memo2" cols="100" rows="8" ><%=htmlspecialchars(memo2) %></textarea>
 	</div>
-	<div id="image2_div" style="width: 650px;text-align: center;margin-top: 25px;">
-		<div id="option_div" style="width:650px;position:absolute;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<div id="but_div" style="width:100px;height:30px;line-height:30px;margin:0 auto;margin-top: 50px;text-align:center;z-index: 1;background-color: #fff;border-radius:5px;display:none; ">
+	<div class="image2_div" id="image2_div">
+		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<div class="but_div" id="but_div">
 				<a onclick="openImage2ModBgDiv();">编辑</a>|
 				<a onclick="deleteImage2Div();">删除</a>
 			</div>
 		</div>
-		<div id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:forEach items="${requestScope.image2List }" var="image2" varStatus="status">
-			<img id="img2_1" alt="" src="${image2.value }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" id="img2_1" alt="" src="${image2.value }">
 			</c:forEach>
 		</div>
 	</div>
-	<div id="image3_div" style="width: 650px;text-align: center;margin-top: 25px;">
-		<div id="option_div" style="width:650px;position:absolute;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<div id="but_div" style="width:100px;height:30px;line-height:30px;margin:0 auto;margin-top: 50px;text-align:center;z-index: 1;background-color: #fff;border-radius:5px;display:none; ">
+	<div class="image3_div" id="image3_div">
+		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<div class="but_div" id="but_div">
 				<a onclick="openImage3ModBgDiv();">编辑</a>|
 				<a onclick="deleteImage3Div();">删除</a>
 			</div>
 		</div>
-		<div id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:forEach items="${requestScope.image3List }" var="image3" varStatus="status">
-			<img id="img3_1" alt="" src="${image3.value }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" id="img3_1" alt="" src="${image3.value }">
 			</c:forEach>
 		</div>
 	</div>
-	<div style="margin-top: 20px;">
-		<textarea id="memo3" name="memo3" cols="100" rows="8" style="width:650px;height:550px;visibility:hidden;"><%=htmlspecialchars(memo3) %></textarea>
+	<div class="memo3_div">
+		<textarea class="memo3_ta" id="memo3" name="memo3" cols="100" rows="8"><%=htmlspecialchars(memo3) %></textarea>
 	</div>
 </div>
-<div id="right_div" style="width: 150px;height: 200px;text-align: center;">
-	<img style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/007.png">
-	<div style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;margin-top:15px;color:#fff;background-color:#4caf50;border-radius:3px;" onclick="addHtmlGoodsSPZS();">生成二维码</div>
+<div class="right_div" id="right_div">
+	<img class="uncreate_img" alt="" src="/GoodsPublic/resource/images/007.png">
+	<div class="createQrcode_div" onclick="addHtmlGoodsSPZS();">生成二维码</div>
 </div>
 	<input type="hidden" id="accountNumber_hid" name="accountNumber" value="${sessionScope.user.id }" />
 	<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />

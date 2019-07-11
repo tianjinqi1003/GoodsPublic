@@ -355,3 +355,91 @@
 	border: #eee solid 1px;
 	text-align: center;
 }
+.memo2_div{
+	margin-top: 20px;
+	}
+.memo2_ta{
+	width:650px;
+	height:220px;
+	visibility:hidden;
+	}
+.image2_div{
+	width: 650px;
+	text-align: center;
+	margin-top: 25px;
+	}
+.image2_div .option_div{
+	width:650px;
+	position:absolute;
+	}
+.image2_div .but_div{
+	width:100px;
+	height:30px;
+	line-height:30px;
+	margin:0 auto;
+	margin-top: 50px;
+	text-align:center;
+	z-index: 1;
+	background-color: #fff;
+	border-radius:5px;
+	display:none;
+}
+.image2_div .list_div .item_img{
+	width: 600px;
+	height: 600px;
+	margin-top: 25px;
+}
+.image3_div{
+	width: 650px;
+	text-align: center;
+	margin-top: 25px;
+}
+.image3_div .option_div{
+	width:650px;
+	position:absolute;
+}
+.image3_div .but_div{
+	width:100px;
+	height:30px;
+	line-height:30px;
+	margin:0 auto;
+	margin-top: 50px;
+	text-align:center;
+	z-index: 1;
+	background-color: #fff;
+	border-radius:5px;
+	display:none;
+}
+.image3_div .list_div .item_img{
+	width: 600px;
+	height: 600px;
+	margin-top: 25px;
+}
+.memo3_div{
+	margin-top: 20px;
+	}
+.memo3_ta{
+	width:650px;
+	height:550px;
+	visibility:hidden;
+}
+.right_div{
+	width: 150px;
+	height: 200px;
+	text-align: center;
+}
+.uncreate_img{
+	width: 120px;
+	height: 120px;
+}
+.createQrcode_div{
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align:center;
+	margin:0 auto;
+	margin-top:15px;
+	color:#fff;
+	background-color:#4caf50;
+	border-radius:3px;
+}
