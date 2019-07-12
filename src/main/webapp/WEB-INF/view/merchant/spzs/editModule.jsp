@@ -14,6 +14,7 @@
 <%@include file="../js.jsp"%>
 <link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/themes/default/default.css" />
 <link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css" />
+<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/editModule.css" />
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/kindeditor.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
@@ -380,40 +381,40 @@ function goBack(){
 }
 </script>
 </head>
-<body style="background-color: #fbfbfb;">
+<body>
 <form id="form1" name="form1" method="post" action="finishEditHtmlGoodsSPZS" enctype="multipart/form-data">
-<div id="image1ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
-	<div id="image1Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
-		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
-			<span style="margin-left: 20px;">图片模块</span>
-			<span style="float: right;margin-right: 20px;cursor: pointer;" onclick="closeImage1ModBgDiv();">关闭</span>
+<div class="image1ModBg_div" id="image1ModBg_div">
+	<div class="image1Mod_div" id="image1Mod_div">
+		<div class="title_div">
+			<span class="title_span">图片模块</span>
+			<span class="close_span" onclick="closeImage1ModBgDiv();">关闭</span>
 		</div>
 		<div id="tab_div">
-			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
+			<table>
 				<c:if test="${requestScope.htmlGoodsSPZS.image1_1 ne null||requestScope.htmlGoodsSPZS.image1_2 ne null||requestScope.htmlGoodsSPZS.image1_3 ne null||requestScope.htmlGoodsSPZS.image1_4 ne null }">
 				<tr>
 					<c:if test="${requestScope.htmlGoodsSPZS.image1_1 ne null }">
-					<td id="file_td1_1" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage1(this);">
-						<img id="img1_1" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image1_1 }">
+					<td class="file_td" id="file_td1_1">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
+						<img class="item_img" id="img1_1" alt="" src="${requestScope.htmlGoodsSPZS.image1_1 }">
 					</td>
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsSPZS.image1_2 ne null }">
-					<td id="file_td1_2" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage1(this);">
-						<img id="img1_2" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image1_2 }">
+					<td class="file_td" id="file_td1_2">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
+						<img class="item_img" id="img1_2"  alt="" src="${requestScope.htmlGoodsSPZS.image1_2 }">
 					</td>
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsSPZS.image1_3 ne null }">
-					<td id="file_td1_3" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage1(this);">
-						<img id="img1_3" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image1_3 }">
+					<td class="file_td" id="file_td1_3">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
+						<img class="item_img" id="img1_3" alt="" src="${requestScope.htmlGoodsSPZS.image1_3 }">
 					</td>
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsSPZS.image1_4 ne null }">
-					<td id="file_td1_4" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage1(this);">
-						<img id="img1_4" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image1_4 }">
+					<td class="file_td" id="file_td1_4">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
+						<img class="item_img" id="img1_4" alt="" src="${requestScope.htmlGoodsSPZS.image1_4 }">
 					</td>
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsSPZS.image1_5 eq null }">
@@ -426,9 +427,9 @@ function goBack(){
 				<c:if test="${requestScope.htmlGoodsSPZS.image1_5 ne null}">
 				<tr>
 					<c:if test="${requestScope.htmlGoodsSPZS.image1_5 ne null }">
-					<td id="file_td1_5" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage1(this);">
-						<img id="img1_5" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image1_5 }">
+					<td class="file_td" id="file_td1_5">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
+						<img class="item_img" id="img1_5" alt="" src="${requestScope.htmlGoodsSPZS.image1_5 }">
 					</td>
 					</c:if>
 					<td id="upload_td">
@@ -437,50 +438,50 @@ function goBack(){
 				</tr>
 				</c:if>
 			</table>
-			<div id="uploadFile1_div" style="display: none;">
+			<div class="uploadFile1_div" id="uploadFile1_div">
 				<input type="file" id="file1_1" name="file" onchange="showQrcodePic1(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid1"/>
 		</div>
-		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
-			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeImage1ModBgDiv();">确&nbsp;认</div>
-			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeImage1ModBgDiv();">取&nbsp;消</div>
+		<div class="but_div" id="but_div">
+			<div class="confirm_div" onclick="closeImage1ModBgDiv();">确&nbsp;认</div>
+			<div class="cancel_div" onclick="closeImage1ModBgDiv();">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
 
-<div id="image2ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
-	<div id="image2Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
-		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
-			<span style="margin-left: 20px;">图片模块</span>
-			<span style="float: right;margin-right: 20px;cursor: pointer;" onclick="closeImage2ModBgDiv();">关闭</span>
+<div class="image2ModBg_div" id="image2ModBg_div">
+	<div class="image2Mod_div" id="image2Mod_div">
+		<div class="title_div">
+			<span class="title_span">图片模块</span>
+			<span class="close_span" onclick="closeImage2ModBgDiv();">关闭</span>
 		</div>
 		<div id="tab_div">
-			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
+			<table>
 				<c:if test="${requestScope.htmlGoodsSPZS.image2_1 ne null||requestScope.htmlGoodsSPZS.image2_2 ne null||requestScope.htmlGoodsSPZS.image2_3 ne null||requestScope.htmlGoodsSPZS.image2_4 ne null }">
 				<tr>
 					<c:if test="${requestScope.htmlGoodsSPZS.image2_1 ne null }">
-					<td id="file_td2_1" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage2(this);">
-						<img id="img2_1" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }">
+					<td class="file_td" id="file_td2_1">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
+						<img class="item_img" id="img2_1" alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }">
 					</td>
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsSPZS.image2_2 ne null }">
-					<td id="file_td2_2" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage2(this);">
-						<img id="img2_2" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image2_2 }">
+					<td class="file_td" id="file_td2_2">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
+						<img class="item_img" id="img2_2" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image2_2 }">
 					</td>
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsSPZS.image2_3 ne null }">
-					<td id="file_td2_3" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage2(this);">
-						<img id="img2_3" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image2_3 }">
+					<td class="file_td" id="file_td2_3">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
+						<img class="item_img" id="img2_3" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image2_3 }">
 					</td>
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsSPZS.image2_4 ne null }">
-					<td id="file_td2_4" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage2(this);">
-						<img id="img2_4" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image2_4 }">
+					<td class="file_td" id="file_td2_4">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
+						<img class="item_img" id="img2_4" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image2_4 }">
 					</td>
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsSPZS.image2_5 eq null }">
@@ -493,9 +494,9 @@ function goBack(){
 				<c:if test="${requestScope.htmlGoodsSPZS.image2_5 ne null}">
 				<tr>
 					<c:if test="${requestScope.htmlGoodsSPZS.image2_5 ne null }">
-					<td id="file_td2_5" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage2(this);">
-						<img id="img2_5" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }">
+					<td class="file_td" id="file_td2_5">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
+						<img class="item_img" id="img2_5" alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }">
 					</td>
 					</c:if>
 					<td id="upload_td">
@@ -504,50 +505,50 @@ function goBack(){
 				</tr>
 				</c:if>
 			</table>
-			<div id="uploadFile2_div" style="display: none;">
+			<div class="uploadFile2_div" id="uploadFile2_div">
 				<input type="file" id="file2_1" name="file" onchange="showQrcodePic2(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid2"/>
 		</div>
-		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
-			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeImage2ModBgDiv();">确&nbsp;认</div>
-			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeImage2ModBgDiv();">取&nbsp;消</div>
+		<div class="but_div" id="but_div">
+			<div class="confirm_div" onclick="closeImage2ModBgDiv();">确&nbsp;认</div>
+			<div class="cancel_div" onclick="closeImage2ModBgDiv();">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
 
-<div id="image3ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
-	<div id="image3Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
-		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
-			<span style="margin-left: 20px;">图片模块</span>
-			<span style="float: right;margin-right: 20px;cursor: pointer;" onclick="closeImage3ModBgDiv();">关闭</span>
+<div class="image3ModBg_div" id="image3ModBg_div">
+	<div class="image3Mod_div" id="image3Mod_div">
+		<div class="title_div">
+			<span class="title_span">图片模块</span>
+			<span class="close_span" onclick="closeImage3ModBgDiv();">关闭</span>
 		</div>
 		<div id="tab_div">
-			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
+			<table>
 				<c:if test="${requestScope.htmlGoodsSPZS.image3_1 ne null||requestScope.htmlGoodsSPZS.image3_2 ne null||requestScope.htmlGoodsSPZS.image3_3 ne null||requestScope.htmlGoodsSPZS.image3_4 ne null }">
 				<tr>
 					<c:if test="${requestScope.htmlGoodsSPZS.image3_1 ne null }">
-					<td id="file_td3_1" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage3(this);">
-						<img id="img3_1" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }">
+					<td class="file_td" id="file_td3_1">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage3(this);">
+						<img class="item_img" id="img3_1" alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }">
 					</td>
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsSPZS.image3_2 ne null }">
-					<td id="file_td3_2" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage3(this);">
-						<img id="img3_2" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }">
+					<td class="file_td" id="file_td3_2">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage3(this);">
+						<img class="item_img" id="img3_2" alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }">
 					</td>
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsSPZS.image3_3 ne null }">
-					<td id="file_td3_3" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage3(this);">
-						<img id="img3_3" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }">
+					<td class="file_td" id="file_td3_3">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage3(this);">
+						<img class="item_img" id="img3_3" alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }">
 					</td>
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsSPZS.image3_4 ne null }">
-					<td id="file_td3_4" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage3(this);">
-						<img id="img3_4" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }">
+					<td class="file_td" id="file_td3_4">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage3(this);">
+						<img class="item_img" id="img3_4" alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }">
 					</td>
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsSPZS.image3_5 eq null }">
@@ -560,9 +561,9 @@ function goBack(){
 				<c:if test="${requestScope.htmlGoodsSPZS.image3_5 ne null}">
 				<tr>
 					<c:if test="${requestScope.htmlGoodsSPZS.image3_5 ne null }">
-					<td id="file_td3_5" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage3(this);">
-						<img id="img3_5" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }">
+					<td class="file_td" id="file_td3_5">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage3(this);">
+						<img class="item_img" id="img3_5" alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }">
 					</td>
 					</c:if>
 					<td id="upload_td">
@@ -571,49 +572,49 @@ function goBack(){
 				</tr>
 				</c:if>
 			</table>
-			<div id="uploadFile3_div" style="display: none;">
+			<div class="uploadFile3_div" id="uploadFile3_div">
 				<input type="file" id="file3_1" name="file" onchange="showQrcodePic3(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid3"/>
 		</div>
-		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
-			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeImage3ModBgDiv();">确&nbsp;认</div>
-			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeImage3ModBgDiv();">取&nbsp;消</div>
+		<div class="but_div" id="but_div">
+			<div class="confirm_div" onclick="closeImage3ModBgDiv();">确&nbsp;认</div>
+			<div class="cancel_div" onclick="closeImage3ModBgDiv();">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
 
-<div style="width: 100%;height: 50px;line-height: 50px;background-color: #fff;">
-	<div style="float:left;width: 70px;height: 30px;line-height: 30px;text-align:center;margin-top:10px;margin-left:20px;border:1px solid #eee;border-radius:3px;" onclick="goBack();">&lt返回</div>
-	<div style="width:200px;margin:0 auto;font-size:18px;font-weight: bold;text-align: center;">红酒介绍-案例</div>
-	<div style="float:right;height: 30px;line-height: 30px;text-align:center;margin-top:-40px;margin-right:20px;border-radius:3px;">我的二维码&nbsp;${sessionScope.user.userName }</div>
+<div class="top_div">
+	<div class="return_div" onclick="goBack();">&lt返回</div>
+	<div class="title_div">红酒介绍-案例</div>
+	<div class="myQrcode_div">我的二维码&nbsp;${sessionScope.user.userName }</div>
 </div>
-<div id="middle_div" style="width: 650px;margin: 0 auto;margin-top: 25px;background-color: #fff;">
+<div class="middle_div" id="middle_div">
 	<div>
-		<input type="text" id="productName" name="productName" placeholder="请输入标题" value="${requestScope.htmlGoodsSPZS.productName }" style="width: 100%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;"/>
+		<input class="productName_input" type="text" id="productName" name="productName" placeholder="请输入标题" value="${requestScope.htmlGoodsSPZS.productName }"/>
 	</div>
-	<div id="image1_div" style="width: 650px;text-align: center;">
-		<div id="option_div" style="width:650px;position:absolute;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<div id="but_div" style="width:100px;height:30px;line-height:30px;margin:0 auto;margin-top: 50px;text-align:center;z-index: 1;background-color: #fff;border-radius:5px;display:none; ">
+	<div class="image1_div" id="image1_div">
+		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<div class="but_div" id="but_div">
 				<a onclick="openImage1ModBgDiv();">编辑</a>|
 				<a onclick="deleteImage1Div();">删除</a>
 			</div>
 		</div>
-		<div id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_1 ne null }">
-			<img id="img1_1" alt="" src="${requestScope.htmlGoodsSPZS.image1_1 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" id="img1_1" alt="" src="${requestScope.htmlGoodsSPZS.image1_1 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_2 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image1_2 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_2 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_3 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image1_3 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_3 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_4 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image1_4 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_4 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_5 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image1_5 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_5 }">
 			</c:if>
 		</div>
 	</div>
