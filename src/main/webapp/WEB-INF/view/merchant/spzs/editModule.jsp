@@ -618,83 +618,83 @@ function goBack(){
 			</c:if>
 		</div>
 	</div>
-	<div style="margin-top: 25px;">
-		<textarea id="memo1" name="memo1" cols="100" rows="8" style="width:650px;height:150px;visibility:hidden;"><%=htmlspecialchars(htmlGoodsSPZS.getMemo1()) %></textarea>
+	<div class="memo1_div">
+		<textarea class="memo1_ta" id="memo1" name="memo1" cols="100" rows="8"><%=htmlspecialchars(htmlGoodsSPZS.getMemo1()) %></textarea>
 	</div>
-	<div id="spxq_div" style="margin-top: 20px;">
-		<table id="spxq_tab" style="width: 600px;margin: 0 auto;border: #eee solid 1px;">
-			<tr style="height:60px;">
-				<td colspan="2" style="text-align: center;background-color: #fbfbfb;">商品详情</td>
-				<td style="text-align: center;background-color: #fbfbfb;">操作</td>
+	<div class="spxq_div" id="spxq_div">
+		<table class="spxq_tab" id="spxq_tab">
+			<tr class="head_tr">
+				<td class="spxq_td" colspan="2">商品详情</td>
+				<td class="cz_td">操作</td>
 			</tr>
 			
-			<tr id="tr1" height="50">
+			<tr class="item_tr" id="tr1" height="50">
 				<input type="hidden" name="spxqName1" value="${requestScope.htmlGoodsSPZS.spxqName1 }" />
-				<td style="width:20%;border: #eee solid 1px;padding-left: 20px;">${requestScope.htmlGoodsSPZS.spxqName1 }</td>
-				<td style="width:70%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="name_td">${requestScope.htmlGoodsSPZS.spxqName1 }</td>
+				<td class="value_td">
 					<input type="text" name="spxqValue1" value="${requestScope.htmlGoodsSPZS.spxqValue1 }" />
 				</td>
-				<td style="width:10%;border: #eee solid 1px;text-align: center;">
+				<td class="cz_td">
 					<input type="hidden" id="spxqIfShow1" name="spxqIfShow1" value="${requestScope.htmlGoodsSPZS.spxqIfShow1 }" />
 					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow1?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(1,this)"/>
 				</td>
 			</tr>
 			
-			<tr id="tr2" height="50">
+			<tr class="item_tr" id="tr2" height="50">
 				<input type="hidden" name="spxqName2" value="${requestScope.htmlGoodsSPZS.spxqName2 }" />
-				<td style="width:20%;border: #eee solid 1px;padding-left: 20px;">${requestScope.htmlGoodsSPZS.spxqName2 }</td>
-				<td style="width:70%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="name_td">${requestScope.htmlGoodsSPZS.spxqName2 }</td>
+				<td class="value_td">
 					<input type="text" name="spxqValue2" value="${requestScope.htmlGoodsSPZS.spxqValue2 }" />
 				</td>
-				<td style="width:10%;border: #eee solid 1px;text-align: center;">
+				<td class="cz_td">
 					<input type="hidden" id="spxqIfShow2" name="spxqIfShow2" value="${requestScope.htmlGoodsSPZS.spxqIfShow2 }" />
 					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow2?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(2,this)"/>
 				</td>
 			</tr>
 			
-			<tr id="tr3" height="50">
+			<tr class="item_tr" id="tr3" height="50">
 				<input type="hidden" name="spxqName3" value="${requestScope.htmlGoodsSPZS.spxqName3 }" />
-				<td style="width:20%;border: #eee solid 1px;padding-left: 20px;">${requestScope.htmlGoodsSPZS.spxqName3 }</td>
-				<td style="width:70%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="name_td">${requestScope.htmlGoodsSPZS.spxqName3 }</td>
+				<td class="value_td">
 					<input type="text" name="spxqValue3" value="${requestScope.htmlGoodsSPZS.spxqValue3 }" />
 				</td>
-				<td style="width:10%;border: #eee solid 1px;text-align: center;">
+				<td class="cz_td">
 					<input type="hidden" id="spxqIfShow3" name="spxqIfShow3" value="${requestScope.htmlGoodsSPZS.spxqIfShow3 }" />
 					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow3?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(3,this)"/>
 				</td>
 			</tr>
 			
-			<tr id="tr4" height="50">
+			<tr class="item_tr" id="tr4" height="50">
 				<input type="hidden" name="spxqName4" value="${requestScope.htmlGoodsSPZS.spxqName4 }" />
-				<td style="width:20%;border: #eee solid 1px;padding-left: 20px;">${requestScope.htmlGoodsSPZS.spxqName4 }</td>
-				<td style="width:70%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="name_td">${requestScope.htmlGoodsSPZS.spxqName4 }</td>
+				<td class="value_td">
 					<input type="text" name="spxqValue4" value="${requestScope.htmlGoodsSPZS.spxqValue4 }" />
 				</td>
-				<td style="width:10%;border: #eee solid 1px;text-align: center;">
+				<td class="cz_td">
 					<input type="hidden" id="spxqIfShow4" name="spxqIfShow4" value="${requestScope.htmlGoodsSPZS.spxqIfShow4 }" />
 					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow4?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(4,this)"/>
 				</td>
 			</tr>
 			
-			<tr id="tr5" height="50">
+			<tr class="item_tr" id="tr5" height="50">
 				<input type="hidden" name="spxqName5" value="${requestScope.htmlGoodsSPZS.spxqName5 }" />
-				<td style="width:20%;border: #eee solid 1px;padding-left: 20px;">${requestScope.htmlGoodsSPZS.spxqName5 }</td>
-				<td style="width:70%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="name_td">${requestScope.htmlGoodsSPZS.spxqName5 }</td>
+				<td class="value_td">
 					<input type="text" name="spxqValue5" value="${requestScope.htmlGoodsSPZS.spxqValue5 }" />
 				</td>
-				<td style="width:10%;border: #eee solid 1px;text-align: center;">
+				<td class="cz_td">
 					<input type="hidden" id="spxqIfShow5" name="spxqIfShow5" value="${requestScope.htmlGoodsSPZS.spxqIfShow5 }" />
 					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow5?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(5,this)"/>
 				</td>
 			</tr>
 			
-			<tr id="tr6" height="50">
+			<tr class="item_tr" id="tr6" height="50">
 				<input type="hidden" name="spxqName6" value="${requestScope.htmlGoodsSPZS.spxqName6 }" />
-				<td style="width:20%;border: #eee solid 1px;padding-left: 20px;">${requestScope.htmlGoodsSPZS.spxqName6 }</td>
-				<td style="width:70%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="name_td">${requestScope.htmlGoodsSPZS.spxqName6 }</td>
+				<td class="value_td">
 					<input type="text" name="spxqValue6" value="${requestScope.htmlGoodsSPZS.spxqValue6 }" />
 				</td>
-				<td style="width:10%;border: #eee solid 1px;text-align: center;">
+				<td class="cz_td">
 					<input type="hidden" id="spxqIfShow6" name="spxqIfShow6" value="${requestScope.htmlGoodsSPZS.spxqIfShow6 }" />
 					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow6?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(6,this)"/>
 				</td>
@@ -702,69 +702,69 @@ function goBack(){
 			
 		</table>
 	</div>
-	<div style="margin-top: 20px;">
-		<textarea id="memo2" name="memo2" cols="100" rows="8" style="width:650px;height:220px;visibility:hidden;"><%=htmlspecialchars(htmlGoodsSPZS.getMemo2()) %></textarea>
+	<div class="memo2_div">
+		<textarea class="memo2_ta" id="memo2" name="memo2" cols="100" rows="8"><%=htmlspecialchars(htmlGoodsSPZS.getMemo2()) %></textarea>
 	</div>
-	<div id="image2_div" style="width: 650px;text-align: center;margin-top: 25px;">
-		<div id="option_div" style="width:650px;position:absolute;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<div id="but_div" style="width:100px;height:30px;line-height:30px;margin:0 auto;margin-top: 50px;text-align:center;z-index: 1;background-color: #fff;border-radius:5px;display:none; ">
+	<div class="image2_div" id="image2_div">
+		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<div class="but_div" id="but_div">
 				<a onclick="openImage2ModBgDiv();">编辑</a>|
 				<a onclick="deleteImage2Div();">删除</a>
 			</div>
 		</div>
-		<div id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_1 ne null }">
-			<img id="img2_1" alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" id="img2_1" alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_2 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image2_2 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_2 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_3 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image2_3 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_3 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_4 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image2_4 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_4 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_5 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }">
 			</c:if>
 		</div>
 	</div>
-	<div id="image3_div" style="width: 650px;text-align: center;margin-top: 25px;">
-		<div id="option_div" style="width:650px;position:absolute;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<div id="but_div" style="width:100px;height:30px;line-height:30px;margin:0 auto;margin-top: 50px;text-align:center;z-index: 1;background-color: #fff;border-radius:5px;display:none; ">
+	<div class="image3_div" id="image3_div">
+		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<div class="but_div" id="but_div">
 				<a onclick="openImage3ModBgDiv();">编辑</a>|
 				<a onclick="deleteImage3Div();">删除</a>
 			</div>
 		</div>
-		<div id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_1 ne null }">
-			<img id="img3_1" alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" id="img3_1" alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_2 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_3 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_4 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_5 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }">
 			</c:if>
 		</div>
 	</div>
-	<div style="margin-top: 20px;">
-		<textarea id="memo3" name="memo3" cols="100" rows="8" style="width:650px;height:550px;visibility:hidden;"><%=htmlspecialchars(htmlGoodsSPZS.getMemo3()) %></textarea>
+	<div class="memo3_div">
+		<textarea class="memo3_ta" id="memo3" name="memo3" cols="100" rows="8"><%=htmlspecialchars(htmlGoodsSPZS.getMemo3()) %></textarea>
 	</div>
 </div>
-<div id="right_div" style="width: 150px;height: 200px;text-align: center;">
-	<img style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsSPZS.qrCode }">
-	<div style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;margin-top:15px;border:1px solid #eee;background-color:#fff;border-radius:3px;">预览</div>
-	<div style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;margin-top:15px;border:1px solid #eee;background-color:#fff;border-radius:3px;" onclick="saveEditHtmlGoodsSPZS();">保存</div>
-	<div style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;margin-top:15px;color:#fff;background-color:#4caf50;border-radius:3px;" onclick="finishEditHtmlGoodsSPZS();">完成编辑</div>
-	<div id="saveStatus_div" style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;margin-top:15px;color:#4caf50;display: none;"></div>
+<div class="right_div" id="right_div">
+	<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsSPZS.qrCode }">
+	<div class="preview_div">预览</div>
+	<div class="save_div" onclick="saveEditHtmlGoodsSPZS();">保存</div>
+	<div class="finishEdit_div" onclick="finishEditHtmlGoodsSPZS();">完成编辑</div>
+	<div class="saveStatus_div" id="saveStatus_div"></div>
 </div>
 	<input type="hidden" id="id" name="id" value="${requestScope.htmlGoodsSPZS.id }" />
 	<input type="hidden" id="goodsNumber" name="goodsNumber" value="${requestScope.htmlGoodsSPZS.goodsNumber }" />

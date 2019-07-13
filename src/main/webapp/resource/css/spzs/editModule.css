@@ -313,3 +313,163 @@ body{
 	height: 600px;
 	margin-top: 25px;
 }
+.memo1_div{
+	margin-top: 25px;
+}
+.memo1_ta{
+	width:650px;
+	height:150px;
+	visibility:hidden;
+}
+.spxq_div{
+	margin-top: 20px;
+}
+.spxq_tab{
+	width: 600px;
+	margin: 0 auto;
+	border: #eee solid 1px;
+}
+.spxq_tab .head_tr{
+	height:60px;
+}
+.spxq_tab .head_tr .spxq_td{
+	text-align: center;
+	background-color: #fbfbfb;
+}
+.spxq_tab .head_tr .cz_td{
+	text-align: center;
+	background-color: #fbfbfb;
+}
+.spxq_tab .item_tr .name_td{
+	width:20%;
+	border: #eee solid 1px;
+	padding-left: 20px;
+}
+.spxq_tab .item_tr .value_td{
+	width:70%;
+	border: #eee solid 1px;
+	padding-left: 20px;
+}
+.spxq_tab .item_tr .cz_td{
+	width:10%;
+	border: #eee solid 1px;
+	text-align: center;
+}
+.memo2_div{
+	margin-top: 20px;
+}
+.memo2_ta{
+	width:650px;
+	height:220px;
+	visibility:hidden;
+}
+.image2_div{
+	width: 650px;
+	text-align: center;
+	margin-top: 25px;
+}
+.image2_div .option_div{
+	width:650px;
+	position:absolute;
+}
+.image2_div .but_div{
+	width:100px;
+	height:30px;
+	line-height:30px;
+	margin:0 auto;
+	margin-top: 50px;
+	text-align:center;
+	z-index: 1;
+	background-color: #fff;
+	border-radius:5px;
+	display:none;
+}
+.image2_div .list_div .item_img{
+	width: 600px;height: 600px;margin-top: 25px;
+}
+.image3_div{
+	width: 650px;
+	text-align: center;
+	margin-top: 25px;
+}
+.image3_div .option_div{
+	width:650px;
+	position:absolute;
+}
+.image3_div .but_div{
+	width:100px;
+	height:30px;
+	line-height:30px;
+	margin:0 auto;
+	margin-top: 50px;
+	text-align:center;
+	z-index: 1;
+	background-color: #fff;
+	border-radius:5px;
+	display:none;
+}
+.image3_div .list_div .item_img{
+	width: 600px;
+	height: 600px;
+	margin-top: 25px;
+}
+.memo3_div{
+	margin-top: 20px;
+}
+.memo3_ta{
+	width:650px;
+	height:550px;
+	visibility:hidden;
+}
+.right_div{
+	width: 150px;
+	height: 200px;
+	text-align: center;
+}
+.right_div .qrCode_img{
+	width: 120px;
+	height: 120px;
+}
+.right_div .preview_div{
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align:center;
+	margin:0 auto;
+	margin-top:15px;
+	border:1px solid #eee;
+	background-color:#fff;
+	border-radius:3px;
+}
+.right_div .save_div{
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align:center;
+	margin:0 auto;
+	margin-top:15px;
+	border:1px solid #eee;
+	background-color:#fff;
+	border-radius:3px;
+}
+.right_div .finishEdit_div{
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align:center;
+	margin:0 auto;
+	margin-top:15px;
+	color:#fff;
+	background-color:#4caf50;
+	border-radius:3px;
+}
+.right_div .saveStatus_div{
+	width: 100px;
+	height: 30px;
+	line-height: 30px;
+	text-align:center;
+	margin:0 auto;
+	margin-top:15px;
+	color:#4caf50;
+	display: none;
+}

@@ -357,21 +357,21 @@
 }
 .memo2_div{
 	margin-top: 20px;
-	}
+}
 .memo2_ta{
 	width:650px;
 	height:220px;
 	visibility:hidden;
-	}
+}
 .image2_div{
 	width: 650px;
 	text-align: center;
 	margin-top: 25px;
-	}
+}
 .image2_div .option_div{
 	width:650px;
 	position:absolute;
-	}
+}
 .image2_div .but_div{
 	width:100px;
 	height:30px;
