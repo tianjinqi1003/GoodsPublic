@@ -1,4 +1,7 @@
 @charset "UTF-8";
+body{
+	background-color: #fbfbfb;
+}
 .image1ModBg_div{
 	width:100%;
 	height:100%;

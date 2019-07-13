@@ -343,7 +343,7 @@ function goBack(){
 }
 </script>
 </head>
-<body style="background-color: #fbfbfb;">
+<body>
 <form id="form1" name="form1" method="post" action="addHtmlGoodsSPZS" enctype="multipart/form-data">
 <div class="image1ModBg_div" id="image1ModBg_div">
 	<div class="image1Mod_div" id="image1Mod_div">
