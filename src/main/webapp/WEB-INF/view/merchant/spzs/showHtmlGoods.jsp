@@ -8,139 +8,140 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <title>商品</title>
 <%@include file="../js.jsp"%>
+<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/showHtmlGoods.css" />
 </head>
-<body style="width: 100%;">
-<div id="main_div" style="width: 100%;margin: 0 auto;background-color: #fff;">
-	<div style="width: 95%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;">
+<body>
+<div class="main_div" id="main_div">
+	<div class="productName_div">
 		${requestScope.htmlGoodsSPZS.productName }
 	</div>
-	<div id="image1_div" style="width: 95%;text-align: center;">
+	<div class="image1_div"  id="image1_div">
 		<c:if test="${requestScope.htmlGoodsSPZS.image1_1 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image1_1 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image1_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_1 }">
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsSPZS.image1_2 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image1_2 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image1_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_2 }">
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsSPZS.image1_3 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image1_3 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image1_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_3 }">
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsSPZS.image1_4 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image1_4 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image1_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_4 }">
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsSPZS.image1_5 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image1_5 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image1_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_5 }">
 		</c:if>
 	</div>
-	<div style="width:95%;margin-top: 20px;">
+	<div class="memo1_div">
 		${requestScope.htmlGoodsSPZS.memo1 }
 	</div>
 	
-	<div style="margin-top: 20px;">
-		<table id="spxq_tab" style="width: 95%;margin: 0 auto;border: #eee solid 1px;">
+	<div class="spxq_div">
+		<table class="spxq_tab" id="spxq_tab">
 			<tr height="60">
-				<td colspan="2" style="text-align: center;background-color: #eee;">商品详情</td>
+				<td class="head_td" colspan="2">商品详情</td>
 			</tr>
 			
 			<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow1 }">
 			<tr height="50">
-				<td style="width:25%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="name_td">
 					${requestScope.htmlGoodsSPZS.spxqName1 }
 				</td>
-				<td style="width:75%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="value_td">
 					${requestScope.htmlGoodsSPZS.spxqValue1 }
 				</td>
 			</tr>
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow2 }">
 			<tr height="50">
-				<td style="width:25%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="name_td">
 					${requestScope.htmlGoodsSPZS.spxqName2 }
 				</td>
-				<td style="width:75%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="value_td">
 					${requestScope.htmlGoodsSPZS.spxqValue2 }
 				</td>
 			</tr>
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow3 }">
 			<tr height="50">
-				<td style="width:25%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="name_td">
 					${requestScope.htmlGoodsSPZS.spxqName3 }
 				</td>
-				<td style="width:75%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="value_td">
 					${requestScope.htmlGoodsSPZS.spxqValue3 }
 				</td>
 			</tr>
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow4 }">
 			<tr height="50">
-				<td style="width:25%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="name_td">
 					${requestScope.htmlGoodsSPZS.spxqName4 }
 				</td>
-				<td style="width:75%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="value_td">
 					${requestScope.htmlGoodsSPZS.spxqValue4 }
 				</td>
 			</tr>
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow5 }">
 			<tr height="50">
-				<td style="width:25%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="name_td">
 					${requestScope.htmlGoodsSPZS.spxqName5 }
 				</td>
-				<td style="width:75%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="value_td">
 					${requestScope.htmlGoodsSPZS.spxqValue5 }
 				</td>
 			</tr>
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow6 }">
 			<tr height="50">
-				<td style="width:25%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="name_td">
 					${requestScope.htmlGoodsSPZS.spxqName6 }
 				</td>
-				<td style="width:75%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="value_td">
 					${requestScope.htmlGoodsSPZS.spxqValue6 }
 				</td>
 			</tr>
 			</c:if>
 		</table>
 	</div>
-	<div style="width:95%;margin-top: 20px;">
+	<div class="memo2_div">
 		${requestScope.htmlGoodsSPZS.memo2 }
 	</div>
-	<div id="image2_div" style="width: 95%;text-align: center;margin-top: 20px;">
+	<div class="image2_div" id="image2_div">
 		<c:if test="${requestScope.htmlGoodsSPZS.image2_1 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image2_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }">
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsSPZS.image2_2 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image2_2 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image2_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_2 }">
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsSPZS.image2_3 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image2_3 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image2_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_3 }">
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsSPZS.image2_4 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image2_4 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image2_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_4 }">
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsSPZS.image2_5 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image2_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }">
 		</c:if>
 	</div>
-	<div id="image3_div" style="width: 95%;text-align: center;margin-top: 20px;">
+	<div class="image3_div" id="image3_div">
 		<c:if test="${requestScope.htmlGoodsSPZS.image3_1 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image3_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }">
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsSPZS.image3_2 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image3_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }">
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsSPZS.image3_3 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image3_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }">
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsSPZS.image3_4 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image3_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }">
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsSPZS.image3_5 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image3_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }">
 		</c:if>
 	</div>
-	<div style="width:95%;margin-top: 20px;">
+	<div class="memo3_div">
 		${requestScope.htmlGoodsSPZS.memo3 }
 	</div>
 </div>

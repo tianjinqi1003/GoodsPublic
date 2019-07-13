@@ -202,9 +202,9 @@ function showQrcodePic1(obj){
 	file.removeAttr("onchange");
 	file.css("display","none");
 	var fileHtml=file.prop("outerHTML");
-	var tdHtml="<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
-				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage1(this);\">"
-				+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+	var tdHtml="<td class=\"file_td\" id=\"file_td"+uuid+"\">"
+				+"<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteImage1(this);\">"
+				+"<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\">"
 				+fileHtml
 			+"</td>";
 	
@@ -233,7 +233,7 @@ function showQrcodePic1(obj){
         $img.attr("src", dataURL);
 
         var listDiv=$("#image1_div #list_div");
-        listDiv.append("<img id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\" style=\"width: 600px;height: 600px;margin-top: 25px;\">");
+        listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -254,9 +254,9 @@ function showQrcodePic2(obj){
 	file.removeAttr("onchange");
 	file.css("display","none");
 	var fileHtml=file.prop("outerHTML");
-	var tdHtml="<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
-				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage2(this);\">"
-				+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+	var tdHtml="<td class=\"file_td\" id=\"file_td"+uuid+"\">"
+				+"<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteImage2(this);\">"
+				+"<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\">"
 				+fileHtml
 			+"</td>";
 	
@@ -285,7 +285,7 @@ function showQrcodePic2(obj){
         $img.attr("src", dataURL);
 
         var listDiv=$("#image2_div #list_div");
-        listDiv.append("<img id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\" style=\"width: 600px;height: 600px;margin-top: 25px;\">");
+        listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -306,9 +306,9 @@ function showQrcodePic3(obj){
 	file.removeAttr("onchange");
 	file.css("display","none");
 	var fileHtml=file.prop("outerHTML");
-	var tdHtml="<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
-				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage3(this);\">"
-				+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+	var tdHtml="<td class=\"file_td\" id=\"file_td"+uuid+"\">"
+				+"<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteImage3(this);\">"
+				+"<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\">"
 				+fileHtml
 			+"</td>";
 	
@@ -337,7 +337,7 @@ function showQrcodePic3(obj){
         $img.attr("src", dataURL);
 
         var listDiv=$("#image3_div #list_div");
-        listDiv.append("<img id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\" style=\"width: 600px;height: 600px;margin-top: 25px;\">");
+        listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
