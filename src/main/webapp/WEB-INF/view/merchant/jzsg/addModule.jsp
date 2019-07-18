@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>编辑</title>
 <%@include file="../js.jsp"%>
+<link rel="stylesheet" href="<%=basePath %>/resource/css/jzsg/addModule.css" />
 <script type="text/javascript">
 $(function(){
 	var bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
@@ -206,72 +207,72 @@ function goBack(){
 }
 </script>
 </head>
-<body style="background-color: #fbfbfb;">
+<body>
 <form id="form1" name="form1" method="post" action="addHtmlGoodsJZSG" enctype="multipart/form-data">
-<div id="image1ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
-	<div id="image1Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
-		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
-			<span style="margin-left: 20px;">图片模块</span>
-			<span style="float: right;margin-right: 20px;cursor: pointer;" onclick="closeImage1ModBgDiv();">关闭</span>
+<div class="image1ModBg_div" id="image1ModBg_div">
+	<div class="image1Mod_div" id="image1Mod_div">
+		<div class="title_div">
+			<span class="title_span">图片模块</span>
+			<span class="close_span" onclick="closeImage1ModBgDiv();">关闭</span>
 		</div>
 		<div id="tab_div">
-			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
+			<table>
 				<tr>
-					<td id="file_td1_1" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage1(this);">
-						<img id="img1_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/jzsg/bf0b334d871019cf3b2359e22b405d1c.png">
+					<td class="file_td" id="file_td1_1">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
+						<img class="item_img" id="img1_1" alt="" src="/GoodsPublic/resource/images/jzsg/bf0b334d871019cf3b2359e22b405d1c.png">
 					</td>
 					<td id="upload_td">
 						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
 					</td>
 				</tr>
 			</table>
-			<div id="uploadFile1_div" style="display: none;">
+			<div class="uploadFile1_div" id="uploadFile1_div">
 				<input type="file" id="file1_1" name="file" onchange="showQrcodePic1(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid1"/>
 		</div>
-		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
-			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeImage1ModBgDiv();">确&nbsp;认</div>
-			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeImage1ModBgDiv();">取&nbsp;消</div>
+		<div class="but_div" id="but_div">
+			<div class="confirm_div" onclick="closeImage1ModBgDiv();">确&nbsp;认</div>
+			<div class="cancel_div" onclick="closeImage1ModBgDiv();">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
 
-<div id="image2ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
-	<div id="image2Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
-		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
-			<span style="margin-left: 20px;">图片模块</span>
-			<span style="float: right;margin-right: 20px;cursor: pointer;" onclick="closeImage2ModBgDiv();">关闭</span>
+<div class="image2ModBg_div" id="image2ModBg_div">
+	<div class="image2Mod_div" id="image2Mod_div">
+		<div class="title_div">
+			<span class="title_span">图片模块</span>
+			<span class="close_span" onclick="closeImage2ModBgDiv();">关闭</span>
 		</div>
 		<div id="tab_div">
-			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
+			<table>
 				<tr>
-					<td id="file_td2_1" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage2(this);">
-						<img id="img2_1" style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/jzsg/43a339cd90f1a6b00c0c256d49d6a119.png">
+					<td class="file_td" id="file_td2_1">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
+						<img class="item_img" id="img2_1" alt="" src="/GoodsPublic/resource/images/jzsg/43a339cd90f1a6b00c0c256d49d6a119.png">
 					</td>
 					<td id="upload_td">
 						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
 					</td>
 				</tr>
 			</table>
-			<div id="uploadFile2_div" style="display: none;">
+			<div class="uploadFile2_div" id="uploadFile2_div">
 				<input type="file" id="file2_1" name="file" onchange="showQrcodePic2(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid2"/>
 		</div>
-		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
-			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeImage2ModBgDiv();">确&nbsp;认</div>
-			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeImage2ModBgDiv();">取&nbsp;消</div>
+		<div class="but_div" id="but_div">
+			<div class="confirm_div" onclick="closeImage2ModBgDiv();">确&nbsp;认</div>
+			<div class="cancel_div" onclick="closeImage2ModBgDiv();">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
 
-<div style="width: 100%;height: 50px;line-height: 50px;background-color: #fff;">
-	<div style="float:left;width: 70px;height: 30px;line-height: 30px;text-align:center;margin-top:10px;margin-left:20px;border:1px solid #eee;border-radius:3px;" onclick="goBack();">&lt返回</div>
-	<div style="width:200px;margin:0 auto;font-size:18px;font-weight: bold;text-align: center;">施工人员信息展示</div>
-	<div style="float:right;height: 30px;line-height: 30px;text-align:center;margin-top:-40px;margin-right:20px;border-radius:3px;">我的二维码&nbsp;${sessionScope.user.userName }</div>
+<div class="top_div">
+	<div class="return_div" onclick="goBack();">&lt返回</div>
+	<div class="title_div">施工人员信息展示</div>
+	<div class="myQrcode_div">我的二维码&nbsp;${sessionScope.user.userName }</div>
 </div>
 <div id="middle_div" style="width: 650px;margin: 0 auto;margin-top: 25px;background-color: #fff;">
 	<div>
