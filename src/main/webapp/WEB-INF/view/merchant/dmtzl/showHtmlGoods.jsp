@@ -8,38 +8,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <title>多媒体资料</title>
 <%@include file="../js.jsp"%>
+<link rel="stylesheet" href="<%=basePath %>/resource/css/dmtzl/showHtmlGoods.css" />
 </head>
-<body style="width: 100%;">
-<div id="main_div" style="width: 100%;margin: 0 auto;background-color: #fff;">
-	<div style="width: 95%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;">
+<body>
+<div class="main_div" id="main_div">
+	<div class="title_div">
 		${requestScope.htmlGoodsDMTZL.title }
 	</div>
-	<div style="width:95%;margin-top: 20px;">
+	<div class="memo1_div">
 		${requestScope.htmlGoodsDMTZL.memo1 }
 	</div>
-	<div id="embed1_div" style="width: 95%;text-align: center;">
+	<div class="embed1_div" id="embed1_div">
 		<c:if test="${requestScope.htmlGoodsDMTZL.embed1_1 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsDMTZL.embed1_1 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<embed class="embed1_1_embed" alt="" src="${requestScope.htmlGoodsDMTZL.embed1_1 }">
 		</c:if>
 	</div>
-	<div style="width:95%;margin-top: 20px;">
+	<div class="memo2_div">
 		${requestScope.htmlGoodsDMTZL.memo2 }
 	</div>
-	<div id="image1_div" style="width: 95%;text-align: center;">
+	<div class="image1_div" id="image1_div">
 		<c:if test="${requestScope.htmlGoodsDMTZL.image1_1 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsDMTZL.image1_1 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image1_1_img" alt="" src="${requestScope.htmlGoodsDMTZL.image1_1 }">
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsDMTZL.image1_2 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsDMTZL.image1_2 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image1_2_img" alt="" src="${requestScope.htmlGoodsDMTZL.image1_2 }">
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsDMTZL.image1_3 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsDMTZL.image1_3 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image1_3_img" alt="" src="${requestScope.htmlGoodsDMTZL.image1_3 }">
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsDMTZL.image1_4 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsDMTZL.image1_4 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image1_4_img" alt="" src="${requestScope.htmlGoodsDMTZL.image1_4 }">
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsDMTZL.image1_5 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsDMTZL.image1_5 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image1_5_img" alt="" src="${requestScope.htmlGoodsDMTZL.image1_5 }">
 		</c:if>
 	</div>
 </div>
