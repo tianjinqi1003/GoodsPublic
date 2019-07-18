@@ -14,6 +14,7 @@
 <%@include file="../js.jsp"%>
 <link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/themes/default/default.css" />
 <link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css" />
+<link rel="stylesheet" href="<%=basePath %>/resource/css/dmtzl/editModule.css" />
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/kindeditor.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
@@ -157,7 +158,7 @@ function showQrcodeEmbed1(obj){
 		embedTag="embed";
 	else
 		embedTag="iframe";
-	embedShowDiv.html("<"+embedTag+" id=\"embed"+uuid+"\" style=\"width: 100%;height: 300px;\" alt=\"\">"
+	embedShowDiv.html("<"+embedTag+" class=\"item_embed\" id=\"embed"+uuid+"\" alt=\"\">"
 			+fileHtml);
 
 	var $file = $(obj);
@@ -171,7 +172,7 @@ function showQrcodeEmbed1(obj){
         dataURL = windowURL.createObjectURL(fileObj.files[0]);
         $embed.attr("src", dataURL);
         
-        $("#embed1_div #embed1_1").replaceWith("<"+embedTag+" id=\"embed1_1\" src=\""+dataURL+"\" style=\"width: 600px;height: 300px;margin-top: 25px;\"/>");
+        $("#embed1_div #embed1_1").replaceWith("<"+embedTag+" class=\"item_embed\" id=\"embed1_1\" src=\""+dataURL+"\"/>");
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -193,8 +194,8 @@ function showQrcodePic1(obj){
 	file.css("display","none");
 	var fileHtml=file.prop("outerHTML");
 	var tdHtml="<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
-				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
-				+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+				+"<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteImage(this);\">"
+				+"<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\">"
 				+fileHtml
 			+"</td>";
 	
@@ -223,7 +224,7 @@ function showQrcodePic1(obj){
         $img.attr("src", dataURL);
         
         var listDiv=$("#image1_div #list_div");
-        listDiv.append("<img id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\" style=\"width: 600px;height: 600px;margin-top: 25px;\">");
+        listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -255,63 +256,63 @@ function goBack(){
 }
 </script>
 </head>
-<body style="background-color: #fbfbfb;">
+<body>
 <form id="form1" name="form1" method="post" action="finishEditHtmlGoodsDMTZL" enctype="multipart/form-data">
-<div id="embed1ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
-	<div id="embed1Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
-		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
-			<span style="margin-left: 20px;">视频模块</span>
-			<span style="float: right;margin-right: 20px;cursor: pointer;" onclick="closeEmbed1ModBgDiv();">关闭</span>
+<div class="embed1ModBg_div" id="embed1ModBg_div">
+	<div class="embed1Mod_div" id="embed1Mod_div">
+		<div class="title_div">
+			<span class="title_span">视频模块</span>
+			<span class="close_span" onclick="closeEmbed1ModBgDiv();">关闭</span>
 		</div>
 		<div>
-			<div id="embedShow_div" style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
-				<embed id="embed1_1" style="width: 100%;height: 300px;" alt="" src="${requestScope.htmlGoodsDMTZL.embed1_1 }">
+			<div class="embedShow_div" id="embedShow_div">
+				<embed class="item_embed" id="embed1_1" alt="" src="${requestScope.htmlGoodsDMTZL.embed1_1 }">
 			</div>
-			<div style="width:100px;height:33px;line-height:33px;text-align:center;color:#999;margin:0 auto;margin-top: 15px;border: #999 solid 1px;border-radius:5px;" onclick="uploadEmbed1();">重新上传</div>
-			<div id="uploadFile2_div" style="display: none;">
+			<div class="reupload_div" onclick="uploadEmbed1();">重新上传</div>
+			<div class="uploadFile2_div" id="uploadFile2_div">
 				<input type="file" id="file2_1" name="file" onchange="showQrcodeEmbed1(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid1"/>
 		</div>
-		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
-			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeEmbed1ModBgDiv();">确&nbsp;认</div>
-			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeEmbed1ModBgDiv();">取&nbsp;消</div>
+		<div class="but_div" id="but_div">
+			<div class="confirm_div" onclick="closeEmbed1ModBgDiv();">确&nbsp;认</div>
+			<div class="cancel_div" onclick="closeEmbed1ModBgDiv();">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
 
-<div id="image1ModBg_div" style="width:100%;height:100%;position: fixed;background:rgba(0,0,0,0.5);display:none;z-index: 1;">
-	<div id="image1Mod_div" style="width: 600px;margin: 0 auto;margin-top: 100px;background-color: #fff;">
-		<div style="width: 100%;height: 50px;line-height: 50px;border-bottom: #999 solid 1px;">
-			<span style="margin-left: 20px;">图片模块</span>
-			<span style="float: right;margin-right: 20px;cursor: pointer;" onclick="closeImage1ModBgDiv();">关闭</span>
+<div class="image1ModBg_div" id="image1ModBg_div">
+	<div class="image1Mod_div" id="image1Mod_div">
+		<div class="title_div">
+			<span class="title_span">图片模块</span>
+			<span class="close_span" onclick="closeImage1ModBgDiv();">关闭</span>
 		</div>
 		<div id="tab_div">
-			<table style="width: 550px;margin:0 auto;margin-top: 20px;border: #eee solid 1px;">
+			<table>
 				<c:if test="${requestScope.htmlGoodsDMTZL.image1_1 ne null||requestScope.htmlGoodsDMTZL.image1_2 ne null||requestScope.htmlGoodsDMTZL.image1_3 ne null||requestScope.htmlGoodsDMTZL.image1_4 ne null }">
 				<tr>
 					<c:if test="${requestScope.htmlGoodsDMTZL.image1_1 ne null }">
-					<td id="file_td1_1" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
-						<img id="img1_1" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsDMTZL.image1_1 }">
+					<td class="file_td" id="file_td1_1">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage(this);">
+						<img class="item_img" id="img1_1" alt="" src="${requestScope.htmlGoodsDMTZL.image1_1 }">
 					</td>
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsDMTZL.image1_2 ne null }">
-					<td id="file_td1_2" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
-						<img id="img1_2" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsDMTZL.image1_2 }">
+					<td class="file_td" id="file_td1_2">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage(this);">
+						<img class="item_img" id="img1_2" alt="" src="${requestScope.htmlGoodsDMTZL.image1_2 }">
 					</td>
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsDMTZL.image1_3 ne null }">
-					<td id="file_td1_3" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
-						<img id="img1_3" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsDMTZL.image1_3 }">
+					<td class="file_td" id="file_td1_3">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage(this);">
+						<img class="item_img" id="img1_3" alt="" src="${requestScope.htmlGoodsDMTZL.image1_3 }">
 					</td>
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsDMTZL.image1_4 ne null }">
-					<td id="file_td1_4" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
-						<img id="img1_4" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsDMTZL.image1_4 }">
+					<td class="file_td" id="file_td1_4">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage(this);">
+						<img class="item_img" id="img1_4" alt="" src="${requestScope.htmlGoodsDMTZL.image1_4 }">
 					</td>
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsDMTZL.image1_5 eq null }">
@@ -324,9 +325,9 @@ function goBack(){
 				<c:if test="${requestScope.htmlGoodsDMTZL.image1_5 ne null}">
 				<tr>
 					<c:if test="${requestScope.htmlGoodsDMTZL.image1_5 ne null }">
-					<td id="file_td1_5" style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
-						<img id="img1_5" style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsDMTZL.image1_5 }">
+					<td class="file_td" id="file_td1_5">
+						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage(this);">
+						<img class="item_img" id="img1_5" alt="" src="${requestScope.htmlGoodsDMTZL.image1_5 }">
 					</td>
 					</c:if>
 					<td id="upload_td">
@@ -335,78 +336,78 @@ function goBack(){
 				</tr>
 				</c:if>
 			</table>
-			<div id="uploadFile1_div" style="display: none;">
+			<div class="uploadFile1_div" id="uploadFile1_div">
 				<input type="file" id="file1_1" name="file" onchange="showQrcodePic1(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid1"/>
 		</div>
-		<div id="but_div" style="width: 100%;height: 50px;line-height: 50px;margin-top: 20px;border-top: #999 solid 1px;">
-			<div style="width:80px;height:35px;line-height:35px;text-align:center;color:#fff;float:right;margin-top: 7px;margin-right:13px;background-color: #4caf50;border-radius:5px;" onclick="closeImage1ModBgDiv();">确&nbsp;认</div>
-			<div style="width:80px;height:33px;line-height:33px;text-align:center;color:#999;float:right;margin-top: 7px;margin-right:13px;border: #999 solid 1px;border-radius:5px;" onclick="closeImage1ModBgDiv();">取&nbsp;消</div>
+		<div class="but_div" id="but_div">
+			<div class="confirm_div" onclick="closeImage1ModBgDiv();">确&nbsp;认</div>
+			<div class="cancel_div" onclick="closeImage1ModBgDiv();">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
 
-<div style="width: 100%;height: 50px;line-height: 50px;background-color: #fff;">
-	<div style="float:left;width: 70px;height: 30px;line-height: 30px;text-align:center;margin-top:10px;margin-left:20px;border:1px solid #eee;border-radius:3px;" onclick="goBack();">&lt返回</div>
-	<div style="width:200px;margin:0 auto;font-size:18px;font-weight: bold;text-align: center;">多媒体资料</div>
-	<div style="float:right;height: 30px;line-height: 30px;text-align:center;margin-top:-40px;margin-right:20px;border-radius:3px;">我的二维码&nbsp;${sessionScope.user.userName }</div>
+<div class="top_div">
+	<div class="return_div" onclick="goBack();">&lt返回</div>
+	<div class="title_div">多媒体资料</div>
+	<div class="myQrcode_div">我的二维码&nbsp;${sessionScope.user.userName }</div>
 </div>
-<div id="middle_div" style="width: 650px;margin: 0 auto;margin-top: 25px;background-color: #fff;">
+<div class="middle_div" id="middle_div" style="">
 	<div>
-		<input type="text" id="title" name="title" placeholder="请输入标题" value="${requestScope.htmlGoodsDMTZL.title }" style="width: 100%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;"/>
+		<input class="title_input" type="text" id="title" name="title" placeholder="请输入标题" value="${requestScope.htmlGoodsDMTZL.title }"/>
 	</div>
-	<div style="margin-top: 25px;">
-		<textarea id="memo1" name="memo1" cols="100" rows="8" style="width:650px;height:150px;visibility:hidden;"><%=htmlspecialchars(htmlGoodsDMTZL.getMemo1()) %></textarea>
+	<div class="memo1_div">
+		<textarea class="memo1_ta" id="memo1" name="memo1" cols="100" rows="8"><%=htmlspecialchars(htmlGoodsDMTZL.getMemo1()) %></textarea>
 	</div>
-	<div id="embed1_div" style="width: 650px;text-align: center;margin-top: 25px;">
-		<div id="option_div" style="width:650px;position:absolute;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<div id="but_div" style="width:100px;height:30px;line-height:30px;margin:0 auto;margin-top: 50px;text-align:center;z-index: 1;background-color: #fff;border-radius:5px;display:none; ">
+	<div class="embed1_div" id="embed1_div">
+		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<div class="but_div" id="but_div">
 				<a onclick="openEmbed1ModBgDiv();">编辑</a>|
 				<a onclick="deleteEmbed1Div();">删除</a>
 			</div>
 		</div>
-		<div onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div class="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:if test="${requestScope.htmlGoodsDMTZL.embed1_1 ne null }">
-			<embed id="embed1_1" alt="" src="${requestScope.htmlGoodsDMTZL.embed1_1 }" style="width: 600px;height: 300px;margin-top: 25px;"/>
+			<embed class="item_embed" id="embed1_1" alt="" src="${requestScope.htmlGoodsDMTZL.embed1_1 }"/>
 			</c:if>
 		</div>
 	</div>
-	<div style="margin-top: 20px;">
-		<textarea id="memo2" name="memo2" cols="100" rows="8" style="width:650px;height:220px;visibility:hidden;"><%=htmlspecialchars(htmlGoodsDMTZL.getMemo2()) %></textarea>
+	<div class="memo2_div">
+		<textarea class="memo1_ta" id="memo2" name="memo2" cols="100" rows="8"><%=htmlspecialchars(htmlGoodsDMTZL.getMemo2()) %></textarea>
 	</div>
-	<div id="image1_div" style="width: 650px;text-align: center;">
-		<div id="option_div" style="width:650px;position:absolute;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<div id="but_div" style="width:100px;height:30px;line-height:30px;margin:0 auto;margin-top: 50px;text-align:center;z-index: 1;background-color: #fff;border-radius:5px;display:none; ">
+	<div class="image1_div" id="image1_div">
+		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<div class="but_div" id="but_div">
 				<a onclick="openImage1ModBgDiv();">编辑</a>|
 				<a onclick="deleteImage1Div();">删除</a>
 			</div>
 		</div>
-		<div id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:if test="${requestScope.htmlGoodsDMTZL.image1_1 ne null }">
-			<img id="img1_1" alt="" src="${requestScope.htmlGoodsDMTZL.image1_1 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" id="img1_1" alt="" src="${requestScope.htmlGoodsDMTZL.image1_1 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsDMTZL.image1_2 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsDMTZL.image1_2 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" alt="" src="${requestScope.htmlGoodsDMTZL.image1_2 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsDMTZL.image1_3 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsDMTZL.image1_3 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" alt="" src="${requestScope.htmlGoodsDMTZL.image1_3 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsDMTZL.image1_4 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsDMTZL.image1_4 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" alt="" src="${requestScope.htmlGoodsDMTZL.image1_4 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsDMTZL.image1_5 ne null }">
-			<img alt="" src="${requestScope.htmlGoodsDMTZL.image1_5 }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" alt="" src="${requestScope.htmlGoodsDMTZL.image1_5 }">
 			</c:if>
 		</div>
 	</div>
 </div>
-<div id="right_div" style="width: 150px;height: 200px;text-align: center;">
-	<img style="width: 120px;height: 120px;" alt="" src="${requestScope.htmlGoodsDMTZL.qrCode }">
-	<div style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;margin-top:15px;border:1px solid #eee;background-color:#fff;border-radius:3px;">预览</div>
-	<div style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;margin-top:15px;border:1px solid #eee;background-color:#fff;border-radius:3px;" onclick="saveEdithtmlGoodsDMTZL();">保存</div>
-	<div style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;margin-top:15px;color:#fff;background-color:#4caf50;border-radius:3px;" onclick="finishEdithtmlGoodsDMTZL();">完成编辑</div>
-	<div id="saveStatus_div" style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;margin-top:15px;color:#4caf50;display: none;"></div>
+<div class="right_div" id="right_div">
+	<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsDMTZL.qrCode }">
+	<div class="preview_div">预览</div>
+	<div class="save_div" onclick="saveEdithtmlGoodsDMTZL();">保存</div>
+	<div class="finishEdit_div" onclick="finishEdithtmlGoodsDMTZL();">完成编辑</div>
+	<div class="saveStatus_div" id="saveStatus_div"></div>
 </div>
 	<input type="hidden" id="id" name="id" value="${requestScope.htmlGoodsDMTZL.id }" />
 	<input type="hidden" id="goodsNumber" name="goodsNumber" value="${requestScope.htmlGoodsDMTZL.goodsNumber }" />
