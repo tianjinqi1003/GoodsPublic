@@ -274,33 +274,33 @@ function goBack(){
 	<div class="title_div">施工人员信息展示</div>
 	<div class="myQrcode_div">我的二维码&nbsp;${sessionScope.user.userName }</div>
 </div>
-<div id="middle_div" style="width: 650px;margin: 0 auto;margin-top: 25px;background-color: #fff;">
+<div class="middle_div" id="middle_div">
 	<div>
-		<input type="text" id="title" name="title" placeholder="请输入标题" style="width: 100%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;"/>
+		<input class="title_input" type="text" id="title" name="title" placeholder="请输入标题" />
 	</div>
-	<div id="image1_div" style="width: 650px;text-align: center;">
-		<div id="option_div" style="width:650px;position:absolute;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<div id="but_div" style="width:100px;height:30px;line-height:30px;margin:0 auto;margin-top: 50px;text-align:center;z-index: 1;background-color: #fff;border-radius:5px;display:none; ">
+	<div class="image1_div" id="image1_div">
+		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<div class="but_div" id="but_div">
 				<a onclick="openImage1ModBgDiv();">编辑</a>|
 				<a onclick="deleteImage1Div();">删除</a>
 			</div>
 		</div>
-		<div id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:forEach items="${requestScope.image1List }" var="image1" varStatus="status">
-			<img id="img1_1" alt="" src="${image1.value }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" id="img1_1" alt="" src="${image1.value }">
 			</c:forEach>
 		</div>
 	</div>
-	<div id="ryxx_div" style="margin-top: 20px;">
-		<table id="ryxx_tab" style="width: 600px;margin: 0 auto;border: #eee solid 1px;">
+	<div class="ryxx_div" id="ryxx_div">
+		<table class="ryxx_tab" id="ryxx_tab">
 			<c:forEach items="${requestScope.ryxxList }" var="ryxx" varStatus="status">
-			<tr id="tr${status.index+1 }" height="50">
+			<tr class="item_tr" id="tr${status.index+1 }" height="50">
 				<input type="hidden" name="ryxxName${status.index+1 }" value="${ryxx.name }" />
-				<td style="width:20%;border: #eee solid 1px;padding-left: 20px;">${ryxx.name }</td>
-				<td style="width:70%;border: #eee solid 1px;padding-left: 20px;">
+				<td class="name_td">${ryxx.name }</td>
+				<td class="value_td">
 					<input type="text" name="ryxxValue${status.index+1 }" />
 				</td>
-				<td style="width:10%;border: #eee solid 1px;text-align: center;">
+				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow${status.index+1 }" name="ryxxIfShow${status.index+1 }" value="true" />
 					<input type="button" value="显示" onclick="changeRYXXTrIfShow(${status.index+1 },this)"/>
 				</td>
@@ -308,23 +308,23 @@ function goBack(){
 			</c:forEach>
 		</table>
 	</div>
-	<div id="image2_div" style="width: 650px;text-align: center;margin-top: 25px;">
-		<div id="option_div" style="width:650px;position:absolute;" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<div id="but_div" style="width:100px;height:30px;line-height:30px;margin:0 auto;margin-top: 50px;text-align:center;z-index: 1;background-color: #fff;border-radius:5px;display:none; ">
+	<div class="image2_div" id="image2_div">
+		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+			<div class="but_div" id="but_div">
 				<a onclick="openImage2ModBgDiv();">编辑</a>|
 				<a onclick="deleteImage2Div();">删除</a>
 			</div>
 		</div>
-		<div id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
+		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:forEach items="${requestScope.image2List }" var="image2" varStatus="status">
-			<img id="img2_1" alt="" src="${image2.value }" style="width: 600px;height: 600px;margin-top: 25px;">
+			<img class="item_img" id="img2_1" alt="" src="${image2.value }">
 			</c:forEach>
 		</div>
 	</div>
 </div>
-<div id="right_div" style="width: 150px;height: 200px;text-align: center;">
-	<img style="width: 120px;height: 120px;" alt="" src="/GoodsPublic/resource/images/007.png">
-	<div style="width: 100px;height: 30px;line-height: 30px;text-align:center;margin:0 auto;margin-top:15px;color:#fff;background-color:#4caf50;border-radius:3px;" onclick="addHtmlGoodsJZSG();">生成二维码</div>
+<div class="right_div" id="right_div">
+	<img class="uncreate_img" alt="" src="/GoodsPublic/resource/images/007.png">
+	<div class="createQrcode_div" onclick="addHtmlGoodsJZSG();">生成二维码</div>
 </div>
 	<input type="hidden" id="accountNumber_hid" name="accountNumber" value="${sessionScope.user.id }" />
 	<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
