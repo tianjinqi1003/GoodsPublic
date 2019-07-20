@@ -591,7 +591,7 @@ function goBack(){
 </div>
 <div class="middle_div" id="middle_div">
 	<div>
-		<input class="productName_input" type="text" id="productName" name="productName" placeholder="请输入标题" value="${requestScope.htmlGoodsSPZS.productName }"/>
+		<input type="text" class="productName_input" id="productName" name="productName" placeholder="请输入标题" value="${requestScope.htmlGoodsSPZS.productName }"/>
 	</div>
 	<div class="image1_div" id="image1_div">
 		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
