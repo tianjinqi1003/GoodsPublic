@@ -1,14 +1,26 @@
 package goodsPublic.controller;
 
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
@@ -31,9 +43,22 @@ import com.goodsPublic.config.AlipayConfig;
 import com.goodsPublic.util.FileUploadUtils;
 import com.goodsPublic.util.FinalState;
 import com.goodsPublic.util.JsonUtil;
+import com.goodsPublic.util.MD5Util;
 import com.goodsPublic.util.PlanResult;
 import com.goodsPublic.util.qrcode.Qrcode;
+import com.goodsPublic.util.wxpay.UnifiedOrderRequest;
+import com.goodsPublic.util.wxpay.UnifiedOrderRespose;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import com.thoughtworks.xstream.io.xml.XmlFriendlyNameCoder;
+import com.thoughtworks.xstream.io.xml.XppDriver;
 
+import freemarker.template.utility.StringUtil;
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
@@ -1780,6 +1805,154 @@ public class MainController {
 			jsonMap.put("info", "编辑标签失败！");
 		}
 		return jsonMap;
+	}
+	
+	/**
+	 * 创建二维码
+	 */
+	@RequestMapping(value="/createQRCode")
+	public void createQRCode(String orderId, HttpServletResponse response) {
+		
+		//生成订单
+		String orderInfo = createOrderInfo(orderId);
+		//调统一下单API
+		String code_url = httpOrder(orderInfo);
+		//将返回预支付交易链接（code_url）生成二维码图片
+		//这里使用的是zxing   <span style="color:#ff0000;"><strong>说明1(见文末)</strong></span>
+		try {
+			int width = 200;
+			int height = 200;
+			String format = "png";
+			Hashtable hints = new Hashtable();
+			hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+			BitMatrix bitMatrix = new MultiFormatWriter().encode(code_url, BarcodeFormat.QR_CODE, width, height, hints);
+			OutputStream out = null;
+			out = response.getOutputStream();
+			MatrixToImageWriter.writeToStream(bitMatrix, format, out);
+			out.flush();
+			out.close();
+		} catch (Exception e) {
+		}
+ 
+	}
+	
+	/**
+	 * 生成订单
+	 * @param orderId
+	 * @return
+	 */
+	private String createOrderInfo(String orderId) {
+		//生成订单对象
+		UnifiedOrderRequest unifiedOrderRequest = new UnifiedOrderRequest();
+		unifiedOrderRequest.setAppid("wxf600e162d89732da");//公众账号ID
+		unifiedOrderRequest.setMch_id("1546451251");//商户号
+		unifiedOrderRequest.setNonce_str(com.goodsPublic.util.StringUtils.makeUUID());//随机字符串       <span style="color:#ff0000;"><strong>说明2(见文末)</strong></span>
+		unifiedOrderRequest.setBody("aaaaaaaaaaaaaa");//商品描述
+		unifiedOrderRequest.setOut_trade_no(orderId);//商户订单号
+		unifiedOrderRequest.setTotal_fee("1");	//金额需要扩大100倍:1代表支付时是0.01
+		unifiedOrderRequest.setSpbill_create_ip("192.168.230.1");//终端IP
+		unifiedOrderRequest.setNotify_url("xxxxxxxxxxxxxx");//通知地址
+		unifiedOrderRequest.setTrade_type("NATIVE");//JSAPI--公众号支付、NATIVE--原生扫码支付、APP--app支付
+		unifiedOrderRequest.setSign(createSign(unifiedOrderRequest));//签名<span style="color:#ff0000;"><strong>说明5(见文末，签名方法一并给出)</strong></span>
+		//将订单对象转为xml格式
+		XStream xStream = new XStream(new XppDriver(new XmlFriendlyNameCoder("_-", "_"))); //<span style="color:#ff0000;"><strong>说明3(见文末)</strong></span>
+		xStream.alias("xml", UnifiedOrderRequest.class);//根元素名需要是xml
+		return xStream.toXML(unifiedOrderRequest);
+	}
+	
+	/**
+	 * 调统一下单API
+	 * @param orderInfo
+	 * @return
+	 */
+	private String httpOrder(String orderInfo) {
+		String url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
+		try {
+			HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+			//加入数据  
+            conn.setRequestMethod("POST");  
+            conn.setDoOutput(true);  
+              
+            BufferedOutputStream buffOutStr = new BufferedOutputStream(conn.getOutputStream());  
+            buffOutStr.write(orderInfo.getBytes());
+            buffOutStr.flush();  
+            buffOutStr.close();  
+              
+            //获取输入流  
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(),"utf-8"));  
+              
+            String line = null;  
+            StringBuffer sb = new StringBuffer();  
+            while((line = reader.readLine())!= null){  
+                sb.append(line);  
+            }  
+            
+            //XStream xStream = new XStream(new XppDriver(new XmlFriendlyNameCoder("_-", "_")));//说明3(见文末)
+            XStream xStream = new XStream(new DomDriver());  
+            //将请求返回的内容通过xStream转换为UnifiedOrderRespose对象
+            xStream.alias("xml", UnifiedOrderRespose.class);
+            UnifiedOrderRespose unifiedOrderRespose = (UnifiedOrderRespose) xStream.fromXML(sb.toString());
+            
+            //根据微信文档return_code 和result_code都为SUCCESS的时候才会返回code_url
+            //<span style="color:#ff0000;"><strong>说明4(见文末)</strong></span>
+            if(null!=unifiedOrderRespose 
+            		&& "SUCCESS".equals(unifiedOrderRespose.getReturn_code()) 
+            		&& "SUCCESS".equals(unifiedOrderRespose.getResult_code())){
+            	return unifiedOrderRespose.getCode_url();
+            }else{
+            	return null;
+            }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	/**
+	 * 生成签名
+	 * 
+	 * @param appid_value
+	 * @param mch_id_value
+	 * @param productId
+	 * @param nonce_str_value
+	 * @param trade_type 
+	 * @param notify_url 
+	 * @param spbill_create_ip 
+	 * @param total_fee 
+	 * @param out_trade_no 
+	 * @return
+	 */
+	private String createSign(UnifiedOrderRequest unifiedOrderRequest) {
+		//根据规则创建可排序的map集合
+		SortedMap<String, String> packageParams = new TreeMap<String, String>();
+		packageParams.put("appid", unifiedOrderRequest.getAppid());
+		packageParams.put("body", unifiedOrderRequest.getBody());
+		packageParams.put("mch_id", unifiedOrderRequest.getMch_id());
+		packageParams.put("nonce_str", unifiedOrderRequest.getNonce_str());
+		packageParams.put("notify_url", unifiedOrderRequest.getNotify_url());
+		packageParams.put("out_trade_no", unifiedOrderRequest.getOut_trade_no());
+		packageParams.put("spbill_create_ip", unifiedOrderRequest.getSpbill_create_ip());
+		packageParams.put("trade_type", unifiedOrderRequest.getTrade_type());
+		packageParams.put("total_fee", unifiedOrderRequest.getTotal_fee());
+ 
+		StringBuffer sb = new StringBuffer();
+		Set es = packageParams.entrySet();//字典序
+		Iterator it = es.iterator();
+		while (it.hasNext()) {
+			Map.Entry entry = (Map.Entry) it.next();
+			String k = (String) entry.getKey();
+			String v = (String) entry.getValue();
+			//为空不参与签名、参数名区分大小写
+			if (null != v && !"".equals(v) && !"sign".equals(k)
+					&& !"key".equals(k)) {
+				sb.append(k + "=" + v + "&");
+			}
+		}
+		//第二步拼接key，key设置路径：微信商户平台(pay.weixin.qq.com)-->账户设置-->API安全-->密钥设置
+		sb.append("key=" +"GTusD1WphSK1zMjDFjRM4a3notET41hJ");
+		String sign = MD5Util.MD5Encode(sb.toString())
+				.toUpperCase();//MD5加密
+		return sign;
 	}
 	
 	public static void main(String[] args) {

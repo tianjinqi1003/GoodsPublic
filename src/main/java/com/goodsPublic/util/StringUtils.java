@@ -2,7 +2,9 @@ package com.goodsPublic.util;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -401,5 +403,14 @@ public class StringUtils extends org.apache.commons.lang.StringUtils{
 			return serializable.toString();
 		}
 	}
-   
+	
+	/**
+	 * 创建UUID
+	 * @return
+	 */
+	public static synchronized String makeUUID() {
+		Date date = new Date();
+		StringBuffer s = new StringBuffer(new SimpleDateFormat("ymdhmsm").format(date));
+		return s.append((new Random().nextInt(900) + 100)).toString();
+	}
 }
