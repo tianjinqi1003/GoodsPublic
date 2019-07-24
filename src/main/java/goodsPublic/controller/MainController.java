@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -82,6 +83,7 @@ public class MainController {
 	
 	@Autowired
 	private CategoryService categoryService;
+	private SimpleDateFormat orderIdSDF=new SimpleDateFormat("yyyyMMddHHmmss");
 	
 	/**
 	 * 跳转至商品发布页面
@@ -1379,7 +1381,7 @@ public class MainController {
 		return url;
 	}
 	
-	@RequestMapping(value="/kaiTong")
+	@RequestMapping(value="/kaiTong",method=RequestMethod.GET)
 	public String kaiTong() {
 		System.out.println("开通商户......");
 		return null;
@@ -1630,6 +1632,18 @@ public class MainController {
 		return "/merchant/fee/price";
 	}
 	
+	@RequestMapping(value="/goFeeBuy")
+	public String goFeeBuy() {
+		
+		return "/merchant/fee/buy";
+	}
+	
+	@RequestMapping(value="/goFeeTenpay")
+	public String goFeeTenpay() {
+		
+		return "/merchant/fee/tenpay";
+	}
+	
 	/**
 	 * 跳转至行业模板快速生成页面
 	 * @return
@@ -1811,9 +1825,10 @@ public class MainController {
 	 * 创建二维码
 	 */
 	@RequestMapping(value="/createQRCode")
-	public void createQRCode(String orderId, HttpServletResponse response) {
+	public void createQRCode(HttpServletResponse response) {
 		
 		//生成订单
+		String orderId = orderIdSDF.format(new Date());
 		String orderInfo = createOrderInfo(orderId);
 		//调统一下单API
 		String code_url = httpOrder(orderInfo);
@@ -1851,7 +1866,7 @@ public class MainController {
 		unifiedOrderRequest.setOut_trade_no(orderId);//商户订单号
 		unifiedOrderRequest.setTotal_fee("1");	//金额需要扩大100倍:1代表支付时是0.01
 		unifiedOrderRequest.setSpbill_create_ip("192.168.230.1");//终端IP
-		unifiedOrderRequest.setNotify_url("xxxxxxxxxxxxxx");//通知地址
+		unifiedOrderRequest.setNotify_url("http://192.168.230.1:8088/GoodsPublic/merchant/main/kaiTong");//通知地址
 		unifiedOrderRequest.setTrade_type("NATIVE");//JSAPI--公众号支付、NATIVE--原生扫码支付、APP--app支付
 		unifiedOrderRequest.setSign(createSign(unifiedOrderRequest));//签名<span style="color:#ff0000;"><strong>说明5(见文末，签名方法一并给出)</strong></span>
 		//将订单对象转为xml格式
