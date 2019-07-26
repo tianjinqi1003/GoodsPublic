@@ -50,6 +50,11 @@ $(function(){
 	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight)+40)+"px");
 });
 
+function resetDivPosition(){
+	var middleDivHeight=$("#middle_div").css("height").substring(0,$("#middle_div").css("height").length-2);
+	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight))+"px");
+}
+
 function showOptionDiv(o){
 	$(o).parent().find("#but_div").css("display","block");
 }
@@ -77,14 +82,20 @@ function openImage3ModBgDiv(){
 
 function deleteImage1Div(){
 	$("#image1_div").remove();
+	$("#uploadFile1_div input[type='file']").remove();
+	resetDivPosition();
 }
 
 function deleteImage2Div(){
 	$("#image2_div").remove();
+	$("#uploadFile2_div input[type='file']").remove();
+	resetDivPosition();
 }
 
 function deleteImage3Div(){
 	$("#image3_div").remove();
+	$("#uploadFile3_div input[type='file']").remove();
+	resetDivPosition();
 }
 
 function renameFile(){
@@ -117,22 +128,22 @@ function closeImage3ModBgDiv(){
 function uploadImage1(){
 	var uuid=createUUID();
 	$("#uuid_hid1").val(uuid);
-	$("#uploadFile1_div").append("<input type=\"file\" id=\"uploadFile1_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic1(this)\"/>");
-	document.getElementById("uploadFile1_inp").click();
+	$("#uploadFile1_div").append("<input type=\"file\" id=\"file1_1\" name=\"file"+uuid+"\" onchange=\"showQrcodePic1(this)\"/>");
+	document.getElementById("file1_1").click();
 }
 
 function uploadImage2(){
 	var uuid=createUUID();
 	$("#uuid_hid2").val(uuid);
-	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\"/>");
-	document.getElementById("uploadFile2_inp").click();
+	$("#uploadFile2_div").append("<input type=\"file\" id=\"file2_1\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\"/>");
+	document.getElementById("file2_1").click();
 }
 
 function uploadImage3(){
 	var uuid=createUUID();
 	$("#uuid_hid3").val(uuid);
-	$("#uploadFile3_div").append("<input type=\"file\" id=\"uploadFile3_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic3(this)\"/>");
-	document.getElementById("uploadFile3_inp").click();
+	$("#uploadFile3_div").append("<input type=\"file\" id=\"file3_1\" name=\"file"+uuid+"\" onchange=\"showQrcodePic3(this)\"/>");
+	document.getElementById("file3_1").click();
 }
 
 function deleteImage1(o){
@@ -140,6 +151,8 @@ function deleteImage1(o){
 	var uuid=td.attr("id").substring(7);
 	$("#image1_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
+	$("#uploadFile1_div input[type='file'][id='file"+uuid+"']").remove();
+	resetDivPosition();
 }
 
 function deleteImage2(o){
@@ -147,6 +160,8 @@ function deleteImage2(o){
 	var uuid=td.attr("id").substring(7);
 	$("#image2_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
+	$("#uploadFile2_div input[type='file'][id='file"+uuid+"']").remove();
+	resetDivPosition();
 }
 
 function deleteImage3(o){
@@ -154,6 +169,8 @@ function deleteImage3(o){
 	var uuid=td.attr("id").substring(7);
 	$("#image3_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
+	$("#uploadFile3_div input[type='file'][id='file"+uuid+"']").remove();
+	resetDivPosition();
 }
 
 function showQrcodePic1(obj){
@@ -196,6 +213,8 @@ function showQrcodePic1(obj){
         
         var listDiv=$("#image1_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
+        
+    	resetDivPosition();
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -248,6 +267,8 @@ function showQrcodePic2(obj){
         
         var listDiv=$("#image2_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
+        
+    	resetDivPosition();
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -300,6 +321,8 @@ function showQrcodePic3(obj){
 
         var listDiv=$("#image3_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
+
+    	resetDivPosition();
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
