@@ -8,24 +8,52 @@
 <%@include file="../js.jsp"%>
 <link rel="stylesheet" href="<%=basePath %>/resource/css/fee/buy.css" />
 <script type="text/javascript">
+function changeAlipayChosen(){
+	var clas=$("#alipay_div").attr("class");
+	if(clas.indexOf("chosen")!=-1){
+		$("#alipay_div").removeClass("chosen");
+	}
+	else{
+		$("#alipay_div").addClass("chosen");
+		$("#wechatpay_div").removeClass("chosen");
+	}
+}
+function changeWechatpayChosen(){
+	var clas=$("#wechatpay_div").attr("class");
+	if(clas.indexOf("chosen")!=-1){
+		$("#wechatpay_div").removeClass("chosen");
+	}
+	else{
+		$("#wechatpay_div").addClass("chosen");
+		$("#alipay_div").removeClass("chosen");
+	}
+}
+
 function goPay(){
-	location.href="${pageContext.request.contextPath}/merchant/main/goFeeTenpay";
+	if($("#alipay_div").attr("class").indexOf("chosen")!=-1)
+		alert("支付宝支付");
+	else if($("#wechatpay_div").attr("class").indexOf("chosen")!=-1)
+		location.href="${pageContext.request.contextPath}/merchant/main/goFeeTenpay";
+	else{
+		alert("请选择支付方式!");
+		return false;
+	}
 }
 </script>
 </head>
-<body style="background-color: #eee;">
-<div style="width: 1020px;height:300px;margin: 0 auto;background-color: #fff;">
-	<div style="margin-left: 50px;height: 40px;line-height:40px;font-size: 20px;">支付方式</div>
-	<div style="margin-left: 50px;">
-		<div style="width: 150px;height: 60px;line-height:60px;text-align: center;display: table-cell;vertical-align: middle;border: 1px solid #eceeef;background-color: #fff;border-radius: 3px;">
+<body>
+<div class="main_div">
+	<div class="payTypeTit_div">支付方式</div>
+	<div class="payType_div">
+		<div class="alipay_div chosen" id="alipay_div" onclick="changeAlipayChosen();">
 			<img alt="" src="<%=basePath %>/resource/images/alipay_icon1.png">
 		</div>
-		<div style="width: 150px;height: 60px;line-height:60px;left:20px;position:relative; text-align: center;display: table-cell;vertical-align: middle;border: 1px solid #eceeef;background-color: #fff;border-radius: 3px;">
+		<div class="wechatpay_div" id="wechatpay_div" onclick="changeWechatpayChosen();">
 			<img alt="" src="<%=basePath %>/resource/images/wechatpay_icon@1x.png">
 		</div>
-		<div style="height: 60px;line-height:60px;">
+		<div class="agree_div">
 			我已阅读并同意
-			<div style="width: 150px;height: 40px;line-height:40px;text-align: center;color:#fff;background-color: #ef6c00;border-radius: 3px;" onclick="goPay();">去付款</div>
+			<div class="goPay_div" onclick="goPay();">去付款</div>
 		</div>
 	</div>
 </div>

@@ -5,7 +5,7 @@ package com.goodsPublic.util.wxpay;
  * @author Y
  *
  */
-public class UnifiedOrderRespose {
+public class UnifiedOrderResponse {
 
 	private String return_code;				//返回状态码
 	private String return_msg;				//返回信息
