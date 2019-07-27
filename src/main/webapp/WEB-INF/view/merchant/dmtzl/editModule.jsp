@@ -43,6 +43,11 @@ $(function(){
 	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight)+40)+"px");
 });
 
+function resetDivPosition(){
+	var middleDivHeight=$("#middle_div").css("height").substring(0,$("#middle_div").css("height").length-2);
+	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight))+"px");
+}
+
 function showOptionDiv(o){
 	$(o).parent().find("#but_div").css("display","block");
 }
@@ -97,10 +102,14 @@ function openImage1ModBgDiv(){
 
 function deleteEmbed1Div(){
 	$("#embed1_div").remove();
+	$("#uploadFile2_div input[type='file']").remove();
+	resetDivPosition();
 }
 
 function deleteImage1Div(){
 	$("#image1_div").remove();
+	$("#uploadFile1_div input[type='file']").remove();
+	resetDivPosition();
 }
 
 function renameFile(){
@@ -141,6 +150,8 @@ function deleteImage(o){
 	var uuid=td.attr("id").substring(7);
 	$("#image1_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
+	$("#uploadFile1_div input[type='file'][name='file"+uuid+"']").remove();
+	resetDivPosition();
 }
 
 function showQrcodeEmbed1(obj){
@@ -225,6 +236,8 @@ function showQrcodePic1(obj){
         
         var listDiv=$("#image1_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
+        
+    	resetDivPosition();
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -270,7 +283,7 @@ function goBack(){
 			</div>
 			<div class="reupload_div" onclick="uploadEmbed1();">重新上传</div>
 			<div class="uploadFile2_div" id="uploadFile2_div">
-				<input type="file" id="file2_1" name="file" onchange="showQrcodeEmbed1(this)" />
+				<input type="file" id="file2_1" name="file2_1" onchange="showQrcodeEmbed1(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid1"/>
 		</div>
@@ -337,7 +350,7 @@ function goBack(){
 				</c:if>
 			</table>
 			<div class="uploadFile1_div" id="uploadFile1_div">
-				<input type="file" id="file1_1" name="file" onchange="showQrcodePic1(this)" />
+				<input type="file" id="file1_1" name="file1_1" onchange="showQrcodePic1(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid1"/>
 		</div>
@@ -388,16 +401,16 @@ function goBack(){
 			<img class="item_img" id="img1_1" alt="" src="${requestScope.htmlGoodsDMTZL.image1_1 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsDMTZL.image1_2 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsDMTZL.image1_2 }">
+			<img class="item_img" id="img1_2" alt="" src="${requestScope.htmlGoodsDMTZL.image1_2 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsDMTZL.image1_3 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsDMTZL.image1_3 }">
+			<img class="item_img" id="img1_3" alt="" src="${requestScope.htmlGoodsDMTZL.image1_3 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsDMTZL.image1_4 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsDMTZL.image1_4 }">
+			<img class="item_img" id="img1_4" alt="" src="${requestScope.htmlGoodsDMTZL.image1_4 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsDMTZL.image1_5 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsDMTZL.image1_5 }">
+			<img class="item_img" id="img1_5" alt="" src="${requestScope.htmlGoodsDMTZL.image1_5 }">
 			</c:if>
 		</div>
 	</div>

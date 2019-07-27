@@ -49,6 +49,11 @@ $(function(){
 	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight)+40)+"px");
 });
 
+function resetDivPosition(){
+	var middleDivHeight=$("#middle_div").css("height").substring(0,$("#middle_div").css("height").length-2);
+	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight))+"px");
+}
+
 function showOptionDiv(o){
 	$(o).parent().find("#but_div").css("display","block");
 }
@@ -115,14 +120,20 @@ function openImage3ModBgDiv(){
 
 function deleteImage1Div(){
 	$("#image1_div").remove();
+	$("#uploadFile1_div input[type='file']").remove();
+	resetDivPosition();
 }
 
 function deleteImage2Div(){
 	$("#image2_div").remove();
+	$("#uploadFile2_div input[type='file']").remove();
+	resetDivPosition();
 }
 
 function deleteImage3Div(){
 	$("#image3_div").remove();
+	$("#uploadFile3_div input[type='file']").remove();
+	resetDivPosition();
 }
 
 function renameFile(){
@@ -178,6 +189,8 @@ function deleteImage1(o){
 	var uuid=td.attr("id").substring(7);
 	$("#image1_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
+	$("#uploadFile1_div input[type='file'][name='file"+uuid+"']").remove();
+	resetDivPosition();
 }
 
 function deleteImage2(o){
@@ -185,6 +198,8 @@ function deleteImage2(o){
 	var uuid=td.attr("id").substring(7);
 	$("#image2_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
+	$("#uploadFile2_div input[type='file'][name='file"+uuid+"']").remove();
+	resetDivPosition();
 }
 
 function deleteImage3(o){
@@ -192,6 +207,8 @@ function deleteImage3(o){
 	var uuid=td.attr("id").substring(7);
 	$("#image3_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
+	$("#uploadFile3_div input[type='file'][name='file"+uuid+"']").remove();
+	resetDivPosition();
 }
 
 function showQrcodePic1(obj){
@@ -234,6 +251,8 @@ function showQrcodePic1(obj){
 
         var listDiv=$("#image1_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
+        
+    	resetDivPosition();
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -286,6 +305,8 @@ function showQrcodePic2(obj){
 
         var listDiv=$("#image2_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
+
+    	resetDivPosition();
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -338,6 +359,8 @@ function showQrcodePic3(obj){
 
         var listDiv=$("#image3_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
+
+    	resetDivPosition();
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -439,7 +462,7 @@ function goBack(){
 				</c:if>
 			</table>
 			<div class="uploadFile1_div" id="uploadFile1_div">
-				<input type="file" id="file1_1" name="file" onchange="showQrcodePic1(this)" />
+				<input type="file" id="file1_1" name="file1_1" onchange="showQrcodePic1(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid1"/>
 		</div>
@@ -506,7 +529,7 @@ function goBack(){
 				</c:if>
 			</table>
 			<div class="uploadFile2_div" id="uploadFile2_div">
-				<input type="file" id="file2_1" name="file" onchange="showQrcodePic2(this)" />
+				<input type="file" id="file2_1" name="file2_1" onchange="showQrcodePic2(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid2"/>
 		</div>
@@ -573,7 +596,7 @@ function goBack(){
 				</c:if>
 			</table>
 			<div class="uploadFile3_div" id="uploadFile3_div">
-				<input type="file" id="file3_1" name="file" onchange="showQrcodePic3(this)" />
+				<input type="file" id="file3_1" name="file3_1" onchange="showQrcodePic3(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid3"/>
 		</div>
@@ -605,16 +628,16 @@ function goBack(){
 			<img class="item_img" id="img1_1" alt="" src="${requestScope.htmlGoodsSPZS.image1_1 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_2 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_2 }">
+			<img class="item_img" id="img1_2" alt="" src="${requestScope.htmlGoodsSPZS.image1_2 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_3 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_3 }">
+			<img class="item_img" id="img1_3" alt="" src="${requestScope.htmlGoodsSPZS.image1_3 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_4 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_4 }">
+			<img class="item_img" id="img1_4" alt="" src="${requestScope.htmlGoodsSPZS.image1_4 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image1_5 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_5 }">
+			<img class="item_img" id="img1_5" alt="" src="${requestScope.htmlGoodsSPZS.image1_5 }">
 			</c:if>
 		</div>
 	</div>
@@ -717,16 +740,16 @@ function goBack(){
 			<img class="item_img" id="img2_1" alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_2 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_2 }">
+			<img class="item_img" id="img2_2" alt="" src="${requestScope.htmlGoodsSPZS.image2_2 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_3 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_3 }">
+			<img class="item_img" id="img2_3" alt="" src="${requestScope.htmlGoodsSPZS.image2_3 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_4 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_4 }">
+			<img class="item_img" id="img2_4" alt="" src="${requestScope.htmlGoodsSPZS.image2_4 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_5 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }">
+			<img class="item_img" id="img2_5" alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }">
 			</c:if>
 		</div>
 	</div>
@@ -742,16 +765,16 @@ function goBack(){
 			<img class="item_img" id="img3_1" alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_2 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }">
+			<img class="item_img" id="img3_2" alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_3 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }">
+			<img class="item_img" id="img3_3" alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_4 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }">
+			<img class="item_img" id="img3_4" alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image3_5 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }">
+			<img class="item_img" id="img3_5" alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }">
 			</c:if>
 		</div>
 	</div>
