@@ -285,6 +285,10 @@ body{
 	height: 600px;
 	margin-top: 25px;
 }
+.space_div{
+	width: 650px;
+	height: 1px;
+}
 .right_div{
 	width: 150px;
 	height: 200px;
