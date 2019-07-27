@@ -35,6 +35,7 @@ KindEditor.ready(function(K) {
 });
 
 $(function(){
+	/*
 	if (!!window.ActiveXObject || "ActiveXObject" in window){
         console.log("The browser is IE!");
      }
@@ -44,6 +45,7 @@ $(function(){
 			$(this).replaceWith("<iframe src=\""+$(this).attr("src")+"\" style=\"width:"+$(this).css("width")+";height:"+$(this).css("height")+";margin-top:"+$(this).css("margin-top")+"\"/>");
         });
     }
+    */
 	
 	var bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
 	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
@@ -51,6 +53,11 @@ $(function(){
 	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
 	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight)+40)+"px");
 });
+
+function resetDivPosition(){
+	var middleDivHeight=$("#middle_div").css("height").substring(0,$("#middle_div").css("height").length-2);
+	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight))+"px");
+}
 
 function showOptionDiv(o){
 	$(o).parent().find("#but_div").css("display","block");
@@ -75,10 +82,14 @@ function openImage1ModBgDiv(){
 
 function deleteEmbed1Div(){
 	$("#embed1_div").remove();
+	$("#uploadFile2_div input[type='file']").remove();
+	resetDivPosition();
 }
 
 function deleteImage1Div(){
 	$("#image1_div").remove();
+	$("#uploadFile1_div input[type='file']").remove();
+	resetDivPosition();
 }
 
 function renameFile(){
@@ -103,7 +114,7 @@ function closeImage1ModBgDiv(){
 function uploadEmbed1(){
 	var uuid=createUUID();
 	$("#uuid_hid1").val(uuid);
-	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodeEmbed1(this)\"/>");
+	$("#uploadFile2_div").html("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodeEmbed1(this)\"/>");
 	document.getElementById("uploadFile2_inp").click();
 }
 
@@ -119,6 +130,8 @@ function deleteImage(o){
 	var uuid=td.attr("id").substring(7);
 	$("#image1_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
+	$("#uploadFile1_div input[type='file'][name='file"+uuid+"']").remove();
+	resetDivPosition();
 }
 
 function showQrcodeEmbed1(obj){
@@ -136,7 +149,7 @@ function showQrcodeEmbed1(obj){
 		embedTag="embed";
 	else
 		embedTag="iframe";
-	embedShowDiv.html("<"+embedTag+" id=\"embed"+uuid+"\" style=\"width: 100%;height: 300px;\" alt=\"\">"
+	embedShowDiv.html("<"+embedTag+" class=\"item_embed\" id=\"embed"+uuid+"\" alt=\"\">"
 			+fileHtml);
 
 	var $file = $(obj);
@@ -149,6 +162,8 @@ function showQrcodeEmbed1(obj){
     if (fileObj && fileObj.files && fileObj.files[0]) {
         dataURL = windowURL.createObjectURL(fileObj.files[0]);
         $embed.attr("src", dataURL);
+        
+        $("#embed1_div #embed1_1").replaceWith("<"+embedTag+" class=\"item_embed\" id=\"embed1_1\" src=\""+dataURL+"\"/>");
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -169,9 +184,9 @@ function showQrcodePic1(obj){
 	file.removeAttr("onchange");
 	file.css("display","none");
 	var fileHtml=file.prop("outerHTML");
-	var tdHtml="<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
-				+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage(this);\">"
-				+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
+	var tdHtml="<td class=\"file_td\" id=\"file_td"+uuid+"\">"
+				+"<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteImage(this);\">"
+				+"<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\">"
 				+fileHtml
 			+"</td>";
 	
@@ -200,7 +215,9 @@ function showQrcodePic1(obj){
         $img.attr("src", dataURL);
         
         var listDiv=$("#image1_div #list_div");
-        listDiv.append("<img id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\" style=\"width: 600px;height: 600px;margin-top: 25px;\">");
+        listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
+
+    	resetDivPosition();
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -276,7 +293,7 @@ function goBack(){
 				</tr>
 			</table>
 			<div class="uploadFile1_div" id="uploadFile1_div">
-				<input type="file" id="file1_1" name="file" onchange="showQrcodePic1(this)" />
+				<input type="file" id="file1_1" name="file1_1" onchange="showQrcodePic1(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid1"/>
 		</div>
@@ -299,7 +316,7 @@ function goBack(){
 	<div class="memo1_div">
 		<textarea class="memo1_ta" id="memo1" name="memo1" cols="100" rows="8"><%=htmlspecialchars(memo1) %></textarea>
 	</div>
-	<div class="embed_div" id="embed_div">
+	<div class="embed1_div" id="embed1_div">
 		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<div class="but_div" id="but_div">
 				<a onclick="openEmbed1ModBgDiv();">编辑</a>|
@@ -308,7 +325,7 @@ function goBack(){
 		</div>
 		<div class="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<c:forEach items="${requestScope.embed1List }" var="embed1" varStatus="status">
-			<embed class="item_img" class="item_embed" src="${embed1.url }"/>
+			<embed class="item_embed" id="embed1_1" src="${embed1.url }"/>
 			</c:forEach>
 		</div>
 	</div>

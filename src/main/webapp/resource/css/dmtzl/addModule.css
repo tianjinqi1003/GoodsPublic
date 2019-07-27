@@ -222,15 +222,15 @@ body{
 	height:150px;
 	visibility:hidden;
 }
-.embed_div{
+.embed1_div{
 	width: 650px;
 	text-align: center;
 }
-.embed_div .option_div{
+.embed1_div .option_div{
 	width:650px;
 	position:absolute;
 }
-.embed_div .but_div{
+.embed1_div .but_div{
 	width:100px;
 	height:30px;
 	line-height:30px;
@@ -242,7 +242,7 @@ body{
 	border-radius:5px;
 	display:none;
 }
-.embed_div .list_div .item_img{
+.embed1_div .list_div .item_embed{
 	width: 600px;
 	height: 300px;
 	margin-top: 25px;

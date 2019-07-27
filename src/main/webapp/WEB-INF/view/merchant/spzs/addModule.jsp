@@ -128,22 +128,22 @@ function closeImage3ModBgDiv(){
 function uploadImage1(){
 	var uuid=createUUID();
 	$("#uuid_hid1").val(uuid);
-	$("#uploadFile1_div").append("<input type=\"file\" id=\"file1_1\" name=\"file"+uuid+"\" onchange=\"showQrcodePic1(this)\"/>");
-	document.getElementById("file1_1").click();
+	$("#uploadFile1_div").append("<input type=\"file\" id=\"uploadFile1_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic1(this)\"/>");
+	document.getElementById("uploadFile1_inp").click();
 }
 
 function uploadImage2(){
 	var uuid=createUUID();
 	$("#uuid_hid2").val(uuid);
-	$("#uploadFile2_div").append("<input type=\"file\" id=\"file2_1\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\"/>");
-	document.getElementById("file2_1").click();
+	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\"/>");
+	document.getElementById("uploadFile2_inp").click();
 }
 
 function uploadImage3(){
 	var uuid=createUUID();
 	$("#uuid_hid3").val(uuid);
-	$("#uploadFile3_div").append("<input type=\"file\" id=\"file3_1\" name=\"file"+uuid+"\" onchange=\"showQrcodePic3(this)\"/>");
-	document.getElementById("file3_1").click();
+	$("#uploadFile3_div").append("<input type=\"file\" id=\"uploadFile3_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic3(this)\"/>");
+	document.getElementById("uploadFile3_inp").click();
 }
 
 function deleteImage1(o){
@@ -151,7 +151,7 @@ function deleteImage1(o){
 	var uuid=td.attr("id").substring(7);
 	$("#image1_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
-	$("#uploadFile1_div input[type='file'][id='file"+uuid+"']").remove();
+	$("#uploadFile1_div input[type='file'][name='file"+uuid+"']").remove();
 	resetDivPosition();
 }
 
@@ -160,7 +160,7 @@ function deleteImage2(o){
 	var uuid=td.attr("id").substring(7);
 	$("#image2_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
-	$("#uploadFile2_div input[type='file'][id='file"+uuid+"']").remove();
+	$("#uploadFile2_div input[type='file'][name='file"+uuid+"']").remove();
 	resetDivPosition();
 }
 
@@ -169,7 +169,7 @@ function deleteImage3(o){
 	var uuid=td.attr("id").substring(7);
 	$("#image3_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
-	$("#uploadFile3_div input[type='file'][id='file"+uuid+"']").remove();
+	$("#uploadFile3_div input[type='file'][name='file"+uuid+"']").remove();
 	resetDivPosition();
 }
 
@@ -387,7 +387,7 @@ function goBack(){
 				</tr>
 			</table>
 			<div class="uploadFile1_div" id="uploadFile1_div">
-				<input type="file" id="file1_1" name="file" onchange="showQrcodePic1(this)" />
+				<input type="file" id="file1_1" name="file1_1" onchange="showQrcodePic1(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid1"/>
 		</div>
@@ -427,7 +427,7 @@ function goBack(){
 				</tr>
 			</table>
 			<div class="uploadFile2_div" id="uploadFile2_div">
-				<input type="file" id="file2_1" name="file" onchange="showQrcodePic2(this)" />
+				<input type="file" id="file2_1" name="file2_1" onchange="showQrcodePic2(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid2"/>
 		</div>
@@ -457,7 +457,7 @@ function goBack(){
 				</tr>
 			</table>
 			<div class="uploadFile3_div" id="uploadFile3_div">
-				<input type="file" id="file3_1" name="file" onchange="showQrcodePic3(this)" />
+				<input type="file" id="file3_1" name="file3_1" onchange="showQrcodePic3(this)" />
 			</div>
 			<input type="hidden" id="uuid_hid3"/>
 		</div>
