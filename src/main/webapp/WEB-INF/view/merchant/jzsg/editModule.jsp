@@ -31,6 +31,7 @@ function hideOptionDiv(o){
 
 function saveEditHtmlGoodsJZSG(){
 	renameFile();
+	renameImage();
 	
 	var formData = new FormData($("#form1")[0]);
 	 
@@ -62,6 +63,7 @@ function hideSaveStatusDiv(){
 
 function finishEditHtmlGoodsJZSG(){
 	renameFile();
+	renameImage();
 	document.getElementById("sub_but").click();
 }
 
@@ -76,12 +78,14 @@ function openImage2ModBgDiv(){
 function deleteImage1Div(){
 	$("#image1_div").remove();
 	$("#uploadFile1_div input[type='file']").remove();
+	$("#uploadFile1_div input[type='text']").remove();
 	resetDivPosition();
 }
 
 function deleteImage2Div(){
 	$("#image2_div").remove();
 	$("#uploadFile2_div input[type='file']").remove();
+	$("#uploadFile2_div input[type='text']").remove();
 	resetDivPosition();
 }
 
@@ -92,6 +96,17 @@ function renameFile(){
 	});
 	$("#uploadFile2_div input[type='file']").each(function(i){
 		$(this).attr("name","file2_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
+}
+
+function renameImage(){
+	$("#uploadFile1_div input[type='text']").each(function(i){
+		$(this).attr("name","image1_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
+	$("#uploadFile2_div input[type='text']").each(function(i){
+		$(this).attr("name","image2_"+(i+1));
 		//console.log($(this).attr("name"));
 	});
 }
@@ -108,6 +123,7 @@ function uploadImage1(){
 	var uuid=createUUID();
 	$("#uuid_hid1").val(uuid);
 	$("#uploadFile1_div").append("<input type=\"file\" id=\"uploadFile1_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic1(this)\"/>");
+	$("#uploadFile1_div").append("<input type=\"text\" id=\"image"+uuid+"\" name=\"image"+uuid+"\" />");
 	document.getElementById("uploadFile1_inp").click();
 }
 
@@ -115,6 +131,7 @@ function uploadImage2(){
 	var uuid=createUUID();
 	$("#uuid_hid2").val(uuid);
 	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\"/>");
+	$("#uploadFile2_div").append("<input type=\"text\" id=\"image"+uuid+"\" name=\"image"+uuid+"\" />");
 	document.getElementById("uploadFile2_inp").click();
 }
 
@@ -124,6 +141,7 @@ function deleteImage1(o){
 	$("#image1_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
 	$("#uploadFile1_div input[type='file'][name='file"+uuid+"']").remove();
+	$("#uploadFile1_div input[type='text'][name='image"+uuid+"']").remove();
 	resetDivPosition();
 }
 
@@ -133,6 +151,7 @@ function deleteImage2(o){
 	$("#image2_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
 	$("#uploadFile2_div input[type='file'][name='file"+uuid+"']").remove();
+	$("#uploadFile2_div input[type='text'][name='image"+uuid+"']").remove();
 	resetDivPosition();
 }
 
@@ -290,7 +309,18 @@ function goBack(){
 				</tr>
 			</table>
 			<div class="uploadFile1_div" id="uploadFile1_div">
+				<c:if test="${requestScope.htmlGoodsJZSG.image1_1 ne null }">
 				<input type="file" id="file1_1" name="file1_1" onchange="showQrcodePic1(this)" />
+				<input type="text" id="image1_1" name="image1_1" value="${requestScope.htmlGoodsJZSG.image1_1 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJZSG.image1_2 ne null }">
+				<input type="file" id="file1_2" name="file1_2" onchange="showQrcodePic1(this)" />
+				<input type="text" id="image1_2" name="image1_2" value="${requestScope.htmlGoodsJZSG.image1_2 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJZSG.image1_3 ne null }">
+				<input type="file" id="file1_3" name="file1_3" onchange="showQrcodePic1(this)" />
+				<input type="text" id="image1_3" name="image1_3" value="${requestScope.htmlGoodsJZSG.image1_3 }" />
+				</c:if>
 			</div>
 			<input type="hidden" id="uuid_hid1"/>
 		</div>
@@ -334,7 +364,18 @@ function goBack(){
 				</tr>
 			</table>
 			<div class="uploadFile2_div" id="uploadFile2_div">
+				<c:if test="${requestScope.htmlGoodsJZSG.image2_1 ne null }">
 				<input type="file" id="file2_1" name="file2_1" onchange="showQrcodePic2(this)" />
+				<input type="text" id="image2_1" name="image2_1" value="${requestScope.htmlGoodsJZSG.image2_1 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJZSG.image2_2 ne null }">
+				<input type="file" id="file2_2" name="file2_2" onchange="showQrcodePic2(this)" />
+				<input type="text" id="image2_2" name="image2_2" value="${requestScope.htmlGoodsJZSG.image2_2 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsJZSG.image2_3 ne null }">
+				<input type="file" id="file2_3" name="file2_3" onchange="showQrcodePic2(this)" />
+				<input type="text" id="image2_3" name="image2_3" value="${requestScope.htmlGoodsJZSG.image2_3 }" />
+				</c:if>
 			</div>
 			<input type="hidden" id="uuid_hid2"/>
 		</div>
@@ -366,10 +407,10 @@ function goBack(){
 			<img class="item_img" id="img1_1" alt="" src="${requestScope.htmlGoodsJZSG.image1_1 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsJZSG.image1_2 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsJZSG.image1_2 }">
+			<img class="item_img" id="img1_2" alt="" src="${requestScope.htmlGoodsJZSG.image1_2 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsJZSG.image1_3 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsJZSG.image1_3 }">
+			<img class="item_img" id="img1_3" alt="" src="${requestScope.htmlGoodsJZSG.image1_3 }">
 			</c:if>
 		</div>
 	</div>
@@ -509,10 +550,10 @@ function goBack(){
 			<img class="item_img" id="img2_1" alt="" src="${requestScope.htmlGoodsJZSG.image2_1 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsJZSG.image2_2 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsJZSG.image2_2 }">
+			<img class="item_img" id="img2_2" alt="" src="${requestScope.htmlGoodsJZSG.image2_2 }">
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsJZSG.image2_3 ne null }">
-			<img class="item_img" alt="" src="${requestScope.htmlGoodsJZSG.image2_3 }">
+			<img class="item_img" id="img2_3" alt="" src="${requestScope.htmlGoodsJZSG.image2_3 }">
 			</c:if>
 		</div>
 	</div>

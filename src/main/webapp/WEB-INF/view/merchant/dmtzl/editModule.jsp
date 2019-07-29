@@ -105,12 +105,14 @@ function openImage1ModBgDiv(){
 function deleteEmbed1Div(){
 	$("#embed1_div").remove();
 	$("#uploadFile2_div input[type='file']").remove();
+	$("#uploadFile2_div input[type='text']").remove();
 	resetDivPosition();
 }
 
 function deleteImage1Div(){
 	$("#image1_div").remove();
 	$("#uploadFile1_div input[type='file']").remove();
+	$("#uploadFile1_div input[type='text']").remove();
 	resetDivPosition();
 }
 

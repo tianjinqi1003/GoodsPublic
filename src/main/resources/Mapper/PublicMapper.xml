@@ -1108,24 +1108,12 @@
 		<if test="ryxxIfShow10!=null">
 			ryxxIfShow10=#{ryxxIfShow10},
 		</if>
-		<if test="image1_1!=null">
 			image1_1=#{image1_1},
-		</if>
-		<if test="image1_2!=null">
 			image1_2=#{image1_2},
-		</if>
-		<if test="image1_3!=null">
 			image1_3=#{image1_3},
-		</if>
-		<if test="image2_1!=null">
 			image2_1=#{image2_1},
-		</if>
-		<if test="image2_2!=null">
 			image2_2=#{image2_2},
-		</if>
-		<if test="image2_3!=null">
 			image2_3=#{image2_3},
-		</if>
 		gmtModified=now()
 		where id=#{id}
 	</update>

@@ -123,18 +123,21 @@ function openImage3ModBgDiv(){
 function deleteImage1Div(){
 	$("#image1_div").remove();
 	$("#uploadFile1_div input[type='file']").remove();
+	$("#uploadFile1_div input[type='text']").remove();
 	resetDivPosition();
 }
 
 function deleteImage2Div(){
 	$("#image2_div").remove();
 	$("#uploadFile2_div input[type='file']").remove();
+	$("#uploadFile2_div input[type='text']").remove();
 	resetDivPosition();
 }
 
 function deleteImage3Div(){
 	$("#image3_div").remove();
 	$("#uploadFile3_div input[type='file']").remove();
+	$("#uploadFile3_div input[type='text']").remove();
 	resetDivPosition();
 }
 
