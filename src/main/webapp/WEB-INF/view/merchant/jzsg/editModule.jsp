@@ -120,6 +120,10 @@ function closeImage2ModBgDiv(){
 }
 
 function uploadImage1(){
+	if($("#image1Mod_div table td[class='file_td']").length>=3){
+		alert("最多上传3张图片!");
+		return false;
+	}
 	var uuid=createUUID();
 	$("#uuid_hid1").val(uuid);
 	$("#uploadFile1_div").append("<input type=\"file\" id=\"uploadFile1_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic1(this)\"/>");
@@ -142,6 +146,17 @@ function deleteImage1(o){
 	td.remove();
 	$("#uploadFile1_div input[type='file'][name='file"+uuid+"']").remove();
 	$("#uploadFile1_div input[type='text'][name='image"+uuid+"']").remove();
+
+	var imageTab=$("#image1Mod_div table");
+	var tdArr1=imageTab.find("td");
+	imageTab.empty();
+	for(var i=0;i<tdArr1.length;i++){
+		var tdArr2=imageTab.find("td");
+		if(tdArr2.length==0||tdArr2.length%4==0)
+			imageTab.append("<tr></tr>");
+		imageTab.find("tr").eq(imageTab.find("tr").length-1).append(tdArr1[i]);
+	}
+	
 	resetDivPosition();
 }
 
@@ -152,6 +167,17 @@ function deleteImage2(o){
 	td.remove();
 	$("#uploadFile2_div input[type='file'][name='file"+uuid+"']").remove();
 	$("#uploadFile2_div input[type='text'][name='image"+uuid+"']").remove();
+
+	var imageTab=$("#image2Mod_div table");
+	var tdArr1=imageTab.find("td");
+	imageTab.empty();
+	for(var i=0;i<tdArr1.length;i++){
+		var tdArr2=imageTab.find("td");
+		if(tdArr2.length==0||tdArr2.length%4==0)
+			imageTab.append("<tr></tr>");
+		imageTab.find("tr").eq(imageTab.find("tr").length-1).append(tdArr1[i]);
+	}
+	
 	resetDivPosition();
 }
 
@@ -166,7 +192,7 @@ function showQrcodePic1(obj){
 	
 	var imageTab=$("#image1Mod_div table");
 	var length=imageTab.find("td[id^='file_td']").length;
-	imageTab.find("#upload_td").before("<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
+	imageTab.find("#upload_td").before("<td class=\"file_td\" id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
 			+"<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteImage1(this);\">"
 			+"<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\">"
 			+fileHtml

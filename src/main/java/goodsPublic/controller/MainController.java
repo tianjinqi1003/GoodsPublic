@@ -1870,8 +1870,8 @@ public class MainController {
 		unifiedOrderRequest.setOut_trade_no(orderId);//商户订单号
 		unifiedOrderRequest.setTotal_fee("50000");	//金额需要扩大100倍:1代表支付时是0.01
 		unifiedOrderRequest.setSpbill_create_ip("120.27.5.36");//终端IP
-		unifiedOrderRequest.setNotify_url("http://192.168.230.1:8088/GoodsPublic/merchant/main/kaiTong");//通知地址
-		//unifiedOrderRequest.setNotify_url("http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/kaiTong");//通知地址
+		//unifiedOrderRequest.setNotify_url("http://192.168.230.1:8088/GoodsPublic/merchant/main/kaiTong");//通知地址
+		unifiedOrderRequest.setNotify_url("http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/kaiTong");//通知地址
 		unifiedOrderRequest.setTrade_type("NATIVE");//JSAPI--公众号支付、NATIVE--原生扫码支付、APP--app支付
 		unifiedOrderRequest.setSign(unifiedOrderRequest.createSign(unifiedOrderRequest));//签名<span style="color:#ff0000;"><strong>说明5(见文末，签名方法一并给出)</strong></span>
 		//将订单对象转为xml格式

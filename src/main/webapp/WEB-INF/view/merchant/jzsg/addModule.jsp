@@ -74,6 +74,10 @@ function closeImage2ModBgDiv(){
 }
 
 function uploadImage1(){
+	if($("#image1Mod_div table td[class='file_td']").length>=3){
+		alert("最多上传3张图片!");
+		return false;
+	}
 	var uuid=createUUID();
 	$("#uuid_hid1").val(uuid);
 	$("#uploadFile1_div").append("<input type=\"file\" id=\"uploadFile1_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic1(this)\"/>");
@@ -81,6 +85,10 @@ function uploadImage1(){
 }
 
 function uploadImage2(){
+	if($("#image2Mod_div table td[class='file_td']").length>=5){
+		alert("最多上传5张图片!");
+		return false;
+	}
 	var uuid=createUUID();
 	$("#uuid_hid2").val(uuid);
 	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\"/>");
@@ -93,6 +101,17 @@ function deleteImage1(o){
 	$("#image1_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
 	$("#uploadFile1_div input[type='file'][name='file"+uuid+"']").remove();
+
+	var imageTab=$("#image1Mod_div table");
+	var tdArr1=imageTab.find("td");
+	imageTab.empty();
+	for(var i=0;i<tdArr1.length;i++){
+		var tdArr2=imageTab.find("td");
+		if(tdArr2.length==0||tdArr2.length%4==0)
+			imageTab.append("<tr></tr>");
+		imageTab.find("tr").eq(imageTab.find("tr").length-1).append(tdArr1[i]);
+	}
+	
 	resetDivPosition();
 }
 
@@ -102,6 +121,17 @@ function deleteImage2(o){
 	$("#image2_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
 	$("#uploadFile2_div input[type='file'][name='file"+uuid+"']").remove();
+
+	var imageTab=$("#image2Mod_div table");
+	var tdArr1=imageTab.find("td");
+	imageTab.empty();
+	for(var i=0;i<tdArr1.length;i++){
+		var tdArr2=imageTab.find("td");
+		if(tdArr2.length==0||tdArr2.length%4==0)
+			imageTab.append("<tr></tr>");
+		imageTab.find("tr").eq(imageTab.find("tr").length-1).append(tdArr1[i]);
+	}
+	
 	resetDivPosition();
 }
 
@@ -116,7 +146,7 @@ function showQrcodePic1(obj){
 	
 	var imageTab=$("#image1Mod_div table");
 	var length=imageTab.find("td[id^='file_td']").length;
-	imageTab.find("#upload_td").before("<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
+	imageTab.find("#upload_td").before("<td class=\"file_td\" id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
 			+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage1(this);\">"
 			+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
 			+fileHtml

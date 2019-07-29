@@ -119,6 +119,10 @@ function uploadEmbed1(){
 }
 
 function uploadImage1(){
+	if($("#image1Mod_div table td[class='file_td']").length>=5){
+		alert("最多上传5张图片!");
+		return false;
+	}
 	var uuid=createUUID();
 	$("#uuid_hid1").val(uuid);
 	$("#uploadFile1_div").append("<input type=\"file\" id=\"uploadFile1_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic1(this)\"/>");
@@ -131,6 +135,17 @@ function deleteImage(o){
 	$("#image1_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
 	$("#uploadFile1_div input[type='file'][name='file"+uuid+"']").remove();
+
+	var imageTab=$("#image1Mod_div table");
+	var tdArr1=imageTab.find("td");
+	imageTab.empty();
+	for(var i=0;i<tdArr1.length;i++){
+		var tdArr2=imageTab.find("td");
+		if(tdArr2.length==0||tdArr2.length%4==0)
+			imageTab.append("<tr></tr>");
+		imageTab.find("tr").eq(imageTab.find("tr").length-1).append(tdArr1[i]);
+	}
+	
 	resetDivPosition();
 }
 

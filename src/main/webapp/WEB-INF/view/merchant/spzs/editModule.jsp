@@ -214,6 +214,17 @@ function deleteImage1(o){
 	td.remove();
 	$("#uploadFile1_div input[type='file'][name='file"+uuid+"']").remove();
 	$("#uploadFile1_div input[type='text'][name='image"+uuid+"']").remove();
+
+	var imageTab=$("#image1Mod_div table");
+	var tdArr1=imageTab.find("td");
+	imageTab.empty();
+	for(var i=0;i<tdArr1.length;i++){
+		var tdArr2=imageTab.find("td");
+		if(tdArr2.length==0||tdArr2.length%4==0)
+			imageTab.append("<tr></tr>");
+		imageTab.find("tr").eq(imageTab.find("tr").length-1).append(tdArr1[i]);
+	}
+	
 	resetDivPosition();
 }
 
@@ -224,6 +235,17 @@ function deleteImage2(o){
 	td.remove();
 	$("#uploadFile2_div input[type='file'][name='file"+uuid+"']").remove();
 	$("#uploadFile2_div input[type='text'][name='image"+uuid+"']").remove();
+	
+	var imageTab=$("#image2Mod_div table");
+	var tdArr1=imageTab.find("td");
+	imageTab.empty();
+	for(var i=0;i<tdArr1.length;i++){
+		var tdArr2=imageTab.find("td");
+		if(tdArr2.length==0||tdArr2.length%4==0)
+			imageTab.append("<tr></tr>");
+		imageTab.find("tr").eq(imageTab.find("tr").length-1).append(tdArr1[i]);
+	}
+	
 	resetDivPosition();
 }
 
@@ -234,6 +256,17 @@ function deleteImage3(o){
 	td.remove();
 	$("#uploadFile3_div input[type='file'][name='file"+uuid+"']").remove();
 	$("#uploadFile3_div input[type='text'][name='image"+uuid+"']").remove();
+
+	var imageTab=$("#image3Mod_div table");
+	var tdArr1=imageTab.find("td");
+	imageTab.empty();
+	for(var i=0;i<tdArr1.length;i++){
+		var tdArr2=imageTab.find("td");
+		if(tdArr2.length==0||tdArr2.length%4==0)
+			imageTab.append("<tr></tr>");
+		imageTab.find("tr").eq(imageTab.find("tr").length-1).append(tdArr1[i]);
+	}
+	
 	resetDivPosition();
 }
 
@@ -660,7 +693,26 @@ function goBack(){
 				</c:if>
 			</table>
 			<div class="uploadFile3_div" id="uploadFile3_div">
+				<c:if test="${requestScope.htmlGoodsSPZS.image3_1 ne null }">
 				<input type="file" id="file3_1" name="file3_1" onchange="showQrcodePic3(this)" />
+				<input type="text" id="image3_1" name="image3_1" value="${requestScope.htmlGoodsSPZS.image3_1 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsSPZS.image3_2 ne null }">
+				<input type="file" id="file3_2" name="file3_2" onchange="showQrcodePic3(this)" />
+				<input type="text" id="image3_2" name="image3_2" value="${requestScope.htmlGoodsSPZS.image3_2 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsSPZS.image3_3 ne null }">
+				<input type="file" id="file3_3" name="file3_3" onchange="showQrcodePic3(this)" />
+				<input type="text" id="image3_3" name="image3_3" value="${requestScope.htmlGoodsSPZS.image3_3 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsSPZS.image3_4 ne null }">
+				<input type="file" id="file3_4" name="file3_4" onchange="showQrcodePic3(this)" />
+				<input type="text" id="image3_4" name="image3_4" value="${requestScope.htmlGoodsSPZS.image3_4 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsSPZS.image3_5 ne null }">
+				<input type="file" id="file3_5" name="file3_5" onchange="showQrcodePic3(this)" />
+				<input type="text" id="image3_5" name="image3_5" value="${requestScope.htmlGoodsSPZS.image3_5 }" />
+				</c:if>
 			</div>
 			<input type="hidden" id="uuid_hid3"/>
 		</div>

@@ -126,6 +126,10 @@ function closeImage3ModBgDiv(){
 }
 
 function uploadImage1(){
+	if($("#image1Mod_div table td[class='file_td']").length>=5){
+		alert("最多上传5张图片!");
+		return false;
+	}
 	var uuid=createUUID();
 	$("#uuid_hid1").val(uuid);
 	$("#uploadFile1_div").append("<input type=\"file\" id=\"uploadFile1_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic1(this)\"/>");
@@ -133,6 +137,10 @@ function uploadImage1(){
 }
 
 function uploadImage2(){
+	if($("#image2Mod_div table td[class='file_td']").length>=5){
+		alert("最多上传5张图片!");
+		return false;
+	}
 	var uuid=createUUID();
 	$("#uuid_hid2").val(uuid);
 	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\"/>");
@@ -140,6 +148,10 @@ function uploadImage2(){
 }
 
 function uploadImage3(){
+	if($("#image3Mod_div table td[class='file_td']").length>=5){
+		alert("最多上传5张图片!");
+		return false;
+	}
 	var uuid=createUUID();
 	$("#uuid_hid3").val(uuid);
 	$("#uploadFile3_div").append("<input type=\"file\" id=\"uploadFile3_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic3(this)\"/>");
@@ -152,6 +164,17 @@ function deleteImage1(o){
 	$("#image1_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
 	$("#uploadFile1_div input[type='file'][name='file"+uuid+"']").remove();
+	
+	var imageTab=$("#image1Mod_div table");
+	var tdArr1=imageTab.find("td");
+	imageTab.empty();
+	for(var i=0;i<tdArr1.length;i++){
+		var tdArr2=imageTab.find("td");
+		if(tdArr2.length==0||tdArr2.length%4==0)
+			imageTab.append("<tr></tr>");
+		imageTab.find("tr").eq(imageTab.find("tr").length-1).append(tdArr1[i]);
+	}
+	
 	resetDivPosition();
 }
 
@@ -161,6 +184,17 @@ function deleteImage2(o){
 	$("#image2_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
 	$("#uploadFile2_div input[type='file'][name='file"+uuid+"']").remove();
+	
+	var imageTab=$("#image2Mod_div table");
+	var tdArr1=imageTab.find("td");
+	imageTab.empty();
+	for(var i=0;i<tdArr1.length;i++){
+		var tdArr2=imageTab.find("td");
+		if(tdArr2.length==0||tdArr2.length%4==0)
+			imageTab.append("<tr></tr>");
+		imageTab.find("tr").eq(imageTab.find("tr").length-1).append(tdArr1[i]);
+	}
+	
 	resetDivPosition();
 }
 
@@ -170,6 +204,17 @@ function deleteImage3(o){
 	$("#image3_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
 	$("#uploadFile3_div input[type='file'][name='file"+uuid+"']").remove();
+	
+	var imageTab=$("#image3Mod_div table");
+	var tdArr1=imageTab.find("td");
+	imageTab.empty();
+	for(var i=0;i<tdArr1.length;i++){
+		var tdArr2=imageTab.find("td");
+		if(tdArr2.length==0||tdArr2.length%4==0)
+			imageTab.append("<tr></tr>");
+		imageTab.find("tr").eq(imageTab.find("tr").length-1).append(tdArr1[i]);
+	}
+	
 	resetDivPosition();
 }
 
