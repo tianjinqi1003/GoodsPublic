@@ -58,6 +58,7 @@ function hideOptionDiv(o){
 
 function saveEdithtmlGoodsDMTZL(){
 	renameFile();
+	renameImage();
 	
 	var formData = new FormData($("#form1")[0]);
 	 
@@ -89,6 +90,7 @@ function hideSaveStatusDiv(){
 
 function finishEdithtmlGoodsDMTZL(){
 	renameFile();
+	renameImage();
 	document.getElementById("sub_but").click();
 }
 
@@ -123,6 +125,13 @@ function renameFile(){
 	});
 }
 
+function renameImage(){
+	$("#uploadFile1_div input[type='text']").each(function(i){
+		$(this).attr("name","image1_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
+}
+
 function closeEmbed1ModBgDiv(){
 	$("#embed1ModBg_div").css("display","none");
 }
@@ -142,6 +151,7 @@ function uploadImage1(){
 	var uuid=createUUID();
 	$("#uuid_hid1").val(uuid);
 	$("#uploadFile1_div").append("<input type=\"file\" id=\"uploadFile1_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic1(this)\"/>");
+	$("#uploadFile1_div").append("<input type=\"text\" id=\"image"+uuid+"\" name=\"image"+uuid+"\" />");
 	document.getElementById("uploadFile1_inp").click();
 }
 
@@ -151,6 +161,7 @@ function deleteImage(o){
 	$("#image1_div #list_div img[id='img"+uuid+"']").remove();
 	td.remove();
 	$("#uploadFile1_div input[type='file'][name='file"+uuid+"']").remove();
+	$("#uploadFile1_div input[type='text'][name='image"+uuid+"']").remove();
 	resetDivPosition();
 }
 
@@ -283,7 +294,10 @@ function goBack(){
 			</div>
 			<div class="reupload_div" onclick="uploadEmbed1();">重新上传</div>
 			<div class="uploadFile2_div" id="uploadFile2_div">
+				<c:if test="${requestScope.htmlGoodsDMTZL.embed1_1 ne null }">
 				<input type="file" id="file2_1" name="file2_1" onchange="showQrcodeEmbed1(this)" />
+				<input type="text" id="embed1_1" name="embed1_1" value="${requestScope.htmlGoodsDMTZL.embed1_1 }" />
+				</c:if>
 			</div>
 			<input type="hidden" id="uuid_hid1"/>
 		</div>
@@ -350,7 +364,26 @@ function goBack(){
 				</c:if>
 			</table>
 			<div class="uploadFile1_div" id="uploadFile1_div">
+				<c:if test="${requestScope.htmlGoodsDMTZL.image1_1 ne null }">
 				<input type="file" id="file1_1" name="file1_1" onchange="showQrcodePic1(this)" />
+				<input type="text" id="image1_1" name="image1_1" value="${requestScope.htmlGoodsDMTZL.image1_1 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsDMTZL.image1_2 ne null }">
+				<input type="file" id="file1_2" name="file1_2" onchange="showQrcodePic1(this)" />
+				<input type="text" id="image1_2" name="image1_2" value="${requestScope.htmlGoodsDMTZL.image1_2 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsDMTZL.image1_3 ne null }">
+				<input type="file" id="file1_3" name="file1_3" onchange="showQrcodePic1(this)" />
+				<input type="text" id="image1_3" name="image1_3" value="${requestScope.htmlGoodsDMTZL.image1_3 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsDMTZL.image1_4 ne null }">
+				<input type="file" id="file1_4" name="file1_4" onchange="showQrcodePic1(this)" />
+				<input type="text" id="image1_4" name="image1_4" value="${requestScope.htmlGoodsDMTZL.image1_4 }" />
+				</c:if>
+				<c:if test="${requestScope.htmlGoodsDMTZL.image1_5 ne null }">
+				<input type="file" id="file1_5" name="file1_5" onchange="showQrcodePic1(this)" />
+				<input type="text" id="image1_5" name="image1_5" value="${requestScope.htmlGoodsDMTZL.image1_5 }" />
+				</c:if>
 			</div>
 			<input type="hidden" id="uuid_hid1"/>
 		</div>
