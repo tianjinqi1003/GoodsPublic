@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import goodsPublic.entity.AccountMsg;
+import goodsPublic.entity.AccountPayRecord;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlGoodsDMTZL;
@@ -300,4 +301,11 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public int deleteHtmlGoodsJZSGByIds(List<String> idList);
+
+	/**
+	 * 添加商户付费记录
+	 * @param accountPayRecord
+	 * @return
+	 */
+	public int addAccountPayRecord(AccountPayRecord accountPayRecord);
 }

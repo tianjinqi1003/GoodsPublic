@@ -17,6 +17,7 @@ import com.goodsPublic.util.qrcode.Qrcode;
 
 import goodsPublic.dao.PublicMapper;
 import goodsPublic.entity.AccountMsg;
+import goodsPublic.entity.AccountPayRecord;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlGoodsDMTZL;
@@ -505,6 +506,12 @@ public class PublicServiceImpl implements PublicService {
 		List<String> idList = Arrays.asList(ids.split(","));
 		count=publicDao.deleteHtmlGoodsJZSGByIds(idList);
 		return count;
+	}
+
+	@Override
+	public int addAccountPayRecord(AccountPayRecord accountPayRecord) {
+		// TODO Auto-generated method stub
+		return publicDao.addAccountPayRecord(accountPayRecord);
 	}
 
 }

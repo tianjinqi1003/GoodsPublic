@@ -907,6 +907,56 @@
 			</if>
 		</trim>
 	</insert>
+	<insert id="addAccountPayRecord" parameterType="goodsPublic.entity.AccountPayRecord">
+		insert into account_pay_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="accountNumber!=null">
+				accountNumber,
+			</if>
+			<if test="payTime!=null">
+				payTime,
+			</if>
+			<if test="endTime!=null">
+				endTime,
+			</if>
+			<if test="vipType!=null">
+				vipType,
+			</if>
+			<if test="payType!=null">
+				payType,
+			</if>
+			<if test="money!=null">
+				money,
+			</if>
+			<if test="phone!=null">
+				phone,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="accountNumber!=null">
+				#{accountNumber},
+			</if>
+			<if test="payTime!=null">
+				#{payTime},
+			</if>
+			<if test="endTime!=null">
+				#{endTime},
+			</if>
+			<if test="vipType!=null">
+				#{vipType},
+			</if>
+			<if test="payType!=null">
+				#{payType},
+			</if>
+			<if test="money!=null">
+				#{money},
+			</if>
+			<if test="phone!=null">
+				#{phone}
+			</if>
+		</trim>
+	</insert>
 	<update id="editHtmlGoodsSPZS" parameterType="goodsPublic.entity.HtmlGoodsSPZS">
 		update html_goods_spzs set
 		<if test="productName!=null">

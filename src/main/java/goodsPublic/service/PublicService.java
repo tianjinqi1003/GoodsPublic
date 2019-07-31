@@ -5,6 +5,7 @@ import java.util.List;
 import com.goodsPublic.util.PlanResult;
 
 import goodsPublic.entity.AccountMsg;
+import goodsPublic.entity.AccountPayRecord;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlGoodsDMTZL;
@@ -309,6 +310,13 @@ public interface PublicService {
 	 * @return
 	 */
 	public int deleteHtmlGoodsJZSGByIds(String ids);
+
+	/**
+	 * 添加商户付费记录
+	 * @param accountPayRecord
+	 * @return
+	 */
+	public int addAccountPayRecord(AccountPayRecord accountPayRecord);
 
 
 }
