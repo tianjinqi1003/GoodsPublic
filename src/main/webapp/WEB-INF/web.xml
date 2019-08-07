@@ -40,4 +40,24 @@
 		<servlet-name>GoodsPublic</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>WxPayServlet</display-name>
+    <servlet-name>WxPayServlet</servlet-name>
+    <servlet-class>com.goodsPublic.util.wxpay.WxPayServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WxPayServlet</servlet-name>
+    <url-pattern>/wxPayServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>WxPayNotifySevlet</display-name>
+    <servlet-name>WxPayNotifySevlet</servlet-name>
+    <servlet-class>com.goodsPublic.util.wxpay.WxPayNotifySevlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WxPayNotifySevlet</servlet-name>
+    <url-pattern>/wxPayNotifySevlet</url-pattern>
+  </servlet-mapping>
 </web-app>
