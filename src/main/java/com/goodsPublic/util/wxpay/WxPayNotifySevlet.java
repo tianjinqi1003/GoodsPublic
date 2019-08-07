@@ -61,7 +61,7 @@ public class WxPayNotifySevlet extends HttpServlet {
 			if (("SUCCESS").equals(result_code)) {
 				//自行实现
 				System.out.println("SUCCESS...自行实现......");
-				
+				response.getWriter().write("<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>");
 			}
 		}
 

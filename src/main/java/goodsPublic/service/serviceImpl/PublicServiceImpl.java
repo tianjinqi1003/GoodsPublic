@@ -1,5 +1,7 @@
 package goodsPublic.service.serviceImpl;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -8,6 +10,9 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +23,7 @@ import com.goodsPublic.util.qrcode.Qrcode;
 import goodsPublic.dao.PublicMapper;
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.AccountPayRecord;
+import goodsPublic.entity.CreatePayCodeRecord;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlGoodsDMTZL;
@@ -512,6 +518,11 @@ public class PublicServiceImpl implements PublicService {
 	public int addAccountPayRecord(AccountPayRecord accountPayRecord) {
 		// TODO Auto-generated method stub
 		return publicDao.addAccountPayRecord(accountPayRecord);
+	}
+
+	@Override
+	public int addCreatePayCodeRecord(CreatePayCodeRecord cpcr) {
+		return publicDao.addCreatePayCodeRecord(cpcr);
 	}
 
 }

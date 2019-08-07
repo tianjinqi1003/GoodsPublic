@@ -6,6 +6,7 @@ import com.goodsPublic.util.PlanResult;
 
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.AccountPayRecord;
+import goodsPublic.entity.CreatePayCodeRecord;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlGoodsDMTZL;
@@ -317,6 +318,8 @@ public interface PublicService {
 	 * @return
 	 */
 	public int addAccountPayRecord(AccountPayRecord accountPayRecord);
+
+	public int addCreatePayCodeRecord(CreatePayCodeRecord cpcr);
 
 
 }

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.AccountPayRecord;
+import goodsPublic.entity.CreatePayCodeRecord;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlGoodsDMTZL;
@@ -308,4 +309,6 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public int addAccountPayRecord(AccountPayRecord accountPayRecord);
+
+	public int addCreatePayCodeRecord(CreatePayCodeRecord cpcr);
 }

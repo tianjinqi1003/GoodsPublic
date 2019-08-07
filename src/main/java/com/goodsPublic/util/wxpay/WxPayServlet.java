@@ -14,6 +14,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.goodsPublic.util.MoneyUtil;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import com.jpay.ext.kit.IpKit;
 import com.jpay.ext.kit.PaymentKit;
 import com.jpay.ext.kit.StrKit;
@@ -22,16 +28,11 @@ import com.jpay.weixin.api.WxPayApi.TradeType;
 import com.jpay.weixin.api.WxPayApiConfig;
 import com.jpay.weixin.api.WxPayApiConfig.PayModel;
 import com.jpay.weixin.api.WxPayApiConfigKit;
-import com.goodsPublic.util.wxpay.WxPayConfig;
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.EncodeHintType;
-import com.google.zxing.MultiFormatWriter;
-import com.google.zxing.client.j2se.MatrixToImageWriter;
-import com.google.zxing.common.BitMatrix;
-import com.goodsPublic.util.MoneyUtil;
 
-import cn.hutool.core.io.FileUtil;
-import cn.hutool.extra.qrcode.QrCodeUtil;
+import goodsPublic.entity.AccountMsg;
+import goodsPublic.entity.CreatePayCodeRecord;
+import goodsPublic.service.PublicService;
+import goodsPublic.service.serviceImpl.PublicServiceImpl;
 
 /**
  * 微信扫码支付
@@ -41,6 +42,7 @@ public class WxPayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private SimpleDateFormat orderIdSDF=new SimpleDateFormat("yyyyMMddHHmmss");
+	private PublicService publicService;
 	private ServletConfig config;
 
 	public void init(ServletConfig config) throws ServletException {
@@ -125,22 +127,34 @@ public class WxPayServlet extends HttpServlet {
 		}
 		
 		// 微信预支付订单生产成功 获取二维码url
-		String qrCodeUrl = result.get("code_url");
+		String codeUrl = result.get("code_url");
 		
 		try {
+			publicService=new PublicServiceImpl();
+			CreatePayCodeRecord cpcr=new CreatePayCodeRecord();
+			cpcr.setOutTradeNo(outTradeNo);
+			AccountMsg user = (AccountMsg)request.getSession().getAttribute("user");
+			cpcr.setAccountNumber(user.getUserName());
+			cpcr.setPhone(user.getPhone());
+			//cpcr.setVipType(Integer.valueOf(request.getParameter("vipType")));
+			cpcr.setPayType(2);
+			cpcr.setMoney(Float.valueOf(total_fee));
+			cpcr.setCodeUrl(codeUrl);
+			int c=publicService.addCreatePayCodeRecord(cpcr);
+			
 			int width = 200;
 			int height = 200;
 			String format = "png";
 			Hashtable hints = new Hashtable();
 			hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
-			BitMatrix bitMatrix = new MultiFormatWriter().encode(qrCodeUrl, BarcodeFormat.QR_CODE, width, height, hints);
+			BitMatrix bitMatrix = new MultiFormatWriter().encode(codeUrl, BarcodeFormat.QR_CODE, width, height, hints);
 			OutputStream out = null;
 			out = response.getOutputStream();
 			MatrixToImageWriter.writeToStream(bitMatrix, format, out);
 			out.flush();
 			out.close();
 		} catch (Exception e) {
-			
+			e.printStackTrace();
 		}
 
 		//QrCodeUtil.generate(qrCodeUrl, 300, 300, FileUtil.file(rootPath + "/wxPayCode/" + outTradeNo + ".png"));

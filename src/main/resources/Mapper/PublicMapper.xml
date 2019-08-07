@@ -957,6 +957,20 @@
 			</if>
 		</trim>
 	</insert>
+	<insert id="addCreatePayCodeRecord" parameterType="goodsPublic.entity.CreatePayCodeRecord">
+		insert into create_pay_code_record
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="outTradeNo!=null">
+				outTradeNo
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="outTradeNo!=null">
+				#{outTradeNo}
+			</if>
+		</trim>
+	</insert>
 	<update id="editHtmlGoodsSPZS" parameterType="goodsPublic.entity.HtmlGoodsSPZS">
 		update html_goods_spzs set
 		<if test="productName!=null">
