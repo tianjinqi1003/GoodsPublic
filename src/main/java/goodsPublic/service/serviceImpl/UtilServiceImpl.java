@@ -34,6 +34,7 @@ public class UtilServiceImpl implements UtilService {
 	        response.setContentType("image/jpeg");
 	        String capText = captchaProducer.createText();  //创建图片中显示的随机文字
 	            try {
+	            	System.out.println("capText==="+capText);
 	            	session.setAttribute("验证码", capText);
 	                BufferedImage bi = captchaProducer.createImage(capText);
 	                ServletOutputStream out = response.getOutputStream();
