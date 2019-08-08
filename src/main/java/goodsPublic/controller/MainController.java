@@ -1,6 +1,7 @@
 package goodsPublic.controller;
 
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -36,6 +37,8 @@ import com.goodsPublic.util.JsonUtil;
 import com.goodsPublic.util.PlanResult;
 import com.goodsPublic.util.qrcode.Qrcode;
 import com.jpay.ext.kit.HttpKit;
+import com.jpay.ext.kit.PaymentKit;
+import com.jpay.weixin.api.WxPayApiConfigKit;
 
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.AccountPayRecord;
@@ -61,7 +64,7 @@ public class MainController {
 	private PublicService publicService;
 	@Autowired
 	private CategoryService categoryService;
-	private SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
+	private SimpleDateFormat timeSDF=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	/**
 	 * 跳转至商品发布页面
@@ -1359,12 +1362,6 @@ public class MainController {
 		return url;
 	}
 
-	@RequestMapping(value="/goFeeWxPayNotifyUrl",method=RequestMethod.GET)
-	public String wxPayNotifyUrl() {
-		
-		return "/merchant/fee/wxPayNotifyUrl";
-	}
-
 	@RequestMapping(value="/addCreatePayCodeRecord")
 	@ResponseBody
 	public String addCreatePayCodeRecord(CreatePayCodeRecord cpcr) {
@@ -1396,54 +1393,82 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/kaiTong")
-	@ResponseBody
-	public String kaiTong(HttpServletRequest request, HttpServletResponse response) {
+	public void kaiTong(HttpServletRequest request, HttpServletResponse response) {
 		
-		System.out.println("开通商户......");
-		String xmlMsg = HttpKit.readData(request);
-		System.out.println("收到微信支付回调通知===" + xmlMsg);
-		String outTradeNo="20190808154205";
-		CreatePayCodeRecord cpcr=publicService.getCreatePayCodeRecordByOutTradeNo(outTradeNo);
-		AccountPayRecord apr = new AccountPayRecord();
-		apr.setOutTradeNo(outTradeNo);
-		apr.setAccountNumber(cpcr.getAccountNumber());
-		Date date = new Date();
-		apr.setPayTime(sdf.format(date));
-		Calendar calendar=Calendar.getInstance();
-		calendar.setTime(date);
-		int vipType = cpcr.getVipType();
-		switch (vipType) {
-			case CreatePayCodeRecord.ONE_MONTH:
-			case CreatePayCodeRecord.CONTINUE_MONTH:
-				calendar.add(Calendar.MONTH, 1);
-				break;
-			case CreatePayCodeRecord.THREE_MONTHS:
-				calendar.add(Calendar.MONTH, 3);
-				break;
-			case CreatePayCodeRecord.ONE_YEAR:
-				calendar.add(Calendar.YEAR, 1);
-				break;
+		try {
+			// 支付结果通用通知文档:https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_7&index=8
+			String xmlMsg = HttpKit.readData(request);
+			System.out.println("收到微信支付回调通知===" + xmlMsg);
+			Map<String, String> params = PaymentKit.xmlToMap(xmlMsg);
+			 String appid = params.get("appid");
+			 //商户号
+			 String mch_id = params.get("mch_id");
+			String result_code = params.get("result_code");
+			 String openId = params.get("openid");
+			 //交易类型
+			 String trade_type = params.get("trade_type");
+			 //付款银行
+			 String bank_type = params.get("bank_type");
+			 // 总金额
+			String money = params.get("total_fee");
+			 //现金支付金额
+			 String cash_fee = params.get("cash_fee");
+			 // 微信支付订单号
+			String transactionId = params.get("transaction_id");
+			// // 商户订单号
+			String outTradeNo = params.get("out_trade_no");
+			// // 支付完成时间，格式为yyyyMMddHHmmss
+			// String time_end = params.get("time_end");
+			///////////////////////////// 以下是附加参数///////////////////////////////////
+			String type = params.get("attach");
+			 String fee_type = params.get("fee_type");
+			 String is_subscribe = params.get("is_subscribe");
+			 String err_code = params.get("err_code");
+			 String err_code_des = params.get("err_code_des");
+			if (PaymentKit.verifyNotify(params, WxPayApiConfigKit.getWxPayApiConfig().getPaternerKey())) {
+				System.out.println("result_code==="+result_code);
+				if (("SUCCESS").equals(result_code)) {
+					//自行实现
+					System.out.println("SUCCESS...自行实现......");
+					
+					CreatePayCodeRecord cpcr=publicService.getCreatePayCodeRecordByOutTradeNo(outTradeNo);
+					AccountPayRecord apr = new AccountPayRecord();
+					apr.setOutTradeNo(outTradeNo);
+					apr.setAccountNumber(cpcr.getAccountNumber());
+					Date date = new Date();
+					apr.setPayTime(timeSDF.format(date));
+					Calendar calendar=Calendar.getInstance();
+					calendar.setTime(date);
+					int vipType = cpcr.getVipType();
+					switch (vipType) {
+						case CreatePayCodeRecord.ONE_MONTH:
+						case CreatePayCodeRecord.CONTINUE_MONTH:
+							calendar.add(Calendar.MONTH, 1);
+							break;
+						case CreatePayCodeRecord.THREE_MONTHS:
+							calendar.add(Calendar.MONTH, 3);
+							break;
+						case CreatePayCodeRecord.ONE_YEAR:
+							calendar.add(Calendar.YEAR, 1);
+							break;
+					}
+					apr.setEndTime(timeSDF.format(calendar.getTime()));
+					apr.setVipType(vipType);
+					apr.setPayType(cpcr.getPayType());
+					apr.setMoney(cpcr.getMoney());
+					apr.setPhone(cpcr.getPhone());
+					
+					int count=publicService.addAccountPayRecord(apr);
+					System.out.println("改变的条数==="+count);
+					if(count>0) {
+						response.getWriter().write("<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>");
+					}
+				}
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		apr.setEndTime(sdf.format(calendar.getTime()));
-		apr.setVipType(vipType);
-		apr.setPayType(cpcr.getPayType());
-		apr.setMoney(cpcr.getMoney());
-		apr.setPhone(cpcr.getPhone());
-		
-		int count=publicService.addAccountPayRecord(apr);
-		PlanResult plan=new PlanResult();
-		String json;
-		if(count==0) {
-			plan.setStatus(1);
-			plan.setMsg("更新状态失败");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		else {
-			plan.setStatus(0);
-			plan.setMsg("更新状态成功");
-			json=JsonUtil.getJsonFromObject(plan);
-		}
-		return json;
 	}
 	
 	/**
