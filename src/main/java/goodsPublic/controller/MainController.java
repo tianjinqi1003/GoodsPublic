@@ -1,22 +1,14 @@
 package goodsPublic.controller;
 
 
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
@@ -45,6 +37,7 @@ import com.goodsPublic.util.qrcode.Qrcode;
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.AccountPayRecord;
 import goodsPublic.entity.CategoryInfo;
+import goodsPublic.entity.CreatePayCodeRecord;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlGoodsDMTZL;
@@ -1367,6 +1360,36 @@ public class MainController {
 	public String wxPayNotifyUrl() {
 		
 		return "/merchant/fee/wxPayNotifyUrl";
+	}
+
+	@RequestMapping(value="/addCreatePayCodeRecord")
+	@ResponseBody
+	public String addCreatePayCodeRecord(CreatePayCodeRecord cpcr) {
+		
+		/*
+		cpcr.setOutTradeNo(outTradeNo);
+		AccountMsg user = (AccountMsg)request.getSession().getAttribute("user");
+		cpcr.setAccountNumber(user.getUserName());
+		cpcr.setPhone(user.getPhone());
+		//cpcr.setVipType(Integer.valueOf(request.getParameter("vipType")));
+		cpcr.setPayType(2);
+		cpcr.setMoney(Float.valueOf(total_fee));
+		cpcr.setCodeUrl(codeUrl);
+		*/
+		int count=publicService.addCreatePayCodeRecord(cpcr);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(1);
+			plan.setMsg("添加失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(0);
+			plan.setMsg("添加成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 	
 	@RequestMapping(value="/kaiTong")

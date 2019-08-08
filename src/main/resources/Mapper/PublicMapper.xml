@@ -961,13 +961,49 @@
 		insert into create_pay_code_record
 		<trim prefix="(" suffix=")" suffixOverrides="," >
 			<if test="outTradeNo!=null">
-				outTradeNo
+				outTradeNo,
+			</if>
+			<if test="accountNumber!=null">
+				accountNumber,
+			</if>
+			<if test="phone!=null">
+				phone,
+			</if>
+			<if test="vipType!=null">
+				vipType,
+			</if>
+			<if test="payType!=null">
+				payType,
+			</if>
+			<if test="money!=null">
+				money,
+			</if>
+			<if test="codeUrl!=null">
+				codeUrl
 			</if>
 		</trim>
 		values
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="outTradeNo!=null">
-				#{outTradeNo}
+				#{outTradeNo},
+			</if>
+			<if test="accountNumber!=null">
+				#{accountNumber},
+			</if>
+			<if test="phone!=null">
+				#{phone},
+			</if>
+			<if test="vipType!=null">
+				#{vipType},
+			</if>
+			<if test="payType!=null">
+				#{payType},
+			</if>
+			<if test="money!=null">
+				#{money},
+			</if>
+			<if test="codeUrl!=null">
+				#{codeUrl}
 			</if>
 		</trim>
 	</insert>

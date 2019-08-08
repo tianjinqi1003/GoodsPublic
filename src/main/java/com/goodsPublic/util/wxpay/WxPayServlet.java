@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.goodsPublic.util.MoneyUtil;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
@@ -29,10 +31,11 @@ import com.jpay.weixin.api.WxPayApiConfig;
 import com.jpay.weixin.api.WxPayApiConfig.PayModel;
 import com.jpay.weixin.api.WxPayApiConfigKit;
 
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.extra.qrcode.QrCodeUtil;
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.CreatePayCodeRecord;
 import goodsPublic.service.PublicService;
-import goodsPublic.service.serviceImpl.PublicServiceImpl;
 
 /**
  * 微信扫码支付
@@ -42,7 +45,6 @@ public class WxPayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	private SimpleDateFormat orderIdSDF=new SimpleDateFormat("yyyyMMddHHmmss");
-	private PublicService publicService;
 	private ServletConfig config;
 
 	public void init(ServletConfig config) throws ServletException {
@@ -64,7 +66,7 @@ public class WxPayServlet extends HttpServlet {
 		}
 	}
 	
-	private void unifiedorder(HttpServletRequest request, HttpServletResponse response) {
+	private void unifiedorder(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// 网站根目录
 		String rootPath = config.getServletContext().getRealPath("/");
 
@@ -129,19 +131,8 @@ public class WxPayServlet extends HttpServlet {
 		// 微信预支付订单生产成功 获取二维码url
 		String codeUrl = result.get("code_url");
 		
+		/*
 		try {
-			publicService=new PublicServiceImpl();
-			CreatePayCodeRecord cpcr=new CreatePayCodeRecord();
-			cpcr.setOutTradeNo(outTradeNo);
-			AccountMsg user = (AccountMsg)request.getSession().getAttribute("user");
-			cpcr.setAccountNumber(user.getUserName());
-			cpcr.setPhone(user.getPhone());
-			//cpcr.setVipType(Integer.valueOf(request.getParameter("vipType")));
-			cpcr.setPayType(2);
-			cpcr.setMoney(Float.valueOf(total_fee));
-			cpcr.setCodeUrl(codeUrl);
-			int c=publicService.addCreatePayCodeRecord(cpcr);
-			
 			int width = 200;
 			int height = 200;
 			String format = "png";
@@ -156,12 +147,15 @@ public class WxPayServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		*/
 
-		//QrCodeUtil.generate(qrCodeUrl, 300, 300, FileUtil.file(rootPath + "/wxPayCode/" + outTradeNo + ".png"));
+		QrCodeUtil.generate(codeUrl, 300, 300, FileUtil.file(rootPath + "/wxPayCode/" + outTradeNo + ".png"));
 		
-		//request.setAttribute("codeUrl", outTradeNo);
+		request.setAttribute("codeUrl", outTradeNo);
+		request.setAttribute("vipType", request.getParameter("vipType"));
+		request.setAttribute("totalFee", total_fee);
 
-		//request.getRequestDispatcher("/pay/wxpay.jsp").forward(request, response);
+		request.getRequestDispatcher("\\main\\goFeeTenpay").forward(request, response);
 	}
 
 }

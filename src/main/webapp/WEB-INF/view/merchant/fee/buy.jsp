@@ -33,7 +33,7 @@ function goPay(){
 	if($("#alipay_div").attr("class").indexOf("chosen")!=-1)
 		alert("支付宝支付");
 	else if($("#wechatpay_div").attr("class").indexOf("chosen")!=-1)
-		location.href="${pageContext.request.contextPath}/merchant/main/goFeeTenpay";
+		location.href="${pageContext.request.contextPath}/merchant/wxPayServlet?action=unifiedorder";
 	else{
 		alert("请选择支付方式!");
 		return false;
