@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
@@ -34,6 +35,7 @@ import com.goodsPublic.util.FinalState;
 import com.goodsPublic.util.JsonUtil;
 import com.goodsPublic.util.PlanResult;
 import com.goodsPublic.util.qrcode.Qrcode;
+import com.jpay.ext.kit.HttpKit;
 
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.AccountPayRecord;
@@ -1395,9 +1397,12 @@ public class MainController {
 	
 	@RequestMapping(value="/kaiTong")
 	@ResponseBody
-	public String kaiTong(String outTradeNo) {
+	public String kaiTong(HttpServletRequest request, HttpServletResponse response) {
 		
 		System.out.println("开通商户......");
+		String xmlMsg = HttpKit.readData(request);
+		System.out.println("收到微信支付回调通知===" + xmlMsg);
+		String outTradeNo="20190808154205";
 		CreatePayCodeRecord cpcr=publicService.getCreatePayCodeRecordByOutTradeNo(outTradeNo);
 		AccountPayRecord apr = new AccountPayRecord();
 		apr.setOutTradeNo(outTradeNo);
