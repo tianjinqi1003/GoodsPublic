@@ -3,6 +3,7 @@ package goodsPublic.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -56,9 +57,9 @@ public class MainController {
 
 	@Autowired
 	private PublicService publicService;
-	
 	@Autowired
 	private CategoryService categoryService;
+	private SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmmss");
 	
 	/**
 	 * 跳转至商品发布页面
@@ -1356,7 +1357,7 @@ public class MainController {
 		return url;
 	}
 
-	@RequestMapping(value="/wxPayNotifyUrl",method=RequestMethod.GET)
+	@RequestMapping(value="/goFeeWxPayNotifyUrl",method=RequestMethod.GET)
 	public String wxPayNotifyUrl() {
 		
 		return "/merchant/fee/wxPayNotifyUrl";
@@ -1394,10 +1395,37 @@ public class MainController {
 	
 	@RequestMapping(value="/kaiTong")
 	@ResponseBody
-	public String kaiTong(AccountPayRecord accountPayRecord) {
+	public String kaiTong(String outTradeNo) {
 		
 		System.out.println("开通商户......");
-		int count=publicService.addAccountPayRecord(accountPayRecord);
+		CreatePayCodeRecord cpcr=publicService.getCreatePayCodeRecordByOutTradeNo(outTradeNo);
+		AccountPayRecord apr = new AccountPayRecord();
+		apr.setOutTradeNo(outTradeNo);
+		apr.setAccountNumber(cpcr.getAccountNumber());
+		Date date = new Date();
+		apr.setPayTime(sdf.format(date));
+		Calendar calendar=Calendar.getInstance();
+		calendar.setTime(date);
+		int vipType = cpcr.getVipType();
+		switch (vipType) {
+			case CreatePayCodeRecord.ONE_MONTH:
+			case CreatePayCodeRecord.CONTINUE_MONTH:
+				calendar.add(Calendar.MONTH, 1);
+				break;
+			case CreatePayCodeRecord.THREE_MONTHS:
+				calendar.add(Calendar.MONTH, 3);
+				break;
+			case CreatePayCodeRecord.ONE_YEAR:
+				calendar.add(Calendar.YEAR, 1);
+				break;
+		}
+		apr.setEndTime(sdf.format(calendar.getTime()));
+		apr.setVipType(vipType);
+		apr.setPayType(cpcr.getPayType());
+		apr.setMoney(cpcr.getMoney());
+		apr.setPhone(cpcr.getPhone());
+		
+		int count=publicService.addAccountPayRecord(apr);
 		PlanResult plan=new PlanResult();
 		String json;
 		if(count==0) {

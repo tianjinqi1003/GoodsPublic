@@ -9,6 +9,7 @@ public class AccountPayRecord implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
+	private String outTradeNo;
 	private String accountNumber;
 	private String payTime;
 	private String endTime;
@@ -21,6 +22,12 @@ public class AccountPayRecord implements Serializable {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public String getOutTradeNo() {
+		return outTradeNo;
+	}
+	public void setOutTradeNo(String outTradeNo) {
+		this.outTradeNo = outTradeNo;
 	}
 	public String getAccountNumber() {
 		return accountNumber;

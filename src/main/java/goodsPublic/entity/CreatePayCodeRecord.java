@@ -8,11 +8,16 @@ public class CreatePayCodeRecord implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public static final int ONE_MONTH=1;
+	public static final int THREE_MONTHS=2;
+	public static final int ONE_YEAR=3;
+	public static final int FOREVER=4;
+	public static final int CONTINUE_MONTH=5;
 	private Integer id;
 	private String outTradeNo;
 	private String accountNumber;
 	private String phone;
-	private Integer vipType;
+	private Integer vipType;//会员类型 1.一个月 2.三个月 3.一年 4.永久 5.连续包月
 	private Integer payType;
 	private Float money;
 	private String codeUrl;

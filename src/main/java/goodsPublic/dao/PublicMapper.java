@@ -311,4 +311,6 @@ public interface PublicMapper {
 	public int addAccountPayRecord(AccountPayRecord accountPayRecord);
 
 	public int addCreatePayCodeRecord(CreatePayCodeRecord cpcr);
+
+	public CreatePayCodeRecord getCreatePayCodeRecordByOutTradeNo(@Param("outTradeNo") String outTradeNo);
 }

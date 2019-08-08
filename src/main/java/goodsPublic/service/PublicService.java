@@ -321,5 +321,7 @@ public interface PublicService {
 
 	public int addCreatePayCodeRecord(CreatePayCodeRecord cpcr);
 
+	public CreatePayCodeRecord getCreatePayCodeRecordByOutTradeNo(String outTradeNo);
+
 
 }

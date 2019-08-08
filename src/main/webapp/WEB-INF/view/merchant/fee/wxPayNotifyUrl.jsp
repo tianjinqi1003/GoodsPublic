@@ -2,6 +2,7 @@
     pageEncoding="utf-8"%>
     <%
     System.out.println("1111111111111111");
+    response.getWriter().write("<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>");
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,18 +12,17 @@
 <%@include file="../js.jsp"%>
 <script type="text/javascript">
 var baseUrl="${pageContext.request.contextPath}";
+/*
 $(function(){
-	var date=new Date();
-	var payTime=date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
-	date.setMonth(date.getMonth()+7);
-	var endTime=date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate()+" "+date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
 	$.post(baseUrl+"/merchant/main/kaiTong",
-		{accountNumber:"32",payTime:payTime,endTime:endTime,vipType:1,payType:2,money:"0.01",phone:"13608977126"},
+		//{accountNumber:"32",payTime:payTime,endTime:endTime,vipType:1,payType:2,money:"0.01",phone:"13608977126"},
+		{outTradeNo:'${requestScope.outTradeNo}'},
 		function(data){
 			
 		}
 	,"json");
 });
+*/
 </script>
 </head>
 <body>

@@ -30,10 +30,30 @@ function changeWechatpayChosen(){
 }
 
 function goPay(){
+	var vipType;
+	var price='${param.price}';
+	switch (price) {
+		case "60":
+			vipType=1;
+			break;
+		case "150":
+			vipType=2;
+			break;
+		case "600":
+			vipType=3;
+			break;
+		case "7000":
+			vipType=4;
+			break;
+		case "50":
+			vipType=5;
+			break;
+	}
+	
 	if($("#alipay_div").attr("class").indexOf("chosen")!=-1)
 		alert("支付宝支付");
 	else if($("#wechatpay_div").attr("class").indexOf("chosen")!=-1)
-		location.href="${pageContext.request.contextPath}/merchant/wxPayServlet?action=unifiedorder";
+		location.href="${pageContext.request.contextPath}/merchant/wxPayServlet?action=unifiedorder&vipType="+vipType;
 	else{
 		alert("请选择支付方式!");
 		return false;

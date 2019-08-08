@@ -910,6 +910,9 @@
 	<insert id="addAccountPayRecord" parameterType="goodsPublic.entity.AccountPayRecord">
 		insert into account_pay_record
 		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="outTradeNo!=null">
+				outTradeNo,
+			</if>
 			<if test="accountNumber!=null">
 				accountNumber,
 			</if>
@@ -934,6 +937,9 @@
 		</trim>
 		values
 		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="outTradeNo!=null">
+				#{outTradeNo},
+			</if>
 			<if test="accountNumber!=null">
 				#{accountNumber},
 			</if>
@@ -1007,6 +1013,9 @@
 			</if>
 		</trim>
 	</insert>
+	<select id="getCreatePayCodeRecordByOutTradeNo" resultType="goodsPublic.entity.CreatePayCodeRecord">
+		select * from create_pay_code_record where outTradeNo=#{outTradeNo}
+	</select>
 	<update id="editHtmlGoodsSPZS" parameterType="goodsPublic.entity.HtmlGoodsSPZS">
 		update html_goods_spzs set
 		<if test="productName!=null">

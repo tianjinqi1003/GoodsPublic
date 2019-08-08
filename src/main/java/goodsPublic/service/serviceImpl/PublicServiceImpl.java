@@ -525,4 +525,10 @@ public class PublicServiceImpl implements PublicService {
 		return publicDao.addCreatePayCodeRecord(cpcr);
 	}
 
+	@Override
+	public CreatePayCodeRecord getCreatePayCodeRecordByOutTradeNo(String outTradeNo) {
+		// TODO Auto-generated method stub
+		return publicDao.getCreatePayCodeRecordByOutTradeNo(outTradeNo);
+	}
+
 }
