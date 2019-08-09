@@ -12,7 +12,8 @@ $(function(){
 	$("#add_but").linkbutton({
 		iconCls:"icon-add",
 		onClick:function(){
-			location.href=path+"merchant/main/goAddModule?trade=jzsg";
+			if(checkIfPaid())
+				location.href=path+"merchant/main/goAddModule?trade=jzsg";
 		}
 	});
 	
@@ -73,19 +74,39 @@ function deleteHtmlGoodsJZSG() {
 }
 
 function deleteByIds(ids){
-	$.messager.confirm("提示","确定要删除吗？",function(r){
-		if(r){
-			$.post("deleteHtmlGoodsJZSGByIds",
-				{ids:ids},
-				function(result){
-					if(result.status==1){
-						tab1.datagrid("reload");
+	if(checkIfPaid()){
+		$.messager.confirm("提示","确定要删除吗？",function(r){
+			if(r){
+				$.post("deleteHtmlGoodsJZSGByIds",
+					{ids:ids},
+					function(result){
+						if(result.status==1){
+							tab1.datagrid("reload");
+						}
+						alert(result.msg);
 					}
-					alert(result.msg);
-				}
-			,"json");
+				,"json");
+			}
+		});
+	}
+}
+
+function checkIfPaid(){
+	var bool=false;
+	$.ajaxSetup({async:false});
+	$.post("checkIfPaid",
+		{accountNumber:'${sessionScope.user.id}'},
+		function(data){
+			if(data.status=="ok"){
+				bool=true;
+			}
+			else{
+				alert(data.message);
+				bool=false;
+			}
 		}
-	});
+	,"json");
+	return bool;
 }
 
 function setFitWidthInParent(o){

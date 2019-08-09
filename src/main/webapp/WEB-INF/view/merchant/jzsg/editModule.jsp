@@ -30,30 +30,50 @@ function hideOptionDiv(o){
 }
 
 function saveEditHtmlGoodsJZSG(){
-	renameFile();
-	renameImage();
-	
-	var formData = new FormData($("#form1")[0]);
-	 
-	$.ajax({
-		type:"post",
-		url:"saveEditHtmlGoodsJZSG",
-		dataType: "json",
-		data:formData,
-		cache: false,
-		processData: false,
-		contentType: false,
-		success: function (data){
-			if(data.status==1){
-				$("#saveStatus_div").css("display","block");
-				setTimeout("hideSaveStatusDiv()",3000);
+	if(checkIfPaid()){
+		renameFile();
+		renameImage();
+		
+		var formData = new FormData($("#form1")[0]);
+		 
+		$.ajax({
+			type:"post",
+			url:"saveEditHtmlGoodsJZSG",
+			dataType: "json",
+			data:formData,
+			cache: false,
+			processData: false,
+			contentType: false,
+			success: function (data){
+				if(data.status==1){
+					$("#saveStatus_div").css("display","block");
+					setTimeout("hideSaveStatusDiv()",3000);
+				}
+				else{
+					$("#saveStatus_div").css("display","none");
+				}
+				$("#saveStatus_div").text(data.msg);
+			}
+		});
+	}
+}
+
+function checkIfPaid(){
+	var bool=false;
+	$.ajaxSetup({async:false});
+	$.post("checkIfPaid",
+		{accountNumber:'${sessionScope.user.id}'},
+		function(data){
+			if(data.status=="ok"){
+				bool=true;
 			}
 			else{
-				$("#saveStatus_div").css("display","none");
+				alert(data.message);
+				bool=false;
 			}
-			$("#saveStatus_div").text(data.msg);
 		}
-	});
+	,"json");
+	return bool;
 }
 
 function hideSaveStatusDiv(){
@@ -301,7 +321,7 @@ function goBack(){
 </script>
 </head>
 <body>
-<form id="form1" name="form1" method="post" action="finishEditHtmlGoodsJZSG" enctype="multipart/form-data">
+<form id="form1" name="form1" method="post" action="finishEditHtmlGoodsJZSG" onsubmit="return checkIfPaid();" enctype="multipart/form-data">
 <div class="image1ModBg_div" id="image1ModBg_div">
 	<div class="image1Mod_div" id="image1Mod_div">
 		<div class="title_div">

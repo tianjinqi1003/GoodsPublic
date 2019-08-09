@@ -57,30 +57,50 @@ function hideOptionDiv(o){
 }
 
 function saveEdithtmlGoodsDMTZL(){
-	renameFile();
-	renameImage();
-	
-	var formData = new FormData($("#form1")[0]);
-	 
-	$.ajax({
-		type:"post",
-		url:"saveEditHtmlGoodsDMTZL",
-		dataType: "json",
-		data:formData,
-		cache: false,
-		processData: false,
-		contentType: false,
-		success: function (data){
-			if(data.status==1){
-				$("#saveStatus_div").css("display","block");
-				setTimeout("hideSaveStatusDiv()",3000);
+	if(checkIfPaid()){
+		renameFile();
+		renameImage();
+		
+		var formData = new FormData($("#form1")[0]);
+		 
+		$.ajax({
+			type:"post",
+			url:"saveEditHtmlGoodsDMTZL",
+			dataType: "json",
+			data:formData,
+			cache: false,
+			processData: false,
+			contentType: false,
+			success: function (data){
+				if(data.status==1){
+					$("#saveStatus_div").css("display","block");
+					setTimeout("hideSaveStatusDiv()",3000);
+				}
+				else{
+					$("#saveStatus_div").css("display","none");
+				}
+				$("#saveStatus_div").text(data.msg);
+			}
+		});
+	}
+}
+
+function checkIfPaid(){
+	var bool=false;
+	$.ajaxSetup({async:false});
+	$.post("checkIfPaid",
+		{accountNumber:'${sessionScope.user.id}'},
+		function(data){
+			if(data.status=="ok"){
+				bool=true;
 			}
 			else{
-				$("#saveStatus_div").css("display","none");
+				alert(data.message);
+				bool=false;
 			}
-			$("#saveStatus_div").text(data.msg);
 		}
-	});
+	,"json");
+	return bool;
 }
 
 function hideSaveStatusDiv(){
@@ -298,7 +318,7 @@ function goBack(){
 </script>
 </head>
 <body>
-<form id="form1" name="form1" method="post" action="finishEditHtmlGoodsDMTZL" enctype="multipart/form-data">
+<form id="form1" name="form1" method="post" action="finishEditHtmlGoodsDMTZL" onsubmit="return checkIfPaid();" enctype="multipart/form-data">
 <div class="embed1ModBg_div" id="embed1ModBg_div">
 	<div class="embed1Mod_div" id="embed1Mod_div">
 		<div class="title_div">

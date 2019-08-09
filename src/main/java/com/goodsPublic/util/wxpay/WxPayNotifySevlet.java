@@ -13,7 +13,7 @@ import com.jpay.ext.kit.PaymentKit;
 import com.jpay.weixin.api.WxPayApiConfigKit;
 
 /**
- * 微信回调
+ * 微信回调（这个类本来是下载时就有的，因为servlet无法访问数据库，就用kaiTong那个接口代替这个类里的service接口了。这个类现在暂时没用了，不过还是保留着）
  * @author Administrator
  *
  */
@@ -27,6 +27,7 @@ public class WxPayNotifySevlet extends HttpServlet {
 
 	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		// 支付结果通用通知文档:https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_7&index=8
 		String xmlMsg = HttpKit.readData(request);
 		System.out.println("收到微信支付回调通知===" + xmlMsg);

@@ -2,6 +2,7 @@ package goodsPublic.controller;
 
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -1468,6 +1469,31 @@ public class MainController {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping(value="/checkIfPaid")
+	@ResponseBody
+	public Map<String, Object> checkIfPaid(String accountNumber) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		try {
+			boolean bool=publicService.checkIfPaid(accountNumber);
+			
+			if(bool) {
+				jsonMap.put("status", "ok");
+				jsonMap.put("message", "已付费");
+			}
+			else {
+				jsonMap.put("status", "no");
+				jsonMap.put("message", "未付费，不能使用！");
+			}
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return jsonMap;
 		}
 	}
 	

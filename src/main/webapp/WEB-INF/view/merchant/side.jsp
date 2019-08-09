@@ -86,6 +86,7 @@
 							&nbsp;&nbsp;&nbsp;商家信息
 						</a>
 					</li>
+					<!-- 
 					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
 					<li class="layui-nav-item">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
@@ -93,6 +94,7 @@
 							&nbsp;&nbsp;&nbsp;分类管理
 						</a>
 					</li>
+					 -->
 				</div>
 				<!-- 
 				<li class="layui-nav-item">
@@ -119,36 +121,61 @@
 				<div style="width: 92%; margin: 0 auto; margin-top: 5px;border: #CAD9EA solid 1px;background-color: #F5FAFE;">
 					<li class="layui-nav-item first-level">
 						<a>
-							商品管理
+							自定义模板
 						</a>
 					</li>
 					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
-					<c:choose>
-						<c:when test="${empty sessionScope.categoryList}">
-							<li class="layui-nav-item">
-								<a href="<%=basePath%>merchant/main/goCategoryList">
-									暂无分类
-								</a>
-							</li>
-						</c:when>
-						<c:otherwise>
-							<c:forEach items="${sessionScope.categoryList }" var="item" varStatus="status">
+						<li class="layui-nav-item">
+							<a>
+								标签管理
+							</a>
+						</li>
+						<li class="layui-nav-item">
+							<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
+							<a href="<%=basePath%>merchant/main/goGoodsLabelSetList?accountId=${sessionScope.user.id }">
+								&nbsp;&nbsp;&nbsp;标签定义
+							</a>
+						</li>
+						<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
+						<li class="layui-nav-item">
+							<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
+							<a href="<%=basePath%>merchant/main/goCategoryList">
+								&nbsp;&nbsp;&nbsp;分类管理
+							</a>
+						</li>
+						<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
+						<li class="layui-nav-item">
+							<a>
+								商品管理
+							</a>
+						</li>
+						<c:choose>
+							<c:when test="${empty sessionScope.categoryList}">
 								<li class="layui-nav-item">
-									<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-									<a href="<%=basePath%>merchant/main/goGoodsList?categoryId=${item.categoryId}">
-										&nbsp;&nbsp;&nbsp;${item.categoryName }
-									</a>
-									<a href="<%=basePath%>merchant/main/operation?categoryId=${item.categoryId}&accountId=${sessionScope.user.id}" style="margin-top: -45px; margin-left: 90px;">
-										|&nbsp;添加
+									<a href="<%=basePath%>merchant/main/goCategoryList">
+										暂无分类
 									</a>
 								</li>
-								<c:if test="${status.index<sessionScope.categoryList.size()-1 }">
-									<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
-								</c:if>
-							</c:forEach>
-						</c:otherwise>
-					</c:choose>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${sessionScope.categoryList }" var="item" varStatus="status">
+									<li class="layui-nav-item">
+										<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
+										<a href="<%=basePath%>merchant/main/goGoodsList?categoryId=${item.categoryId}">
+											&nbsp;&nbsp;&nbsp;${item.categoryName }
+										</a>
+										<a href="<%=basePath%>merchant/main/operation?categoryId=${item.categoryId}&accountId=${sessionScope.user.id}" style="margin-top: -45px; margin-left: 90px;">
+											|&nbsp;添加
+										</a>
+									</li>
+									<c:if test="${status.index<sessionScope.categoryList.size()-1 }">
+										<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
+									</c:if>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 				</div>
+				<!-- 
 				<div style="width: 92%; margin: 0 auto; margin-top: 20px;border: #CAD9EA solid 1px;background-color: #F5FAFE;">
 					<li class="layui-nav-item first-level">
 						<a>
@@ -163,10 +190,11 @@
 						</a>
 					</li>
 				</div>
+				 -->
 				<div style="width: 92%; margin: 0 auto; margin-top: 20px;border: #CAD9EA solid 1px;background-color: #F5FAFE;">
 					<li class="layui-nav-item first-level">
 						<a>
-							模板快速生成
+							行业定制
 						</a>
 					</li>
 					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
@@ -216,13 +244,6 @@
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
 						<a href="">
 							&nbsp;&nbsp;&nbsp;其他应用
-						</a>
-					</li>
-					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
-					<li class="layui-nav-item">
-						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-						<a href="">
-							&nbsp;&nbsp;&nbsp;自定义模板
 						</a>
 					</li>
 				</div>

@@ -1016,6 +1016,9 @@
 	<select id="getCreatePayCodeRecordByOutTradeNo" resultType="goodsPublic.entity.CreatePayCodeRecord">
 		select * from create_pay_code_record where outTradeNo=#{outTradeNo}
 	</select>
+	<select id="getLastAccountPayRecordByNumber" resultType="goodsPublic.entity.AccountPayRecord">
+		select * from account_pay_record where accountNumber=#{accountNumber} order by payTime desc limit 1
+	</select>
 	<update id="editHtmlGoodsSPZS" parameterType="goodsPublic.entity.HtmlGoodsSPZS">
 		update html_goods_spzs set
 		<if test="productName!=null">

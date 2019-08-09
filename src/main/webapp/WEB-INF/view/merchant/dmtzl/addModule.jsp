@@ -262,10 +262,28 @@ function createUUID() {
 function goBack(){
 	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=dmtzl";
 }
+
+function checkIfPaid(){
+	var bool=false;
+	$.ajaxSetup({async:false});
+	$.post("checkIfPaid",
+		{accountNumber:'${sessionScope.user.id}'},
+		function(data){
+			if(data.status=="ok"){
+				bool=true;
+			}
+			else{
+				alert(data.message);
+				bool=false;
+			}
+		}
+	,"json");
+	return bool;
+}
 </script>
 </head>
 <body>
-<form id="form1" name="form1" method="post" action="addHtmlGoodsDMTZL" enctype="multipart/form-data">
+<form id="form1" name="form1" method="post" action="addHtmlGoodsDMTZL" onsubmit="return checkIfPaid();" enctype="multipart/form-data">
 <div class="embed1ModBg_div" id="embed1ModBg_div">
 	<div class="embed1Mod_div" id="embed1Mod_div">
 		<div class="title_div">

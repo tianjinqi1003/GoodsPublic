@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -42,6 +43,7 @@ import goodsPublic.service.PublicService;
 public class PublicServiceImpl implements PublicService {
 	@Autowired
 	private PublicMapper publicDao;
+	private SimpleDateFormat timeSDF=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	//发布商品接口，将商品保存在数据库中
 	@Override
@@ -529,6 +531,34 @@ public class PublicServiceImpl implements PublicService {
 	public CreatePayCodeRecord getCreatePayCodeRecordByOutTradeNo(String outTradeNo) {
 		// TODO Auto-generated method stub
 		return publicDao.getCreatePayCodeRecordByOutTradeNo(outTradeNo);
+	}
+
+	@Override
+	public boolean checkIfPaid(String accountNumber) throws ParseException {
+		// TODO Auto-generated method stub
+		
+		boolean ifPaid=false;
+		AccountPayRecord apr = publicDao.getLastAccountPayRecordByNumber(accountNumber);
+		
+		Date endTime=null;
+		int vipType = apr.getVipType();
+		switch (vipType) {
+			case AccountPayRecord.ONE_MONTH:
+			case AccountPayRecord.THREE_MONTHS:
+			case AccountPayRecord.ONE_YEAR:
+				endTime = timeSDF.parse(apr.getEndTime());
+				if(new Date().before(endTime)) {
+					ifPaid=true;
+				}
+				break;
+			case AccountPayRecord.FOREVER:
+				ifPaid=true;
+				break;
+			case AccountPayRecord.CONTINUE_MONTH:
+				ifPaid=true;
+				break;
+		}
+		return ifPaid;
 	}
 
 }

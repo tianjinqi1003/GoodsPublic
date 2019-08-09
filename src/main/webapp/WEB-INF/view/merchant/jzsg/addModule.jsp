@@ -252,10 +252,28 @@ function changeRYXXTrIfShow(index,o){
 function goBack(){
 	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=jzsg";
 }
+
+function checkIfPaid(){
+	var bool=false;
+	$.ajaxSetup({async:false});
+	$.post("checkIfPaid",
+		{accountNumber:'${sessionScope.user.id}'},
+		function(data){
+			if(data.status=="ok"){
+				bool=true;
+			}
+			else{
+				alert(data.message);
+				bool=false;
+			}
+		}
+	,"json");
+	return bool;
+}
 </script>
 </head>
 <body>
-<form id="form1" name="form1" method="post" action="addHtmlGoodsJZSG" enctype="multipart/form-data">
+<form id="form1" name="form1" method="post" action="addHtmlGoodsJZSG" onsubmit="return checkIfPaid();" enctype="multipart/form-data">
 <div class="image1ModBg_div" id="image1ModBg_div">
 	<div class="image1Mod_div" id="image1Mod_div">
 		<div class="title_div">

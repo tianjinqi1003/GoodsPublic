@@ -1,5 +1,6 @@
 package goodsPublic.service;
 
+import java.text.ParseException;
 import java.util.List;
 
 import com.goodsPublic.util.PlanResult;
@@ -322,6 +323,8 @@ public interface PublicService {
 	public int addCreatePayCodeRecord(CreatePayCodeRecord cpcr);
 
 	public CreatePayCodeRecord getCreatePayCodeRecordByOutTradeNo(String outTradeNo);
+
+	public boolean checkIfPaid(String accountNumber) throws ParseException;
 
 
 }
