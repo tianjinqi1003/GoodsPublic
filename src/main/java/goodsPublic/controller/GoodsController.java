@@ -2,6 +2,9 @@ package goodsPublic.controller;
 
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +25,7 @@ import com.goodsPublic.util.JsonUtil;
 import com.goodsPublic.util.PlanResult;
 
 import goodsPublic.entity.AccountMsg;
+import goodsPublic.entity.AccountPayRecord;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.service.CategoryService;
 import goodsPublic.service.PublicService;
@@ -39,6 +43,7 @@ public class GoodsController {
 	private CategoryService categoryService;
 	@Autowired
 	private PublicService publicService;
+	private SimpleDateFormat timeSDF=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	/**
 	 * 跳转至登录页面
@@ -143,8 +148,23 @@ public class GoodsController {
 		plan.setData(msg);
 		plan.setUrl("/merchant/login");
 		
+		//这里是注册完成后添加50个自定义标签
 		AccountMsg resultUser=userService.checkUser(msg);
 		publicService.initGoodsLabelSet(resultUser.getId());
+		
+		//这里是注册完成后，自动开通24小时免费试用，过期要继续使用就得付费
+		AccountPayRecord apr = new AccountPayRecord();
+		apr.setAccountNumber(resultUser.getId());
+		Date date = new Date();
+		apr.setPayTime(timeSDF.format(date));
+		Calendar calendar=Calendar.getInstance();
+		calendar.setTime(date);
+		calendar.add(Calendar.DAY_OF_MONTH, 1);
+		apr.setEndTime(timeSDF.format(calendar.getTime()));
+		apr.setVipType(AccountPayRecord.FREE_TRIAL);
+		apr.setMoney((float)0.00);
+		apr.setPhone(resultUser.getPhone());
+		publicService.addAccountPayRecord(apr);
 		
 		return JsonUtil.getJsonFromObject(plan);
 	}

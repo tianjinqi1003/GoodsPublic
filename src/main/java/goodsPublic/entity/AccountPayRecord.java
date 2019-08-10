@@ -8,6 +8,7 @@ public class AccountPayRecord implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public static final int FREE_TRIAL=0;
 	public static final int ONE_MONTH=1;
 	public static final int THREE_MONTHS=2;
 	public static final int ONE_YEAR=3;

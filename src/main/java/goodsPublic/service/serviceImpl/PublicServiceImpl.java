@@ -543,6 +543,9 @@ public class PublicServiceImpl implements PublicService {
 		Date endTime=null;
 		int vipType = apr.getVipType();
 		switch (vipType) {
+			case AccountPayRecord.FREE_TRIAL:
+				ifPaid=true;
+				break;
 			case AccountPayRecord.ONE_MONTH:
 			case AccountPayRecord.THREE_MONTHS:
 			case AccountPayRecord.ONE_YEAR:
