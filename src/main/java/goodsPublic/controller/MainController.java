@@ -1472,6 +1472,11 @@ public class MainController {
 		}
 	}
 	
+	/**
+	 * 验证是否已付费
+	 * @param accountNumber
+	 * @return
+	 */
 	@RequestMapping(value="/checkIfPaid")
 	@ResponseBody
 	public Map<String, Object> checkIfPaid(String accountNumber) {
@@ -1495,6 +1500,29 @@ public class MainController {
 		finally {
 			return jsonMap;
 		}
+	}
+	
+	/**
+	 * 验证是否已登录
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="/checkIfLogined")
+	@ResponseBody
+	public Map<String, Object> checkIfLogined(HttpSession session) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		Object userObj = session.getAttribute("user");
+		
+		if(userObj!=null) {
+			jsonMap.put("status", "ok");
+			jsonMap.put("message", "已登录");
+		}
+		else {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "未登录");
+		}
+		return jsonMap;
 	}
 	
 	/**

@@ -26,8 +26,9 @@
 			<value>
 				/merchant/main/show=anon
 				/merchant/main/goShowHtmlGoods=anon
-				/wxPayNotifySevlet=anon
 				/merchant/main/kaiTong=anon
+				/merchant/main/goAddModule=anon
+				/merchant/main/checkIfLogined=anon
 				/merchant/login=anon
 				/merchant/login/captcha=anon
 				/merchant/regist=anon
