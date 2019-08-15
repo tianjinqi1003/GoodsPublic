@@ -228,7 +228,7 @@ public interface PublicMapper {
 	 * @param type 
 	 * @return
 	 */
-	public List<ModuleSPZS> getModuleSPZSBySPXQ(String type);
+	public List<ModuleSPZS> getModuleSPZSByType(String type, String moduleName);
 	
 	/**
 	 * 根据类型，查询多媒体资料模板列表
@@ -267,13 +267,6 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public HtmlGoodsJZSG getHtmlGoodsJZSG(String userNumber, String accountId);
-	
-	/**
-	 * 根据备注类型，获得商品展示模板对应的值
-	 * @param type
-	 * @return
-	 */
-	public ModuleSPZS getModuleSPZSByMemo(String type);
 	
 	/**
 	 * 根据备注类型，获得多媒体资料模板对应的值

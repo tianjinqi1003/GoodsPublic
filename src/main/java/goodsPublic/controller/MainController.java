@@ -1814,29 +1814,44 @@ public class MainController {
 		
 		String url=null;
 		switch (trade) {
-		case "spzs":
-			List<ModuleSPZS> spxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq");
+		case ModuleSPZS.RED_WINE:
+			List<ModuleSPZS> spxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq",trade);
 			request.setAttribute("spxqList", spxqList);
 			
-			String memo1 = (String)publicService.getModuleSPZSByType("memo1");
-			request.setAttribute("memo1", memo1);
+			request.setAttribute("memo1", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo1",trade)).get(0).getValue());
 			
-			String memo2 = (String)publicService.getModuleSPZSByType("memo2");
-			request.setAttribute("memo2", memo2);
+			request.setAttribute("memo2", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo2",trade)).get(0).getValue());
 			
-			String memo3 = (String)publicService.getModuleSPZSByType("memo3");
-			request.setAttribute("memo3", memo3);
+			request.setAttribute("memo3", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo3",trade)).get(0).getValue());
 			
-			List<ModuleSPZS> image1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1");
+			List<ModuleSPZS> image1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1",trade);
 			request.setAttribute("image1List", image1List);
 			
-			List<ModuleSPZS> image2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2");
+			List<ModuleSPZS> image2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2",trade);
 			request.setAttribute("image2List", image2List);
 			
-			List<ModuleSPZS> image3List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image3");
+			List<ModuleSPZS> image3List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image3",trade);
 			request.setAttribute("image3List", image3List);
 			
 			url="/merchant/spzs/addModule";
+			break;
+		case ModuleSPZS.WHITE_WINE:
+			request.setAttribute("productName", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("productName",trade)).get(0).getValue());
+			
+			List<ModuleSPZS> wwSpxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq",trade);
+			request.setAttribute("spxqList", wwSpxqList);
+			
+			request.setAttribute("memo1", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo1",trade)).get(0).getValue());
+			
+			request.setAttribute("memo2", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo2",trade)).get(0).getValue());
+
+			List<ModuleSPZS> wwImage1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1",trade);
+			request.setAttribute("image1List", wwImage1List);
+			
+			List<ModuleSPZS> wwImage2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2",trade);
+			request.setAttribute("image2List", wwImage2List);
+			
+			url="/merchant/spzs/addWhiteWineModule";
 			break;
 		case "dmtzl":
 

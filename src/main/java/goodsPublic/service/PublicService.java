@@ -229,9 +229,10 @@ public interface PublicService {
 	/**
 	 * 根据类型查询商品展示模板
 	 * @param type
+	 * @param moduleName 
 	 * @return
 	 */
-	public Object getModuleSPZSByType(String type);
+	public Object getModuleSPZSByType(String type, String moduleName);
 	
 	/**
 	 * 根据类型查询多媒体资料模板

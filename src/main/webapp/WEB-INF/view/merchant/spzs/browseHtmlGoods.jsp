@@ -19,7 +19,7 @@ function editContent(goodsNumber,accountNumber){
 	<div class="top_div">
 		<img class="createSuccess_img" alt="" src="/GoodsPublic/resource/images/006.png">
 		<span class="createSuccess_span">生码成功！</span>
-		<a class="createQrcode_a" href="${pageContext.request.contextPath}/merchant/main/goAddModule?trade=spzs">新建二维码</a>
+		<a class="createQrcode_a" href="${pageContext.request.contextPath}/merchant/main/goAddModule?trade=redWine">新建二维码</a>
 		<a class="return_a" href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=spzs">返回列表页</a>
 	</div>
 	<div class="left_div" id="left_div">

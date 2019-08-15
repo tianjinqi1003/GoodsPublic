@@ -8,11 +8,14 @@ public class ModuleSPZS implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	public static final String RED_WINE="redWine";
+	public static final String WHITE_WINE="whiteWine";
 	private int id;
 	private String name;
 	private String value;
 	private String type;
 	private int sort;
+	private String moduleName;
 	public int getId() {
 		return id;
 	}
@@ -42,6 +45,12 @@ public class ModuleSPZS implements Serializable {
 	}
 	public void setSort(int sort) {
 		this.sort = sort;
+	}
+	public String getModuleName() {
+		return moduleName;
+	}
+	public void setModuleName(String moduleName) {
+		this.moduleName = moduleName;
 	}
 	
 }

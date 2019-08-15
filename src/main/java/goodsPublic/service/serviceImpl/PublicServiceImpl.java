@@ -413,23 +413,20 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public Object getModuleSPZSByType(String type) {
+	public Object getModuleSPZSByType(String type, String moduleName) {
 		// TODO Auto-generated method stub
 		
 		Object obj=null;
 		switch (type) {
+		case "productName":
 		case "spxq":
 		case "image1":
 		case "image2":
 		case "image3":
-			List<ModuleSPZS> spxqList = publicDao.getModuleSPZSBySPXQ(type);
-			obj=spxqList;
-			break;
 		case "memo1":
 		case "memo2":
 		case "memo3":
-			ModuleSPZS moduleSPZS = publicDao.getModuleSPZSByMemo(type);
-			obj=moduleSPZS.getValue();
+			obj = publicDao.getModuleSPZSByType(type,moduleName);
 			break;
 		}
 		return obj;

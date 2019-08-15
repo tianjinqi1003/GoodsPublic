@@ -13,7 +13,7 @@ $(function(){
 		iconCls:"icon-add",
 		onClick:function(){
 			if(checkIfPaid())
-				location.href=path+"merchant/main/goAddModule?trade=spzs";
+				location.href=path+"merchant/main/goAddModule?trade=redWine";
 		}
 	});
 	
@@ -44,7 +44,7 @@ $(function(){
 	    ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
-				$(this).datagrid("appendRow",{productName:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/goAddModule?trade=spzs\">点击生成商品模板</a><div>"});
+				$(this).datagrid("appendRow",{productName:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/goAddModule?trade=redWine\">点击生成商品模板</a><div>"});
 				$(this).datagrid("mergeCells",{index:0,field:"productName",colspan:3});
 				data.total=0;
 			}

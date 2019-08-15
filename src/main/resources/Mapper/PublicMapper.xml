@@ -1655,17 +1655,14 @@
 	<insert id="insertGoodsLabel">
 		insert into goods_label_set(`key`,module,isShow,isPublic,isCheck,accountNumber,sort) values(#{key},#{module},0,0,0,#{accountNumber},0)
 	</insert>
-	<select id="getModuleSPZSBySPXQ" resultType="goodsPublic.entity.ModuleSPZS">
-		select * from module_spzs where type=#{param1}
+	<select id="getModuleSPZSByType" resultType="goodsPublic.entity.ModuleSPZS">
+		select * from module_spzs where type=#{param1} and moduleName=#{param2}
 	</select>
 	<select id="getModuleDMTZLByType" resultType="goodsPublic.entity.ModuleDMTZL">
 		select * from module_dmtzl where type=#{param1}
 	</select>
 	<select id="getModuleJZSGByType" resultType="goodsPublic.entity.ModuleJZSG">
 		select * from module_jzsg where type=#{param1}
-	</select>
-	<select id="getModuleSPZSByMemo" resultType="goodsPublic.entity.ModuleSPZS">
-		select * from module_spzs where type=#{param1}
 	</select>
 	<select id="getModuleDMTZLByMemo" resultType="goodsPublic.entity.ModuleDMTZL">
 		select * from module_dmtzl where type=#{param1}
