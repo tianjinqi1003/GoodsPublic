@@ -1313,23 +1313,37 @@ public class MainController {
 	@RequestMapping(value="/show",method=RequestMethod.GET)
 	public String Show(String goodsNumber,String accountId,HttpServletRequest request) {
 		System.out.println(goodsNumber);
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/dd HH:mm:ss");
-		request.setAttribute("searchTime", sdf.format(date));
-
-		List<GoodsLabelSet> glsList=publicService.getGoodsLabelSetByModuleAccountId("editGoods",accountId);
-		request.setAttribute("glsList", glsList);
 		
-		PlanResult plan=publicService.getGoodsByGN(goodsNumber);
-		Goods goods = (Goods)plan.getData();
-		request.setAttribute("plan", goods);
-		
-		List<Goods> goodsList = publicService.queryGoodsList(goods.getCategory_id(),accountId);
-		request.setAttribute("flagGoodsList", goodsList);
-		
-		AccountMsg accountMsg = publicService.getAccountById(((Goods)plan.getData()).getAccountNumber());
-		request.setAttribute("accountMsg", accountMsg);
-		return "/merchant/show";
+		Map<String, Object> jsonMap = checkIfPaid(accountId);
+		String status = jsonMap.get("status").toString();
+		if("ok".equals(status)) {
+			
+			Date date = new Date();
+			SimpleDateFormat sdf = new SimpleDateFormat("YYYY/MM/dd HH:mm:ss");
+			request.setAttribute("searchTime", sdf.format(date));
+	
+			List<GoodsLabelSet> glsList=publicService.getGoodsLabelSetByModuleAccountId("editGoods",accountId);
+			request.setAttribute("glsList", glsList);
+			
+			PlanResult plan=publicService.getGoodsByGN(goodsNumber);
+			Goods goods = (Goods)plan.getData();
+			request.setAttribute("plan", goods);
+			
+			List<Goods> goodsList = publicService.queryGoodsList(goods.getCategory_id(),accountId);
+			request.setAttribute("flagGoodsList", goodsList);
+			
+			AccountMsg accountMsg = publicService.getAccountById(((Goods)plan.getData()).getAccountNumber());
+			request.setAttribute("accountMsg", accountMsg);
+			
+			return "/merchant/show";
+		}
+		else {
+			
+			String message = jsonMap.get("message").toString();
+			request.setAttribute("message", message);
+			
+			return "/merchant/unPaid";
+		}
 	}
 	
 	/**

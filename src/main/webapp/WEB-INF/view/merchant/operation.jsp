@@ -31,7 +31,7 @@ $(function(){
 		var json=JSON.parse('${requestScope.json}');
 		if(json.status==0){
 			var goodsNumber=json.data;
-			var url=location.href.substring(0,location.href.indexOf("GoodsPublic")-1)+baseUrl+json.url+"?goodsNumber="+goodsNumber;
+			var url=location.href.substring(0,location.href.indexOf("GoodsPublic")-1)+baseUrl+json.url+"?goodsNumber="+goodsNumber+"&accountId="+'${sessionScope.user.id}';
 			$.post(baseUrl + "/merchant/main/createShowUrlQrcode",
 				{url:url,goodsNumber:goodsNumber},
 				function(json1){
@@ -55,7 +55,8 @@ $(function(){
 		left:200,
 		buttons:[
            {text:"提交",id:"ok_but",iconCls:"icon-ok",handler:function(){
-        	   checkEdit();
+        	   if(checkIfPaid())
+        	   	  checkEdit();
            }}
         ]
 	});
@@ -109,6 +110,24 @@ $(function(){
 	editor.css("max-height","500px");
 	//alert(editor.html());
 });
+
+function checkIfPaid(){
+	var bool=false;
+	$.ajaxSetup({async:false});
+	$.post("checkIfPaid",
+		{accountNumber:'${sessionScope.user.id}'},
+		function(data){
+			if(data.status=="ok"){
+				bool=true;
+			}
+			else{
+				alert(data.message);
+				bool=false;
+			}
+		}
+	,"json");
+	return bool;
+}
 
 var editFlag=true;
 function checkEdit(){

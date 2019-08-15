@@ -16,7 +16,8 @@ $(function(){
 		left:200,
 		buttons:[
            {text:"提交",id:"ok_but",iconCls:"icon-ok",handler:function(){
-        	   checkEdit();
+        	   if(checkIfPaid())
+        	   	  checkEdit();
            }}
         ]
 	});
@@ -99,6 +100,24 @@ $(function(){
 		}
 	});
 });
+
+function checkIfPaid(){
+	var bool=false;
+	$.ajaxSetup({async:false});
+	$.post("checkIfPaid",
+		{accountNumber:'${sessionScope.user.id}'},
+		function(data){
+			if(data.status=="ok"){
+				bool=true;
+			}
+			else{
+				alert(data.message);
+				bool=false;
+			}
+		}
+	,"json");
+	return bool;
+}
 
 function checkEdit(){
 	if(checkLabel()){

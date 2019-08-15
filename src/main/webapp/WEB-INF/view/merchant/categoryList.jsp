@@ -12,7 +12,8 @@ $(function(){
 	$("#remove_but").linkbutton({
 		iconCls:"icon-remove",
 		onClick:function(){
-			deleteByIds();
+			if(checkIfPaid())
+				deleteByIds();
 		}
 	});
 	
@@ -90,7 +91,8 @@ function initEditDiv(){
 		left:210,
 		buttons:[
            {text:"提交",id:"ok_but",iconCls:"icon-ok",handler:function(){
-        	   checkEdit();
+        	   if(checkIfPaid())
+        	   	  checkEdit();
            }}
         ]
 	});
@@ -132,6 +134,24 @@ function initEditDiv(){
 	$("#ok_but").css("position","absolute");
 	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","15px");
+}
+
+function checkIfPaid(){
+	var bool=false;
+	$.ajaxSetup({async:false});
+	$.post("checkIfPaid",
+		{accountNumber:'${sessionScope.user.id}'},
+		function(data){
+			if(data.status=="ok"){
+				bool=true;
+			}
+			else{
+				alert(data.message);
+				bool=false;
+			}
+		}
+	,"json");
+	return bool;
 }
 
 function checkEdit(){
