@@ -221,7 +221,7 @@ public interface PublicMapper {
 	 * @param module
 	 * @param accountNumber
 	 */
-	public void insertGoodsLabel(@Param("key") String key, @Param("module") String module, @Param("accountNumber") String accountNumber);
+	public void insertGoodsLabel(GoodsLabelSet goodsLabelSet);
 	
 	/**
 	 * 根据类型，查询商品展示模板列表

@@ -352,59 +352,123 @@ public class PublicServiceImpl implements PublicService {
 	public void initGoodsLabelSet(String accountNumber) {
 		// TODO Auto-generated method stub
 		String[] moduleArr= {"operation","editGoods","goodsList"};
-		int maxSize=51;
+		int maxSize=50;
 		String[] keyArr=null;
 		for (String module : moduleArr) {
 			switch (module) {
 			case "operation":
 				keyArr=new String[maxSize];
-				keyArr[0]="category_id";
-				keyArr[1]="goodsNumber";
-				keyArr[2]="title";
-				keyArr[3]="imgUrl";
-				keyArr[4]="htmlContent";
-				for(int i = 5;i < maxSize;i++) {
-					keyArr[i]="key"+(i-4);
+				keyArr[0]="goodsNumber";
+				keyArr[1]="title";
+				keyArr[2]="imgUrl";
+				keyArr[3]="htmlContent";
+				for(int i = 4;i < maxSize;i++) {
+					keyArr[i]="key"+(i-3);
 				}
 				
 				for (String key : keyArr) {
-					if(publicDao.checkGoodsLabelExist(key,module,accountNumber)==0)
-						publicDao.insertGoodsLabel(key,module,accountNumber);
+					if(publicDao.checkGoodsLabelExist(key,module,accountNumber)==0) {
+						GoodsLabelSet gls=new GoodsLabelSet();
+						gls.setKey(key);
+						gls.setModule(module);
+						String label=null;
+						boolean isShow=false;
+						if("goodsNumber".equals(key)) {
+							label="商品编号";
+							isShow=true;
+						}
+						else if("imgUrl".equals(key)) {
+							label="图片";
+							isShow=true;
+						}
+						else if("htmlContent".equals(key)) {
+							label="文本编辑器";
+							isShow=true;
+						}
+						gls.setLabel(label);
+						gls.setIsShow(isShow);
+						gls.setAccountNumber(accountNumber);
+						publicDao.insertGoodsLabel(gls);
+					}
 				}
 				keyArr=null;
 				break;
 			case "editGoods":
 				keyArr=new String[maxSize];
-				keyArr[0]="category_id";
-				keyArr[1]="goodsNumber";
-				keyArr[2]="title";
-				keyArr[3]="imgUrl";
-				keyArr[4]="htmlContent";
-				for(int i = 5;i < maxSize;i++) {
-					keyArr[i]="key"+(i-4);
+				keyArr[0]="goodsNumber";
+				keyArr[1]="title";
+				keyArr[2]="imgUrl";
+				keyArr[3]="htmlContent";
+				for(int i = 4;i < maxSize;i++) {
+					keyArr[i]="key"+(i-3);
 				}
 				
 				for (String key : keyArr) {
-					if(publicDao.checkGoodsLabelExist(key,module,accountNumber)==0)
-						publicDao.insertGoodsLabel(key,module,accountNumber);
+					if(publicDao.checkGoodsLabelExist(key,module,accountNumber)==0) {
+						GoodsLabelSet gls=new GoodsLabelSet();
+						gls.setKey(key);
+						gls.setModule(module);
+						String label=null;
+						boolean isShow=false;
+						if("goodsNumber".equals(key)) {
+							label="商品编号";
+							isShow=true;
+						}
+						else if("imgUrl".equals(key)) {
+							label="图片";
+							isShow=true;
+						}
+						else if("htmlContent".equals(key)) {
+							label="文本编辑器";
+							isShow=true;
+						}
+						gls.setLabel(label);
+						gls.setIsShow(isShow);
+						gls.setAccountNumber(accountNumber);
+						publicDao.insertGoodsLabel(gls);
+					}
 				}
 				keyArr=null;
 				break;
 			case "goodsList":
 				keyArr=new String[maxSize];
-				keyArr[0]="category_id";
-				keyArr[1]="goodsNumber";
-				keyArr[2]="title";
-				keyArr[3]="imgUrl";
-				keyArr[4]="qrCode";
-				keyArr[5]="id";
-				for(int i = 6;i < maxSize;i++) {
-					keyArr[i]="key"+(i-5);
+				keyArr[0]="goodsNumber";
+				keyArr[1]="title";
+				keyArr[2]="imgUrl";
+				keyArr[3]="qrCode";
+				keyArr[4]="id";
+				for(int i = 5;i < maxSize;i++) {
+					keyArr[i]="key"+(i-4);
 				}
 				
 				for (String key : keyArr) {
-					if(publicDao.checkGoodsLabelExist(key,module,accountNumber)==0)
-						publicDao.insertGoodsLabel(key,module,accountNumber);
+					if(publicDao.checkGoodsLabelExist(key,module,accountNumber)==0) {
+						GoodsLabelSet gls=new GoodsLabelSet();
+						gls.setKey(key);
+						gls.setModule(module);
+						String label=null;
+						boolean isShow=false;
+						if("goodsNumber".equals(key)) {
+							label="商品编号";
+							isShow=true;
+						}
+						else if("imgUrl".equals(key)) {
+							label="图片";
+							isShow=true;
+						}
+						else if("qrCode".equals(key)) {
+							label="二维码";
+							isShow=true;
+						}
+						if("id".equals(key)) {
+							label="操作";
+							isShow=true;
+						}
+						gls.setLabel(label);
+						gls.setIsShow(isShow);
+						gls.setAccountNumber(accountNumber);
+						publicDao.insertGoodsLabel(gls);
+					}
 				}
 				keyArr=null;
 				break;

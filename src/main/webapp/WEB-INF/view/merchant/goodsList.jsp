@@ -47,7 +47,8 @@ $(function(){
 		        */
 		        onLoadSuccess:function(data){
 					if(data.total==0){
-						$(this).datagrid("appendRow",{goodsNumber:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/operation?categoryId=${param.categoryId}&accountId=${sessionScope.user.id}\">点击添加商品</a><div>"});
+						var rowKey=columns[0].field;
+						$(this).datagrid("appendRow",{imgUrl:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/operation?categoryId=${param.categoryId}&accountId=${sessionScope.user.id}\">点击添加商品</a><div>"});
 						$(this).datagrid("mergeCells",{index:0,field:columns[0].field,colspan:columns.length});
 						data.total=0;
 					}

@@ -1652,8 +1652,8 @@
 	<select id="checkGoodsLabelExist" resultType="java.lang.Integer">
 		select count(*) from goods_label_set where `key`=#{key} and module=#{module} and accountNumber=#{accountNumber}
 	</select>
-	<insert id="insertGoodsLabel">
-		insert into goods_label_set(`key`,module,isShow,isPublic,isCheck,accountNumber,sort) values(#{key},#{module},0,0,0,#{accountNumber},0)
+	<insert id="insertGoodsLabel" parameterType="goodsPublic.entity.GoodsLabelSet">
+		insert into goods_label_set(`key`,label,module,isShow,isPublic,isCheck,accountNumber,sort) values(#{key},#{label},#{module},#{isShow},0,0,#{accountNumber},0)
 	</insert>
 	<select id="getModuleSPZSByType" resultType="goodsPublic.entity.ModuleSPZS">
 		select * from module_spzs where type=#{param1} and moduleName=#{param2}

@@ -131,13 +131,20 @@ function checkIfPaid(){
 
 var editFlag=true;
 function checkEdit(){
-	/*
 	if(checkGoodsNumber()){
-		if(checkTitle()){
-			document.getElementById("sub_but").click();
-		}
+		//if(checkTitle()){
+			$("table tr").each(function(){
+				if(editFlag)
+					$(this).find("td").eq(1).find("input").blur();
+				else
+					return editFlag;
+					
+			});
+			if(editFlag)
+				document.getElementById("sub_but").click();
+		//}
 	}
-	*/
+	/*
 	$("table tr").each(function(){
 		if(editFlag)
 			$(this).find("td").eq(1).find("input").blur();
@@ -147,6 +154,7 @@ function checkEdit(){
 	});
 	if(editFlag)
 		document.getElementById("sub_but").click();
+	*/
 }
 
 function focusGoodsNumber(){
