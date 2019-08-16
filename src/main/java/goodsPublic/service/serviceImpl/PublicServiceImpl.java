@@ -373,21 +373,30 @@ public class PublicServiceImpl implements PublicService {
 						gls.setModule(module);
 						String label=null;
 						boolean isShow=false;
+						int sort=0;
 						if("goodsNumber".equals(key)) {
 							label="商品编号";
 							isShow=true;
 						}
+						else if("title".equals(key)) {
+							label="名称";
+							isShow=true;
+							sort=1;
+						}
 						else if("imgUrl".equals(key)) {
 							label="图片";
 							isShow=true;
+							sort=2;
 						}
 						else if("htmlContent".equals(key)) {
 							label="文本编辑器";
 							isShow=true;
+							sort=3;
 						}
 						gls.setLabel(label);
 						gls.setIsShow(isShow);
 						gls.setAccountNumber(accountNumber);
+						gls.setSort(sort);
 						publicDao.insertGoodsLabel(gls);
 					}
 				}
@@ -410,21 +419,30 @@ public class PublicServiceImpl implements PublicService {
 						gls.setModule(module);
 						String label=null;
 						boolean isShow=false;
+						int sort=0;
 						if("goodsNumber".equals(key)) {
 							label="商品编号";
 							isShow=true;
 						}
+						else if("title".equals(key)) {
+							label="名称";
+							isShow=true;
+							sort=1;
+						}
 						else if("imgUrl".equals(key)) {
 							label="图片";
 							isShow=true;
+							sort=2;
 						}
 						else if("htmlContent".equals(key)) {
 							label="文本编辑器";
 							isShow=true;
+							sort=3;
 						}
 						gls.setLabel(label);
 						gls.setIsShow(isShow);
 						gls.setAccountNumber(accountNumber);
+						gls.setSort(sort);
 						publicDao.insertGoodsLabel(gls);
 					}
 				}
@@ -448,26 +466,36 @@ public class PublicServiceImpl implements PublicService {
 						gls.setModule(module);
 						String label=null;
 						boolean isShow=false;
+						int sort=0;
 						if("goodsNumber".equals(key)) {
 							label="商品编号";
 							isShow=true;
 						}
+						else if("title".equals(key)) {
+							label="名称";
+							isShow=true;
+							sort=1;
+						}
 						else if("imgUrl".equals(key)) {
 							label="图片";
 							isShow=true;
+							sort=2;
 						}
 						else if("qrCode".equals(key)) {
 							label="二维码";
 							isShow=true;
+							sort=3;
 						}
 						if("id".equals(key)) {
 							label="操作";
 							isShow=true;
+							sort=4;
 						}
 						gls.setLabel(label);
 						gls.setIsShow(isShow);
 						gls.setAccountNumber(accountNumber);
-						publicDao.insertGoodsLabel(gls);
+						gls.setSort(sort);
+						publicDao.insertGoodsLabel(gls);//17863923662    2150902517@qq.com
 					}
 				}
 				keyArr=null;

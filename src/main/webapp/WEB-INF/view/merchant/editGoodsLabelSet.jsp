@@ -67,7 +67,8 @@ $(function(){
 	$("#module").combobox({
 		valueField:"value",
 		textField:"text",
-		data:[{"value":"","text":"请选择"},{"value":"operation","text":"商品添加"},{"value":"editGoods","text":"商品编辑"}],
+		data:[{"value":"","text":"请选择"},{"value":"operation","text":"商品添加"},{"value":"editGoods","text":"商品编辑"},{"value":"goodsList","text":"商品列表"}],
+		disabled:true,
 		onLoadSuccess:function(){
 			$(this).combobox("setValue", '${requestScope.goodsLabelSet.module }');
 		}
