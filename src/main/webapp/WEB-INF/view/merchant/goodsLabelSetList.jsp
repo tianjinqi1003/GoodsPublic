@@ -8,9 +8,26 @@
 <%@include file="js.jsp"%>
 <script type="text/javascript">
 $(function(){
+	$("#add_but").linkbutton({
+		iconCls:"icon-add",
+		onClick:function(){
+			if(checkIfPaid())
+				location.href="goAddGoodsLabelSet";
+		}
+	});
+	
+	$("#remove_but").linkbutton({
+		iconCls:"icon-remove",
+		onClick:function(){
+			if(checkIfPaid())
+				deleteByKeys();
+		}
+	});
+	
 	tab1=$("#tab1").datagrid({
 		title:"标签列表",
 		url:"queryGoodsLabelSetList",
+		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),
 		pagination:true,
 		pageSize:10,
@@ -90,6 +107,56 @@ function reSizeCol(){
 	cols.css("width",width/colCount+"px");
 }
 
+function checkIfPaid(){
+	var bool=false;
+	$.ajaxSetup({async:false});
+	$.post("checkIfPaid",
+		{accountNumber:'${sessionScope.user.id}'},
+		function(data){
+			if(data.status=="ok"){
+				bool=true;
+			}
+			else{
+				alert(data.message);
+				bool=false;
+			}
+		}
+	,"json");
+	return bool;
+}
+
+function deleteByKeys() {
+	var rows=tab1.datagrid("getSelections");
+	if (rows.length == 0) {
+		$.messager.alert("提示","请选择要删除的信息！","warning");
+		return false;
+	}
+	
+	$.messager.confirm("提示","确定要删除吗？",function(r){
+		if(r){
+			var keys = "";
+			for (var i = 0; i < rows.length; i++) {
+				keys += "," + rows[i].key;
+			}
+			keys=keys.substring(1);
+			
+			$.post("deleteLabelByKeys",
+				{accountNumber:'${sessionScope.user.id}',keys:keys},
+				function(result){
+					if(result.status==1){
+						$.messager.alert("提示",result.msg,"warning");
+						location.href = location.href;
+					}
+					else{
+						$.messager.alert("提示",result.msg,"warning");
+					}
+				}
+			,"json");
+			
+		}
+	});
+}
+
 function setFitWidthInParent(o){
 	var width=$(o).css("width");
 	return width.substring(0,width.length-2)-210;
@@ -108,6 +175,10 @@ function initTab1WindowMarginLeft(){
 <div class="layui-layout layui-layout-admin">
 	<%@include file="side.jsp"%>
 	<div id="tab1_div" style="margin-top:20px;margin-left: 210px;">
+		<div id="toolbar">
+			<a id="add_but">添加</a>
+			<a id="remove_but">删除</a>
+		</div>
 		 <table id="tab1">
 		 </table>
 	</div>

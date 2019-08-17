@@ -1013,6 +1013,65 @@
 			</if>
 		</trim>
 	</insert>
+	<insert id="addGoodsLabelSet" parameterType="goodsPublic.entity.GoodsLabelSet">
+		insert into goods_label_set
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="key!=null">
+				`key`,
+			</if>
+			<if test="label!=null">
+				label,
+			</if>
+			<if test="module!=null">
+				module,
+			</if>
+			<if test="isShow!=null">
+				isShow,
+			</if>
+			<if test="isPublic!=null">
+				isPublic,
+			</if>
+			<if test="isCheck!=null">
+				isCheck,
+			</if>
+			<if test="accountNumber!=null">
+				accountNumber,
+			</if>
+			<if test="sort!=null">
+				sort
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="key!=null">
+				#{key},
+			</if>
+			<if test="label!=null">
+				#{label},
+			</if>
+			<if test="module!=null">
+				#{module},
+			</if>
+			<if test="isShow!=null">
+				#{isShow},
+			</if>
+			<if test="isPublic!=null">
+				#{isPublic},
+			</if>
+			<if test="isCheck!=null">
+				#{isCheck},
+			</if>
+			<if test="accountNumber!=null">
+				#{accountNumber},
+			</if>
+			<if test="sort!=null">
+				#{sort}
+			</if>
+		</trim>
+	</insert>
+	<select id="getLabelKeyList" resultType="java.lang.String">
+		select `key` from goods_label_set where module=#{module} and accountNumber=#{accountNumber} and `KEY` like'key%' ORDER BY `key`
+	</select>
 	<select id="getCreatePayCodeRecordByOutTradeNo" resultType="goodsPublic.entity.CreatePayCodeRecord">
 		select * from create_pay_code_record where outTradeNo=#{outTradeNo}
 	</select>
@@ -1693,5 +1752,8 @@
 		<foreach collection="list" item="id" open=" and cast(id as char) in (" separator="," close=")">
 		#{id}
 		</foreach>
+	</delete>
+	<delete id="deleteLabelByKeys">
+		delete from goods_label_set where `key` in(#{keys}) and accountNumber=#{accountNumber}
 	</delete>
 </mapper>

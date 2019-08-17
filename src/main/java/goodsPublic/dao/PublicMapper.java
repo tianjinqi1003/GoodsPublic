@@ -195,6 +195,9 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public GoodsLabelSet getGoodsLabelSetById(String id);
+
+	public int addGoodsLabelSet(GoodsLabelSet goodsLabelSet);
+	
 	/**
 	 * 编辑商品标签
 	 * @param goodsLabelSet
@@ -308,4 +311,8 @@ public interface PublicMapper {
 	public CreatePayCodeRecord getCreatePayCodeRecordByOutTradeNo(@Param("outTradeNo") String outTradeNo);
 
 	public AccountPayRecord getLastAccountPayRecordByNumber(@Param("accountNumber") String accountNumber);
+
+	public int deleteLabelByKeys(@Param("accountNumber") String accountNumber, @Param("keys") String keys);
+
+	public List<String> getLabelKeyList(@Param("module") String module, @Param("accountNumber") String accountNumber);
 }

@@ -213,6 +213,8 @@ public interface PublicService {
 	 */
 	public GoodsLabelSet getGoodsLabelSetById(String id);
 
+	public int addGoodsLabelSet(GoodsLabelSet goodsLabelSet);
+
 	/**
 	 * 编辑商品标签
 	 * @param goodsLabelSet
@@ -326,6 +328,8 @@ public interface PublicService {
 	public CreatePayCodeRecord getCreatePayCodeRecordByOutTradeNo(String outTradeNo);
 
 	public boolean checkIfPaid(String accountNumber) throws ParseException;
+
+	public int deleteLabelByKeys(String accountNumber, String keys);
 
 
 }

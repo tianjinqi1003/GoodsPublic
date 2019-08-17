@@ -1308,6 +1308,25 @@ public class MainController {
 		json=JsonUtil.getJsonFromObject(plan);
 		return json;
 	}
+	
+	@RequestMapping(value="/deleteLabelByKeys",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteLabelByKeys(String accountNumber, String keys) {
+		
+		int count = publicService.deleteLabelByKeys(accountNumber, keys);
+		
+		PlanResult plan=new PlanResult();
+		if(count>0) {
+			plan.setStatus(1);
+			plan.setMsg("删除标签成功！");
+		}
+		else {
+			plan.setStatus(0);
+			plan.setMsg("删除标签失败！");
+		}
+		String json=JsonUtil.getJsonFromObject(plan);
+		return json;
+	}
 
 	/**
 	 * 跳转至商品展示页
@@ -1957,6 +1976,12 @@ public class MainController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/goAddGoodsLabelSet")
+	public String goAddGoodsLabelSet() {
+		
+		return "/merchant/addGoodsLabelSet";
+	}
+	
 	/**
 	 * 跳转至编辑标签页面
 	 * @param request
@@ -1965,9 +1990,33 @@ public class MainController {
 	 */
 	@RequestMapping(value="/goEditGoodsLabelSet")
 	public String goEditGoodsLabelSet(HttpServletRequest request, String id) {
+		
 		GoodsLabelSet goodsLabelSet=publicService.getGoodsLabelSetById(id);
 		request.setAttribute("goodsLabelSet", goodsLabelSet);
 		return "/merchant/editGoodsLabelSet";
+	}
+	
+	/**
+	 * 添加商品标签
+	 * @param goodsLabelSet
+	 * @return
+	 */
+	@RequestMapping(value="/addGoodsLabelSet")
+	@ResponseBody
+	public Map<String, Object> addGoodsLabelSet(GoodsLabelSet goodsLabelSet) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=publicService.addGoodsLabelSet(goodsLabelSet);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "添加标签成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "添加标签失败！");
+		}
+		return jsonMap;
 	}
 	
 	/**

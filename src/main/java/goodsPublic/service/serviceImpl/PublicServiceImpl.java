@@ -9,6 +9,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -19,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.goodsPublic.util.PlanResult;
+import com.goodsPublic.util.StringUtils;
 import com.goodsPublic.util.qrcode.Qrcode;
 
 import goodsPublic.dao.PublicMapper;
@@ -340,6 +342,35 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
+	public int addGoodsLabelSet(GoodsLabelSet goodsLabelSet) {
+		// TODO Auto-generated method stub
+		int count=0;
+		String[] moduleArr= {"operation","editGoods","goodsList"};
+		for (String module : moduleArr) {
+			goodsLabelSet.setKey(makeLabelKey(module,goodsLabelSet.getAccountNumber()));
+			goodsLabelSet.setModule(module);
+			count+=publicDao.addGoodsLabelSet(goodsLabelSet);
+		}
+		return count;
+	}
+	
+	public String makeLabelKey(String module, String accountNumber) {
+		
+		List<String> keyList=publicDao.getLabelKeyList(module,accountNumber);
+		int index=1;
+		String key=null;
+		for (String key1 : keyList) {
+			key="key"+index;
+			if(key.equals(key1))
+				index++;
+			else
+				return key;
+		}
+		key="key"+index;
+		return key;
+	}
+
+	@Override
 	public int editGoodsLabelSet(GoodsLabelSet goodsLabelSet) {
 		// TODO Auto-generated method stub
 		int count=0;
@@ -651,6 +682,12 @@ public class PublicServiceImpl implements PublicService {
 				break;
 		}
 		return ifPaid;
+	}
+
+	@Override
+	public int deleteLabelByKeys(String accountNumber, String keys) {
+		// TODO Auto-generated method stub
+		return publicDao.deleteLabelByKeys(accountNumber, keys);
 	}
 
 }
