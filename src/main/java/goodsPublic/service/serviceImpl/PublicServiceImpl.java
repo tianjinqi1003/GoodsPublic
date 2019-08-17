@@ -352,17 +352,17 @@ public class PublicServiceImpl implements PublicService {
 	public void initGoodsLabelSet(String accountNumber) {
 		// TODO Auto-generated method stub
 		String[] moduleArr= {"operation","editGoods","goodsList"};
-		int maxSize=50;
 		String[] keyArr=null;
 		for (String module : moduleArr) {
 			switch (module) {
 			case "operation":
-				keyArr=new String[maxSize];
+				int addMaxSize=9;
+				keyArr=new String[addMaxSize];
 				keyArr[0]="goodsNumber";
 				keyArr[1]="title";
 				keyArr[2]="imgUrl";
 				keyArr[3]="htmlContent";
-				for(int i = 4;i < maxSize;i++) {
+				for(int i = 4;i < addMaxSize;i++) {
 					keyArr[i]="key"+(i-3);
 				}
 				
@@ -403,12 +403,13 @@ public class PublicServiceImpl implements PublicService {
 				keyArr=null;
 				break;
 			case "editGoods":
-				keyArr=new String[maxSize];
+				int editMaxSize=9;
+				keyArr=new String[editMaxSize];
 				keyArr[0]="goodsNumber";
 				keyArr[1]="title";
 				keyArr[2]="imgUrl";
 				keyArr[3]="htmlContent";
-				for(int i = 4;i < maxSize;i++) {
+				for(int i = 4;i < editMaxSize;i++) {
 					keyArr[i]="key"+(i-3);
 				}
 				
@@ -449,13 +450,14 @@ public class PublicServiceImpl implements PublicService {
 				keyArr=null;
 				break;
 			case "goodsList":
-				keyArr=new String[maxSize];
+				int listMaxSize=10;
+				keyArr=new String[listMaxSize];
 				keyArr[0]="goodsNumber";
 				keyArr[1]="title";
 				keyArr[2]="imgUrl";
 				keyArr[3]="qrCode";
 				keyArr[4]="id";
-				for(int i = 5;i < maxSize;i++) {
+				for(int i = 5;i < listMaxSize;i++) {
 					keyArr[i]="key"+(i-4);
 				}
 				
@@ -495,7 +497,7 @@ public class PublicServiceImpl implements PublicService {
 						gls.setIsShow(isShow);
 						gls.setAccountNumber(accountNumber);
 						gls.setSort(sort);
-						publicDao.insertGoodsLabel(gls);//17863923662    2150902517@qq.com
+						publicDao.insertGoodsLabel(gls);//17863923662    2150902517@qq.com    http://192.168.230.1:8088/GoodsPublic/merchant/main/show?goodsNumber=00008&accountId=40
 					}
 				}
 				keyArr=null;

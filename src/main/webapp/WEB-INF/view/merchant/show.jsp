@@ -10,6 +10,7 @@
 	src="../../resource/js/jquery-3.3.1.js"></script>
 <script type="text/javascript">
 $(function(){
+	/*
 	var ht=$("#htmlContent_div").html();
 	$("#glsList_div #goodsLabelSet_div").each(function(){
 		var label=$(this).attr("attr-label");
@@ -24,6 +25,7 @@ $(function(){
 		//console.log(label+","+key+","+value);
 	});
 	$("#htmlContent_div").html(ht);
+	*/
 	
 	$("#mainMsg1 #htmlContent_div").find("img").each(function(){
 		var title=$(this).attr("title");
@@ -171,10 +173,10 @@ body {
 								<span style="margin-left:10px;color: #686868;">${plan.title}</span>
 							</div>
 							 -->
+							<!-- 
 							<div id="htmlContent_div" style="width: 100%;background-color: #fff;">
 								${plan.htmlContent}
 							</div>
-							<!-- 
 							<c:forEach items="${requestScope.glsList }" var="goodsLabelSet">
 								<c:if test="${goodsLabelSet.isShow }">
 									<c:choose>
@@ -194,14 +196,24 @@ body {
 								</c:if>
 							</c:forEach>
 							 -->
-							 <div id="glsList_div" style="display: none;">
+							 <div id="glsList_div">
 								<c:forEach items="${requestScope.glsList }" var="goodsLabelSet">
 									<c:if test="${goodsLabelSet.isShow }">
 										<c:choose>
+											<c:when test="${goodsLabelSet.key eq 'imgUrl' }">
+												<div style="width: 100%;height: 220px;line-height: 220px;background-color: #fff;text-align: center;">
+													<img alt="" src="${plan[goodsLabelSet.key]}" style="width:200px;height:200px;margin-top: 10px;">
+												</div>
+											</c:when>
 											<c:when test="${goodsLabelSet.key eq 'htmlContent' }">
+												<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;text-align: center;">产品详情</div>
+												<div style="width: 100%;padding-bottom:10px; background-color: #fff;">
+													<span style="margin-left:20px;">${plan[goodsLabelSet.key]}</span>
+												</div>
 											</c:when>
 											<c:otherwise>
-												<div id="goodsLabelSet_div" attr-label="${goodsLabelSet.label }" attr-key="${goodsLabelSet.key }" attr-value="${plan[goodsLabelSet.key]}">
+												<div id="goodsLabelSet_div" style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;" attr-label="${goodsLabelSet.label }" attr-key="${goodsLabelSet.key }" attr-value="${plan[goodsLabelSet.key]}">
+													<span style="margin-left:20px;">${goodsLabelSet.label }:${plan[goodsLabelSet.key]}</span>
 												</div>
 											</c:otherwise>
 										</c:choose>
@@ -232,12 +244,12 @@ body {
 							<img alt="" src="<%=basePath%>resource/images/001.png" style="float:right;margin-top:8px;margin-right:10px;font-size: 25px;"/>
 						</div>
 						<c:forEach items="${flagGoodsList }" var="goods">
-						<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
-							<span style="margin-left:20px;color: #686868;" onclick="goFlagGoods('${goods.goodsNumber }','${param.accountId}');">${goods.title }</span>
-						</div>
-						<div style="width: 100%;height: 260px;background-color: #fff;">
-							<img alt="" src="${goods.imgUrl }" onclick="location.href='/GoodsPublic/merchant/main/show?goodsNumber=${goods.goodsNumber }&accountId=${param.accountId}';" style="width: 256px;height:256px;">
-						</div>
+							<div style="width: 100%;height: 40px;line-height: 40px;background-color: #fff;">
+								<span style="margin-left:20px;color: #686868;" onclick="goFlagGoods('${goods.goodsNumber }','${param.accountId}');">${goods.title }</span>
+							</div>
+							<div style="width: 100%;height: 260px;text-align: center;background-color: #fff;">
+								<img alt="" src="${goods.imgUrl }" onclick="location.href='/GoodsPublic/merchant/main/show?goodsNumber=${goods.goodsNumber }&accountId=${param.accountId}';" style="width: 256px;height:256px;">
+							</div>
 						</c:forEach>
 					</div>
 					<div class="mainMsg" style="display: none;">
