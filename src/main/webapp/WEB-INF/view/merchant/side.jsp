@@ -7,6 +7,26 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>边框导航栏</title>
+<script type="text/javascript">
+//这个验证方法与其他页面的验证恰好相反，其他页面都是未付费不让用，而这里是未付费就跳转到相应链接页面付费，付过费了就不能再继续付费了
+function checkIfPaid(){
+	var bool=false;
+	$.ajaxSetup({async:false});
+	$.post("checkIfPaid",
+		{accountNumber:'${sessionScope.user.id}'},
+		function(data){
+			if(data.status=="ok"){
+				alert(data.message);
+				bool=false;
+			}
+			else{
+				bool=true;
+			}
+		}
+	,"json");
+	return bool;
+}
+</script>
 <style type="text/css">
 .side {
 	position: fixed;
@@ -256,7 +276,7 @@
 					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
 					<li class="layui-nav-item">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-						<a href="<%=basePath%>merchant/main/goFeePrice?accountId=${sessionScope.user.id }">
+						<a href="<%=basePath%>merchant/main/goFeePrice?accountId=${sessionScope.user.id }" onclick="return checkIfPaid();">
 							&nbsp;&nbsp;&nbsp;付费
 						</a>
 					</li>

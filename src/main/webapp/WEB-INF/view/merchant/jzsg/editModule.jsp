@@ -139,6 +139,17 @@ function closeImage2ModBgDiv(){
 	$("#image2ModBg_div").css("display","none");
 }
 
+function changeButStyle(o,flag){
+	if(flag==1){
+		$(o).css("color","#4caf50");
+		$(o).css("border-color","#4caf50");
+	}
+	else{
+		$(o).css("color","#999");
+		$(o).css("border-color","#999");
+	}
+}
+
 function uploadImage1(){
 	if($("#image1Mod_div table td[class='file_td']").length>=3){
 		alert("最多上传3张图片!");
@@ -350,7 +361,7 @@ function goBack(){
 					</td>
 					</c:if>
 					<td id="upload_td">
-						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
 					</td>
 				</tr>
 			</table>
@@ -372,7 +383,7 @@ function goBack(){
 		</div>
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closeImage1ModBgDiv();">确&nbsp;认</div>
-			<div class="cancel_div" onclick="closeImage1ModBgDiv();">取&nbsp;消</div>
+			<div class="cancel_div" onclick="closeImage1ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
@@ -405,7 +416,7 @@ function goBack(){
 					</td>
 					</c:if>
 					<td id="upload_td">
-						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
 					</td>
 				</tr>
 			</table>
@@ -427,7 +438,7 @@ function goBack(){
 		</div>
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closeImage2ModBgDiv();">确&nbsp;认</div>
-			<div class="cancel_div" onclick="closeImage2ModBgDiv();">取&nbsp;消</div>
+			<div class="cancel_div" onclick="closeImage2ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
@@ -470,7 +481,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow1" name="ryxxIfShow1" value="${requestScope.htmlGoodsJZSG.ryxxIfShow1 }" />
-					<input type="button" value="${requestScope.htmlGoodsJZSG.ryxxIfShow1?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(1,this)"/>
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow1?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(1,this)"/>
 				</td>
 			</tr>
 			
@@ -482,7 +493,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow2" name="ryxxIfShow2" value="${requestScope.htmlGoodsJZSG.ryxxIfShow2 }" />
-					<input type="button" value="${requestScope.htmlGoodsJZSG.ryxxIfShow2?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(2,this)"/>
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow2?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(2,this)"/>
 				</td>
 			</tr>
 			
@@ -494,7 +505,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow3" name="ryxxIfShow3" value="${requestScope.htmlGoodsJZSG.ryxxIfShow3 }" />
-					<input type="button" value="${requestScope.htmlGoodsJZSG.ryxxIfShow3?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(3,this)"/>
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow3?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(3,this)"/>
 				</td>
 			</tr>
 			
@@ -506,7 +517,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow4" name="ryxxIfShow4" value="${requestScope.htmlGoodsJZSG.ryxxIfShow4 }" />
-					<input type="button" value="${requestScope.htmlGoodsJZSG.ryxxIfShow4?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(4,this)"/>
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow4?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(4,this)"/>
 				</td>
 			</tr>
 			
@@ -518,7 +529,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow5" name="ryxxIfShow5" value="${requestScope.htmlGoodsJZSG.ryxxIfShow5 }" />
-					<input type="button" value="${requestScope.htmlGoodsJZSG.ryxxIfShow5?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(5,this)"/>
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow5?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(5,this)"/>
 				</td>
 			</tr>
 			
@@ -530,7 +541,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow6" name="ryxxIfShow6" value="${requestScope.htmlGoodsJZSG.ryxxIfShow6 }" />
-					<input type="button" value="${requestScope.htmlGoodsJZSG.ryxxIfShow6?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(6,this)"/>
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow6?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(6,this)"/>
 				</td>
 			</tr>
 			
@@ -542,7 +553,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow7" name="ryxxIfShow7" value="${requestScope.htmlGoodsJZSG.ryxxIfShow7 }" />
-					<input type="button" value="${requestScope.htmlGoodsJZSG.ryxxIfShow7?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(7,this)"/>
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow7?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(7,this)"/>
 				</td>
 			</tr>
 			
@@ -554,7 +565,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow8" name="ryxxIfShow8" value="${requestScope.htmlGoodsJZSG.ryxxIfShow8 }" />
-					<input type="button" value="${requestScope.htmlGoodsJZSG.ryxxIfShow8?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(8,this)"/>
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow8?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(8,this)"/>
 				</td>
 			</tr>
 			
@@ -566,7 +577,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow9" name="ryxxIfShow9" value="${requestScope.htmlGoodsJZSG.ryxxIfShow9 }" />
-					<input type="button" value="${requestScope.htmlGoodsJZSG.ryxxIfShow9?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(9,this)"/>
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow9?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(9,this)"/>
 				</td>
 			</tr>
 			
@@ -578,7 +589,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow10" name="ryxxIfShow10" value="${requestScope.htmlGoodsJZSG.ryxxIfShow10 }" />
-					<input type="button" value="${requestScope.htmlGoodsJZSG.ryxxIfShow10?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(10,this)"/>
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow10?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(10,this)"/>
 				</td>
 			</tr>
 			

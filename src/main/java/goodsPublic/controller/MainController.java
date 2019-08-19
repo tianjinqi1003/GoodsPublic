@@ -1539,7 +1539,7 @@ public class MainController {
 			
 			if(bool) {
 				jsonMap.put("status", "ok");
-				jsonMap.put("message", "已付费");
+				jsonMap.put("message", "已付过费了");
 			}
 			else {
 				jsonMap.put("status", "no");
