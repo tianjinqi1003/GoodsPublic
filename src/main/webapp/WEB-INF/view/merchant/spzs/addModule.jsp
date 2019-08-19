@@ -125,6 +125,17 @@ function closeImage3ModBgDiv(){
 	$("#image3ModBg_div").css("display","none");
 }
 
+function changeButStyle(o,flag){
+	if(flag==1){
+		$(o).css("color","#4caf50");
+		$(o).css("border-color","#4caf50");
+	}
+	else{
+		$(o).css("color","#999");
+		$(o).css("border-color","#999");
+	}
+}
+
 function uploadImage1(){
 	if($("#image1Mod_div table td[class='file_td']").length>=5){
 		alert("最多上传5张图片!");
@@ -471,7 +482,7 @@ function checkIfPaid(){
 						<img class="item_img" id="img1_1" alt="" src="/GoodsPublic/resource/images/spzs/22ad5cebe49933335608eeb6356e6ab9.png">
 					</td>
 					<td id="upload_td">
-						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
 					</td>
 				</tr>
 			</table>
@@ -482,7 +493,7 @@ function checkIfPaid(){
 		</div>
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closeImage1ModBgDiv();">确&nbsp;认</div>
-			<div class="cancel_div" onclick="closeImage1ModBgDiv();">取&nbsp;消</div>
+			<div class="cancel_div" onclick="closeImage1ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
@@ -511,7 +522,7 @@ function checkIfPaid(){
 					</td>
 					 -->
 					<td id="upload_td">
-						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
 					</td>
 				</tr>
 			</table>
@@ -522,7 +533,7 @@ function checkIfPaid(){
 		</div>
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closeImage2ModBgDiv();">确&nbsp;认</div>
-			<div class="cancel_div" onclick="closeImage2ModBgDiv();">取&nbsp;消</div>
+			<div class="cancel_div" onclick="closeImage2ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
@@ -541,7 +552,7 @@ function checkIfPaid(){
 						<img class="item_img" id="img3_1" alt="" src="/GoodsPublic/resource/images/spzs/\573ab1fc91d98528915519d96dc2e6ec.png">
 					</td>
 					<td id="upload_td">
-						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage3();">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage3();">
 					</td>
 				</tr>
 			</table>
@@ -552,14 +563,14 @@ function checkIfPaid(){
 		</div>
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closeImage3ModBgDiv();">确&nbsp;认</div>
-			<div class="cancel_div" onclick="closeImage3ModBgDiv();">取&nbsp;消</div>
+			<div class="cancel_div" onclick="closeImage3ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
 
 <div class="top_div">
 	<div class="return_div" onclick="goBack();">&lt返回</div>
-	<div class="title_div">红酒介绍-案例</div>
+	<div class="title_div">商品展示-案例</div>
 	<div class="myQrcode_div">我的二维码&nbsp;${sessionScope.user.userName }</div>
 </div>
 <div class="middle_div" id="middle_div">
@@ -597,7 +608,7 @@ function checkIfPaid(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="spxqIfShow${status.index+1 }" name="spxqIfShow${status.index+1 }" value="true" />
-					<input type="button" value="显示" onclick="changeSPXQTrIfShow(${status.index+1 },this)"/>
+					<input type="button" class="spxqIfShow_inp" value="显示" onclick="changeSPXQTrIfShow(${status.index+1 },this)"/>
 				</td>
 			</tr>
 			</c:forEach>

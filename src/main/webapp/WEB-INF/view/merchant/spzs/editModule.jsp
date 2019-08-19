@@ -203,6 +203,17 @@ function closeImage3ModBgDiv(){
 	$("#image3ModBg_div").css("display","none");
 }
 
+function changeButStyle(o,flag){
+	if(flag==1){
+		$(o).css("color","#4caf50");
+		$(o).css("border-color","#4caf50");
+	}
+	else{
+		$(o).css("color","#999");
+		$(o).css("border-color","#999");
+	}
+}
+
 function uploadImage1(){
 	var uuid=createUUID();
 	$("#uuid_hid1").val(uuid);
@@ -521,7 +532,7 @@ function goBack(){
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsSPZS.image1_5 eq null }">
 					<td id="upload_td">
-						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
 					</td>
 					</c:if>
 				</tr>
@@ -535,7 +546,7 @@ function goBack(){
 					</td>
 					</c:if>
 					<td id="upload_td">
-						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
 					</td>
 				</tr>
 				</c:if>
@@ -566,7 +577,7 @@ function goBack(){
 		</div>
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closeImage1ModBgDiv();">确&nbsp;认</div>
-			<div class="cancel_div" onclick="closeImage1ModBgDiv();">取&nbsp;消</div>
+			<div class="cancel_div" onclick="closeImage1ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
@@ -607,7 +618,7 @@ function goBack(){
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsSPZS.image2_5 eq null }">
 					<td id="upload_td">
-						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
 					</td>
 					</c:if>
 				</tr>
@@ -621,7 +632,7 @@ function goBack(){
 					</td>
 					</c:if>
 					<td id="upload_td">
-						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
 					</td>
 				</tr>
 				</c:if>
@@ -652,7 +663,7 @@ function goBack(){
 		</div>
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closeImage2ModBgDiv();">确&nbsp;认</div>
-			<div class="cancel_div" onclick="closeImage2ModBgDiv();">取&nbsp;消</div>
+			<div class="cancel_div" onclick="closeImage2ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
@@ -693,7 +704,7 @@ function goBack(){
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsSPZS.image3_5 eq null }">
 					<td id="upload_td">
-						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage3();">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage3();">
 					</td>
 					</c:if>
 				</tr>
@@ -707,7 +718,7 @@ function goBack(){
 					</td>
 					</c:if>
 					<td id="upload_td">
-						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage3();">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage3();">
 					</td>
 				</tr>
 				</c:if>
@@ -738,14 +749,14 @@ function goBack(){
 		</div>
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closeImage3ModBgDiv();">确&nbsp;认</div>
-			<div class="cancel_div" onclick="closeImage3ModBgDiv();">取&nbsp;消</div>
+			<div class="cancel_div" onclick="closeImage3ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
 
 <div class="top_div">
 	<div class="return_div" onclick="goBack();">&lt返回</div>
-	<div class="title_div">红酒介绍-案例</div>
+	<div class="title_div">商品展示-案例</div>
 	<div class="myQrcode_div">我的二维码&nbsp;${sessionScope.user.userName }</div>
 </div>
 <div class="middle_div" id="middle_div">
@@ -795,7 +806,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="spxqIfShow1" name="spxqIfShow1" value="${requestScope.htmlGoodsSPZS.spxqIfShow1 }" />
-					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow1?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(1,this)"/>
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsSPZS.spxqIfShow1?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(1,this)"/>
 				</td>
 			</tr>
 			
@@ -807,7 +818,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="spxqIfShow2" name="spxqIfShow2" value="${requestScope.htmlGoodsSPZS.spxqIfShow2 }" />
-					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow2?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(2,this)"/>
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsSPZS.spxqIfShow2?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(2,this)"/>
 				</td>
 			</tr>
 			
@@ -819,7 +830,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="spxqIfShow3" name="spxqIfShow3" value="${requestScope.htmlGoodsSPZS.spxqIfShow3 }" />
-					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow3?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(3,this)"/>
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsSPZS.spxqIfShow3?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(3,this)"/>
 				</td>
 			</tr>
 			
@@ -831,7 +842,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="spxqIfShow4" name="spxqIfShow4" value="${requestScope.htmlGoodsSPZS.spxqIfShow4 }" />
-					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow4?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(4,this)"/>
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsSPZS.spxqIfShow4?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(4,this)"/>
 				</td>
 			</tr>
 			
@@ -843,7 +854,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="spxqIfShow5" name="spxqIfShow5" value="${requestScope.htmlGoodsSPZS.spxqIfShow5 }" />
-					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow5?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(5,this)"/>
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsSPZS.spxqIfShow5?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(5,this)"/>
 				</td>
 			</tr>
 			
@@ -855,7 +866,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="spxqIfShow6" name="spxqIfShow6" value="${requestScope.htmlGoodsSPZS.spxqIfShow6 }" />
-					<input type="button" value="${requestScope.htmlGoodsSPZS.spxqIfShow6?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(6,this)"/>
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsSPZS.spxqIfShow6?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(6,this)"/>
 				</td>
 			</tr>
 			

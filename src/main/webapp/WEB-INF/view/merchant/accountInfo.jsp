@@ -66,7 +66,36 @@ $(function(){
 
 function checkEdit(){
 	if(checkNickName()){
-		document.getElementById("sub_but").click();
+		//document.getElementById("sub_but").click();
+		var formData=new FormData($("#form1")[0]);
+		 
+		$.ajax({
+			type:"post",
+			url:"editAccountInfo",
+			dataType: "json",
+			data:formData,
+			cache: false,
+			processData: false,
+			contentType: false,
+			success: function (data){
+				if(data.status==1){
+					$.messager.defaults.ok = "是";
+				    $.messager.defaults.cancel = "否";
+				    $.messager.defaults.width = 350;//更改消息框宽度
+				    $.messager.confirm(
+				    	"提示",
+				    	"商家编辑成功，重新登录生效！是否重新登录？"
+				        ,function(r){    
+				            if (r){    
+				                location.href="../exit";
+				            }
+				        }); 
+				}
+				else{
+					$.messager.alert("提示","商家编辑失败","warning");
+				}
+			}
+		});
 	}
 }
 

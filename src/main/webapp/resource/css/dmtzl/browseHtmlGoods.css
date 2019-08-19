@@ -140,6 +140,7 @@ body{
 	margin-left:25px;
 	color:#fff;
 	background-color: #4caf50;
+	cursor:pointer;
 	border-radius:3px;
 }
 .right_div .option3_div{

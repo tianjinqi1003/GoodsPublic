@@ -73,6 +73,17 @@ function closeImage2ModBgDiv(){
 	$("#image2ModBg_div").css("display","none");
 }
 
+function changeButStyle(o,flag){
+	if(flag==1){
+		$(o).css("color","#4caf50");
+		$(o).css("border-color","#4caf50");
+	}
+	else{
+		$(o).css("color","#999");
+		$(o).css("border-color","#999");
+	}
+}
+
 function uploadImage1(){
 	if($("#image1Mod_div table td[class='file_td']").length>=3){
 		alert("最多上传3张图片!");
@@ -314,7 +325,7 @@ function checkIfPaid(){
 						<img class="item_img" id="img1_1" alt="" src="/GoodsPublic/resource/images/jzsg/bf0b334d871019cf3b2359e22b405d1c.png">
 					</td>
 					<td id="upload_td">
-						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
 					</td>
 				</tr>
 			</table>
@@ -325,7 +336,7 @@ function checkIfPaid(){
 		</div>
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closeImage1ModBgDiv();">确&nbsp;认</div>
-			<div class="cancel_div" onclick="closeImage1ModBgDiv();">取&nbsp;消</div>
+			<div class="cancel_div" onclick="closeImage1ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
@@ -344,7 +355,7 @@ function checkIfPaid(){
 						<img class="item_img" id="img2_1" alt="" src="/GoodsPublic/resource/images/jzsg/43a339cd90f1a6b00c0c256d49d6a119.png">
 					</td>
 					<td id="upload_td">
-						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
 					</td>
 				</tr>
 			</table>
@@ -355,7 +366,7 @@ function checkIfPaid(){
 		</div>
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closeImage2ModBgDiv();">确&nbsp;认</div>
-			<div class="cancel_div" onclick="closeImage2ModBgDiv();">取&nbsp;消</div>
+			<div class="cancel_div" onclick="closeImage2ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
@@ -393,7 +404,7 @@ function checkIfPaid(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow${status.index+1 }" name="ryxxIfShow${status.index+1 }" value="true" />
-					<input type="button" value="显示" onclick="changeRYXXTrIfShow(${status.index+1 },this)"/>
+					<input type="button" class="ryxxIfShow_inp" value="显示" onclick="changeRYXXTrIfShow(${status.index+1 },this)"/>
 				</td>
 			</tr>
 			</c:forEach>

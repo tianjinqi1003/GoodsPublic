@@ -111,6 +111,17 @@ function closeImage1ModBgDiv(){
 	$("#image1ModBg_div").css("display","none");
 }
 
+function changeButStyle(o,flag){
+	if(flag==1){
+		$(o).css("color","#4caf50");
+		$(o).css("border-color","#4caf50");
+	}
+	else{
+		$(o).css("color","#999");
+		$(o).css("border-color","#999");
+	}
+}
+
 function uploadEmbed1(){
 	var uuid=createUUID();
 	$("#uuid_hid1").val(uuid);
@@ -320,7 +331,7 @@ function checkIfPaid(){
 			<div class="embedShow_div" id="embedShow_div">
 				<embed class="item_embed" id="embed1_1" alt="" src="/GoodsPublic/resource/embed/dmtzl/d707ea145302bad9422553804f43d669_conv.H_57_5.mp4">
 			</div>
-			<div class="reupload_div" onclick="uploadEmbed1();">重新上传</div>
+			<div class="reupload_div" onclick="uploadEmbed1();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">重新上传</div>
 			<div class="uploadFile2_div" id="uploadFile2_div">
 				<input type="file" id="file2_1" name="file" onchange="showQrcodeEmbed1(this)" />
 			</div>
@@ -328,7 +339,7 @@ function checkIfPaid(){
 		</div>
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closeEmbed1ModBgDiv();">确&nbsp;认</div>
-			<div class="cancel_div" onclick="closeEmbed1ModBgDiv();">取&nbsp;消</div>
+			<div class="cancel_div" onclick="closeEmbed1ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
@@ -347,7 +358,7 @@ function checkIfPaid(){
 						<img class="item_img" id="img1_1" alt="" src="/GoodsPublic/resource/images/dmtzl/c769d75fc7033f7218ca8bcb0c08624e.jpg">
 					</td>
 					<td id="upload_td">
-						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
 					</td>
 				</tr>
 			</table>
@@ -358,7 +369,7 @@ function checkIfPaid(){
 		</div>
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closeImage1ModBgDiv();">确&nbsp;认</div>
-			<div class="cancel_div" onclick="closeImage1ModBgDiv();">取&nbsp;消</div>
+			<div class="cancel_div" onclick="closeImage1ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
 		</div>
 	</div>
 </div>

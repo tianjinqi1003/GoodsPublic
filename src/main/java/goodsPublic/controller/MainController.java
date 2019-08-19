@@ -1116,7 +1116,9 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping(value="/editAccountInfo")
+	@ResponseBody
 	public String editAccountInfo(AccountMsg accountMsg,HttpServletRequest request,@RequestParam(value="file")  MultipartFile file) {
+		String json="";
 		try {
 			if(file.getSize()>0) {
 				String jsonStr = FileUploadUtils.appUploadContentImg(request,file,"");
@@ -1129,11 +1131,23 @@ public class MainController {
 			AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
 			accountMsg.setId(msg.getId());
 			int a=publicService.editAccountInfo(accountMsg);
+
+			PlanResult plan=new PlanResult();
+			if(a==0) {
+				plan.setStatus(0);
+				//plan.setMsg("商家编辑失败");
+			}
+			else {
+				plan.setStatus(1);
+				//plan.setMsg("商家编辑成功，重新登录生效！");
+			}
+			json=JsonUtil.getJsonFromObject(plan);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "/merchant/accountInfo";
+		//return "/merchant/accountInfo";
+		return json;
 	}
 	
 	/**

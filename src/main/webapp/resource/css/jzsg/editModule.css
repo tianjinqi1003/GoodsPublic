@@ -178,6 +178,7 @@ body{
 	margin-top:10px;
 	margin-left:20px;
 	border:1px solid #eee;
+	cursor:pointer;
 	border-radius:3px;
 }
 .top_div .title_div{
@@ -313,6 +314,7 @@ body{
 	margin-top:15px;
 	border:1px solid #eee;
 	background-color:#fff;
+	cursor:pointer;
 	border-radius:3px;
 }
 .right_div .finishEdit_div{
@@ -324,6 +326,7 @@ body{
 	margin-top:15px;
 	color:#fff;
 	background-color:#4caf50;
+	cursor:pointer;
 	border-radius:3px;
 }
 .right_div .saveStatus_div{

@@ -162,6 +162,17 @@ function closeImage1ModBgDiv(){
 	$("#image1ModBg_div").css("display","none");
 }
 
+function changeButStyle(o,flag){
+	if(flag==1){
+		$(o).css("color","#4caf50");
+		$(o).css("border-color","#4caf50");
+	}
+	else{
+		$(o).css("color","#999");
+		$(o).css("border-color","#999");
+	}
+}
+
 function uploadEmbed1(){
 	var uuid=createUUID();
 	$("#uuid_hid1").val(uuid);
@@ -329,7 +340,7 @@ function goBack(){
 			<div class="embedShow_div" id="embedShow_div">
 				<embed class="item_embed" id="embed1_1" alt="" src="${requestScope.htmlGoodsDMTZL.embed1_1 }">
 			</div>
-			<div class="reupload_div" onclick="uploadEmbed1();">重新上传</div>
+			<div class="reupload_div" onclick="uploadEmbed1();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">重新上传</div>
 			<div class="uploadFile2_div" id="uploadFile2_div">
 				<c:if test="${requestScope.htmlGoodsDMTZL.embed1_1 ne null }">
 				<input type="file" id="file2_1" name="file2_1" onchange="showQrcodeEmbed1(this)" />
@@ -340,7 +351,7 @@ function goBack(){
 		</div>
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closeEmbed1ModBgDiv();">确&nbsp;认</div>
-			<div class="cancel_div" onclick="closeEmbed1ModBgDiv();">取&nbsp;消</div>
+			<div class="cancel_div" onclick="closeEmbed1ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
@@ -381,7 +392,7 @@ function goBack(){
 					</c:if>
 					<c:if test="${requestScope.htmlGoodsDMTZL.image1_5 eq null }">
 					<td id="upload_td">
-						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
 					</td>
 					</c:if>
 				</tr>
@@ -395,7 +406,7 @@ function goBack(){
 					</td>
 					</c:if>
 					<td id="upload_td">
-						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
+						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
 					</td>
 				</tr>
 				</c:if>
@@ -426,7 +437,7 @@ function goBack(){
 		</div>
 		<div class="but_div" id="but_div">
 			<div class="confirm_div" onclick="closeImage1ModBgDiv();">确&nbsp;认</div>
-			<div class="cancel_div" onclick="closeImage1ModBgDiv();">取&nbsp;消</div>
+			<div class="cancel_div" onclick="closeImage1ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
 		</div>
 	</div>
 </div>
