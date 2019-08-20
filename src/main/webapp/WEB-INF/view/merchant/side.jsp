@@ -8,8 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>边框导航栏</title>
 <script type="text/javascript">
-//这个验证方法与其他页面的验证恰好相反，其他页面都是未付费不让用，而这里是未付费就跳转到相应链接页面付费，付过费了就不能再继续付费了
-function checkIfPaid(){
+/*这个验证方法与其他页面的验证恰好相反，其他页面都是未付费不让用，而这里是未付费就跳转到相应链接页面付费，付过费了就不能再继续付费了
+因为其他页面包含了这个页，虽然调用了同一个接口，必须用checkIfPaidInSide这个方法，把方法名区分开
+*/
+function checkIfPaidInSide(){
 	var bool=false;
 	$.ajaxSetup({async:false});
 	$.post("checkIfPaid",
@@ -276,7 +278,7 @@ function checkIfPaid(){
 					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
 					<li class="layui-nav-item">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-						<a href="<%=basePath%>merchant/main/goFeePrice?accountId=${sessionScope.user.id }" onclick="return checkIfPaid();">
+						<a href="<%=basePath%>merchant/main/goFeePrice?accountId=${sessionScope.user.id }" onclick="return checkIfPaidInSide();">
 							&nbsp;&nbsp;&nbsp;付费
 						</a>
 					</li>

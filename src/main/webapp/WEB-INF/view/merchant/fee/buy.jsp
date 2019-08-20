@@ -50,6 +50,11 @@ function goPay(){
 			break;
 	}
 	
+	if(!$("#agree_cb").prop("checked")){
+		alert("请选择《付费用户服务协议》!");
+		return false;
+	}
+	
 	if($("#alipay_div").attr("class").indexOf("chosen")!=-1)
 		alert("支付宝支付");
 	else if($("#wechatpay_div").attr("class").indexOf("chosen")!=-1)
@@ -72,7 +77,7 @@ function goPay(){
 			<img alt="" src="<%=basePath %>/resource/images/wechatpay_icon@1x.png">
 		</div>
 		<div class="agree_div">
-			我已阅读并同意
+			<input type="checkbox" id="agree_cb"/>我已阅读并同意<a href="http://qlcode.qdhualing.com/agreement.htm" target="blank">《付费用户服务协议》</a>
 			<div class="goPay_div" onclick="goPay();">去付款</div>
 		</div>
 	</div>

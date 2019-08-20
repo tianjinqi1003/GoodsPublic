@@ -1395,22 +1395,31 @@ public class MainController {
 	public String goShowHtmlGoods(String trade,String goodsNumber,String accountId,HttpServletRequest request) {
 		
 		String url=null;
-		switch (trade) {
-		case "spzs":
-			HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(goodsNumber,accountId);
-			request.setAttribute("htmlGoodsSPZS", htmlGoodsSPZS);
-			url = "/merchant/spzs/showHtmlGoods";
-			break;
-		case "dmtzl":
-			HtmlGoodsDMTZL htmlGoodsDMTZL = publicService.getHtmlGoodsDMTZL(goodsNumber,accountId);
-			request.setAttribute("htmlGoodsDMTZL", htmlGoodsDMTZL);
-			url = "/merchant/dmtzl/showHtmlGoods";
-			break;
-		case "jzsg":
-			HtmlGoodsJZSG htmlGoodsJZSG = publicService.getHtmlGoodsJZSG(request.getParameter("userNumber"),accountId);
-			request.setAttribute("htmlGoodsJZSG", htmlGoodsJZSG);
-			url = "/merchant/jzsg/showHtmlGoods";
-			break;
+		Map<String, Object> jsonMap = checkIfPaid(accountId);
+		String status = jsonMap.get("status").toString();
+		if("ok".equals(status)) {
+			switch (trade) {
+			case "spzs":
+				HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(goodsNumber,accountId);
+				request.setAttribute("htmlGoodsSPZS", htmlGoodsSPZS);
+				url = "/merchant/spzs/showHtmlGoods";
+				break;
+			case "dmtzl":
+				HtmlGoodsDMTZL htmlGoodsDMTZL = publicService.getHtmlGoodsDMTZL(goodsNumber,accountId);
+				request.setAttribute("htmlGoodsDMTZL", htmlGoodsDMTZL);
+				url = "/merchant/dmtzl/showHtmlGoods";
+				break;
+			case "jzsg":
+				HtmlGoodsJZSG htmlGoodsJZSG = publicService.getHtmlGoodsJZSG(request.getParameter("userNumber"),accountId);
+				request.setAttribute("htmlGoodsJZSG", htmlGoodsJZSG);
+				url = "/merchant/jzsg/showHtmlGoods";
+				break;
+			}
+		}
+		else {
+			String message = jsonMap.get("message").toString();
+			request.setAttribute("message", message);
+			url = "/merchant/unPaid";
 		}
 		return url;
 	}
