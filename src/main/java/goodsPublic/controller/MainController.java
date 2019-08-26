@@ -1538,6 +1538,7 @@ public class MainController {
 	public void kaiTongByAlipay(HttpServletRequest request) {
 		
 		try {
+			
 			//获取支付宝POST过来反馈信息
 			Map<String,String> params = new HashMap<String,String>();
 			Map<String,String[]> requestParams = request.getParameterMap();
@@ -1551,7 +1552,6 @@ public class MainController {
 				}
 				//乱码解决，这段代码在出现乱码时使用
 				valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
-				System.out.println("name=="+name+","+"valueStr==="+valueStr);
 				params.put(name, valueStr);
 			}
 			
@@ -1592,6 +1592,37 @@ public class MainController {
 				}
 				
 				System.out.println("success");
+				
+
+				CreatePayCodeRecord cpcr=publicService.getCreatePayCodeRecordByOutTradeNo(out_trade_no);
+				AccountPayRecord apr = new AccountPayRecord();
+				apr.setOutTradeNo(out_trade_no);
+				apr.setAccountNumber(cpcr.getAccountNumber());
+				Date date = new Date();
+				apr.setPayTime(timeSDF.format(date));
+				Calendar calendar=Calendar.getInstance();
+				calendar.setTime(date);
+				int vipType = cpcr.getVipType();
+				switch (vipType) {
+					case CreatePayCodeRecord.ONE_MONTH:
+					case CreatePayCodeRecord.CONTINUE_MONTH:
+						calendar.add(Calendar.MONTH, 1);
+						break;
+					case CreatePayCodeRecord.THREE_MONTHS:
+						calendar.add(Calendar.MONTH, 3);
+						break;
+					case CreatePayCodeRecord.ONE_YEAR:
+						calendar.add(Calendar.YEAR, 1);
+						break;
+				}
+				apr.setEndTime(timeSDF.format(calendar.getTime()));
+				apr.setVipType(vipType);
+				apr.setPayType(cpcr.getPayType());
+				apr.setMoney(cpcr.getMoney());
+				apr.setPhone(cpcr.getPhone());
+				
+				int count=publicService.addAccountPayRecord(apr);
+				System.out.println("改变的条数==="+count);
 				
 			}else {//验证失败
 				System.out.println("fail");
@@ -2159,7 +2190,7 @@ public class MainController {
 			//付款金额，必填
 			String total_amount = "0.01";
 			//订单名称，必填
-			String subject = "测试";
+			String subject = "aaa";
 			//商品描述，可空
 			String body = "";
 			
@@ -2182,6 +2213,8 @@ public class MainController {
 			CreatePayCodeRecord cpcr= new CreatePayCodeRecord();
 			cpcr.setOutTradeNo(out_trade_no);
 			cpcr.setAccountNumber(request.getParameter("accountNumber"));
+			cpcr.setPhone(request.getParameter("phone"));
+			cpcr.setVipType(Integer.valueOf(request.getParameter("vipType")));
 			cpcr.setPayType(1);
 			cpcr.setMoney(Float.valueOf(total_amount));
 			
