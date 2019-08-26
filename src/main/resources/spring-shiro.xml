@@ -26,7 +26,8 @@
 			<value>
 				/merchant/main/show=anon
 				/merchant/main/goShowHtmlGoods=anon
-				/merchant/main/kaiTong=anon
+				/merchant/main/kaiTongByWX=anon
+				/merchant/main/kaiTongByAlipay=anon
 				/merchant/main/goAddModule=anon
 				/merchant/main/checkIfLogined=anon
 				/merchant/login=anon

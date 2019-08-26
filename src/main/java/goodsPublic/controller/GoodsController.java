@@ -90,6 +90,7 @@ public class GoodsController {
 				}
 			}catch (Exception e) {
 				e.printStackTrace();
+				plan.setStatus(1);
 				plan.setMsg("登陆失败");
 				return JsonUtil.getJsonFromObject(plan);
 			}

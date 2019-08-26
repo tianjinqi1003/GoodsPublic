@@ -2,14 +2,10 @@ package goodsPublic.controller;
 
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,11 +27,11 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipayTradePrecreateRequest;
 import com.alipay.api.response.AlipayTradePrecreateResponse;
-import com.goodsPublic.config.AlipayConfig;
 import com.goodsPublic.util.FileUploadUtils;
 import com.goodsPublic.util.FinalState;
 import com.goodsPublic.util.JsonUtil;
 import com.goodsPublic.util.PlanResult;
+import com.goodsPublic.util.alipay.AlipayConfig;
 import com.goodsPublic.util.qrcode.Qrcode;
 import com.jpay.ext.kit.HttpKit;
 import com.jpay.ext.kit.PaymentKit;
@@ -56,6 +52,10 @@ import goodsPublic.entity.ModuleSPZS;
 import goodsPublic.service.CategoryService;
 import goodsPublic.service.PublicService;
 import net.sf.json.JSONObject;
+import com.alipay.api.*;
+import com.alipay.api.request.*;
+import com.alipay.api.*;
+import com.alipay.api.internal.util.*;
 
 @Controller
 @RequestMapping("/merchant/main")
@@ -66,6 +66,7 @@ public class MainController {
 	@Autowired
 	private CategoryService categoryService;
 	private SimpleDateFormat timeSDF=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	private SimpleDateFormat orderIdSDF=new SimpleDateFormat("yyyyMMddHHmmss");
 	
 	/**
 	 * 跳转至商品发布页面
@@ -1454,8 +1455,8 @@ public class MainController {
 		return json;
 	}
 	
-	@RequestMapping(value="/kaiTong")
-	public void kaiTong(HttpServletRequest request, HttpServletResponse response) {
+	@RequestMapping(value="/kaiTongByWX")
+	public void kaiTongByWX(HttpServletRequest request, HttpServletResponse response) {
 		
 		try {
 			// 支付结果通用通知文档:https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_7&index=8
@@ -1528,6 +1529,82 @@ public class MainController {
 				}
 			}
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value="/kaiTongByAlipay")
+	public void kaiTongByAlipay(HttpServletRequest request) {
+		
+		try {
+			//获取支付宝POST过来反馈信息
+			Map<String,String> params = new HashMap<String,String>();
+			Map<String,String[]> requestParams = request.getParameterMap();
+			for (Iterator<String> iter = requestParams.keySet().iterator(); iter.hasNext();) {
+				String name = (String) iter.next();
+				String[] values = (String[]) requestParams.get(name);
+				String valueStr = "";
+				for (int i = 0; i < values.length; i++) {
+					valueStr = (i == values.length - 1) ? valueStr + values[i]
+							: valueStr + values[i] + ",";
+				}
+				//乱码解决，这段代码在出现乱码时使用
+				valueStr = new String(valueStr.getBytes("ISO-8859-1"), "utf-8");
+				System.out.println("name=="+name+","+"valueStr==="+valueStr);
+				params.put(name, valueStr);
+			}
+			
+			boolean signVerified = AlipaySignature.rsaCheckV1(params, AlipayConfig.alipay_public_key, AlipayConfig.charset, AlipayConfig.sign_type); //调用SDK验证签名
+
+			//——请在这里编写您的程序（以下代码仅作参考）——
+			
+			/* 实际验证过程建议商户务必添加以下校验：
+			1、需要验证该通知数据中的out_trade_no是否为商户系统中创建的订单号，
+			2、判断total_amount是否确实为该订单的实际金额（即商户订单创建时的金额），
+			3、校验通知中的seller_id（或者seller_email) 是否为out_trade_no这笔单据的对应的操作方（有的时候，一个商户可能有多个seller_id/seller_email）
+			4、验证app_id是否为该商户本身。
+			*/
+			if(signVerified) {//验证成功
+				//商户订单号
+				String out_trade_no = new String(request.getParameter("out_trade_no").getBytes("ISO-8859-1"),"UTF-8");
+			
+				//支付宝交易号
+				String trade_no = new String(request.getParameter("trade_no").getBytes("ISO-8859-1"),"UTF-8");
+			
+				//交易状态
+				String trade_status = new String(request.getParameter("trade_status").getBytes("ISO-8859-1"),"UTF-8");
+				
+				if(trade_status.equals("TRADE_FINISHED")){
+					//判断该笔订单是否在商户网站中已经做过处理
+					//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+					//如果有做过处理，不执行商户的业务程序
+						
+					//注意：
+					//退款日期超过可退款期限后（如三个月可退款），支付宝系统发送该交易状态通知
+				}else if (trade_status.equals("TRADE_SUCCESS")){
+					//判断该笔订单是否在商户网站中已经做过处理
+					//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
+					//如果有做过处理，不执行商户的业务程序
+					
+					//注意：
+					//付款完成后，支付宝系统发送该交易状态通知
+				}
+				
+				System.out.println("success");
+				
+			}else {//验证失败
+				System.out.println("fail");
+			
+				//调试用，写文本函数记录程序运行情况是否正常
+				String sWord = AlipaySignature.getSignCheckContentV1(params);
+				System.out.println("sWord===="+sWord);
+				AlipayConfig.logResult(sWord);
+			}
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (AlipayApiException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -2065,69 +2142,63 @@ public class MainController {
 		return jsonMap;
 	}
 	
-	public static void main(String[] args) {
+	@RequestMapping(value="/alipay")
+	public void alipay(HttpServletRequest request, HttpServletResponse response) {
 		
 		try {
-			AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.URL,AlipayConfig.APPID,AlipayConfig.RSA_PRIVATE_KEY,AlipayConfig.FORMAT,AlipayConfig.CHARSET,AlipayConfig.ALIPAY_PUBLIC_KEY,AlipayConfig.SIGNTYPE);
-			AlipayTradePrecreateRequest request = new AlipayTradePrecreateRequest();	
-			request.setBizContent("{" +
-			"\"out_trade_no\":\"20180320010101001\"," +
-			"\"total_amount\":\"0.01\"," +
-			"\"subject\":\"Iphone6 16G\","+
-			"\"seller_id\":\"2018091961456482\"," +
-			"\"discountable_amount\":\"8.88\","+
-			"\"goods_detail\":[{"+
-			"\"goods_id\":\"apple-01\"," +
-			"\"goods_name\":\"ipad\","+
-			"\"quantity\":\"1\","+
-			"\"price\":\"2000\","+
-			"\"goods_category\":\"34543238\","+
-			"\"categories_tree\":\"124868003|126232002|126252004\","+
-			"\"body\":\"特价手机\","+
-			"\"show_url\":\"http://www.alipay.com/xxx.jpg\""+
-			"}],"+
-			"\"body\":\"Iphone6 16G\","+
-			"\"operator_id\":\"yx_001\","+
-			"\"store_id\":\"NJ_001\","+
-"\"disable_pay_channels\":\"pcredit,moneyFund,debitCardExpress\","+
-"\"enable_pay_channels\":\"pcredit,moneyFund,debitCardExpress\","+
-"\"terminal_id\":\"NJ_T_001\","+
-"\"extend_params\":{"+
-"\"sys_service_provider_id\":\"2088511833207846\","+
-"\"industry_reflux_info\":\"{\"scene_code\":\"metro_tradeorder\",\"channel\":\"xxxx\",\"scene_data\":{\"asset_name\":\"ALIPAY\"}}\"," +
-"\"card_type\":\"S0JP0000\""+
-			"},"+
-			"\"timeout_express\":\"90m\","+
-			"\"settle_info\":{"+
-			"\"settle_detail_infos\":[{"+
-			"\"trans_in_type\":\"cardSerialNo\","+
-			"\"trans_in\":\"A0001\","+
-			"\"summary_dimension\":\"A0001\","+
-			"\"settle_entity_id\":\"2088xxxxx;ST_0001\","+
-			"\"settle_entity_type\":\"SecondMerchant、Store\","+
-			"\"amount\":\"0.1\""+
-			"}]}," +
-			"\"business_params\":\"{\"data\":\"123\"},"+
-			"\"qr_code_timeout_express\":\"90m\""+
-			" }");
-			AlipayTradePrecreateResponse response = alipayClient.execute(request);
-			if(response.isSuccess()){
-			System.out.println("调用成功");
-			String qrCode = response.getQrCode();
-			System.out.println("------qrCode-------"+qrCode);
-			// 需要修改为运行机器上的路径
-			//String filePath = String.format("/Users/sudo/Desktop/qr- %s.png",response.getOutTradeNo());
-			//将生成的二维码存放到指定路径
-			//ZxingUtils.getQRCodeImge(response.getQrCode(), 256, filePath);
-			} else {
-			System.out.println("调用失败");
+			//获得初始化的AlipayClient
+			AlipayClient alipayClient = new DefaultAlipayClient(AlipayConfig.gatewayUrl, AlipayConfig.app_id, AlipayConfig.merchant_private_key, "json", AlipayConfig.charset, AlipayConfig.alipay_public_key, AlipayConfig.sign_type);
+			
+			//设置请求参数
+			AlipayTradePagePayRequest alipayRequest = new AlipayTradePagePayRequest();
+			//alipayRequest.setReturnUrl(AlipayConfig.return_url);
+			alipayRequest.setNotifyUrl(AlipayConfig.notify_url);
+			
+			//商户订单号，商户网站订单系统中唯一订单号，必填
+			String out_trade_no = orderIdSDF.format(new Date());
+			//付款金额，必填
+			String total_amount = "0.01";
+			//订单名称，必填
+			String subject = "测试";
+			//商品描述，可空
+			String body = "";
+			
+			alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\"," 
+					+ "\"total_amount\":\""+ total_amount +"\"," 
+					+ "\"subject\":\""+ subject +"\"," 
+					+ "\"body\":\""+ body +"\"," 
+					+ "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
+			
+			//若想给BizContent增加其他可选请求参数，以增加自定义超时时间参数timeout_express来举例说明
+			//alipayRequest.setBizContent("{\"out_trade_no\":\""+ out_trade_no +"\"," 
+			//		+ "\"total_amount\":\""+ total_amount +"\"," 
+			//		+ "\"subject\":\""+ subject +"\"," 
+			//		+ "\"body\":\""+ body +"\"," 
+			//		+ "\"timeout_express\":\"10m\"," 
+			//		+ "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
+			//请求参数可查阅【电脑网站支付的API文档-alipay.trade.page.pay-请求参数】章节
+			
+
+			CreatePayCodeRecord cpcr= new CreatePayCodeRecord();
+			cpcr.setOutTradeNo(out_trade_no);
+			cpcr.setAccountNumber(request.getParameter("accountNumber"));
+			cpcr.setPayType(1);
+			cpcr.setMoney(Float.valueOf(total_amount));
+			
+			String jsonString = addCreatePayCodeRecord(cpcr);
+			PlanResult plan = JsonUtil.getObjectFromJson(jsonString,PlanResult.class);
+			if(plan.getStatus()==0) {
+				//请求
+				String result = alipayClient.pageExecute(alipayRequest).getBody();
+				//输出
+				response.getWriter().println(result);
 			}
 		} catch (AlipayApiException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-		
 	}
-	
 }

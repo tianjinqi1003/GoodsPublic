@@ -56,7 +56,7 @@ function goPay(){
 	}
 	
 	if($("#alipay_div").attr("class").indexOf("chosen")!=-1)
-		alert("支付宝支付");
+		location.href="${pageContext.request.contextPath}/merchant/main/alipay?action=pay&vipType="+vipType+"&accountNumber="+'${sessionScope.user.id}'+"&phone="+'${sessionScope.user.phone}';
 	else if($("#wechatpay_div").attr("class").indexOf("chosen")!=-1)
 		location.href="${pageContext.request.contextPath}/merchant/wxPayServlet?action=unifiedorder&vipType="+vipType;
 	else{
