@@ -2,6 +2,7 @@ package goodsPublic.service;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Map;
 
 import com.goodsPublic.util.PlanResult;
 
@@ -327,7 +328,7 @@ public interface PublicService {
 
 	public CreatePayCodeRecord getCreatePayCodeRecordByOutTradeNo(String outTradeNo);
 
-	public boolean checkIfPaid(String accountNumber) throws ParseException;
+	public Map<String, Object> checkIfPaid(String accountNumber) throws ParseException;
 
 	public int deleteLabelByKeys(String accountNumber, String keys);
 

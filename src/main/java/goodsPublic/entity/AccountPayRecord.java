@@ -19,7 +19,7 @@ public class AccountPayRecord implements Serializable {
 	private String accountNumber;
 	private String payTime;
 	private String endTime;
-	private Integer vipType;//会员类型 1.一个月 2.三个月 3.一年 4.永久 5.连续包月
+	private Integer vipType;//会员类型 0.免费 1.一个月 2.三个月 3.一年 4.永久 5.连续包月
 	private Integer payType;
 	private Float money;
 	private String phone;

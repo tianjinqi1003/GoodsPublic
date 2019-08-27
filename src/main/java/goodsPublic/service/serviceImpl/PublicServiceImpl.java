@@ -9,8 +9,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -656,16 +658,17 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public boolean checkIfPaid(String accountNumber) throws ParseException {
+	public Map<String, Object> checkIfPaid(String accountNumber) throws ParseException {
 		// TODO Auto-generated method stub
 		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		boolean ifPaid=false;
 		AccountPayRecord apr = publicDao.getLastAccountPayRecordByNumber(accountNumber);
 		
 		Date endTime=null;
 		int vipType = apr.getVipType();
 		switch (vipType) {
-		case AccountPayRecord.FREE_TRIAL:
+			case AccountPayRecord.FREE_TRIAL:
 			case AccountPayRecord.ONE_MONTH:
 			case AccountPayRecord.THREE_MONTHS:
 			case AccountPayRecord.ONE_YEAR:
@@ -681,7 +684,21 @@ public class PublicServiceImpl implements PublicService {
 				ifPaid=true;
 				break;
 		}
-		return ifPaid;
+		
+		if(ifPaid) {
+			jsonMap.put("status", "ok");
+			if(vipType==AccountPayRecord.FREE_TRIAL) {
+				jsonMap.put("vipType", AccountPayRecord.FREE_TRIAL);
+				jsonMap.put("message", "免费试用");
+			}
+			else
+				jsonMap.put("message", "已付过费了");
+		}
+		else {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "未付费，不能使用！");
+		}
+		return jsonMap;
 	}
 
 	@Override

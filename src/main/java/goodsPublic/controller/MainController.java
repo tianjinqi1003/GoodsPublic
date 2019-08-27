@@ -1535,7 +1535,7 @@ public class MainController {
 	}
 
 	@RequestMapping(value="/kaiTongByAlipay")
-	public void kaiTongByAlipay(HttpServletRequest request) {
+	public void kaiTongByAlipay(HttpServletRequest request, HttpServletResponse response) {
 		
 		try {
 			
@@ -1623,6 +1623,7 @@ public class MainController {
 				
 				int count=publicService.addAccountPayRecord(apr);
 				System.out.println("改变的条数==="+count);
+				response.getWriter().write("success");
 				
 			}else {//验证失败
 				System.out.println("fail");
@@ -1631,11 +1632,15 @@ public class MainController {
 				String sWord = AlipaySignature.getSignCheckContentV1(params);
 				System.out.println("sWord===="+sWord);
 				AlipayConfig.logResult(sWord);
+				response.getWriter().write("fail");
 			}
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (AlipayApiException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -1650,18 +1655,9 @@ public class MainController {
 	@ResponseBody
 	public Map<String, Object> checkIfPaid(String accountNumber) {
 
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		Map<String, Object> jsonMap=null;
 		try {
-			boolean bool=publicService.checkIfPaid(accountNumber);
-			
-			if(bool) {
-				jsonMap.put("status", "ok");
-				jsonMap.put("message", "已付过费了");
-			}
-			else {
-				jsonMap.put("status", "no");
-				jsonMap.put("message", "未付费，不能使用！");
-			}
+			jsonMap = publicService.checkIfPaid(accountNumber);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

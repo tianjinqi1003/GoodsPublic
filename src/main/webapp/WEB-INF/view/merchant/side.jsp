@@ -17,7 +17,7 @@ function checkIfPaidInSide(){
 	$.post("checkIfPaid",
 		{accountNumber:'${sessionScope.user.id}'},
 		function(data){
-			if(data.status=="ok"){
+			if(data.status=="ok"&&data.vipType!=0){
 				alert(data.message);
 				bool=false;
 			}
