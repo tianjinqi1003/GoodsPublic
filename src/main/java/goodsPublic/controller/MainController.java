@@ -2184,7 +2184,8 @@ public class MainController {
 			//商户订单号，商户网站订单系统中唯一订单号，必填
 			String out_trade_no = orderIdSDF.format(new Date());
 			//付款金额，必填
-			String total_amount = "0.01";
+			//String total_amount = "0.01";
+			String total_amount = request.getParameter("totalAmount");
 			//订单名称，必填
 			String subject = "aaa";
 			//商品描述，可空

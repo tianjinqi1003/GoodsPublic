@@ -20,7 +20,7 @@ $(function(){
 <body style="background-color: #eee;">
 	<div style="width: 1020px;height:500px;margin: 0 auto;background-color: #fff;">
 		<div style="text-align: center;height: 40px;line-height: 40px;">扫一扫付款（元）</div>
-		<div style="color: #f57c00;font-size: 36px;text-align: center;height: 40px;line-height: 40px;">￥0.01</div>
+		<div style="color: #f57c00;font-size: 36px;text-align: center;height: 40px;line-height: 40px;">￥${requestScope.totalFee}</div>
 		<div style="width: 230px;height: 320px;padding: 20px;border: 1px solid #ddd;margin: auto;">
 			<div style="width:100%;height: 190px;line-height: 190px;text-align: center;vertical-align: middle;margin:0 auto; margin-bottom: 20px;">
 				<img alt="" src="${basePath}/GoodsPublic/wxPayCode/${requestScope.codeUrl}.png" style="width: 190px;height: 190px;">

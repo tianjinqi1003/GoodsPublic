@@ -71,7 +71,8 @@ public class WxPayServlet extends HttpServlet {
 		String rootPath = config.getServletContext().getRealPath("/");
 
 		//订单金额
-		String total_fee = "0.01";
+		//String total_fee = "0.01";
+		String total_fee = request.getParameter("totalFee");
 		//订单号
 		String outTradeNo = orderIdSDF.format(new Date());
 

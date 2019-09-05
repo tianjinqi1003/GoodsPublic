@@ -37,8 +37,8 @@ function goBuy(price){
 	</div>
 	<div style="width: 200px;height:300px;margin-top:-300px;margin-left:615px;background-color: #fff;">
 		<div style="width:150px; color: #999;margin: 0 auto;padding-top:20px;text-align: center;">永久</div>
-		<div style="width:150px; color: #999;margin: 0 auto;margin-top:15px;text-align: center;">￥<span style="color: #000;font-size: 30px;">7000</span></div>
-		<div style="width: 100px;height: 40px;line-height: 40px;text-align:center;color:#f57c00;margin: 0 auto;margin-top:20px;border:#f57c00 solid 1px;border-radius:5px;cursor: pointer;" onclick="goBuy(7000);">
+		<div style="width:150px; color: #999;margin: 0 auto;margin-top:15px;text-align: center;">￥<span style="color: #000;font-size: 30px;">2000</span></div>
+		<div style="width: 100px;height: 40px;line-height: 40px;text-align:center;color:#f57c00;margin: 0 auto;margin-top:20px;border:#f57c00 solid 1px;border-radius:5px;cursor: pointer;" onclick="goBuy(2000);">
 			立即购买
 		</div>
 	</div>

@@ -42,7 +42,7 @@ function goPay(){
 		case "600":
 			vipType=3;
 			break;
-		case "7000":
+		case "2000":
 			vipType=4;
 			break;
 		case "50":
@@ -56,9 +56,9 @@ function goPay(){
 	}
 	
 	if($("#alipay_div").attr("class").indexOf("chosen")!=-1)
-		location.href="${pageContext.request.contextPath}/merchant/main/alipay?action=pay&vipType="+vipType+"&accountNumber="+'${sessionScope.user.id}'+"&phone="+'${sessionScope.user.phone}';
+		location.href="${pageContext.request.contextPath}/merchant/main/alipay?action=pay&vipType="+vipType+"&totalAmount="+price+"&accountNumber="+'${sessionScope.user.id}'+"&phone="+'${sessionScope.user.phone}';
 	else if($("#wechatpay_div").attr("class").indexOf("chosen")!=-1)
-		location.href="${pageContext.request.contextPath}/merchant/wxPayServlet?action=unifiedorder&vipType="+vipType;
+		location.href="${pageContext.request.contextPath}/merchant/wxPayServlet?action=unifiedorder&vipType="+vipType+"&totalFee="+price;
 	else{
 		alert("请选择支付方式!");
 		return false;
