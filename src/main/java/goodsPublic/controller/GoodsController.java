@@ -2,6 +2,7 @@ package goodsPublic.controller;
 
 
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,6 +109,66 @@ public class GoodsController {
 		plan.setStatus(1);
 		plan.setMsg("验证码错误");
 		return JsonUtil.getJsonFromObject(plan);
+	}
+	
+	@RequestMapping(value="/loginQL",method=RequestMethod.GET,produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public void loginQL(String userName,String password,HttpServletRequest request,HttpServletResponse response) {
+		String jsonpCallback=null;
+		try {
+			//HttpSession session=request.getSession();
+			UsernamePasswordToken token = new UsernamePasswordToken(userName,password);  
+			Subject currentUser = SecurityUtils.getSubject();  
+			if (!currentUser.isAuthenticated()){
+				//使用shiro来验证  
+				token.setRememberMe(true);  
+				currentUser.login(token);//验证角色和权限  
+			}
+			/*
+			AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
+			List<CategoryInfo> catList = categoryService.getCategory(msg.getId());
+			session.setAttribute("categoryList", catList);
+			session.setAttribute("user", msg);
+			*/
+			
+			jsonpCallback="jsonpCallback(\"{\\\"status\\\":0,\\\"msg\\\":\\\"验证通过\\\"}\")";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			jsonpCallback="jsonpCallback(\"{\\\"status\\\":1,\\\"msg\\\":\\\"登陆失败\\\"}\")";
+		}
+		finally {
+			try {
+				response.getWriter().print(jsonpCallback);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@RequestMapping(value="/saveQLUser",method=RequestMethod.GET,produces="plain/text; charset=UTF-8")
+	public String saveQLUser(String userName,String password,HttpServletRequest request) {
+
+		try {
+			HttpSession session=request.getSession();
+			UsernamePasswordToken token = new UsernamePasswordToken(userName,password);  
+			Subject currentUser = SecurityUtils.getSubject();  
+			if (!currentUser.isAuthenticated()){
+				//使用shiro来验证  
+				token.setRememberMe(true);  
+				currentUser.login(token);//验证角色和权限  
+			}
+			AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
+			List<CategoryInfo> catList = categoryService.getCategory(msg.getId());
+			session.setAttribute("categoryList", catList);
+			session.setAttribute("user", msg);
+			
+		} catch (AuthenticationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "/merchant/fee/buy";
 	}
 	
 	/**
