@@ -68,7 +68,7 @@ function goPay(){
 </head>
 <body>
 <div class="main_div">
-	<div class="payTypeTit_div">支付方式</div>
+	<div class="payTypeTit_div">请选择支付方式</div>
 	<div class="payType_div">
 		<div class="alipay_div chosen" id="alipay_div" onclick="changeAlipayChosen();">
 			<img alt="" src="<%=basePath %>/resource/images/alipay_icon1.png">
@@ -77,7 +77,7 @@ function goPay(){
 			<img alt="" src="<%=basePath %>/resource/images/wechatpay_icon@1x.png">
 		</div>
 		<div class="agree_div">
-			<input type="checkbox" id="agree_cb"/>我已阅读并同意<a href="http://qlcode.qdhualing.com/agreement.htm" target="blank">《付费用户服务协议》</a>
+			<input type="checkbox" id="agree_cb"/>我已阅读并同意<a href="http://qlcode.qdhualing.com/agreement.htm" style="color:#357bb3;" target="blank">《付费用户服务协议》</a>
 			<div class="goPay_div" onclick="goPay();">去付款</div>
 		</div>
 	</div>

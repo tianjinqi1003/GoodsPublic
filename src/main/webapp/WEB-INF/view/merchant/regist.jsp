@@ -72,6 +72,8 @@ body .beg-login-bg {
 				<h2 class="title">二维码查询商家注册</h2>
 			</div>
 			<form class="layui-form" method="post">
+				<input type="hidden" name="action" value="${param.action }"/>
+				<input type="hidden" name="price" value="${param.price }"/>
 				<div class="layui-form-item">
 					<label class="layui-form-label">用户名</label>
 					<div class="layui-input-inline">
@@ -116,7 +118,7 @@ body .beg-login-bg {
 				<div class="layui-form-item">
 					<label class="layui-form-label">邮箱:</label>
 					<div class="layui-input-block">
-						<input type="text" name="email" lay-verify="required|email"
+						<input type="text" name="email"
 							placeholder="请输入邮箱地址" autocomplete="off" class="layui-input">
 					</div>
 				</div>

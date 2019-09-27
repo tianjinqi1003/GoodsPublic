@@ -1,6 +1,6 @@
 @charset "UTF-8";
 body{background-color: #eee;}
-.main_div{width: 1020px;height:300px;margin: 0 auto;background-color: #fff;}
+.main_div{width: 1020px;height:300px;margin: 0 auto;margin-top: 30px;background-color: #fff;}
 .payTypeTit_div{margin-left: 50px;height: 40px;line-height:40px;font-size: 20px;}
 .payType_div{margin-left: 50px;}
 .alipay_div{width: 150px;height: 60px;line-height:60px;text-align: center;display: table-cell;vertical-align: middle;border: 1px solid #eceeef;background-color: #fff;border-radius: 3px;}

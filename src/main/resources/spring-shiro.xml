@@ -32,6 +32,7 @@
 				/merchant/main/checkIfLogined=anon
 				/merchant/login=anon
 				/merchant/login/captcha=anon
+				/merchant/checkIfLogin=anon
 				/merchant/loginQL=anon
 				/merchant/saveQLUser=anon
 				/merchant/regist=anon

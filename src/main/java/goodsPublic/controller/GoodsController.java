@@ -117,7 +117,7 @@ public class GoodsController {
 		String jsonpCallback=null;
 		try {
 			//HttpSession session=request.getSession();
-			UsernamePasswordToken token = new UsernamePasswordToken(userName,password);  
+			UsernamePasswordToken token = new UsernamePasswordToken(userName,password);
 			Subject currentUser = SecurityUtils.getSubject();  
 			if (!currentUser.isAuthenticated()){
 				//使用shiro来验证  
@@ -144,6 +144,26 @@ public class GoodsController {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
+	}
+	
+	@RequestMapping(value="/checkIfLogin",method=RequestMethod.GET,produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public void checkIfLogin(HttpSession session,HttpServletResponse response) {
+		
+		String jsonpCallback=null;
+		Object user = session.getAttribute("user");
+		if(user==null) {
+			jsonpCallback="jsonpCallback(\"{\\\"status\\\":1,\\\"msg\\\":\\\"用户未登陆\\\"}\")";
+		}
+		else {
+			jsonpCallback="jsonpCallback(\"{\\\"status\\\":0,\\\"msg\\\":\\\"用户已登陆\\\"}\")";
+		}
+		try {
+			response.getWriter().print(jsonpCallback);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 	
@@ -192,7 +212,7 @@ public class GoodsController {
 	//注册信息处理接口
 	@RequestMapping(value = "/regist" , method = RequestMethod.POST,produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String subRegist(AccountMsg msg) {
+	public String subRegist(AccountMsg msg, String action, HttpServletRequest request) {
 		System.out.println("===注册信息处理接口===");
 		System.out.println(msg);
 		PlanResult plan=new PlanResult();
@@ -209,7 +229,11 @@ public class GoodsController {
 		plan.setStatus(0);
 		plan.setMsg("注册成功");
 		plan.setData(msg);
-		plan.setUrl("/merchant/login");
+		//plan.setUrl("/merchant/login");
+		if("buy".equals(action))
+			plan.setUrl("/merchant/saveQLUser?price="+request.getParameter("price"));
+		else
+			plan.setUrl("/merchant/main/goAccountInfo");
 		
 		//这里是注册完成后添加50个自定义标签
 		AccountMsg resultUser=userService.checkUser(msg);
@@ -228,6 +252,8 @@ public class GoodsController {
 		apr.setMoney((float)0.00);
 		apr.setPhone(resultUser.getPhone());
 		publicService.addAccountPayRecord(apr);
+		
+		saveQLUser(resultUser.getUserName(),resultUser.getPassWord(),request);
 		
 		return JsonUtil.getJsonFromObject(plan);
 	}
