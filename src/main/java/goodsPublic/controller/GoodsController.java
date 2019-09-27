@@ -113,9 +113,13 @@ public class GoodsController {
 	
 	@RequestMapping(value="/loginQL",method=RequestMethod.GET,produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public void loginQL(String userName,String password,HttpServletRequest request,HttpServletResponse response) {
+	public void loginQL(HttpServletRequest request,HttpServletResponse response) {
 		String jsonpCallback=null;
 		try {
+			String userName = request.getParameter("userName");
+			String password = request.getParameter("password");
+			System.out.println("userName==="+userName);
+			System.out.println("password==="+password);
 			//HttpSession session=request.getSession();
 			UsernamePasswordToken token = new UsernamePasswordToken(userName,password);
 			Subject currentUser = SecurityUtils.getSubject();  
