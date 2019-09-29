@@ -227,6 +227,7 @@ public class MainController {
 		System.out.println("111111111111111"+file2_3);
 		System.out.println("111111111111111"+file2_4);
 		System.out.println("111111111111111"+file2_5);
+		String trade = request.getParameter("trade");
 		try {
 			MultipartFile[] fileArr=new MultipartFile[15];
 			fileArr[0]=file1_1;
@@ -302,16 +303,28 @@ public class MainController {
 						}
 					}
 					else {
-						switch (i) {
-						case 0:
-							htmlGoodsSPZS.setImage1_1("/GoodsPublic/resource/images/spzs/22ad5cebe49933335608eeb6356e6ab9.png");
-							break;
-						case 5:
-							htmlGoodsSPZS.setImage2_1("/GoodsPublic/resource/images/spzs/41116eb627d54a623813c01bcadd05ce.png");
-							break;
-						case 10:
-							htmlGoodsSPZS.setImage3_1("/GoodsPublic/resource/images/spzs/573ab1fc91d98528915519d96dc2e6ec.png");
-							break;
+						if("redWine".equals(trade)) {
+							switch (i) {
+							case 0:
+								htmlGoodsSPZS.setImage1_1("/GoodsPublic/resource/images/spzs/22ad5cebe49933335608eeb6356e6ab9.png");
+								break;
+							case 5:
+								htmlGoodsSPZS.setImage2_1("/GoodsPublic/resource/images/spzs/41116eb627d54a623813c01bcadd05ce.png");
+								break;
+							case 10:
+								htmlGoodsSPZS.setImage3_1("/GoodsPublic/resource/images/spzs/573ab1fc91d98528915519d96dc2e6ec.png");
+								break;
+							}
+						}
+						else if("whiteWine".equals(trade)) {
+							switch (i) {
+							case 0:
+								htmlGoodsSPZS.setImage1_1("/GoodsPublic/resource/images/spzs/258bb5b4e0d98344406a5f71e32ad767.png");
+								break;
+							case 5:
+								htmlGoodsSPZS.setImage2_1("/GoodsPublic/resource/images/spzs/25787fd7408641e333869e762e514fdd.png");
+								break;
+							}
 						}
 					}
 				}

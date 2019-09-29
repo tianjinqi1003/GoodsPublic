@@ -358,7 +358,7 @@ function checkIfPaid(){
 				<tr>
 					<td class="file_td" id="file_td1_1">
 						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
-						<img class="item_img" id="img1_1" alt="" src="/GoodsPublic/resource/images/spzs/22ad5cebe49933335608eeb6356e6ab9.png">
+						<img class="item_img" id="img1_1" alt="" src="/GoodsPublic/resource/images/spzs/258bb5b4e0d98344406a5f71e32ad767.png">
 					</td>
 					<td id="upload_td">
 						<img alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
@@ -388,7 +388,7 @@ function checkIfPaid(){
 				<tr>
 					<td class="file_td" id="file_td2_1">
 						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
-						<img class="item_img" id="img2_1" alt="" src="/GoodsPublic/resource/images/spzs/41116eb627d54a623813c01bcadd05ce.png">
+						<img class="item_img" id="img2_1" alt="" src="/GoodsPublic/resource/images/spzs/25787fd7408641e333869e762e514fdd.png">
 						<!-- 
 						<input type="file" id="file2_1" name="file2_1" onchange="showQrcodePic2(this)" style="display: none;"/>
 						 -->
@@ -485,6 +485,7 @@ function checkIfPaid(){
 	<div class="createQrcode_div" onclick="addHtmlGoodsSPZS();">生成二维码</div>
 </div>
 	<input type="hidden" id="accountNumber_hid" name="accountNumber" value="${sessionScope.user.id }" />
+	<input type="hidden" name="trade" value="${param.trade}"/>
 	<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
 </form>
 </body>
