@@ -257,7 +257,7 @@ public interface PublicService {
 	 * @param accountId
 	 * @return
 	 */
-	public HtmlGoodsSPZS getHtmlGoodsSPZS(String goodsNumber, String accountId);
+	public HtmlGoodsSPZS getHtmlGoodsSPZS(String moduleType,String goodsNumber, String accountId);
 	
 	/**
 	 * 获得多媒体资料模板内容

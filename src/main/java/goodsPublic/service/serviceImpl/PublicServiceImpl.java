@@ -596,9 +596,9 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public HtmlGoodsSPZS getHtmlGoodsSPZS(String goodsNumber, String accountId) {
+	public HtmlGoodsSPZS getHtmlGoodsSPZS(String moduleType, String goodsNumber, String accountId) {
 		// TODO Auto-generated method stub
-		return publicDao.getHtmlGoodsSPZS(goodsNumber,accountId);
+		return publicDao.getHtmlGoodsSPZS(moduleType,goodsNumber,accountId);
 	}
 	
 	@Override

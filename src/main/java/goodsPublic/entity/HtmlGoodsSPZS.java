@@ -54,6 +54,7 @@ public class HtmlGoodsSPZS implements Serializable {
 	private String memo1;
 	private String memo2;
 	private String memo3;
+	private String moduleType;
 	private String qrCode;
 	private String gmtCreate;
 	private String gmtModified;
@@ -334,6 +335,12 @@ public class HtmlGoodsSPZS implements Serializable {
 	}
 	public void setMemo3(String memo3) {
 		this.memo3 = memo3;
+	}
+	public String getModuleType() {
+		return moduleType;
+	}
+	public void setModuleType(String moduleType) {
+		this.moduleType = moduleType;
 	}
 	public String getQrCode() {
 		return qrCode;

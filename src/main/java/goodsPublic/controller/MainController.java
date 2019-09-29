@@ -227,7 +227,7 @@ public class MainController {
 		System.out.println("111111111111111"+file2_3);
 		System.out.println("111111111111111"+file2_4);
 		System.out.println("111111111111111"+file2_5);
-		String trade = request.getParameter("trade");
+		String moduleType = htmlGoodsSPZS.getModuleType();
 		try {
 			MultipartFile[] fileArr=new MultipartFile[15];
 			fileArr[0]=file1_1;
@@ -303,7 +303,7 @@ public class MainController {
 						}
 					}
 					else {
-						if("redWine".equals(trade)) {
+						if("redWine".equals(moduleType)) {
 							switch (i) {
 							case 0:
 								htmlGoodsSPZS.setImage1_1("/GoodsPublic/resource/images/spzs/22ad5cebe49933335608eeb6356e6ab9.png");
@@ -316,7 +316,7 @@ public class MainController {
 								break;
 							}
 						}
-						else if("whiteWine".equals(trade)) {
+						else if("whiteWine".equals(moduleType)) {
 							switch (i) {
 							case 0:
 								htmlGoodsSPZS.setImage1_1("/GoodsPublic/resource/images/spzs/258bb5b4e0d98344406a5f71e32ad767.png");
@@ -336,8 +336,8 @@ public class MainController {
 			String addr = request.getLocalAddr();
 			int port = request.getLocalPort();
 			String contextPath = request.getContextPath();
-			//String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoods?trade=spzs&goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
-			String url = "http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=spzs&goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
+			//String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoods?trade=spzs&moduleType="+htmlGoodsSPZS.getModuleType()+"&goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
+			String url = "http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=spzs&moduleType="+htmlGoodsSPZS.getModuleType()+"&goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
 			
 			String fileName = goodsNumber + ".jpg";
 			String avaPath="/GoodsPublic/upload/"+fileName;
@@ -350,7 +350,7 @@ public class MainController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "../../merchant/main/goBrowseHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
+		return "../../merchant/main/goBrowseHtmlGoodsSPZS?moduleType="+moduleType+"&goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
 	}
 	
 	/**
@@ -1029,10 +1029,15 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping("/goBrowseHtmlGoodsSPZS")
-	public String goBrowseHtmlGoodsSPZS(String goodsNumber, String accountNumber, HttpServletRequest request) {
-		HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(goodsNumber,accountNumber);
+	public String goBrowseHtmlGoodsSPZS(String moduleType, String goodsNumber, String accountNumber, HttpServletRequest request) {
+		HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(moduleType,goodsNumber,accountNumber);
 		request.setAttribute("htmlGoodsSPZS", htmlGoodsSPZS);
-		return "/merchant/spzs/browseHtmlGoods";
+		String url="";
+		if(ModuleSPZS.RED_WINE.equals(moduleType))
+			url="/merchant/spzs/redWine/browseHtmlGoods";
+		else if(ModuleSPZS.WHITE_WINE.equals(moduleType))
+			url="/merchant/spzs/whiteWine/browseHtmlGoods";
+		return url;
 	}
 	
 	@RequestMapping("/goBrowseHtmlGoodsDMTZL")
@@ -1406,7 +1411,7 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping(value="/goShowHtmlGoods",method=RequestMethod.GET)
-	public String goShowHtmlGoods(String trade,String goodsNumber,String accountId,HttpServletRequest request) {
+	public String goShowHtmlGoods(String trade,String moduleType,String goodsNumber,String accountId,HttpServletRequest request) {
 		
 		String url=null;
 		Map<String, Object> jsonMap = checkIfPaid(accountId);
@@ -1414,9 +1419,12 @@ public class MainController {
 		if("ok".equals(status)) {
 			switch (trade) {
 			case "spzs":
-				HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(goodsNumber,accountId);
+				HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(moduleType,goodsNumber,accountId);
 				request.setAttribute("htmlGoodsSPZS", htmlGoodsSPZS);
-				url = "/merchant/spzs/showHtmlGoods";
+				if(ModuleSPZS.RED_WINE.equals(moduleType))
+					url = "/merchant/spzs/redWine/showHtmlGoods";
+				else if(ModuleSPZS.WHITE_WINE.equals(moduleType))
+					url = "/merchant/spzs/whiteWine/showHtmlGoods";
 				break;
 			case "dmtzl":
 				HtmlGoodsDMTZL htmlGoodsDMTZL = publicService.getHtmlGoodsDMTZL(goodsNumber,accountId);
@@ -1988,48 +1996,52 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping(value="/goAddModule")
-	public String goAddModule(HttpServletRequest request, String trade) {
+	public String goAddModule(HttpServletRequest request) {
 		
+		String trade = request.getParameter("trade");
+		String moduleType = request.getParameter("moduleType");
 		String url=null;
 		switch (trade) {
-		case ModuleSPZS.RED_WINE:
-			List<ModuleSPZS> spxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq",trade);
-			request.setAttribute("spxqList", spxqList);
-			
-			request.setAttribute("memo1", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo1",trade)).get(0).getValue());
-			
-			request.setAttribute("memo2", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo2",trade)).get(0).getValue());
-			
-			request.setAttribute("memo3", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo3",trade)).get(0).getValue());
-			
-			List<ModuleSPZS> image1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1",trade);
-			request.setAttribute("image1List", image1List);
-			
-			List<ModuleSPZS> image2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2",trade);
-			request.setAttribute("image2List", image2List);
-			
-			List<ModuleSPZS> image3List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image3",trade);
-			request.setAttribute("image3List", image3List);
-			
-			url="/merchant/spzs/addModule";
-			break;
-		case ModuleSPZS.WHITE_WINE:
-			request.setAttribute("productName", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("productName",trade)).get(0).getValue());
-			
-			List<ModuleSPZS> wwSpxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq",trade);
-			request.setAttribute("spxqList", wwSpxqList);
-			
-			request.setAttribute("memo1", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo1",trade)).get(0).getValue());
-			
-			request.setAttribute("memo2", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo2",trade)).get(0).getValue());
+		case "spzs":
+			if(ModuleSPZS.RED_WINE.equals(moduleType)) {
+				List<ModuleSPZS> spxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq",trade);
+				request.setAttribute("spxqList", spxqList);
+				
+				request.setAttribute("memo1", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo1",trade)).get(0).getValue());
+				
+				request.setAttribute("memo2", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo2",trade)).get(0).getValue());
+				
+				request.setAttribute("memo3", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo3",trade)).get(0).getValue());
+				
+				List<ModuleSPZS> image1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1",trade);
+				request.setAttribute("image1List", image1List);
+				
+				List<ModuleSPZS> image2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2",trade);
+				request.setAttribute("image2List", image2List);
+				
+				List<ModuleSPZS> image3List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image3",trade);
+				request.setAttribute("image3List", image3List);
+				
+				url="/merchant/spzs/addModule";
+			}
+			else if(ModuleSPZS.WHITE_WINE.equals(moduleType)) {
+				request.setAttribute("productName", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("productName",trade)).get(0).getValue());
+				
+				List<ModuleSPZS> wwSpxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq",trade);
+				request.setAttribute("spxqList", wwSpxqList);
+				
+				request.setAttribute("memo1", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo1",trade)).get(0).getValue());
+				
+				request.setAttribute("memo2", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo2",trade)).get(0).getValue());
 
-			List<ModuleSPZS> wwImage1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1",trade);
-			request.setAttribute("image1List", wwImage1List);
-			
-			List<ModuleSPZS> wwImage2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2",trade);
-			request.setAttribute("image2List", wwImage2List);
-			
-			url="/merchant/spzs/addWhiteWineModule";
+				List<ModuleSPZS> wwImage1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1",trade);
+				request.setAttribute("image1List", wwImage1List);
+				
+				List<ModuleSPZS> wwImage2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2",trade);
+				request.setAttribute("image2List", wwImage2List);
+				
+				url="/merchant/spzs/addWhiteWineModule";
+			}
 			break;
 		case "dmtzl":
 
@@ -2071,14 +2083,17 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping(value="/goEditModule")
-	public String goEditModule(HttpServletRequest request, String trade, String goodsNumber, String accountNumber) {
+	public String goEditModule(HttpServletRequest request, String trade, String moduleType, String goodsNumber, String accountNumber) {
 		
 		String url=null;
 		switch (trade) {
 		case "spzs":
-			HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(goodsNumber,accountNumber);
+			HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(moduleType,goodsNumber,accountNumber);
 			request.setAttribute("htmlGoodsSPZS", htmlGoodsSPZS);
-			url="/merchant/spzs/editModule";
+			if(ModuleSPZS.RED_WINE.equals(moduleType))
+				url="/merchant/spzs/redWine/editModule";
+			else if(ModuleSPZS.WHITE_WINE.equals(moduleType))
+				url="/merchant/spzs/whiteWine/editModule";
 			break;
 		case "dmtzl":
 			HtmlGoodsDMTZL htmlGoodsDMTZL = publicService.getHtmlGoodsDMTZL(goodsNumber,accountNumber);

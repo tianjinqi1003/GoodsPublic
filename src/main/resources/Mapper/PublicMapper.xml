@@ -439,6 +439,9 @@
 			<if test="memo3!=null">
 				memo3,
 			</if>
+			<if test="moduleType!=null">
+				moduleType,
+			</if>
 			<if test="qrCode!=null">
 				qrCode,
 			</if>
@@ -562,6 +565,9 @@
 			</if>
 			<if test="memo3!=null">
 				#{memo3},
+			</if>
+			<if test="moduleType!=null">
+				#{moduleType},
 			</if>
 			<if test="qrCode!=null">
 				#{qrCode},
@@ -1727,7 +1733,7 @@
 		select * from module_dmtzl where type=#{param1}
 	</select>
 	<select id="getHtmlGoodsSPZS" resultType="goodsPublic.entity.HtmlGoodsSPZS">
-		select * from html_goods_spzs where goodsNumber=#{param1} and accountNumber=#{param2}
+		select * from html_goods_spzs where moduleType=#{param1} and goodsNumber=#{param2} and accountNumber=#{param3}
 	</select>
 	<select id="getHtmlGoodsDMTZL" resultType="goodsPublic.entity.HtmlGoodsDMTZL">
 		select * from html_goods_dmtzl where goodsNumber=#{param1} and accountNumber=#{param2}
