@@ -231,7 +231,7 @@ public interface PublicMapper {
 	 * @param type 
 	 * @return
 	 */
-	public List<ModuleSPZS> getModuleSPZSByType(String type, String moduleName);
+	public List<ModuleSPZS> getModuleSPZSByType(String type, String moduleType);
 	
 	/**
 	 * 根据类型，查询多媒体资料模板列表

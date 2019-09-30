@@ -540,7 +540,7 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public Object getModuleSPZSByType(String type, String moduleName) {
+	public Object getModuleSPZSByType(String type, String moduleType) {
 		// TODO Auto-generated method stub
 		
 		Object obj=null;
@@ -550,10 +550,11 @@ public class PublicServiceImpl implements PublicService {
 		case "image1":
 		case "image2":
 		case "image3":
+		case "image4":
 		case "memo1":
 		case "memo2":
 		case "memo3":
-			obj = publicDao.getModuleSPZSByType(type,moduleName);
+			obj = publicDao.getModuleSPZSByType(type,moduleType);
 			break;
 		}
 		return obj;

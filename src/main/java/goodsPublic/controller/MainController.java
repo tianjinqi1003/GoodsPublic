@@ -220,6 +220,11 @@ public class MainController {
 			@RequestParam(value="file3_3",required=false) MultipartFile file3_3,
 			@RequestParam(value="file3_4",required=false) MultipartFile file3_4,
 			@RequestParam(value="file3_5",required=false) MultipartFile file3_5,
+			@RequestParam(value="file4_1",required=false) MultipartFile file4_1,
+			@RequestParam(value="file4_2",required=false) MultipartFile file4_2,
+			@RequestParam(value="file4_3",required=false) MultipartFile file4_3,
+			@RequestParam(value="file4_4",required=false) MultipartFile file4_4,
+			@RequestParam(value="file4_5",required=false) MultipartFile file4_5,
 			HttpServletRequest request) {
 		
 		System.out.println("111111111111111"+file2_1);
@@ -229,7 +234,7 @@ public class MainController {
 		System.out.println("111111111111111"+file2_5);
 		String moduleType = htmlGoodsSPZS.getModuleType();
 		try {
-			MultipartFile[] fileArr=new MultipartFile[15];
+			MultipartFile[] fileArr=new MultipartFile[20];
 			fileArr[0]=file1_1;
 			fileArr[1]=file1_2;
 			fileArr[2]=file1_3;
@@ -245,6 +250,11 @@ public class MainController {
 			fileArr[12]=file3_3;
 			fileArr[13]=file3_4;
 			fileArr[14]=file3_5;
+			fileArr[15]=file4_1;
+			fileArr[16]=file4_2;
+			fileArr[17]=file4_3;
+			fileArr[18]=file4_4;
+			fileArr[19]=file4_5;
 			for (int i = 0; i < fileArr.length; i++) {
 				String jsonStr = null;
 				if(fileArr[i]!=null) {
@@ -299,6 +309,21 @@ public class MainController {
 							case 14:
 								htmlGoodsSPZS.setImage3_5(dataJO.get("src").toString());
 								break;
+							case 15:
+								htmlGoodsSPZS.setImage4_1(dataJO.get("src").toString());
+								break;
+							case 16:
+								htmlGoodsSPZS.setImage4_2(dataJO.get("src").toString());
+								break;
+							case 17:
+								htmlGoodsSPZS.setImage4_3(dataJO.get("src").toString());
+								break;
+							case 18:
+								htmlGoodsSPZS.setImage4_4(dataJO.get("src").toString());
+								break;
+							case 19:
+								htmlGoodsSPZS.setImage4_5(dataJO.get("src").toString());
+								break;
 							}
 						}
 					}
@@ -323,6 +348,22 @@ public class MainController {
 								break;
 							case 5:
 								htmlGoodsSPZS.setImage2_1("/GoodsPublic/resource/images/spzs/25787fd7408641e333869e762e514fdd.png");
+								break;
+							}
+						}
+						else if("homeTextiles".equals(moduleType)) {
+							switch (i) {
+							case 0:
+								htmlGoodsSPZS.setImage1_1("/GoodsPublic/resource/images/spzs/8878b699bd21eeaeeaec254b5d4e6f79.png");
+								break;
+							case 5:
+								htmlGoodsSPZS.setImage2_1("/GoodsPublic/resource/images/spzs/e3f0c2aa261ac2b652fbdca9eaba04f3.png");
+								break;
+							case 10:
+								htmlGoodsSPZS.setImage3_1("/GoodsPublic/resource/images/spzs/bc40c19357bcf636e9ad6e71581686c4.png");
+								break;
+							case 15:
+								htmlGoodsSPZS.setImage4_1("/GoodsPublic/resource/images/spzs/f078f4614735e89cd7608110115c6ad6.png");
 								break;
 							}
 						}
@@ -588,9 +629,14 @@ public class MainController {
 			@RequestParam(value="file3_3",required=false) MultipartFile file3_3,
 			@RequestParam(value="file3_4",required=false) MultipartFile file3_4,
 			@RequestParam(value="file3_5",required=false) MultipartFile file3_5,
+			@RequestParam(value="file4_1",required=false) MultipartFile file4_1,
+			@RequestParam(value="file4_2",required=false) MultipartFile file4_2,
+			@RequestParam(value="file4_3",required=false) MultipartFile file4_3,
+			@RequestParam(value="file4_4",required=false) MultipartFile file4_4,
+			@RequestParam(value="file4_5",required=false) MultipartFile file4_5,
 			HttpServletRequest request) {
 		
-		editHtmlGoodsSPZS(htmlGoodsSPZS,file1_1,file1_2,file1_3,file1_4,file1_5,file2_1,file2_2,file2_3,file2_4,file2_5,file3_1,file3_2,file3_3,file3_4,file3_5,request);
+		editHtmlGoodsSPZS(htmlGoodsSPZS,file1_1,file1_2,file1_3,file1_4,file1_5,file2_1,file2_2,file2_3,file2_4,file2_5,file3_1,file3_2,file3_3,file3_4,file3_5,file4_1,file4_2,file4_3,file4_4,file4_5,request);
 		
 		return "../../merchant/main/goBrowseHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
 	}
@@ -688,11 +734,16 @@ public class MainController {
 			@RequestParam(value="file3_3",required=false) MultipartFile file3_3,
 			@RequestParam(value="file3_4",required=false) MultipartFile file3_4,
 			@RequestParam(value="file3_5",required=false) MultipartFile file3_5,
+			@RequestParam(value="file4_1",required=false) MultipartFile file4_1,
+			@RequestParam(value="file4_2",required=false) MultipartFile file4_2,
+			@RequestParam(value="file4_3",required=false) MultipartFile file4_3,
+			@RequestParam(value="file4_4",required=false) MultipartFile file4_4,
+			@RequestParam(value="file4_5",required=false) MultipartFile file4_5,
 			HttpServletRequest request) {
 		
 		PlanResult plan=new PlanResult();
 		String json;
-		int count = editHtmlGoodsSPZS(htmlGoodsSPZS,file1_1,file1_2,file1_3,file1_4,file1_5,file2_1,file2_2,file2_3,file2_4,file2_5,file3_1,file3_2,file3_3,file3_4,file3_5,request);
+		int count = editHtmlGoodsSPZS(htmlGoodsSPZS,file1_1,file1_2,file1_3,file1_4,file1_5,file2_1,file2_2,file2_3,file2_4,file2_5,file3_1,file3_2,file3_3,file3_4,file3_5,file4_1,file4_2,file4_3,file4_4,file4_5,request);
 		if(count==0) {
 			plan.setStatus(0);
 			plan.setMsg("内容保存失败！");
@@ -805,10 +856,10 @@ public class MainController {
 	 * @param request
 	 * @return
 	 */
-	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS, MultipartFile file1_1, MultipartFile file1_2, MultipartFile file1_3, MultipartFile file1_4, MultipartFile file1_5, MultipartFile file2_1, MultipartFile file2_2, MultipartFile file2_3, MultipartFile file2_4, MultipartFile file2_5, MultipartFile file3_1, MultipartFile file3_2, MultipartFile file3_3, MultipartFile file3_4, MultipartFile file3_5, HttpServletRequest request) {
+	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS, MultipartFile file1_1, MultipartFile file1_2, MultipartFile file1_3, MultipartFile file1_4, MultipartFile file1_5, MultipartFile file2_1, MultipartFile file2_2, MultipartFile file2_3, MultipartFile file2_4, MultipartFile file2_5, MultipartFile file3_1, MultipartFile file3_2, MultipartFile file3_3, MultipartFile file3_4, MultipartFile file3_5, MultipartFile file4_1, MultipartFile file4_2, MultipartFile file4_3, MultipartFile file4_4, MultipartFile file4_5, HttpServletRequest request) {
 		int count = 0;
 		try {
-			MultipartFile[] fileArr=new MultipartFile[15];
+			MultipartFile[] fileArr=new MultipartFile[20];
 			fileArr[0]=file1_1;
 			fileArr[1]=file1_2;
 			fileArr[2]=file1_3;
@@ -824,6 +875,11 @@ public class MainController {
 			fileArr[12]=file3_3;
 			fileArr[13]=file3_4;
 			fileArr[14]=file3_5;
+			fileArr[15]=file4_1;
+			fileArr[16]=file4_2;
+			fileArr[17]=file4_3;
+			fileArr[18]=file4_4;
+			fileArr[19]=file4_5;
 			for (int i = 0; i < fileArr.length; i++) {
 				String jsonStr = null;
 				if(fileArr[i]!=null) {
@@ -877,6 +933,21 @@ public class MainController {
 								break;
 							case 14:
 								htmlGoodsSPZS.setImage3_5(dataJO.get("src").toString());
+								break;
+							case 15:
+								htmlGoodsSPZS.setImage4_1(dataJO.get("src").toString());
+								break;
+							case 16:
+								htmlGoodsSPZS.setImage4_2(dataJO.get("src").toString());
+								break;
+							case 17:
+								htmlGoodsSPZS.setImage4_3(dataJO.get("src").toString());
+								break;
+							case 18:
+								htmlGoodsSPZS.setImage4_4(dataJO.get("src").toString());
+								break;
+							case 19:
+								htmlGoodsSPZS.setImage4_5(dataJO.get("src").toString());
 								break;
 							}
 						}
@@ -1037,6 +1108,8 @@ public class MainController {
 			url="/merchant/spzs/redWine/browseHtmlGoods";
 		else if(ModuleSPZS.WHITE_WINE.equals(moduleType))
 			url="/merchant/spzs/whiteWine/browseHtmlGoods";
+		else if(ModuleSPZS.HOME_TEXTILES.equals(moduleType))
+			url="/merchant/spzs/homeTextiles/browseHtmlGoods";
 		return url;
 	}
 	
@@ -1425,6 +1498,8 @@ public class MainController {
 					url = "/merchant/spzs/redWine/showHtmlGoods";
 				else if(ModuleSPZS.WHITE_WINE.equals(moduleType))
 					url = "/merchant/spzs/whiteWine/showHtmlGoods";
+				else if(ModuleSPZS.HOME_TEXTILES.equals(moduleType))
+					url = "/merchant/spzs/homeTextiles/showHtmlGoods";
 				break;
 			case "dmtzl":
 				HtmlGoodsDMTZL htmlGoodsDMTZL = publicService.getHtmlGoodsDMTZL(goodsNumber,accountId);
@@ -2004,43 +2079,63 @@ public class MainController {
 		switch (trade) {
 		case "spzs":
 			if(ModuleSPZS.RED_WINE.equals(moduleType)) {
-				List<ModuleSPZS> spxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq",trade);
+				List<ModuleSPZS> spxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq",moduleType);
 				request.setAttribute("spxqList", spxqList);
 				
-				request.setAttribute("memo1", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo1",trade)).get(0).getValue());
+				request.setAttribute("memo1", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo1",moduleType)).get(0).getValue());
 				
-				request.setAttribute("memo2", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo2",trade)).get(0).getValue());
+				request.setAttribute("memo2", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo2",moduleType)).get(0).getValue());
 				
-				request.setAttribute("memo3", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo3",trade)).get(0).getValue());
+				request.setAttribute("memo3", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo3",moduleType)).get(0).getValue());
 				
-				List<ModuleSPZS> image1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1",trade);
+				List<ModuleSPZS> image1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1",moduleType);
 				request.setAttribute("image1List", image1List);
 				
-				List<ModuleSPZS> image2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2",trade);
+				List<ModuleSPZS> image2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2",moduleType);
 				request.setAttribute("image2List", image2List);
 				
-				List<ModuleSPZS> image3List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image3",trade);
+				List<ModuleSPZS> image3List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image3",moduleType);
 				request.setAttribute("image3List", image3List);
 				
-				url="/merchant/spzs/addModule";
+				url="/merchant/spzs/redWine/addModule";
 			}
 			else if(ModuleSPZS.WHITE_WINE.equals(moduleType)) {
-				request.setAttribute("productName", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("productName",trade)).get(0).getValue());
+				request.setAttribute("productName", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("productName",moduleType)).get(0).getValue());
 				
-				List<ModuleSPZS> wwSpxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq",trade);
+				List<ModuleSPZS> wwSpxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq",moduleType);
 				request.setAttribute("spxqList", wwSpxqList);
 				
-				request.setAttribute("memo1", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo1",trade)).get(0).getValue());
+				request.setAttribute("memo1", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo1",moduleType)).get(0).getValue());
 				
-				request.setAttribute("memo2", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo2",trade)).get(0).getValue());
+				request.setAttribute("memo2", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo2",moduleType)).get(0).getValue());
 
-				List<ModuleSPZS> wwImage1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1",trade);
+				List<ModuleSPZS> wwImage1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1",moduleType);
 				request.setAttribute("image1List", wwImage1List);
 				
-				List<ModuleSPZS> wwImage2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2",trade);
+				List<ModuleSPZS> wwImage2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2",moduleType);
 				request.setAttribute("image2List", wwImage2List);
 				
-				url="/merchant/spzs/addWhiteWineModule";
+				url="/merchant/spzs/whiteWine/addModule";
+			}
+			else if(ModuleSPZS.HOME_TEXTILES.equals(moduleType)) {
+				request.setAttribute("productName", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("productName",moduleType)).get(0).getValue());
+				
+				List<ModuleSPZS> wwSpxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq",moduleType);
+				request.setAttribute("spxqList", wwSpxqList);
+				
+				List<ModuleSPZS> wwImage1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1",moduleType);
+				request.setAttribute("image1List", wwImage1List);
+				
+				List<ModuleSPZS> wwImage2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2",moduleType);
+				request.setAttribute("image2List", wwImage2List);
+				
+				List<ModuleSPZS> wwImage3List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image3",moduleType);
+				request.setAttribute("image3List", wwImage3List);
+				
+				List<ModuleSPZS> wwImage4List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image4",moduleType);
+				request.setAttribute("image4List", wwImage4List);
+				
+				url="/merchant/spzs/homeTextiles/addModule";
 			}
 			break;
 		case "dmtzl":
@@ -2094,6 +2189,8 @@ public class MainController {
 				url="/merchant/spzs/redWine/editModule";
 			else if(ModuleSPZS.WHITE_WINE.equals(moduleType))
 				url="/merchant/spzs/whiteWine/editModule";
+			else if(ModuleSPZS.HOME_TEXTILES.equals(moduleType))
+				url="/merchant/spzs/homeTextiles/editModule";
 			break;
 		case "dmtzl":
 			HtmlGoodsDMTZL htmlGoodsDMTZL = publicService.getHtmlGoodsDMTZL(goodsNumber,accountNumber);

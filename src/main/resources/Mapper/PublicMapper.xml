@@ -385,6 +385,15 @@
 			<if test="spxqIfShow6!=null">
 				spxqIfShow6,
 			</if>
+			<if test="spxqName7!=null">
+				spxqName7,
+			</if>
+			<if test="spxqValue7!=null">
+				spxqValue7,
+			</if>
+			<if test="spxqIfShow7!=null">
+				spxqIfShow7,
+			</if>
 			<if test="image1_1!=null">
 				image1_1,
 			</if>
@@ -429,6 +438,21 @@
 			</if>
 			<if test="image3_5!=null">
 				image3_5,
+			</if>
+			<if test="image4_1!=null">
+				image4_1,
+			</if>
+			<if test="image4_2!=null">
+				image4_2,
+			</if>
+			<if test="image4_3!=null">
+				image4_3,
+			</if>
+			<if test="image4_4!=null">
+				image4_4,
+			</if>
+			<if test="image4_5!=null">
+				image4_5,
 			</if>
 			<if test="memo1!=null">
 				memo1,
@@ -512,6 +536,15 @@
 			<if test="spxqIfShow6!=null">
 				#{spxqIfShow6},
 			</if>
+			<if test="spxqName7!=null">
+				#{spxqName7},
+			</if>
+			<if test="spxqValue7!=null">
+				#{spxqValue7},
+			</if>
+			<if test="spxqIfShow7!=null">
+				#{spxqIfShow7},
+			</if>
 			<if test="image1_1!=null">
 				#{image1_1},
 			</if>
@@ -556,6 +589,21 @@
 			</if>
 			<if test="image3_5!=null">
 				#{image3_5},
+			</if>
+			<if test="image4_1!=null">
+				#{image4_1},
+			</if>
+			<if test="image4_2!=null">
+				#{image4_2},
+			</if>
+			<if test="image4_3!=null">
+				#{image4_3},
+			</if>
+			<if test="image4_4!=null">
+				#{image4_4},
+			</if>
+			<if test="image4_5!=null">
+				#{image4_5},
 			</if>
 			<if test="memo1!=null">
 				#{memo1},
@@ -1143,6 +1191,15 @@
 		<if test="spxqIfShow6!=null">
 			spxqIfShow6=#{spxqIfShow6},
 		</if>
+		<if test="spxqName7!=null">
+			spxqName7=#{spxqName7},
+		</if>
+		<if test="spxqValue7!=null">
+			spxqValue7=#{spxqValue7},
+		</if>
+		<if test="spxqIfShow7!=null">
+			spxqIfShow7=#{spxqIfShow7},
+		</if>
 			image1_1=#{image1_1},
 			image1_2=#{image1_2},
 			image1_3=#{image1_3},
@@ -1158,6 +1215,11 @@
 			image3_3=#{image3_3},
 			image3_4=#{image3_4},
 			image3_5=#{image3_5},
+			image4_1=#{image4_1},
+			image4_2=#{image4_2},
+			image4_3=#{image4_3},
+			image4_4=#{image4_4},
+			image4_5=#{image4_5},
 		<if test="memo1!=null">
 			memo1=#{memo1},
 		</if>
@@ -1721,7 +1783,7 @@
 		insert into goods_label_set(`key`,label,module,isShow,isPublic,isCheck,accountNumber,sort) values(#{key},#{label},#{module},#{isShow},0,0,#{accountNumber},#{sort})
 	</insert>
 	<select id="getModuleSPZSByType" resultType="goodsPublic.entity.ModuleSPZS">
-		select * from module_spzs where type=#{param1} and moduleName=#{param2}
+		select * from module_spzs where type=#{param1} and moduleType=#{param2}
 	</select>
 	<select id="getModuleDMTZLByType" resultType="goodsPublic.entity.ModuleDMTZL">
 		select * from module_dmtzl where type=#{param1}

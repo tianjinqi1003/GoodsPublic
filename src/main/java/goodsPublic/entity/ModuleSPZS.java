@@ -10,6 +10,7 @@ public class ModuleSPZS implements Serializable {
 	private static final long serialVersionUID = 1L;
 	public static final String RED_WINE="redWine";
 	public static final String WHITE_WINE="whiteWine";
+	public static final String HOME_TEXTILES="homeTextiles";
 	private int id;
 	private String name;
 	private String value;
