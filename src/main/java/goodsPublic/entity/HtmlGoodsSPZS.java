@@ -57,6 +57,7 @@ public class HtmlGoodsSPZS implements Serializable {
 	private String image4_3;
 	private String image4_4;
 	private String image4_5;
+	private String embed1_1;
 	private String memo1;
 	private String memo2;
 	private String memo3;
@@ -359,6 +360,12 @@ public class HtmlGoodsSPZS implements Serializable {
 	}
 	public void setImage4_5(String image4_5) {
 		this.image4_5 = image4_5;
+	}
+	public String getEmbed1_1() {
+		return embed1_1;
+	}
+	public void setEmbed1_1(String embed1_1) {
+		this.embed1_1 = embed1_1;
 	}
 	public String getMemo1() {
 		return memo1;

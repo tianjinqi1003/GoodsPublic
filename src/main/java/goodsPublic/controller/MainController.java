@@ -295,7 +295,10 @@ public class MainController {
 								htmlGoodsSPZS.setImage2_5(dataJO.get("src").toString());
 								break;
 							case 10:
-								htmlGoodsSPZS.setImage3_1(dataJO.get("src").toString());
+								if("productExplain".equals(moduleType))
+									htmlGoodsSPZS.setEmbed1_1(dataJO.get("src").toString());
+								else
+									htmlGoodsSPZS.setImage3_1(dataJO.get("src").toString());
 								break;
 							case 11:
 								htmlGoodsSPZS.setImage3_2(dataJO.get("src").toString());
@@ -374,6 +377,22 @@ public class MainController {
 								break;
 							case 5:
 								htmlGoodsSPZS.setImage2_1("/GoodsPublic/resource/images/spzs/a61777ec9042bb003308d961f185a4e1.png");
+								break;
+							}
+						}
+						else if("productExplain".equals(moduleType)) {
+							switch (i) {
+							case 0:
+								htmlGoodsSPZS.setImage1_1("/GoodsPublic/resource/images/spzs/81a5d69b81bda7b772771e31b57e4fae.png");
+								break;
+							case 5:
+								htmlGoodsSPZS.setImage2_1("/GoodsPublic/resource/images/spzs/59a9157e809d046c12699bc4f431266c.png");
+								break;
+							case 6:
+								htmlGoodsSPZS.setImage2_2("/GoodsPublic/resource/images/spzs/594c03f1f5e93d78248d9d268f8070b6.png");
+								break;
+							case 10:
+								htmlGoodsSPZS.setEmbed1_1("/GoodsPublic/resource/embed/spzs/4c4a6999823cc4088a4996896ae136c2.mp4");
 								break;
 							}
 						}
@@ -1122,6 +1141,8 @@ public class MainController {
 			url="/merchant/spzs/homeTextiles/browseHtmlGoods";
 		else if(ModuleSPZS.ARTWORK.equals(moduleType))
 			url="/merchant/spzs/artwork/browseHtmlGoods";
+		else if(ModuleSPZS.PRODUCT_EXPLAIN.equals(moduleType))
+			url="/merchant/spzs/productExplain/browseHtmlGoods";
 		return url;
 	}
 	
@@ -1512,6 +1533,8 @@ public class MainController {
 					url = "/merchant/spzs/whiteWine/showHtmlGoods";
 				else if(ModuleSPZS.HOME_TEXTILES.equals(moduleType))
 					url = "/merchant/spzs/homeTextiles/showHtmlGoods";
+				else if(ModuleSPZS.ARTWORK.equals(moduleType))
+					url = "/merchant/spzs/artwork/showHtmlGoods";
 				break;
 			case "dmtzl":
 				HtmlGoodsDMTZL htmlGoodsDMTZL = publicService.getHtmlGoodsDMTZL(goodsNumber,accountId);
@@ -2165,6 +2188,27 @@ public class MainController {
 				
 				url="/merchant/spzs/artwork/addModule";
 			}
+			else if(ModuleSPZS.PRODUCT_EXPLAIN.equals(moduleType)) {
+				List<ModuleSPZS> wwSpxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq",moduleType);
+				request.setAttribute("spxqList", wwSpxqList);
+				
+				request.setAttribute("memo1", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo1",moduleType)).get(0).getValue());
+				
+				request.setAttribute("memo2", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo2",moduleType)).get(0).getValue());
+				
+				request.setAttribute("memo3", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo3",moduleType)).get(0).getValue());
+				
+				List<ModuleSPZS> wwImage1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1",moduleType);
+				request.setAttribute("image1List", wwImage1List);
+				
+				List<ModuleSPZS> wwImage2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2",moduleType);
+				request.setAttribute("image2List", wwImage2List);
+
+				List<ModuleSPZS> spzsEmbed1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("embed1",moduleType);
+				request.setAttribute("embed1List", spzsEmbed1List);
+				
+				url="/merchant/spzs/productExplain/addModule";
+			}
 			break;
 		case "dmtzl":
 
@@ -2221,6 +2265,8 @@ public class MainController {
 				url="/merchant/spzs/homeTextiles/editModule";
 			else if(ModuleSPZS.ARTWORK.equals(moduleType))
 				url="/merchant/spzs/artwork/editModule";
+			else if(ModuleSPZS.PRODUCT_EXPLAIN.equals(moduleType))
+				url="/merchant/spzs/productExplain/editModule";
 			break;
 		case "dmtzl":
 			HtmlGoodsDMTZL htmlGoodsDMTZL = publicService.getHtmlGoodsDMTZL(goodsNumber,accountNumber);

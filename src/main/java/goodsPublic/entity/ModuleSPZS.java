@@ -12,6 +12,7 @@ public class ModuleSPZS implements Serializable {
 	public static final String WHITE_WINE="whiteWine";
 	public static final String HOME_TEXTILES="homeTextiles";
 	public static final String ARTWORK="artwork";
+	public static final String PRODUCT_EXPLAIN="productExplain";
 	private int id;
 	private String name;
 	private String value;

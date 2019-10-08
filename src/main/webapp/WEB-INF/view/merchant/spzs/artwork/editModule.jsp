@@ -124,10 +124,6 @@ function openImage2ModBgDiv(){
 	$("#image2ModBg_div").css("display","block");
 }
 
-function openImage3ModBgDiv(){
-	$("#image3ModBg_div").css("display","block");
-}
-
 function deleteImage1Div(){
 	$("#image1_div").remove();
 	$("#uploadFile1_div input[type='file']").remove();
@@ -142,13 +138,6 @@ function deleteImage2Div(){
 	resetDivPosition();
 }
 
-function deleteImage3Div(){
-	$("#image3_div").remove();
-	$("#uploadFile3_div input[type='file']").remove();
-	$("#uploadFile3_div input[type='text']").remove();
-	resetDivPosition();
-}
-
 function renameFile(){
 	$("#uploadFile1_div input[type='file']").each(function(i){
 		$(this).attr("name","file1_"+(i+1));
@@ -156,10 +145,6 @@ function renameFile(){
 	});
 	$("#uploadFile2_div input[type='file']").each(function(i){
 		$(this).attr("name","file2_"+(i+1));
-		//console.log($(this).attr("name"));
-	});
-	$("#uploadFile3_div input[type='file']").each(function(i){
-		$(this).attr("name","file3_"+(i+1));
 		//console.log($(this).attr("name"));
 	});
 }
@@ -173,10 +158,6 @@ function renameImage(){
 		$(this).attr("name","image2_"+(i+1));
 		//console.log($(this).attr("name"));
 	});
-	$("#uploadFile3_div input[type='text']").each(function(i){
-		$(this).attr("name","image3_"+(i+1));
-		//console.log($(this).attr("name"));
-	});
 }
 
 function closeImage1ModBgDiv(){
@@ -185,10 +166,6 @@ function closeImage1ModBgDiv(){
 
 function closeImage2ModBgDiv(){
 	$("#image2ModBg_div").css("display","none");
-}
-
-function closeImage3ModBgDiv(){
-	$("#image3ModBg_div").css("display","none");
 }
 
 function changeButStyle(o,flag){
@@ -216,14 +193,6 @@ function uploadImage2(){
 	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\"/>");
 	$("#uploadFile2_div").append("<input type=\"text\" id=\"image"+uuid+"\" name=\"image"+uuid+"\" />");
 	document.getElementById("uploadFile2_inp").click();
-}
-
-function uploadImage3(){
-	var uuid=createUUID();
-	$("#uuid_hid3").val(uuid);
-	$("#uploadFile3_div").append("<input type=\"file\" id=\"uploadFile3_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic3(this)\"/>");
-	$("#uploadFile3_div").append("<input type=\"text\" id=\"image"+uuid+"\" name=\"image"+uuid+"\" />");
-	document.getElementById("uploadFile3_inp").click();
 }
 
 function deleteImage1(o){
@@ -256,27 +225,6 @@ function deleteImage2(o){
 	$("#uploadFile2_div input[type='text'][name='image"+uuid+"']").remove();
 	
 	var imageTab=$("#image2Mod_div table");
-	var tdArr1=imageTab.find("td");
-	imageTab.empty();
-	for(var i=0;i<tdArr1.length;i++){
-		var tdArr2=imageTab.find("td");
-		if(tdArr2.length==0||tdArr2.length%4==0)
-			imageTab.append("<tr></tr>");
-		imageTab.find("tr").eq(imageTab.find("tr").length-1).append(tdArr1[i]);
-	}
-	
-	resetDivPosition();
-}
-
-function deleteImage3(o){
-	var td=$(o).parent();
-	var uuid=td.attr("id").substring(7);
-	$("#image3_div #list_div img[id='img"+uuid+"']").remove();
-	td.remove();
-	$("#uploadFile3_div input[type='file'][name='file"+uuid+"']").remove();
-	$("#uploadFile3_div input[type='text'][name='image"+uuid+"']").remove();
-
-	var imageTab=$("#image3Mod_div table");
 	var tdArr1=imageTab.find("td");
 	imageTab.empty();
 	for(var i=0;i<tdArr1.length;i++){
@@ -382,60 +330,6 @@ function showQrcodePic2(obj){
         $img.attr("src", dataURL);
 
         var listDiv=$("#image2_div #list_div");
-        listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
-
-    	resetDivPosition();
-    } else {
-        dataURL = $file.val();
-        var imgObj = document.getElementById("preview");
-        // 两个坑:
-        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
-        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
-        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
-        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
-
-    }
-}
-
-function showQrcodePic3(obj){
-	var uuid=$("#uuid_hid3").val();
-	var file=$(obj);
-	file.attr("id","file"+uuid);
-	file.attr("name","file"+uuid);
-	file.removeAttr("onchange");
-	file.css("display","none");
-	var fileHtml=file.prop("outerHTML");
-	var tdHtml="<td class=\"file_td\" id=\"file_td"+uuid+"\">"
-				+"<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteImage3(this);\">"
-				+"<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\">"
-				+fileHtml
-			+"</td>";
-	
-	var imageTab=$("#image3Mod_div table");
-	//var length=imageTab.find("td[id^='file_td']").length;
-	var tdLength=imageTab.find("td").length;
-    if(tdLength%4==0){
-    	var tr=imageTab.find("tr").eq(imageTab.find("tr").length-1);
-    	tr.append(tdHtml)
-    	imageTab.append("<tr>"+$("#image3Mod_div table #upload_td").prop("outerHTML")+"</tr>");
-    	tr.find("td[id^='upload_td']").remove();
-    }
-    else{
-		imageTab.find("#upload_td").before(tdHtml);
-    }
-
-	var $file = $(obj);
-    var fileObj = $file[0];
-    file=$file;
-    var windowURL = window.URL || window.webkitURL;
-    var dataURL;
-    var $img = $("#image3Mod_div table #img"+uuid);
-
-    if (fileObj && fileObj.files && fileObj.files[0]) {
-        dataURL = windowURL.createObjectURL(fileObj.files[0]);
-        $img.attr("src", dataURL);
-
-        var listDiv=$("#image3_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
 
     	resetDivPosition();

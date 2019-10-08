@@ -454,6 +454,9 @@
 			<if test="image4_5!=null">
 				image4_5,
 			</if>
+			<if test="embed1_1!=null">
+				embed1_1,
+			</if>
 			<if test="memo1!=null">
 				memo1,
 			</if>
@@ -604,6 +607,9 @@
 			</if>
 			<if test="image4_5!=null">
 				#{image4_5},
+			</if>
+			<if test="embed1_1!=null">
+				#{embed1_1},
 			</if>
 			<if test="memo1!=null">
 				#{memo1},
