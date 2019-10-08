@@ -13,7 +13,7 @@ $(function(){
 		iconCls:"icon-add",
 		onClick:function(){
 			if(checkIfPaid())
-				location.href=path+"merchant/main/goAddModule?trade=spzs&type=redWine";
+				location.href=path+"merchant/main/goAddModule?trade=spzs&moduleType=redWine";
 		}
 	});
 	

@@ -367,6 +367,16 @@ public class MainController {
 								break;
 							}
 						}
+						else if("artwork".equals(moduleType)) {
+							switch (i) {
+							case 0:
+								htmlGoodsSPZS.setImage1_1("/GoodsPublic/resource/images/spzs/f21c462d8e78cbe6f31d4b8c67a0560e.png");
+								break;
+							case 5:
+								htmlGoodsSPZS.setImage2_1("/GoodsPublic/resource/images/spzs/a61777ec9042bb003308d961f185a4e1.png");
+								break;
+							}
+						}
 					}
 				}
 			}
@@ -1110,6 +1120,8 @@ public class MainController {
 			url="/merchant/spzs/whiteWine/browseHtmlGoods";
 		else if(ModuleSPZS.HOME_TEXTILES.equals(moduleType))
 			url="/merchant/spzs/homeTextiles/browseHtmlGoods";
+		else if(ModuleSPZS.ARTWORK.equals(moduleType))
+			url="/merchant/spzs/artwork/browseHtmlGoods";
 		return url;
 	}
 	
@@ -2137,6 +2149,22 @@ public class MainController {
 				
 				url="/merchant/spzs/homeTextiles/addModule";
 			}
+			else if(ModuleSPZS.ARTWORK.equals(moduleType)) {
+				request.setAttribute("productName", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("productName",moduleType)).get(0).getValue());
+				
+				List<ModuleSPZS> wwSpxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq",moduleType);
+				request.setAttribute("spxqList", wwSpxqList);
+
+				request.setAttribute("memo1", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo1",moduleType)).get(0).getValue());
+				
+				List<ModuleSPZS> wwImage1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1",moduleType);
+				request.setAttribute("image1List", wwImage1List);
+				
+				List<ModuleSPZS> wwImage2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2",moduleType);
+				request.setAttribute("image2List", wwImage2List);
+				
+				url="/merchant/spzs/artwork/addModule";
+			}
 			break;
 		case "dmtzl":
 
@@ -2191,6 +2219,8 @@ public class MainController {
 				url="/merchant/spzs/whiteWine/editModule";
 			else if(ModuleSPZS.HOME_TEXTILES.equals(moduleType))
 				url="/merchant/spzs/homeTextiles/editModule";
+			else if(ModuleSPZS.ARTWORK.equals(moduleType))
+				url="/merchant/spzs/artwork/editModule";
 			break;
 		case "dmtzl":
 			HtmlGoodsDMTZL htmlGoodsDMTZL = publicService.getHtmlGoodsDMTZL(goodsNumber,accountNumber);
