@@ -7,10 +7,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>预览</title>
 <%@include file="../../js.jsp"%>
-<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/browseHtmlGoods.css" />
+<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/redWine/browseHtmlGoods.css" />
 <script type="text/javascript">
-function editContent(goodsNumber,accountNumber){
-	location.href="${pageContext.request.contextPath}/merchant/main/goEditModule?trade=spzs&goodsNumber="+goodsNumber+"&accountNumber="+accountNumber;
+function editContent(moduleType,goodsNumber,accountNumber){
+	location.href="${pageContext.request.contextPath}/merchant/main/goEditModule?trade=spzs&moduleType="+moduleType+"&goodsNumber="+goodsNumber+"&accountNumber="+accountNumber;
 }
 </script>
 </head>
@@ -177,7 +177,7 @@ function editContent(goodsNumber,accountNumber){
 		</div>
 		<div class="line1_div"></div>
 		<div class="option2_div">
-			<div class="editContent_div" onclick="editContent(${requestScope.htmlGoodsSPZS.goodsNumber },${requestScope.htmlGoodsSPZS.accountNumber });">编辑内容</div>
+			<div class="editContent_div" onclick="editContent('${requestScope.htmlGoodsSPZS.moduleType }',${requestScope.htmlGoodsSPZS.goodsNumber },${requestScope.htmlGoodsSPZS.accountNumber });">编辑内容</div>
 			<div class="option3_div">
 				<a class="createCopy_a">创建副本</a>
 				<a class="delete_a">删除</a>

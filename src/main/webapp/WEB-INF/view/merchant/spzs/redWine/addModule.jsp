@@ -15,7 +15,7 @@
 <%@include file="../../js.jsp"%>
 <link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/themes/default/default.css" />
 <link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css" />
-<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/addModule.css" />
+<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/redWine/addModule.css" />
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/kindeditor.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
@@ -652,6 +652,7 @@ function checkIfPaid(){
 	<div class="createQrcode_div" onclick="addHtmlGoodsSPZS();">生成二维码</div>
 </div>
 	<input type="hidden" id="accountNumber_hid" name="accountNumber" value="${sessionScope.user.id }" />
+	<input type="hidden" name="moduleType" value="${param.moduleType}"/>
 	<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
 </form>
 </body>

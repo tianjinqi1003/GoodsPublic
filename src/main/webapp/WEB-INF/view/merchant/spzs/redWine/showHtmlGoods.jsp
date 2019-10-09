@@ -8,7 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <title>商品</title>
 <%@include file="../../js.jsp"%>
-<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/showHtmlGoods.css" />
+<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/redWine/showHtmlGoods.css" />
 </head>
 <body>
 <div class="main_div" id="main_div">

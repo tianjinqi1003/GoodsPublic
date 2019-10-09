@@ -14,7 +14,7 @@
 <%@include file="../../js.jsp"%>
 <link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/themes/default/default.css" />
 <link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css" />
-<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/editModule.css" />
+<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/redWine/editModule.css" />
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/kindeditor.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
@@ -937,6 +937,7 @@ function goBack(){
 	<div class="saveStatus_div" id="saveStatus_div"></div>
 </div>
 	<input type="hidden" id="id" name="id" value="${requestScope.htmlGoodsSPZS.id }" />
+	<input type="hidden" id="moduleType" name="moduleType" value="${requestScope.htmlGoodsSPZS.moduleType }" />
 	<input type="hidden" id="goodsNumber" name="goodsNumber" value="${requestScope.htmlGoodsSPZS.goodsNumber }" />
 	<input type="hidden" id="accountNumber_hid" name="accountNumber" value="${sessionScope.user.id }" />
 	<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
