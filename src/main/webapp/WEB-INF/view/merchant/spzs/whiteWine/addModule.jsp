@@ -14,7 +14,7 @@
 <%@include file="../../js.jsp"%>
 <link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/themes/default/default.css" />
 <link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css" />
-<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/addModule.css" />
+<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/whiteWine/addModule.css" />
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/kindeditor.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>

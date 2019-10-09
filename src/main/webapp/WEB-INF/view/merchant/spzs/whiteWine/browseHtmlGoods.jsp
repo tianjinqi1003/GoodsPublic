@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>预览</title>
 <%@include file="../../js.jsp"%>
-<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/browseHtmlGoods.css" />
+<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/whiteWine/browseHtmlGoods.css" />
 <script type="text/javascript">
 function editContent(moduleType,goodsNumber,accountNumber){
 	location.href="${pageContext.request.contextPath}/merchant/main/goEditModule?trade=spzs&moduleType="+moduleType+"&goodsNumber="+goodsNumber+"&accountNumber="+accountNumber;

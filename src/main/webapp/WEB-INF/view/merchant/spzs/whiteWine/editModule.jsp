@@ -14,7 +14,7 @@
 <%@include file="../../js.jsp"%>
 <link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/themes/default/default.css" />
 <link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css" />
-<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/editModule.css" />
+<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/whiteWine/editModule.css" />
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/kindeditor.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
@@ -674,31 +674,6 @@ function goBack(){
 			</c:if>
 			<c:if test="${requestScope.htmlGoodsSPZS.image2_5 ne null }">
 			<img class="item_img" id="img2_5" alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }">
-			</c:if>
-		</div>
-	</div>
-	<div class="image3_div" id="image3_div">
-		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<div class="but_div" id="but_div">
-				<a onclick="openImage3ModBgDiv();">编辑</a>|
-				<a onclick="deleteImage3Div();">删除</a>
-			</div>
-		</div>
-		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<c:if test="${requestScope.htmlGoodsSPZS.image3_1 ne null }">
-			<img class="item_img" id="img3_1" alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }">
-			</c:if>
-			<c:if test="${requestScope.htmlGoodsSPZS.image3_2 ne null }">
-			<img class="item_img" id="img3_2" alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }">
-			</c:if>
-			<c:if test="${requestScope.htmlGoodsSPZS.image3_3 ne null }">
-			<img class="item_img" id="img3_3" alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }">
-			</c:if>
-			<c:if test="${requestScope.htmlGoodsSPZS.image3_4 ne null }">
-			<img class="item_img" id="img3_4" alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }">
-			</c:if>
-			<c:if test="${requestScope.htmlGoodsSPZS.image3_5 ne null }">
-			<img class="item_img" id="img3_5" alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }">
 			</c:if>
 		</div>
 	</div>
