@@ -789,6 +789,7 @@ function goBack(){
 	<div class="saveStatus_div" id="saveStatus_div"></div>
 </div>
 	<input type="hidden" id="id" name="id" value="${requestScope.htmlGoodsSPZS.id }" />
+	<input type="hidden" id="moduleType" name="moduleType" value="${requestScope.htmlGoodsSPZS.moduleType }" />
 	<input type="hidden" id="goodsNumber" name="goodsNumber" value="${requestScope.htmlGoodsSPZS.goodsNumber }" />
 	<input type="hidden" id="accountNumber_hid" name="accountNumber" value="${sessionScope.user.id }" />
 	<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />

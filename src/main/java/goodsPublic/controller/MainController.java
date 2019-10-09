@@ -667,7 +667,7 @@ public class MainController {
 		
 		editHtmlGoodsSPZS(htmlGoodsSPZS,file1_1,file1_2,file1_3,file1_4,file1_5,file2_1,file2_2,file2_3,file2_4,file2_5,file3_1,file3_2,file3_3,file3_4,file3_5,file4_1,file4_2,file4_3,file4_4,file4_5,request);
 		
-		return "../../merchant/main/goBrowseHtmlGoodsSPZS?goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
+		return "../../merchant/main/goBrowseHtmlGoodsSPZS?moduleType="+htmlGoodsSPZS.getModuleType()+"&goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
 	}
 	
 	/**
@@ -888,6 +888,7 @@ public class MainController {
 	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS, MultipartFile file1_1, MultipartFile file1_2, MultipartFile file1_3, MultipartFile file1_4, MultipartFile file1_5, MultipartFile file2_1, MultipartFile file2_2, MultipartFile file2_3, MultipartFile file2_4, MultipartFile file2_5, MultipartFile file3_1, MultipartFile file3_2, MultipartFile file3_3, MultipartFile file3_4, MultipartFile file3_5, MultipartFile file4_1, MultipartFile file4_2, MultipartFile file4_3, MultipartFile file4_4, MultipartFile file4_5, HttpServletRequest request) {
 		int count = 0;
 		try {
+			String moduleType = htmlGoodsSPZS.getModuleType();
 			MultipartFile[] fileArr=new MultipartFile[20];
 			fileArr[0]=file1_1;
 			fileArr[1]=file1_2;
@@ -949,7 +950,10 @@ public class MainController {
 								htmlGoodsSPZS.setImage2_5(dataJO.get("src").toString());
 								break;
 							case 10:
-								htmlGoodsSPZS.setImage3_1(dataJO.get("src").toString());
+								if("productExplain".equals(moduleType))
+									htmlGoodsSPZS.setImage3_1(dataJO.get("src").toString());
+								else
+									htmlGoodsSPZS.setEmbed1_1(dataJO.get("src").toString());
 								break;
 							case 11:
 								htmlGoodsSPZS.setImage3_2(dataJO.get("src").toString());
@@ -1535,6 +1539,8 @@ public class MainController {
 					url = "/merchant/spzs/homeTextiles/showHtmlGoods";
 				else if(ModuleSPZS.ARTWORK.equals(moduleType))
 					url = "/merchant/spzs/artwork/showHtmlGoods";
+				else if(ModuleSPZS.PRODUCT_EXPLAIN.equals(moduleType))
+					url = "/merchant/spzs/productExplain/showHtmlGoods";
 				break;
 			case "dmtzl":
 				HtmlGoodsDMTZL htmlGoodsDMTZL = publicService.getHtmlGoodsDMTZL(goodsNumber,accountId);
