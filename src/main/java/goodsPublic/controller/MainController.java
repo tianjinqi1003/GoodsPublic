@@ -1481,7 +1481,7 @@ public class MainController {
 	public String Show(String goodsNumber,String accountId,HttpServletRequest request) {
 		System.out.println(goodsNumber);
 		
-		Map<String, Object> jsonMap = checkIfPaid(accountId);
+		Map<String, Object> jsonMap = checkIfPaid(accountId,request);
 		String status = jsonMap.get("status").toString();
 		if("ok".equals(status)) {
 			
@@ -1524,7 +1524,7 @@ public class MainController {
 	public String goShowHtmlGoods(String trade,String moduleType,String goodsNumber,String accountId,HttpServletRequest request) {
 		
 		String url=null;
-		Map<String, Object> jsonMap = checkIfPaid(accountId);
+		Map<String, Object> jsonMap = checkIfPaid(accountId,request);
 		String status = jsonMap.get("status").toString();
 		if("ok".equals(status)) {
 			switch (trade) {
@@ -1790,10 +1790,14 @@ public class MainController {
 	 */
 	@RequestMapping(value="/checkIfPaid")
 	@ResponseBody
-	public Map<String, Object> checkIfPaid(String accountNumber) {
+	public Map<String, Object> checkIfPaid(String accountNumber, HttpServletRequest request) {
 
 		Map<String, Object> jsonMap=null;
 		try {
+			if(StringUtils.isEmpty(accountNumber)) {
+				AccountMsg accountMsg=(AccountMsg)request.getSession().getAttribute("user");
+				accountNumber=accountMsg.getId();
+			}
 			jsonMap = publicService.checkIfPaid(accountNumber);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block

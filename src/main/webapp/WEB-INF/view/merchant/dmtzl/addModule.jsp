@@ -292,7 +292,7 @@ function checkIfLogined(){
 				bool=true;
 			}
 			else{
-				alert(data.message);
+				$("#login_bg_div").css("display","block");
 				bool=false;
 			}
 		}
@@ -320,6 +320,7 @@ function checkIfPaid(){
 </script>
 </head>
 <body>
+<%@include file="../loginDialog.jsp"%>
 <form id="form1" name="form1" method="post" action="addHtmlGoodsDMTZL" onsubmit="return checkForm();" enctype="multipart/form-data">
 <div class="embed1ModBg_div" id="embed1ModBg_div">
 	<div class="embed1Mod_div" id="embed1Mod_div">

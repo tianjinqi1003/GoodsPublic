@@ -118,6 +118,7 @@ public class GoodsController {
 		try {
 			String userName = request.getParameter("userName");
 			String password = request.getParameter("password");
+			String action = request.getParameter("action");
 			System.out.println("userName==="+userName);
 			System.out.println("password==="+password);
 			//HttpSession session=request.getSession();
@@ -128,12 +129,14 @@ public class GoodsController {
 				token.setRememberMe(true);  
 				currentUser.login(token);//验证角色和权限  
 			}
-			/*
-			AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
-			List<CategoryInfo> catList = categoryService.getCategory(msg.getId());
-			session.setAttribute("categoryList", catList);
-			session.setAttribute("user", msg);
-			*/
+			
+			if("addModule".equals(action)) {
+				AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
+				List<CategoryInfo> catList = categoryService.getCategory(msg.getId());
+				HttpSession session=request.getSession();
+				session.setAttribute("categoryList", catList);
+				session.setAttribute("user", msg);
+			}
 			
 			jsonpCallback="jsonpCallback(\"{\\\"status\\\":0,\\\"msg\\\":\\\"验证通过\\\"}\")";
 		} catch (Exception e) {
