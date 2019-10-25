@@ -46,7 +46,7 @@ public interface PublicMapper {
 	//修改发布的产品信息
 	public int updataGoodsPublic(Goods articleInfo);
 	//查询所有的产品信息
-	public Goods getAllGoodsMsg(String goodsNumber);
+	public Goods getAllGoodsMsg(@Param("goodsNumber")String goodsNumber, @Param("accountNumber")String accountNumber);
 	
 	/**
 	 * 更新二维码链接
@@ -54,7 +54,7 @@ public interface PublicMapper {
 	 * @param goodsNumber
 	 * @return
 	 */
-	public int updateQrcode(@Param("avaPath")String avaPath, @Param("goodsNumber")String goodsNumber);
+	public int updateQrcode(@Param("avaPath")String avaPath, @Param("goodsNumber")String goodsNumber, @Param("accountNumber")String accountNumber);
 	
 	/**
 	 * 查询商品

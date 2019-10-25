@@ -50,21 +50,21 @@ public interface PublicService {
 	 * @param goodsNumber
 	 * @return
 	 */
-	public int getGoodsByGoodsNumber(String goodsNumber);
+	public int getGoodsByGoodsNumber(String goodsNumber, String accountNumber);
 
 	/**
 	 * 查询当前用户的
 	 * @param goodsNumber
 	 * @return
 	 */
-	public PlanResult getGoodsByGN(String goodsNumber);
+	public PlanResult getGoodsByGN(String goodsNumber, String accountNumber);
 
 	/**
 	 * 生成show页面地址栏二维码
 	 * @param url
 	 * @param goodsNumber
 	 */
-	public void createShowUrlQrcode(String url, String goodsNumber);
+	public void createShowUrlQrcode(String url, String goodsNumber, String accountNumber);
 	/**
 	 * 根据id查询商品
 	 * @param id

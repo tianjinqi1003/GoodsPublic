@@ -16,6 +16,7 @@
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
 <script type="text/javascript">
 var baseUrl = "${pageContext.request.contextPath}"
+var accountNumber='${sessionScope.user.id}';
 KindEditor.ready(function(K) {
 	var editor1 = K.create('textarea[name="htmlContent"]', {
 		cssPath : '<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css',
@@ -31,9 +32,9 @@ $(function(){
 		var json=JSON.parse('${requestScope.json}');
 		if(json.status==0){
 			var goodsNumber=json.data;
-			var url=location.href.substring(0,location.href.indexOf("GoodsPublic")-1)+baseUrl+json.url+"?goodsNumber="+goodsNumber+"&accountId="+'${sessionScope.user.id}';
+			var url=location.href.substring(0,location.href.indexOf("GoodsPublic")-1)+baseUrl+json.url+"?goodsNumber="+goodsNumber+"&accountId="+accountNumber;
 			$.post(baseUrl + "/merchant/main/createShowUrlQrcode",
-				{url:url,goodsNumber:goodsNumber},
+				{url:url,goodsNumber:goodsNumber,accountNumber:accountNumber},
 				function(json1){
 					if(json1.status==0){
 						$.messager.confirm("提示", json.msg+"，是否预览？", function(r){
@@ -176,7 +177,7 @@ function checkGoodsNumber(){
 	else{
 		$.ajaxSetup({async:false});
 		$.post("checkGoodsNumber",
-			{goodsNumber:goodsNumber},
+			{goodsNumber:goodsNumber,accountNumber:accountNumber},
 			function(data){
 				if(data.status==1){
 					alert(data.msg);

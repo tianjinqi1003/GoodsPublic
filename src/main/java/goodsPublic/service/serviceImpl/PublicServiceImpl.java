@@ -95,9 +95,9 @@ public class PublicServiceImpl implements PublicService {
 	
 	//获得所有跟当前用户有关的商品列表(1代表已存在，0代表不存在)
 	@Override
-	public int getGoodsByGoodsNumber(String goodsNumber) {
+	public int getGoodsByGoodsNumber(String goodsNumber, String accountNumber) {
 		//查询商品列表
-		Goods shopInfo = publicDao.getAllGoodsMsg(goodsNumber);
+		Goods shopInfo = publicDao.getAllGoodsMsg(goodsNumber,accountNumber);
 		if(shopInfo!=null) {
 			if(goodsNumber.equals(shopInfo.getGoodsNumber())) {
 				return 1;
@@ -108,9 +108,9 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public PlanResult getGoodsByGN(String goodsNumber) {
+	public PlanResult getGoodsByGN(String goodsNumber, String accountNumber) {
 		PlanResult plan=new PlanResult();
-		Goods shopInfo = publicDao.getAllGoodsMsg(goodsNumber);
+		Goods shopInfo = publicDao.getAllGoodsMsg(goodsNumber,accountNumber);
 		if(shopInfo==null) {
 			plan.setStatus(0);
 			plan.setMsg("查询失败，产品不存在");
@@ -124,12 +124,12 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public void createShowUrlQrcode(String url, String goodsNumber) {
+	public void createShowUrlQrcode(String url, String goodsNumber, String accountNumber) {
 		// TODO Auto-generated method stub
 
         String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
 		String avaPath="/GoodsPublic/upload/"+fileName;
-		if(publicDao.updateQrcode(avaPath,goodsNumber)>0) {
+		if(publicDao.updateQrcode(avaPath,goodsNumber,accountNumber)>0) {
 			//String path = FileSystemView.getFileSystemView().getHomeDirectory() + File.separator + "testQrcode";
 			String path = "D:/resource";
 	        Qrcode.createQrCode(url, path, fileName);

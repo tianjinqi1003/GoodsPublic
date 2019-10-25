@@ -1363,7 +1363,7 @@
 		where id=#{id}
 	</update>
 	<update id="updateQrcode" parameterType="java.lang.String">
-		update public_goods set qrCode=#{param1} where goodsNumber=#{param2}
+		update public_goods set qrCode=#{param1} where goodsNumber=#{param2} and accountNumber=#{param3}
 	</update>
 	<update id="updateSingleGoods" parameterType="goodsPublic.entity.Goods">
 		update public_goods set 
@@ -1711,7 +1711,7 @@
 	</update>
 	<select id="getAllGoodsMsg" resultType="goodsPublic.entity.Goods">
 		select * from public_goods
-		where goodsNumber=#{goodsNumber}
+		where goodsNumber=#{goodsNumber} and accountNumber=#{accountNumber}
 	</select>
 	<select id="queryGoodsForInt" resultType="java.lang.Integer">
 		select count(*) from public_goods where accountNumber=#{param1} and category_id=#{param2}

@@ -1178,8 +1178,8 @@ public class MainController {
 	 */
 	@RequestMapping(value="/checkGoodsNumber",produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String checkGoodsNumber(String goodsNumber) {
-		int count=publicService.getGoodsByGoodsNumber(goodsNumber);
+	public String checkGoodsNumber(String goodsNumber, String accountNumber) {
+		int count=publicService.getGoodsByGoodsNumber(goodsNumber,accountNumber);
 		PlanResult plan=new PlanResult();
 		String json;
 		if(count==1) {
@@ -1201,8 +1201,8 @@ public class MainController {
 	 */
 	@RequestMapping(value="/createShowUrlQrcode",produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String createShowUrlQrcode(String url, String goodsNumber,HttpServletRequest request) {
-		publicService.createShowUrlQrcode(url,goodsNumber);
+	public String createShowUrlQrcode(String url, String goodsNumber, String accountNumber) {
+		publicService.createShowUrlQrcode(url,goodsNumber,accountNumber);
 		PlanResult plan=new PlanResult();
 		String json;
 		plan.setStatus(0);
@@ -1492,7 +1492,7 @@ public class MainController {
 			List<GoodsLabelSet> glsList=publicService.getGoodsLabelSetByModuleAccountId("editGoods",accountId);
 			request.setAttribute("glsList", glsList);
 			
-			PlanResult plan=publicService.getGoodsByGN(goodsNumber);
+			PlanResult plan=publicService.getGoodsByGN(goodsNumber,accountId);
 			Goods goods = (Goods)plan.getData();
 			request.setAttribute("plan", goods);
 			
