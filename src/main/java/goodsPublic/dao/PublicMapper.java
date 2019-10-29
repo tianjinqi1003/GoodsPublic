@@ -300,6 +300,13 @@ public interface PublicMapper {
 	public int deleteHtmlGoodsJZSGByIds(List<String> idList);
 
 	/**
+	 * 根据id删除商品
+	 * @param idList
+	 * @return
+	 */
+	public int deleteGoodsByIds(List<String> idList);
+
+	/**
 	 * 添加商户付费记录
 	 * @param accountPayRecord
 	 * @return

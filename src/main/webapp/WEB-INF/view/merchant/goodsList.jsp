@@ -21,7 +21,7 @@ $(function(){
 			}
 			
 			tab1=$("#tab1").datagrid({
-				title:"商品列表&nbsp;|<a href=\"<%=basePath%>merchant/main/operation?categoryId=${param.categoryId}&accountId=${sessionScope.user.id}\" class=\"panel-title\">发布新商品</a>",
+				title:"商品列表&nbsp;|<a href=\"<%=basePath%>merchant/main/operation?categoryId=${param.categoryId}&accountId=${sessionScope.user.id}\" class=\"panel-title\">发布新商品</a>&nbsp;|&nbsp;&nbsp;<span style=\"cursor:pointer;\" onclick=\"deleteGoods();\">删除商品</span>",
 				url:"queryGoodsList",
 				width:setFitWidthInParent("body"),
 				pagination:true,
@@ -68,6 +68,57 @@ $(function(){
 		}
 	,"json");
 });
+
+function deleteGoods() {
+	var rows=tab1.datagrid("getSelections");
+	if (rows.length == 0) {
+		$.messager.alert("提示","请选择要删除的信息！","warning");
+		return false;
+	}
+	
+	var ids = "";
+	for (var i = 0; i < rows.length; i++) {
+		ids += "," + rows[i].id;
+	}
+	ids=ids.substring(1);
+	deleteByIds(ids);
+}
+
+function deleteByIds(ids){
+	if(checkIfPaid()){
+		$.messager.confirm("提示","确定要删除吗？",function(r){
+			if(r){
+				$.post("deleteGoodsByIds",
+					{ids:ids},
+					function(result){
+						if(result.status==1){
+							tab1.datagrid("reload");
+						}
+						alert(result.msg);
+					}
+				,"json");
+			}
+		});
+	}
+}
+
+function checkIfPaid(){
+	var bool=false;
+	$.ajaxSetup({async:false});
+	$.post("checkIfPaid",
+		{accountNumber:'${sessionScope.user.id}'},
+		function(data){
+			if(data.status=="ok"){
+				bool=true;
+			}
+			else{
+				alert(data.message);
+				bool=false;
+			}
+		}
+	,"json");
+	return bool;
+}
 
 function resetColumnsHtml(){
 	var fields = $("#tab1").datagrid('getColumnFields');

@@ -318,6 +318,13 @@ public interface PublicService {
 	public int deleteHtmlGoodsJZSGByIds(String ids);
 
 	/**
+	 * 根据id删除商品
+	 * @param ids
+	 * @return
+	 */
+	public int deleteGoodsByIds(String ids);
+
+	/**
 	 * 添加商户付费记录
 	 * @param accountPayRecord
 	 * @return

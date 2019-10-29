@@ -1416,6 +1416,31 @@ public class MainController {
 	}
 	
 	/**
+	 * 根据id删除商品
+	 * @param ids
+	 * @return
+	 */
+	@RequestMapping(value="/deleteGoodsByIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteGoodsByIds(String ids) {
+		
+		int count=publicService.deleteGoodsByIds(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除商品信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除商品信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
+	/**
 	 * 根据商户号、类别编号验证是否有商品
 	 * @param accountNumber
 	 * @param categoryIds

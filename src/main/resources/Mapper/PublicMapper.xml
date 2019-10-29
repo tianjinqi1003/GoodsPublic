@@ -1827,6 +1827,12 @@
 		#{id}
 		</foreach>
 	</delete>
+	<delete id="deleteGoodsByIds">
+		delete from public_goods where 1=1
+		<foreach collection="list" item="id" open=" and cast(id as char) in (" separator="," close=")">
+		#{id}
+		</foreach>
+	</delete>
 	<delete id="deleteLabelByKeys">
 		delete from goods_label_set where `key` in(#{keys}) and accountNumber=#{accountNumber}
 	</delete>

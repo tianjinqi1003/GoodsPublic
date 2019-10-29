@@ -643,6 +643,15 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
+	public int deleteGoodsByIds(String ids) {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<String> idList = Arrays.asList(ids.split(","));
+		count=publicDao.deleteGoodsByIds(idList);
+		return count;
+	}
+
+	@Override
 	public int addAccountPayRecord(AccountPayRecord accountPayRecord) {
 		// TODO Auto-generated method stub
 		return publicDao.addAccountPayRecord(accountPayRecord);
