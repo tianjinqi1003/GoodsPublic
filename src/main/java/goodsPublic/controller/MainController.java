@@ -1,11 +1,18 @@
 package goodsPublic.controller;
 
-
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,14 +32,19 @@ import org.springframework.web.multipart.MultipartFile;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
-import com.alipay.api.request.AlipayTradePrecreateRequest;
-import com.alipay.api.response.AlipayTradePrecreateResponse;
+import com.alipay.api.internal.util.AlipaySignature;
+import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.goodsPublic.util.FileUploadUtils;
 import com.goodsPublic.util.FinalState;
 import com.goodsPublic.util.JsonUtil;
 import com.goodsPublic.util.PlanResult;
 import com.goodsPublic.util.alipay.AlipayConfig;
 import com.goodsPublic.util.qrcode.Qrcode;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.jpay.ext.kit.HttpKit;
 import com.jpay.ext.kit.PaymentKit;
 import com.jpay.weixin.api.WxPayApiConfigKit;
@@ -52,10 +64,6 @@ import goodsPublic.entity.ModuleSPZS;
 import goodsPublic.service.CategoryService;
 import goodsPublic.service.PublicService;
 import net.sf.json.JSONObject;
-import com.alipay.api.*;
-import com.alipay.api.request.*;
-import com.alipay.api.*;
-import com.alipay.api.internal.util.*;
 
 @Controller
 @RequestMapping("/merchant/main")
@@ -2463,6 +2471,109 @@ public class MainController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		/**
+		//https://blog.csdn.net/a214919447/article/details/54601237
+		try {  
+			File file = new File("E:/money.xls"); 
+            // 创建输入流，读取Excel  
+            InputStream is = new FileInputStream(file.getAbsolutePath());  
+            // jxl提供的Workbook类  
+            Workbook wb = Workbook.getWorkbook(is);  
+            // Excel的页签数量  
+            int sheet_size = wb.getNumberOfSheets();  
+            for (int index = 0; index < sheet_size; index++) {  
+                // 每个页签创建一个Sheet对象  
+                Sheet sheet = wb.getSheet(index);  
+                // sheet.getRows()返回该页的总行数  
+                for (int i = 0; i < sheet.getRows(); i++) {  
+                    // sheet.getColumns()返回该页的总列数  
+                    for (int j = 0; j < sheet.getColumns(); j++) {  
+                        String cellinfo = sheet.getCell(j, i).getContents();  
+                        System.out.println(cellinfo);  
+                    }  
+                }  
+            }  
+        } catch (Exception e) {
+            e.printStackTrace();  
+        }
+        **/
+		
+		//https://blog.csdn.net/luckykapok918/article/details/73088978
+		//https://www.cnblogs.com/qlqwjy/p/8213989.html
+		//https://bbs.csdn.net/topics/392069203
+		try {
+			Rectangle pageSize = new Rectangle(144, 720);
+			Document document = new Document(pageSize,0,0,10,0);
+			PdfWriter.getInstance(document, new FileOutputStream("E:/Helloworld.PDF"));
+			document.open();
+			document.addTitle("aaa");
+			document.addSubject("bbb");
+			/*
+			document.add(new Paragraph("bbbbbbbbbbbbbb"));
+			*/
+			
+			Image image1 = Image.getInstance("E:/201911020001.png");
+			image1.scaleAbsolute(10, 10);
+			image1.setAbsolutePosition(40, 700);
+			document.add(image1);
+			
+			BaseFont baseFont = BaseFont.createFont("C:/Windows/Fonts/SIMYOU.TTF",BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);
+			Font font = new Font(baseFont);
+			font.setSize(5);
+			//font.setColor(255, 150, 200);
+			Paragraph par = new Paragraph("三江航天",font);
+			par.setAlignment(Element.ALIGN_CENTER);
+			document.add(par);
+			
+			image1 = Image.getInstance("D:/resource/20191029161210.jpg");
+			image1.scaleAbsolute(20, 20);
+			image1.setAbsolutePosition(110, 695);
+			document.add(image1);
+
+			font.setSize(2);
+			document.add(new Paragraph(" ",font));
+
+			font.setSize(5);
+			par = new Paragraph("CNG2-G  325-110   -20B",font);
+			par.setAlignment(Element.ALIGN_CENTER);
+			document.add(par);
+			
+			par = new Paragraph("   气瓶编号：000001",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+			
+			par = new Paragraph("  产品标准号：000001",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+			
+			par = new Paragraph("  充装介质：CNG             公称容积：100L",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+			
+			par = new Paragraph("  公称工作压力：20MPa       水压试验压力：30MPa",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+			
+			par = new Paragraph("  钢内胆设置壁厚：4.5mm     设置使用年限：15年",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+			
+			document.close();
+			
+			/*
+			document.add(new Paragraph("aaa",
+	                FontFactory.getFont(FontFactory.COURIER, 5, 
+	                Font.BOLD, new BaseColor(255, 150, 200))));
+	                */
+			
+			document.close();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
