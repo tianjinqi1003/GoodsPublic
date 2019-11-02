@@ -1,8 +1,11 @@
 package goodsPublic.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,10 +43,14 @@ import com.goodsPublic.util.JsonUtil;
 import com.goodsPublic.util.PlanResult;
 import com.goodsPublic.util.alipay.AlipayConfig;
 import com.goodsPublic.util.qrcode.Qrcode;
-import com.itextpdf.text.*;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.jpay.ext.kit.HttpKit;
 import com.jpay.ext.kit.PaymentKit;
@@ -63,6 +70,8 @@ import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
 import goodsPublic.service.CategoryService;
 import goodsPublic.service.PublicService;
+import jxl.Sheet;
+import jxl.Workbook;
 import net.sf.json.JSONObject;
 
 @Controller
@@ -2477,33 +2486,152 @@ public class MainController {
 	}
 	
 	public static void main(String[] args) {
-		/**
-		//https://blog.csdn.net/a214919447/article/details/54601237
-		try {  
-			File file = new File("E:/money.xls"); 
-            // 创建输入流，读取Excel  
-            InputStream is = new FileInputStream(file.getAbsolutePath());  
-            // jxl提供的Workbook类  
-            Workbook wb = Workbook.getWorkbook(is);  
-            // Excel的页签数量  
-            int sheet_size = wb.getNumberOfSheets();  
-            for (int index = 0; index < sheet_size; index++) {  
-                // 每个页签创建一个Sheet对象  
-                Sheet sheet = wb.getSheet(index);  
-                // sheet.getRows()返回该页的总行数  
-                for (int i = 0; i < sheet.getRows(); i++) {  
-                    // sheet.getColumns()返回该页的总列数  
-                    for (int j = 0; j < sheet.getColumns(); j++) {  
-                        String cellinfo = sheet.getCell(j, i).getContents();  
-                        System.out.println(cellinfo);  
-                    }  
-                }  
-            }  
-        } catch (Exception e) {
-            e.printStackTrace();  
-        }
-        **/
 		
+	}
+	
+	public void outputPDF3() {
+		try {
+			Rectangle pageSize = new Rectangle(144, 720);
+			Document document = new Document(pageSize,0,0,10,0);
+			PdfWriter.getInstance(document, new FileOutputStream("E:/Helloworld.PDF"));
+			document.open();
+			
+			BaseFont baseFont = BaseFont.createFont("C:/Windows/Fonts/SIMYOU.TTF",BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);
+			Font font = new Font(baseFont);
+			font.setSize(5);
+			Paragraph par = new Paragraph("CNG  ONLY",font);
+			par.setAlignment(Element.ALIGN_CENTER);
+			document.add(par);
+			
+			par = new Paragraph("DO NOT USE",font);
+			par.setAlignment(Element.ALIGN_CENTER);
+			document.add(par);
+			
+			par = new Paragraph("   AFTER",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+
+			font.setSize(3);
+			par = new Paragraph("   Serial Number：",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+			
+			par = new Paragraph("   Work Pressure：200bar/15℃",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+			
+			par = new Paragraph("   Test Pressure：300bar",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+			
+			par = new Paragraph("   ISO  11439   CNG-2  CNG2-G-         -20B",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+			
+			par = new Paragraph("   Use Only Manufacturer-Approved PRD",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+			
+			par = new Paragraph("   Manufacture date：",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+
+			par = new Paragraph("湖北三江航天江北机械工程有限公司",font);
+			par.setAlignment(Element.ALIGN_CENTER);
+			document.add(par);
+			
+			par = new Paragraph("Hubei Sanjiang Space jiangbei Mechanical Engineering Co Ltd",font);
+			par.setAlignment(Element.ALIGN_CENTER);
+			document.add(par);
+			
+			par = new Paragraph("http://www.cssg-jbc.com",font);
+			par.setAlignment(Element.ALIGN_CENTER);
+			document.add(par);
+			
+			Image image1 = Image.getInstance("E:/201911020001.png");
+			image1.scaleAbsolute(10, 10);
+			image1.setAbsolutePosition(10, 645);
+			document.add(image1);
+			
+			document.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void outputPDF2() {
+		try {
+			Rectangle pageSize = new Rectangle(144, 720);
+			Document document = new Document(pageSize,0,0,10,0);
+			PdfWriter.getInstance(document, new FileOutputStream("E:/Helloworld.PDF"));
+			document.open();
+			
+			BaseFont baseFont = BaseFont.createFont("C:/Windows/Fonts/SIMYOU.TTF",BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);
+			Font font = new Font(baseFont);
+			font.setSize(5);
+			Paragraph par = new Paragraph("CNG  ONLY",font);
+			par.setAlignment(Element.ALIGN_CENTER);
+			document.add(par);
+			
+			par = new Paragraph("DO NOT USE",font);
+			par.setAlignment(Element.ALIGN_CENTER);
+			document.add(par);
+			
+			par = new Paragraph("   AFTER",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+
+			font.setSize(3);
+			par = new Paragraph("    JB    Serial No：00001        V：200L",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+			
+			par = new Paragraph("    20MPa/15℃        -40℃  to  +65℃",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+			
+			par = new Paragraph("    Type：  CNG2-G-         -20B",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+			
+			par = new Paragraph("    Manufacture date：",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+			
+			par = new Paragraph("    ECE R110  CNG-2  110R-000322",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+			
+			par = new Paragraph("    Use Only Manufacturer-Approved PRD",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+			
+			par = new Paragraph("湖北三江航天江北机械工程有限公司",font);
+			par.setAlignment(Element.ALIGN_CENTER);
+			document.add(par);
+			
+			par = new Paragraph("Hubei Sanjiang Space jiangbei Mechanical Engineering Co Ltd",font);
+			par.setAlignment(Element.ALIGN_CENTER);
+			document.add(par);
+			
+			par = new Paragraph("http://www.cssg-jbc.com",font);
+			par.setAlignment(Element.ALIGN_CENTER);
+			document.add(par);
+			
+			Image image1 = Image.getInstance("E:/201911020001.png");
+			image1.scaleAbsolute(10, 10);
+			image1.setAbsolutePosition(10, 645);
+			document.add(image1);
+			
+			document.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void outputPDF1() {
 		//https://blog.csdn.net/luckykapok918/article/details/73088978
 		//https://www.cnblogs.com/qlqwjy/p/8213989.html
 		//https://bbs.csdn.net/topics/392069203
@@ -2564,7 +2692,17 @@ public class MainController {
 			par.setAlignment(Element.ALIGN_LEFT);
 			document.add(par);
 			
-			document.close();
+			par = new Paragraph("  制造许可证编号：000001     制造日期：2019年10月",font);
+			par.setAlignment(Element.ALIGN_LEFT);
+			document.add(par);
+			
+			par = new Paragraph("湖北三江航天江北机械工程有限公司",font);
+			par.setAlignment(Element.ALIGN_CENTER);
+			document.add(par);
+			
+			par = new Paragraph("服务热线：110",font);
+			par.setAlignment(Element.ALIGN_CENTER);
+			document.add(par);
 			
 			/*
 			document.add(new Paragraph("aaa",
@@ -2577,5 +2715,32 @@ public class MainController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	public void inputExcel() {
+		//https://blog.csdn.net/a214919447/article/details/54601237
+		try {  
+			File file = new File("E:/money.xls"); 
+            // 创建输入流，读取Excel  
+            InputStream is = new FileInputStream(file.getAbsolutePath());  
+            // jxl提供的Workbook类  
+            Workbook wb = Workbook.getWorkbook(is);  
+            // Excel的页签数量  
+            int sheet_size = wb.getNumberOfSheets();  
+            for (int index = 0; index < sheet_size; index++) {  
+                // 每个页签创建一个Sheet对象  
+                Sheet sheet = wb.getSheet(index);  
+                // sheet.getRows()返回该页的总行数  
+                for (int i = 0; i < sheet.getRows(); i++) {  
+                    // sheet.getColumns()返回该页的总列数  
+                    for (int j = 0; j < sheet.getColumns(); j++) {  
+                        String cellinfo = sheet.getCell(j, i).getContents();  
+                        System.out.println(cellinfo);  
+                    }  
+                }  
+            }  
+        } catch (Exception e) {
+            e.printStackTrace();  
+        }
 	}
 }
