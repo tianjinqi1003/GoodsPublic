@@ -195,10 +195,12 @@
 		    <version>5.2.0</version>
 		</dependency>
 		<!-- 设置pdf文件密码，还要引入下面bcprov-jdk15on.jar包 -->
+		<!-- 
 		<dependency>
 		    <groupId>org.bouncycastle</groupId>
 		    <artifactId>bcprov-jdk15on</artifactId>
 		    <version>1.54</version>
 		</dependency>
+		 -->
 	</dependencies>
 </project>
