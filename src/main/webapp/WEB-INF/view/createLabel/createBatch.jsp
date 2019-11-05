@@ -135,12 +135,31 @@ function setFitHeightInParent(o){
 			</tr>
 		</table>
 	</form>
-	<div id="export_content" style="width:400px;height: 300px;margin-top:-200px; margin-left:1200px; background-color: yellow;">
+	<div id="export_content" style="width:400px;height: 300px;margin-top:-200px; margin-left:1200px;border:#000 solid 1px;">
+		 <img alt="" src="<%=basePath %>/resource/images/qrcode.png" style="width: 80px;height: 80px;margin-top: 160px;margin-left: 300px;position: absolute;">
 	     <span style="margin-top: 180px;margin-left: 150px;position: absolute;">356-70</span>
 	     <span style="margin-top: 200px;margin-left: 90px;position: absolute;">CB190</span>
 	     <span style="margin-top: 250px;margin-left: 210px;position: absolute;">70L</span>
+	     <span style="margin-top: 300px;margin-left: 120px;position: absolute;">5.0</span>
+	     <span style="margin-top: 350px;margin-left: 210px;position: absolute;">2019&nbsp;&nbsp;&nbsp;&nbsp;1</span>
 	</div>
-	<button id="exportToPdf" style="margin-left: 1200px;">导出为PDF</button>
+	<div style="margin-left: 1200px;">
+		产品型号   
+		<input type="button" value="上移"/> 
+		<input type="button" value="下移"/> 
+		<input type="button" value="左移"/> 
+		<input type="button" value="右移"/> 
+	</div>
+	<div style="margin-left: 1200px;">
+		气瓶编号   
+		<input type="button" value="上移"/> 
+		<input type="button" value="下移"/> 
+		<input type="button" value="左移"/> 
+		<input type="button" value="右移"/> 
+	</div>
+	<div>
+		<button id="exportToPdf" style="margin-left: 1200px;">导出为PDF</button>
+	</div>
 </div>
 </body>
 </html>
