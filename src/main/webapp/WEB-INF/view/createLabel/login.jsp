@@ -87,7 +87,7 @@ body {
 					</div>
 					<div class="beg-pull-right">
 						<a class="layui-btn layui-btn-primary"
-							href="<%=basePath%>merchant/regist">注册新用户</a>
+							href="<%=basePath%>createLabel/regist">注册新用户</a>
 					</div>
 					<div class="beg-clear"></div>
 				</div>
@@ -110,7 +110,7 @@ body {
         //监听提交按钮
         form.on('submit(login)', function (data) {
             $(data.elem).attr('class', 'layui-btn layui-btn-disabled');
-            var url=baseUrl + "/merchant/login"
+            var url=baseUrl + "/createLabel/login"
             var params = {
                     userName: data.field.userName,
                     password: MD5(data.field.password).toUpperCase(),
