@@ -28,4 +28,10 @@ public class CreateLabelServiceImpl implements CreateLabelService {
 		return createLabelDao.insertPreviewCRSPDFSet(pCrsPdfSet);
 	}
 
+	@Override
+	public PreviewCRSPDFSet selectCRSPdfSet(Integer labelType, String accountNumber) {
+		// TODO Auto-generated method stub
+		return createLabelDao.selectCRSPdfSet(labelType,accountNumber);
+	}
+
 }

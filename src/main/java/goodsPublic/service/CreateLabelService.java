@@ -11,4 +11,6 @@ public interface CreateLabelService {
 
 	int insertPreviewCRSPDFSet(PreviewCRSPDFSet pCrsPdfSet);
 
+	PreviewCRSPDFSet selectCRSPdfSet(Integer labelType, String accountNumber);
+
 }

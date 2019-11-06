@@ -6,6 +6,9 @@
  	<select id="selectPreviewCRSPDF" resultType="goodsPublic.entity.PreviewCRSPDF">
  		select * from preview_crs_pdf
  	</select>
+ 	<select id="selectCRSPdfSet" resultType="goodsPublic.entity.PreviewCRSPDFSet">
+ 		select * from preview_crs_pdf_set where label_type=#{labelType} and accountNumber=#{accountNumber}
+ 	</select>
  	<insert id="insertPreviewCRSPDFSet" parameterType="goodsPublic.entity.PreviewCRSPDFSet">
  		insert into preview_crs_pdf_set 
  		<trim prefix="(" suffix=")" suffixOverrides=",">

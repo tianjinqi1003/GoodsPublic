@@ -1,6 +1,8 @@
 package goodsPublic.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -141,6 +143,18 @@ public class CreateLabelController {
 	public String toCreateBatch() {
 		
 		return "/createLabel/createBatch";
+	}
+	
+	@RequestMapping(value="/selectCRSPdfSet")
+	@ResponseBody
+	public Map<String, Object> selectCRSPdfSet(Integer labelType, String accountNumber) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		PreviewCRSPDFSet crsPdfSet=createLabelService.selectCRSPdfSet(labelType,accountNumber);
+		
+		jsonMap.put("crsPdfSet", crsPdfSet);
+		return jsonMap;
 	}
 
 }
