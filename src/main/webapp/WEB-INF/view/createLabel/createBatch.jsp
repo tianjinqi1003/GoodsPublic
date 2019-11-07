@@ -29,48 +29,76 @@ $(function(){
            }},
            {text:"导出为PDF",id:"export_pdf_but",iconCls:"icon-ok",handler:function(){
         	   if(checkPreviewPdfHtml()){
-	        	   html2canvas(
-	                   document.getElementById("pdf_div"),
-	                   {
-	                       dpi: 172,//导出pdf清晰度
-	                       onrendered: function (canvas) {
-	                           var contentWidth = canvas.width;
-	                           var contentHeight = canvas.height;
-	    
-	                           //一页pdf显示html页面生成的canvas高度;
-	                           var pageHeight = contentWidth / 592.28 * 841.89;
-	                           //未生成pdf的html页面高度
-	                           var leftHeight = contentHeight;
-	                           //pdf页面偏移
-	                           var position = 0;
-	                           //html页面生成的canvas在pdf中图片的宽高（a4纸的尺寸[595.28,841.89]）
-	                           var imgWidth = 595.28;
-	                           var imgHeight = 592.28 / contentWidth * contentHeight;
-	    
-	                           var pageData = canvas.toDataURL('image/jpeg', 1.0);
-	                           var pdf = new jsPDF('', 'pt', 'a4');
-	    
-	                           //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
-	                           //当内容未超过pdf一页显示的范围，无需分页
-	                           if (leftHeight < pageHeight) {
-	                               pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
-	                           } else {
-	                               while (leftHeight > 0) {
-	                                   pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
-	                                   leftHeight -= pageHeight;
-	                                   position -= 841.89;
-	                                   //避免添加空白页
-	                                   if (leftHeight > 0) {
-	                                       pdf.addPage();
-	                                   }
-	                               }
-	                           }
-	                           pdf.save('content.pdf');
-	                       },
-	                       //背景设为白色（默认为黑色）
-	                       background: "#fff"  
-	                   }
-	                )
+        		   var qpqsbh=$("#qpqsbh_inp").val();
+        		   var qpjsbh=$("#qpjsbh_inp").val();
+        		   var qpqsbhPre=qpqsbh.substring(0,7);
+        		   var qpqsbhSuf=qpqsbh.substring(7,qpqsbh.length);
+        		   var zzrq=$("#zzrq_inp").val().replace(/\s*/g,'');
+        		   qpjsbh=qpjsbh.substring(7,qpjsbh.length);
+        		   var outputPdfDiv=$("#outputPdf_div");
+        		   for(var i = qpqsbhSuf;i <= qpjsbh;i++){
+                       var qpbhSuf;
+                       qpbhSuf=i+"";
+                       if(qpbhSuf.length==2)
+                    	    qpbhSuf="0"+i;
+                       else if(qpbhSuf.length==1)
+                    	    qpbhSuf="00"+i;
+                       var qpbh=qpqsbhPre+qpbhSuf;
+        			   outputPdfDiv.append("<div id=\"pdf_div"+qpbh+"\" style=\"width:400px;height: 300px;border:#000 solid 1px;\">"+$("#pdf_div").html()+"</div>");
+        		   }
+        		   
+        		   outputPdfDiv.find("div[id^='pdf_div']").each(function(i){
+        			   var pdfDivId=$(this).attr("id");
+        			   var qpbh=pdfDivId.substring(7,pdfDivId.length);
+        			   $(this).find("span[id='qpbh_span']").text(qpbh);
+        			   //if(pdfDivId=="pdf_divCB19001002")
+        				   //return false;
+        			   $("#pdf_div").empty();
+        			   $("#pdf_div").append($("#"+pdfDivId).html());
+        			   //console.log($("#pdf_div").html());
+        			   html2canvas(
+	   	                   document.getElementById("pdf_div"),
+	   	                   {
+	   	                       dpi: 172,//导出pdf清晰度
+	   	                       onrendered: function (canvas) {
+	   	                           var contentWidth = canvas.width;
+	   	                           var contentHeight = canvas.height;
+	   	    
+	   	                           //一页pdf显示html页面生成的canvas高度;
+	   	                           var pageHeight = contentWidth / 592.28 * 841.89;
+	   	                           //未生成pdf的html页面高度
+	   	                           var leftHeight = contentHeight;
+	   	                           //pdf页面偏移
+	   	                           var position = 0;
+	   	                           //html页面生成的canvas在pdf中图片的宽高（a4纸的尺寸[595.28,841.89]）
+	   	                           var imgWidth = 595.28;
+	   	                           var imgHeight = 592.28 / contentWidth * contentHeight;
+	   	    
+	   	                           var pageData = canvas.toDataURL('image/jpeg', 1.0);
+	   	                           var pdf = new jsPDF('', 'pt', 'a4');
+	   	    
+	   	                           //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+	   	                           //当内容未超过pdf一页显示的范围，无需分页
+	   	                           if (leftHeight < pageHeight) {
+	   	                               pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
+	   	                           } else {
+	   	                               while (leftHeight > 0) {
+	   	                                   pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+	   	                                   leftHeight -= pageHeight;
+	   	                                   position -= 841.89;
+	   	                                   //避免添加空白页
+	   	                                   if (leftHeight > 0) {
+	   	                                       pdf.addPage();
+	   	                                   }
+	   	                               }
+	   	                           }
+	   	                           pdf.save(qpbh+zzrq+'.pdf');
+	   	                       },
+	   	                       //背景设为白色（默认为黑色）
+	   	                       background: "#fff"  
+	   	                   }
+	   	                )
+        		   });
         	   	}
            }}
         ]
@@ -147,15 +175,22 @@ function previewPDF(labelType){
 			var zzrqTop=crsPdfSet.zzrq_top;
 			var qrcodeLeft=crsPdfSet.qrcode_left;
 			var qrcodeTop=crsPdfSet.qrcode_top;
+			
+			var cpxh=$("#cpxh_inp").val();
+			var qpqsbh=$("#qpqsbh_inp").val();
+			var gcrj=$("#gcrj_inp").val();
+			var ndbh=$("#ndbh_inp").val();
+			var zzrq=$("#zzrq_inp").val();
+			
 			var previewPDFTd=$("#previewPDF_td");
 			previewPDFTd.empty();
 			previewPDFTd.append("<div id=\"pdf_div\" style=\"width:400px;height: 300px;border:#000 solid 1px;\">"
 									+"<img id=\"qrcode_img\" alt=\"\" src=\""+path+"/resource/images/qrcode.png\" style=\"width: 80px;height: 80px;margin-top: "+qrcodeTop+"px;margin-left: "+qrcodeLeft+"px;position: absolute;\">"
-									+"<span id=\"cpxh_span\" style=\"margin-top: "+cpxhTop+"px;margin-left: "+cpxhLeft+"px;position: absolute;\">356-70</span>"
-									+"<span id=\"qpbh_span\" style=\"margin-top: "+qpbhTop+"px;margin-left: "+qpbhLeft+"px;position: absolute;\">CB190</span>"
-									+"<span id=\"gcrj_span\" style=\"margin-top: "+gcrjTop+"px;margin-left: "+gcrjLeft+"px;position: absolute;\">70L</span>"
-									+"<span id=\"ndbh_span\" style=\"margin-top: "+ndbhTop+"px;margin-left: "+ndbhLeft+"px;position: absolute;\">5.0</span>"
-									+"<span id=\"zzrq_span\" style=\"margin-top: "+zzrqTop+"px;margin-left: "+zzrqLeft+"px;position: absolute;\">2019&nbsp;&nbsp;&nbsp;&nbsp;1</span>"
+									+"<span id=\"cpxh_span\" style=\"margin-top: "+cpxhTop+"px;margin-left: "+cpxhLeft+"px;position: absolute;\">"+cpxh+"</span>"
+									+"<span id=\"qpbh_span\" style=\"margin-top: "+qpbhTop+"px;margin-left: "+qpbhLeft+"px;position: absolute;\">"+qpqsbh+"</span>"
+									+"<span id=\"gcrj_span\" style=\"margin-top: "+gcrjTop+"px;margin-left: "+gcrjLeft+"px;position: absolute;\">"+gcrj+"</span>"
+									+"<span id=\"ndbh_span\" style=\"margin-top: "+ndbhTop+"px;margin-left: "+ndbhLeft+"px;position: absolute;\">"+ndbh+"</span>"
+									+"<span id=\"zzrq_span\" style=\"margin-top: "+zzrqTop+"px;margin-left: "+zzrqLeft+"px;position: absolute;\">"+zzrq+"</span>"
 								+"</div>");
 		}
 	,"json");
@@ -228,37 +263,37 @@ function initWindowMarginLeft(){
 				<tr style="height: 45px;">
 					<td style="width:40%;">产品型号：</td>
 					<td>
-						<input id="" name="" type="text" maxlength="20" onfocus="focus" onblur="check"/>
+						<input id="cpxh_inp" name="" type="text" maxlength="20" value="356-70" onfocus="focus" onblur="check"/>
 					</td>
 				</tr>
 				<tr style="height: 45px;">
 					<td>气瓶起始编号：</td>
 					<td>
-						<input id="" name="" type="text" maxlength="20" onfocus="focus" onblur="check"/>
+						<input id="qpqsbh_inp" name="" type="text" maxlength="20" value="CB19001001" onfocus="focus" onblur="check"/>
 					</td>
 				</tr>
 				<tr style="height: 45px;">
 					<td>气瓶结束编号：</td>
 					<td>
-						<input id="" name="" type="text" maxlength="20" onfocus="focus" onblur="check"/>
+						<input id="qpjsbh_inp" name="" type="text" maxlength="20" value="CB19001003" onfocus="focus" onblur="check"/>
 					</td>
 				</tr>
 				<tr style="height: 45px;">
 					<td>公称容积：</td>
 					<td>
-						<input id="" name="" type="text" maxlength="20" onfocus="focus" onblur="check"/>
+						<input id="gcrj_inp" name="" type="text" maxlength="20" value="70L" onfocus="focus" onblur="check"/>
 					</td>
 				</tr>
 				<tr style="height: 45px;">
 					<td>内胆壁厚：</td>
 					<td>
-						<input id="" name="" type="text" maxlength="20" onfocus="focus" onblur="check"/>
+						<input id="ndbh_inp" name="" type="text" maxlength="20" value="5.0" onfocus="focus" onblur="check"/>
 					</td>
 				</tr>
 				<tr style="height: 45px;">
 					<td>制造日期：</td>
 					<td>
-						<input id="" name="" type="text" maxlength="20" onfocus="focus" onblur="check"/>
+						<input id="zzrq_inp" name="" type="text" maxlength="20" value="2019    11" onfocus="focus" onblur="check"/>
 					</td>
 				</tr>
 				<tr style="height: 350px;">
@@ -322,6 +357,8 @@ function initWindowMarginLeft(){
 					 -->
 				</tr>
 			</table>
+			<div id="outputPdf_div" style="display: none;">
+			</div>
 		</form>
 	</div>
 	<%@include file="foot.jsp"%>
