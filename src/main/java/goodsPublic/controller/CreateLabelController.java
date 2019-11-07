@@ -1,5 +1,9 @@
 package goodsPublic.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +11,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -15,7 +20,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.goodsPublic.util.JsonUtil;
 import com.goodsPublic.util.PlanResult;
@@ -24,10 +31,14 @@ import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.AirBottle;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
+import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.PreviewCRSPDF;
 import goodsPublic.entity.PreviewCRSPDFSet;
 import goodsPublic.service.CreateLabelService;
 import goodsPublic.service.UserService;
+import jxl.Sheet;
+import jxl.Workbook;
+import jxl.read.biff.BiffException;
 
 @Controller
 @RequestMapping("/createLabel")
@@ -203,6 +214,62 @@ public class CreateLabelController {
 		jsonMap.put("total", count);
 		jsonMap.put("rows", abList);
 		return jsonMap;
+	}
+	
+	@RequestMapping(value="/updateAirBottleRecord",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String updateAirBottleRecord(@RequestParam(value="excel_file",required=false) MultipartFile excel_file,String qpbhsStr) {
+		
+		PlanResult plan=new PlanResult();
+		
+        try {
+        	String[] qpbhArr = qpbhsStr.split(",");
+        	
+			// 创建输入流，读取Excel  
+			InputStream is = excel_file.getInputStream();  
+			// jxl提供的Workbook类  
+			Workbook wb = Workbook.getWorkbook(is);  
+			// Excel的页签数量  
+			int sheet_size = wb.getNumberOfSheets();  
+			for (int index = 0; index < sheet_size; index++) {  
+			    // 每个页签创建一个Sheet对象  
+			    Sheet sheet = wb.getSheet(index);  
+			    // sheet.getRows()返回该页的总行数  
+			    for (int i = 1; i < sheet.getRows(); i++) {  
+			    	/*
+			        // sheet.getColumns()返回该页的总列数  
+			        for (int j = 0; j < sheet.getColumns(); j++) {  
+			            String cellinfo = sheet.getCell(j, i).getContents();  
+			            System.out.print(cellinfo+"   ");  
+			        }
+			        System.out.println("  ");
+			        */
+			    	String qpbh = sheet.getCell(1, i).getContents();
+			    	if(StringUtils.isEmpty(qpbh))
+			    		continue;
+			    	for (String qpbh1 : qpbhArr) {
+				        System.out.println("qpbh==="+qpbh.equals(qpbh1));
+					}
+			    }  
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		String json;
+		int count = 0;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("内容保存失败！");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("内容保存成功！");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
 	}
 
 }

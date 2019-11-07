@@ -132,6 +132,9 @@
  			<if test="zzrq!=null">
 	 			zzrq,
 	 		</if>
+ 			<if test="input!=null">
+	 			input,
+	 		</if>
  		</trim>
  		values
  		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -149,6 +152,9 @@
 	 		</if>
  			<if test="zzrq!=null">
 	 			#{zzrq},
+	 		</if>
+ 			<if test="input!=null">
+	 			0,
 	 		</if>
  		</trim>
  	</insert>

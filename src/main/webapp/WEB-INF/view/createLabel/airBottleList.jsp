@@ -30,6 +30,46 @@ $(function(){
 		}
 	});
 	
+	$("#input_but").linkbutton({
+		iconCls:"icon-back",
+		onClick:function(){
+			var rows=tab1.datagrid("getSelections");
+			if (rows.length == 0) {
+				$.messager.alert("提示","请选择要更新的信息！","warning");
+				return false;
+			}
+			var qpbhsStr="";
+			for(var i=0;i<rows.length;i++){
+				if(rows[i].input)
+					continue;
+				qpbhsStr+=","+rows[i].qpbh;
+			}
+			$("#qpbhsStr").val(qpbhsStr.substring(1));
+			
+			var formData = new FormData($("#form1")[0]);
+			 
+			$.ajax({
+				type:"post",
+				url:"updateAirBottleRecord",
+				dataType: "json",
+				data:formData,
+				cache: false,
+				processData: false,
+				contentType: false,
+				success: function (data){
+					if(data.status==1){
+						//$("#saveStatus_div").css("display","block");
+						//setTimeout("hideSaveStatusDiv()",3000);
+					}
+					else{
+						//$("#saveStatus_div").css("display","none");
+					}
+					//$("#saveStatus_div").text(data.msg);
+				}
+			});
+		}
+	});
+	
 	tab1=$("#tab1").datagrid({
 		title:"历史记录查询",
 		url:"queryAirBottleList",
@@ -115,6 +155,12 @@ function initTab1WindowMarginLeft(){
 			<a id="search_but">查询</a>
 			<a id="add_but">创建批次</a>
 			<a id="remove_but">删除</a>
+			
+			<form id="form1">
+				<input type="file" id="excel_file" name="excel_file"/>
+				<input type="hidden" id="qpbhsStr" name="qpbhsStr"/>
+			</form>
+			<a id="input_but">导入Excel</a>
 		</div>
 		<table id="tab1">
 		</table>

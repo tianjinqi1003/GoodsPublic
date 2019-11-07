@@ -69,6 +69,12 @@ public class AirBottle implements Serializable {
 	public void setQpzzdw(String qpzzdw) {
 		this.qpzzdw = qpzzdw;
 	}
+	public Boolean getInput() {
+		return input;
+	}
+	public void setInput(Boolean input) {
+		this.input = input;
+	}
 	private String cpxh;//产品型号
 	private String qpbh;//气瓶编号
 	private String gcrj;//公称容积
@@ -78,5 +84,6 @@ public class AirBottle implements Serializable {
 	private String qpzjxh;//气瓶支架型号
 	private String zzrq;//制造日期
 	private String qpzzdw;//气瓶制造单位
+	private Boolean input;
 
 }
