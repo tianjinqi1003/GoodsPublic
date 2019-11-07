@@ -16,4 +16,8 @@ public interface CreateLabelService {
 
 	int insertAirBottleRecord(AirBottle airBottle);
 
+	int queryAirBottleForInt(String qpbh);
+
+	List<AirBottle> queryAirBottleList(String qpbh, int page, int rows, String sort, String order);
+
 }

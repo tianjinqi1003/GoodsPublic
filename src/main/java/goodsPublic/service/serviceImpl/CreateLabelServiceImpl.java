@@ -41,4 +41,16 @@ public class CreateLabelServiceImpl implements CreateLabelService {
 		return createLabelDao.insertAirBottleRecord(airBottle);
 	}
 
+	@Override
+	public int queryAirBottleForInt(String qpbh) {
+		// TODO Auto-generated method stub
+		return createLabelDao.queryAirBottleForInt(qpbh);
+	}
+
+	@Override
+	public List<AirBottle> queryAirBottleList(String qpbh, int page, int rows, String sort, String order) {
+		// TODO Auto-generated method stub
+		return createLabelDao.queryAirBottleList(qpbh, page, rows, sort, order);
+	}
+
 }

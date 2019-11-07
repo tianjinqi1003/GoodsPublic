@@ -23,6 +23,7 @@ import com.goodsPublic.util.PlanResult;
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.AirBottle;
 import goodsPublic.entity.CategoryInfo;
+import goodsPublic.entity.Goods;
 import goodsPublic.entity.PreviewCRSPDF;
 import goodsPublic.entity.PreviewCRSPDFSet;
 import goodsPublic.service.CreateLabelService;
@@ -78,7 +79,7 @@ public class CreateLabelController {
 			
 			plan.setStatus(0);
 			plan.setMsg("验证通过");
-			plan.setUrl("/createLabel/toCreateBatch");
+			plan.setUrl("/createLabel/toAirBottleList");
 			return JsonUtil.getJsonFromObject(plan);
 		}
 		plan.setStatus(1);
@@ -112,7 +113,7 @@ public class CreateLabelController {
 		plan.setStatus(0);
 		plan.setMsg("注册成功");
 		plan.setData(msg);
-		plan.setUrl("/createLabel/toCreateBatch");
+		plan.setUrl("/createLabel/toAirBottleList");
 		
 		AccountMsg resultUser=userService.checkUser(msg);
 		List<PreviewCRSPDF> pCrsPdflist=createLabelService.selectPreviewCRSPDF();
@@ -138,6 +139,12 @@ public class CreateLabelController {
 		}
 		
 		return JsonUtil.getJsonFromObject(plan);
+	}
+	
+	@RequestMapping("/toAirBottleList")
+	public String toAirBottleList() {
+		
+		return "/createLabel/airBottleList";
 	}
 	
 	@RequestMapping("/toCreateBatch")
@@ -182,6 +189,19 @@ public class CreateLabelController {
 			jsonMap.put("info", "生成历史记录失败！");
 		}
 		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/queryAirBottleList")
+	@ResponseBody
+	public Map<String, Object> queryAirBottleList(String qpbh,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count = createLabelService.queryAirBottleForInt(qpbh);
+		List<AirBottle> abList = createLabelService.queryAirBottleList(qpbh, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		jsonMap.put("rows", abList);
 		return jsonMap;
 	}
 

@@ -60,7 +60,7 @@
 	<div class="layui-header ">
 		<div class="layui-logo">
 			<img alt="" src="<%=basePath%>resource/images/qrcode.png"/>
-			<a>二维码产品发布系统</a>
+			<a>库存标签二维码系统</a>
 		</div>
 		<ul class="layui-nav layui-layout-right">
 			<li class="layui-nav-item"><a href="javascript:;"> <img
@@ -85,7 +85,7 @@
 					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
 					<li class="layui-nav-item">
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-						<a href="<%=basePath%>createLabel/toCreateBatch">
+						<a href="<%=basePath%>createLabel/toAirBottleList">
 							&nbsp;&nbsp;&nbsp;历史记录
 						</a>
 					</li>

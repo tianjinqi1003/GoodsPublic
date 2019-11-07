@@ -9,6 +9,19 @@
  	<select id="selectCRSPdfSet" resultType="goodsPublic.entity.PreviewCRSPDFSet">
  		select * from preview_crs_pdf_set where label_type=#{labelType} and accountNumber=#{accountNumber}
  	</select>
+ 	<select id="queryAirBottleForInt" resultType="java.lang.Integer">
+		select count(*) from air_bottle where 1=1
+		<if test="qpbh!=null&amp;qpbh!=''">
+			and qpbh like'%${qpbh}%'
+		</if>
+	</select>
+	<select id="queryAirBottleList" resultType="goodsPublic.entity.AirBottle">
+		select * from air_bottle where 1=1
+		<if test="qpbh!=null&amp;qpbh!=''">
+			and qpbh like'%${qpbh}%'
+		</if>
+		limit ${param2},${param3}
+	</select>
  	<insert id="insertPreviewCRSPDFSet" parameterType="goodsPublic.entity.PreviewCRSPDFSet">
  		insert into preview_crs_pdf_set 
  		<trim prefix="(" suffix=")" suffixOverrides=",">

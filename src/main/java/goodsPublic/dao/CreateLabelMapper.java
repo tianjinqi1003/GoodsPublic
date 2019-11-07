@@ -18,4 +18,8 @@ public interface CreateLabelMapper {
 
 	int insertAirBottleRecord(AirBottle airBottle);
 
+	int queryAirBottleForInt(@Param("qpbh")String qpbh);
+
+	List<AirBottle> queryAirBottleList(@Param("qpbh")String qpbh, int page, int rows, String sort, String order);
+
 }
