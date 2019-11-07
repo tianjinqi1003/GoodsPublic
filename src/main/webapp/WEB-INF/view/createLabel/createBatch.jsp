@@ -47,9 +47,11 @@ $(function(){
         			   outputPdfDiv.append("<div id=\"pdf_div"+qpbh+"\" style=\"width:400px;height: 300px;border:#000 solid 1px;\">"+$("#pdf_div").html()+"</div>");
         		   }
         		   
+        		   var qpbhsStr;
         		   outputPdfDiv.find("div[id^='pdf_div']").each(function(i){
         			   var pdfDivId=$(this).attr("id");
         			   var qpbh=pdfDivId.substring(7,pdfDivId.length);
+        			   qpbhsStr+=","+qpbh;
         			   $(this).find("span[id='qpbh_span']").text(qpbh);
         			   //if(pdfDivId=="pdf_divCB19001002")
         				   //return false;
@@ -99,6 +101,18 @@ $(function(){
 	   	                   }
 	   	                )
         		   });
+        		   
+        		   var cpxh=$("#cpxh_inp").val();
+       			   var gcrj=$("#gcrj_inp").val();
+       			   var ndbh=$("#ndbh_inp").val();
+       			   var zzrq=$("#zzrq_inp").val();
+       			
+        		   $.post("insertAirBottleRecord",
+       				   {cpxh:cpxh,qpbhsStr:qpbhsStr.substring(1),gcrj:gcrj,ndbh:ndbh,zzrq:zzrq},
+       				   function(data){
+        			   		alert(data.info);
+        		   	   }
+        		   ,"json");
         	   	}
            }}
         ]

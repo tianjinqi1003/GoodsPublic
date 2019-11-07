@@ -21,6 +21,7 @@ import com.goodsPublic.util.JsonUtil;
 import com.goodsPublic.util.PlanResult;
 
 import goodsPublic.entity.AccountMsg;
+import goodsPublic.entity.AirBottle;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.PreviewCRSPDF;
 import goodsPublic.entity.PreviewCRSPDFSet;
@@ -154,6 +155,33 @@ public class CreateLabelController {
 		PreviewCRSPDFSet crsPdfSet=createLabelService.selectCRSPdfSet(labelType,accountNumber);
 		
 		jsonMap.put("crsPdfSet", crsPdfSet);
+		
+		return jsonMap;
+	}
+
+	@RequestMapping(value="/insertAirBottleRecord")
+	@ResponseBody
+	public Map<String, Object> insertAirBottleRecord(AirBottle airBottle, String qpbhsStr) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		String[] qpbhArr = qpbhsStr.split(",");
+		
+		int count = 0;
+		for (int i = 0; i < qpbhArr.length; i++) {
+			airBottle.setQpbh(qpbhArr[i]);
+			count += createLabelService.insertAirBottleRecord(airBottle);
+		}
+		
+		if(count==qpbhArr.length) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "生成历史记录成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "生成历史记录失败！");
+		}
+		
 		return jsonMap;
 	}
 

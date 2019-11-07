@@ -101,4 +101,42 @@
 	 		</if>
  		</trim>
  	</insert>
+ 	<insert id="insertAirBottleRecord" parameterType="goodsPublic.entity.AirBottle">
+ 		insert into air_bottle
+ 		<trim prefix="(" suffix=")" suffixOverrides=",">
+ 			<if test="cpxh!=null">
+	 			cpxh,
+	 		</if>
+ 			<if test="qpbh!=null">
+	 			qpbh,
+	 		</if>
+ 			<if test="gcrj!=null">
+	 			gcrj,
+	 		</if>
+ 			<if test="ndbh!=null">
+	 			ndbh,
+	 		</if>
+ 			<if test="zzrq!=null">
+	 			zzrq,
+	 		</if>
+ 		</trim>
+ 		values
+ 		<trim prefix="(" suffix=")" suffixOverrides=",">
+ 			<if test="cpxh!=null">
+	 			#{cpxh},
+	 		</if>
+ 			<if test="qpbh!=null">
+	 			#{qpbh},
+	 		</if>
+ 			<if test="gcrj!=null">
+	 			#{gcrj},
+	 		</if>
+ 			<if test="ndbh!=null">
+	 			#{ndbh},
+	 		</if>
+ 			<if test="zzrq!=null">
+	 			#{zzrq},
+	 		</if>
+ 		</trim>
+ 	</insert>
 </mapper>

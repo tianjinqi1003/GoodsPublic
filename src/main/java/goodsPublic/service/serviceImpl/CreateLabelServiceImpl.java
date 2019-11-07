@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import goodsPublic.dao.CreateLabelMapper;
+import goodsPublic.entity.AirBottle;
 import goodsPublic.entity.PreviewCRSPDF;
 import goodsPublic.entity.PreviewCRSPDFSet;
 import goodsPublic.service.CreateLabelService;
@@ -32,6 +33,12 @@ public class CreateLabelServiceImpl implements CreateLabelService {
 	public PreviewCRSPDFSet selectCRSPdfSet(Integer labelType, String accountNumber) {
 		// TODO Auto-generated method stub
 		return createLabelDao.selectCRSPdfSet(labelType,accountNumber);
+	}
+
+	@Override
+	public int insertAirBottleRecord(AirBottle airBottle) {
+		// TODO Auto-generated method stub
+		return createLabelDao.insertAirBottleRecord(airBottle);
 	}
 
 }
