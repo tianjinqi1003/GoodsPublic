@@ -58,13 +58,12 @@ $(function(){
 				contentType: false,
 				success: function (data){
 					if(data.status==1){
-						//$("#saveStatus_div").css("display","block");
-						//setTimeout("hideSaveStatusDiv()",3000);
+						alert(data.msg);
+						tab1.datagrid("load");
 					}
 					else{
-						//$("#saveStatus_div").css("display","none");
+						alert(data.msg);
 					}
-					//$("#saveStatus_div").text(data.msg);
 				}
 			});
 		}
@@ -88,8 +87,7 @@ $(function(){
             {field:"zzrq",title:"制造日期",width:100,sortable:true},
             {field:"qpzzdw",title:"气瓶制造单位",width:100,sortable:true},
             {field:"id",title:"操作",width:100,formatter:function(value,row){
-            	//return "<a href=\"${pageContext.request.contextPath}/merchant/main/goEditCategory?id="+value+"\">编辑</a>";
-            	return "<a onclick=\"getCategory('"+row.id+"','"+row.categoryId+"','"+row.categoryName+"')\">编辑</a>";
+            	return "<a href=\"${pageContext.request.contextPath}/createLabel/goEditAirBottle?id="+value+"\">编辑</a>";
             }}
         ]],
         onLoadSuccess:function(data){

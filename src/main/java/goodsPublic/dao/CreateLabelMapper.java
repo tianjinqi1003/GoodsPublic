@@ -22,4 +22,8 @@ public interface CreateLabelMapper {
 
 	List<AirBottle> queryAirBottleList(@Param("qpbh")String qpbh, int page, int rows, String sort, String order);
 
+	int updateAirBottle(AirBottle airBottle);
+
+	AirBottle getAirBottleById(@Param("id")String id);
+
 }

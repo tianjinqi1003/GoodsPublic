@@ -53,4 +53,22 @@ public class CreateLabelServiceImpl implements CreateLabelService {
 		return createLabelDao.queryAirBottleList(qpbh, page, rows, sort, order);
 	}
 
+	@Override
+	public int updateAirBottle(AirBottle airBottle) {
+		// TODO Auto-generated method stub
+		return createLabelDao.updateAirBottle(airBottle);
+	}
+
+	@Override
+	public AirBottle getAirBottleById(String id) {
+		// TODO Auto-generated method stub
+		return createLabelDao.getAirBottleById(id);
+	}
+
+	@Override
+	public int editAirBottle(AirBottle airBottle) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

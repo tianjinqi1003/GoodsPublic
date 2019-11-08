@@ -6,6 +6,9 @@
  	<select id="selectPreviewCRSPDF" resultType="goodsPublic.entity.PreviewCRSPDF">
  		select * from preview_crs_pdf
  	</select>
+ 	<select id="getAirBottleById" resultType="goodsPublic.entity.AirBottle">
+ 		select * from air_bottle where id=#{id}
+ 	</select>
  	<select id="selectCRSPdfSet" resultType="goodsPublic.entity.PreviewCRSPDFSet">
  		select * from preview_crs_pdf_set where label_type=#{labelType} and accountNumber=#{accountNumber}
  	</select>
@@ -158,4 +161,21 @@
 	 		</if>
  		</trim>
  	</insert>
+ 	<update id="updateAirBottle" parameterType="goodsPublic.entity.AirBottle">
+ 		update air_bottle set 
+ 		<if test="zl!=null">
+ 			zl=#{zl},
+ 		</if>
+ 		<if test="scrj!=null">
+ 			scrj=#{scrj},
+ 		</if>
+ 		<if test="qpzjxh!=null">
+ 			qpzjxh=#{qpzjxh},
+ 		</if>
+ 		<if test="qpzzdw!=null">
+ 			qpzzdw=#{qpzzdw},
+ 		</if>
+ 		input=1
+ 		where qpbh=#{qpbh}
+ 	</update>
 </mapper>

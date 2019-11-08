@@ -20,4 +20,10 @@ public interface CreateLabelService {
 
 	List<AirBottle> queryAirBottleList(String qpbh, int page, int rows, String sort, String order);
 
+	int updateAirBottle(AirBottle airBottle);
+
+	AirBottle getAirBottleById(String id);
+
+	int editAirBottle(AirBottle airBottle);
+
 }

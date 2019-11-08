@@ -31,6 +31,7 @@ import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.AirBottle;
 import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.Goods;
+import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.PreviewCRSPDF;
 import goodsPublic.entity.PreviewCRSPDFSet;
@@ -221,6 +222,7 @@ public class CreateLabelController {
 	public String updateAirBottleRecord(@RequestParam(value="excel_file",required=false) MultipartFile excel_file,String qpbhsStr) {
 		
 		PlanResult plan=new PlanResult();
+		int count = 0;
 		
         try {
         	String[] qpbhArr = qpbhsStr.split(",");
@@ -248,7 +250,24 @@ public class CreateLabelController {
 			    	if(StringUtils.isEmpty(qpbh))
 			    		continue;
 			    	for (String qpbh1 : qpbhArr) {
-				        System.out.println("qpbh==="+qpbh.equals(qpbh1));
+				        if(qpbh.equals(qpbh1)) {
+				        	String zl = sheet.getCell(2, i).getContents();
+				        	String scrj = sheet.getCell(3, i).getContents();
+				        	String qpzjxh = sheet.getCell(4, i).getContents();
+				        	String qpzzdw = sheet.getCell(5, i).getContents();
+					        System.out.println("zl==="+zl);
+					        System.out.println("scrj==="+scrj);
+					        System.out.println("qpzjxh==="+qpzjxh);
+					        System.out.println("qpzzdw==="+qpzzdw);
+					        
+					        AirBottle airBottle=new AirBottle();
+					        airBottle.setQpbh(qpbh);
+					        airBottle.setZl(zl);
+					        airBottle.setScrj(scrj);
+					        airBottle.setQpzjxh(qpzjxh);
+					        airBottle.setQpzzdw(qpzzdw);
+					        count += createLabelService.updateAirBottle(airBottle);
+				        }
 					}
 			    }  
 			}
@@ -258,18 +277,43 @@ public class CreateLabelController {
 		}
 		
 		String json;
-		int count = 0;
 		if(count==0) {
 			plan.setStatus(0);
-			plan.setMsg("内容保存失败！");
+			plan.setMsg("导入失败！");
 			json=JsonUtil.getJsonFromObject(plan);
 		}
 		else {
 			plan.setStatus(1);
-			plan.setMsg("内容保存成功！");
+			plan.setMsg("导入成功！");
 			json=JsonUtil.getJsonFromObject(plan);
 		}
 		return json;
+	}
+	
+	@RequestMapping(value="/goEditAirBottle")
+	public String goEditAirBottle(HttpServletRequest request, String id) {
+		
+		AirBottle airBottle=createLabelService.getAirBottleById(id);
+		request.setAttribute("airBottle", airBottle);
+		return "/createLabel/editAirBottle";
+	}
+	
+	@RequestMapping(value="/editAirBottle")
+	@ResponseBody
+	public Map<String, Object> editAirBottle(AirBottle airBottle) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=createLabelService.editAirBottle(airBottle);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑失败！");
+		}
+		return jsonMap;
 	}
 
 }
