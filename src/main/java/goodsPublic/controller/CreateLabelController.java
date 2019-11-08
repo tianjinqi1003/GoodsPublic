@@ -165,6 +165,12 @@ public class CreateLabelController {
 		return "/createLabel/createBatch";
 	}
 	
+	@RequestMapping("/toPreviewHGZPdf")
+	public String toPreviewHGZPdf() {
+		
+		return "/createLabel/previewHGZPdf";
+	}
+	
 	@RequestMapping(value="/selectCRSPdfSet")
 	@ResponseBody
 	public Map<String, Object> selectCRSPdfSet(Integer labelType, String accountNumber) {

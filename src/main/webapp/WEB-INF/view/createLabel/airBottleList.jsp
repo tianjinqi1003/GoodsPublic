@@ -69,6 +69,25 @@ $(function(){
 		}
 	});
 	
+	$("#previewPdf_but").linkbutton({
+		iconCls:"icon-search",
+		onClick:function(){
+			var rows=tab1.datagrid("getSelections");
+			if (rows.length == 0) {
+				$.messager.alert("提示","请选择要生成Pdf的信息！","warning");
+				return false;
+			}
+			var jsonStr="[";
+			for(var i=0;i<rows.length;i++){
+				jsonStr+="{\"cpxh\":\""+rows[i].cpxh+"\",\"qpbh\":\""+rows[i].qpbh+"\",\"zl\":\""+rows[i].zl+"\",\"scrj\":\""+rows[i].scrj+"\",\"zzrq\":\""+rows[i].zzrq+"\"}";
+				if(i<rows.length-1)
+					jsonStr+=",";
+			}
+			jsonStr+="]";
+			window.open("toPreviewHGZPdf?jsonStr="+jsonStr,"newwindow","width=300;");
+		}
+	});
+	
 	tab1=$("#tab1").datagrid({
 		title:"历史记录查询",
 		url:"queryAirBottleList",
@@ -178,6 +197,7 @@ function initTab1WindowMarginLeft(){
 				<input type="hidden" id="qpbhsStr" name="qpbhsStr"/>
 			</form>
 			<a id="input_but">导入Excel</a>
+			<a id="previewPdf_but">预览Pdf</a>
 		</div>
 		<table id="tab1">
 		</table>
