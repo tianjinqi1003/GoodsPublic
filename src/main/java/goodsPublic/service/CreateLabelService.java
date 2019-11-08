@@ -28,4 +28,6 @@ public interface CreateLabelService {
 
 	int deleteAirBottle(String ids);
 
+	boolean checkAirBottleExistByQpbh(String qpbh);
+
 }

@@ -25,6 +25,9 @@
 		</if>
 		limit ${param2},${param3}
 	</select>
+	<select id="getAirBottleCountByQpbh" resultType="java.lang.Integer">
+		select count(*) from air_bottle where qpbh=#{qpbh}
+	</select>
  	<insert id="insertPreviewCRSPDFSet" parameterType="goodsPublic.entity.PreviewCRSPDFSet">
  		insert into preview_crs_pdf_set 
  		<trim prefix="(" suffix=")" suffixOverrides=",">

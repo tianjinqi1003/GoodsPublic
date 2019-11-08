@@ -20,7 +20,7 @@ public interface CreateLabelMapper {
 
 	int queryAirBottleForInt(@Param("qpbh")String qpbh);
 
-	List<AirBottle> queryAirBottleList(@Param("qpbh")String qpbh, int page, int rows, String sort, String order);
+	List<AirBottle> queryAirBottleList(@Param("qpbh")String qpbh, int start, int rows, String sort, String order);
 
 	int updateAirBottle(AirBottle airBottle);
 
@@ -29,5 +29,7 @@ public interface CreateLabelMapper {
 	int editAirBottle(AirBottle airBottle);
 
 	int deleteAirBottle(List<String> idList);
+
+	int getAirBottleCountByQpbh(@Param("qpbh")String qpbh);
 
 }

@@ -51,7 +51,7 @@ public class CreateLabelServiceImpl implements CreateLabelService {
 	@Override
 	public List<AirBottle> queryAirBottleList(String qpbh, int page, int rows, String sort, String order) {
 		// TODO Auto-generated method stub
-		return createLabelDao.queryAirBottleList(qpbh, page, rows, sort, order);
+		return createLabelDao.queryAirBottleList(qpbh, (page-1)*rows, rows, sort, order);
 	}
 
 	@Override
@@ -79,6 +79,13 @@ public class CreateLabelServiceImpl implements CreateLabelService {
 		List<String> idList = Arrays.asList(ids.split(","));
 		count=createLabelDao.deleteAirBottle(idList);
 		return count;
+	}
+
+	@Override
+	public boolean checkAirBottleExistByQpbh(String qpbh) {
+		// TODO Auto-generated method stub
+		int count=createLabelDao.getAirBottleCountByQpbh(qpbh);
+		return count>0?true:false;
 	}
 
 }

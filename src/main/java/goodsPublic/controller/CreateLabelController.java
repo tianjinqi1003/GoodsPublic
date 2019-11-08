@@ -204,6 +204,23 @@ public class CreateLabelController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/checkAirBottleExistByQpbh")
+	@ResponseBody
+	public Map<String, Object> checkAirBottleExistByQpbh(String qpbh) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		if(createLabelService.checkAirBottleExistByQpbh(qpbh)) {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "气瓶编号已存在！");
+		}
+		else {
+			jsonMap.put("message", "ok");
+		}
+		
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/queryAirBottleList")
 	@ResponseBody
 	public Map<String, Object> queryAirBottleList(String qpbh,int page,int rows,String sort,String order) {

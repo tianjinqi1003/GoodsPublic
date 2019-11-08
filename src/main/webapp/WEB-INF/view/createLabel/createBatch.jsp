@@ -44,6 +44,8 @@ $(function(){
                        else if(qpbhSuf.length==1)
                     	    qpbhSuf="00"+i;
                        var qpbh=qpqsbhPre+qpbhSuf;
+                       if(!checkQpbhExist(qpbh))
+                    	   continue;
         			   outputPdfDiv.append("<div id=\"pdf_div"+qpbh+"\" style=\"width:400px;height: 300px;border:#000 solid 1px;\">"+$("#pdf_div").html()+"</div>");
         		   }
         		   
@@ -247,6 +249,22 @@ function checkPreviewPdfHtml(){
     }
     else
 	    return true;
+}
+
+function checkQpbhExist(qpbh){
+	var bool=false;
+	$.ajaxSetup({async:false});
+	$.post("checkAirBottleExistByQpbh",
+		{qpbh:qpbh},
+		function(data){
+			if(data.message=="no"){
+				bool=false;
+			}
+			else
+				bool=true;
+		}
+	,"json");
+	return bool;
 }
 
 function setFitWidthInParent(o){
