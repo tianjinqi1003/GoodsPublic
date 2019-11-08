@@ -78,14 +78,14 @@ $(function(){
 		pageSize:10,
 		columns:[[
             {field:"cpxh",title:"产品型号",width:100,sortable:true},
-            {field:"qpbh",title:"气瓶编号",width:100,sortable:true},
-            {field:"gcrj",title:"公称容积",width:100,sortable:true},
-            {field:"ndbh",title:"内胆壁厚",width:100,sortable:true},
-            {field:"zl",title:"重量",width:100,sortable:true},
-            {field:"scrj",title:"实测容积",width:100,sortable:true},
+            {field:"qpbh",title:"气瓶编号",width:150,sortable:true},
+            {field:"gcrj",title:"公称容积",width:80,sortable:true},
+            {field:"ndbh",title:"内胆壁厚",width:80,sortable:true},
+            {field:"zl",title:"重量",width:80,sortable:true},
+            {field:"scrj",title:"实测容积",width:80,sortable:true},
             {field:"qpzjxh",title:"气瓶支架型号",width:100,sortable:true},
             {field:"zzrq",title:"制造日期",width:100,sortable:true},
-            {field:"qpzzdw",title:"气瓶制造单位",width:100,sortable:true},
+            {field:"qpzzdw",title:"气瓶制造单位",width:300,sortable:true},
             {field:"id",title:"操作",width:100,formatter:function(value,row){
             	return "<a href=\"${pageContext.request.contextPath}/createLabel/goEditAirBottle?id="+value+"\">编辑</a>";
             }}
@@ -98,7 +98,6 @@ $(function(){
 			}
 			
 			resetTabStyle();
-			reSizeCol();
 		}
 	});
 	
@@ -117,17 +116,37 @@ function resetTabStyle(){
 	$(".panel.datagrid .datagrid-pager.pagination").css("background","#F5FAFE");
 }
 
-//重设列宽
-function reSizeCol(){
-	var width=$(".panel.datagrid").css("width");
-	width=width.substring(0,width.length-2);
-	var cols=$(".datagrid-htable tr td");
-	var colCount=cols.length;
-	width=width-colCount*2;
-	cols.css("width",width/colCount+"px");
-	cols=$(".datagrid-btable tr").eq(0).find("td");
-	colCount=cols.length;
-	cols.css("width",width/colCount+"px");
+function deleteByIds() {
+	var rows=tab1.datagrid("getSelections");
+	if (rows.length == 0) {
+		$.messager.alert("提示","请选择要删除的信息！","warning");
+		return false;
+	}
+	
+	$.messager.confirm("提示","确定要删除吗？",function(r){
+		if(r){
+			var ids = "";
+			for (var i = 0; i < rows.length; i++) {
+				ids += "," + rows[i].id;
+			}
+			ids=ids.substring(1);
+			
+			//$.ajaxSetup({async:false});
+			$.post(path+"createLabel/deleteAirBottle", 
+				{ids:ids}, 
+				function(data) {
+					if(data.status==1){
+						alert(data.msg);
+						tab1.datagrid("load");
+					}
+					else{
+						alert(data.msg);
+					}
+				}
+			, "json");
+			
+		}
+	});
 }
 
 function setFitWidthInParent(o){

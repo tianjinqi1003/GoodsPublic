@@ -26,4 +26,6 @@ public interface CreateLabelService {
 
 	int editAirBottle(AirBottle airBottle);
 
+	int deleteAirBottle(String ids);
+
 }

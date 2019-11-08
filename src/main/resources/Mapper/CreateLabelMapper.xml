@@ -178,4 +178,23 @@
  		input=1
  		where qpbh=#{qpbh}
  	</update>
+ 	<update id="editAirBottle" parameterType="goodsPublic.entity.AirBottle">
+ 		update air_bottle set 
+ 		<if test="zl!=null">
+ 			zl=#{zl},
+ 		</if>
+ 		<if test="scrj!=null">
+ 			scrj=#{scrj},
+ 		</if>
+ 		<if test="qpzjxh!=null">
+ 			qpzjxh=#{qpzjxh}
+ 		</if>
+ 		where id=#{id}
+ 	</update>
+ 	<delete id="deleteAirBottle" parameterType="java.util.List">
+		delete from air_bottle where 1=1
+		<foreach collection="list" item="id" open=" and cast(id as char) in (" separator="," close=")">
+		#{id}
+		</foreach> 
+	</delete>
 </mapper>

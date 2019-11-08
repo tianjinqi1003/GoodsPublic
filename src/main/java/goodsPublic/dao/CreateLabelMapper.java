@@ -26,4 +26,8 @@ public interface CreateLabelMapper {
 
 	AirBottle getAirBottleById(@Param("id")String id);
 
+	int editAirBottle(AirBottle airBottle);
+
+	int deleteAirBottle(List<String> idList);
+
 }

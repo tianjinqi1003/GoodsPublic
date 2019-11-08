@@ -1,5 +1,6 @@
 package goodsPublic.service.serviceImpl;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,7 +69,16 @@ public class CreateLabelServiceImpl implements CreateLabelService {
 	@Override
 	public int editAirBottle(AirBottle airBottle) {
 		// TODO Auto-generated method stub
-		return 0;
+		return createLabelDao.editAirBottle(airBottle);
+	}
+
+	@Override
+	public int deleteAirBottle(String ids) {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<String> idList = Arrays.asList(ids.split(","));
+		count=createLabelDao.deleteAirBottle(idList);
+		return count;
 	}
 
 }

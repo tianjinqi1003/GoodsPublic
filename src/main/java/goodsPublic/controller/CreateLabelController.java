@@ -315,5 +315,25 @@ public class CreateLabelController {
 		}
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/deleteAirBottle",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteAirBottle(String ids) {
+		
+		int count=createLabelService.deleteAirBottle(ids);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
 
 }
