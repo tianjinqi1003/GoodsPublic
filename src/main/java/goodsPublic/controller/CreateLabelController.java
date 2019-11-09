@@ -171,6 +171,15 @@ public class CreateLabelController {
 		return "/createLabel/previewHGZPdf";
 	}
 	
+	@RequestMapping("/toQrcodeCRS")
+	public String toQrcodeCRS(String id,HttpServletRequest request) {
+		
+		AirBottle airBottle = createLabelService.getAirBottleById(id);
+		
+		request.setAttribute("airBottle", airBottle);
+		return "/createLabel/qrcodeCRS";
+	}
+	
 	@RequestMapping("/toQrcodeHGZ")
 	public String toQrcodeHGZ(String id,HttpServletRequest request) {
 		
