@@ -20,7 +20,7 @@ $(function(){
 	for(var i=0;i<airBottleJA.length;i++){
 		var airBottleJO=airBottleJA[i];
 		previewPdfDiv.append("<div id=\"pdf_div"+airBottleJO.qpbh+"\" zzrq=\""+airBottleJO.zzrq+"\" style=\"width:400px;height: 300px;margin:0 auto;margin-top:10px;border:#000 solid 1px;\">"
-								+"<img alt=\"\" src=\""+path+"/resource/images/qrcode.png\" style=\"width: 180px;height: 180px;margin-top: 80px;margin-left: 150px;position: absolute;\">"
+								+"<img alt=\"\" src=\""+createQrcode(airBottleJO.qpbh)+"\" style=\"width: 180px;height: 180px;margin-top: 80px;margin-left: 150px;position: absolute;\">"
 								+"<span style=\"margin-top: 20px;margin-left: 20px;position: absolute;\">"+airBottleJO.cpxh+"</span>"
 								+"<span style=\"margin-top: 60px;margin-left: 20px;position: absolute;\">"+airBottleJO.qpbh+"</span>"
 								+"<span style=\"margin-top: 100px;margin-left: 20px;position: absolute;\">"+airBottleJO.zl+"</span>"
@@ -83,10 +83,23 @@ $(function(){
 		}
 	});
 });
+
+function createQrcode(qpbh){
+	var qrcodeUrl;
+	var url="http://120.27.5.36:8888/GoodsPublic/createLabel/toQrcodeHGZ?qpbh="+qpbh;
+	$.ajaxSetup({async:false});
+    $.post("createQrcode",
+	   {url:url,qpbh:qpbh},
+	   function(data){
+		   qrcodeUrl=data.qrcodeUrl;
+   	   }
+    ,"json");
+    return qrcodeUrl;
+}
 </script>
 </head>
 <body>
-<div id="previewPdf_div" style="width: 410px;margin:0 auto;background-color: yellow;">
+<div id="previewPdf_div" style="width: 410px;margin:0 auto;">
 	<!-- 
 	<div id="pdf_div" style="width:400px;height: 300px;margin:0 auto;margin-top:10px;border:#000 solid 1px;">
 		 <img alt="" src="<%=basePath %>/resource/images/qrcode.png" style="width: 180px;height: 180px;margin-top: 80px;margin-left: 150px;position: absolute;">

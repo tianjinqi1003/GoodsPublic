@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.goodsPublic.util.JsonUtil;
 import com.goodsPublic.util.PlanResult;
+import com.goodsPublic.util.qrcode.Qrcode;
 
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.AirBottle;
@@ -172,18 +175,20 @@ public class CreateLabelController {
 	}
 	
 	@RequestMapping("/toQrcodeCRS")
-	public String toQrcodeCRS(String id,HttpServletRequest request) {
+	public String toQrcodeCRS(String qpbh,HttpServletRequest request) {
 		
-		AirBottle airBottle = createLabelService.getAirBottleById(id);
+		//http://localhost:8088/GoodsPublic/createLabel/toQrcodeCRS?qpbh=CB19001006
+		AirBottle airBottle = createLabelService.getAirBottleByQpbh(qpbh);
 		
 		request.setAttribute("airBottle", airBottle);
 		return "/createLabel/qrcodeCRS";
 	}
 	
 	@RequestMapping("/toQrcodeHGZ")
-	public String toQrcodeHGZ(String id,HttpServletRequest request) {
+	public String toQrcodeHGZ(String qpbh,HttpServletRequest request) {
 		
-		AirBottle airBottle = createLabelService.getAirBottleById(id);
+		//http://localhost:8088/GoodsPublic/createLabel/toQrcodeHGZ?qpbh=CB19001006
+		AirBottle airBottle = createLabelService.getAirBottleByQpbh(qpbh);
 		
 		request.setAttribute("airBottle", airBottle);
 		return "/createLabel/qrcodeHGZ";
@@ -375,6 +380,21 @@ public class CreateLabelController {
 			json=JsonUtil.getJsonFromObject(plan);
 		}
 		return json;
+	}
+	
+	@RequestMapping(value="/createQrcode")
+	@ResponseBody
+	public Map<String, Object> createQrcode(String url, String qpbh) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		String fileName = qpbh+new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
+		String avaPath="/GoodsPublic/upload/"+fileName;
+		String path = "D:/resource";
+        Qrcode.createQrCode(url, path, fileName);
+        
+        jsonMap.put("qrcodeUrl", avaPath);
+		
+		return jsonMap;
 	}
 
 }

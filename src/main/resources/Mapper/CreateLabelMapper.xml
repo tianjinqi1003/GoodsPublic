@@ -9,6 +9,9 @@
  	<select id="getAirBottleById" resultType="goodsPublic.entity.AirBottle">
  		select * from air_bottle where id=#{id}
  	</select>
+ 	<select id="getAirBottleByQpbh" resultType="goodsPublic.entity.AirBottle">
+ 		select * from air_bottle where qpbh=#{qpbh}
+ 	</select>
  	<select id="selectCRSPdfSet" resultType="goodsPublic.entity.PreviewCRSPDFSet">
  		select * from preview_crs_pdf_set where label_type=#{labelType} and accountNumber=#{accountNumber}
  	</select>

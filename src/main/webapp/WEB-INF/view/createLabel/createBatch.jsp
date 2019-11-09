@@ -58,6 +58,16 @@ $(function(){
         			   var pdfDivId=$(this).attr("id");
         			   var qpbh=pdfDivId.substring(7,pdfDivId.length);
         			   qpbhsStr+=","+qpbh;
+        			   
+        			   var url="http://120.27.5.36:8888/GoodsPublic/createLabel/toQrcodeCRS?qpbh="+qpbh;
+        			   $.post("createQrcode",
+       					   {url:url,qpbh:qpbh},
+       					   function(data){
+       						   $("#"+pdfDivId).find("img[id='qrcode_img']").attr("src",data.qrcodeUrl);
+        			   	   }
+        			   ,"json");
+
+					   console.log($(this).find("img[id='qrcode_img']").attr("src"));
         			   $(this).find("span[id='qpbh_span']").text(qpbh);
         			   //if(pdfDivId=="pdf_divCB19001002")
         				   //return false;

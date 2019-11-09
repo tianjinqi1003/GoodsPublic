@@ -30,4 +30,6 @@ public interface CreateLabelService {
 
 	boolean checkAirBottleExistByQpbh(String qpbh);
 
+	AirBottle getAirBottleByQpbh(String qpbh);
+
 }
