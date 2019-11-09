@@ -171,6 +171,15 @@ public class CreateLabelController {
 		return "/createLabel/previewHGZPdf";
 	}
 	
+	@RequestMapping("/toQrcodeHGZ")
+	public String toQrcodeHGZ(String id,HttpServletRequest request) {
+		
+		AirBottle airBottle = createLabelService.getAirBottleById(id);
+		
+		request.setAttribute("airBottle", airBottle);
+		return "/createLabel/qrcodeHGZ";
+	}
+	
 	@RequestMapping(value="/selectCRSPdfSet")
 	@ResponseBody
 	public Map<String, Object> selectCRSPdfSet(Integer labelType, String accountNumber) {

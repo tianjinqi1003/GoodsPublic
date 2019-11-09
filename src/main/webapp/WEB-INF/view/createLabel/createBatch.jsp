@@ -6,8 +6,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>创建批次界面</title>
 <%@include file="../merchant/js.jsp"%>
+<!-- 
 <script src="https://cdn.bootcss.com/jspdf/1.5.3/jspdf.debug.js"></script>
 <script src="https://cdn.bootcss.com/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
+ -->
+<script type="text/javascript" src="<%=basePath %>resource/js/pdf/jspdf.debug.js"></script>
+<script type="text/javascript" src="<%=basePath %>resource/js/pdf/html2canvas.min.js"></script>
 <script type="text/javascript">
 var path='<%=basePath %>';
 $(function(){
