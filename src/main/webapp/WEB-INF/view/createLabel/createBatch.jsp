@@ -67,7 +67,7 @@ $(function(){
         			   	   }
         			   ,"json");
 
-					   console.log($(this).find("img[id='qrcode_img']").attr("src"));
+					   //console.log($(this).find("img[id='qrcode_img']").attr("src"));
         			   $(this).find("span[id='qpbh_span']").text(qpbh);
         			   //if(pdfDivId=="pdf_divCB19001002")
         				   //return false;
@@ -116,8 +116,11 @@ $(function(){
 	   	                       background: "#fff"  
 	   	                   }
 	   	                )
+	   	                
         		   });
         		   
+  	               editPreviewCrsPdfSet();
+  	               
         		   var cpxh=$("#cpxh_inp").val();
        			   var gcrj=$("#gcrj_inp").val();
        			   var ndbh=$("#ndbh_inp").val();
@@ -187,12 +190,57 @@ $(function(){
 	$(".dialog-button .l-btn-text").css("font-size","20px");
 });
 
+function editPreviewCrsPdfSet(){
+	var id=$("#pdf_div #id_hid").val();
+    var cpxhLeft=$("#pdf_div #cpxh_span").css("margin-left");
+    cpxhLeft=cpxhLeft.substring(0,cpxhLeft.length-2);
+    var cpxhTop=$("#pdf_div #cpxh_span").css("margin-top");
+    cpxhTop=cpxhTop.substring(0,cpxhTop.length-2);
+    var qpbhLeft=$("#pdf_div #qpbh_span").css("margin-left");
+    qpbhLeft=qpbhLeft.substring(0,qpbhLeft.length-2);
+    var qpbhTop=$("#pdf_div #qpbh_span").css("margin-top");
+    qpbhTop=qpbhTop.substring(0,qpbhTop.length-2);
+    var gcrjLeft=$("#pdf_div #gcrj_span").css("margin-left");
+    gcrjLeft=gcrjLeft.substring(0,gcrjLeft.length-2);
+    var gcrjTop=$("#pdf_div #gcrj_span").css("margin-top");
+    gcrjTop=gcrjTop.substring(0,gcrjTop.length-2);
+    var ndbhLeft=$("#pdf_div #ndbh_span").css("margin-left");
+    ndbhLeft=ndbhLeft.substring(0,ndbhLeft.length-2);
+    var ndbhTop=$("#pdf_div #ndbh_span").css("margin-top");
+    ndbhTop=ndbhTop.substring(0,ndbhTop.length-2);
+    var zzrqLeft=$("#pdf_div #zzrq_span").css("margin-left");
+    zzrqLeft=zzrqLeft.substring(0,zzrqLeft.length-2);
+    var zzrqTop=$("#pdf_div #zzrq_span").css("margin-top");
+    zzrqTop=zzrqTop.substring(0,zzrqTop.length-2);
+    var qrcodeLeft=$("#pdf_div #qrcode_img").css("margin-left");
+    qrcodeLeft=qrcodeLeft.substring(0,qrcodeLeft.length-2);
+    var qrcodeTop=$("#pdf_div #qrcode_img").css("margin-top");
+    qrcodeTop=qrcodeTop.substring(0,qrcodeTop.length-2);
+    
+    console.log("cpxhLeft==="+cpxhLeft);
+    console.log("cpxhTop==="+cpxhTop);
+    console.log("qpbhLeft==="+qpbhLeft);
+    console.log("qpbhTop==="+qpbhTop);
+    console.log("gcrjLeft==="+gcrjLeft);
+    console.log("gcrjTop==="+gcrjTop);
+    console.log("ndbhLeft==="+ndbhLeft);
+    console.log("ndbhTop==="+ndbhTop);
+    $.post("editPreviewCrsPdfSet",
+   		{id:id,cpxh_left:cpxhLeft,cpxh_top:cpxhTop,qpbh_left:qpbhLeft,qpbh_top:qpbhTop,gcrj_left:gcrjLeft,gcrj_top:gcrjTop,
+    	ndbh_left:ndbhLeft,ndbh_top:ndbhTop,zzrq_left:zzrqLeft,zzrq_top:zzrqTop,qrcode_left:qrcodeLeft,qrcode_top:qrcodeTop},
+   		function(){
+    	
+    	}
+    ,"json");
+}
+
 function previewPDF(labelType){
 	$.post("selectCRSPdfSet",
 		{labelType:labelType,accountNumber:'${sessionScope.user.id}'},
 		function(data){
-			//console.log(data);
+			console.log(data);
 			var crsPdfSet=data.crsPdfSet;
+			var id=crsPdfSet.id;
 			var cpxhLeft=crsPdfSet.cpxh_left;
 			var cpxhTop=crsPdfSet.cpxh_top;
 			var qpbhLeft=crsPdfSet.qpbh_left;
@@ -215,6 +263,7 @@ function previewPDF(labelType){
 			var previewPDFTd=$("#previewPDF_td");
 			previewPDFTd.empty();
 			previewPDFTd.append("<div id=\"pdf_div\" style=\"width:400px;height: 300px;border:#000 solid 1px;\">"
+									+"<input id=\"id_hid\" type=\"hidden\" value=\""+id+"\"/>"
 									+"<img id=\"qrcode_img\" alt=\"\" src=\""+path+"/resource/images/qrcode.png\" style=\"width: 80px;height: 80px;margin-top: "+qrcodeTop+"px;margin-left: "+qrcodeLeft+"px;position: absolute;\">"
 									+"<span id=\"cpxh_span\" style=\"margin-top: "+cpxhTop+"px;margin-left: "+cpxhLeft+"px;position: absolute;\">"+cpxh+"</span>"
 									+"<span id=\"qpbh_span\" style=\"margin-top: "+qpbhTop+"px;margin-left: "+qpbhLeft+"px;position: absolute;\">"+qpqsbh+"</span>"

@@ -34,4 +34,6 @@ public interface CreateLabelMapper {
 
 	int getAirBottleCountByQpbh(@Param("qpbh")String qpbh);
 
+	int editPreviewCrsPdfSet(PreviewCRSPDFSet pCrsPdfSet);
+
 }

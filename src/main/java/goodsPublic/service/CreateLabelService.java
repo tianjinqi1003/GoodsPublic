@@ -32,4 +32,6 @@ public interface CreateLabelService {
 
 	AirBottle getAirBottleByQpbh(String qpbh);
 
+	int editPreviewCrsPdfSet(PreviewCRSPDFSet pCrsPdfSet);
+
 }

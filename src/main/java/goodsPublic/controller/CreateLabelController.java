@@ -382,6 +382,31 @@ public class CreateLabelController {
 		return json;
 	}
 	
+
+	@RequestMapping(value="/editPreviewCrsPdfSet")
+	@ResponseBody
+	public Map<String, Object> editPreviewCrsPdfSet(PreviewCRSPDFSet pCrsPdfSet) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		try {
+			int count=createLabelService.editPreviewCrsPdfSet(pCrsPdfSet);
+			if(count>0) {
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "编辑成功！");
+			}
+			else {
+				jsonMap.put("message", "no");
+				jsonMap.put("info", "编辑失败！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return jsonMap;
+		}
+	}
+	
 	@RequestMapping(value="/createQrcode")
 	@ResponseBody
 	public Map<String, Object> createQrcode(String url, String qpbh) {
