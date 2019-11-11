@@ -84,7 +84,8 @@ $(function(){
 					jsonStr+=",";
 			}
 			jsonStr+="]";
-			window.open("toPreviewHGZPdf?jsonStr="+jsonStr,"newwindow","width=300;");
+			//https://blog.csdn.net/xiaomage1314/article/details/77945425
+			window.open("toPreviewHGZPdf?jsonStr="+escape(jsonStr),"newwindow","width=300;");
 		}
 	});
 	

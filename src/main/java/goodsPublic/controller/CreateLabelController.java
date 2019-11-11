@@ -174,24 +174,19 @@ public class CreateLabelController {
 		return "/createLabel/previewHGZPdf";
 	}
 	
-	@RequestMapping("/toQrcodeCRS")
-	public String toQrcodeCRS(String qpbh,HttpServletRequest request) {
+	@RequestMapping("/toQrcodeInfo")
+	public String toQrcodeInfo(String action,String qpbh,HttpServletRequest request) {
 		
-		//http://localhost:8088/GoodsPublic/createLabel/toQrcodeCRS?qpbh=CB19001006
+		//http://localhost:8088/GoodsPublic/createLabel/toQrcode?action=crs&qpbh=CB19001006
 		AirBottle airBottle = createLabelService.getAirBottleByQpbh(qpbh);
 		
 		request.setAttribute("airBottle", airBottle);
-		return "/createLabel/qrcodeCRS";
-	}
-	
-	@RequestMapping("/toQrcodeHGZ")
-	public String toQrcodeHGZ(String qpbh,HttpServletRequest request) {
-		
-		//http://localhost:8088/GoodsPublic/createLabel/toQrcodeHGZ?qpbh=CB19001006
-		AirBottle airBottle = createLabelService.getAirBottleByQpbh(qpbh);
-		
-		request.setAttribute("airBottle", airBottle);
-		return "/createLabel/qrcodeHGZ";
+		String url=null;
+		if("crs".equals(action))
+			url="/createLabel/qrcodeCRS";
+		else if("hgz".equals(action))
+			url="/createLabel/qrcodeHGZ";
+		return url;
 	}
 	
 	@RequestMapping(value="/selectCRSPdfSet")
