@@ -36,9 +36,6 @@
 				/merchant/loginQL=anon
 				/merchant/saveQLUser=anon
 				/merchant/regist=anon
-				/createLabel/login=anon
-				/createLabel/regist=anon
-				/createLabel/toQrcodeInfo=anon
 				/resource/**=anon
 				/**=authc
 			</value>
