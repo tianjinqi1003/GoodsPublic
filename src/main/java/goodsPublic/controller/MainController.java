@@ -2411,6 +2411,24 @@ public class MainController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/createQrcodeByCQSCQ")
+	@ResponseBody
+	public void createQrcodeByCQSCQ(String url, HttpServletResponse response) {
+
+		String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
+		String avaPath="/GoodsPublic/upload/"+fileName;
+		String path = "D:/resource";
+        Qrcode.createQrCode(url, path, fileName);
+        
+        String jsonpCallback="jsonpCallback(\"{\\\"qrcode\\\":\\\""+avaPath+"\\\"}\")";
+        try {
+			response.getWriter().print(jsonpCallback);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	@RequestMapping(value="/alipay")
 	public void alipay(HttpServletRequest request, HttpServletResponse response) {
 		
