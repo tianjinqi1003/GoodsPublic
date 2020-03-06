@@ -10,6 +10,7 @@ import goodsPublic.entity.CreatePayCodeRecord;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlGoodsDMTZL;
+import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.ModuleDMTZL;
@@ -40,6 +41,8 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public int addHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoods);
+
+	public int addHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);
 	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS);
 	public int editHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoodsDMTZL);
 	public int editHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG);

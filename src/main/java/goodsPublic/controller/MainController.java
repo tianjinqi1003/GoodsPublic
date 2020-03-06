@@ -16,6 +16,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -54,6 +55,7 @@ import goodsPublic.entity.CreatePayCodeRecord;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlGoodsDMTZL;
+import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.ModuleDMTZL;
@@ -624,6 +626,46 @@ public class MainController {
 			e.printStackTrace();
 		}
 		return "../../merchant/main/goBrowseHtmlGoodsJZSG?userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountNumber="+htmlGoodsJZSG.getAccountNumber();
+	}
+	
+	@RequestMapping(value="/addHtmlGoodsGRMP",produces="plain/text; charset=UTF-8")
+	public void addHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP, @RequestParam(value="avatorImg",required=false) MultipartFile avatorImg, 
+			HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+        	response.setHeader("Access-Control-Allow-Origin", "*");
+        	response.setHeader("Access-Control-Allow-Methods", "POST,GET");
+
+			System.out.println("Company==="+htmlGoodsGRMP.getCompany());
+			System.out.println("Size==="+avatorImg.getSize());
+			
+			if(avatorImg.getSize()>0) {
+				String jsonStr = FileUploadUtils.appUploadContentImg(request,avatorImg,"");
+				JSONObject fileJson = JSONObject.fromObject(jsonStr);
+				if("成功".equals(fileJson.get("msg"))) {
+					JSONObject dataJO = (JSONObject)fileJson.get("data");
+					htmlGoodsGRMP.setAvatorUrl(dataJO.get("src").toString());
+				}
+			}
+			String userNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+			String url = "http://www.iot-mes.com:8081/";
+			String fileName = userNumber + ".jpg";
+			String avaPath="/ChenQiQrcode/upload/"+fileName;
+			String path = "D:/resource/ChenQiQrcode/upload/";
+			Qrcode.createQrCode(url, path, fileName);
+
+			String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+			htmlGoodsGRMP.setUuid(uuid);
+			htmlGoodsGRMP.setQrcode(avaPath);
+			int a=publicService.addHtmlGoodsGRMP(htmlGoodsGRMP);
+			
+	        //String jsonpCallback="jsonpCallback(\"{\\\"qrcode\\\":\\\"1111111111\\\"}\")";
+			//response.getWriter().print(jsonpCallback);
+			response.sendRedirect("http://www.iot-mes.com:8081/qrcodeCreate/vcard.html");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**

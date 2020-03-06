@@ -967,6 +967,122 @@
 			</if>
 		</trim>
 	</insert>
+	<insert id="addHtmlGoodsGRMP" parameterType="goodsPublic.entity.HtmlGoodsGRMP">
+		insert into html_goods_grmp
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="uuid!=null">
+				uuid,
+			</if>
+			<if test="name!=null">
+				name,
+			</if>
+			<if test="mobile!=null">
+				mobile,
+			</if>
+			<if test="email!=null">
+				email,
+			</if>
+			<if test="url!=null">
+				url,
+			</if>
+			<if test="fax!=null">
+				fax,
+			</if>
+			<if test="phone!=null">
+				phone,
+			</if>
+			<if test="weixin!=null">
+				weixin,
+			</if>
+			<if test="qq!=null">
+				qq,
+			</if>
+			<if test="weibo!=null">
+				weibo,
+			</if>
+			<if test="company!=null">
+				company,
+			</if>
+			<if test="dep!=null">
+				dep,
+			</if>
+			<if test="job!=null">
+				job,
+			</if>
+			<if test="touxian!=null">
+				touxian,
+			</if>
+			<if test="address!=null">
+				address,
+			</if>
+			<if test="note!=null">
+				note,
+			</if>
+			<if test="avatorUrl!=null">
+				avatorUrl,
+			</if>
+			<if test="qrcode!=null">
+				qrcode,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="uuid!=null">
+				#{uuid},
+			</if>
+			<if test="name!=null">
+				#{name},
+			</if>
+			<if test="mobile!=null">
+				#{mobile},
+			</if>
+			<if test="email!=null">
+				#{email},
+			</if>
+			<if test="url!=null">
+				#{url},
+			</if>
+			<if test="fax!=null">
+				#{fax},
+			</if>
+			<if test="phone!=null">
+				#{phone},
+			</if>
+			<if test="weixin!=null">
+				#{weixin},
+			</if>
+			<if test="qq!=null">
+				#{qq},
+			</if>
+			<if test="weibo!=null">
+				#{weibo},
+			</if>
+			<if test="company!=null">
+				#{company},
+			</if>
+			<if test="dep!=null">
+				#{dep},
+			</if>
+			<if test="job!=null">
+				#{job},
+			</if>
+			<if test="touxian!=null">
+				#{touxian},
+			</if>
+			<if test="address!=null">
+				#{address},
+			</if>
+			<if test="note!=null">
+				#{note},
+			</if>
+			<if test="avatorUrl!=null">
+				#{avatorUrl},
+			</if>
+			<if test="qrcode!=null">
+				#{qrcode},
+			</if>
+		</trim>
+	</insert>
 	<insert id="addAccountPayRecord" parameterType="goodsPublic.entity.AccountPayRecord">
 		insert into account_pay_record
 		<trim prefix="(" suffix=")" suffixOverrides=",">

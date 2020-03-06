@@ -12,6 +12,7 @@ import goodsPublic.entity.CreatePayCodeRecord;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlGoodsDMTZL;
+import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
 
@@ -44,6 +45,8 @@ public interface PublicService {
 	 * @return
 	 */
 	public int addHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoods);
+
+	public int addHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);
 
 	/**
 	 * 获得所有跟当前用户有关的商品列表

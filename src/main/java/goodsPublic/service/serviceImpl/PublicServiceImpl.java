@@ -32,6 +32,7 @@ import goodsPublic.entity.CreatePayCodeRecord;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlGoodsDMTZL;
+import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.ModuleDMTZL;
@@ -71,6 +72,12 @@ public class PublicServiceImpl implements PublicService {
 	public int addHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoods) {
 		// TODO Auto-generated method stub
 		return publicDao.addHtmlGoodsJZSG(htmlGoods);
+	}
+
+	@Override
+	public int addHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP) {
+		// TODO Auto-generated method stub
+		return publicDao.addHtmlGoodsGRMP(htmlGoodsGRMP);
 	}
 	
 	@Override
