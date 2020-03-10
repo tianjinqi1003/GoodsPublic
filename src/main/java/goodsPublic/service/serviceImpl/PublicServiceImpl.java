@@ -79,6 +79,12 @@ public class PublicServiceImpl implements PublicService {
 		// TODO Auto-generated method stub
 		return publicDao.addHtmlGoodsGRMP(htmlGoodsGRMP);
 	}
+
+	@Override
+	public int editHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP) {
+		// TODO Auto-generated method stub
+		return publicDao.editHtmlGoodsGRMP(htmlGoodsGRMP);
+	}
 	
 	@Override
 	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS) {
@@ -723,6 +729,12 @@ public class PublicServiceImpl implements PublicService {
 	public int deleteLabelByKeys(String accountNumber, String keys) {
 		// TODO Auto-generated method stub
 		return publicDao.deleteLabelByKeys(accountNumber, keys);
+	}
+
+	@Override
+	public HtmlGoodsGRMP getHtmlGoodsGRMP(String uuid) {
+		// TODO Auto-generated method stub
+		return publicDao.getHtmlGoodsGRMP(uuid);
 	}
 
 }

@@ -633,12 +633,6 @@ public class MainController {
 			HttpServletRequest request, HttpServletResponse response) {
 
         try {
-        	response.setHeader("Access-Control-Allow-Origin", "*");
-        	response.setHeader("Access-Control-Allow-Methods", "POST,GET");
-
-			System.out.println("Company==="+htmlGoodsGRMP.getCompany());
-			System.out.println("Size==="+avatorImg.getSize());
-			
 			if(avatorImg.getSize()>0) {
 				String jsonStr = FileUploadUtils.appUploadContentImg(request,avatorImg,"");
 				JSONObject fileJson = JSONObject.fromObject(jsonStr);
@@ -661,8 +655,45 @@ public class MainController {
 			
 	        //String jsonpCallback="jsonpCallback(\"{\\\"qrcode\\\":\\\"1111111111\\\"}\")";
 			//response.getWriter().print(jsonpCallback);
-			response.sendRedirect("http://www.iot-mes.com:8081/qrcodeCreate/vcard.html");
+			response.sendRedirect("http://www.iot-mes.com:8081/qrcodeCreate/vcard.html?type=1");
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@RequestMapping(value="/editHtmlGoodsGRMP",produces="plain/text; charset=UTF-8")
+	public void editHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP, @RequestParam(value="avatorImg",required=false) MultipartFile avatorImg, 
+			HttpServletRequest request, HttpServletResponse response) {
+        try {
+			if(avatorImg.getSize()>0) {
+				String jsonStr = FileUploadUtils.appUploadContentImg(request,avatorImg,"");
+				JSONObject fileJson = JSONObject.fromObject(jsonStr);
+				if("成功".equals(fileJson.get("msg"))) {
+					JSONObject dataJO = (JSONObject)fileJson.get("data");
+					htmlGoodsGRMP.setAvatorUrl(dataJO.get("src").toString());
+				}
+			}
+			int a=publicService.editHtmlGoodsGRMP(htmlGoodsGRMP);
+			response.sendRedirect("http://www.iot-mes.com:8081/qrcodeCreate/vcard.html?type=1");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+
+	@RequestMapping(value="/getHtmlGoodsGRMP")
+	@ResponseBody
+	public void getHtmlGoodsGRMP(String uuid, HttpServletResponse response) {
+		
+		HtmlGoodsGRMP htmlGoodsGRMP = publicService.getHtmlGoodsGRMP(uuid);
+		
+		String grmpStr=JSONObject.fromObject(htmlGoodsGRMP).toString().replaceAll("\"", "\\\\\"");
+		String jsonpCallback="jsonpCallback(\"{\\\"htmlGoodsGRMP\\\":"+grmpStr+"}\")";
+        try {
+			response.getWriter().print(jsonpCallback);
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

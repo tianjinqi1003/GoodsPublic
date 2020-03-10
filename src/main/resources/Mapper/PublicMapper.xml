@@ -1254,6 +1254,58 @@
 	<select id="getLastAccountPayRecordByNumber" resultType="goodsPublic.entity.AccountPayRecord">
 		select * from account_pay_record where accountNumber=#{accountNumber} order by payTime desc limit 1
 	</select>
+	<update id="editHtmlGoodsGRMP" parameterType="goodsPublic.entity.HtmlGoodsSPZS">
+		update html_goods_grmp set 
+		<if test="name!=null">
+			name=#{name},
+		</if>
+		<if test="email!=null">
+			email=#{email},
+		</if>
+		<if test="url!=null">
+			url=#{url},
+		</if>
+		<if test="fax!=null">
+			fax=#{fax},
+		</if>
+		<if test="phone!=null">
+			phone=#{phone},
+		</if>
+		<if test="weixin!=null">
+			weixin=#{weixin},
+		</if>
+		<if test="qq!=null">
+			qq=#{qq},
+		</if>
+		<if test="weibo!=null">
+			weibo=#{weibo},
+		</if>
+		<if test="company!=null">
+			company=#{company},
+		</if>
+		<if test="dep!=null">
+			dep=#{dep},
+		</if>
+		<if test="job!=null">
+			job=#{job},
+		</if>
+		<if test="touxian!=null">
+			touxian=#{touxian},
+		</if>
+		<if test="address!=null">
+			address=#{address},
+		</if>
+		<if test="note!=null">
+			note=#{note},
+		</if>
+		<if test="avatorUrl!=null">
+			avatorUrl=#{avatorUrl},
+		</if>
+		<if test="mobile!=null">
+			mobile=#{mobile}
+		</if>
+		where uuid=#{uuid}
+	</update>
 	<update id="editHtmlGoodsSPZS" parameterType="goodsPublic.entity.HtmlGoodsSPZS">
 		update html_goods_spzs set
 		<if test="productName!=null">
@@ -1924,6 +1976,9 @@
 	</select>
 	<select id="getHtmlGoodsJZSG" resultType="goodsPublic.entity.HtmlGoodsJZSG">
 		select * from html_goods_jzsg where userNumber=#{param1} and accountNumber=#{param2}
+	</select>
+	<select id="getHtmlGoodsGRMP" resultType="goodsPublic.entity.HtmlGoodsGRMP">
+		select * from html_goods_grmp where uuid=#{uuid}
 	</select>
 	<delete id="deleteHtmlGoodsSPZSByIds">
 		delete from html_goods_spzs where 1=1

@@ -43,6 +43,7 @@ public interface PublicMapper {
 	public int addHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoods);
 
 	public int addHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);
+	public int editHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);
 	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS);
 	public int editHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoodsDMTZL);
 	public int editHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG);
@@ -325,4 +326,6 @@ public interface PublicMapper {
 	public int deleteLabelByKeys(@Param("accountNumber") String accountNumber, @Param("keys") String keys);
 
 	public List<String> getLabelKeyList(@Param("module") String module, @Param("accountNumber") String accountNumber);
+
+	public HtmlGoodsGRMP getHtmlGoodsGRMP(@Param("uuid") String uuid);
 }

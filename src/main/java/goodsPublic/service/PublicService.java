@@ -48,6 +48,8 @@ public interface PublicService {
 
 	public int addHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);
 
+	public int editHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);
+
 	/**
 	 * 获得所有跟当前用户有关的商品列表
 	 * @param goodsNumber
@@ -341,6 +343,8 @@ public interface PublicService {
 	public Map<String, Object> checkIfPaid(String accountNumber) throws ParseException;
 
 	public int deleteLabelByKeys(String accountNumber, String keys);
+
+	public HtmlGoodsGRMP getHtmlGoodsGRMP(String uuid);
 
 
 }
