@@ -30,10 +30,7 @@
 				/merchant/main/kaiTongByAlipay=anon
 				/merchant/main/goAddModule=anon
 				/merchant/main/checkIfLogined=anon
-				/merchant/main/createQrcodeByCQSCQ=anon
-				/merchant/main/addHtmlGoodsGRMP=anon
-				/merchant/main/editHtmlGoodsGRMP=anon
-				/merchant/main/getHtmlGoodsGRMP=anon
+				/merchant/chenQi/**=anon
 				/merchant/login=anon
 				/merchant/login/captcha=anon
 				/merchant/checkIfLogin=anon
