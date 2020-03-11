@@ -43,8 +43,8 @@ function login(){
 	  var userName=$("#userName").val();
 	  var password=MD5($("#password").val()).toUpperCase();
 	  $.ajax({
-		 url:"http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/loginQL",
-		 //url:"http://localhost:8088/GoodsPublic/merchant/loginQL",
+		 //url:"http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/loginQL",
+		 url:"http://localhost:8088/GoodsPublic/merchant/loginQL",
 		 dataType:'jsonp',
 		 data:"userName="+userName+"&password="+password+"&action=addModule",
 		 processData: false, 

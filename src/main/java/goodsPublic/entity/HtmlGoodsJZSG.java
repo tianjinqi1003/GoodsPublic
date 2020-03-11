@@ -51,6 +51,7 @@ public class HtmlGoodsJZSG implements Serializable {
 	private String gmtModified;
 	private String userNumber;
 	private String accountNumber;
+	private String from;
 	public int getId() {
 		return id;
 	}
@@ -308,6 +309,12 @@ public class HtmlGoodsJZSG implements Serializable {
 	}
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
+	}
+	public String getFrom() {
+		return from;
+	}
+	public void setFrom(String from) {
+		this.from = from;
 	}
 
 }

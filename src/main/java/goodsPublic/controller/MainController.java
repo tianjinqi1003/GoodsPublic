@@ -472,7 +472,9 @@ public class MainController {
 			HttpServletRequest request) {
 		
 		System.out.println("111111111111111"+file2_1);
-		
+
+        String accountNumberCq = null;
+		String from=null;
 		try {
 			MultipartFile[] fileArr=new MultipartFile[6];
 			fileArr[0]=file1_1;
@@ -539,12 +541,21 @@ public class MainController {
 			Qrcode.createQrCode(url, path, fileName);
 			
 			htmlGoodsDMTZL.setQrCode(avaPath);
+
+	        from=htmlGoodsDMTZL.getFrom();
+	        if("cq".equals(from)) {
+	        	accountNumberCq=getCQAccountNumber(request);
+	        	htmlGoodsDMTZL.setAccountNumber(accountNumberCq);
+	        }
 			int a=publicService.addHtmlGoodsDMTZL(htmlGoodsDMTZL);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "../../merchant/main/goBrowseHtmlGoodsDMTZL?goodsNumber="+htmlGoodsDMTZL.getGoodsNumber()+"&accountNumber="+htmlGoodsDMTZL.getAccountNumber();
+		if("cq".equals(from))
+			return "../../merchant/main/goEditModule?trade=dmtzl&goodsNumber="+htmlGoodsDMTZL.getGoodsNumber()+"&accountNumber="+accountNumberCq+"&from="+from;
+		else
+			return "../../merchant/main/goBrowseHtmlGoodsDMTZL?goodsNumber="+htmlGoodsDMTZL.getGoodsNumber()+"&accountNumber="+htmlGoodsDMTZL.getAccountNumber();
 	}
 	
 	/**
@@ -572,6 +583,8 @@ public class MainController {
 		System.out.println("111111111111111"+file2_1);
 		System.out.println("111111111111111"+file2_2);
 		System.out.println("111111111111111"+file2_3);
+        String accountNumberCq = null;
+		String from=null;
 		try {
 			MultipartFile[] fileArr=new MultipartFile[6];
 			fileArr[0]=file1_1;
@@ -638,12 +651,21 @@ public class MainController {
 			Qrcode.createQrCode(url, path, fileName);
 			
 			htmlGoodsJZSG.setQrCode(avaPath);
+
+	        from=htmlGoodsJZSG.getFrom();
+	        if("cq".equals(from)) {
+	        	accountNumberCq=getCQAccountNumber(request);
+	        	htmlGoodsJZSG.setAccountNumber(accountNumberCq);
+	        }
 			int a=publicService.addHtmlGoodsJZSG(htmlGoodsJZSG);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "../../merchant/main/goBrowseHtmlGoodsJZSG?userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountNumber="+htmlGoodsJZSG.getAccountNumber();
+		if("cq".equals(from))
+			return "../../merchant/main/goEditModule?trade=jzsg&userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountNumber="+accountNumberCq+"&from="+from;
+		else
+			return "../../merchant/main/goBrowseHtmlGoodsJZSG?userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountNumber="+htmlGoodsJZSG.getAccountNumber();
 	}
 	
 	/**

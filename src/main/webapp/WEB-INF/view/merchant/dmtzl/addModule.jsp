@@ -422,6 +422,7 @@ function checkIfPaid(){
 	<div class="createQrcode_div" onclick="addHtmlGoodsDMTZL();">生成二维码</div>
 </div>
 	<input type="hidden" id="accountNumber_hid" name="accountNumber" value="${sessionScope.user.id }" />
+	<input type="hidden" name="from" value="${param.from}"/>
 	<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
 </form>
 </body>
