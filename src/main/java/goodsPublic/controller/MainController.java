@@ -242,7 +242,12 @@ public class MainController {
 		System.out.println("111111111111111"+file2_5);
 		String moduleType = htmlGoodsSPZS.getModuleType();
         String accountNumberCq = null;
-		String from=null;
+		String from=htmlGoodsSPZS.getFrom();
+		
+        if("cq".equals(from)) {
+        	accountNumberCq=getCQAccountNumber(request);
+        	htmlGoodsSPZS.setAccountNumber(accountNumberCq);
+        }
 		try {
 			MultipartFile[] fileArr=new MultipartFile[20];
 			fileArr[0]=file1_1;
@@ -425,12 +430,6 @@ public class MainController {
 	        Qrcode.createQrCode(url, path, fileName);
 			
 	        htmlGoodsSPZS.setQrCode(avaPath);
-	        
-	        from=htmlGoodsSPZS.getFrom();
-	        if("cq".equals(from)) {
-	        	accountNumberCq=getCQAccountNumber(request);
-	        	htmlGoodsSPZS.setAccountNumber(accountNumberCq);
-	        }
 			int a=publicService.addHtmlGoodsSPZS(htmlGoodsSPZS);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -474,7 +473,11 @@ public class MainController {
 		System.out.println("111111111111111"+file2_1);
 
         String accountNumberCq = null;
-		String from=null;
+		String from=htmlGoodsDMTZL.getFrom();
+        if("cq".equals(from)) {
+        	accountNumberCq=getCQAccountNumber(request);
+        	htmlGoodsDMTZL.setAccountNumber(accountNumberCq);
+        }
 		try {
 			MultipartFile[] fileArr=new MultipartFile[6];
 			fileArr[0]=file1_1;
@@ -542,11 +545,6 @@ public class MainController {
 			
 			htmlGoodsDMTZL.setQrCode(avaPath);
 
-	        from=htmlGoodsDMTZL.getFrom();
-	        if("cq".equals(from)) {
-	        	accountNumberCq=getCQAccountNumber(request);
-	        	htmlGoodsDMTZL.setAccountNumber(accountNumberCq);
-	        }
 			int a=publicService.addHtmlGoodsDMTZL(htmlGoodsDMTZL);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -584,7 +582,11 @@ public class MainController {
 		System.out.println("111111111111111"+file2_2);
 		System.out.println("111111111111111"+file2_3);
         String accountNumberCq = null;
-		String from=null;
+		String from=htmlGoodsJZSG.getFrom();
+        if("cq".equals(from)) {
+        	accountNumberCq=getCQAccountNumber(request);
+        	htmlGoodsJZSG.setAccountNumber(accountNumberCq);
+        }
 		try {
 			MultipartFile[] fileArr=new MultipartFile[6];
 			fileArr[0]=file1_1;
@@ -652,11 +654,6 @@ public class MainController {
 			
 			htmlGoodsJZSG.setQrCode(avaPath);
 
-	        from=htmlGoodsJZSG.getFrom();
-	        if("cq".equals(from)) {
-	        	accountNumberCq=getCQAccountNumber(request);
-	        	htmlGoodsJZSG.setAccountNumber(accountNumberCq);
-	        }
 			int a=publicService.addHtmlGoodsJZSG(htmlGoodsJZSG);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
