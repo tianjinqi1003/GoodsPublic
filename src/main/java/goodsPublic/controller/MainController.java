@@ -241,6 +241,8 @@ public class MainController {
 		System.out.println("111111111111111"+file2_4);
 		System.out.println("111111111111111"+file2_5);
 		String moduleType = htmlGoodsSPZS.getModuleType();
+        String accountNumberCq = null;
+		String from=null;
 		try {
 			MultipartFile[] fileArr=new MultipartFile[20];
 			fileArr[0]=file1_1;
@@ -423,12 +425,28 @@ public class MainController {
 	        Qrcode.createQrCode(url, path, fileName);
 			
 	        htmlGoodsSPZS.setQrCode(avaPath);
+	        
+	        from=htmlGoodsSPZS.getFrom();
+	        if("cq".equals(from)) {
+	        	accountNumberCq=getCQAccountNumber(request);
+	        	htmlGoodsSPZS.setAccountNumber(accountNumberCq);
+	        }
 			int a=publicService.addHtmlGoodsSPZS(htmlGoodsSPZS);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "../../merchant/main/goBrowseHtmlGoodsSPZS?moduleType="+moduleType+"&goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
+		
+		if("cq".equals(from))
+			return "../../merchant/main/goEditModule?trade=spzs&moduleType="+moduleType+"&goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+accountNumberCq+"&from="+from;
+		else
+			return "../../merchant/main/goBrowseHtmlGoodsSPZS?moduleType="+moduleType+"&goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
+	}
+	
+	public String getCQAccountNumber(HttpServletRequest request) {
+    	AccountMsg user=(AccountMsg)request.getSession().getAttribute("user");
+    	String accountNumber=user.getId();
+    	return accountNumber;
 	}
 	
 	/**
@@ -2293,8 +2311,11 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping(value="/goEditModule")
-	public String goEditModule(HttpServletRequest request, String trade, String moduleType, String goodsNumber, String accountNumber) {
+	public String goEditModule(HttpServletRequest request, String trade, String moduleType, String goodsNumber, String accountNumber, String from) {
 		
+        if("cq".equals(from)) {
+        	accountNumber=getCQAccountNumber(request);
+        }
 		String url=null;
 		switch (trade) {
 		case "spzs":

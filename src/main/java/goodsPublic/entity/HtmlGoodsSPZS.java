@@ -67,6 +67,7 @@ public class HtmlGoodsSPZS implements Serializable {
 	private String gmtModified;
 	private String goodsNumber;
 	private String accountNumber;
+	private String from;
 	public int getId() {
 		return id;
 	}
@@ -420,6 +421,12 @@ public class HtmlGoodsSPZS implements Serializable {
 	}
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
+	}
+	public String getFrom() {
+		return from;
+	}
+	public void setFrom(String from) {
+		this.from = from;
 	}
 
 }

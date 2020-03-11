@@ -476,9 +476,7 @@
 			<if test="goodsNumber!=null">
 				goodsNumber,
 			</if>
-			<if test="accountNumber!=null">
 				accountNumber,
-			</if>
 		</trim>
 		values
 		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -630,9 +628,7 @@
 			<if test="goodsNumber!=null">
 				#{goodsNumber},
 			</if>
-			<if test="accountNumber!=null">
 				#{accountNumber},
-			</if>
 		</trim>
 	</insert>
 	<insert id="addHtmlGoodsDMTZL" parameterType="goodsPublic.entity.HtmlGoodsDMTZL">
