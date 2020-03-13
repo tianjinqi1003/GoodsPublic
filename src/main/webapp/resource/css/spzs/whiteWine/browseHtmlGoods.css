@@ -127,25 +127,6 @@ body{
 	border:1px solid #eee;
 	border-radius:3px;
 }
-.right_div .option1_div{
-	float: left;
-	width:250px;
-	margin-top:20px;
-	margin-left: 10px;
-}
-.right_div .option1_div .pbdy_div,
-.right_div .option1_div .xzqtgs_div,
-.right_div .option1_div .ewmmh_div,
-.right_div .option1_div .hgmhmb_div{
-	width: 100%;
-	height: 25px;
-}
-.right_div .option1_div .pbdy_a,
-.right_div .option1_div .xzqtgs_a,
-.right_div .option1_div .ewmmh_a,
-.right_div .option1_div .hgmhmb_a{
-	color: #357bb3;
-}
 .line1_div,.line2_div{
 	width: 205px;
 	height: 1px;
