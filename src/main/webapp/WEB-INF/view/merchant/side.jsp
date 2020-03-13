@@ -53,6 +53,18 @@ function checkIfPaidInSide(){
 .layui-nav .layui-nav-item a{
 	color:#000;
 }
+.layui-nav .layui-nav-item .first-level-img{
+	width:13px;height:13px;margin-top: 16px;margin-left: 18px;
+}
+.layui-nav .layui-nav-item .first-level-a{
+	margin-top: -29px;margin-left: 18px;
+}
+.layui-nav .layui-nav-item .second-level-a{
+	margin-left:19px;
+}
+.layui-nav .layui-nav-item .add_a{
+	margin-top: -45px; margin-left: 113px;
+}
 .layui-nav .layui-nav-item .pointer-img{
 	margin-top: 18px;
 	margin-left: 127px;
@@ -97,204 +109,145 @@ function checkIfPaidInSide(){
 				style="margin-right: 10px;height: 800px;">
 				<div style="width: 100%; margin: 0 auto; margin-top: 20px;background-color: #F5FAFE;">
 					<li class="layui-nav-item first-level">
-						<img alt="" src="<%=basePath%>resource/images/008.png" style="width:13px;height:13px;margin-top: 16px;margin-left: 18px;" />
+						<img class="first-level-img" alt="" src="<%=basePath%>resource/images/008.png" />
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_5.jpg" />
-						<a style="margin-top: -29px;margin-left: 18px;">
+						<a class="first-level-a">
 							系统管理
 						</a>
 					</li>
-					<!-- 
-					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
-					 -->
 					<li class="layui-nav-item">
-						<a style="margin-left:19px;" href="<%=basePath%>merchant/main/goAccountInfo?accountId=${sessionScope.user.id }">
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goAccountInfo?accountId=${sessionScope.user.id }">
 							商家信息
 						</a>
 					</li>
-					<!-- 
-					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
-					 -->
 					<li class="layui-nav-item">
-						<a style="margin-left:19px;" href="<%=basePath%>merchant/main/goCategoryList">
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goCategoryList">
 							成员管理
 						</a>
 					</li>
 				</div>
-				<!-- 
-				<li class="layui-nav-item">
-					<a href="javascript:;" class="getCategory">店内分类</a>
-					<dl class="layui-nav-child">
-						 <c:choose>
-						 <c:when test="${empty sessionScope.categoryList}">
-							 <dd>
-							 	<a href="<%=basePath%>merchant/main/goCategoryList">暂无分类</a>
-							 </dd>
-						 </c:when>
-						 <c:otherwise>
-							 <c:forEach items="${sessionScope.categoryList }" var="item">
-							 <dd>
-								<a href="<%=basePath%>merchant/main/queryGoodsList?categoryId=${item.categoryId}">${item.categoryName }</a>
-								<a href="<%=basePath%>merchant/main/operation" style="margin-top: -40px;margin-left: 90px;">|&nbsp;添加</a>
-							 </dd>
-							 </c:forEach>
-						 </c:otherwise>
-						 </c:choose>
-					</dl>
-				</li>
-				 -->
 				<div style="width: 100%; margin: 0 auto; margin-top: 5px;background-color: #F5FAFE;">
 					<li class="layui-nav-item first-level">
-						<img alt="" src="<%=basePath%>resource/images/008.png" style="width:13px;height:13px;margin-top: 16px;margin-left: 18px;" />
+						<img class="first-level-img" alt="" src="<%=basePath%>resource/images/008.png" />
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_5.jpg" />
-						<a style="margin-top: -29px;margin-left: 18px;">
+						<a class="first-level-a">
 							标签管理
 						</a>
 					</li>
-					<!-- 
-					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
-					 -->
-						<li class="layui-nav-item">
-							<a style="margin-left:19px;" href="<%=basePath%>merchant/main/goGoodsLabelSetList?accountId=${sessionScope.user.id }">
-								标签定义
-							</a>
-						</li>
-						<li class="layui-nav-item">
-							<a style="margin-left:19px;" href="<%=basePath%>merchant/main/goCategoryList">
-								分类管理
-							</a>
-						</li>
+					<li class="layui-nav-item">
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goGoodsLabelSetList?accountId=${sessionScope.user.id }">
+							标签定义
+						</a>
+					</li>
+					<li class="layui-nav-item">
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goCategoryList">
+							分类管理
+						</a>
+					</li>
 						
-						<li class="layui-nav-item first-level">
-							<img alt="" src="<%=basePath%>resource/images/008.png" style="width:13px;height:13px;margin-top: 16px;margin-left: 18px;" />
-							<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_5.jpg" />
-							<a style="margin-top: -29px;margin-left: 18px;">
-								商品管理
-							</a>
-						</li>
-						<c:choose>
-							<c:when test="${empty sessionScope.categoryList}">
+					<li class="layui-nav-item first-level">
+						<img class="first-level-img" alt="" src="<%=basePath%>resource/images/008.png" />
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_5.jpg" />
+						<a class="first-level-a">
+							商品管理
+						</a>
+					</li>
+					<c:choose>
+						<c:when test="${empty sessionScope.categoryList}">
+							<li class="layui-nav-item">
+								<a href="<%=basePath%>merchant/main/goCategoryList">
+									暂无分类
+								</a>
+							</li>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${sessionScope.categoryList }" var="item" varStatus="status">
 								<li class="layui-nav-item">
-									<a href="<%=basePath%>merchant/main/goCategoryList">
-										暂无分类
+									<a class="second-level-a" href="<%=basePath%>merchant/main/goGoodsList?categoryId=${item.categoryId}">
+										${item.categoryName }
+									</a>
+									<a class="add_a" href="<%=basePath%>merchant/main/operation?categoryId=${item.categoryId}&accountId=${sessionScope.user.id}">
+										|&nbsp;添加
 									</a>
 								</li>
-							</c:when>
-							<c:otherwise>
-								<c:forEach items="${sessionScope.categoryList }" var="item" varStatus="status">
-									<li class="layui-nav-item">
-										<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-										<a href="<%=basePath%>merchant/main/goGoodsList?categoryId=${item.categoryId}">
-											&nbsp;&nbsp;&nbsp;${item.categoryName }
-										</a>
-										<a href="<%=basePath%>merchant/main/operation?categoryId=${item.categoryId}&accountId=${sessionScope.user.id}" style="margin-top: -45px; margin-left: 90px;">
-											|&nbsp;添加
-										</a>
-									</li>
-									<c:if test="${status.index<sessionScope.categoryList.size()-1 }">
-										<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
-									</c:if>
-								</c:forEach>
-							</c:otherwise>
-						</c:choose>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</div>
-				<!-- 
-				<div style="width: 92%; margin: 0 auto; margin-top: 20px;border: #CAD9EA solid 1px;background-color: #F5FAFE;">
+				<div style="width: 100%; margin: 0 auto; margin-top: 20px;background-color: #F5FAFE;">
 					<li class="layui-nav-item first-level">
-						<a>
-							标签管理
-						</a>
-					</li>
-					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
-					<li class="layui-nav-item">
-						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-						<a href="<%=basePath%>merchant/main/goGoodsLabelSetList?accountId=${sessionScope.user.id }">
-							&nbsp;&nbsp;&nbsp;标签查询
-						</a>
-					</li>
-				</div>
-				 -->
-				<div style="width: 92%; margin: 0 auto; margin-top: 20px;border: #CAD9EA solid 1px;background-color: #F5FAFE;">
-					<li class="layui-nav-item first-level">
-						<a>
+						<img class="first-level-img" alt="" src="<%=basePath%>resource/images/008.png" />
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_5.jpg" />
+						<a class="first-level-a">
 							行业定制
 						</a>
 					</li>
-					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
 					<li class="layui-nav-item">
-						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-						<a href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=spzs&accountId=${sessionScope.user.id }">
-							&nbsp;&nbsp;&nbsp;商品展示
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=spzs&accountId=${sessionScope.user.id }">
+							商品展示
 						</a>
 					</li>
-					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
 					<li class="layui-nav-item">
-						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-						<a href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=dmtzl&accountId=${sessionScope.user.id }">
-							&nbsp;&nbsp;&nbsp;多媒体资料
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=dmtzl&accountId=${sessionScope.user.id }">
+							多媒体资料
 						</a>
 					</li>
-					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
 					<li class="layui-nav-item">
-						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-						<a href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=jzsg&accountId=${sessionScope.user.id }">
-							&nbsp;&nbsp;&nbsp;建筑施工
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=jzsg&accountId=${sessionScope.user.id }">
+							建筑施工
 						</a>
 					</li>
-					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
 					<li class="layui-nav-item">
-						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-						<a href="">
-							&nbsp;&nbsp;&nbsp;设备巡检
+						<a class="second-level-a">
+							设备巡检
 						</a>
 					</li>
-					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
 					<li class="layui-nav-item">
-						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-						<a href="">
-							&nbsp;&nbsp;&nbsp;物资标识
+						<a class="second-level-a">
+							物资标识
 						</a>
 					</li>
-					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
 					<li class="layui-nav-item">
-						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-						<a href="">
-							&nbsp;&nbsp;&nbsp;无纸化记录
+						<a class="second-level-a">
+							无纸化记录
 						</a>
 					</li>
-					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
 					<li class="layui-nav-item">
-						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-						<a href="">
-							&nbsp;&nbsp;&nbsp;其他应用
+						<a class="second-level-a">
+							其他应用
 						</a>
 					</li>
 				</div>
-				<div style="width: 92%; margin: 0 auto; margin-top: 20px;border: #CAD9EA solid 1px;background-color: #F5FAFE;">
+				<div style="width: 100%; margin: 0 auto; margin-top: 20px;background-color: #F5FAFE;">
 					<li class="layui-nav-item first-level">
-						<a>
+						<img class="first-level-img" alt="" src="<%=basePath%>resource/images/008.png" />
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_5.jpg" />
+						<a class="first-level-a">
 							vip付费管理
 						</a>
 					</li>
-					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
 					<li class="layui-nav-item">
-						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-						<a href="<%=basePath%>merchant/main/goFeePrice?accountId=${sessionScope.user.id }" onclick="return checkIfPaidInSide();">
-							&nbsp;&nbsp;&nbsp;付费
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goFeePrice?accountId=${sessionScope.user.id }" onclick="return checkIfPaidInSide();">
+							付费
 						</a>
 					</li>
 				</div>
-			</ul>
-			<shiro:hasRole  name="admin">
-  			<!--  有权限   -->
-			<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo"
-				style="margin-right: 10px;">
-				<div style="border: #f3f3f4 solid 1px; width: 92%; margin: 0 auto; margin-top: 5px;">
+	  			<!--  有权限   -->
+				<shiro:hasRole  name="admin">
+				<div style="width: 100%; margin: 0 auto; margin-top: 20px;background-color: #F5FAFE;">
+					<li class="layui-nav-item first-level">
+						<img class="first-level-img" alt="" src="<%=basePath%>resource/images/008.png" />
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_5.jpg" />
+						<a class="first-level-a">
+							商户管理
+						</a>
+					</li>
 					<li class="layui-nav-item">
-						<a href="<%=basePath%>admin/goAccountList">商户查询</a>
+						<a class="second-level-a" href="<%=basePath%>admin/goAccountList">商户查询</a>
 					</li>
 				</div>
+				</shiro:hasRole>
 			</ul>
-			</shiro:hasRole>
 		</div>
 	</div>
 </body>
