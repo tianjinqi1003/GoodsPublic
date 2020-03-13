@@ -55,7 +55,7 @@ function checkIfPaidInSide(){
 }
 .layui-nav .layui-nav-item .pointer-img{
 	margin-top: 18px;
-	margin-left: 18px;
+	margin-left: 127px;
 	position: absolute;
 }
 .layui-nav .first-level{
@@ -79,7 +79,7 @@ function checkIfPaidInSide(){
 	<div class="layui-header ">
 		<div class="layui-logo">
 			<img alt="" src="<%=basePath%>resource/images/qrcode.png"/>
-			<a>二维码产品发布系统</a>
+			<a>辰麒二维码管理平台</a>
 		</div>
 		<ul class="layui-nav layui-layout-right">
 			<li class="layui-nav-item"><a href="javascript:;"> <img
@@ -94,29 +94,31 @@ function checkIfPaidInSide(){
 	<div class="layui-side ">
 		<div class="layui-side-scroll">
 			<ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo"
-				style="margin-right: 10px;height: 800px;overflow-y:scroll;">
-				<div style="width: 92%; margin: 0 auto; margin-top: 20px;border: #CAD9EA solid 1px;background-color: #F5FAFE;">
+				style="margin-right: 10px;height: 800px;">
+				<div style="width: 100%; margin: 0 auto; margin-top: 20px;background-color: #F5FAFE;">
 					<li class="layui-nav-item first-level">
-						<a>
+						<img alt="" src="<%=basePath%>resource/images/008.png" style="width:13px;height:13px;margin-top: 16px;margin-left: 18px;" />
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_5.jpg" />
+						<a style="margin-top: -29px;margin-left: 18px;">
 							系统管理
-						</a>
-					</li>
-					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
-					<li class="layui-nav-item">
-						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-						<a href="<%=basePath%>merchant/main/goAccountInfo?accountId=${sessionScope.user.id }">
-							&nbsp;&nbsp;&nbsp;商家信息
 						</a>
 					</li>
 					<!-- 
 					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
+					 -->
 					<li class="layui-nav-item">
-						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-						<a href="<%=basePath%>merchant/main/goCategoryList">
-							&nbsp;&nbsp;&nbsp;分类管理
+						<a style="margin-left:19px;" href="<%=basePath%>merchant/main/goAccountInfo?accountId=${sessionScope.user.id }">
+							商家信息
 						</a>
 					</li>
+					<!-- 
+					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
 					 -->
+					<li class="layui-nav-item">
+						<a style="margin-left:19px;" href="<%=basePath%>merchant/main/goCategoryList">
+							成员管理
+						</a>
+					</li>
 				</div>
 				<!-- 
 				<li class="layui-nav-item">
@@ -140,34 +142,32 @@ function checkIfPaidInSide(){
 					</dl>
 				</li>
 				 -->
-				<div style="width: 92%; margin: 0 auto; margin-top: 5px;border: #CAD9EA solid 1px;background-color: #F5FAFE;">
+				<div style="width: 100%; margin: 0 auto; margin-top: 5px;background-color: #F5FAFE;">
 					<li class="layui-nav-item first-level">
-						<a>
-							自定义模板
+						<img alt="" src="<%=basePath%>resource/images/008.png" style="width:13px;height:13px;margin-top: 16px;margin-left: 18px;" />
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_5.jpg" />
+						<a style="margin-top: -29px;margin-left: 18px;">
+							标签管理
 						</a>
 					</li>
+					<!-- 
 					<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
+					 -->
 						<li class="layui-nav-item">
-							<a>
-								标签管理
+							<a style="margin-left:19px;" href="<%=basePath%>merchant/main/goGoodsLabelSetList?accountId=${sessionScope.user.id }">
+								标签定义
 							</a>
 						</li>
 						<li class="layui-nav-item">
-							<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-							<a href="<%=basePath%>merchant/main/goGoodsLabelSetList?accountId=${sessionScope.user.id }">
-								&nbsp;&nbsp;&nbsp;标签定义
+							<a style="margin-left:19px;" href="<%=basePath%>merchant/main/goCategoryList">
+								分类管理
 							</a>
 						</li>
-						<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
-						<li class="layui-nav-item">
-							<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_3.gif" />
-							<a href="<%=basePath%>merchant/main/goCategoryList">
-								&nbsp;&nbsp;&nbsp;分类管理
-							</a>
-						</li>
-						<div style="width:100%;height: 1px;background-color: #CAD9EA;"></div>
-						<li class="layui-nav-item">
-							<a>
+						
+						<li class="layui-nav-item first-level">
+							<img alt="" src="<%=basePath%>resource/images/008.png" style="width:13px;height:13px;margin-top: 16px;margin-left: 18px;" />
+							<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_5.jpg" />
+							<a style="margin-top: -29px;margin-left: 18px;">
 								商品管理
 							</a>
 						</li>

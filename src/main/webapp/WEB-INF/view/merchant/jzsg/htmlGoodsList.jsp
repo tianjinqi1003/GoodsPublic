@@ -118,7 +118,7 @@ function setFitWidthInParent(o){
 <body>
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../side.jsp"%>
-	<div id="tab1_div" style="margin-top:20px;margin-left: 200px;">
+	<div id="tab1_div" style="margin-top:20px;margin-left: 238px;">
 		<div id="toolbar">
 			<a id="add_but">添加</a>
 			<a id="remove_but">删除</a>
