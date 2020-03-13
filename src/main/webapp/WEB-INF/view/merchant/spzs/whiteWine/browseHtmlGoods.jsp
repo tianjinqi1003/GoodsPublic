@@ -160,6 +160,7 @@ function editContent(moduleType,goodsNumber,accountNumber){
 				<img class="qrcode_img" alt="" src="${requestScope.htmlGoodsSPZS.qrCode }" />
 				<div class="downloadQrcode2_div">下载二维码</div>
 			</div>
+			<!-- 
 			<div class="option1_div">
 				<div class="pbdy_div">
 					<a class="pbdy_a">排版打印</a>
@@ -174,6 +175,7 @@ function editContent(moduleType,goodsNumber,accountNumber){
 					<a class="hgmhmb_a">换个美化模板</a>
 				</div>
 			</div>
+			 -->
 		</div>
 		<div class="line1_div"></div>
 		<div class="option2_div">
