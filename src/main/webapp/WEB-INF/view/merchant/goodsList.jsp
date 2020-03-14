@@ -52,7 +52,6 @@ $(function(){
 						data.total=0;
 					}
 					
-					//$(".panel-header").css("background","linear-gradient(to bottom,#F4F4F4 0,#F4F4F4 20%)");
 					$(".panel-header .panel-title").css("color","#000");
 					$(".panel-header .panel-title").css("font-size","15px");
 					$(".panel-header .panel-title").css("padding-left","10px");
@@ -162,14 +161,9 @@ function resetColumnsHtml(){
 }
 
 function resetTabStyle(){
-	//$(".panel.datagrid .panel-header").css("background","linear-gradient(to bottom,#E7F4FD 0,#E7F4FD 20%)");
 	$(".panel.datagrid .panel-header .panel-title").css("color","#000");
 	$(".panel.datagrid .panel-header .panel-title").css("font-size","15px");
 	$(".panel.datagrid .panel-header .panel-title").css("padding-left","10px");
-	
-	//$(".panel.datagrid .datagrid-toolbar").css("background","#F5FAFE");
-	//$(".panel.datagrid .datagrid-header-row").css("background","#E7F4FD");
-	//$(".panel.datagrid .datagrid-pager.pagination").css("background","#F5FAFE");
 }
 
 //重设列宽

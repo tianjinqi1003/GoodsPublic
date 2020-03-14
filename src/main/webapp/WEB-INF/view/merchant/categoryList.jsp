@@ -38,7 +38,6 @@ $(function(){
 				$(this).datagrid("mergeCells",{index:0,field:"categoryId",colspan:3});
 				data.total=0;
 			}
-			
 			resetTabStyle();
 			reSizeCol();
 			initEditDiv();
@@ -48,17 +47,20 @@ $(function(){
 });
 
 function resetTabStyle(){
+	$(".datagrid-header td .datagrid-cell").each(function(){
+		$(this).find("span").eq(0).css("margin-left","11px");
+	});
+	$(".datagrid-body td .datagrid-cell").each(function(){
+		var html=$(this).html();
+		$(this).html("<span style=\"margin-left:11px;\">"+html+"</span>");
+	});
+	
 	$(".panel.datagrid").css("width","788px");
-	$(".panel.datagrid").css("margin-left",initTab1WindowMarginLeft());
+	$(".panel.datagrid").css("margin-left",initTab1WindowMarginLeft());//保持居中
 
-	$(".panel.datagrid .panel-header").css("background","linear-gradient(to bottom,#E7F4FD 0,#E7F4FD 20%)");
 	$(".panel.datagrid .panel-header .panel-title").css("color","#000");
 	$(".panel.datagrid .panel-header .panel-title").css("font-size","15px");
 	$(".panel.datagrid .panel-header .panel-title").css("padding-left","10px");
-	
-	$(".panel.datagrid .datagrid-toolbar").css("background","#F5FAFE");
-	$(".panel.datagrid .datagrid-header-row").css("background","#E7F4FD");
-	$(".panel.datagrid .datagrid-pager.pagination").css("background","#F5FAFE");
 }
 
 //重设列宽
@@ -87,8 +89,8 @@ function initEditDiv(){
 		title:"添加/编辑分类",
 		width:diaWidth,
 		height:200,
-		top:rowsCount*25+200,
-		left:210,
+		top:rowsCount*25+228,
+		left:218,
 		buttons:[
            {text:"提交",id:"ok_but",iconCls:"icon-ok",handler:function(){
         	   if(checkIfPaid())
@@ -112,7 +114,6 @@ function initEditDiv(){
 	$(".panel.window").css("width","783px");
 	$(".panel.window").css("margin-top","40px");
 	$(".panel.window").css("margin-left",initEditWindowMarginLeft());
-	$(".panel.window").css("background","linear-gradient(to bottom,#E7F4FD 0,#E7F4FD 20%)"); 
 	$(".window,.window .window-body").css("border-color","#ddd");
 	$(".panel.window .panel-title").css("color","#000");
 	$(".panel.window .panel-title").css("font-size","15px");
@@ -125,7 +126,6 @@ function initEditDiv(){
 	$(".window-shadow").css("width","783px");
 	$(".window-shadow").css("margin-top","40px");
 	$(".window-shadow").css("margin-left",initEditWindowMarginLeft());
-	$(".window-shadow").css("background","#E7F4FD");
 	
 	$(".panel-body.panel-body-noborder.window-body").css("width",diaWidth-4+"px"); 
 	$(".panel-body.panel-body-noborder.window-body").css("height","155px"); 
@@ -295,9 +295,9 @@ function initEditWindowMarginLeft(){
 <body>
 <div class="layui-layout layui-layout-admin">
 	<%@include file="side.jsp"%>
-	<div id="tab1_div" style="margin-top:20px;margin-left: 200px;">
-		<div id="toolbar">
-			<a id="remove_but">删除</a>
+	<div id="tab1_div" style="margin-top:20px;margin-left: 220px;">
+		<div id="toolbar" style="height:32px;line-height:32px;">
+			<a id="remove_but" style="margin-left: 13px;">删除</a>
 		</div>
 		<table id="tab1">
 		</table>

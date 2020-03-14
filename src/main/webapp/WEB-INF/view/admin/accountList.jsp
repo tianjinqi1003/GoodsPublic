@@ -39,11 +39,18 @@ $(function(){
 				data.total=0;
 			}
 
-			$(".panel-header").css("background","linear-gradient(to bottom,#F4F4F4 0,#F4F4F4 20%)");
 			$(".panel-header .panel-title").css("color","#000");
 			$(".panel-header .panel-title").css("font-size","15px");
 			$(".panel-header .panel-title").css("padding-left","10px");
 			$(".panel-header, .panel-body").css("border-color","#ddd");
+			
+			$(".datagrid-header td .datagrid-cell").each(function(){
+				$(this).find("span").eq(0).css("margin-left","11px");
+			});
+			$(".datagrid-body td .datagrid-cell").each(function(){
+				var html=$(this).html();
+				$(this).html("<span style=\"margin-left:11px;\">"+html+"</span>");
+			});
 			
 			reSizeCol();
 		}
@@ -80,14 +87,14 @@ function updateStatus(id,status){
 
 function setFitWidthInParent(o){
 	var width=$(o).css("width");
-	return width.substring(0,width.length-2)-250;
+	return width.substring(0,width.length-2)-270;
 }
 </script>
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../merchant/side.jsp"%>
-	<div style="margin-top:5px;margin-left: 210px;">
+	<div style="margin-top:20px;margin-left: 238px;">
 		 <table id="tab1">
 		 </table>
 	</div>

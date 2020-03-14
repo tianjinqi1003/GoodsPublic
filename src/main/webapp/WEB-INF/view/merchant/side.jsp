@@ -121,7 +121,7 @@ function checkIfPaidInSide(){
 						</a>
 					</li>
 					<li class="layui-nav-item">
-						<a class="second-level-a" href="<%=basePath%>merchant/main/goCategoryList">
+						<a class="second-level-a">
 							成员管理
 						</a>
 					</li>

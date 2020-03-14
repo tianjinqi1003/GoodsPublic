@@ -52,7 +52,7 @@ $(function(){
 		$(this).find("td").eq(0).css("color","#006699");
 		$(this).find("td").eq(0).css("border-right","#CAD9EA solid 1px");
 		$(this).find("td").eq(0).css("font-weight","bold");
-		$(this).find("td").eq(0).css("background-color","#F5FAFE");
+		$(this).find("td").eq(0).css("background-color","#FAFDFE");
 	});
 
 	$("#edit_div table tr").mousemove(function(){
@@ -64,7 +64,6 @@ $(function(){
 	$(".panel.window").css("width","983px");
 	$(".panel.window").css("margin-top","20px");
 	$(".panel.window").css("margin-left",initWindowMarginLeft());
-	$(".panel.window").css("background","linear-gradient(to bottom,#E7F4FD 0,#E7F4FD 20%)"); 
 	$(".panel.window .panel-title").css("color","#000");
 	$(".panel.window .panel-title").css("font-size","15px");
 	$(".panel.window .panel-title").css("padding-left","10px");
@@ -75,7 +74,6 @@ $(function(){
 	$(".window-shadow").css("width","1000px");
 	$(".window-shadow").css("margin-top","20px");
 	$(".window-shadow").css("margin-left",initWindowMarginLeft());
-	$(".window-shadow").css("background","#E7F4FD");
 	
 	$(".window,.window .window-body").css("border-color","#ddd");
 	
