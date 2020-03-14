@@ -109,13 +109,13 @@
   border-color: #111;
 }
 .panel-header {
-  background-color: #E0ECFF;
-  background: -webkit-linear-gradient(top,#EFF5FF 0,#E0ECFF 100%);
-  background: -moz-linear-gradient(top,#EFF5FF 0,#E0ECFF 100%);
-  background: -o-linear-gradient(top,#EFF5FF 0,#E0ECFF 100%);
-  background: linear-gradient(to bottom,#838383 0,#111 100%);
+  background-color: #FAFDFE;
+  background: -webkit-linear-gradient(top,#FAFDFE 0,#FAFDFE 100%);
+  background: -moz-linear-gradient(top,#FAFDFE 0,#FAFDFE 100%);
+  background: -o-linear-gradient(top,#FAFDFE 0,#FAFDFE 100%);
+  background: linear-gradient(to bottom,#FAFDFE 0,#FAFDFE 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#EFF5FF,endColorstr=#E0ECFF,GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#FAFDFE,endColorstr=#FAFDFE,GradientType=0);
   height: 35px;
 }
 .panel-body {
@@ -1100,7 +1100,7 @@
 }
 .datagrid-header-row,
 .datagrid-row {
-  height: 25px;
+  height: 32px;
 }
 .datagrid-header td,
 .datagrid-body td,
@@ -1225,13 +1225,13 @@
 }
 .datagrid-header,
 .datagrid-td-rownumber {
-  background-color: #efefef;
-  background: -webkit-linear-gradient(top,#F9F9F9 0,#efefef 100%);
-  background: -moz-linear-gradient(top,#F9F9F9 0,#efefef 100%);
-  background: -o-linear-gradient(top,#F9F9F9 0,#efefef 100%);
-  background: linear-gradient(to bottom,#F9F9F9 0,#efefef 100%);
+  background-color: #FAFDFE;
+  background: -webkit-linear-gradient(top,#FAFDFE 0,#FAFDFE 100%);
+  background: -moz-linear-gradient(top,#FAFDFE 0,#FAFDFE 100%);
+  background: -o-linear-gradient(top,#FAFDFE 0,#FAFDFE 100%);
+  background: linear-gradient(to bottom,#FAFDFE 0,#FAFDFE 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#F9F9F9,endColorstr=#efefef,GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#FAFDFE,endColorstr=#FAFDFE,GradientType=0);
 }
 .datagrid-cell-rownumber {
   color: #000000;
@@ -1247,7 +1247,7 @@
 }
 .datagrid-toolbar,
 .datagrid-pager {
-  background: #F4F4F4;
+  background: #FAFDFE;
 }
 .datagrid-header,
 .datagrid-toolbar,
