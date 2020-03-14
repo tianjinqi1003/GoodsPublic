@@ -100,9 +100,10 @@ public interface PublicService {
 	/**
 	 * 查询商品模板内容数量
 	 * @param accountId
+	 * @param moduleType 
 	 * @return
 	 */
-	public int queryHtmlGoodsSPZSForInt(String accountId);
+	public int queryHtmlGoodsSPZSForInt(String accountId, String moduleType);
 	
 	/**
 	 * 查询多媒体资料模板内容数量
@@ -142,13 +143,14 @@ public interface PublicService {
 	/**
 	 * 根据商户编号，查询商品展示模板内容
 	 * @param accountId
+	 * @param moduleType 
 	 * @param page
 	 * @param rows
 	 * @param sort
 	 * @param order
 	 * @return
 	 */
-	public List<HtmlGoodsSPZS> queryHtmlGoodsSPZSList(String accountId, int page, int rows, String sort,
+	public List<HtmlGoodsSPZS> queryHtmlGoodsSPZSList(String accountId, String moduleType, int page, int rows, String sort,
 			String order);
 	
 	/**

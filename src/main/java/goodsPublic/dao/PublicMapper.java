@@ -71,13 +71,14 @@ public interface PublicMapper {
 	/**
 	 * 根据商户编号，查询商品展示模板内容
 	 * @param accountId
-	 * @param i
+	 * @param moduleType 
+	 * @param page
 	 * @param rows
 	 * @param sort
 	 * @param order
 	 * @return
 	 */
-	public List<HtmlGoodsSPZS> queryHtmlGoodsSPZSList(String accountId, int i, int rows, String sort,
+	public List<HtmlGoodsSPZS> queryHtmlGoodsSPZSList(String accountId, String moduleType, int page, int rows, String sort,
 			String order);
 	
 	/**
@@ -145,9 +146,10 @@ public interface PublicMapper {
 	/**
 	 * 查询模板商品数量
 	 * @param accountId
+	 * @param moduleType 
 	 * @return
 	 */
-	public int queryHtmlGoodsSPZSForInt(String accountId);
+	public int queryHtmlGoodsSPZSForInt(String accountId, String moduleType);
 	/**
 	 * 查询模板多媒体资料数量
 	 * @param accountId

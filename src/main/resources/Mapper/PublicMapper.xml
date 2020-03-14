@@ -1885,7 +1885,7 @@
 		select count(*) from public_goods where accountNumber=#{param1} and category_id=#{param2}
 	</select>
 	<select id="queryHtmlGoodsSPZSForInt" resultType="java.lang.Integer">
-		select count(*) from html_goods_spzs where accountNumber=#{param1}
+		select count(*) from html_goods_spzs where accountNumber=#{param1} and moduleType=#{param2}
 	</select>
 	<select id="queryHtmlGoodsDMTZLForInt" resultType="java.lang.Integer">
 		select count(*) from html_goods_dmtzl where accountNumber=#{param1}
@@ -1897,7 +1897,7 @@
 		select * from public_goods where accountNumber=#{param1} and category_id=#{param2} limit ${param3},${param4}
 	</select>
 	<select id="queryHtmlGoodsSPZSList" resultType="goodsPublic.entity.HtmlGoodsSPZS">
-		select * from html_goods_spzs where accountNumber=#{param1} limit ${param2},${param3}
+		select * from html_goods_spzs where accountNumber=#{param1} and moduleType=#{param2} limit ${param3},${param4}
 	</select>
 	<select id="queryHtmlGoodsDMTZLList" resultType="goodsPublic.entity.HtmlGoodsDMTZL">
 		select * from html_goods_dmtzl where accountNumber=#{param1} limit ${param2},${param3}

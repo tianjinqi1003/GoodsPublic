@@ -8,12 +8,23 @@
 <%@include file="../js.jsp"%>
 <script type="text/javascript">
 var path='<%=basePath %>';
+var tab1Title;
+var moduleType='${param.moduleType}';
+switch(moduleType){
+case "redWine":
+	tab1Title="酒水";
+	break;
+case "productExplain":
+	tab1Title="说明书";
+	break;
+}
+
 $(function(){
 	$("#add_but").linkbutton({
 		iconCls:"icon-add",
 		onClick:function(){
 			if(checkIfPaid())
-				location.href=path+"merchant/main/goAddModule?trade=spzs&moduleType=redWine";
+				location.href=path+"merchant/main/goAddModule?trade=spzs&moduleType="+moduleType;
 		}
 	});
 	
@@ -25,13 +36,13 @@ $(function(){
 	});
 	
 	tab1=$("#tab1").datagrid({
-		title:"商品模板查询",
+		title:tab1Title+"模板生成",
 		url:"queryHtmlGoodsSPZSList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),
 		pagination:true,
 		pageSize:10,
-		queryParams:{accountId:'${sessionScope.user.id}'},
+		queryParams:{accountId:'${sessionScope.user.id}',moduleType:moduleType},
 		columns:[[
 			{field:"productName",title:"名称",width:200},
             {field:"gmtCreate",title:"创建时间",width:200},

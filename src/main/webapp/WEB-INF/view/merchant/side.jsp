@@ -179,12 +179,22 @@ function checkIfPaidInSide(){
 						<img class="first-level-img" alt="" src="<%=basePath%>resource/images/008.png" />
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_5.jpg" />
 						<a class="first-level-a">
-							行业定制
+							行业模板
+						</a>
+					</li>
+					<li class="layui-nav-item">
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=spzs&moduleType=redWine&accountId=${sessionScope.user.id }">
+							酒水
+						</a>
+					</li>
+					<li class="layui-nav-item">
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=spzs&moduleType=productExplain&accountId=${sessionScope.user.id }">
+							说明书
 						</a>
 					</li>
 					<li class="layui-nav-item">
 						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=spzs&accountId=${sessionScope.user.id }">
-							商品展示
+							展示样品
 						</a>
 					</li>
 					<li class="layui-nav-item">
@@ -199,22 +209,22 @@ function checkIfPaidInSide(){
 					</li>
 					<li class="layui-nav-item">
 						<a class="second-level-a">
-							设备巡检
+							活动签到
 						</a>
 					</li>
 					<li class="layui-nav-item">
 						<a class="second-level-a">
-							物资标识
+							多媒体图书
 						</a>
 					</li>
 					<li class="layui-nav-item">
 						<a class="second-level-a">
-							无纸化记录
+							名片
 						</a>
 					</li>
 					<li class="layui-nav-item">
 						<a class="second-level-a">
-							其他应用
+							设备管理
 						</a>
 					</li>
 				</div>

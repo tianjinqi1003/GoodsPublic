@@ -267,9 +267,9 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public int queryHtmlGoodsSPZSForInt(String accountId) {
+	public int queryHtmlGoodsSPZSForInt(String accountId, String moduleType) {
 		// TODO Auto-generated method stub
-		return publicDao.queryHtmlGoodsSPZSForInt(accountId);
+		return publicDao.queryHtmlGoodsSPZSForInt(accountId,moduleType);
 	}
 	
 	@Override
@@ -292,10 +292,10 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public List<HtmlGoodsSPZS> queryHtmlGoodsSPZSList(String accountId, int page, int rows, String sort,
+	public List<HtmlGoodsSPZS> queryHtmlGoodsSPZSList(String accountId, String moduleType, int page, int rows, String sort,
 			String order) {
 		// TODO Auto-generated method stub
-		return publicDao.queryHtmlGoodsSPZSList(accountId, (page-1)*rows, rows, sort, order);
+		return publicDao.queryHtmlGoodsSPZSList(accountId, moduleType, (page-1)*rows, rows, sort, order);
 	}
 	
 	@Override

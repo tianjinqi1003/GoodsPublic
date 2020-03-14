@@ -1991,11 +1991,11 @@ public class MainController {
 	 */
 	@RequestMapping(value="/queryHtmlGoodsSPZSList")
 	@ResponseBody
-	public Map<String, Object> queryHtmlGoodsSPZSList(String accountId,int page,int rows,String sort,String order) {
+	public Map<String, Object> queryHtmlGoodsSPZSList(String accountId,String moduleType,int page,int rows,String sort,String order) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		int count = publicService.queryHtmlGoodsSPZSForInt(accountId);
-		List<HtmlGoodsSPZS> htmlGoodsList = publicService.queryHtmlGoodsSPZSList(accountId, page, rows, sort, order);
+		int count = publicService.queryHtmlGoodsSPZSForInt(accountId,moduleType);
+		List<HtmlGoodsSPZS> htmlGoodsList = publicService.queryHtmlGoodsSPZSList(accountId,moduleType, page, rows, sort, order);
 		
 		jsonMap.put("total", count);
 		jsonMap.put("rows", htmlGoodsList);
