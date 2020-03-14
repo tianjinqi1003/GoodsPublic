@@ -52,13 +52,23 @@ $(function(){
 						data.total=0;
 					}
 					
-					$(".panel-header").css("background","linear-gradient(to bottom,#F4F4F4 0,#F4F4F4 20%)");
+					//$(".panel-header").css("background","linear-gradient(to bottom,#F4F4F4 0,#F4F4F4 20%)");
 					$(".panel-header .panel-title").css("color","#000");
 					$(".panel-header .panel-title").css("font-size","15px");
 					$(".panel-header .panel-title").css("padding-left","10px");
 					$(".panel-header, .panel-body").css("border-color","#ddd");
 
 					resetColumnsHtml();
+
+					//因为这个报表是自定义标签，所以必须上面重置html格式后才可以执行下面的设置行头间距代码
+					$(".datagrid-header td .datagrid-cell").each(function(){
+						$(this).find("span").eq(0).css("margin-left","11px");
+					});
+					$(".datagrid-body td .datagrid-cell").each(function(){
+						var html=$(this).html();
+						$(this).html("<span style=\"margin-left:11px;\">"+html+"</span>");
+					});
+					
 					resetTabStyle();
 					reSizeCol();
 				}
@@ -152,16 +162,14 @@ function resetColumnsHtml(){
 }
 
 function resetTabStyle(){
-	$(".panel.datagrid").css("margin-left",initTab1WindowMarginLeft());
-
-	$(".panel.datagrid .panel-header").css("background","linear-gradient(to bottom,#E7F4FD 0,#E7F4FD 20%)");
+	//$(".panel.datagrid .panel-header").css("background","linear-gradient(to bottom,#E7F4FD 0,#E7F4FD 20%)");
 	$(".panel.datagrid .panel-header .panel-title").css("color","#000");
 	$(".panel.datagrid .panel-header .panel-title").css("font-size","15px");
 	$(".panel.datagrid .panel-header .panel-title").css("padding-left","10px");
 	
-	$(".panel.datagrid .datagrid-toolbar").css("background","#F5FAFE");
-	$(".panel.datagrid .datagrid-header-row").css("background","#E7F4FD");
-	$(".panel.datagrid .datagrid-pager.pagination").css("background","#F5FAFE");
+	//$(".panel.datagrid .datagrid-toolbar").css("background","#F5FAFE");
+	//$(".panel.datagrid .datagrid-header-row").css("background","#E7F4FD");
+	//$(".panel.datagrid .datagrid-pager.pagination").css("background","#F5FAFE");
 }
 
 //重设列宽
@@ -194,15 +202,7 @@ layui.use([ 'element' ], function() {
 
 function setFitWidthInParent(o){
 	var width=$(o).css("width");
-	return width.substring(0,width.length-2)-250;
-}
-
-function initTab1WindowMarginLeft(){
-	var tab1DivWidth=$("#tab1_div").css("width");
-	tab1DivWidth=tab1DivWidth.substring(0,tab1DivWidth.length-2);
-	var pdWidth=$(".panel.datagrid").css("width");
-	pdWidth=pdWidth.substring(0,pdWidth.length-2);
-	return ((tab1DivWidth-pdWidth)/2)+"px";
+	return width.substring(0,width.length-2)-270;
 }
 </script>
 <style type="text/css">
@@ -214,7 +214,7 @@ function initTab1WindowMarginLeft(){
 </div>
 <div class="layui-layout layui-layout-admin">
 	<%@include file="side.jsp"%>
-	<div id="tab1_div" style="margin-top:20px;margin-left: 210px;">
+	<div id="tab1_div" style="margin-top:20px;margin-left: 238px;">
 		 <table id="tab1">
 		 </table>
 	</div>

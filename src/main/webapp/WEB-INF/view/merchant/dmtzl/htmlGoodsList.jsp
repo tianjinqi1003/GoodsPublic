@@ -48,14 +48,35 @@ $(function(){
 				data.total=0;
 			}
 			
-			$(".panel-header").css("background","linear-gradient(to bottom,#F4F4F4 0,#F4F4F4 20%)");
 			$(".panel-header .panel-title").css("color","#000");
 			$(".panel-header .panel-title").css("font-size","15px");
 			$(".panel-header .panel-title").css("padding-left","10px");
 			$(".panel-header, .panel-body").css("border-color","#ddd");
+
+			$(".datagrid-header td .datagrid-cell").each(function(){
+				$(this).find("span").eq(0).css("margin-left","11px");
+			});
+			$(".datagrid-body td .datagrid-cell").each(function(){
+				var html=$(this).html();
+				$(this).html("<span style=\"margin-left:11px;\">"+html+"</span>");
+			});
+			reSizeCol();
 		}
 	});
 });
+
+//重设列宽
+function reSizeCol(){
+	var width=$(".panel.datagrid").css("width");
+	width=width.substring(0,width.length-2);
+	var cols=$(".datagrid-htable tr td");
+	var colCount=cols.length;
+	width=width-colCount*2;
+	cols.css("width",width/colCount+"px");
+	cols=$(".datagrid-btable tr").eq(0).find("td");
+	colCount=cols.length;
+	cols.css("width",width/colCount+"px");
+}
 
 function deleteHtmlGoodsDMTZL() {
 	var rows=tab1.datagrid("getSelections");
@@ -110,16 +131,16 @@ function checkIfPaid(){
 
 function setFitWidthInParent(o){
 	var width=$(o).css("width");
-	return width.substring(0,width.length-2)-210;
+	return width.substring(0,width.length-2)-270;
 }
 </script>
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../side.jsp"%>
-	<div id="tab1_div" style="margin-top:20px;margin-left: 200px;">
-		<div id="toolbar">
-			<a id="add_but">添加</a>
+	<div id="tab1_div" style="margin-top:20px;margin-left: 238px;">
+		<div id="toolbar" style="height:32px;line-height:32px;">
+			<a id="add_but" style="margin-left: 13px;">添加</a>
 			<a id="remove_but">删除</a>
 		</div>
 		<table id="tab1">

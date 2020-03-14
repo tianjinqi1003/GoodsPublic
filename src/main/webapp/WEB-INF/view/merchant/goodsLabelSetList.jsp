@@ -69,11 +69,18 @@ $(function(){
 				data.total=0;
 			}
 			
-			$(".panel-header").css("background","linear-gradient(to bottom,#F4F4F4 0,#F4F4F4 20%)");
 			$(".panel-header .panel-title").css("color","#000");
 			$(".panel-header .panel-title").css("font-size","15px");
 			$(".panel-header .panel-title").css("padding-left","10px");
 			$(".panel-header, .panel-body").css("border-color","#ddd");
+
+			$(".datagrid-header td .datagrid-cell").each(function(){
+				$(this).find("span").eq(0).css("margin-left","11px");
+			});
+			$(".datagrid-body td .datagrid-cell").each(function(){
+				var html=$(this).html();
+				$(this).html("<span style=\"margin-left:11px;\">"+html+"</span>");
+			});
 			
 			resetTabStyle();
 			reSizeCol();
@@ -82,16 +89,9 @@ $(function(){
 });
 
 function resetTabStyle(){
-	$(".panel.datagrid").css("margin-left",initTab1WindowMarginLeft());
-
-	$(".panel.datagrid .panel-header").css("background","linear-gradient(to bottom,#E7F4FD 0,#E7F4FD 20%)");
 	$(".panel.datagrid .panel-header .panel-title").css("color","#000");
 	$(".panel.datagrid .panel-header .panel-title").css("font-size","15px");
 	$(".panel.datagrid .panel-header .panel-title").css("padding-left","10px");
-	
-	$(".panel.datagrid .datagrid-toolbar").css("background","#F5FAFE");
-	$(".panel.datagrid .datagrid-header-row").css("background","#E7F4FD");
-	$(".panel.datagrid .datagrid-pager.pagination").css("background","#F5FAFE");
 }
 
 //重设列宽
@@ -159,24 +159,16 @@ function deleteByKeys() {
 
 function setFitWidthInParent(o){
 	var width=$(o).css("width");
-	return width.substring(0,width.length-2)-210;
-}
-
-function initTab1WindowMarginLeft(){
-	var tab1DivWidth=$("#tab1_div").css("width");
-	tab1DivWidth=tab1DivWidth.substring(0,tab1DivWidth.length-2);
-	var pdWidth=$(".panel.datagrid").css("width");
-	pdWidth=pdWidth.substring(0,pdWidth.length-2);
-	return ((tab1DivWidth-pdWidth)/2)+"px";
+	return width.substring(0,width.length-2)-270;
 }
 </script>
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
 	<%@include file="side.jsp"%>
-	<div id="tab1_div" style="margin-top:20px;margin-left: 210px;">
-		<div id="toolbar">
-			<a id="add_but">添加</a>
+	<div id="tab1_div" style="margin-top:20px;margin-left: 238px;">
+		<div id="toolbar" style="height:32px;line-height:32px;">
+			<a id="add_but" style="margin-left: 13px;">添加</a>
 			<a id="remove_but">删除</a>
 		</div>
 		 <table id="tab1">

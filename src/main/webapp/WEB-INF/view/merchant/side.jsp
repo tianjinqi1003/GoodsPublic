@@ -90,8 +90,8 @@ function checkIfPaidInSide(){
 <body>
 	<div class="layui-header ">
 		<div class="layui-logo">
-			<img alt="" src="<%=basePath%>resource/images/qrcode.png"/>
-			<a>辰麒二维码管理平台</a>
+			<img alt="" src="<%=basePath%>resource/images/qrcode.png" style="width:36px;height:36px;margin-left: 5px;"/>
+			<a style="font-size: 17px;margin-left:9px;">辰麒二维码管理平台</a>
 		</div>
 		<ul class="layui-nav layui-layout-right">
 			<li class="layui-nav-item"><a href="javascript:;"> <img
