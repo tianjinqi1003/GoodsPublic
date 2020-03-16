@@ -1294,16 +1294,6 @@ public class MainController {
 	public String editAccountInfo(AccountMsg accountMsg,HttpServletRequest request) {
 		String json="";
 		try {
-			/*
-			if(file.getSize()>0) {
-				String jsonStr = FileUploadUtils.appUploadContentImg(request,file,"");
-				JSONObject fileJson = JSONObject.fromObject(jsonStr);
-				if("成功".equals(fileJson.get("msg"))) {
-					JSONObject dataJO = (JSONObject)fileJson.get("data");
-					accountMsg.setAvatar_img(dataJO.get("src").toString());
-				}
-			}
-			*/
 			AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
 			accountMsg.setId(msg.getId());
 			int a=publicService.editAccountInfo(accountMsg);
