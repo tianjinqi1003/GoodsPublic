@@ -1842,39 +1842,41 @@
 	</update>
 	<update id="editAccountInfo" parameterType="goodsPublic.entity.AccountMsg">
 		update account_info set 
-		<if test="avatar_img!=''&amp;avatar_img!=null">
-			avatar_img=#{avatar_img},
-		</if>
-		<if test="companyName!=''&amp;companyName!=null">
-			companyName=#{companyName},
-		</if>
-		<if test="companyAddress!=''&amp;companyAddress!=null">
-			companyAddress=#{companyAddress},
-		</if>
-		<if test="postcode!=''&amp;postcode!=null">
-			postcode=#{postcode},
-		</if>
-		<if test="phone!=''&amp;phone!=null">
-			phone=#{phone},
-		</if>
-		<if test="quotient!=''&amp;quotient!=null">
-			quotient=#{quotient},
-		</if>
-		<if test="fax!=''&amp;fax!=null">
-			fax=#{fax},
-		</if>
-		<if test="email!=''&amp;email!=null">
-			email=#{email},
-		</if>
-		<if test="countCode!=''&amp;countCode!=null">
-			countCode=#{countCode},
-		</if>
-		<if test="recordNumber!=''&amp;recordNumber!=null">
-			recordNumber=#{recordNumber},
-		</if>
-		<if test="nickName!=''&amp;nickName!=null">
-			nickName=#{nickName}
-		</if>
+		<trim suffixOverrides=",">
+			<if test="avatar_img!=''&amp;avatar_img!=null">
+				avatar_img=#{avatar_img},
+			</if>
+			<if test="companyName!=''&amp;companyName!=null">
+				companyName=#{companyName},
+			</if>
+			<if test="companyAddress!=''&amp;companyAddress!=null">
+				companyAddress=#{companyAddress},
+			</if>
+			<if test="postcode!=''&amp;postcode!=null">
+				postcode=#{postcode},
+			</if>
+			<if test="phone!=''&amp;phone!=null">
+				phone=#{phone},
+			</if>
+			<if test="quotient!=''&amp;quotient!=null">
+				quotient=#{quotient},
+			</if>
+			<if test="fax!=''&amp;fax!=null">
+				fax=#{fax},
+			</if>
+			<if test="email!=''&amp;email!=null">
+				email=#{email},
+			</if>
+			<if test="countCode!=''&amp;countCode!=null">
+				countCode=#{countCode},
+			</if>
+			<if test="recordNumber!=''&amp;recordNumber!=null">
+				recordNumber=#{recordNumber},
+			</if>
+			<if test="nickName!=''&amp;nickName!=null">
+				nickName=#{nickName},
+			</if>
+		</trim>
 		where id=#{id}
 	</update>
 	<select id="getAllGoodsMsg" resultType="goodsPublic.entity.Goods">

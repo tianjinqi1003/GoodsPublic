@@ -69,6 +69,43 @@ $(function(){
 	$("#gsxx_div").css("width",setFitWidthInParent("body")+"px");
 });
 
+function checkEditCompany(){
+	if(checkCompanyName()){
+		if(checkCompanyAddress()){
+			if(checkPhone()){
+				if(checkEmail()){
+					var companyName=$("#companyName").val();
+					var companyAddress=$("#companyAddress").val();
+					var phone=$("#phone").val();
+					var email=$("#email").val();
+					
+					$.post("editAccountInfo",
+						{companyName:companyName,companyAddress:companyAddress,phone:phone,email:email},
+						function(data){
+							if(data.status==1){
+								$.messager.defaults.ok = "是";
+							    $.messager.defaults.cancel = "否";
+							    $.messager.defaults.width = 350;//更改消息框宽度
+							    $.messager.confirm(
+							    	"提示",
+							    	"商家编辑成功，重新登录生效！是否重新登录？"
+							        ,function(r){    
+							            if (r){    
+							                location.href="../exit";
+							            }
+							        }); 
+							}
+							else{
+								$.messager.alert("提示","商家编辑失败","warning");
+							}
+						}
+					,"json");
+				}
+			}
+		}
+	}
+}
+
 function checkEdit(){
 	if(checkNickName()){
 		//document.getElementById("sub_but").click();
@@ -124,6 +161,86 @@ function checkNickName(){
 		return true;
 }
 
+function focusCompanyName(){
+	var companyName = $("#companyName").val();
+	if(companyName=="公司名称不能为空"){
+		$("#companyName").val("");
+		$("#companyName").css("color", "#555555");
+	}
+}
+
+//验证公司名称
+function checkCompanyName(){
+	var companyName = $("#companyName").val();
+	if(companyName==null||companyName==""||companyName=="公司名称不能为空"){
+		$("#companyName").css("color","#E15748");
+    	$("#companyName").val("公司名称不能为空");
+    	return false;
+	}
+	else
+		return true;
+}
+
+function focusCompanyAddress(){
+	var companyAddress = $("#companyAddress").val();
+	if(companyAddress=="公司地址不能为空"){
+		$("#companyAddress").val("");
+		$("#companyAddress").css("color", "#555555");
+	}
+}
+
+//验证公司地址
+function checkCompanyAddress(){
+	var companyAddress = $("#companyAddress").val();
+	if(companyAddress==null||companyAddress==""||companyAddress=="公司地址不能为空"){
+		$("#companyAddress").css("color","#E15748");
+    	$("#companyAddress").val("公司地址不能为空");
+    	return false;
+	}
+	else
+		return true;
+}
+
+function focusPhone(){
+	var phone = $("#phone").val();
+	if(phone=="联系方式不能为空"){
+		$("#phone").val("");
+		$("#phone").css("color", "#555555");
+	}
+}
+
+//验证联系方式
+function checkPhone(){
+	var phone = $("#phone").val();
+	if(phone==null||phone==""||phone=="联系方式不能为空"){
+		$("#phone").css("color","#E15748");
+    	$("#phone").val("联系方式不能为空");
+    	return false;
+	}
+	else
+		return true;
+}
+
+function focusEmail(){
+	var email = $("#email").val();
+	if(email=="邮箱不能为空"){
+		$("#email").val("");
+		$("#email").css("color", "#555555");
+	}
+}
+
+//验证邮箱
+function checkEmail(){
+	var email = $("#email").val();
+	if(email==null||email==""||email=="邮箱不能为空"){
+		$("#email").css("color","#E15748");
+    	$("#email").val("邮箱不能为空");
+    	return false;
+	}
+	else
+		return true;
+}
+
 function showAvatarImg(obj){
 	var $file = $(obj);
     var fileObj = $file[0];
@@ -163,9 +280,72 @@ function initWindowMarginLeft(){
 	pwWidth=pwWidth.substring(0,pwWidth.length-2);
 	return ((editDivWidth-pwWidth)/2)+"px";
 }
+
+function openEditCompanyDialog(flag){
+	$("#editCompanyBg_div").css("display",flag==1?"block":"none");
+}
 </script>
+<style type="text/css">
+.editCompanyBg_div{
+	width: 100%;height:100%;
+	background: rgba(0,0,0,0.65);
+	position: fixed;
+	display: none;
+	z-index: 1001;
+}
+.editCompany_div{
+	width:500px;height:340px;margin:100px auto;background: #f8f8f8;border-radius: 6px;
+}
+.editCompany_div .title{
+	font-size: 22px;color: #4CAF50;text-align: center;padding-top: 20px;
+}
+.editCompany_div .gsmc_div,.editCompany_div .gsdz_div,.editCompany_div .lxdh_div,.editCompany_div .yx_div{
+	width:300px;margin: auto;padding-top: 20px;
+}
+.editCompany_div input{
+	width: 200px;height:30px;margin-left: 20px;border: 1px solid #DDE0E2;
+}
+.editCompany_div .but_div{
+	width:168px;margin: auto;padding-top: 20px;
+}
+.editCompany_div .but{
+	width: 76px;padding: 5px 10px;font-size: 14px;border: 1px solid #d9d9d9;border-radius: 4px;cursor: pointer;
+}
+.editCompany_div .cancel_but{
+	color: #323232;background: #FFF;
+}
+.editCompany_div .submit_but{
+	color: #FFF;background: #4CAF52;margin-left: 12px;
+}
+</style>
 </head>
 <body>
+<div class="editCompanyBg_div" id="editCompanyBg_div">
+	<div class="editCompany_div">
+		<h4 class="title">公司信息</h4>
+		<div class="gsmc_div">
+			<span>公司名称</span>
+			<input type="text" id="companyName" value="${requestScope.accountMsg.companyName }" onfocus="focusCompanyName()" onblur="checkCompanyName()"/>
+		</div>
+		<div class="gsdz_div">
+			<span>公司地址</span>
+			<input type="text" id="companyAddress" value="${requestScope.accountMsg.companyAddress }" onfocus="focusCompanyAddress()" onblur="checkCompanyAddress()"/>
+		</div>
+		<div class="lxdh_div">
+			<span>联系电话</span>
+			<input type="text" id="phone" value="${requestScope.accountMsg.phone }" onfocus="focusPhone()" onblur="checkPhone()"/>
+		</div>
+		<div class="yx_div">
+			<span>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</span>
+			<input type="text" id="email" value="${requestScope.accountMsg.email }" onfocus="focusEmail()" onblur="checkEmail()"/>
+		</div>
+		<div class="but_div">
+			<button class="but cancel_but" onclick="openEditCompanyDialog(0)">取消</button>
+			<button class="but submit_but" onclick="checkEditCompany()">提交</button>
+		</div>
+	</div>
+</div>
+
 <div class="layui-layout layui-layout-admin">
 	<%@include file="side.jsp"%>
 	<!-- 
@@ -289,7 +469,7 @@ function initWindowMarginLeft(){
 			<a>绑定微信</a>
 		</div>
 	</div>
-	<div id="gsxx_div" style="height:230px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">
+	<div id="gsxx_div" style="height:260px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">
 		<div style="font-size: 20px;color: #373737;font-weight:700;">公司信息</div>
 		<div style="margin-top:20px;">
 			<span style="font-size: 14px;color: #373737;font-weight: 700;">公司名称：</span>
@@ -306,6 +486,9 @@ function initWindowMarginLeft(){
 		<div style="margin-top:20px;">
 			<span style="font-size: 14px;color: #373737;font-weight: 700;">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</span>
 			<span>${requestScope.accountMsg.email }</span>
+		</div>
+		<div style="margin-top:20px;">
+			<span style="font-size: 14px;color: #357bb3;cursor: pointer;" onclick="openEditCompanyDialog(1)">修改公司信息</span>
 		</div>
 	</div>
 	<%@include file="foot.jsp"%>

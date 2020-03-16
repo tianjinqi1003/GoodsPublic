@@ -1291,9 +1291,10 @@ public class MainController {
 	 */
 	@RequestMapping(value="/editAccountInfo")
 	@ResponseBody
-	public String editAccountInfo(AccountMsg accountMsg,HttpServletRequest request,@RequestParam(value="file")  MultipartFile file) {
+	public String editAccountInfo(AccountMsg accountMsg,HttpServletRequest request) {
 		String json="";
 		try {
+			/*
 			if(file.getSize()>0) {
 				String jsonStr = FileUploadUtils.appUploadContentImg(request,file,"");
 				JSONObject fileJson = JSONObject.fromObject(jsonStr);
@@ -1302,6 +1303,7 @@ public class MainController {
 					accountMsg.setAvatar_img(dataJO.get("src").toString());
 				}
 			}
+			*/
 			AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
 			accountMsg.setId(msg.getId());
 			int a=publicService.editAccountInfo(accountMsg);
