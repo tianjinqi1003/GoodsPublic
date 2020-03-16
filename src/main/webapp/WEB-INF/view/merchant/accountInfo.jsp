@@ -8,6 +8,7 @@
 <%@include file="js.jsp"%>
 <script type="text/javascript">
 $(function(){
+	/*
 	$("#edit_div").dialog({
 		title:"商家信息",
 		width:setFitWidthInParent("body"),
@@ -62,6 +63,10 @@ $(function(){
 	$("#ok_but").css("position","absolute");
 	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","15px");
+	*/
+	
+	$("#zhxx_div").css("width",setFitWidthInParent("body")+"px");
+	$("#gsxx_div").css("width",setFitWidthInParent("body")+"px");
 });
 
 function checkEdit(){
@@ -143,7 +148,7 @@ function showAvatarImg(obj){
 	
 function setFitWidthInParent(o){
 	var width=$(o).css("width");
-	return width.substring(0,width.length-2)-200;
+	return width.substring(0,width.length-2)-310;
 }
 	
 function setFitHeightInParent(o){
@@ -163,6 +168,7 @@ function initWindowMarginLeft(){
 <body>
 <div class="layui-layout layui-layout-admin">
 	<%@include file="side.jsp"%>
+	<!-- 
 	<div id="edit_div">
 		  <form id="form1" name="form1" method="post" action="editAccountInfo" enctype="multipart/form-data">
 		  <input type="hidden" id="id" name="id" value="${param.accountId }"/>
@@ -190,7 +196,7 @@ function initWindowMarginLeft(){
 				</td>
 				<td>
 					
-					<input id="companyName" name="companyName" type="text" value="${requestScope.accountMsg.companyName }" onfocus="focusCompanyName()" onblur="checkCompanyName()"/>
+					<input id="companyName" name="companyName" type="text" value="${requestScope.accountMsg.companyName }"/>
 				</td>
 			  </tr>
 			  <tr>
@@ -199,7 +205,7 @@ function initWindowMarginLeft(){
 				</td>
 				<td>
 					
-					<input id="companyAddress" name="companyAddress" type="text" value="${requestScope.accountMsg.companyAddress }" onfocus="focusCompanyAddress()" onblur="checkCompanyAddress()"/>
+					<input id="companyAddress" name="companyAddress" type="text" value="${requestScope.accountMsg.companyAddress }"/>
 				</td>
 			  </tr>
 			  <tr>
@@ -208,7 +214,7 @@ function initWindowMarginLeft(){
 				</td>
 				<td>
 					
-					<input id="postcode" name="postcode" type="text" value="${requestScope.accountMsg.postcode }" onfocus="focusPostcode()" onblur="checkPostcode()"/>
+					<input id="postcode" name="postcode" type="text" value="${requestScope.accountMsg.postcode }"/>
 				</td>
 			  </tr>
 			  <tr>
@@ -216,7 +222,7 @@ function initWindowMarginLeft(){
 					手机号
 				</td>
 				<td>
-					<input id="phone" name="phone" type="text" value="${requestScope.accountMsg.phone }" onfocus="focusPhone()" onblur="checkPhone()"/>
+					<input id="phone" name="phone" type="text" value="${requestScope.accountMsg.phone }"/>
 					可填多个电话，用逗号隔开
 				</td>
 			  </tr>
@@ -225,7 +231,7 @@ function initWindowMarginLeft(){
 					商话
 				</td>
 				<td>
-					<input id="quotient" name="quotient" type="text" value="${requestScope.accountMsg.quotient }" onfocus="focusQuotient()" onblur="checkQuotient()"/>
+					<input id="quotient" name="quotient" type="text" value="${requestScope.accountMsg.quotient }"/>
 					可填多个电话，用逗号隔开
 				</td>
 			  </tr>
@@ -234,7 +240,7 @@ function initWindowMarginLeft(){
 					公司传真
 				</td>
 				<td>
-					<input id="fax" name="fax" type="text" value="${requestScope.accountMsg.fax }" onfocus="focusFax()" onblur="checkFax()"/>
+					<input id="fax" name="fax" type="text" value="${requestScope.accountMsg.fax }"/>
 				</td>
 			  </tr>
 			  <tr>
@@ -242,7 +248,7 @@ function initWindowMarginLeft(){
 					邮箱
 				</td>
 				<td>
-					<input id="email" name="email" type="text" value="${requestScope.accountMsg.email }" onfocus="focusEmail()" onblur="checkEmail()"/>
+					<input id="email" name="email" type="text" value="${requestScope.accountMsg.email }"/>
 				</td>
 			  </tr>
 			  <tr>
@@ -262,18 +268,45 @@ function initWindowMarginLeft(){
 				</td>
 			  </tr>
 		  </table>
-		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -45px;"></div>
-		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -66px;"></div>
-		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -46px;"></div>
-		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -46px;"></div>
-		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -46px;"></div>
-		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -46px;"></div>
-		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -46px;"></div>
-		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -46px;"></div>
-		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -46px;"></div>
-		  <div style="height: 1px;width: 100%;background-color: #CAD9EA;margin-top: -113px;"></div>
-		  <input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
 		  </form>
+	</div>
+	 -->
+	<div id="zhxx_div" style="height:230px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">
+		<div style="font-size: 20px;color: #373737;font-weight:700;">账户信息</div>
+		<div style="margin-top:20px;">
+			<span style="font-size: 14px;color: #373737;font-weight: 700;">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：</span>
+			<span>${requestScope.accountMsg.nickName }</span>
+		</div>
+		<div style="margin-top:20px;">
+			<span style="font-size: 14px;color: #373737;font-weight: 700;">用户账号：</span>
+			<span>${requestScope.accountMsg.userName }</span>
+		</div>
+		<div style="margin-top:20px;">
+			<span style="font-size: 14px;color: #373737;font-weight: 700;">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</span>
+			<span>${requestScope.accountMsg.passWord }</span>
+		</div>
+		<div style="margin-top:20px;">
+			<a>绑定微信</a>
+		</div>
+	</div>
+	<div id="gsxx_div" style="height:230px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">
+		<div style="font-size: 20px;color: #373737;font-weight:700;">公司信息</div>
+		<div style="margin-top:20px;">
+			<span style="font-size: 14px;color: #373737;font-weight: 700;">公司名称：</span>
+			<span>${requestScope.accountMsg.companyName }</span>
+		</div>
+		<div style="margin-top:20px;">
+			<span style="font-size: 14px;color: #373737;font-weight: 700;">公司地址：</span>
+			<span>${requestScope.accountMsg.companyAddress }</span>
+		</div>
+		<div style="margin-top:20px;">
+			<span style="font-size: 14px;color: #373737;font-weight: 700;">联系电话：</span>
+			<span>${requestScope.accountMsg.phone }</span>
+		</div>
+		<div style="margin-top:20px;">
+			<span style="font-size: 14px;color: #373737;font-weight: 700;">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</span>
+			<span>${requestScope.accountMsg.email }</span>
+		</div>
 	</div>
 	<%@include file="foot.jsp"%>
 </div>

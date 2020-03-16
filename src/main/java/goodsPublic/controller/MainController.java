@@ -2318,6 +2318,10 @@ public class MainController {
 			
 			url="/merchant/jzsg/addModule";
 			break;
+		case "hdqd":
+			
+			url="/merchant/hdqd/addModule";
+			break;
 		}
 		return url;
 	}
