@@ -184,7 +184,22 @@ function checkIfPaidInSide(){
 					</li>
 					<li class="layui-nav-item">
 						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=spzs&moduleType=redWine&accountId=${sessionScope.user.id }">
-							酒水
+							红酒
+						</a>
+					</li>
+					<li class="layui-nav-item">
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=spzs&moduleType=whiteWine&accountId=${sessionScope.user.id }">
+							白酒
+						</a>
+					</li>
+					<li class="layui-nav-item">
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=spzs&moduleType=homeTextiles&accountId=${sessionScope.user.id }">
+							家纺
+						</a>
+					</li>
+					<li class="layui-nav-item">
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=spzs&moduleType=artwork&accountId=${sessionScope.user.id }">
+							艺术品
 						</a>
 					</li>
 					<li class="layui-nav-item">
@@ -208,7 +223,7 @@ function checkIfPaidInSide(){
 						</a>
 					</li>
 					<li class="layui-nav-item">
-						<a class="second-level-a">
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=hdqd&accountId=${sessionScope.user.id }">
 							活动签到
 						</a>
 					</li>

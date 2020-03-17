@@ -2202,6 +2202,9 @@ public class MainController {
 		case "jzsg":
 			url="/merchant/jzsg/htmlGoodsList";
 			break;
+		case "hdqd":
+			url="/merchant/hdqd/htmlGoodsList";
+			break;
 		}
 		return url;
 	}

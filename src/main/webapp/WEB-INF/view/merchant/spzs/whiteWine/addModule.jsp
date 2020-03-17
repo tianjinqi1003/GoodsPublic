@@ -297,7 +297,7 @@ function changeSPXQTrIfShow(index,o){
 }
 
 function goBack(){
-	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=spzs";
+	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=spzs&moduleType="+'${param.moduleType}';
 }
 
 function checkForm(){
@@ -420,7 +420,7 @@ function checkIfPaid(){
 
 <div class="top_div">
 	<div class="return_div" onclick="goBack();">&lt返回</div>
-	<div class="title_div">红酒介绍-案例</div>
+	<div class="title_div">白酒介绍-案例</div>
 	<div class="myQrcode_div">我的二维码&nbsp;${sessionScope.user.userName }</div>
 </div>
 <div class="middle_div" id="middle_div">

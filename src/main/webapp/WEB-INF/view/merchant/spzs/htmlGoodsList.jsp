@@ -12,7 +12,16 @@ var tab1Title;
 var moduleType='${param.moduleType}';
 switch(moduleType){
 case "redWine":
-	tab1Title="酒水";
+	tab1Title="红酒";
+	break;
+case "whiteWine":
+	tab1Title="白酒";
+	break;
+case "homeTextiles":
+	tab1Title="家纺";
+	break;
+case "artwork":
+	tab1Title="艺术品";
 	break;
 case "productExplain":
 	tab1Title="说明书";

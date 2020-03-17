@@ -533,7 +533,7 @@ function checkIfPaid(){
 
 <div class="top_div">
 	<div class="return_div" onclick="goBack();">&lt返回</div>
-	<div class="title_div">商品展示-案例</div>
+	<div class="title_div">说明书-案例</div>
 	<div class="myQrcode_div">我的二维码&nbsp;${sessionScope.user.userName }</div>
 </div>
 <div class="middle_div" id="middle_div">
