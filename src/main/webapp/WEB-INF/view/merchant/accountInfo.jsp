@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>商家信息</title>
 <%@include file="js.jsp"%>
+<script type="text/javascript" src="<%=basePath %>resource/js/MD5.js"></script>
 <script type="text/javascript">
 $(function(){
 	$("#zhxx_div").css("width",setFitWidthInParent("body")+"px");
@@ -37,6 +38,38 @@ function checkEditNickName(){
 				}
 			}
 		,"json");
+	}
+}
+
+function checkEditPwd(){
+	if(checkPassWord()){
+		if(checkNewPwd()){
+			if(checkNewPwd2()){
+				var passWord = $("#newPwd").val();
+				$.post("updatePwdByAccountId",
+					{passWord:MD5(passWord).toUpperCase()},
+					function(result){
+						var json=JSON.parse(result);
+						if(json.status==1){
+							$.messager.defaults.ok = "是";
+						    $.messager.defaults.cancel = "否";
+						    $.messager.defaults.width = 350;//更改消息框宽度
+						    $.messager.confirm(
+						    	"提示",
+						    	"修改密码成功，重新登录生效！是否重新登录？"
+						        ,function(r){    
+						            if (r){    
+						                location.href="../exit";
+						            }
+						        }); 
+						}
+						else{
+							$.messager.alert("提示","修改密码失败","warning");
+						}
+					}
+				);
+			}
+		}
 	}
 }
 
@@ -91,6 +124,65 @@ function checkNickName(){
 	if(nickName==null||nickName==""||nickName=="昵称不能为空"){
 		$("#nickName").css("color","#E15748");
     	$("#nickName").val("昵称不能为空");
+    	return false;
+	}
+	else
+		return true;
+}
+
+//验证原密码
+function checkPassWord(){
+	var flag=false;
+	var userName='${sessionScope.user.userName}';
+	var passWord = $("#passWord").val();
+	if(passWord==null||passWord==""){
+    	alert("原密码不能为空");
+    	flag=false;
+	}
+	else{
+		$.ajaxSetup({async:false});
+		$.post("checkPassWord",
+			{passWord:MD5(passWord).toUpperCase(),userName:userName},
+			function(data){
+				if(data.status=="ok"){
+					flag=true;
+				}
+				else{
+					alert(data.message);
+					flag=false;
+				}
+			}
+		,"json");
+	}
+	return flag;
+}
+
+//验证新密码
+function checkNewPwd(){
+	var passWord = $("#passWord").val();
+	var newPwd = $("#newPwd").val();
+	if(newPwd==null||newPwd==""){
+    	alert("新密码不能为空");
+    	return false;
+	}
+	if(newPwd==passWord){
+		alert("新密码不能和原密码一致！");
+    	return false;
+	}
+	else
+		return true;
+}
+
+//验证确认密码
+function checkNewPwd2(){
+	var newPwd = $("#newPwd").val();
+	var newPwd2 = $("#newPwd2").val();
+	if(newPwd2==null||newPwd2==""){
+    	alert("确认密码不能为空");
+    	return false;
+	}
+	else if(newPwd!=newPwd2){
+		alert("两次密码不一致！");
     	return false;
 	}
 	else
@@ -237,6 +329,9 @@ function openEditCompanyDialog(flag){
 .editPwd_div{
 	width:400px;height:420px;margin:100px auto;background: #f8f8f8;border-radius: 6px;
 }
+.editPwd_div .close_span{
+	float: right;margin-top: 20px;margin-right: 20px;font-size: 25px;cursor: pointer;
+}
 .editPwd_div .title{
 	font-size: 22px;color: #4CAF50;text-align: center;padding-top: 50px;
 }
@@ -253,6 +348,12 @@ function openEditCompanyDialog(flag){
     font-size: 12px;
 	border: 1px solid #DDE0E2;
     border-radius: 4px;
+}
+.editPwd_div .confirm_div{
+	width:240px;height:40px;line-height:40px;margin: 30px auto;text-align:center;font-size:17px;color:#fff;background-color:#4caf50;border-radius:3px;cursor: pointer;
+}
+.editPwd_div .warn_div{
+	width: 100%;margin-top: 20px;border-radius: 0 0 4px 4px;font-size: 12px;text-align: center;color: #9b9b9b;
 }
 
 .editCompanyBg_div{
@@ -306,20 +407,20 @@ function openEditCompanyDialog(flag){
 <div class="editPwdBg_div" id="editPwdBg_div">
 	<div class="editPwd_div">
 		<div>
-			<span style="float: right;margin-top: 20px;margin-right: 20px;font-size: 25px;cursor: pointer;" onclick="openEditPwdDialog(0)">×</span>
+			<span class="close_span" onclick="openEditPwdDialog(0)">×</span>
 		</div>
 		<h4 class="title">修改密码</h4>
 		<div class="ymm_div">
-			<input type="password" id="passWord" placeholder="原密码" onfocus="focusPassWord()" onblur="checkPassWord()"/>
+			<input type="password" id="passWord" placeholder="原密码"/>
 		</div>
 		<div class="xmm_div">
-			<input type="password" id="newNewPwd" placeholder="新密码" onfocus="focusPassWord()" onblur="checkPassWord()"/>
+			<input type="password" id="newPwd" placeholder="新密码"/>
 		</div>
 		<div class="qrmm_div">
-			<input type="password" id="newNewPwd2" placeholder="确认密码" onfocus="focusPassWord()" onblur="checkPassWord()"/>
+			<input type="password" id="newPwd2" placeholder="确认密码"/>
 		</div>
-		<div style="width:240px;height:40px;line-height:40px;margin: 30px auto;text-align:center;font-size:17px;color:#fff;background-color:#4caf50;border-radius:3px;">确定</div>
-		<div style="width: 100%;margin-top: 20px;border-radius: 0 0 4px 4px;font-size: 12px;text-align: center;color: #9b9b9b;">注意：密码修改后需要重新登录系统</div>
+		<div class="confirm_div" onclick="checkEditPwd()">确定</div>
+		<div class="warn_div">注意：密码修改后需要重新登录系统</div>
 	</div>
 </div>
 

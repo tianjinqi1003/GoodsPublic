@@ -348,5 +348,9 @@ public interface PublicService {
 
 	public HtmlGoodsGRMP getHtmlGoodsGRMP(String uuid);
 
+	public boolean checkPassWord(String passWord, String userName);
+
+	public int updatePwdByAccountId(String passWord, String id);
+
 
 }

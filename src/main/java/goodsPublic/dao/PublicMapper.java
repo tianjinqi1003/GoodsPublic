@@ -330,4 +330,8 @@ public interface PublicMapper {
 	public List<String> getLabelKeyList(@Param("module") String module, @Param("accountNumber") String accountNumber);
 
 	public HtmlGoodsGRMP getHtmlGoodsGRMP(@Param("uuid") String uuid);
+
+	public String getAccountPwdByUserName(@Param("userName") String userName);
+
+	public int updatePwdByAccountId(@Param("passWord") String passWord, @Param("id") String id);
 }

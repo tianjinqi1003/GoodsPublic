@@ -737,4 +737,22 @@ public class PublicServiceImpl implements PublicService {
 		return publicDao.getHtmlGoodsGRMP(uuid);
 	}
 
+	@Override
+	public boolean checkPassWord(String passWord, String userName) {
+		// TODO Auto-generated method stub
+		
+		String pwd = publicDao.getAccountPwdByUserName(userName);
+		if(pwd.equals(passWord)) {
+			return true;
+		}
+		else
+			return false;
+	}
+
+	@Override
+	public int updatePwdByAccountId(String passWord, String id) {
+		// TODO Auto-generated method stub
+		return publicDao.updatePwdByAccountId(passWord,id);
+	}
+
 }

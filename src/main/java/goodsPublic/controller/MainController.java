@@ -1316,6 +1316,23 @@ public class MainController {
 		return json;
 	}
 	
+	@RequestMapping(value="/updatePwdByAccountId")
+	@ResponseBody
+	public String updatePwdByAccountId(String passWord) {
+		AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
+		String accountId = msg.getId();
+		int a = publicService.updatePwdByAccountId(passWord,accountId);
+		
+		PlanResult plan=new PlanResult();
+		if(a==0) {
+			plan.setStatus(0);
+		}
+		else {
+			plan.setStatus(1);
+		}
+		return JsonUtil.getJsonFromObject(plan);
+	}
+	
 	/**
 	 * 编辑商品信息
 	 * */
@@ -1868,6 +1885,23 @@ public class MainController {
 		finally {
 			return jsonMap;
 		}
+	}
+	
+	@RequestMapping(value="/checkPassWord")
+	@ResponseBody
+	public Map<String, Object> checkPassWord(String passWord, String userName) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		boolean bool=publicService.checkPassWord(passWord,userName);
+		
+		if(bool) {
+			jsonMap.put("status", "ok");
+		}
+		else {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "原密码错误！");
+		}
+		return jsonMap;
 	}
 	
 	/**

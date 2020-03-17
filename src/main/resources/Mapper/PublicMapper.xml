@@ -1840,6 +1840,9 @@
 		gmt_modified=now()
 		where category_id=#{category_id} and accountNumber=#{accountNumber}
 	</update>
+	<update id="updatePwdByAccountId">
+		update account_info set passWord=#{passWord} where id=#{id}
+	</update>
 	<update id="editAccountInfo" parameterType="goodsPublic.entity.AccountMsg">
 		update account_info set 
 		<trim suffixOverrides=",">
@@ -1918,6 +1921,9 @@
 	</select>
 	<select id="getGoodsListByMsg" resultType="int">
 		select count(*) from public_goods where accountNumber=#{id}
+	</select>
+	<select id="getAccountPwdByUserName" resultType="String">
+		select passWord from account_info where userName=#{userName}
 	</select>
 	<select id="getGoodsLabelSetByModuleAccountId" resultType="goodsPublic.entity.GoodsLabelSet">
 		select * from goods_label_set where module=#{module} and accountNumber=#{accountNumber} and isShow=1 order by sort
