@@ -1898,6 +1898,9 @@
 	<select id="queryHtmlGoodsJZSGForInt" resultType="java.lang.Integer">
 		select count(*) from html_goods_jzsg where accountNumber=#{param1}
 	</select>
+	<select id="queryHtmlGoodsHDQDForInt" resultType="java.lang.Integer">
+		select count(*) from html_goods_hdqd where accountNumber=#{param1}
+	</select>
 	<select id="queryGoodsList" resultType="goodsPublic.entity.Goods">
 		select * from public_goods where accountNumber=#{param1} and category_id=#{param2} limit ${param3},${param4}
 	</select>
@@ -1909,6 +1912,9 @@
 	</select>
 	<select id="queryHtmlGoodsJZSGList" resultType="goodsPublic.entity.HtmlGoodsJZSG">
 		select * from html_goods_jzsg where accountNumber=#{param1} limit ${param2},${param3}
+	</select>
+	<select id="queryHtmlGoodsHDQDList" resultType="goodsPublic.entity.HtmlGoodsHDQD">
+		select * from html_goods_hdqd where accountNumber=#{param1} limit ${param2},${param3}
 	</select>
 	<select id="queryGoodsListByCateId" resultType="goodsPublic.entity.Goods">
 		select goodsNumber,title,imgUrl,category_id from public_goods where category_id=#{param1} and accountNumber=#{param2}

@@ -11,6 +11,7 @@ import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.HtmlGoodsGRMP;
+import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.ModuleDMTZL;
@@ -104,6 +105,8 @@ public interface PublicMapper {
 	 */
 	public List<HtmlGoodsJZSG> queryHtmlGoodsJZSGList(String accountId, int i, int rows, String sort,
 			String order);
+
+	public List<HtmlGoodsHDQD> queryHtmlGoodsHDQDList(String accountId, int i, int rows, String sort, String order);
 	
 	/**
 	 * 根据类别id查询商品
@@ -162,6 +165,9 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public int queryHtmlGoodsJZSGForInt(String accountId);
+
+	public int queryHtmlGoodsHDQDForInt(String accountId);
+	
 	/**
 	 * 编辑商户信息
 	 * @param accountMsg

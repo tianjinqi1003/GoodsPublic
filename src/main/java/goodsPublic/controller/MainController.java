@@ -56,6 +56,7 @@ import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.HtmlGoodsGRMP;
+import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.ModuleDMTZL;
@@ -2066,6 +2067,19 @@ public class MainController {
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		int count = publicService.queryHtmlGoodsJZSGForInt(accountId);
 		List<HtmlGoodsJZSG> htmlGoodsList = publicService.queryHtmlGoodsJZSGList(accountId, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		jsonMap.put("rows", htmlGoodsList);
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/queryHtmlGoodsHDQDList")
+	@ResponseBody
+	public Map<String, Object> queryHtmlGoodsHDQDList(String accountId,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count = publicService.queryHtmlGoodsHDQDForInt(accountId);
+		List<HtmlGoodsHDQD> htmlGoodsList = publicService.queryHtmlGoodsHDQDList(accountId, page, rows, sort, order);
 		
 		jsonMap.put("total", count);
 		jsonMap.put("rows", htmlGoodsList);

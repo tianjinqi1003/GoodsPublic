@@ -33,6 +33,7 @@ import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.HtmlGoodsGRMP;
+import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.ModuleDMTZL;
@@ -285,6 +286,12 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
+	public int queryHtmlGoodsHDQDForInt(String accountId) {
+		// TODO Auto-generated method stub
+		return publicDao.queryHtmlGoodsHDQDForInt(accountId);
+	}
+
+	@Override
 	public List<Goods> queryGoodsList(String accountId, String categoryId, int page, int rows, String sort,
 			String order) {
 		// TODO Auto-generated method stub
@@ -310,6 +317,12 @@ public class PublicServiceImpl implements PublicService {
 			String order) {
 		// TODO Auto-generated method stub
 		return publicDao.queryHtmlGoodsJZSGList(accountId, (page-1)*rows, rows, sort, order);
+	}
+
+	@Override
+	public List<HtmlGoodsHDQD> queryHtmlGoodsHDQDList(String accountId, int page, int rows, String sort, String order) {
+		// TODO Auto-generated method stub
+		return publicDao.queryHtmlGoodsHDQDList(accountId, (page-1)*rows, rows, sort, order);
 	}
 
 	@Override

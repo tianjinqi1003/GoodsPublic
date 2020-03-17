@@ -13,6 +13,7 @@ import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.HtmlGoodsGRMP;
+import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
 
@@ -118,6 +119,8 @@ public interface PublicService {
 	 * @return
 	 */
 	public int queryHtmlGoodsJZSGForInt(String accountId);
+
+	public int queryHtmlGoodsHDQDForInt(String accountId);
 	
 	/**
 	 * 查询商品信息
@@ -176,6 +179,8 @@ public interface PublicService {
 	 */
 	public List<HtmlGoodsJZSG> queryHtmlGoodsJZSGList(String accountId, int page, int rows, String sort,
 			String order);
+
+	public List<HtmlGoodsHDQD> queryHtmlGoodsHDQDList(String accountId, int page, int rows, String sort, String order);
 
 	/**
 	 * 编辑商户信息
