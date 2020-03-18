@@ -465,74 +465,82 @@ function checkIfPaid(){
 	,"json");
 	return bool;
 }
+
+function openUploadExcelDialog(flag){
+	$("#uploadExcelBg_div").css("display",flag==1?"block":"none");
+}
 </script>
 </head>
 <body>
-<div style="width: 100%;height:100%;background: rgba(0,0,0,0.65);position: fixed;z-index: 1;">
-	<div style="width:800px;height:503px;margin:145px auto;padding-top: 40px;background-color: #fff;border: 0;border-radius: 4px;">
-		<span class="close_span" style="float: right;margin-top: -25px;margin-right: 20px;color: rgba(0,0,0,.45);font-size: 25px;cursor: pointer;" onclick="openEditPwdDialog(0)">×</span>
-		<div style="width:550px;margin: auto;">
-			<div style="width: 24px;height: 24px;line-height: 24px;text-align: center;color: #fff;background: #4caf50;border: 1px solid #4caf50;border-radius: 50%;">1</div>
-			<span style="margin-left: 35px;margin-top: -22px;position: absolute;">下载Excel模板</span>
-			<div style="width: 70px;height: 1px;background: rgba(0,0,0,.15);margin-left: 138px;margin-top: -12px;"></div>
-			<div style="width: 24px;height: 24px;line-height: 24px;margin-left: 218px;margin-top: -12px;text-align: center;color: rgba(0,0,0,.45);background: #fff;border: 1px solid #bbb;border-radius: 50%;">2</div>
-			<span style="margin-left: 254px;margin-top: -24px;color: rgba(0,0,0,.45);position: absolute;">上传Excel</span>
-			<div style="width: 70px;height: 1px;background: rgba(0,0,0,.15);margin-left: 328px;margin-top: -12px;"></div>
-			<div style="width: 24px;height: 24px;line-height: 24px;margin-left: 408px;margin-top: -12px;text-align: center;color: rgba(0,0,0,.45);background: #fff;border: 1px solid #bbb;border-radius: 50%;">3</div>
-			<span style="margin-left: 447px;margin-top: -24px;color: rgba(0,0,0,.45);position: absolute;">确认数据并生成</span>
+<div class="uploadExcelBg_div" id="uploadExcelBg_div">
+	<div class="uploadExcel_div">
+		<span class="close_span" onclick="openUploadExcelDialog(0)">×</span>
+		<div class="step_div">
+			<div class="first_div">1</div>
+			<span class="xzmb_span">下载Excel模板</span>
+			<div class="line1_div"></div>
+			<div class="second_div">2</div>
+			<span class="sc_span">上传Excel</span>
+			<div class="line2_div"></div>
+			<div class="third_div">3</div>
+			<span class="qrsj_span">确认数据并生成</span>
 		</div>
-		<div style="width:740px;margin: 35px auto 12px;color: #9b9b9b;font-size: 12px;font-weight: 700;">Excel模板效果：（此处最多只预览6个字段）</div>
-		<div style="width:740px;height:300px;margin: auto;">
-			<div style="width:405px;height:275px;">
-				<img src="<%=basePath %>/resource/images/spzs/excel_bg.19fbdf2a.jpg" alt="" style="width: 419px;height: 249px;margin-left: -14px;">
-				<table style="width: 378px;height:56px;margin-top: -194px;margin-left: 14px;font-size: 12px;text-align: center;position: absolute;">
-					<tr style="height: 14px;line-height: 14px;background: rgba(245,166,35,.1);">
-						<td style="width: 63px;font-weight: 700;">品牌</td>
-						<td style="width: 63px;font-weight: 700;">系列</td>
-						<td style="width: 63px;font-weight: 700;">产地</td>
-						<td style="width: 63px;font-weight: 700;">葡萄品种</td>
-						<td style="width: 63px;font-weight: 700;">醒酒时间</td>
-						<td style="width: 63px;font-weight: 700;">采摘年份</td>
-					</tr>
-					<tr style="height: 14px;line-height: 14px;">
-						<td>品牌</td>
-						<td>系列</td>
-						<td>产地</td>
-						<td>葡萄品种</td>
-						<td>醒酒时间</td>
-						<td>采摘年份</td>
-					</tr>
-					<tr style="height: 14px;line-height: 14px;">
-						<td>品牌</td>
-						<td>系列</td>
-						<td>产地</td>
-						<td>葡萄品种</td>
-						<td>醒酒时间</td>
-						<td>采摘年份</td>
-					</tr>
-					<tr style="height: 14px;line-height: 14px;">
-						<td>品牌</td>
-						<td>系列</td>
-						<td>产地</td>
-						<td>葡萄品种</td>
-						<td>醒酒时间</td>
-						<td>采摘年份</td>
-					</tr>
-				</table>
-				<div style="margin-top: 8px;text-align: center;font-size: 12px;color: #357bb3;font-weight: 600;cursor: default;">查看二维码效果</div>
+		
+		<div id="xzmb_div">
+			<div class="mbxgTxt_div">Excel模板效果：（此处最多只预览6个字段）</div>
+			<div class="mbxgContent_div">
+				<div class="left_div">
+					<img class="excel_img" src="<%=basePath %>/resource/images/spzs/excel_bg.19fbdf2a.jpg" alt="">
+					<table class="excel_tab">
+						<tr class="tit_tr">
+							<td>品牌</td>
+							<td>系列</td>
+							<td>产地</td>
+							<td>葡萄品种</td>
+							<td>醒酒时间</td>
+							<td>采摘年份</td>
+						</tr>
+						<tr class="content_tr">
+							<td>品牌</td>
+							<td>系列</td>
+							<td>产地</td>
+							<td>葡萄品种</td>
+							<td>醒酒时间</td>
+							<td>采摘年份</td>
+						</tr>
+						<tr class="content_tr">
+							<td>品牌</td>
+							<td>系列</td>
+							<td>产地</td>
+							<td>葡萄品种</td>
+							<td>醒酒时间</td>
+							<td>采摘年份</td>
+						</tr>
+						<tr class="content_tr">
+							<td>品牌</td>
+							<td>系列</td>
+							<td>产地</td>
+							<td>葡萄品种</td>
+							<td>醒酒时间</td>
+							<td>采摘年份</td>
+						</tr>
+					</table>
+					<div class="ckxgBut_div">查看二维码效果</div>
+				</div>
+				
+				<div class="right_div">
+					<div class="qxz_div">请下载Excel模板，按左图格式填入信息</div>
+					<div class="dyh_div">第一行作为标题</div>
+					<div class="deh_div">第二行开始填入信息，每行信息都会生成一个二维码</div>
+					<div class="xzmbBut_div">下载Excel模板</div>
+					<div class="ckzysx_div">查看Excel填写注意事项</div>
+				</div>
+				
 			</div>
-			
-			<div style="width: 331px;height:237px;border: 1px dashed #9b9b9b;margin-top: -275px;float: right;">
-				<div style="margin-top: 20px;margin-bottom: 8px;font-size: 16px;font-weight: 500;line-height: 2em;text-align: center;">请下载Excel模板，按左图格式填入信息</div>
-				<div style="width: 197px;height:24px;line-height:24px;font-size: 12px;color: #9b9b9b;margin-left: 67px;">第一行作为标题</div>
-				<div style="width: 197px;height:24px;line-height:24px;font-size: 12px;color: #9b9b9b;margin-left: 67px;">第二行开始填入信息，每行信息都会生成一个二维码</div>
-				<div style="width: 142px;height:32px;line-height:32px;margin: 38px auto 0;text-align:center;color:#fff;background-color: #4caf50;border-color: #4caf50;border-radius: 16px;">下载Excel模板</div>
-				<div style="margin-top: 15px;text-align:center;font-size: 12px;color: #357bb3;">查看Excel填写注意事项</div>
-			</div>
-			
-			<div style="width:740px;height:32px;margin-top: 15px;">
-				<div style="width: 176px;height:32px;line-height:32px;float:right;text-align:center;color:#fff;background-color: #4caf50;border-color: #4caf50;border-radius: 4px;">我已填好Excel，下一步</div>
-			</div>
+		</div>
+		
+		<div class="wyth_div">
+			<div class="wythBut_div">我已填好Excel，下一步</div>
 		</div>
 	</div>
 </div>
