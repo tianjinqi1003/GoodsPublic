@@ -2223,6 +2223,16 @@ public class MainController {
 		return url;
 	}
 	
+	@RequestMapping(value="/goBatchAddModule")
+	public String goBatchAddModule(HttpServletRequest request) {
+
+		String trade = request.getParameter("trade");
+		String moduleType = request.getParameter("moduleType");
+		String url=null;
+		url="/merchant/spzs/redWine/batchAddModule";
+		return url;
+	}
+	
 	/**
 	 * 跳转至模板添加页面
 	 * @param type
