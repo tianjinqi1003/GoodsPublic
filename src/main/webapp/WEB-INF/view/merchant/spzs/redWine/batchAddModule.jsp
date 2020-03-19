@@ -20,6 +20,7 @@
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
 <script type="text/javascript">
+var stepIndex=1;
 KindEditor.ready(function(K) {
 	var editor1 = K.create('textarea[name="memo1"]', {
 		cssPath : '<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css',
@@ -466,6 +467,44 @@ function checkIfPaid(){
 	return bool;
 }
 
+function nextStep(flag){
+	if(flag==1)
+		stepIndex++;
+	else if(flag==-1)
+		stepIndex--;
+	
+	if(stepIndex==1){
+		$("#first_div").text("1");
+		$("#first_div").css("color","#fff");
+		$("#first_div").css("background","#4caf50");
+		$("#first_div").css("border","1px solid #4caf50");
+		$("#xzmb_span").css("color","#000");
+		
+		$("#second_div").css("color","rgba(0,0,0,.45)");
+		$("#second_div").css("background","#fff");
+		$("#second_div").css("border","1px solid #bbb");
+		$("#sc_span").css("color","rgba(0,0,0,.45)");
+		
+		$("#xzmb_div").css("display","block");
+		$("#scwj_div").css("display","none");
+	}
+	else if(stepIndex==2){
+		$("#first_div").text("√");
+		$("#first_div").css("color","#4caf50");
+		$("#first_div").css("background","#fff");
+		$("#first_div").css("border","1px solid #4caf50");
+		$("#xzmb_span").css("color","rgba(0,0,0,.45)");
+		
+		$("#second_div").css("color","#fff");
+		$("#second_div").css("background","#4caf50");
+		$("#second_div").css("border","1px solid #4caf50");
+		$("#sc_span").css("color","#000");
+		
+		$("#xzmb_div").css("display","none");
+		$("#scwj_div").css("display","block");
+	}
+}
+
 function openUploadExcelDialog(flag){
 	$("#uploadExcelBg_div").css("display",flag==1?"block":"none");
 }
@@ -476,11 +515,11 @@ function openUploadExcelDialog(flag){
 	<div class="uploadExcel_div">
 		<span class="close_span" onclick="openUploadExcelDialog(0)">×</span>
 		<div class="step_div">
-			<div class="first_div">1</div>
-			<span class="xzmb_span">下载Excel模板</span>
+			<div class="first_div" id="first_div">1</div>
+			<span class="xzmb_span" id="xzmb_span">下载Excel模板</span>
 			<div class="line1_div"></div>
-			<div class="second_div">2</div>
-			<span class="sc_span">上传Excel</span>
+			<div class="second_div" id="second_div">2</div>
+			<span class="sc_span" id="sc_span">上传Excel</span>
 			<div class="line2_div"></div>
 			<div class="third_div">3</div>
 			<span class="qrsj_span">确认数据并生成</span>
@@ -537,10 +576,19 @@ function openUploadExcelDialog(flag){
 				</div>
 				
 			</div>
+			<div class="wyth_div">
+				<div class="wythBut_div" onclick="nextStep(1)">我已填好Excel，下一步</div>
+			</div>
 		</div>
 		
-		<div class="wyth_div">
-			<div class="wythBut_div">我已填好Excel，下一步</div>
+		<div class="scwj_div" id="scwj_div">
+			<div class="main_div">
+				<div class="uploadBut_div">上传 Excel</div>
+				<div class="downloadBut_div">下载Excel模板</div>
+			</div>
+			<div class="but_div">
+				<div class="preBut_div" onclick="nextStep(-1)">上一步</div>
+			</div>
 		</div>
 	</div>
 </div>
