@@ -525,7 +525,7 @@ function openUploadExcelDialog(flag){
 			<span class="qrsj_span">确认数据并生成</span>
 		</div>
 		
-		<div id="xzmb_div">
+		<div class="xzmb_div" id="xzmb_div" style="display: none;">
 			<div class="mbxgTxt_div">Excel模板效果：（此处最多只预览6个字段）</div>
 			<div class="mbxgContent_div">
 				<div class="left_div">
@@ -588,6 +588,43 @@ function openUploadExcelDialog(flag){
 			</div>
 			<div class="but_div">
 				<div class="preBut_div" onclick="nextStep(-1)">上一步</div>
+			</div>
+		</div>
+		
+		<div class="qrsjbsc_div" id="qrsjbsc_div">
+			<div class="ylsjTxt_div">
+				预览数据：本次共上传<span class="num_span">4</span>条数据， 将生成<span class="num_span">4</span>个二维码
+				<span class="reUpload_span">重新上传</span>
+			</div>
+			<div class="tab_div">
+				<table class="excel_tab">
+					<thead>
+						<tr class="xh_tr">
+							<th>1</th>
+							<th>1</th>
+							<th>1</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="tit_tr">
+							<td>
+								<div style="width:55px;height:25px;line-height:25px;text-align:center;margin:2px auto 0; background: #4caf50;color: #fff;border-radius: 4px;">标题行</div>
+    						</td>
+							<td>2</td>
+							<td>2</td>
+						</tr>
+						<tr class="content_tr">
+							<td class="num_td">3</td>
+							<td>3</td>
+							<td>3</td>
+						</tr>
+						<tr class="content_tr">
+							<td class="num_td">3</td>
+							<td>3</td>
+							<td>3</td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
