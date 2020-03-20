@@ -288,6 +288,8 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public HtmlGoodsJZSG getHtmlGoodsJZSG(String userNumber, String accountId);
+
+	public ScoreQrcode getScoreQrcode(String uuid, String accountId);
 	
 	/**
 	 * 根据备注类型，获得多媒体资料模板对应的值

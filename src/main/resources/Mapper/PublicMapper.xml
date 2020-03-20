@@ -1997,6 +1997,9 @@
 	<select id="getHtmlGoodsJZSG" resultType="goodsPublic.entity.HtmlGoodsJZSG">
 		select * from html_goods_jzsg where userNumber=#{param1} and accountNumber=#{param2}
 	</select>
+	<select id="getScoreQrcode" resultType="goodsPublic.entity.ScoreQrcode">
+		select * from score_qrcode where uuid=#{param1} and accountNumber=#{param2}
+	</select>
 	<select id="getHtmlGoodsGRMP" resultType="goodsPublic.entity.HtmlGoodsGRMP">
 		select * from html_goods_grmp where uuid=#{uuid}
 	</select>

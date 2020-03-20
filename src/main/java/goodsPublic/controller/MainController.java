@@ -1633,6 +1633,12 @@ public class MainController {
 				request.setAttribute("htmlGoodsJZSG", htmlGoodsJZSG);
 				url = "/merchant/jzsg/showHtmlGoods";
 				break;
+			case "jfdhjp":
+				//http://localhost:8088/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jfdhjp&uuid=134654686&accountId=34
+				ScoreQrcode scoreQrcode = publicService.getScoreQrcode(request.getParameter("uuid"),accountId);
+				request.setAttribute("scoreQrcode", scoreQrcode);
+				url = "/merchant/jfdhjp/showHtmlGoods";
+				break;
 			}
 		}
 		else {

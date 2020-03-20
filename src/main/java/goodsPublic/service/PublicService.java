@@ -292,6 +292,8 @@ public interface PublicService {
 	 */
 	public HtmlGoodsJZSG getHtmlGoodsJZSG(String userNumber, String accountId);
 
+	public ScoreQrcode getScoreQrcode(String uuid, String accountId);
+
 	/**
 	 * 编辑商品展示模板内容
 	 * @param htmlGoodsSPZS

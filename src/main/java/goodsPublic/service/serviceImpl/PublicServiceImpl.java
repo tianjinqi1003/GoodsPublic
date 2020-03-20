@@ -655,6 +655,12 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
+	public ScoreQrcode getScoreQrcode(String uuid, String accountId) {
+		// TODO Auto-generated method stub
+		return publicDao.getScoreQrcode(uuid,accountId);
+	}
+
+	@Override
 	public int deleteHtmlGoodsSPZSByIds(String ids) {
 		// TODO Auto-generated method stub
 		int count=0;
