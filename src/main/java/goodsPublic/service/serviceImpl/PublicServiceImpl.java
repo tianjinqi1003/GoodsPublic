@@ -39,6 +39,7 @@ import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
+import goodsPublic.entity.ScoreQrcode;
 import goodsPublic.service.PublicService;
 /**
  * 这是用来处理商品的对应接口
@@ -268,6 +269,12 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
+	public int queryScoreQrcodeForInt(String accountId) {
+		// TODO Auto-generated method stub
+		return publicDao.queryScoreQrcodeForInt(accountId);
+	}
+
+	@Override
 	public int queryHtmlGoodsSPZSForInt(String accountId, String moduleType) {
 		// TODO Auto-generated method stub
 		return publicDao.queryHtmlGoodsSPZSForInt(accountId,moduleType);
@@ -296,6 +303,12 @@ public class PublicServiceImpl implements PublicService {
 			String order) {
 		// TODO Auto-generated method stub
 		return publicDao.queryGoodsList(accountId, categoryId, (page-1)*rows, rows, sort, order);
+	}
+
+	@Override
+	public List<ScoreQrcode> queryScoreQrcodeList(String accountId, int page, int rows, String sort, String order) {
+		// TODO Auto-generated method stub
+		return publicDao.queryScoreQrcodeList(accountId, (page-1)*rows, rows, sort, order);
 	}
 
 	@Override

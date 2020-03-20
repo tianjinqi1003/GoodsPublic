@@ -17,6 +17,7 @@ import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
+import goodsPublic.entity.ScoreQrcode;
 
 public interface PublicMapper {
 	//保存发布的产品信息
@@ -68,6 +69,8 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public List<Goods> queryGoodsList(String accountId, String categoryId, int start, int rows, String sort, String order);
+
+	public List<ScoreQrcode> queryScoreQrcodeList(String accountId, int i, int rows, String sort, String order);
 	
 	/**
 	 * 根据商户编号，查询商品展示模板内容
@@ -146,6 +149,9 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public int queryGoodsForInt(String accountId, String categoryId);
+
+	public int queryScoreQrcodeForInt(String accountId);
+	
 	/**
 	 * 查询模板商品数量
 	 * @param accountId

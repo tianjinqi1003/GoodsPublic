@@ -21,11 +21,11 @@ public class ScoreQrcode implements Serializable {
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	public String getQrocde() {
-		return qrocde;
+	public String getQrcode() {
+		return qrcode;
 	}
-	public void setQrocde(String qrocde) {
-		this.qrocde = qrocde;
+	public void setQrcode(String qrcode) {
+		this.qrcode = qrcode;
 	}
 	public String getShopLogo() {
 		return shopLogo;
@@ -45,11 +45,11 @@ public class ScoreQrcode implements Serializable {
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
-	public Integer getAccountId() {
-		return accountId;
+	public Integer getAccountNumber() {
+		return accountNumber;
 	}
-	public void setAccountId(Integer accountId) {
-		this.accountId = accountId;
+	public void setAccountNumber(Integer accountNumber) {
+		this.accountNumber = accountNumber;
 	}
 	public Boolean getEnable() {
 		return enable;
@@ -58,11 +58,11 @@ public class ScoreQrcode implements Serializable {
 		this.enable = enable;
 	}
 	private String createTime;
-	private String qrocde;
+	private String qrcode;
 	private String shopLogo;
 	private Integer score;
 	private String endTime;
-	private Integer accountId;
+	private Integer accountNumber;
 	private Boolean enable;
 
 }

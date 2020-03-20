@@ -14,7 +14,7 @@ public class ScoreQrcodeHistory implements Serializable {
 	private String shopLogo;
 	private Integer score;
 	private String endTime;
-	private Integer accountId;
+	private Integer accountNumber;
 	private Integer customerId;
 	public String getUuid() {
 		return uuid;
@@ -52,11 +52,11 @@ public class ScoreQrcodeHistory implements Serializable {
 	public void setEndTime(String endTime) {
 		this.endTime = endTime;
 	}
-	public Integer getAccountId() {
-		return accountId;
+	public Integer getAccountNumber() {
+		return accountNumber;
 	}
-	public void setAccountId(Integer accountId) {
-		this.accountId = accountId;
+	public void setAccountNumber(Integer accountNumber) {
+		this.accountNumber = accountNumber;
 	}
 	public Integer getCustomerId() {
 		return customerId;

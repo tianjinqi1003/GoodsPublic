@@ -16,6 +16,7 @@ import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
+import goodsPublic.entity.ScoreQrcode;
 
 public interface PublicService {
 
@@ -98,6 +99,8 @@ public interface PublicService {
 	 */
 	public int queryGoodsForInt(String accountId, String categoryId);
 
+	public int queryScoreQrcodeForInt(String accountId);
+
 	/**
 	 * 查询商品模板内容数量
 	 * @param accountId
@@ -142,6 +145,8 @@ public interface PublicService {
 	 * @return
 	 */
 	public List<Goods> queryGoodsList(int categoryID, String accountId);
+
+	public List<ScoreQrcode> queryScoreQrcodeList(String accountId, int page, int rows, String sort, String order);
 
 	/**
 	 * 根据商户编号，查询商品展示模板内容

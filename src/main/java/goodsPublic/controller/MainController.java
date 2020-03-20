@@ -62,6 +62,7 @@ import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
+import goodsPublic.entity.ScoreQrcode;
 import goodsPublic.service.CategoryService;
 import goodsPublic.service.PublicService;
 import net.sf.json.JSONObject;
@@ -2004,6 +2005,19 @@ public class MainController {
 		
 		jsonMap.put("total", count);
 		jsonMap.put("rows", goodsList);
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/queryScoreQrcodeList")
+	@ResponseBody
+	public Map<String, Object> queryScoreQrcodeList(String accountId,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count = publicService.queryScoreQrcodeForInt(accountId);
+		List<ScoreQrcode> scList = publicService.queryScoreQrcodeList(accountId, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		jsonMap.put("rows", scList);
 		return jsonMap;
 	}
 	
