@@ -213,6 +213,11 @@ function checkIfPaidInSide(){
 						</a>
 					</li>
 					<li class="layui-nav-item">
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=jfdhjp&accountId=${sessionScope.user.id }">
+							积分兑换奖品
+						</a>
+					</li>
+					<li class="layui-nav-item">
 						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=dmtzl&accountId=${sessionScope.user.id }">
 							多媒体资料
 						</a>

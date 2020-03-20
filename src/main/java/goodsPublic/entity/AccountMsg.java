@@ -20,7 +20,9 @@ public class AccountMsg {
 	private String recordNumber;
 	private String accountStatus;
 	private String role;
-	
+	private Integer dhjpScore;
+	private String jpmdhReg;
+
 	public AccountMsg(String userName,String passWord) {
 		this.userName=userName;
 		this.passWord=passWord;
@@ -148,6 +150,21 @@ public class AccountMsg {
 	}
 	public void setGmt_create(String gmt_create) {
 		this.gmt_create = gmt_create;
+	}
+	public Integer getDhjpScore() {
+		return dhjpScore;
+	}
+
+	public void setDhjpScore(Integer dhjpScore) {
+		this.dhjpScore = dhjpScore;
+	}
+
+	public String getJpmdhReg() {
+		return jpmdhReg;
+	}
+
+	public void setJpmdhReg(String jpmdhReg) {
+		this.jpmdhReg = jpmdhReg;
 	}
 
 	@Override
