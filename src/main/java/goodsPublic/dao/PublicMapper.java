@@ -44,6 +44,8 @@ public interface PublicMapper {
 	 */
 	public int addHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoods);
 
+	public int addScoreQrcode(ScoreQrcode scoreQrcode);
+
 	public int addHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);
 	public int editHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);
 	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS);

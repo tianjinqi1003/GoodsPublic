@@ -667,6 +667,41 @@ public class MainController {
 			return "../../merchant/main/goBrowseHtmlGoodsJZSG?userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountNumber="+htmlGoodsJZSG.getAccountNumber();
 	}
 	
+	@RequestMapping(value="/addScoreQrcode",produces="plain/text; charset=UTF-8")
+	public String addScoreQrcode(ScoreQrcode scoreQrcode,
+			@RequestParam(value="file",required=false) MultipartFile file,
+			HttpServletRequest request) {
+		
+		try {
+			String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+			scoreQrcode.setUuid(uuid);
+			
+			if(file.getSize()>0) {
+				String jsonStr = FileUploadUtils.appUploadContentImg(request,file,"");
+				JSONObject fileJson = JSONObject.fromObject(jsonStr);
+				if("成功".equals(fileJson.get("msg"))) {
+					JSONObject dataJO = (JSONObject)fileJson.get("data");
+					scoreQrcode.setShopLogo(dataJO.get("src").toString());
+				}
+			}
+
+			String url = "http://www.baidu.com";
+			String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
+			String avaPath="/GoodsPublic/upload/jfdhjp/"+fileName;
+			String path = "D:/resource/jfdhjp";
+			Qrcode.createQrCode(url, path, fileName);
+			
+			scoreQrcode.setQrcode(avaPath);
+			
+			int a=publicService.addScoreQrcode(scoreQrcode);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "../../merchant/main/goHtmlGoodsList?trade=jfdhjp&accountId="+scoreQrcode.getAccountNumber();
+	}
+	
 	/**
 	 * 完成编辑商品展示模板内容
 	 * @param htmlGoodsSPZS

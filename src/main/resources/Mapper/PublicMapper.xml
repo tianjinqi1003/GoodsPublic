@@ -967,6 +967,54 @@
 			</if>
 		</trim>
 	</insert>
+	<insert id="addScoreQrcode" parameterType="goodsPublic.entity.ScoreQrcode">
+		insert into score_qrcode
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="uuid!=null">
+				uuid,
+			</if>
+				createTime,
+			<if test="qrcode!=null">
+				qrcode,
+			</if>
+			<if test="shopLogo!=null">
+				shopLogo,
+			</if>
+			<if test="score!=null">
+				score,
+			</if>
+			<if test="endTime!=null">
+				endTime,
+			</if>
+			<if test="accountNumber!=null">
+				accountNumber,
+			</if>
+				enable
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="uuid!=null">
+				#{uuid},
+			</if>
+				now(),
+			<if test="qrcode!=null">
+				#{qrcode},
+			</if>
+			<if test="shopLogo!=null">
+				#{shopLogo},
+			</if>
+			<if test="score!=null">
+				#{score},
+			</if>
+			<if test="endTime!=null">
+				#{endTime},
+			</if>
+			<if test="accountNumber!=null">
+				#{accountNumber},
+			</if>
+				0
+		</trim>
+	</insert>
 	<insert id="addHtmlGoodsGRMP" parameterType="goodsPublic.entity.HtmlGoodsGRMP">
 		insert into html_goods_grmp
 		<trim prefix="(" suffix=")" suffixOverrides=",">

@@ -48,6 +48,8 @@ public interface PublicService {
 	 */
 	public int addHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoods);
 
+	public int addScoreQrcode(ScoreQrcode scoreQrcode);
+
 	public int addHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);
 
 	public int editHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);
