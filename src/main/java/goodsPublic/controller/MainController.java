@@ -2398,6 +2398,10 @@ public class MainController {
 			
 			url="/merchant/hdqd/addModule";
 			break;
+		case "jfdhjp":
+			
+			url="/merchant/jfdhjp/addModule";
+			break;
 		}
 		return url;
 	}
