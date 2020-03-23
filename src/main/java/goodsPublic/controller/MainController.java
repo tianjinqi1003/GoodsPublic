@@ -1,11 +1,6 @@
 package goodsPublic.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -41,6 +36,7 @@ import com.alipay.api.request.AlipayTradePagePayRequest;
 import com.goodsPublic.util.FileUploadUtils;
 import com.goodsPublic.util.FinalState;
 import com.goodsPublic.util.JsonUtil;
+import com.goodsPublic.util.MethodUtil;
 import com.goodsPublic.util.PlanResult;
 import com.goodsPublic.util.alipay.AlipayConfig;
 import com.goodsPublic.util.qrcode.Qrcode;
@@ -55,7 +51,6 @@ import goodsPublic.entity.CreatePayCodeRecord;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
 import goodsPublic.entity.HtmlGoodsDMTZL;
-import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
@@ -1670,6 +1665,12 @@ public class MainController {
 				break;
 			case "jfdhjp":
 				//http://localhost:8088/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jfdhjp&uuid=134654686&accountId=34
+
+				String code = request.getParameter("code");
+				JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxf600e162d89732da&secret=097ee3404400bdf4b75ac8cfb0cc1c26&code="+code+"&grant_type=authorization_code"));
+				String openId = obj.getString("openid");
+				System.out.println("openId======"+openId);
+				
 				ScoreQrcode scoreQrcode = publicService.getScoreQrcode(request.getParameter("uuid"),accountId);
 				request.setAttribute("scoreQrcode", scoreQrcode);
 				url = "/merchant/jfdhjp/showHtmlGoods";
