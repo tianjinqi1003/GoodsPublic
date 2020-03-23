@@ -4,8 +4,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>积分兑换奖品</title>
-<%@include file="../js.jsp"%>
+<title>积分二维码</title>
+<%@include file="../../js.jsp"%>
 <script type="text/javascript">
 var path='<%=basePath %>';
 $(function(){
@@ -115,7 +115,7 @@ function setFitWidthInParent(o){
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
-	<%@include file="../side.jsp"%>
+	<%@include file="../../side.jsp"%>
 	<div id="tab1_div" style="margin-top:20px;margin-left: 238px;">
 		<div id="toolbar" style="height:32px;line-height:32px;">
 			<a id="add_but" style="margin-left: 13px;">添加</a>
@@ -125,22 +125,7 @@ function setFitWidthInParent(o){
 		<table id="tab1">
 		</table>
 	</div>
-	<div id="gkjfqd_div" style="height:230px;margin-top:20px;margin-left: 238px;padding-top:15px;padding-left:15px;background-color:#FAFDFE;">
-		<div style="font-size: 20px;color: #373737;font-weight:700;">顾客积分清单</div>
-		<div>
-			<div class="item_div">
-				<div style="color: #999;width: 100%;height:30px;line-height:30px;">3月13日</div>
-				<div style="background-color: #fff;width: 100%;height:120px;">
-					<span style="color: #000;margin-top: 10px;margin-left: 10px;position: absolute;">李天赐</span>
-					<span style="color: #00f;margin-top: 10px;margin-right: 110px;float: right;cursor: pointer;">查看积分明细</span>
-					<span style="color: #999;margin-top: 40px;margin-left: 10px;position: absolute;">奖品码   123</span>
-					<span style="color: #999;margin-top: 40px;margin-left: 228px;position: absolute;">消费次数:12</span>
-					<span style="color: #999;margin-top: 70px;margin-left: 10px;position: absolute;">剩余积分:20</span>
-				</div>
-			</div>
-		</div>
-	</div>
-	<%@include file="../foot.jsp"%>
+	<%@include file="../../foot.jsp"%>
 </div>
 </body>
 </html>

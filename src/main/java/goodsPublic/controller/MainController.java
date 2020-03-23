@@ -2259,7 +2259,7 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping(value="/goHtmlGoodsList")
-	public String goHtmlGoodsList(String trade) {
+	public String goHtmlGoodsList(String trade,HttpServletRequest request) {
 		
 		String url = null;
 		switch (trade) {
@@ -2276,7 +2276,11 @@ public class MainController {
 			url="/merchant/hdqd/htmlGoodsList";
 			break;
 		case "jfdhjp":
-			url="/merchant/jfdhjp/htmlGoodsList";
+			String nav = request.getParameter("nav");
+			if("ewmsc".equals(nav))
+				url="/merchant/jfdhjp/ewmsc/htmlGoodsList";
+			else if("jfgl".equals(nav))
+				url="/merchant/jfdhjp/jfgl/scoreList";
 			break;
 		}
 		return url;
@@ -2436,7 +2440,7 @@ public class MainController {
 			break;
 		case "jfdhjp":
 			
-			url="/merchant/jfdhjp/addModule";
+			url="/merchant/jfdhjp/ewmsc/addModule";
 			break;
 		}
 		return url;

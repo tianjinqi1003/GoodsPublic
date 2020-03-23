@@ -62,10 +62,13 @@ function checkIfPaidInSide(){
 .layui-nav .layui-nav-item .second-level-a{
 	margin-left:19px;
 }
+.layui-nav .layui-nav-item .third-level-a{
+	margin-left:38px;
+}
 .layui-nav .layui-nav-item .add_a{
 	margin-top: -45px; margin-left: 113px;
 }
-.layui-nav .layui-nav-item .pointer-img{
+.layui-nav .first-level .pointer-img{
 	margin-top: 18px;
 	margin-left: 127px;
 	position: absolute;
@@ -74,6 +77,11 @@ function checkIfPaidInSide(){
     font-size: 15px;
 	font-weight: bold;
 	background-color: #E7F4FD;
+}
+.layui-nav .second-level .pointer-img{
+	margin-top: 18px;
+	margin-left: 160px;
+	position: absolute;
 }
 .layui-nav,.layui-side{
 	background-color: #FAFDFE;
@@ -212,11 +220,22 @@ function checkIfPaidInSide(){
 							展示样品
 						</a>
 					</li>
-					<li class="layui-nav-item">
-						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=jfdhjp&accountId=${sessionScope.user.id }">
+					<li class="layui-nav-item second-level">
+						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_5.jpg" />
+						<a class="second-level-a">
 							积分兑换奖品
 						</a>
 					</li>
+						<li class="layui-nav-item">
+							<a class="third-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=jfdhjp&nav=ewmsc&accountId=${sessionScope.user.id }">
+								二维码生成
+							</a>
+						</li>
+						<li class="layui-nav-item">
+							<a class="third-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=jfdhjp&nav=jfgl&accountId=${sessionScope.user.id }">
+								积分管理
+							</a>
+						</li>
 					<li class="layui-nav-item">
 						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=dmtzl&accountId=${sessionScope.user.id }">
 							多媒体资料
