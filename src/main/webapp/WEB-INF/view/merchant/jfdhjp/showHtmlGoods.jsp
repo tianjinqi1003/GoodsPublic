@@ -8,26 +8,48 @@
 <title>积分兑换奖品在线行动</title>
 <%@include file="../js.jsp"%>
 <script type="text/javascript">
+var openId='${param.openId}';
+var sqUuid='${param.sqUuid}';
 $(function(){
-	var rbdw=$("#redBag_div").css("width");
-	rbdw=rbdw.substring(0,rbdw.length-2);
-	var rbdh=parseInt(rbdw*534/359);
-	$("#redBag_div").css("height",rbdh+"px");
-	
-	var sdw=$("#score_div").css("width");
-	sdw=sdw.substring(0,sdw.length-2);
-	var sdh=parseInt(sdw*534/359);
-	$("#score_div").css("height",sdh+"px");
-	
-	var djmdw=$("#djm_div").css("width");
-	djmdw=djmdw.substring(0,djmdw.length-2);
-	var djmdh=parseInt(djmdw*534/359);
-	$("#djm_div").css("height",djmdh+"px");
+	var enable='${requestScope.scoreQrcode.enable }';
+	if(enable=="true"){
+		alert("您已扫过");
+	}
+	else{
+		var rbdw=$("#redBag_div").css("width");
+		rbdw=rbdw.substring(0,rbdw.length-2);
+		var rbdh=parseInt(rbdw*534/359);
+		$("#redBag_div").css("height",rbdh+"px");
+		
+		var sdw=$("#score_div").css("width");
+		sdw=sdw.substring(0,sdw.length-2);
+		var sdh=parseInt(sdw*534/359);
+		$("#score_div").css("height",sdh+"px");
+		
+		var djmdw=$("#djm_div").css("width");
+		djmdw=djmdw.substring(0,djmdw.length-2);
+		var djmdh=parseInt(djmdw*534/359);
+		$("#djm_div").css("height",djmdh+"px");
+	}
 });
 
 function openRedBag(){
-	$("#redBag_div").css("display","none");
-	$("#score_div").css("display","block");
+	//var redBagScore=parseInt('${requestScope.scoreQrcode.score }');
+	var redBagScore=10;
+	$.post("openJPDHJFRedBagByJC",
+		{openId:openId,sqUuid:sqUuid,redBagScore:redBagScore},
+		function(data){
+			if(data.status=="ok"){
+				$("#redBag_div").css("display","none");
+				$("#score_div").css("display","block");
+				var shopScore=parseInt($("#shopScore_span").text());
+				$("#shopScore_span").text(shopScore+redBagScore);
+			}
+			else{
+				alert(data.message);
+			}
+		}
+	,"json");
 }
 </script>
 </head>
@@ -43,15 +65,15 @@ function openRedBag(){
 	</div>
 	
 	<div id="score_div" style="background-image: url('/GoodsPublic/resource/images/jfdhjp/002.png');background-size: 100% auto;
-	background-repeat: no-repeat;width: 50%;margin: auto;display: none;">
-	${requestScope.scoreQrcode.score }
+	background-repeat: no-repeat;width: 50%;margin: auto;padding: 1px;display: none;">
+		<div style="font-size: 30px;text-align: center;margin-top: 103px;">${requestScope.scoreQrcode.score }</div>
 	</div>
 	
 	<div id="djm_div" style="background-image: url('/GoodsPublic/resource/images/jfdhjp/003.png');background-size: 100% auto;
 	background-repeat: no-repeat;width: 50%;margin: auto;display: none;">
 	</div>
 	
-	<div style="width:227px;color: #FDC303;font-size: 20px;font-weight: bold;margin: 5px auto 0;">你的店铺积分累积：${requestScope.jc.score }</div>
+	<div style="width:227px;color: #FDC303;font-size: 20px;font-weight: bold;margin: 5px auto 0;">你的店铺积分累积：<span id="shopScore_span">${requestScope.jc.score }</span></div>
 	<div style="color: #fff;font-size: 20px;padding: 15px 20px 15px 20px;word-wrap:break-word;">活动规则说明：aaaaaaa</div>
 </body>
 </html>

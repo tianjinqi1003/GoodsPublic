@@ -357,4 +357,8 @@ public interface PublicMapper {
 	public int getJCCountByOpenId(@Param("openId") String openId);
 
 	public JFDHJPCustomer getJCByOpenId(@Param("openId") String openId);
+
+	public int updateSQEnableByUuid(@Param("uuid") String uuid);
+
+	public int updateJCScoreByOpenId(@Param("score") Integer score, @Param("openId") String openId);
 }

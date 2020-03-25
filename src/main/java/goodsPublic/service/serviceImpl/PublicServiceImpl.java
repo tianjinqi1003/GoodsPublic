@@ -816,4 +816,15 @@ public class PublicServiceImpl implements PublicService {
 		return publicDao.getJCByOpenId(openId);
 	}
 
+	@Override
+	public boolean openJPDHJFRedBagByJC(String openId, String uuid, Integer score) {
+		// TODO Auto-generated method stub
+		int count1=publicDao.updateSQEnableByUuid(uuid);
+		int count2=publicDao.updateJCScoreByOpenId(score,openId);
+		if(count1>0&&count2>0)
+			return true;
+		else
+			return false;
+	}
+
 }

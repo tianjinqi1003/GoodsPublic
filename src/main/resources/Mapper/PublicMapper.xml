@@ -1331,6 +1331,12 @@
 	<select id="getJCByOpenId" resultType="goodsPublic.entity.JFDHJPCustomer">
 		select * from jfdhjp_customer where openId=#{openId}
 	</select>
+	<update id="updateSQEnableByUuid">
+		update score_qrcode set enable=1 where uuid=#{uuid}
+	</update>
+	<update id="updateJCScoreByOpenId">
+		update jfdhjp_customer set score=score+#{score} where openId=#{openId}
+	</update>
 	<update id="editHtmlGoodsGRMP" parameterType="goodsPublic.entity.HtmlGoodsSPZS">
 		update html_goods_grmp set 
 		<if test="name!=null">

@@ -1691,9 +1691,10 @@ public class MainController {
 				JFDHJPCustomer jc = publicService.getJCByOpenId(openId);
 				request.setAttribute("jc", jc);
 				
-				ScoreQrcode scoreQrcode = publicService.getScoreQrcode(request.getParameter("uuid"),accountId);
+				String uuid = request.getParameter("uuid");
+				ScoreQrcode scoreQrcode = publicService.getScoreQrcode(uuid,accountId);
 				request.setAttribute("scoreQrcode", scoreQrcode);
-				url = "/merchant/jfdhjp/showHtmlGoods.jsp?openId="+openId;
+				url = "/merchant/jfdhjp/showHtmlGoods.jsp?openId="+openId+"&sqUuid="+uuid+"&";
 				break;
 			}
 		}
@@ -1924,6 +1925,25 @@ public class MainController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	@RequestMapping(value="/openJPDHJFRedBagByJC")
+	@ResponseBody
+	public Map<String, Object> openJPDHJFRedBagByJC(String openId, String sqUuid,Integer redBagScore) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		boolean bool = publicService.openJPDHJFRedBagByJC(openId,sqUuid,redBagScore);
+		
+		if(bool) {
+			jsonMap.put("status", "ok");
+		}
+		else {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "打开红包失败！");
+		}
+		
+		return jsonMap;
 	}
 	
 	/**
