@@ -9,7 +9,7 @@ public class JFDHJPCustomer implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private Integer id;
-	private String weixinNo;
+	private String openId;
 	private String nickName;
 	private String createTime;
 	private Integer takeCount;//消费次数
@@ -20,11 +20,11 @@ public class JFDHJPCustomer implements Serializable {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	public String getWeixinNo() {
-		return weixinNo;
+	public String getOpenId() {
+		return openId;
 	}
-	public void setWeixinNo(String weixinNo) {
-		this.weixinNo = weixinNo;
+	public void setOpenId(String openId) {
+		this.openId = openId;
 	}
 	public String getNickName() {
 		return nickName;

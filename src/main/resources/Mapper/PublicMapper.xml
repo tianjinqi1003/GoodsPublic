@@ -1237,6 +1237,32 @@
 			</if>
 		</trim>
 	</insert>
+	<insert id="addJFDHJPCustomer" parameterType="goodsPublic.entity.JFDHJPCustomer">
+		insert into jfdhjp_customer
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="openId!=null">
+				openId,
+			</if>
+			<if test="nickName!=null">
+				nickName,
+			</if>
+				createTime,
+				takeCount,
+				score
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="openId!=null">
+				#{openId},
+			</if>
+			<if test="nickName!=null">
+				#{nickName},
+			</if>
+				now(),
+				0,
+				0
+		</trim>
+	</insert>
 	<insert id="addGoodsLabelSet" parameterType="goodsPublic.entity.GoodsLabelSet">
 		insert into goods_label_set
 		<trim prefix="(" suffix=")" suffixOverrides="," >
@@ -1301,6 +1327,9 @@
 	</select>
 	<select id="getLastAccountPayRecordByNumber" resultType="goodsPublic.entity.AccountPayRecord">
 		select * from account_pay_record where accountNumber=#{accountNumber} order by payTime desc limit 1
+	</select>
+	<select id="getJCByOpenId" resultType="goodsPublic.entity.JFDHJPCustomer">
+		select * from jfdhjp_customer where openId=#{openId}
 	</select>
 	<update id="editHtmlGoodsGRMP" parameterType="goodsPublic.entity.HtmlGoodsSPZS">
 		update html_goods_grmp set 
@@ -1951,6 +1980,9 @@
 	</select>
 	<select id="queryHtmlGoodsHDQDForInt" resultType="java.lang.Integer">
 		select count(*) from html_goods_hdqd where accountNumber=#{param1}
+	</select>
+	<select id="getJCCountByOpenId" resultType="java.lang.Integer">
+		select count(*) from jfdhjp_customer where openId=#{openId}
 	</select>
 	<select id="queryGoodsList" resultType="goodsPublic.entity.Goods">
 		select * from public_goods where accountNumber=#{param1} and category_id=#{param2} limit ${param3},${param4}

@@ -36,6 +36,7 @@ import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
+import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
@@ -714,6 +715,12 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
+	public int addJFDHJPCustomer(JFDHJPCustomer jc) {
+		// TODO Auto-generated method stub
+		return publicDao.addJFDHJPCustomer(jc);
+	}
+
+	@Override
 	public CreatePayCodeRecord getCreatePayCodeRecordByOutTradeNo(String outTradeNo) {
 		// TODO Auto-generated method stub
 		return publicDao.getCreatePayCodeRecordByOutTradeNo(outTradeNo);
@@ -791,6 +798,22 @@ public class PublicServiceImpl implements PublicService {
 	public int updatePwdByAccountId(String passWord, String id) {
 		// TODO Auto-generated method stub
 		return publicDao.updatePwdByAccountId(passWord,id);
+	}
+
+	@Override
+	public boolean checkJCOpenIdExist(String openId) {
+		// TODO Auto-generated method stub
+		int count=publicDao.getJCCountByOpenId(openId);
+		if(count==0)
+			return false;
+		else
+			return true;
+	}
+
+	@Override
+	public JFDHJPCustomer getJCByOpenId(String openId) {
+		// TODO Auto-generated method stub
+		return publicDao.getJCByOpenId(openId);
 	}
 
 }

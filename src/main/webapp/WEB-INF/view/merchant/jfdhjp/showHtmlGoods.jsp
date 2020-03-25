@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <title>积分兑换奖品在线行动</title>
 <%@include file="../js.jsp"%>
 <script type="text/javascript">
@@ -23,28 +24,34 @@ $(function(){
 	var djmdh=parseInt(djmdw*534/359);
 	$("#djm_div").css("height",djmdh+"px");
 });
+
+function openRedBag(){
+	$("#redBag_div").css("display","none");
+	$("#score_div").css("display","block");
+}
 </script>
 </head>
 <body style="background-color: #039045;margin: 0;">
-	<div style="width:100%;height:330px;padding-top: 20px;padding-left: 20px;">
-		<img alt="" src="${requestScope.scoreQrcode.shopLogo }" style="width: 300px;height: 300px;">
+	<div style="width:100%;height:170px;padding-top: 20px;padding-left: 20px;">
+		<img alt="" src="${requestScope.scoreQrcode.shopLogo }" style="width: 150px;height: 150px;">
 	</div>
 	<div id="redBag_div" style="background-image: url('/GoodsPublic/resource/images/jfdhjp/001.png');background-size: 100% auto;
-	background-repeat: no-repeat;width: 80%;margin: auto;display: none;">
-		<div style="width: 80%;height:200px;margin-top: 792px;position: absolute;">
-			<div class="openBut_div" onclick="alert(1)" style="width: 200px;height:200px;margin:auto;"></div>
+	background-repeat: no-repeat;width: 70%;margin: auto;">
+		<div style="width: 70%;height:78px;margin-top: 290px;position: absolute;">
+			<div class="openBut_div" onclick="openRedBag()" style="width: 75px;height:75px;margin:auto;"></div>
 		</div>
 	</div>
 	
 	<div id="score_div" style="background-image: url('/GoodsPublic/resource/images/jfdhjp/002.png');background-size: 100% auto;
 	background-repeat: no-repeat;width: 50%;margin: auto;display: none;">
+	${requestScope.scoreQrcode.score }
 	</div>
 	
 	<div id="djm_div" style="background-image: url('/GoodsPublic/resource/images/jfdhjp/003.png');background-size: 100% auto;
-	background-repeat: no-repeat;width: 50%;margin: auto;">
+	background-repeat: no-repeat;width: 50%;margin: auto;display: none;">
 	</div>
 	
-	<div style="width:603px;color: #FDC303;font-size: 38px;font-weight: bold;margin: 22px auto 0;">你的店铺积分累积：</div>
-	<div style="color: #fff;font-size: 38px;padding: 40px 20px 40px 20px;word-wrap:break-word;">活动规则说明：aaaaaaa</div>
+	<div style="width:227px;color: #FDC303;font-size: 20px;font-weight: bold;margin: 5px auto 0;">你的店铺积分累积：${requestScope.jc.score }</div>
+	<div style="color: #fff;font-size: 20px;padding: 15px 20px 15px 20px;word-wrap:break-word;">活动规则说明：aaaaaaa</div>
 </body>
 </html>

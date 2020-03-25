@@ -14,6 +14,7 @@ import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
+import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
@@ -337,6 +338,8 @@ public interface PublicMapper {
 
 	public int addCreatePayCodeRecord(CreatePayCodeRecord cpcr);
 
+	public int addJFDHJPCustomer(JFDHJPCustomer jc);
+
 	public CreatePayCodeRecord getCreatePayCodeRecordByOutTradeNo(@Param("outTradeNo") String outTradeNo);
 
 	public AccountPayRecord getLastAccountPayRecordByNumber(@Param("accountNumber") String accountNumber);
@@ -350,4 +353,8 @@ public interface PublicMapper {
 	public String getAccountPwdByUserName(@Param("userName") String userName);
 
 	public int updatePwdByAccountId(@Param("passWord") String passWord, @Param("id") String id);
+
+	public int getJCCountByOpenId(@Param("openId") String openId);
+
+	public JFDHJPCustomer getJCByOpenId(@Param("openId") String openId);
 }

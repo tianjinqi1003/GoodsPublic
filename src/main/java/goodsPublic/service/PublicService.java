@@ -16,6 +16,7 @@ import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
+import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.ScoreQrcode;
 
 public interface PublicService {
@@ -354,6 +355,8 @@ public interface PublicService {
 
 	public int addCreatePayCodeRecord(CreatePayCodeRecord cpcr);
 
+	public int addJFDHJPCustomer(JFDHJPCustomer jc);
+
 	public CreatePayCodeRecord getCreatePayCodeRecordByOutTradeNo(String outTradeNo);
 
 	public Map<String, Object> checkIfPaid(String accountNumber) throws ParseException;
@@ -365,6 +368,10 @@ public interface PublicService {
 	public boolean checkPassWord(String passWord, String userName);
 
 	public int updatePwdByAccountId(String passWord, String id);
+
+	public boolean checkJCOpenIdExist(String openId);
+
+	public JFDHJPCustomer getJCByOpenId(String openId);
 
 
 }

@@ -33,6 +33,7 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
+import com.goodsPublic.util.TenpayHttpClient;
 import com.goodsPublic.util.FileUploadUtils;
 import com.goodsPublic.util.FinalState;
 import com.goodsPublic.util.JsonUtil;
@@ -54,6 +55,7 @@ import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
+import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
@@ -72,6 +74,9 @@ public class MainController {
 	private CategoryService categoryService;
 	private SimpleDateFormat timeSDF=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private SimpleDateFormat orderIdSDF=new SimpleDateFormat("yyyyMMddHHmmss");
+	
+	private static final String APP_ID="wxf600e162d89732da";
+	private static final String APP_SECRET="097ee3404400bdf4b75ac8cfb0cc1c26";
 	
 	/**
 	 * 跳转至商品发布页面
@@ -1667,13 +1672,28 @@ public class MainController {
 				//http://localhost:8088/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jfdhjp&uuid=134654686&accountId=34
 
 				String code = request.getParameter("code");
-				JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxf600e162d89732da&secret=097ee3404400bdf4b75ac8cfb0cc1c26&code="+code+"&grant_type=authorization_code"));
-				String openId = obj.getString("openid");
+				//JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+APP_ID+"&secret="+APP_SECRET+"&code="+code+"&grant_type=authorization_code"));
+				//String openId = obj.getString("openid");
+				String openId = "oNFEuwzkbP4OTTjBucFgBTWE5Bqg";
 				System.out.println("openId======"+openId);
+				
+				boolean bool=publicService.checkJCOpenIdExist(openId);
+				if(!bool) {
+					Map<String, String> userMap = queryUserFromApi(openId,APP_ID,APP_SECRET);
+					
+					JFDHJPCustomer jc=new JFDHJPCustomer();
+					jc.setOpenId(openId);
+					jc.setNickName(userMap.get("nickname"));
+					//jc.setHeadImgUrl(userMap.get("headimgurl"));
+					
+					publicService.addJFDHJPCustomer(jc);
+				}
+				JFDHJPCustomer jc = publicService.getJCByOpenId(openId);
+				request.setAttribute("jc", jc);
 				
 				ScoreQrcode scoreQrcode = publicService.getScoreQrcode(request.getParameter("uuid"),accountId);
 				request.setAttribute("scoreQrcode", scoreQrcode);
-				url = "/merchant/jfdhjp/showHtmlGoods";
+				url = "/merchant/jfdhjp/showHtmlGoods.jsp?openId="+openId;
 				break;
 			}
 		}
@@ -2638,5 +2658,68 @@ public class MainController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 获取微信用户信息
+	 * @param appID 
+	 * @param appSecret 
+	 * @return 
+	 */
+	public static Map<String, String> queryUserFromApi(String openid, String appID, String appSecret){
+		
+		/*
+		ApplicationContext ac = new ClassPathXmlApplicationContext("spring-mvc.xml");
+		MPWeixinDaoImp mpWeixinDao = (MPWeixinDaoImp) ac.getBean("MPWeixinDao");
+		*/
+		
+		/**
+		 * 获取access_token值
+		 */
+		String access_token = "";
+		System.out.println("openID==========="+openid);
+		System.out.println("appID==========="+appID);
+		System.out.println("appSecret==========="+appSecret);
+		String tokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appID + "&secret=" + appSecret;
+		TenpayHttpClient httpClientToken = new TenpayHttpClient();																
+		httpClientToken.setMethod("GET");
+		httpClientToken.setReqContent(tokenUrl);
+		if (httpClientToken.call()) {
+		    System.out.println("获取token成功");
+			String resContent = httpClientToken.getResContent();
+			System.out.println("resContent：" + resContent);
+			//access_token = JsonUtil.getJsonValue(resContent, "access_token");
+			access_token = new org.json.JSONObject(resContent).getString("access_token");
+			System.out.println("token：" + access_token);
+		}
+		System.out.println("获取的token值为:" + access_token);
+		
+		
+		/**
+		 * 获取用户信息
+		 */
+		String nickname = "";
+		String headimgurl = "";
+		String userInfoUrl = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=" + access_token + "&openid=" + openid + "&lang=zh_CN";
+		TenpayHttpClient httpClientUser = new TenpayHttpClient();																
+		httpClientUser.setMethod("GET");
+		httpClientUser.setReqContent(userInfoUrl);
+        if (httpClientUser.call()) {
+            System.out.println("获取用户信息成功");
+            String resContent = httpClientUser.getResContent();
+            System.out.println("resContent：" + resContent);
+            /*
+            nickname = JsonUtil.getJsonValue(resContent, "nickname");
+            headimgurl = JsonUtil.getJsonValue(resContent, "headimgurl");
+            */
+            org.json.JSONObject rsJO = new org.json.JSONObject(resContent);
+            nickname = rsJO.getString("nickname");
+            headimgurl = rsJO.getString("headimgurl");
+        }
+        Map<String, String> jsonMap = new HashMap<String, String>();
+        jsonMap.put("openid", openid);
+        jsonMap.put("nickname", nickname);
+        jsonMap.put("headimgurl", headimgurl);
+        return jsonMap;
 	}
 }
