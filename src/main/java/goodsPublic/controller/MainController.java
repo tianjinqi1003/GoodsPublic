@@ -680,7 +680,7 @@ public class MainController {
 				}
 			}
 
-			String url = "http://www.baidu.com";
+			String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf600e162d89732da&redirect_uri=http://www.qrcodesy.com/getCode.asp?accountId="+scoreQrcode.getAccountNumber()+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
 			String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
 			String avaPath="/GoodsPublic/upload/jfdhjp/"+fileName;
 			String path = "D:/resource/jfdhjp";
@@ -694,7 +694,7 @@ public class MainController {
 			e.printStackTrace();
 		}
 		
-		return "../../merchant/main/goHtmlGoodsList?trade=jfdhjp&accountId="+scoreQrcode.getAccountNumber();
+		return "../../merchant/main/goHtmlGoodsList?trade=jfdhjp&nav=ewmsc&accountId="+scoreQrcode.getAccountNumber();
 	}
 	
 	/**

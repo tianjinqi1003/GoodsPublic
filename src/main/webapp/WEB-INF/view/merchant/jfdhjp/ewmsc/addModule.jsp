@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>添加积分二维码</title>
-<%@include file="../js.jsp"%>
+<%@include file="../../js.jsp"%>
 <script type="text/javascript">
 $(function(){
 	$("#add_div").dialog({
@@ -192,7 +192,7 @@ function initWindowMarginLeft(){
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
-		<%@include file="../side.jsp"%>
+		<%@include file="../../side.jsp"%>
 		<div id="add_div">
 			<form id="form1" name="form1" method="post" action="addScoreQrcode" onsubmit="return checkForm();" enctype="multipart/form-data">
 			<input type="hidden" id="accountNumber" name="accountNumber" value="${sessionScope.user.id }"/>
@@ -228,7 +228,7 @@ function initWindowMarginLeft(){
 			</table>
 			</form>
 		</div>
-		<%@include file="../foot.jsp"%>
+		<%@include file="../../foot.jsp"%>
 	</div>
 <script>
 	$(document).on("click", ".uploadImg", function () {
