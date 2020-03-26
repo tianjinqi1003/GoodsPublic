@@ -31,6 +31,8 @@ import sun.misc.BASE64Decoder;
  */
 public class StringUtils extends org.apache.commons.lang.StringUtils{
 	
+	public static final String REALM_NAME="http://www.qrcodesy.com:8080/";
+	
 	/**
 	 * 一次性判断多个或单个对象为空。
 	 * @param objects

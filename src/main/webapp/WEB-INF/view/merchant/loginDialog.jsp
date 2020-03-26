@@ -43,7 +43,7 @@ function login(){
 	  var userName=$("#userName").val();
 	  var password=MD5($("#password").val()).toUpperCase();
 	  $.ajax({
-		 //url:"http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/loginQL",
+		 //url:"http://www.qrcodesy.com:8080/GoodsPublic/merchant/loginQL",
 		 url:"http://localhost:8088/GoodsPublic/merchant/loginQL",
 		 dataType:'jsonp',
 		 data:"userName="+userName+"&password="+password+"&action=addModule",
@@ -94,7 +94,7 @@ function closeLoginBgDiv(){
 		<div style="width: 1px;height: 246px;top: 72px;left: 320px;background-color: rgba(120,130,140,.13);position: absolute;"></div>
 		<div style="width:220px;height:280px;margin-top:-280px;margin-left:365px;border: 1px solid rgba(120,130,140,0.25);padding: 16px 0 24px;box-sizing: border-box;border-radius: 4px;background: #fff;">
 			<h2 style="color: #4caf50;font-size:20px;height:30px;line-height:30px;">微信账号登录</h2>
-			<img style="width:170px;height:170px;" src="http://www.bainuojiaoche.com:8080/GoodsPublic/resource/images/qrcode.png"/>
+			<img style="width:170px;height:170px;" src="http://www.qrcodesy.com:8080/GoodsPublic/resource/images/qrcode.png"/>
 			<p style="color: #666;font-size: 14px;margin-top: 10px;">微信扫码快速注册登录</p>
 		</div>
 		<div style="width:100%;height:50px;line-height:50px;color: #9b9b9b;text-align:center;background-color:#fff;bottom: 0;position: absolute;">

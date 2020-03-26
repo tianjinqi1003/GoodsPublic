@@ -10,6 +10,6 @@ public class WxPayConfig {
 	
 	public static String wxApiKey="GTusD1WphSK1zMjDFjRM4a3notET41hJ";
 	
-	//public static String notifyUrl ="http://www.bainuojiaoche.com:8080/GoodsPublic/wxPayNotifySevlet";
-	public static String notifyUrl ="http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/kaiTongByWX";
+	//public static String notifyUrl =com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/wxPayNotifySevlet";
+	public static String notifyUrl =com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/main/kaiTongByWX";
 }

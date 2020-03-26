@@ -26,7 +26,7 @@ $(function(){
 				<img alt="" src="${basePath}/GoodsPublic/wxPayCode/${requestScope.codeUrl}.png" style="width: 190px;height: 190px;">
 				<!-- 
 				<img alt="" src="http://192.168.230.1:8088/GoodsPublic/merchant/wxPayServlet?action=unifiedorder" style="width: 190px;height: 190px;">
-				<img alt="" src="http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/wxPayServlet?action=unifiedorder" style="width: 190px;height: 190px;">
+				<img alt="" src="http://www.qrcodesy.com:8080/GoodsPublic/merchant/wxPayServlet?action=unifiedorder" style="width: 190px;height: 190px;">
 				 -->
 			</div>
 			<div style="width: 190px;height: 60px;margin: auto;background: url(/GoodsPublic/resource/images/checkout_greentip.png) no-repeat;background-size: cover;"></div>

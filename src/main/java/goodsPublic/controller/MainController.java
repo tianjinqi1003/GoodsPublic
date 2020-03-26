@@ -424,7 +424,7 @@ public class MainController {
 			int port = request.getLocalPort();
 			String contextPath = request.getContextPath();
 			//String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoods?trade=spzs&moduleType="+moduleType+"&goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
-			String url = "http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=spzs&moduleType="+moduleType+"&goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
+			String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/main/goShowHtmlGoods?trade=spzs&moduleType="+moduleType+"&goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
 			
 			String fileName = goodsNumber + ".jpg";
 			String avaPath="/GoodsPublic/upload/"+fileName;
@@ -538,7 +538,7 @@ public class MainController {
 			int port = request.getLocalPort();
 			String contextPath = request.getContextPath();
 			//String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoods?trade=dmtzl&goodsNumber="+htmlGoodsDMTZL.getGoodsNumber()+"&accountId="+htmlGoodsDMTZL.getAccountNumber();
-			String url = "http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=dmtzl&goodsNumber="+htmlGoodsDMTZL.getGoodsNumber()+"&accountId="+htmlGoodsDMTZL.getAccountNumber();
+			String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/main/goShowHtmlGoods?trade=dmtzl&goodsNumber="+htmlGoodsDMTZL.getGoodsNumber()+"&accountId="+htmlGoodsDMTZL.getAccountNumber();
 			
 			String fileName = goodsNumber + ".jpg";
 			String avaPath="/GoodsPublic/upload/"+fileName;
@@ -647,7 +647,7 @@ public class MainController {
 			int port = request.getLocalPort();
 			String contextPath = request.getContextPath();
 			//String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoods?trade=jzsg&userNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
-			String url = "http://www.bainuojiaoche.com:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jzsg&userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountId="+htmlGoodsJZSG.getAccountNumber();
+			String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/main/goShowHtmlGoods?trade=jzsg&userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountId="+htmlGoodsJZSG.getAccountNumber();
 			
 			String fileName = userNumber + ".jpg";
 			String avaPath="/GoodsPublic/upload/"+fileName;
@@ -685,7 +685,8 @@ public class MainController {
 				}
 			}
 
-			String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf600e162d89732da&redirect_uri=http://www.qrcodesy.com/getCode.asp?accountId="+scoreQrcode.getAccountNumber()+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+			String jsonParams="{\"accountId\":\""+scoreQrcode.getAccountNumber()+"\",\"uuid\":\""+uuid+"\"}";
+			String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf600e162d89732da&redirect_uri=http://www.qrcodesy.com/getCode.asp?jsonParams="+jsonParams+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
 			String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
 			String avaPath="/GoodsPublic/upload/jfdhjp/"+fileName;
 			String path = "D:/resource/jfdhjp";
@@ -1672,9 +1673,9 @@ public class MainController {
 				//http://localhost:8088/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jfdhjp&uuid=134654686&accountId=34
 
 				String code = request.getParameter("code");
-				JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+APP_ID+"&secret="+APP_SECRET+"&code="+code+"&grant_type=authorization_code"));
-				String openId = obj.getString("openid");
-				//String openId = "oNFEuwzkbP4OTTjBucFgBTWE5Bqg";
+				//JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+APP_ID+"&secret="+APP_SECRET+"&code="+code+"&grant_type=authorization_code"));
+				//String openId = obj.getString("openid");
+				String openId = "oNFEuwzkbP4OTTjBucFgBTWE5Bqg";
 				System.out.println("openId======"+openId);
 				
 				boolean bool=publicService.checkJCOpenIdExist(openId);
