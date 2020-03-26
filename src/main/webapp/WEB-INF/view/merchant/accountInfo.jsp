@@ -82,9 +82,11 @@ function checkEditCompany(){
 					var companyAddress=$("#companyAddress").val();
 					var phone=$("#phone").val();
 					var email=$("#email").val();
+					var dhjpScore=$("#dhjpScore").val();
+					var jpmdhReg=$("#jpmdhReg").val();
 					
 					$.post("editAccountInfo",
-						{companyName:companyName,companyAddress:companyAddress,phone:phone,email:email},
+						{companyName:companyName,companyAddress:companyAddress,phone:phone,email:email,dhjpScore:dhjpScore,jpmdhReg:jpmdhReg},
 						function(data){
 							if(data.status==1){
 								$.messager.defaults.ok = "是";
@@ -364,16 +366,22 @@ function openEditCompanyDialog(flag){
 	z-index: 1001;
 }
 .editCompany_div{
-	width:500px;height:340px;margin:100px auto;background: #f8f8f8;border-radius: 6px;
+	width:500px;height:510px;margin:100px auto;background: #f8f8f8;border-radius: 6px;
 }
 .editCompany_div .title{
 	font-size: 22px;color: #4CAF50;text-align: center;padding-top: 20px;
 }
-.editCompany_div .gsmc_div,.editCompany_div .gsdz_div,.editCompany_div .lxdh_div,.editCompany_div .yx_div{
-	width:300px;margin: auto;padding-top: 20px;
+.editCompany_div .gsmc_div,.editCompany_div .gsdz_div,.editCompany_div .lxdh_div,.editCompany_div .yx_div,.editCompany_div .dhjpjf_div,.editCompany_div .dhjpgz_div{
+	width:310px;margin: auto;padding-top: 20px;
+}
+.editCompany_div .dhjpgz_span{
+	margin-top: 36px;position: absolute;
 }
 .editCompany_div input{
 	width: 200px;height:30px;margin-left: 20px;border: 1px solid #DDE0E2;
+}
+.editCompany_div textarea{
+	width: 200px;height:100px;margin-left: 108px;border: 1px solid #DDE0E2;
 }
 .editCompany_div .but_div{
 	width:168px;margin: auto;padding-top: 20px;
@@ -428,20 +436,28 @@ function openEditCompanyDialog(flag){
 	<div class="editCompany_div">
 		<h4 class="title">公司信息</h4>
 		<div class="gsmc_div">
-			<span>公司名称</span>
+			<span>公&nbsp;&nbsp;司&nbsp;&nbsp;&nbsp;名&nbsp;&nbsp;称</span>
 			<input type="text" id="companyName" value="${requestScope.accountMsg.companyName }" onfocus="focusCompanyName()" onblur="checkCompanyName()"/>
 		</div>
 		<div class="gsdz_div">
-			<span>公司地址</span>
+			<span>公&nbsp;&nbsp;司&nbsp;&nbsp;&nbsp;地&nbsp;&nbsp;址</span>
 			<input type="text" id="companyAddress" value="${requestScope.accountMsg.companyAddress }" onfocus="focusCompanyAddress()" onblur="checkCompanyAddress()"/>
 		</div>
 		<div class="lxdh_div">
-			<span>联系电话</span>
+			<span>联&nbsp;&nbsp;系&nbsp;&nbsp;&nbsp;电&nbsp;&nbsp;话</span>
 			<input type="text" id="phone" value="${requestScope.accountMsg.phone }" onfocus="focusPhone()" onblur="checkPhone()"/>
 		</div>
 		<div class="yx_div">
-			<span>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</span>
+			<span>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</span>
 			<input type="text" id="email" value="${requestScope.accountMsg.email }" onfocus="focusEmail()" onblur="checkEmail()"/>
+		</div>
+		<div class="dhjpjf_div">
+			<span>兑换奖品积分</span>
+			<input type="text" id="dhjpScore" value="${requestScope.accountMsg.dhjpScore }"/>
+		</div>
+		<div class="dhjpgz_div">
+			<span class="dhjpgz_span">兑换奖品规则</span>
+			<textarea id="jpmdhReg" rows="6" cols="10">${requestScope.accountMsg.jpmdhReg }</textarea>
 		</div>
 		<div class="but_div">
 			<button class="but cancel_but" onclick="openEditCompanyDialog(0)">取消</button>
@@ -472,23 +488,31 @@ function openEditCompanyDialog(flag){
 			<a>绑定微信</a>
 		</div>
 	</div>
-	<div id="gsxx_div" style="height:260px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">
+	<div id="gsxx_div" style="height:350px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">
 		<div style="font-size: 20px;color: #373737;font-weight:700;">公司信息</div>
 		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">公司名称：</span>
+			<span style="font-size: 14px;color: #373737;font-weight: 700;">公&nbsp;&nbsp;司&nbsp;&nbsp;&nbsp;名&nbsp;&nbsp;称：</span>
 			<span>${requestScope.accountMsg.companyName }</span>
 		</div>
 		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">公司地址：</span>
+			<span style="font-size: 14px;color: #373737;font-weight: 700;">公&nbsp;&nbsp;司&nbsp;&nbsp;&nbsp;地&nbsp;&nbsp;址：</span>
 			<span>${requestScope.accountMsg.companyAddress }</span>
 		</div>
 		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">联系电话：</span>
+			<span style="font-size: 14px;color: #373737;font-weight: 700;">联&nbsp;&nbsp;系&nbsp;&nbsp;&nbsp;电&nbsp;&nbsp;话：</span>
 			<span>${requestScope.accountMsg.phone }</span>
 		</div>
 		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</span>
+			<span style="font-size: 14px;color: #373737;font-weight: 700;">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</span>
 			<span>${requestScope.accountMsg.email }</span>
+		</div>
+		<div style="margin-top:20px;">
+			<span style="font-size: 14px;color: #373737;font-weight: 700;">兑换奖品积分：</span>
+			<span>${requestScope.accountMsg.dhjpScore }</span>
+		</div>
+		<div style="margin-top:20px;">
+			<span style="font-size: 14px;color: #373737;font-weight: 700;">兑换奖品规则：</span>
+			<span>${requestScope.accountMsg.jpmdhReg }</span>
 		</div>
 		<div style="margin-top:20px;">
 			<span style="font-size: 14px;color: #357bb3;cursor: pointer;" onclick="openEditCompanyDialog(1)">修改公司信息</span>

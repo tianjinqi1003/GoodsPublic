@@ -33,11 +33,12 @@ import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.alipay.api.request.AlipayTradePagePayRequest;
-import com.goodsPublic.util.TenpayHttpClient;
 import com.goodsPublic.util.FileUploadUtils;
 import com.goodsPublic.util.FinalState;
 import com.goodsPublic.util.JsonUtil;
+import com.goodsPublic.util.MethodUtil;
 import com.goodsPublic.util.PlanResult;
+import com.goodsPublic.util.TenpayHttpClient;
 import com.goodsPublic.util.alipay.AlipayConfig;
 import com.goodsPublic.util.qrcode.Qrcode;
 import com.jpay.ext.kit.HttpKit;
@@ -1671,9 +1672,9 @@ public class MainController {
 				//http://localhost:8088/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jfdhjp&uuid=134654686&accountId=34
 
 				String code = request.getParameter("code");
-				//JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+APP_ID+"&secret="+APP_SECRET+"&code="+code+"&grant_type=authorization_code"));
-				//String openId = obj.getString("openid");
-				String openId = "oNFEuwzkbP4OTTjBucFgBTWE5Bqg";
+				JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+APP_ID+"&secret="+APP_SECRET+"&code="+code+"&grant_type=authorization_code"));
+				String openId = obj.getString("openid");
+				//String openId = "oNFEuwzkbP4OTTjBucFgBTWE5Bqg";
 				System.out.println("openId======"+openId);
 				
 				boolean bool=publicService.checkJCOpenIdExist(openId);
@@ -1693,6 +1694,10 @@ public class MainController {
 				String uuid = request.getParameter("uuid");
 				ScoreQrcode scoreQrcode = publicService.getScoreQrcode(uuid,accountId);
 				request.setAttribute("scoreQrcode", scoreQrcode);
+				
+				AccountMsg accountMsg = publicService.getAccountById(accountId);
+				request.setAttribute("accountMsg", accountMsg);
+				
 				url = "/merchant/jfdhjp/showHtmlGoods.jsp?openId="+openId+"&sqUuid="+uuid+"&";
 				break;
 			}

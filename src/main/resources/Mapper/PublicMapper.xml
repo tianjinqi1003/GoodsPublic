@@ -1319,6 +1319,30 @@
 				0
 		</trim>
 	</insert>
+	<insert id="addPrizeCode" parameterType="goodsPublic.entity.PrizeCode">
+		insert into prize_code
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="codeNo!=null">
+				codeNo,
+			</if>
+				createTime,
+			<if test="openId!=null">
+				openId,
+			</if>
+				enable
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="codeNo!=null">
+				#{codeNo},
+			</if>
+				now(),
+			<if test="openId!=null">
+				#{openId},
+			</if>
+				0
+		</trim>
+	</insert>
 	<insert id="addGoodsLabelSet" parameterType="goodsPublic.entity.GoodsLabelSet">
 		insert into goods_label_set
 		<trim prefix="(" suffix=")" suffixOverrides="," >
@@ -2017,6 +2041,12 @@
 			</if>
 			<if test="nickName!=''&amp;nickName!=null">
 				nickName=#{nickName},
+			</if>
+			<if test="dhjpScore!=''&amp;dhjpScore!=null">
+				dhjpScore=#{dhjpScore},
+			</if>
+			<if test="jpmdhReg!=''&amp;jpmdhReg!=null">
+				jpmdhReg=#{jpmdhReg},
 			</if>
 		</trim>
 		where id=#{id}

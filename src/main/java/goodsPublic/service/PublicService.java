@@ -17,6 +17,7 @@ import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.JFDHJPCustomer;
+import goodsPublic.entity.PrizeCode;
 import goodsPublic.entity.ScoreQrcode;
 
 public interface PublicService {
@@ -356,6 +357,8 @@ public interface PublicService {
 	public int addCreatePayCodeRecord(CreatePayCodeRecord cpcr);
 
 	public int addJFDHJPCustomer(JFDHJPCustomer jc);
+
+	public int addPrizeCode(PrizeCode pz);
 
 	public CreatePayCodeRecord getCreatePayCodeRecordByOutTradeNo(String outTradeNo);
 

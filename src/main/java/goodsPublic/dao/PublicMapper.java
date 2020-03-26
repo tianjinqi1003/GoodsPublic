@@ -18,6 +18,7 @@ import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
+import goodsPublic.entity.PrizeCode;
 import goodsPublic.entity.ScoreQrcode;
 import goodsPublic.entity.ScoreQrcodeHistory;
 
@@ -342,6 +343,8 @@ public interface PublicMapper {
 	public int addCreatePayCodeRecord(CreatePayCodeRecord cpcr);
 
 	public int addJFDHJPCustomer(JFDHJPCustomer jc);
+
+	public int addPrizeCode(PrizeCode pz);
 
 	public CreatePayCodeRecord getCreatePayCodeRecordByOutTradeNo(@Param("outTradeNo") String outTradeNo);
 

@@ -40,6 +40,7 @@ import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
+import goodsPublic.entity.PrizeCode;
 import goodsPublic.entity.ScoreQrcode;
 import goodsPublic.entity.ScoreQrcodeHistory;
 import goodsPublic.service.PublicService;
@@ -719,6 +720,12 @@ public class PublicServiceImpl implements PublicService {
 	public int addJFDHJPCustomer(JFDHJPCustomer jc) {
 		// TODO Auto-generated method stub
 		return publicDao.addJFDHJPCustomer(jc);
+	}
+
+	@Override
+	public int addPrizeCode(PrizeCode pz) {
+		// TODO Auto-generated method stub
+		return publicDao.addPrizeCode(pz);
 	}
 
 	@Override
