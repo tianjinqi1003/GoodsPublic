@@ -373,7 +373,7 @@ public interface PublicService {
 
 	public JFDHJPCustomer getJCByOpenId(String openId);
 
-	public boolean openJPDHJFRedBagByJC(String openId, String sqUuid, Integer redBagScore);
+	public boolean openJPDHJFRedBagByJC(ScoreQrcode sq);
 
 
 }

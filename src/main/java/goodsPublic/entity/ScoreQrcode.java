@@ -51,6 +51,12 @@ public class ScoreQrcode implements Serializable {
 	public void setAccountNumber(Integer accountNumber) {
 		this.accountNumber = accountNumber;
 	}
+	public String getOpenId() {
+		return openId;
+	}
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
 	public Boolean getEnable() {
 		return enable;
 	}
@@ -63,6 +69,7 @@ public class ScoreQrcode implements Serializable {
 	private Integer score;
 	private String endTime;
 	private Integer accountNumber;
+	private String openId;
 	private Boolean enable;
 
 }

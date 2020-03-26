@@ -31,6 +31,7 @@
 				/merchant/main/goAddModule=anon
 				/merchant/main/checkIfLogined=anon
 				/merchant/chenQi/**=anon
+				/merchant/phone/**=anon
 				/merchant/login=anon
 				/merchant/login/captcha=anon
 				/merchant/checkIfLogin=anon

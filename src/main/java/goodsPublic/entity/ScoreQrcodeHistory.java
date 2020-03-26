@@ -10,12 +10,12 @@ public class ScoreQrcodeHistory implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String uuid;
 	private String createTime;
-	private String qrocde;
+	private String qrcode;
 	private String shopLogo;
 	private Integer score;
 	private String endTime;
 	private Integer accountNumber;
-	private Integer customerId;
+	private String openId;
 	public String getUuid() {
 		return uuid;
 	}
@@ -28,11 +28,11 @@ public class ScoreQrcodeHistory implements Serializable {
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	public String getQrocde() {
-		return qrocde;
+	public String getQrcode() {
+		return qrcode;
 	}
-	public void setQrocde(String qrocde) {
-		this.qrocde = qrocde;
+	public void setQrcode(String qrcode) {
+		this.qrcode = qrcode;
 	}
 	public String getShopLogo() {
 		return shopLogo;
@@ -58,11 +58,11 @@ public class ScoreQrcodeHistory implements Serializable {
 	public void setAccountNumber(Integer accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-	public Integer getCustomerId() {
-		return customerId;
+	public String getOpenId() {
+		return openId;
 	}
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
+	public void setOpenId(String openId) {
+		this.openId = openId;
 	}
 
 }

@@ -8,6 +8,7 @@
 <title>积分兑换奖品在线行动</title>
 <%@include file="../js.jsp"%>
 <script type="text/javascript">
+var path='<%=basePath %>';
 var openId='${param.openId}';
 var sqUuid='${param.sqUuid}';
 $(function(){
@@ -34,10 +35,15 @@ $(function(){
 });
 
 function openRedBag(){
+	var createTime='${requestScope.scoreQrcode.createTime }';
+	var qrcode='${requestScope.scoreQrcode.qrcode }';
+	var shopLogo='${requestScope.scoreQrcode.shopLogo }';
 	//var redBagScore=parseInt('${requestScope.scoreQrcode.score }');
 	var redBagScore=10;
-	$.post("openJPDHJFRedBagByJC",
-		{openId:openId,sqUuid:sqUuid,redBagScore:redBagScore},
+	var endTime='${requestScope.scoreQrcode.endTime }';
+	var accountNumber='${requestScope.scoreQrcode.accountNumber }';
+	$.post(path+"merchant/phone/openJPDHJFRedBagByJC",
+		{openId:openId,uuid:sqUuid,createTime:createTime,qrcode:qrcode,shopLogo:shopLogo,score:redBagScore,endTime:endTime,accountNumber:accountNumber},
 		function(data){
 			if(data.status=="ok"){
 				$("#redBag_div").css("display","none");

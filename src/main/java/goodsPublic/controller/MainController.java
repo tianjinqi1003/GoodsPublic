@@ -37,7 +37,6 @@ import com.goodsPublic.util.TenpayHttpClient;
 import com.goodsPublic.util.FileUploadUtils;
 import com.goodsPublic.util.FinalState;
 import com.goodsPublic.util.JsonUtil;
-import com.goodsPublic.util.MethodUtil;
 import com.goodsPublic.util.PlanResult;
 import com.goodsPublic.util.alipay.AlipayConfig;
 import com.goodsPublic.util.qrcode.Qrcode;
@@ -1925,25 +1924,6 @@ public class MainController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-
-	@RequestMapping(value="/openJPDHJFRedBagByJC")
-	@ResponseBody
-	public Map<String, Object> openJPDHJFRedBagByJC(String openId, String sqUuid,Integer redBagScore) {
-		
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		
-		boolean bool = publicService.openJPDHJFRedBagByJC(openId,sqUuid,redBagScore);
-		
-		if(bool) {
-			jsonMap.put("status", "ok");
-		}
-		else {
-			jsonMap.put("status", "no");
-			jsonMap.put("message", "打开红包失败！");
-		}
-		
-		return jsonMap;
 	}
 	
 	/**

@@ -19,6 +19,7 @@ import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
 import goodsPublic.entity.ScoreQrcode;
+import goodsPublic.entity.ScoreQrcodeHistory;
 
 public interface PublicMapper {
 	//保存发布的产品信息
@@ -46,6 +47,8 @@ public interface PublicMapper {
 	public int addHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoods);
 
 	public int addScoreQrcode(ScoreQrcode scoreQrcode);
+
+	public int addScoreQrcodeHistory(ScoreQrcodeHistory sqh);
 
 	public int addHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);
 	public int editHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);
@@ -358,7 +361,8 @@ public interface PublicMapper {
 
 	public JFDHJPCustomer getJCByOpenId(@Param("openId") String openId);
 
-	public int updateSQEnableByUuid(@Param("uuid") String uuid);
+	public int updateSQEnableByUuid(@Param("openId") String openId,@Param("uuid") String uuid);
 
 	public int updateJCScoreByOpenId(@Param("score") Integer score, @Param("openId") String openId);
+
 }

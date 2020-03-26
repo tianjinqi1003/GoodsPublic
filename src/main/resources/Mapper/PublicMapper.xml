@@ -1015,6 +1015,62 @@
 				0
 		</trim>
 	</insert>
+	<insert id="addScoreQrcodeHistory" parameterType="goodsPublic.entity.ScoreQrcodeHistory">
+		insert into score_qrcode_history
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="uuid!=null">
+				uuid,
+			</if>
+			<if test="createTime!=null">
+				createTime,
+			</if>
+			<if test="qrcode!=null">
+				qrcode,
+			</if>
+			<if test="shopLogo!=null">
+				shopLogo,
+			</if>
+			<if test="score!=null">
+				score,
+			</if>
+			<if test="endTime!=null">
+				endTime,
+			</if>
+			<if test="accountNumber!=null">
+				accountNumber,
+			</if>
+			<if test="openId!=null">
+				openId,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="uuid!=null">
+				#{uuid},
+			</if>
+			<if test="createTime!=null">
+				#{createTime},
+			</if>
+			<if test="qrcode!=null">
+				#{qrcode},
+			</if>
+			<if test="shopLogo!=null">
+				#{shopLogo},
+			</if>
+			<if test="score!=null">
+				#{score},
+			</if>
+			<if test="endTime!=null">
+				#{endTime},
+			</if>
+			<if test="accountNumber!=null">
+				#{accountNumber},
+			</if>
+			<if test="openId!=null">
+				#{openId},
+			</if>
+		</trim>
+	</insert>
 	<insert id="addHtmlGoodsGRMP" parameterType="goodsPublic.entity.HtmlGoodsGRMP">
 		insert into html_goods_grmp
 		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -1332,7 +1388,7 @@
 		select * from jfdhjp_customer where openId=#{openId}
 	</select>
 	<update id="updateSQEnableByUuid">
-		update score_qrcode set enable=1 where uuid=#{uuid}
+		update score_qrcode set enable=1,openId=#{openId} where uuid=#{uuid}
 	</update>
 	<update id="updateJCScoreByOpenId">
 		update jfdhjp_customer set score=score+#{score} where openId=#{openId}

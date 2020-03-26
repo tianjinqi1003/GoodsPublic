@@ -41,6 +41,7 @@ import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
 import goodsPublic.entity.ScoreQrcode;
+import goodsPublic.entity.ScoreQrcodeHistory;
 import goodsPublic.service.PublicService;
 /**
  * 这是用来处理商品的对应接口
@@ -817,10 +818,22 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public boolean openJPDHJFRedBagByJC(String openId, String uuid, Integer score) {
+	public boolean openJPDHJFRedBagByJC(ScoreQrcode sq) {
 		// TODO Auto-generated method stub
-		int count1=publicDao.updateSQEnableByUuid(uuid);
-		int count2=publicDao.updateJCScoreByOpenId(score,openId);
+		int count1=publicDao.updateSQEnableByUuid(sq.getOpenId(),sq.getUuid());
+		if(count1>0) {
+			ScoreQrcodeHistory sqh=new ScoreQrcodeHistory();
+			sqh.setUuid(sq.getUuid());
+			sqh.setCreateTime(sq.getCreateTime());
+			sqh.setQrcode(sq.getQrcode());
+			sqh.setShopLogo(sq.getShopLogo());
+			sqh.setScore(sq.getScore());
+			sqh.setEndTime(sq.getEndTime());
+			sqh.setAccountNumber(sq.getAccountNumber());
+			sqh.setOpenId(sq.getOpenId());
+			count1=publicDao.addScoreQrcodeHistory(sqh);
+		}
+		int count2=publicDao.updateJCScoreByOpenId(sq.getScore(),sq.getOpenId());
 		if(count1>0&&count2>0)
 			return true;
 		else
