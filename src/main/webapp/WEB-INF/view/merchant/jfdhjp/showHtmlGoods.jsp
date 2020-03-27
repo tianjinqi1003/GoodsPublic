@@ -12,6 +12,7 @@ var path='<%=basePath %>';
 var openId='${param.openId}';
 var sqUuid='${param.sqUuid}';
 var dhjpScore=parseInt('${requestScope.accountMsg.dhjpScore }');
+var windowHeight=$(window).height();
 
 $(function(){
 	var enable='${requestScope.scoreQrcode.enable }';
@@ -19,20 +20,38 @@ $(function(){
 		alert("您已扫过");
 	}
 	else{
+		$("body").css("background-color","#000");
 		var rbdw=$("#redBag_div").css("width");
 		rbdw=rbdw.substring(0,rbdw.length-2);
-		var rbdh=parseInt(rbdw*2220/1080);
+		var rbdh=parseInt(rbdw*681/456);
 		$("#redBag_div").css("height",rbdh+"px");
+		var rbdmt=(windowHeight-rbdh)/2;
+		$("#redBag_div").css("margin-top",rbdmt+"px");
+		$("#shopLogo_div").css("margin-top",rbdmt+108+"px");
+		$("#redBag_div #open_div").css("margin-top",rbdmt+339+"px");
 		
 		var sdw=$("#score_div").css("width");
 		sdw=sdw.substring(0,sdw.length-2);
-		var sdh=parseInt(sdw*2220/1080);
+		var sdh=parseInt(sdw*542/454);
 		$("#score_div").css("height",sdh+"px");
+
+		var sdmt=30;
+		$("#score_div").css("margin-top",sdmt+"px");
+		$("#score_div #value_div").css("margin-top",sdmt+125+"px");
+		$("#score_div #shopScore_div").css("margin-top",sdmt+117+"px");
+		$("#score_div #jpmdhReg_div").css("margin-top",sdmt+92+"px");
 		
 		var djmdw=$("#djm_div").css("width");
 		djmdw=djmdw.substring(0,djmdw.length-2);
-		var djmdh=parseInt(djmdw*2220/1080);
+		var djmdh=parseInt(djmdw*565/454);
 		$("#djm_div").css("height",djmdh+"px");
+		
+		var djmdmt=30;
+		$("#djm_div").css("margin-top",djmdmt+"px");
+		$("#djm_div #codeNo_span").css("margin-top",djmdmt+133+"px");
+		$("#djm_div #djs_div").css("margin-top",djmdmt+220+"px");
+		$("#djm_div #syjf_span").css("margin-top",djmdmt+447+"px");
+		$("#djm_div #jpmdhReg_div").css("margin-top",djmdmt+485+"px");
 	}
 });
 
@@ -55,6 +74,7 @@ function openRedBag(){
 					createPrizeCode();
 				}
 				else{
+					$("body").css("background-color","#009446");
 					$("#score_div").css("display","block");
 					$("#shopScore_span").text(shopScore);
 				}
@@ -71,6 +91,7 @@ function createPrizeCode(){
 		{openId:openId},
 		function(data){
 			if(data.status=="ok"){
+				$("body").css("background-color","#009446");
 				$("#djm_div").css("display","block");
 				$("#codeNo_span").text(data.codeNo);
 				setInterval("reloadDJS()","1000","1000");
@@ -96,36 +117,35 @@ function reloadDJS(){
 }
 </script>
 </head>
-<body style="background-color: #eee;margin: 0;">
+<body style="background-color: #009446;margin: 0;">
 	<div id="redBag_div" style="background-image: url('/GoodsPublic/resource/images/jfdhjp/001.png');background-size: 100% auto;
 	background-repeat: no-repeat;width: 100%;display: block;">
-		<div style="width:100%;height:60px;margin-top: 259px;text-align: center;position: absolute;">
+		<div id="shopLogo_div" style="width:100%;height:68px;margin-top: 259px;text-align: center;position: absolute;">
 			<img alt="" src="${requestScope.scoreQrcode.shopLogo }" style="width: 68px;height: 68px;border-radius: 5px;">
 		</div>
-		<div style="width: 100%;height:115px;margin-top: 491px;position: absolute;">
+		<div id="open_div" style="width: 100%;height:115px;position: absolute;">
 			<div class="openBut_div" onclick="openRedBag()" style="width: 115px;height:115px;margin:auto;"></div>
 		</div>
 	</div>
 	
 	<div id="score_div" style="background-image: url('/GoodsPublic/resource/images/jfdhjp/002.png');background-size: 100% auto;
 	background-repeat: no-repeat;width: 100%;padding: 1px;display: none;">
-		<div style="color:#A3682E;font-size: 25px;text-align: center;margin-top: 245px;">${requestScope.scoreQrcode.score }积分</div>
-		<div id="shopScore_div" style="width:100%;color: #FDE198;font-size: 25px;font-weight: 600;text-align: center;margin: 147px auto 0;display: block;"><span id="shopScore_span">${requestScope.jc.score }</span>积分</div>
-		<div style="color: #FFCC66;font-size: 20px;margin-top:122px;padding: 0 20px 0 20px;word-wrap:break-word;display: block;">活动规则说明：${requestScope.accountMsg.jpmdhReg }</div>
+		<div id="value_div" style="color:#A3682E;font-size: 25px;text-align: center;">${requestScope.scoreQrcode.score }积分</div>
+		<div id="shopScore_div" style="width:100%;color: #FDE198;font-size: 25px;font-weight: 600;text-align: center;display: block;"><span id="shopScore_span">${requestScope.jc.score }</span>积分</div>
+		<div id="jpmdhReg_div" style="color: #FFCC66;font-size: 20px;padding: 0 20px 0 20px;word-wrap:break-word;display: block;">活动规则说明：${requestScope.accountMsg.jpmdhReg }</div>
 	</div>
 	
 	<div id="djm_div" style="background-image: url('/GoodsPublic/resource/images/jfdhjp/003.png');background-size: 100% auto;
 	background-repeat: no-repeat;width: 100%;padding: 1px;display: none;">
-		<span id="codeNo_span" style="color: #E02E24;font-size:25px;margin-top: 259px;margin-left: 210px;position: absolute;">123</span>
-		<div style="width:100%;color:#fff;margin-top: 346px;font-size:25px;position: absolute;">
+		<span id="codeNo_span" style="color: #E02E24;font-size:25px;margin-left: 210px;position: absolute;">123</span>
+		<div id="djs_div" style="width:100%;color:#fff;font-size:25px;position: absolute;">
 			<span id="day_span" style="margin-left: 150px;"></span>
 			<span id="hour_span" style="margin-left: 29px;position: absolute;"></span>
 			<span id="minute_span" style="margin-left: 76px;position: absolute;"></span>
 			<span id="second_span" style="margin-left: 121px;position: absolute;"></span>
 		</div>
-		<span style="color: #FFCC66;font-size:20px;margin-top: 575px;margin-left: 193px;position: absolute;">50</span>
-		<div style="color: #FFCC66;font-size: 17px;margin-top:610px;padding: 0 20px 0 20px;word-wrap:break-word;display: block;">活动规则说明：${requestScope.accountMsg.jpmdhReg }</div>
+		<span id="syjf_span" style="color: #FFCC66;font-size:20px;margin-left: 193px;position: absolute;">50</span>
+		<div id="jpmdhReg_div" style="color: #FFCC66;font-size: 17px;padding: 0 20px 0 20px;word-wrap:break-word;display: block;">活动规则说明：${requestScope.accountMsg.jpmdhReg }</div>
 	</div>
-	
 </body>
 </html>
