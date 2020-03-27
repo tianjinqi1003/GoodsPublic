@@ -1675,9 +1675,9 @@ public class MainController {
 
 				String code = request.getParameter("code");
 				System.out.println("code======"+code);
-				JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+APP_ID+"&secret="+APP_SECRET+"&code="+code+"&grant_type=authorization_code"));
-				String openId = obj.getString("openid");
-				//String openId = "oNFEuwzkbP4OTTjBucFgBTWE5Bqg";
+				//JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+APP_ID+"&secret="+APP_SECRET+"&code="+code+"&grant_type=authorization_code"));
+				//String openId = obj.getString("openid");
+				String openId = "oNFEuwzkbP4OTTjBucFgBTWE5Bqg";
 				System.out.println("openId======"+openId);
 				
 				boolean bool=publicService.checkJCOpenIdExist(openId);

@@ -17,7 +17,8 @@ var windowHeight=$(window).height();
 $(function(){
 	var enable='${requestScope.scoreQrcode.enable }';
 	if(enable=="true"){
-		alert("您已扫过");
+		$("#redBag_div").css("display","none");
+		$("#qrcodeUsed_div").css("display","block");
 	}
 	else{
 		$("body").css("background-color","#000");
@@ -89,6 +90,10 @@ function reloadDJS(){
 	time=time%dwMinute;
 	$("#second_span").text(Math.floor(time/dwSecond));
 }
+
+function showJFYE(){
+	$("#jfye_div").text('${requestScope.scoreQrcode.score }'+"积分");
+}
 </script>
 </head>
 <body style="background-color: #009446;margin: 0;">
@@ -120,6 +125,18 @@ function reloadDJS(){
 		</div>
 		<span id="syjf_span" style="color: #FFCC66;font-size:20px;margin-top:402px;margin-left: 163px;position: absolute;">50</span>
 		<div id="jpmdhReg_div" style="color: #FFCC66;font-size: 17px;margin-top:438px;word-wrap:break-word;display: block;">活动规则说明：${requestScope.accountMsg.jpmdhReg }</div>
+	</div>
+	
+	<div id="qrcodeUsed_div" style="width: 350px;height:330px;background-image: url('/GoodsPublic/resource/images/jfdhjp/004.png');background-size: 100% auto;
+	background-repeat: no-repeat;margin: 30px auto 0;padding: 1px;display: none;">
+		<div id="shopLogo_div" style="width:350px;height:68px;margin-top:133px;text-align: center;position: absolute;">
+			<img alt="" src="${requestScope.scoreQrcode.shopLogo }" style="width: 68px;height: 68px;border-radius: 5px;">
+		</div>
+		<div id="ckjfye_div" style="width: 350px;height:54px;margin-top:263px;position: absolute;">
+			<div class="ckjfyeBut_div" onclick="showJFYE()" style="width: 203px;height:54px;margin:auto;"></div>
+		</div>
+		<div id="jfye_div" style="color:#FFF699;font-size: 25px;text-align: center;margin-top:333px;"></div>
+		<div id="jpmdhReg_div" style="color: #fff;font-size: 17px;margin-top:20px;word-wrap:break-word;display: block;">活动规则说明：${requestScope.accountMsg.jpmdhReg }</div>
 	</div>
 </body>
 </html>
