@@ -668,14 +668,11 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/addScoreQrcode",produces="plain/text; charset=UTF-8")
-	public String addScoreQrcode(ScoreQrcode scoreQrcode,
+	public String addScoreQrcode(ScoreQrcode scoreQrcode, Integer createCount,
 			@RequestParam(value="file",required=false) MultipartFile file,
 			HttpServletRequest request) {
 		
 		try {
-			String uuid = UUID.randomUUID().toString().replaceAll("-", "");
-			scoreQrcode.setUuid(uuid);
-			
 			if(file.getSize()>0) {
 				String jsonStr = FileUploadUtils.appUploadContentImg(request,file,"");
 				JSONObject fileJson = JSONObject.fromObject(jsonStr);
@@ -685,16 +682,20 @@ public class MainController {
 				}
 			}
 
-			String jsonParams="{\"accountId\":\""+scoreQrcode.getAccountNumber()+"\",\"uuid\":\""+uuid+"\"}";
-			String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf600e162d89732da&redirect_uri=http://www.qrcodesy.com/getCode.asp?jsonParams="+jsonParams+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
-			String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
-			String avaPath="/GoodsPublic/upload/jfdhjp/"+fileName;
-			String path = "D:/resource/jfdhjp";
-			Qrcode.createQrCode(url, path, fileName);
-			
-			scoreQrcode.setQrcode(avaPath);
-			
-			int a=publicService.addScoreQrcode(scoreQrcode);
+			for(int i=0;i<createCount;i++) {
+				String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+				scoreQrcode.setUuid(uuid);
+				String jsonParams="{\"accountId\":\""+scoreQrcode.getAccountNumber()+"\",\"uuid\":\""+uuid+"\"}";
+				String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf600e162d89732da&redirect_uri=http://www.qrcodesy.com/getCode.asp?jsonParams="+jsonParams+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+				String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) +i+ ".jpg";
+				String avaPath="/GoodsPublic/upload/jfdhjp/"+fileName;
+				String path = "D:/resource/jfdhjp";
+				Qrcode.createQrCode(url, path, fileName);
+				
+				scoreQrcode.setQrcode(avaPath);
+				
+				int a=publicService.addScoreQrcode(scoreQrcode);
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -2082,6 +2083,8 @@ public class MainController {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		int count = publicService.queryScoreQrcodeForInt(accountId);
+		sort="createTime";
+		order="desc";
 		List<ScoreQrcode> scList = publicService.queryScoreQrcodeList(accountId, page, rows, sort, order);
 		
 		jsonMap.put("total", count);

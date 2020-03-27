@@ -2080,7 +2080,7 @@
 		select * from public_goods where accountNumber=#{param1} and category_id=#{param2} limit ${param3},${param4}
 	</select>
 	<select id="queryScoreQrcodeList" resultType="goodsPublic.entity.ScoreQrcode">
-		select * from score_qrcode where accountNumber=#{param1} limit ${param2},${param3}
+		select * from score_qrcode where accountNumber=#{param1} order by ${param4} ${param5} limit ${param2},${param3}
 	</select>
 	<select id="queryHtmlGoodsSPZSList" resultType="goodsPublic.entity.HtmlGoodsSPZS">
 		select * from html_goods_spzs where accountNumber=#{param1} and moduleType=#{param2} limit ${param3},${param4}

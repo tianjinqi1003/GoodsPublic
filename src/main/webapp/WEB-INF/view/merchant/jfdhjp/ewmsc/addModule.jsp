@@ -76,7 +76,9 @@ function checkForm(){
 		if(checkIfPaid()){
 			if(checkScore()){
 				if(checkEndTime()){
-					return true;
+					if(checkCreateCount()){
+						return true;
+					}
 				}
 			}
 		}
@@ -108,6 +110,16 @@ function checkEndTime(){
 	var endTime=endTimeDTB.datetimebox("getValue");
 	if(endTime==""||endTime==null){
 		alert("请选择活动到期时间！");
+		return false;
+	}
+	else
+		return true;
+}
+
+function checkCreateCount(){
+	var createCount = $("#createCount_inp").val();
+	if(createCount==""||createCount==null){
+		alert("请输入生成数量！");
 		return false;
 	}
 	else
@@ -221,6 +233,15 @@ function initWindowMarginLeft(){
 				 </td>
 				 <td>
 					<input id="endTime_dtb" name="endTime" type="text" value="" maxlength="20" onblur="check"/>
+					<span style="color: #f00;">*</span>
+				 </td>
+			   </tr>
+			   <tr style="border-bottom: #CAD9EA solid 1px;">
+				 <td align="right">
+					<span>生成数量</span>
+				 </td>
+				 <td>
+					<input id="createCount_inp" name="createCount" type="number" value="1" maxlength="20" onblur="checkCreateCount()"/>
 					<span style="color: #f00;">*</span>
 				 </td>
 			   </tr>

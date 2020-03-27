@@ -46,7 +46,7 @@ public class PhoneController {
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
 		PrizeCode pz=new PrizeCode();
-		pz.setCodeNo("20"+new Random().nextInt(10000000));
+		pz.setCodeNo(new Random().nextInt(10000)+"");
 		pz.setOpenId(openId);
 		
 		int count=publicService.addPrizeCode(pz);
