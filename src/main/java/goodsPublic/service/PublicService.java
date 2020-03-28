@@ -378,5 +378,7 @@ public interface PublicService {
 
 	public boolean openJPDHJFRedBagByJC(ScoreQrcode sq);
 
+	public List<Map<String, Object>> queryCustomerScoreList(String accountNumber);
+
 
 }

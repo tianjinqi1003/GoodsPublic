@@ -135,8 +135,9 @@ function showJFYE(){
 		<div id="ckjfye_div" style="width: 350px;height:54px;margin-top:263px;position: absolute;">
 			<div class="ckjfyeBut_div" onclick="showJFYE()" style="width: 203px;height:54px;margin:auto;"></div>
 		</div>
-		<div id="jfye_div" style="color:#FFF699;font-size: 25px;text-align: center;margin-top:333px;"></div>
-		<div id="jpmdhReg_div" style="color: #fff;font-size: 17px;margin-top:20px;word-wrap:break-word;display: block;">活动规则说明：${requestScope.accountMsg.jpmdhReg }</div>
+		<div id="jfye_div" style="width: 350px;height:32px;color:#FFF699;font-size: 25px;text-align: center;margin-top:333px;"></div>
+		<div id="jpmdhReg_div" style="color: #fff;font-size: 17px;margin-top:20px;padding: 0 35px 0 35px;word-wrap:break-word;display: block;">活动规则说明：${requestScope.accountMsg.jpmdhReg }</div>
 	</div>
+	<div style="width: 100%;height:40px;line-height:40px;color: #fff;font-size: 17px;text-align: center;bottom: 0;position: fixed;">${requestScope.accountMsg.companyName }</div>
 </body>
 </html>

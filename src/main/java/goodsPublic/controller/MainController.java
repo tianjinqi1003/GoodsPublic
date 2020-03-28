@@ -2034,6 +2034,25 @@ public class MainController {
 		jsonMap.put("rows", catList1);
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/queryCustomerScoreList")
+	@ResponseBody
+	public Map<String, Object> queryCustomerScoreList(String accountId) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<Map<String, Object>> list=publicService.queryCustomerScoreList(accountId);
+		if(list.size()>0) {
+			jsonMap.put("status", "ok");
+			jsonMap.put("list", list);
+		}
+		else {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "暂无数据");
+		}
+		
+		return jsonMap;
+	}
 
 	/**
 	 * 跳转至商品查询页面

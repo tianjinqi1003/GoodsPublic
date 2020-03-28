@@ -847,4 +847,10 @@ public class PublicServiceImpl implements PublicService {
 			return false;
 	}
 
+	@Override
+	public List<Map<String, Object>> queryCustomerScoreList(String accountNumber) {
+		// TODO Auto-generated method stub
+		return publicDao.queryCustomerScoreList(accountNumber);
+	}
+
 }

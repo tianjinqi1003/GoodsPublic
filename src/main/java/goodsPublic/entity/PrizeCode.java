@@ -11,6 +11,7 @@ public class PrizeCode implements Serializable {
 	private Integer id;
 	private String codeNo;
 	private String createTime;
+	private String accountNumber;
 	private String openId;
 	private String enable;
 	public Integer getId() {
@@ -30,6 +31,12 @@ public class PrizeCode implements Serializable {
 	}
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
+	}
+	public String getAccountNumber() {
+		return accountNumber;
+	}
+	public void setAccountNumber(String accountNumber) {
+		this.accountNumber = accountNumber;
 	}
 	public String getOpenId() {
 		return openId;

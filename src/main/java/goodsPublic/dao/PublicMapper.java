@@ -1,6 +1,7 @@
 package goodsPublic.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -367,5 +368,7 @@ public interface PublicMapper {
 	public int updateSQEnableByUuid(@Param("openId") String openId,@Param("uuid") String uuid);
 
 	public int updateJCScoreByOpenId(@Param("score") Integer score, @Param("openId") String openId);
+
+	public List<Map<String, Object>> queryCustomerScoreList(@Param("accountNumber") String accountNumber);
 
 }

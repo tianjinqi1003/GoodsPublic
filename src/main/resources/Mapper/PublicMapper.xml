@@ -2097,6 +2097,9 @@
 	<select id="queryGoodsListByCateId" resultType="goodsPublic.entity.Goods">
 		select goodsNumber,title,imgUrl,category_id from public_goods where category_id=#{param1} and accountNumber=#{param2}
 	</select>
+	<select id="queryCustomerScoreList" resultType="java.util.Map">
+		select p.id,date_format(p.createTime,'%m月%d日') createTime,j.nickName,p.codeNo,j.takeCount,j.score from prize_code p,jfdhjp_customer j where p.openId=j.openId and p.accountNumber=#{accountNumber} order by p.createTime desc
+	</select>
 	<select id="getGoodsById" resultType="goodsPublic.entity.Goods">
 		select * from public_goods where id=#{param1}
 	</select>
