@@ -989,6 +989,9 @@
 			<if test="accountNumber!=null">
 				accountNumber,
 			</if>
+			<if test="example!=null">
+				example,
+			</if>
 				enable
 		</trim>
 		values
@@ -1011,6 +1014,9 @@
 			</if>
 			<if test="accountNumber!=null">
 				#{accountNumber},
+			</if>
+			<if test="example!=null">
+				#{example},
 			</if>
 				0
 		</trim>
@@ -1340,7 +1346,7 @@
 			<if test="openId!=null">
 				#{openId},
 			</if>
-				0
+				1
 		</trim>
 	</insert>
 	<insert id="addGoodsLabelSet" parameterType="goodsPublic.entity.GoodsLabelSet">
@@ -2059,7 +2065,7 @@
 		select count(*) from public_goods where accountNumber=#{param1} and category_id=#{param2}
 	</select>
 	<select id="queryScoreQrcodeForInt" resultType="java.lang.Integer">
-		select count(*) from score_qrcode where accountNumber=#{param1}
+		select count(*) from score_qrcode where example=1 and accountNumber=#{param1}
 	</select>
 	<select id="queryHtmlGoodsSPZSForInt" resultType="java.lang.Integer">
 		select count(*) from html_goods_spzs where accountNumber=#{param1} and moduleType=#{param2}
@@ -2080,7 +2086,7 @@
 		select * from public_goods where accountNumber=#{param1} and category_id=#{param2} limit ${param3},${param4}
 	</select>
 	<select id="queryScoreQrcodeList" resultType="goodsPublic.entity.ScoreQrcode">
-		select * from score_qrcode where accountNumber=#{param1} order by ${param4} ${param5} limit ${param2},${param3}
+		select * from score_qrcode where example=1 and accountNumber=#{param1} order by ${param4} ${param5} limit ${param2},${param3}
 	</select>
 	<select id="queryHtmlGoodsSPZSList" resultType="goodsPublic.entity.HtmlGoodsSPZS">
 		select * from html_goods_spzs where accountNumber=#{param1} and moduleType=#{param2} limit ${param3},${param4}
@@ -2098,7 +2104,7 @@
 		select goodsNumber,title,imgUrl,category_id from public_goods where category_id=#{param1} and accountNumber=#{param2}
 	</select>
 	<select id="queryCustomerScoreList" resultType="java.util.Map">
-		select p.id,date_format(p.createTime,'%m月%d日') createTime,j.nickName,p.codeNo,j.takeCount,j.score from prize_code p,jfdhjp_customer j where p.openId=j.openId and p.accountNumber=#{accountNumber} order by p.createTime desc
+		select j.id,date_format(p.createTime,'%m月%d日') createDate,date_format(p.createTime,'%H:%m:%s') createTime,j.nickName,p.codeNo,p.enable,j.takeCount,j.score from jfdhjp_customer j left join prize_code p on p.openId=j.openId and p.accountNumber=#{accountNumber} order by p.createTime desc
 	</select>
 	<select id="getGoodsById" resultType="goodsPublic.entity.Goods">
 		select * from public_goods where id=#{param1}

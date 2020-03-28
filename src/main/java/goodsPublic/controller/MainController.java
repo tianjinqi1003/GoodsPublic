@@ -682,7 +682,7 @@ public class MainController {
 				}
 			}
 
-			for(int i=0;i<createCount;i++) {
+			for(int i=0;i<createCount+1;i++) {
 				String uuid = UUID.randomUUID().toString().replaceAll("-", "");
 				scoreQrcode.setUuid(uuid);
 				String jsonParams="{\"accountId\":\""+scoreQrcode.getAccountNumber()+"\",\"uuid\":\""+uuid+"\"}";
@@ -693,6 +693,11 @@ public class MainController {
 				Qrcode.createQrCode(url, path, fileName);
 				
 				scoreQrcode.setQrcode(avaPath);
+				
+				if(i==0)
+					scoreQrcode.setExample(true);
+				else
+					scoreQrcode.setExample(false);
 				
 				int a=publicService.addScoreQrcode(scoreQrcode);
 			}
@@ -2041,6 +2046,7 @@ public class MainController {
 
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
+		//select uuid,MAX(t.createTime1),t.openId,t.createDate,t.createTime,nickName,takeCount,score from(select s.uuid,s.openId,s.createTime createTime1,date_format(s.createTime,'%m月%d日') createDate,date_format(s.createTime,'%H:%m:%s') createTime,j.nickName,j.takeCount,j.score from score_qrcode s left join jfdhjp_customer j on s.openId=j.openId where s.enable=1) t left join prize_code p on p.openId=t.openId and p.accountNumber=34 GROUP BY t.createDate order by t.createTime desc
 		List<Map<String, Object>> list=publicService.queryCustomerScoreList(accountId);
 		if(list.size()>0) {
 			jsonMap.put("status", "ok");

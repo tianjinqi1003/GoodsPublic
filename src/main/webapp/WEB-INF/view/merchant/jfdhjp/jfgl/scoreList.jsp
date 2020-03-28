@@ -25,8 +25,14 @@
 .list_div .item_div .showDetail_span{
 	color: #00f;margin-top: 10px;margin-right: 110px;float: right;cursor: pointer;
 }
-.list_div .item_div .codeNo_span{
-	color: #999;margin-top: 40px;margin-left: 10px;position: absolute;
+.list_div .item_div .codeNo_div{
+	width:200px;color: #999;margin-top: 40px;margin-left: 10px;position: absolute;
+}
+.list_div .item_div .codeEnable{
+	color: #0f0;margin-top: 3px;margin-left: 10px;position: absolute;
+}
+.list_div .item_div .codeDisable{
+	color: #f00;margin-top: 3px;margin-left: 10px;position: absolute;
 }
 .list_div .item_div .takeCount_span{
 	color: #999;margin-top: 40px;margin-left: 228px;position: absolute;
@@ -46,16 +52,20 @@ $(function(){
 				var list=data.list;
 				for(var i=0;i<list.length;i++){
 					var item=list[i];
-					listDiv.append("<div class=\"item_div\">"
-								+"<div class=\"createTime_div\">"+item.createTime+"</div>"
-								+"<div class=\"content_div\">"
-									+"<span class=\"nickName_span\">"+item.nickName+"</span>"
-									+"<span class=\"showDetail_span\">查看积分明细</span>"
-									+"<span class=\"codeNo_span\">奖品码   "+item.codeNo+"</span>"
-									+"<span class=\"takeCount_span\">消费次数:"+item.takeCount+"</span>"
-									+"<span class=\"score_span\">剩余积分:"+item.score+"</span>"
-								+"</div>"
-							+"</div>");
+					var htmlStr="<div class=\"createTime_div\">"+(item.enable==null?"":item.createTime)+"</div>";
+					htmlStr+="<div class=\"item_div\">";
+					htmlStr+="<div class=\"content_div\">";
+					htmlStr+="<span class=\"nickName_span\">"+item.nickName+"</span>";
+					htmlStr+="<span class=\"showDetail_span\">查看积分明细</span>";
+					if(item.enable==null)
+						htmlStr+="<div class=\"codeNo_div\">奖品码   暂无</div>";
+					else
+						htmlStr+="<div class=\"codeNo_div\">奖品码   <span class=\""+(item.enable?"codeEnable":"codeDisable")+"\">"+item.codeNo+"<span></div>";
+					htmlStr+="<span class=\"takeCount_span\">消费次数:"+item.takeCount+"</span>";
+					htmlStr+="<span class=\"score_span\">剩余积分:"+item.score+"</span>";
+					htmlStr+="</div>";
+					htmlStr+="</div>";
+					listDiv.append(htmlStr);
 				}
 			}
 			else{
@@ -72,12 +82,12 @@ $(function(){
 	<div class="gkjfqd_div" id="gkjfqd_div">
 		<div class="title_div">顾客积分清单</div>
 		<div class="list_div" id="list_div">
+			<div class="createTime_div">3月13日</div>
 			<div class="item_div">
-				<div class="createTime_div">3月13日</div>
 				<div class="content_div">
 					<span class="nickName_span">李天赐</span>
 					<span class="showDetail_span">查看积分明细</span>
-					<span class="codeNo_span">奖品码   123</span>
+					<div class="codeNo_div">奖品码   123</div>
 					<span class="takeCount_span">消费次数:12</span>
 					<span class="score_span">剩余积分:20</span>
 				</div>

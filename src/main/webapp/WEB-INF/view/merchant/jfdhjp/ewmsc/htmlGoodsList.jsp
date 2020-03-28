@@ -54,8 +54,8 @@ $(function(){
 	    ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
-				$(this).datagrid("appendRow",{qrcode:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/goAddModule?trade=spzs&moduleType=redWine\">点击生成积分二维码</a><div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"qrcode",colspan:5});
+				$(this).datagrid("appendRow",{score:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/goAddModule?trade=spzs&moduleType=redWine\">点击生成积分二维码</a><div>"});
+				$(this).datagrid("mergeCells",{index:0,field:"score",colspan:5});
 				data.total=0;
 			}
 			

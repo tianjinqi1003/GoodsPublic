@@ -63,6 +63,12 @@ public class ScoreQrcode implements Serializable {
 	public void setEnable(Boolean enable) {
 		this.enable = enable;
 	}
+	public Boolean getExample() {
+		return example;
+	}
+	public void setExample(Boolean example) {
+		this.example = example;
+	}
 	private String createTime;
 	private String qrcode;
 	private String shopLogo;
@@ -71,5 +77,6 @@ public class ScoreQrcode implements Serializable {
 	private Integer accountNumber;
 	private String openId;
 	private Boolean enable;
+	private Boolean example;
 
 }
