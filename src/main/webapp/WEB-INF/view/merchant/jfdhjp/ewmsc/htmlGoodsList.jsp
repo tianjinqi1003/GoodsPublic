@@ -13,12 +13,9 @@ $(function(){
 		title:"pdf预览",
 		width:setFitWidthInParent("body"),
 		height:setFitHeightInParent(".layui-side"),
-		top:60,
-		left:200,
 		buttons:[
-           {text:"提交",id:"ok_but",iconCls:"icon-ok",handler:function(){
-        	   if(checkIfPaid())
-        	   	  checkEdit();
+           {text:"下一步",id:"next_but",iconCls:"icon-ok",handler:function(){
+        	   
            }}
         ]
 	});
@@ -56,6 +53,11 @@ $(function(){
 	$(".window-shadow").css("margin-left",initWindowMarginLeft());
 	
 	$(".window,.window .window-body").css("border-color","#ddd");
+
+	$("#next_but").css("left","45%");
+	$("#next_but").css("position","absolute");
+	$(".dialog-button").css("background-color","#fff");
+	$(".dialog-button .l-btn-text").css("font-size","20px");
 	
 	$("#add_but").linkbutton({
 		iconCls:"icon-add",
@@ -156,6 +158,23 @@ function checkIfPaid(){
 	return bool;
 }
 
+function showTextLocArea(){
+	var text=$("#text_ta").val();
+	var checked=$("#leftUp_rad").prop("checked");
+	if(checked){
+		$("#luta_div").css("display","block");
+		$("#luta_div").text(text);
+		$("#rdta_div").css("display","none");
+		$("#rdta_div").text("");
+	}
+	else{
+		$("#luta_div").css("display","none");
+		$("#luta_div").text("");
+		$("#rdta_div").css("display","block");
+		$("#rdta_div").text(text);
+	}
+}
+
 function setFitWidthInParent(o){
 	var width=$(o).css("width");
 	return width.substring(0,width.length-2)-270;
@@ -184,16 +203,19 @@ function initWindowMarginLeft(){
 		<table>
 		  <tr style="border-bottom: #CAD9EA solid 1px;">
 			<td align="right" style="width:40%;">
-				<div style="height: 150px;margin-top: 10px;">
-					<span style="margin-top: 35px;margin-left:-313px;position: absolute;">文字内容（左上）：</span>
-					<textarea rows="5" cols="20" style="margin-left: -172px;position: absolute;">aaaaaaaaa</textarea>
+				<div style="height: 45px;">
+					<span style="margin-left:-252px;position: absolute;">文字位置：</span>
+					<div style="width:150px;margin-left: 150px;position: absolute;">
+						左上&nbsp;<input type="radio" id="leftUp_rad" name="textLoc" checked="checked" onclick="showTextLocArea()"/>&nbsp;&nbsp;&nbsp;
+						右下&nbsp;<input type="radio" id="rightDown_rad" name="textLoc" onclick="showTextLocArea()"/>
+					</div>
 				</div>
-				<div style="height: 150px;margin-top: 10px;">
-					<span style="margin-top: 35px;margin-left:-313px;position: absolute;">文字内容（右下）：</span>
-					<textarea rows="5" cols="20" style="margin-left: -172px;position: absolute;">bbbbbbbb</textarea>
+				<div style="height: 200px;">
+					<span style="margin-top: 25px;margin-left:-252px;position: absolute;">文字内容：</span>
+					<textarea rows="10" cols="20" id="text_ta" maxlength="200" onkeydown="showTextLocArea();" style="margin-left: -172px;position: absolute;"></textarea>
 				</div>
 				<div style="height: 45px;">
-					文字位置：
+					文字方位：
 					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','up')">上移</a>
 					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','down')">下移</a>
 					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','left')">左移</a>
@@ -209,9 +231,9 @@ function initWindowMarginLeft(){
 			</td>
 			<td>
 				<div style="width: 500px;height:400px;margin: 20px 0 20px;border: #999 solid 1px;">
-					<div style="width: 200px;height:200px;margin-top:20px;margin-left:20px;border: #999 dotted 1px;">aaaaaaaaa</div>
-					<img alt="" src="/GoodsPublic/upload/jfdhjp/20200330132119.jpg" style="width: 200px;height:200px;margin-top: -200px;margin-left: 250px;border: #999 dotted 1px;">
-					<div style="width: 200px;height:130px;margin-top:20px;margin-left:250px;border: #999 dotted 1px;">bbbbbbbb</div>
+					<div id="luta_div" style="width: 200px;height:350px;margin-top:20px;margin-left:20px;word-wrap:break-word;border: #999 dotted 1px;position: absolute;"></div>
+					<img alt="" src="/GoodsPublic/upload/jfdhjp/20200330132119.jpg" style="width: 200px;height:200px;margin-top: 20px;margin-left: 250px;border: #999 dotted 1px;position: absolute;">
+					<div id="rdta_div" style="width: 200px;height:130px;margin-top:240px;margin-left:250px;word-wrap:break-word;border: #999 dotted 1px;position: absolute;display: none;"></div>
 				</div>
 			</td>
 		  </tr>
