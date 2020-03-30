@@ -82,11 +82,9 @@ function checkEditCompany(){
 					var companyAddress=$("#companyAddress").val();
 					var phone=$("#phone").val();
 					var email=$("#email").val();
-					var dhjpScore=$("#dhjpScore").val();
-					var jpmdhReg=$("#jpmdhReg").val();
 					
 					$.post("editAccountInfo",
-						{companyName:companyName,companyAddress:companyAddress,phone:phone,email:email,dhjpScore:dhjpScore,jpmdhReg:jpmdhReg},
+						{companyName:companyName,companyAddress:companyAddress,phone:phone,email:email},
 						function(data){
 							if(data.status==1){
 								$.messager.defaults.ok = "是";
@@ -366,12 +364,12 @@ function openEditCompanyDialog(flag){
 	z-index: 1001;
 }
 .editCompany_div{
-	width:500px;height:510px;margin:100px auto;background: #f8f8f8;border-radius: 6px;
+	width:500px;height:340px;margin:100px auto;background: #f8f8f8;border-radius: 6px;
 }
 .editCompany_div .title{
 	font-size: 22px;color: #4CAF50;text-align: center;padding-top: 20px;
 }
-.editCompany_div .gsmc_div,.editCompany_div .gsdz_div,.editCompany_div .lxdh_div,.editCompany_div .yx_div,.editCompany_div .dhjpjf_div,.editCompany_div .dhjpgz_div{
+.editCompany_div .gsmc_div,.editCompany_div .gsdz_div,.editCompany_div .lxdh_div,.editCompany_div .yx_div{
 	width:310px;margin: auto;padding-top: 20px;
 }
 .editCompany_div .dhjpgz_span{
@@ -451,14 +449,6 @@ function openEditCompanyDialog(flag){
 			<span>邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱</span>
 			<input type="text" id="email" value="${requestScope.accountMsg.email }" onfocus="focusEmail()" onblur="checkEmail()"/>
 		</div>
-		<div class="dhjpjf_div">
-			<span>兑换奖品积分</span>
-			<input type="text" id="dhjpScore" value="${requestScope.accountMsg.dhjpScore }"/>
-		</div>
-		<div class="dhjpgz_div">
-			<span class="dhjpgz_span">兑换奖品规则</span>
-			<textarea id="jpmdhReg" rows="6" cols="10">${requestScope.accountMsg.jpmdhReg }</textarea>
-		</div>
 		<div class="but_div">
 			<button class="but cancel_but" onclick="openEditCompanyDialog(0)">取消</button>
 			<button class="but submit_but" onclick="checkEditCompany()">提交</button>
@@ -505,14 +495,6 @@ function openEditCompanyDialog(flag){
 		<div style="margin-top:20px;">
 			<span style="font-size: 14px;color: #373737;font-weight: 700;">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</span>
 			<span>${requestScope.accountMsg.email }</span>
-		</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">兑换奖品积分：</span>
-			<span>${requestScope.accountMsg.dhjpScore }</span>
-		</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">兑换奖品规则：</span>
-			<span>${requestScope.accountMsg.jpmdhReg }</span>
 		</div>
 		<div style="margin-top:20px;">
 			<span style="font-size: 14px;color: #357bb3;cursor: pointer;" onclick="openEditCompanyDialog(1)">修改公司信息</span>

@@ -13,7 +13,7 @@
 .gkjfqd_div .title_div{
 	font-size: 20px;color: #373737;font-weight:700;
 }
-.list_div .item_div .createTime_div{
+.list_div .item_div .createDate_div{
 	color: #999;width: 100%;height:30px;line-height:30px;
 }
 .list_div .item_div .content_div{
@@ -21,6 +21,9 @@
 }
 .list_div .item_div .nickName_span{
 	color: #000;margin-top: 10px;margin-left: 10px;position: absolute;
+}
+.list_div .item_div .createTime_span{
+	color: #000;margin-top: 10px;margin-left: 100px;position: absolute;
 }
 .list_div .item_div .showDetail_span{
 	color: #00f;margin-top: 10px;margin-right: 110px;float: right;cursor: pointer;
@@ -52,10 +55,11 @@ $(function(){
 				var list=data.list;
 				for(var i=0;i<list.length;i++){
 					var item=list[i];
-					var htmlStr="<div class=\"createTime_div\">"+(item.enable==null?"":item.createTime)+"</div>";
+					var htmlStr="<div class=\"createDate_div\">"+item.createDate+"</div>";
 					htmlStr+="<div class=\"item_div\">";
 					htmlStr+="<div class=\"content_div\">";
 					htmlStr+="<span class=\"nickName_span\">"+item.nickName+"</span>";
+					htmlStr+="<span class=\"createTime_span\">"+item.createTime1+"</span>";
 					htmlStr+="<span class=\"showDetail_span\">查看积分明细</span>";
 					if(item.enable==null)
 						htmlStr+="<div class=\"codeNo_div\">奖品码   暂无</div>";

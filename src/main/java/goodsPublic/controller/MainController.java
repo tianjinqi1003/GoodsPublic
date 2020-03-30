@@ -668,7 +668,7 @@ public class MainController {
 	}
 	
 	@RequestMapping(value="/addScoreQrcode",produces="plain/text; charset=UTF-8")
-	public String addScoreQrcode(ScoreQrcode scoreQrcode, Integer createCount,
+	public String addScoreQrcode(ScoreQrcode scoreQrcode,
 			@RequestParam(value="file",required=false) MultipartFile file,
 			HttpServletRequest request) {
 		
@@ -682,25 +682,19 @@ public class MainController {
 				}
 			}
 
-			for(int i=0;i<createCount+1;i++) {
-				String uuid = UUID.randomUUID().toString().replaceAll("-", "");
-				scoreQrcode.setUuid(uuid);
-				String jsonParams="{\"accountId\":\""+scoreQrcode.getAccountNumber()+"\",\"uuid\":\""+uuid+"\"}";
-				String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf600e162d89732da&redirect_uri=http://www.qrcodesy.com/getCode.asp?jsonParams="+jsonParams+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
-				String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) +i+ ".jpg";
-				String avaPath="/GoodsPublic/upload/jfdhjp/"+fileName;
-				String path = "D:/resource/jfdhjp";
-				Qrcode.createQrCode(url, path, fileName);
-				
-				scoreQrcode.setQrcode(avaPath);
-				
-				if(i==0)
-					scoreQrcode.setExample(true);
-				else
-					scoreQrcode.setExample(false);
-				
-				int a=publicService.addScoreQrcode(scoreQrcode);
-			}
+			String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+			scoreQrcode.setUuid(uuid);
+			String jsonParams="{\"accountId\":\""+scoreQrcode.getAccountNumber()+"\",\"uuid\":\""+uuid+"\"}";
+			String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf600e162d89732da&redirect_uri=http://www.qrcodesy.com/getCode.asp?jsonParams="+jsonParams+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+			String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
+			String avaPath="/GoodsPublic/upload/jfdhjp/"+fileName;
+			String path = "D:/resource/jfdhjp";
+			Qrcode.createQrCode(url, path, fileName);
+			
+			scoreQrcode.setQrcode(avaPath);
+			scoreQrcode.setExample(true);
+			
+			int a=publicService.addScoreQrcode(scoreQrcode);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

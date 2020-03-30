@@ -75,9 +75,11 @@ function checkForm(){
 	if(checkIfLogined()){
 		if(checkIfPaid()){
 			if(checkScore()){
-				if(checkEndTime()){
-					if(checkCreateCount()){
-						return true;
+				if(checkDhjpScore()){
+					if(checkJpmdhReg()){
+						if(checkEndTime()){
+							return true;
+						}
 					}
 				}
 			}
@@ -99,6 +101,46 @@ function checkScore(){
 	if(score==null||score==""||score=="积分不能为空"){
 		$("#score_inp").css("color","#E15748");
     	$("#score_inp").val("积分不能为空");
+    	return false;
+	}
+	else{
+		return true;
+	}
+}
+
+function focusDhjpScore(){
+	var dhjpScore = $("#dhjpScore_inp").val();
+	if(dhjpScore=="兑换奖品积分不能为空"){
+		$("#dhjpScore_inp").val("");
+		$("#dhjpScore_inp").css("color", "#555555");
+	}
+}
+
+function checkDhjpScore(){
+	var dhjpScore = $("#dhjpScore_inp").val();
+	if(dhjpScore==null||dhjpScore==""||dhjpScore=="兑换奖品积分不能为空"){
+		$("#dhjpScore_inp").css("color","#E15748");
+    	$("#dhjpScore_inp").val("兑换奖品积分不能为空");
+    	return false;
+	}
+	else{
+		return true;
+	}
+}
+
+function focusJpmdhReg(){
+	var jpmdhReg = $("#jpmdhReg_ta").val();
+	if(jpmdhReg=="兑换奖品规则不能为空"){
+		$("#jpmdhReg_ta").val("");
+		$("#jpmdhReg_ta").css("color", "#555555");
+	}
+}
+
+function checkJpmdhReg(){
+	var jpmdhReg = $("#jpmdhReg_ta").val();
+	if(jpmdhReg==null||jpmdhReg==""||jpmdhReg=="兑换奖品规则不能为空"){
+		$("#jpmdhReg_ta").css("color","#E15748");
+    	$("#jpmdhReg_ta").val("兑换奖品规则不能为空");
     	return false;
 	}
 	else{
@@ -229,13 +271,32 @@ function initWindowMarginLeft(){
 			   </tr>
 			   <tr style="border-bottom: #CAD9EA solid 1px;">
 				 <td align="right">
-					<span>活动到期时间</span>
+					<span>兑换奖品积分</span>
 				 </td>
 				 <td>
-					<input id="endTime_dtb" name="endTime" type="text" value="" maxlength="20" onblur="check"/>
+					<input id="dhjpScore_inp" name="dhjpScore" type="text" value="" maxlength="20" onfocus="focusDhjpScore()" onblur="checkDhjpScore()"/>
 					<span style="color: #f00;">*</span>
 				 </td>
 			   </tr>
+			   <tr style="border-bottom: #CAD9EA solid 1px;">
+				 <td align="right">
+					<span>兑换奖品规则</span>
+				 </td>
+				 <td>
+				 	<textarea id="jpmdhReg_ta" name="jpmdhReg" rows="6" cols="23" onfocus="focusJpmdhReg()" onblur="checkJpmdhReg()">${requestScope.accountMsg.jpmdhReg }</textarea>
+					<span style="color: #f00;">*</span>
+				 </td>
+			   </tr>
+			   <tr style="border-bottom: #CAD9EA solid 1px;">
+				 <td align="right">
+					<span>活动到期时间</span>
+				 </td>
+				 <td>
+					<input id="endTime_dtb" name="endTime" type="text" value="" maxlength="20"/>
+					<span style="color: #f00;">*</span>
+				 </td>
+			   </tr>
+			   <!-- 
 			   <tr style="border-bottom: #CAD9EA solid 1px;">
 				 <td align="right">
 					<span>生成数量</span>
@@ -245,6 +306,15 @@ function initWindowMarginLeft(){
 					<span style="color: #f00;">*</span>
 				 </td>
 			   </tr>
+		<div style="margin-top:20px;">
+			<span style="font-size: 14px;color: #373737;font-weight: 700;">兑换奖品积分：</span>
+			<span>${requestScope.accountMsg.dhjpScore }</span>
+		</div>
+		<div style="margin-top:20px;">
+			<span style="font-size: 14px;color: #373737;font-weight: 700;">兑换奖品规则：</span>
+			<span>${requestScope.accountMsg.jpmdhReg }</span>
+		</div>
+			    -->
 			   <input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
 			</table>
 			</form>

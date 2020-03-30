@@ -49,6 +49,7 @@ $(function(){
             {field:"endTime",title:"活动到期时间",width:200},
             {field:"uuid",title:"操作",width:150,formatter:function(value,row){
             	var str="<a href=\"${pageContext.request.contextPath}/merchant/main/goEditModule?trade=spzs&moduleType="+row.moduleType+"&goodsNumber="+row.goodsNumber+"&accountNumber="+row.accountNumber+"\">编辑</a>";
+            	str+="&nbsp;&nbsp;<a>导出pdf</a>";
             	return str;
             }}
 	    ]],

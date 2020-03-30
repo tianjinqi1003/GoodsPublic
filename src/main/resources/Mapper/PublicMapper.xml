@@ -2048,12 +2048,6 @@
 			<if test="nickName!=''&amp;nickName!=null">
 				nickName=#{nickName},
 			</if>
-			<if test="dhjpScore!=''&amp;dhjpScore!=null">
-				dhjpScore=#{dhjpScore},
-			</if>
-			<if test="jpmdhReg!=''&amp;jpmdhReg!=null">
-				jpmdhReg=#{jpmdhReg},
-			</if>
 		</trim>
 		where id=#{id}
 	</update>
@@ -2104,7 +2098,7 @@
 		select goodsNumber,title,imgUrl,category_id from public_goods where category_id=#{param1} and accountNumber=#{param2}
 	</select>
 	<select id="queryCustomerScoreList" resultType="java.util.Map">
-		select j.id,date_format(p.createTime,'%m月%d日') createDate,date_format(p.createTime,'%H:%m:%s') createTime,j.nickName,p.codeNo,p.enable,j.takeCount,j.score from jfdhjp_customer j left join prize_code p on p.openId=j.openId and p.accountNumber=#{accountNumber} order by p.createTime desc
+		select uuid,t.openId,nickName,p.codeNo,takeCount,score,t.enable,t.createTime,date_format(t.createTime,'%m月%d日') createDate,date_format(t.createTime,'%H:%i:%s') createTime1 from(select s.uuid,s.openId,MAX(s.createTime) createTime,j.nickName,j.takeCount,j.score,s.enable from score_qrcode s left join jfdhjp_customer j on s.openId=j.openId where s.enable=1) t left join prize_code p on p.openId=t.openId and p.accountNumber=#{accountNumber} GROUP BY t.createTime order by t.createTime desc
 	</select>
 	<select id="getGoodsById" resultType="goodsPublic.entity.Goods">
 		select * from public_goods where id=#{param1}

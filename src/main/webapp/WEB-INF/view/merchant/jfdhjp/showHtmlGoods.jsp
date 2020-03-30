@@ -11,7 +11,7 @@
 var path='<%=basePath %>';
 var openId='${param.openId}';
 var sqUuid='${param.sqUuid}';
-var dhjpScore=parseInt('${requestScope.accountMsg.dhjpScore }');
+var dhjpScore=parseInt('${requestScope.scoreQrcode.dhjpScore }');
 var windowHeight=$(window).height();
 
 $(function(){
@@ -111,7 +111,7 @@ function showJFYE(){
 	background-repeat: no-repeat;margin: 30px auto 0;padding: 1px;display: none;">
 		<div id="value_div" style="color:#A3682E;font-size: 25px;text-align: center;margin-top:125px;">${requestScope.scoreQrcode.score }积分</div>
 		<div id="shopScore_div" style="width:100%;color: #FDE198;font-size: 25px;font-weight: 600;text-align: center;margin-top:125px;display: block;"><span id="shopScore_span">${requestScope.jc.score }</span>积分</div>
-		<div id="jpmdhReg_div" style="color: #FFCC66;font-size: 20px;margin-top:105px;padding: 0 20px 0 20px;word-wrap:break-word;display: block;">活动规则说明：${requestScope.accountMsg.jpmdhReg }</div>
+		<div id="jpmdhReg_div" style="color: #FFCC66;font-size: 20px;margin-top:105px;padding: 0 20px 0 20px;word-wrap:break-word;display: block;">活动规则说明：${requestScope.scoreQrcode.jpmdhReg }</div>
 	</div>
 	
 	<div id="djm_div" style="width: 350px;height:436px;background-image: url('/GoodsPublic/resource/images/jfdhjp/003.png');background-size: 100% auto;
@@ -124,7 +124,7 @@ function showJFYE(){
 			<span id="second_span" style="margin-left: 100px;position: absolute;">4</span>
 		</div>
 		<span id="syjf_span" style="color: #FFCC66;font-size:20px;margin-top:402px;margin-left: 163px;position: absolute;">50</span>
-		<div id="jpmdhReg_div" style="color: #FFCC66;font-size: 17px;margin-top:438px;word-wrap:break-word;display: block;">活动规则说明：${requestScope.accountMsg.jpmdhReg }</div>
+		<div id="jpmdhReg_div" style="color: #FFCC66;font-size: 17px;margin-top:438px;word-wrap:break-word;display: block;">活动规则说明：${requestScope.scoreQrcode.jpmdhReg }</div>
 	</div>
 	
 	<div id="qrcodeUsed_div" style="width: 350px;height:330px;background-image: url('/GoodsPublic/resource/images/jfdhjp/004.png');background-size: 100% auto;
@@ -136,7 +136,7 @@ function showJFYE(){
 			<div class="ckjfyeBut_div" onclick="showJFYE()" style="width: 203px;height:54px;margin:auto;"></div>
 		</div>
 		<div id="jfye_div" style="width: 350px;height:32px;color:#FFF699;font-size: 25px;text-align: center;margin-top:333px;"></div>
-		<div id="jpmdhReg_div" style="color: #fff;font-size: 17px;margin-top:20px;padding: 0 35px 0 35px;word-wrap:break-word;display: block;">活动规则说明：${requestScope.accountMsg.jpmdhReg }</div>
+		<div id="jpmdhReg_div" style="color: #fff;font-size: 17px;margin-top:20px;padding: 0 35px 0 35px;word-wrap:break-word;display: block;">活动规则说明：${requestScope.scoreQrcode.jpmdhReg }</div>
 	</div>
 	<div style="width: 100%;height:40px;line-height:40px;color: #fff;font-size: 17px;text-align: center;bottom: 0;position: fixed;">${requestScope.accountMsg.companyName }</div>
 </body>
