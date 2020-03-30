@@ -9,6 +9,54 @@
 <script type="text/javascript">
 var path='<%=basePath %>';
 $(function(){
+	$("#outputPDF_div").dialog({
+		title:"pdf预览",
+		width:setFitWidthInParent("body"),
+		height:setFitHeightInParent(".layui-side"),
+		top:60,
+		left:200,
+		buttons:[
+           {text:"提交",id:"ok_but",iconCls:"icon-ok",handler:function(){
+        	   if(checkIfPaid())
+        	   	  checkEdit();
+           }}
+        ]
+	});
+
+	$("#outputPDF_div table").css("width","1000px");
+	$("#outputPDF_div table td").css("padding-left","20px");
+	$("#outputPDF_div table td").css("padding-right","20px");
+	$("#outputPDF_div table td").css("font-size","15px");
+	$("#outputPDF_div table tr").css("height","45px");
+	$("#outputPDF_div table tr").each(function(){
+		$(this).find("td").eq(0).css("color","#006699");
+		$(this).find("td").eq(0).css("border-right","#CAD9EA solid 1px");
+		$(this).find("td").eq(0).css("font-weight","bold");
+		$(this).find("td").eq(0).css("background-color","#FAFDFE");
+	});
+
+	$("#outputPDF_div table tr").mousemove(function(){
+		$(this).css("background-color","#ddd");
+	}).mouseout(function(){
+		$(this).css("background-color","#fff");
+	});
+
+	$(".panel.window").css("width","983px");
+	$(".panel.window").css("margin-top","20px");
+	$(".panel.window").css("margin-left",initWindowMarginLeft());
+	$(".panel.window .panel-title").css("color","#000");
+	$(".panel.window .panel-title").css("font-size","15px");
+	$(".panel.window .panel-title").css("padding-left","10px");
+	
+	$(".panel-header, .panel-body").css("border-color","#ddd");
+	
+	//以下的是表格下面的面板
+	$(".window-shadow").css("width","1000px");
+	$(".window-shadow").css("margin-top","20px");
+	$(".window-shadow").css("margin-left",initWindowMarginLeft());
+	
+	$(".window,.window .window-body").css("border-color","#ddd");
+	
 	$("#add_but").linkbutton({
 		iconCls:"icon-add",
 		onClick:function(){
@@ -112,11 +160,65 @@ function setFitWidthInParent(o){
 	var width=$(o).css("width");
 	return width.substring(0,width.length-2)-270;
 }
+
+function setFitHeightInParent(o){
+	var height=$(o).css("height");
+	return height.substring(0,height.length-2)-98;
+}
+
+function initWindowMarginLeft(){
+	var editDivWidth=$("#outputPDF_div").css("width");
+	editDivWidth=editDivWidth.substring(0,editDivWidth.length-2);
+	var pwWidth=$(".panel.window").css("width");
+	pwWidth=pwWidth.substring(0,pwWidth.length-2);
+	return ((editDivWidth-pwWidth)/2)+"px";
+}
 </script>
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../../side.jsp"%>
+	<div id="outputPDF_div">
+		<input type="hidden" id="id" name="id" value="${requestScope.goodsLabelSet.id }"/>
+		<input type="hidden" id="accountNumber" name="accountNumber" value="${sessionScope.user.id }"/>
+		<table>
+		  <tr style="border-bottom: #CAD9EA solid 1px;">
+			<td align="right" style="width:40%;">
+				<div style="height: 150px;margin-top: 10px;">
+					<span style="margin-top: 35px;margin-left:-313px;position: absolute;">文字内容（左上）：</span>
+					<textarea rows="5" cols="20" style="margin-left: -172px;position: absolute;">aaaaaaaaa</textarea>
+				</div>
+				<div style="height: 150px;margin-top: 10px;">
+					<span style="margin-top: 35px;margin-left:-313px;position: absolute;">文字内容（右下）：</span>
+					<textarea rows="5" cols="20" style="margin-left: -172px;position: absolute;">bbbbbbbb</textarea>
+				</div>
+				<div style="height: 45px;">
+					文字位置：
+					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','up')">上移</a>
+					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','down')">下移</a>
+					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','left')">左移</a>
+					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','right')">右移</a>
+				</div>
+				<div style="height: 45px;">
+					二维码位置：
+					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('qpbh_span','up')">上移</a>
+					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('qpbh_span','down')">下移</a>
+					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('qpbh_span','left')">左移</a>
+					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('qpbh_span','right')">右移</a>
+				</div>
+			</td>
+			<td>
+				<div style="width: 500px;height:400px;margin: 20px 0 20px;border: #999 solid 1px;">
+					<div style="width: 200px;height:200px;margin-top:20px;margin-left:20px;border: #999 dotted 1px;">aaaaaaaaa</div>
+					<img alt="" src="/GoodsPublic/upload/jfdhjp/20200330132119.jpg" style="width: 200px;height:200px;margin-top: -200px;margin-left: 250px;border: #999 dotted 1px;">
+					<div style="width: 200px;height:130px;margin-top:20px;margin-left:250px;border: #999 dotted 1px;">bbbbbbbb</div>
+				</div>
+			</td>
+		  </tr>
+		</table>
+		</form>
+	</div>
+	
 	<div id="tab1_div" style="margin-top:20px;margin-left: 238px;">
 		<div id="toolbar" style="height:32px;line-height:32px;">
 			<a id="add_but" style="margin-left: 13px;">添加</a>
