@@ -9,55 +9,7 @@
 <script type="text/javascript">
 var path='<%=basePath %>';
 $(function(){
-	$("#outputPDF_div").dialog({
-		title:"pdf预览",
-		width:setFitWidthInParent("body"),
-		height:setFitHeightInParent(".layui-side"),
-		buttons:[
-           {text:"下一步",id:"next_but",iconCls:"icon-ok",handler:function(){
-        	   
-           }}
-        ]
-	});
-
-	$("#outputPDF_div table").css("width","1000px");
-	$("#outputPDF_div table td").css("padding-left","20px");
-	$("#outputPDF_div table td").css("padding-right","20px");
-	$("#outputPDF_div table td").css("font-size","15px");
-	$("#outputPDF_div table tr").css("height","45px");
-	$("#outputPDF_div table tr").each(function(){
-		$(this).find("td").eq(0).css("color","#006699");
-		$(this).find("td").eq(0).css("border-right","#CAD9EA solid 1px");
-		$(this).find("td").eq(0).css("font-weight","bold");
-		$(this).find("td").eq(0).css("background-color","#FAFDFE");
-	});
-
-	$("#outputPDF_div table tr").mousemove(function(){
-		$(this).css("background-color","#ddd");
-	}).mouseout(function(){
-		$(this).css("background-color","#fff");
-	});
-
-	$(".panel.window").css("width","983px");
-	$(".panel.window").css("margin-top","20px");
-	$(".panel.window").css("margin-left",initWindowMarginLeft());
-	$(".panel.window .panel-title").css("color","#000");
-	$(".panel.window .panel-title").css("font-size","15px");
-	$(".panel.window .panel-title").css("padding-left","10px");
-	
-	$(".panel-header, .panel-body").css("border-color","#ddd");
-	
-	//以下的是表格下面的面板
-	$(".window-shadow").css("width","1000px");
-	$(".window-shadow").css("margin-top","20px");
-	$(".window-shadow").css("margin-left",initWindowMarginLeft());
-	
-	$(".window,.window .window-body").css("border-color","#ddd");
-
-	$("#next_but").css("left","45%");
-	$("#next_but").css("position","absolute");
-	$(".dialog-button").css("background-color","#fff");
-	$(".dialog-button .l-btn-text").css("font-size","20px");
+	initOutputPDFDiv();
 	
 	$("#add_but").linkbutton({
 		iconCls:"icon-add",
@@ -127,6 +79,109 @@ $(function(){
 	});
 });
 
+function initOutputPDFDiv(){
+	$("#outputPDF_div").dialog({
+		title:"pdf预览",
+		width:setFitWidthInParent("body"),
+		height:setFitHeightInParent(".layui-side"),
+		buttons:[
+           {text:"上一步",id:"pre_but",iconCls:"icon-ok",handler:function(){
+        	   goStep(1);
+           }},
+           {text:"下一步",id:"next_but",iconCls:"icon-ok",handler:function(){
+        	   goStep(2);
+           }},
+           {text:"预览",id:"preview_but",iconCls:"icon-ok",handler:function(){
+        	   if(checkCreateCount()){
+        		   previewPdfView();
+        	   }
+           }}
+        ]
+	});
+
+	$("#outputPDF_div table").css("width","1000px");
+	$("#outputPDF_div table td").css("padding-left","20px");
+	$("#outputPDF_div table td").css("padding-right","20px");
+	$("#outputPDF_div table td").css("font-size","15px");
+	$("#outputPDF_div table tr").css("height","45px");
+	$("#outputPDF_div table tr").each(function(){
+		$(this).find("td").eq(0).css("color","#006699");
+		$(this).find("td").eq(0).css("border-right","#CAD9EA solid 1px");
+		$(this).find("td").eq(0).css("font-weight","bold");
+		$(this).find("td").eq(0).css("background-color","#FAFDFE");
+	});
+
+	$("#outputPDF_div table tr").mousemove(function(){
+		$(this).css("background-color","#ddd");
+	}).mouseout(function(){
+		$(this).css("background-color","#fff");
+	});
+
+	$(".panel.window").css("width","983px");
+	$(".panel.window").css("margin-top","20px");
+	$(".panel.window").css("margin-left",initWindowMarginLeft());
+	$(".panel.window .panel-title").css("color","#000");
+	$(".panel.window .panel-title").css("font-size","15px");
+	$(".panel.window .panel-title").css("padding-left","10px");
+	
+	$(".panel-header, .panel-body").css("border-color","#ddd");
+	
+	//以下的是表格下面的面板
+	$(".window-shadow").css("width","1000px");
+	$(".window-shadow").css("margin-top","20px");
+	$(".window-shadow").css("margin-left",initWindowMarginLeft());
+	
+	$(".window,.window .window-body").css("border-color","#ddd");
+
+	$("#pre_but").css("left","30%");
+	$("#pre_but").css("position","absolute");
+	$("#next_but").css("left","45%");
+	$("#next_but").css("position","absolute");
+	$("#preview_but").css("left","45%");
+	$("#preview_but").css("position","absolute");
+	$("#preview_but").css("display","none");
+	$(".dialog-button").css("background-color","#fff");
+	$(".dialog-button .l-btn-text").css("font-size","20px");
+}
+
+function goStep(stepIndex){
+	switch(stepIndex){
+	case 1:
+		$("#outputPDF_div #tab1").css("display","block");
+	    $("#outputPDF_div #tab2").css("display","none");
+ 	    $("#outputPDF_div #next_but").css("display","block");
+ 	    $("#outputPDF_div #preview_but").css("display","none");
+		break;
+	case 2:
+		$("#outputPDF_div #tab1").css("display","none");
+ 	    $("#outputPDF_div #tab2").css("display","block");
+ 	    $("#outputPDF_div #next_but").css("display","none");
+ 	    $("#outputPDF_div #preview_but").css("display","block");
+		break;
+	case 3:
+		break;
+	}
+}
+
+function checkCreateCount(){
+	var createCount = $("#createCount_inp").val();
+	if(createCount==""||createCount==null){
+		alert("请输入生成数量！");
+		return false;
+	}
+	else
+		return true;
+}
+
+function previewPdfView(){
+	var prePdfDiv=$("#prePdf_div");
+	prePdfDiv.empty();
+	var createCount = $("#createCount_inp").val();
+	for(var i=0;i<createCount;i++){
+		prePdfDiv.append($("#tab1 #qrcode_div").clone());
+	}
+}
+
 //重设列宽
 function reSizeCol(){
 	var width=$(".panel.datagrid").css("width");
@@ -162,15 +217,15 @@ function showTextLocArea(){
 	var text=$("#text_ta").val();
 	var checked=$("#leftUp_rad").prop("checked");
 	if(checked){
-		$("#luta_div").css("display","block");
+		$("#luta_div").css("border","#999 dotted 1px");
 		$("#luta_div").text(text);
-		$("#rdta_div").css("display","none");
+		$("#rdta_div").css("border","0");
 		$("#rdta_div").text("");
 	}
 	else{
-		$("#luta_div").css("display","none");
+		$("#luta_div").css("border","0");
 		$("#luta_div").text("");
-		$("#rdta_div").css("display","block");
+		$("#rdta_div").css("border","#999 dotted 1px");
 		$("#rdta_div").text(text);
 	}
 }
@@ -198,9 +253,7 @@ function initWindowMarginLeft(){
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../../side.jsp"%>
 	<div id="outputPDF_div">
-		<input type="hidden" id="id" name="id" value="${requestScope.goodsLabelSet.id }"/>
-		<input type="hidden" id="accountNumber" name="accountNumber" value="${sessionScope.user.id }"/>
-		<table>
+		<table id="tab1">
 		  <tr style="border-bottom: #CAD9EA solid 1px;">
 			<td align="right" style="width:40%;">
 				<div style="height: 45px;">
@@ -230,15 +283,32 @@ function initWindowMarginLeft(){
 				</div>
 			</td>
 			<td>
-				<div style="width: 500px;height:400px;margin: 20px 0 20px;border: #999 solid 1px;">
-					<div id="luta_div" style="width: 200px;height:350px;margin-top:20px;margin-left:20px;word-wrap:break-word;border: #999 dotted 1px;position: absolute;"></div>
-					<img alt="" src="/GoodsPublic/upload/jfdhjp/20200330132119.jpg" style="width: 200px;height:200px;margin-top: 20px;margin-left: 250px;border: #999 dotted 1px;position: absolute;">
-					<div id="rdta_div" style="width: 200px;height:130px;margin-top:240px;margin-left:250px;word-wrap:break-word;border: #999 dotted 1px;position: absolute;display: none;"></div>
+				<div id="qrcode_div" style="width: 500px;height:400px;margin: 20px 0 20px;border: #999 solid 1px;">
+					<div id="luta_div" style="width: 200px;height:200px;margin-top:20px;margin-left:20px;word-wrap:break-word;border: #999 dotted 1px;"></div>
+					<img alt="" src="/GoodsPublic/upload/jfdhjp/20200330132119.jpg" style="width: 200px;height:200px;margin-top: -202px;margin-left: 250px;border: #999 dotted 1px;">
+					<div id="rdta_div" style="width: 200px;height:130px;margin-top:25px;margin-left:250px;word-wrap:break-word;border: #999 dotted 0px;"></div>
 				</div>
 			</td>
 		  </tr>
 		</table>
-		</form>
+		<table id="tab2" style="display: none;">
+		  <tr style="border-bottom: #CAD9EA solid 1px;">
+			<td align="right" style="width:40%;">
+				二维码数量：
+			</td>
+			<td>
+				<div style="width: 200px;">
+					<input id="createCount_inp" name="createCount" type="number" value="1" maxlength="20" onblur="checkCreateCount()"/>
+					<span style="color: #f00;">*</span>
+				</div>
+			</td>
+		  </tr>
+		  <tr>
+		  	<td colspan="2">
+				<div id="prePdf_div" style="width: 1000px;height:auto;margin:0 auto;overflow-y:scroll; background-color: yellow;position: absolute;"></div>
+		  	</td>
+		  </tr>
+		</table>
 	</div>
 	
 	<div id="tab1_div" style="margin-top:20px;margin-left: 238px;">

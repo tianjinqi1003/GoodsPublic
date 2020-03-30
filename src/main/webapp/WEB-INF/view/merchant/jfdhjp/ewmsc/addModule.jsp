@@ -158,16 +158,6 @@ function checkEndTime(){
 		return true;
 }
 
-function checkCreateCount(){
-	var createCount = $("#createCount_inp").val();
-	if(createCount==""||createCount==null){
-		alert("请输入生成数量！");
-		return false;
-	}
-	else
-		return true;
-}
-
 function checkIfLogined(){
 	var bool=false;
 	$.ajaxSetup({async:false});
