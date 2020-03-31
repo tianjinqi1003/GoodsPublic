@@ -6,6 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>积分二维码</title>
 <%@include file="../../js.jsp"%>
+<script type="text/javascript" src="<%=basePath %>resource/js/pdf/jspdf.debug.js"></script>
+<script type="text/javascript" src="<%=basePath %>resource/js/pdf/html2canvas.min.js"></script>
 <script type="text/javascript">
 var path='<%=basePath %>';
 $(function(){
@@ -80,7 +82,7 @@ $(function(){
 });
 
 function initOutputPDFDiv(){
-	$("#outputPDF_div").dialog({
+	$("#previewPDF_div").dialog({
 		title:"pdf预览",
 		width:setFitWidthInParent("body"),
 		height:setFitHeightInParent(".layui-side"),
@@ -91,26 +93,26 @@ function initOutputPDFDiv(){
            {text:"下一步",id:"next_but",iconCls:"icon-ok",handler:function(){
         	   goStep(2);
            }},
-           {text:"预览",id:"preview_but",iconCls:"icon-ok",handler:function(){
-        	   
+           {text:"导出Pdf",id:"outputPdf_but",iconCls:"icon-ok",handler:function(){
+        	   outputPdf();
            }}
         ]
 	});
 
-	$("#outputPDF_div #tab1").css("width","1000px");
-	$("#outputPDF_div #tab2").css("width","500px");
-	$("#outputPDF_div table td").css("padding-left","20px");
-	$("#outputPDF_div table td").css("padding-right","20px");
-	$("#outputPDF_div table td").css("font-size","15px");
-	$("#outputPDF_div table tr").css("height","45px");
-	$("#outputPDF_div table tr").each(function(){
+	$("#previewPDF_div #tab1").css("width","1000px");
+	$("#previewPDF_div #tab2").css("width","500px");
+	$("#previewPDF_div table td").css("padding-left","20px");
+	$("#previewPDF_div table td").css("padding-right","20px");
+	$("#previewPDF_div table td").css("font-size","15px");
+	$("#previewPDF_div table tr").css("height","45px");
+	$("#previewPDF_div table tr").each(function(){
 		$(this).find("td").eq(0).css("color","#006699");
 		$(this).find("td").eq(0).css("border-right","#CAD9EA solid 1px");
 		$(this).find("td").eq(0).css("font-weight","bold");
 		$(this).find("td").eq(0).css("background-color","#FAFDFE");
 	});
 
-	$("#outputPDF_div table tr").mousemove(function(){
+	$("#previewPDF_div table tr").mousemove(function(){
 		$(this).css("background-color","#ddd");
 	}).mouseout(function(){
 		$(this).css("background-color","#fff");
@@ -136,20 +138,105 @@ function initOutputPDFDiv(){
 	$("#pre_but").css("position","absolute");
 	$("#next_but").css("left","45%");
 	$("#next_but").css("position","absolute");
-	$("#preview_but").css("left","45%");
-	$("#preview_but").css("position","absolute");
-	$("#preview_but").css("display","none");
+	$("#outputPdf_but").css("left","45%");
+	$("#outputPdf_but").css("position","absolute");
+	$("#outputPdf_but").css("display","none");
 	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","20px");
+}
+
+var marginTop=10;
+var marginLeft=10;
+var pdfHeight=420;
+
+function outputPdf(){
+	var createCount=$("#createCount_inp").val();
+	for(var i=0;i<createCount;i++){
+		if(i==0){
+			
+		}
+		else if(i%2==1){
+			marginTop=-422;
+		    marginLeft=530;
+		}
+		else if(i%2==0){
+	    	marginTop+=420;
+	    	marginLeft=10;
+	    	pdfHeight+=420;
+	    }
+		var qrcodeDiv=$("#qrcode_div").clone();
+		qrcodeDiv.css("margin-top",marginTop+"px");
+		qrcodeDiv.css("margin-left",marginLeft+"px");
+	    $("#outputPdf_div").append(qrcodeDiv);
+	}
+	$("#outputPdf_div").css("height",pdfHeight+"px");
+	//return false;
+	
+	html2canvas(
+               document.getElementById("outputPdf_div"),
+               {
+                   dpi: 172,//导出pdf清晰度
+                   onrendered: function (canvas) {
+                       var contentWidth = canvas.width;
+                       var contentHeight = canvas.height;
+
+                       //一页pdf显示html页面生成的canvas高度;
+                       var pageHeight = contentWidth / 592.28 * 841.89;
+                       //var pageHeight = 300;
+                       //未生成pdf的html页面高度
+                       var leftHeight = contentHeight;
+                       //pdf页面偏移
+                       var position = 0;
+                       //html页面生成的canvas在pdf中图片的宽高（a4纸的尺寸[595.28,841.89]）
+                       var imgWidth = 595.28;
+                       var imgHeight = 592.28 / contentWidth * contentHeight;
+                       //var imgWidth = 500;
+                       //var imgHeight = 300;
+
+                       var pageData = canvas.toDataURL('image/jpeg', 1.0);
+                       var pdf = new jsPDF('', 'pt', 'a4');
+
+                       //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+                       //alert(leftHeight+","+imgHeight);
+                       //当内容未超过pdf一页显示的范围，无需分页
+                       if (leftHeight < pageHeight) {
+                           pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
+                       } else {
+                           while (leftHeight > 0) {
+                               pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+                               leftHeight -= pageHeight;
+                               position -= 841.89;
+                               //避免添加空白页
+                               if (leftHeight > 0) {
+                                   pdf.addPage();
+                               }
+                           }
+                       }
+                       pdf.save('aaa.pdf');
+                       $("#previewPdf_div").empty();
+                       /*
+                       var firstPdfDiv=$("#outputPdf_div div[id^='pdf_div']").first();
+                       firstPdfDiv.css("height","300px");
+                       $("#previewPdf_div").append(firstPdfDiv);
+                       
+                       $("#outputPdf_div").empty();
+	           		   $("#outputPdf_div").css("height","0px");
+	           		   $("#outputPdf_div").css("display","none");
+                        */
+                   },
+                   //背景设为白色（默认为黑色）
+                   background: "#fff"  
+               }
+            )
 }
 
 function goStep(stepIndex){
 	switch(stepIndex){
 	case 1:
- 		$("#outputPDF_div").css("height","527px");
-		$("#outputPDF_div #tab1").css("display","block");
- 		$("#outputPDF_div #tab1").css("height","443px");
-	    $("#outputPDF_div #tab2").css("display","none");
+ 		$("#previewPDF_div").css("height","527px");
+		$("#previewPDF_div #tab1").css("display","block");
+ 		$("#previewPDF_div #tab1").css("height","443px");
+	    $("#previewPDF_div #tab2").css("display","none");
  	    
  		$(".panel.window").css("width","983px");
  		$(".panel.window").css("height","586px");
@@ -159,14 +246,14 @@ function goStep(stepIndex){
  		$(".window-shadow").css("margin-left",initWindowMarginLeft());
  		$(".dialog-content").css("height","490px");
 	    
- 	    $("#outputPDF_div #next_but").css("display","block");
- 	    $("#outputPDF_div #preview_but").css("display","none");
+ 	    $("#previewPDF_div #next_but").css("display","block");
+ 	    $("#previewPDF_div #outputPdf_but").css("display","none");
 		break;
 	case 2:
- 		$("#outputPDF_div").css("height","100px");
-		$("#outputPDF_div #tab1").css("display","none");
- 	    $("#outputPDF_div #tab2").css("display","block");
- 		$("#outputPDF_div #tab2").css("height","60px");
+ 		$("#previewPDF_div").css("height","100px");
+		$("#previewPDF_div #tab1").css("display","none");
+ 	    $("#previewPDF_div #tab2").css("display","block");
+ 		$("#previewPDF_div #tab2").css("height","60px");
  	    
  		$(".panel.window").css("width","480px");
  		$(".panel.window").css("height","150px");
@@ -176,9 +263,9 @@ function goStep(stepIndex){
  		$(".window-shadow").css("margin-left",initWindowMarginLeft());
  		$(".dialog-content").css("height","60px");
  	    
- 	    $("#outputPDF_div #next_but").css("display","none");
- 	    $("#outputPDF_div #preview_but").css("display","block");
- 		$("#outputPDF_div #preview_but").css("left","55%");
+ 	    $("#previewPDF_div #next_but").css("display","none");
+ 	    $("#previewPDF_div #outputPdf_but").css("display","block");
+ 		$("#previewPDF_div #outputPdf_but").css("left","55%");
 		break;
 	case 3:
 		break;
@@ -193,15 +280,6 @@ function checkCreateCount(){
 	}
 	else
 		return true;
-}
-
-function previewPdfView(){
-	var prePdfDiv=$("#prePdf_div");
-	prePdfDiv.empty();
-	var createCount = $("#createCount_inp").val();
-	for(var i=0;i<createCount;i++){
-		prePdfDiv.append($("#tab1 #qrcode_div").clone());
-	}
 }
 
 //重设列宽
@@ -240,13 +318,13 @@ function showTextLocArea(){
 	var checked=$("#leftUp_rad").prop("checked");
 	if(checked){
 		$("#luta_div").css("border","#999 dotted 1px");
-		$("#luta_div").text(text);
+		$("#luta_span").text(text);
 		$("#rdta_div").css("border","0");
 		$("#rdta_div").text("");
 	}
 	else{
 		$("#luta_div").css("border","0");
-		$("#luta_div").text("");
+		$("#luta_span").text("");
 		$("#rdta_div").css("border","#999 dotted 1px");
 		$("#rdta_div").text(text);
 	}
@@ -263,7 +341,7 @@ function setFitHeightInParent(o){
 }
 
 function initWindowMarginLeft(){
-	var editDivWidth=$("#outputPDF_div").css("width");
+	var editDivWidth=$("#previewPDF_div").css("width");
 	editDivWidth=editDivWidth.substring(0,editDivWidth.length-2);
 	var pwWidth=$(".panel.window").css("width");
 	pwWidth=pwWidth.substring(0,pwWidth.length-2);
@@ -274,7 +352,7 @@ function initWindowMarginLeft(){
 <body>
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../../side.jsp"%>
-	<div id="outputPDF_div">
+	<div id="previewPDF_div">
 		<table id="tab1">
 		  <tr style="border-bottom: #CAD9EA solid 1px;">
 			<td align="right" style="width:40%;">
@@ -287,7 +365,7 @@ function initWindowMarginLeft(){
 				</div>
 				<div style="height: 200px;">
 					<span style="margin-top: 25px;margin-left:-252px;position: absolute;">文字内容：</span>
-					<textarea rows="10" cols="20" id="text_ta" maxlength="200" onkeydown="showTextLocArea();" style="margin-left: -172px;position: absolute;"></textarea>
+					<textarea rows="10" cols="20" id="text_ta" maxlength="200" onkeyup="showTextLocArea();" style="margin-left: -172px;position: absolute;"></textarea>
 				</div>
 				<div style="height: 45px;">
 					文字方位：
@@ -306,7 +384,9 @@ function initWindowMarginLeft(){
 			</td>
 			<td>
 				<div id="qrcode_div" style="width: 500px;height:400px;margin: 20px 0 20px;border: #999 solid 1px;">
-					<div id="luta_div" style="width: 200px;height:200px;margin-top:20px;margin-left:20px;word-wrap:break-word;border: #999 dotted 1px;"></div>
+					<div id="luta_div" style="width: 200px;height:200px;margin-top:20px;margin-left:20px;word-wrap:break-word;border: #999 dotted 1px;">
+						<span id="luta_span"></span>
+					</div>
 					<img alt="" src="/GoodsPublic/upload/jfdhjp/20200330132119.jpg" style="width: 200px;height:200px;margin-top: -202px;margin-left: 250px;border: #999 dotted 1px;">
 					<div id="rdta_div" style="width: 200px;height:130px;margin-top:25px;margin-left:250px;word-wrap:break-word;border: #999 dotted 0px;"></div>
 				</div>
@@ -327,6 +407,9 @@ function initWindowMarginLeft(){
 			</td>
 		  </tr>
 		</table>
+	</div>
+	
+	<div id="outputPdf_div" style="width: 1200px;height:420px;margin:0 auto;padding: 1px;display: block;background-color: yellow;">
 	</div>
 	
 	<div id="tab1_div" style="margin-top:20px;margin-left: 238px;">
