@@ -19,6 +19,7 @@
 <script type="text/javascript" src="<%=basePath %>resource/js/pdf/html2canvas.min.js"></script>
 <script type="text/javascript">
 var path='<%=basePath %>';
+var accountNumber='${sessionScope.user.id }';
 $(function(){
 	initOutputPDFDiv();
 	
@@ -62,7 +63,7 @@ $(function(){
             {field:"endTime",title:"活动到期时间",width:200},
             {field:"uuid",title:"操作",width:150,formatter:function(value,row){
             	var str="<a href=\"${pageContext.request.contextPath}/merchant/main/goEditModule?trade=spzs&moduleType="+row.moduleType+"&goodsNumber="+row.goodsNumber+"&accountNumber="+row.accountNumber+"\">编辑</a>";
-            	str+="&nbsp;&nbsp;<a>导出pdf</a>";
+            	str+="&nbsp;&nbsp;<a onclick=\"showPreviewPDFDiv('"+row.shopLogo+"','"+row.score+"','"+row.endTime+"')\">导出pdf</a>";
             	return str;
             }}
 	    ]],
@@ -90,6 +91,15 @@ $(function(){
 	});
 });
 
+function showPreviewPDFDiv(shopLogo,score,endTime){
+	$("#bg_div").css("display","block");
+	$("#previewPDF_div").dialog('open');
+	
+	$("#previewPDF_div #shopLogo_hid").val(shopLogo);
+	$("#previewPDF_div #score_hid").val(score);
+	$("#previewPDF_div #endTime_hid").val(endTime);
+}
+
 function initOutputPDFDiv(){
 	$("#previewPDF_div").dialog({
 		title:"pdf预览",
@@ -107,7 +117,8 @@ function initOutputPDFDiv(){
            }}
         ]
 	});
-
+	
+	$("#previewPDF_div").dialog('close');
 	$("#previewPDF_div #tab1").css("width","1000px");
 	$("#previewPDF_div #tab2").css("width","500px");
 	$("#previewPDF_div table td").css("padding-left","20px");
@@ -174,10 +185,14 @@ function outputPdf(){
 	    	pdfHeight+=420;
 	    }
 		var qrcodeDiv=$("#qrcode_div").clone();
+		qrcodeDiv.attr("id","qrcode_div"+i);
 		qrcodeDiv.css("margin-top",marginTop+"px");
 		qrcodeDiv.css("margin-left",marginLeft+"px");
 	    $("#outputPdf_div").append(qrcodeDiv);
 	}
+	$("#outputPdf_div div[id^='qrcode_div']").each(function(i){
+		createJFDHJPQrcode($(this),i);
+	});
 	$("#outputPdf_div").css("height",pdfHeight+"px");
 	//return false;
 	
@@ -237,6 +252,35 @@ function outputPdf(){
                    background: "#fff"  
                }
             )
+            
+            var shopLogo=$("#shopLogo_hid").val();
+            var score=$("#score_hid").val();
+            var endTime=$("#endTime_hid").val();
+            qrcodeUuidsStr=qrcodeUuidsStr.substring(1);
+			qrcodeUrlsStr=qrcodeUrlsStr.substring(1);
+            $.post("addBatchScoreQrcode",
+ 				{shopLogo:shopLogo,score:score,endTime:endTime,accountNumber:accountNumber,example:false,qrcodeUuidsStr:qrcodeUuidsStr,qrcodeUrlsStr:qrcodeUrlsStr},
+			   function(data){
+  			   	  alert(data.info);
+   		   	   }
+   		   ,"json");
+}
+
+var qrcodeUuidsStr="";
+var qrcodeUrlsStr="";
+function createJFDHJPQrcode(qrcodeDiv,qrcodeIndex){
+   $.ajaxSetup({async:false});
+   $.post("createJFDHJPQrcode",
+	   {accountNumber:accountNumber,qrcodeIndex:qrcodeIndex},
+	   function(data){
+		   var uuid=data.uuid;
+		   var qrcodeUrl=data.qrcodeUrl;
+		   qrcodeUuidsStr+=","+uuid;
+		   qrcodeUrlsStr+=","+qrcodeUrl;
+		   qrcodeDiv.attr("uuid",uuid);
+		   qrcodeDiv.find("img[id='qrcode_img']").attr("src",qrcodeUrl);
+   	   }
+   ,"json");
 }
 
 function goStep(stepIndex){
@@ -362,6 +406,9 @@ function initWindowMarginLeft(){
 <div class="layui-layout layui-layout-admin">
 	<div class="bg_div" id="bg_div">
 		<div id="previewPDF_div">
+			<input type="hidden" id="shopLogo_hid"/>
+			<input type="hidden" id="score_hid"/>
+			<input type="hidden" id="endTime_hid"/>
 			<table id="tab1">
 			  <tr style="border-bottom: #CAD9EA solid 1px;">
 				<td align="right" style="width:40%;">
@@ -396,7 +443,7 @@ function initWindowMarginLeft(){
 						<div id="luta_div" style="width: 200px;height:200px;margin-top:20px;margin-left:20px;word-wrap:break-word;border: #999 dotted 1px;">
 							<span id="luta_span"></span>
 						</div>
-						<img alt="" src="/GoodsPublic/upload/jfdhjp/20200330132119.jpg" style="width: 200px;height:200px;margin-top: -202px;margin-left: 250px;border: #999 dotted 1px;">
+						<img id="qrcode_img" alt="" src="/GoodsPublic/upload/jfdhjp/20200330132119.jpg" style="width: 200px;height:200px;margin-top: -202px;margin-left: 250px;border: #999 dotted 1px;">
 						<div id="rdta_div" style="width: 200px;height:130px;margin-top:25px;margin-left:250px;word-wrap:break-word;border: #999 dotted 0px;"></div>
 					</div>
 				</td>

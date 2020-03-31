@@ -667,6 +667,34 @@ public class MainController {
 			return "../../merchant/main/goBrowseHtmlGoodsJZSG?userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountNumber="+htmlGoodsJZSG.getAccountNumber();
 	}
 	
+	@RequestMapping(value="/addBatchScoreQrcode")
+	@ResponseBody
+	public Map<String, Object> addBatchScoreQrcode(ScoreQrcode scoreQrcode,String qrcodeUuidsStr,String qrcodeUrlsStr) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		String[] qrcodeUuidArr = qrcodeUuidsStr.split(",");
+		String[] qrcodeUrlArr = qrcodeUrlsStr.split(",");
+		
+		int count = 0;
+		for (int i = 0; i < qrcodeUuidArr.length; i++) {
+			scoreQrcode.setUuid(qrcodeUuidArr[i]);
+			scoreQrcode.setQrcode(qrcodeUrlArr[i]);
+			count += publicService.addScoreQrcode(scoreQrcode);
+		}
+		
+		if(count==qrcodeUuidArr.length) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "生成成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "生成失败！");
+		}
+		
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/addScoreQrcode",produces="plain/text; charset=UTF-8")
 	public String addScoreQrcode(ScoreQrcode scoreQrcode,
 			@RequestParam(value="file",required=false) MultipartFile file,
@@ -701,6 +729,31 @@ public class MainController {
 		}
 		
 		return "../../merchant/main/goHtmlGoodsList?trade=jfdhjp&nav=ewmsc&accountId="+scoreQrcode.getAccountNumber();
+	}
+
+	/**
+	 * 生成积分兑换奖品二维码
+	 * @param url
+	 * @param qpbh
+	 * @return
+	 */
+	@RequestMapping(value="/createJFDHJPQrcode")
+	@ResponseBody
+	public Map<String, Object> createJFDHJPQrcode(String accountNumber, Integer qrcodeIndex) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+		String jsonParams="{\"accountId\":\""+accountNumber+"\",\"uuid\":\""+uuid+"\"}";
+		String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf600e162d89732da&redirect_uri=http://www.qrcodesy.com/getCode.asp?jsonParams="+jsonParams+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+		String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) +qrcodeIndex+ ".jpg";
+		String avaPath="/GoodsPublic/upload/jfdhjp/"+fileName;
+		String path = "D:/resource/jfdhjp";
+        Qrcode.createQrCode(url, path, fileName);
+        
+        jsonMap.put("uuid", uuid);
+        jsonMap.put("qrcodeUrl", avaPath);
+		
+		return jsonMap;
 	}
 	
 	/**
