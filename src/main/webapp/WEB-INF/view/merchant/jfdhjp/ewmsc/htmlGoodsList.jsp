@@ -6,6 +6,15 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>积分二维码</title>
 <%@include file="../../js.jsp"%>
+<style type="text/css">
+.bg_div{
+	width: 100%;height:100%;
+	background: rgba(0,0,0,0.65);
+	position: fixed;
+	display: none;
+	z-index: 1001;
+}
+</style>
 <script type="text/javascript" src="<%=basePath %>resource/js/pdf/jspdf.debug.js"></script>
 <script type="text/javascript" src="<%=basePath %>resource/js/pdf/html2canvas.min.js"></script>
 <script type="text/javascript">
@@ -351,66 +360,66 @@ function initWindowMarginLeft(){
 </head>
 <body>
 <div class="layui-layout layui-layout-admin">
-	<%@include file="../../side.jsp"%>
-	<div id="previewPDF_div">
-		<table id="tab1">
-		  <tr style="border-bottom: #CAD9EA solid 1px;">
-			<td align="right" style="width:40%;">
-				<div style="height: 45px;">
-					<span style="margin-left:-252px;position: absolute;">文字位置：</span>
-					<div style="width:150px;margin-left: 150px;position: absolute;">
-						左上&nbsp;<input type="radio" id="leftUp_rad" name="textLoc" checked="checked" onclick="showTextLocArea()"/>&nbsp;&nbsp;&nbsp;
-						右下&nbsp;<input type="radio" id="rightDown_rad" name="textLoc" onclick="showTextLocArea()"/>
+	<div class="bg_div" id="bg_div">
+		<div id="previewPDF_div">
+			<table id="tab1">
+			  <tr style="border-bottom: #CAD9EA solid 1px;">
+				<td align="right" style="width:40%;">
+					<div style="height: 45px;">
+						<span style="margin-left:-252px;position: absolute;">文字位置：</span>
+						<div style="width:150px;margin-left: 150px;position: absolute;">
+							左上&nbsp;<input type="radio" id="leftUp_rad" name="textLoc" checked="checked" onclick="showTextLocArea()"/>&nbsp;&nbsp;&nbsp;
+							右下&nbsp;<input type="radio" id="rightDown_rad" name="textLoc" onclick="showTextLocArea()"/>
+						</div>
 					</div>
-				</div>
-				<div style="height: 200px;">
-					<span style="margin-top: 25px;margin-left:-252px;position: absolute;">文字内容：</span>
-					<textarea rows="10" cols="20" id="text_ta" maxlength="200" onkeyup="showTextLocArea();" style="margin-left: -172px;position: absolute;"></textarea>
-				</div>
-				<div style="height: 45px;">
-					文字方位：
-					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','up')">上移</a>
-					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','down')">下移</a>
-					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','left')">左移</a>
-					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','right')">右移</a>
-				</div>
-				<div style="height: 45px;">
-					二维码位置：
-					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('qpbh_span','up')">上移</a>
-					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('qpbh_span','down')">下移</a>
-					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('qpbh_span','left')">左移</a>
-					<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('qpbh_span','right')">右移</a>
-				</div>
-			</td>
-			<td>
-				<div id="qrcode_div" style="width: 500px;height:400px;margin: 20px 0 20px;border: #999 solid 1px;">
-					<div id="luta_div" style="width: 200px;height:200px;margin-top:20px;margin-left:20px;word-wrap:break-word;border: #999 dotted 1px;">
-						<span id="luta_span"></span>
+					<div style="height: 200px;">
+						<span style="margin-top: 25px;margin-left:-252px;position: absolute;">文字内容：</span>
+						<textarea rows="10" cols="20" id="text_ta" maxlength="200" onkeyup="showTextLocArea();" style="margin-left: -172px;position: absolute;"></textarea>
 					</div>
-					<img alt="" src="/GoodsPublic/upload/jfdhjp/20200330132119.jpg" style="width: 200px;height:200px;margin-top: -202px;margin-left: 250px;border: #999 dotted 1px;">
-					<div id="rdta_div" style="width: 200px;height:130px;margin-top:25px;margin-left:250px;word-wrap:break-word;border: #999 dotted 0px;"></div>
-				</div>
-			</td>
-		  </tr>
-		</table>
-		
-		<table id="tab2" style="display: none;">
-		  <tr style="border-bottom: #CAD9EA solid 1px;">
-			<td align="right" style="width:40%;">
-				二维码数量：
-			</td>
-			<td>
-				<div style="width: 250px;">
-					<input id="createCount_inp" name="createCount" type="number" value="1" maxlength="20" onblur="checkCreateCount()"/>
-					<span style="color: #f00;">*</span>
-				</div>
-			</td>
-		  </tr>
-		</table>
+					<div style="height: 45px;">
+						文字方位：
+						<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','up')">上移</a>
+						<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','down')">下移</a>
+						<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','left')">左移</a>
+						<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','right')">右移</a>
+					</div>
+					<div style="height: 45px;">
+						二维码位置：
+						<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('qpbh_span','up')">上移</a>
+						<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('qpbh_span','down')">下移</a>
+						<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('qpbh_span','left')">左移</a>
+						<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('qpbh_span','right')">右移</a>
+					</div>
+				</td>
+				<td>
+					<div id="qrcode_div" style="width: 500px;height:400px;margin: 20px 0 20px;border: #999 solid 1px;">
+						<div id="luta_div" style="width: 200px;height:200px;margin-top:20px;margin-left:20px;word-wrap:break-word;border: #999 dotted 1px;">
+							<span id="luta_span"></span>
+						</div>
+						<img alt="" src="/GoodsPublic/upload/jfdhjp/20200330132119.jpg" style="width: 200px;height:200px;margin-top: -202px;margin-left: 250px;border: #999 dotted 1px;">
+						<div id="rdta_div" style="width: 200px;height:130px;margin-top:25px;margin-left:250px;word-wrap:break-word;border: #999 dotted 0px;"></div>
+					</div>
+				</td>
+			  </tr>
+			</table>
+			
+			<table id="tab2" style="display: none;">
+			  <tr style="border-bottom: #CAD9EA solid 1px;">
+				<td align="right" style="width:40%;">
+					二维码数量：
+				</td>
+				<td>
+					<div style="width: 250px;">
+						<input id="createCount_inp" name="createCount" type="number" value="1" maxlength="20" onblur="checkCreateCount()"/>
+						<span style="color: #f00;">*</span>
+					</div>
+				</td>
+			  </tr>
+			</table>
+		</div>
 	</div>
 	
-	<div id="outputPdf_div" style="width: 1200px;height:420px;margin:0 auto;padding: 1px;display: block;background-color: yellow;">
-	</div>
+	<%@include file="../../side.jsp"%>
 	
 	<div id="tab1_div" style="margin-top:20px;margin-left: 238px;">
 		<div id="toolbar" style="height:32px;line-height:32px;">
@@ -422,6 +431,9 @@ function initWindowMarginLeft(){
 		</table>
 	</div>
 	<%@include file="../../foot.jsp"%>
+	
+	<div id="outputPdf_div" style="width: 1200px;height:420px;margin:0 auto;padding: 1px;display: block;background-color: yellow;">
+	</div>
 </div>
 </body>
 </html>
