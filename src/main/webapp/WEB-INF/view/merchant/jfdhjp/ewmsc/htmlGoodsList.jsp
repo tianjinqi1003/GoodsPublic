@@ -194,7 +194,19 @@ function outputPdf(){
 		createJFDHJPQrcode($(this),i);
 	});
 	$("#outputPdf_div").css("height",pdfHeight+"px");
-	//return false;
+	
+
+	   //setTimeout(function(){
+			//使用html2canvas 转换html为canvas
+		      html2canvas(document.getElementById('outputPdf_div')).then(function (canvas) {
+		          var imgUri = canvas.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream"); // 获取生成的图片的url 　
+		          var saveLink = document.createElement('a');
+		          saveLink.href = imgUri;
+		          saveLink.download = 'downLoad.jpg';
+		          saveLink.click();
+		      });
+		 //},"1000","3000");
+	return false;
 	
 	html2canvas(
                document.getElementById("outputPdf_div"),
