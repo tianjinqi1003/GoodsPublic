@@ -165,13 +165,24 @@ function initOutputPDFDiv(){
 	$(".dialog-button .l-btn-text").css("font-size","20px");
 }
 
-var marginTop=10;
+var marginTop=30;
 var marginLeft=10;
-var pdfHeight=420;
 
 function outputPdf(){
+	var checked=$("#leftUp_rad").prop("checked");
+	if(checked){
+		$("#qrcode_div").css("width","500px");
+		$("#qrcode_div").css("height","240px");
+		$("#luta_div").css("border","0");
+	}
+	else{
+		$("#qrcode_div").css("width","300px");
+		$("#qrcode_div").css("height","400px");
+	}
+	
 	var createCount=$("#createCount_inp").val();
 	for(var i=0;i<createCount;i++){
+		/*
 		if(i==0){
 			
 		}
@@ -182,18 +193,21 @@ function outputPdf(){
 		else if(i%2==0){
 	    	marginTop+=420;
 	    	marginLeft=10;
-	    	pdfHeight+=420;
 	    }
+		*/
+		
 		var qrcodeDiv=$("#qrcode_div").clone();
 		qrcodeDiv.attr("id","qrcode_div"+i);
-		qrcodeDiv.css("margin-top",marginTop+"px");
-		qrcodeDiv.css("margin-left",marginLeft+"px");
+		//qrcodeDiv.css("margin-top",marginTop+"px");
+		qrcodeDiv.css("margin",marginTop+"px auto");
+		//qrcodeDiv.css("margin-left",marginLeft+"px");
 	    $("#outputPdf_div").append(qrcodeDiv);
 	}
+	/*
 	$("#outputPdf_div div[id^='qrcode_div']").each(function(i){
 		createJFDHJPQrcode($(this),i);
 	});
-	$("#outputPdf_div").css("height",pdfHeight+"px");
+	*/
 	
 
 	   //setTimeout(function(){
@@ -452,10 +466,10 @@ function initWindowMarginLeft(){
 				</td>
 				<td>
 					<div id="qrcode_div" style="width: 500px;height:400px;margin: 20px 0 20px;border: #999 solid 1px;">
-						<div id="luta_div" style="width: 200px;height:200px;margin-top:20px;margin-left:20px;word-wrap:break-word;border: #999 dotted 1px;">
+						<div id="luta_div" style="width: 200px;height:120px;margin-top:60px;margin-left:20px;word-wrap:break-word;border: #999 dotted 1px;">
 							<span id="luta_span"></span>
 						</div>
-						<img id="qrcode_img" alt="" src="/GoodsPublic/upload/jfdhjp/20200330132119.jpg" style="width: 200px;height:200px;margin-top: -202px;margin-left: 250px;border: #999 dotted 1px;">
+						<img id="qrcode_img" alt="" src="/GoodsPublic/upload/jfdhjp/20200330132119.jpg" style="width: 200px;height:200px;margin-top: -162px;margin-left: 250px;border: #999 dotted 1px;">
 						<div id="rdta_div" style="width: 200px;height:130px;margin-top:25px;margin-left:250px;word-wrap:break-word;border: #999 dotted 0px;"></div>
 					</div>
 				</td>
@@ -491,7 +505,8 @@ function initWindowMarginLeft(){
 	</div>
 	<%@include file="../../foot.jsp"%>
 	
-	<div id="outputPdf_div" style="width: 1200px;height:420px;margin:0 auto;padding: 1px;display: block;background-color: yellow;">
+	<!-- background-color: yellow; -->
+	<div id="outputPdf_div" style="width: 595px;height:842px;margin:0 auto;padding: 1px;display: block;">
 	</div>
 </div>
 </body>
