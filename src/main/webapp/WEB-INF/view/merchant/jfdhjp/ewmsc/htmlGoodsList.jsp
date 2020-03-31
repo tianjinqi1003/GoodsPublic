@@ -92,14 +92,13 @@ function initOutputPDFDiv(){
         	   goStep(2);
            }},
            {text:"预览",id:"preview_but",iconCls:"icon-ok",handler:function(){
-        	   if(checkCreateCount()){
-        		   previewPdfView();
-        	   }
+        	   
            }}
         ]
 	});
 
-	$("#outputPDF_div table").css("width","1000px");
+	$("#outputPDF_div #tab1").css("width","1000px");
+	$("#outputPDF_div #tab2").css("width","500px");
 	$("#outputPDF_div table td").css("padding-left","20px");
 	$("#outputPDF_div table td").css("padding-right","20px");
 	$("#outputPDF_div table td").css("font-size","15px");
@@ -147,16 +146,39 @@ function initOutputPDFDiv(){
 function goStep(stepIndex){
 	switch(stepIndex){
 	case 1:
+ 		$("#outputPDF_div").css("height","527px");
 		$("#outputPDF_div #tab1").css("display","block");
+ 		$("#outputPDF_div #tab1").css("height","443px");
 	    $("#outputPDF_div #tab2").css("display","none");
+ 	    
+ 		$(".panel.window").css("width","983px");
+ 		$(".panel.window").css("height","586px");
+ 		$(".panel.window").css("margin-left",initWindowMarginLeft());
+ 		$(".window-shadow").css("width","1000px");
+ 		$(".window-shadow").css("height","586px");
+ 		$(".window-shadow").css("margin-left",initWindowMarginLeft());
+ 		$(".dialog-content").css("height","490px");
+	    
  	    $("#outputPDF_div #next_but").css("display","block");
  	    $("#outputPDF_div #preview_but").css("display","none");
 		break;
 	case 2:
+ 		$("#outputPDF_div").css("height","100px");
 		$("#outputPDF_div #tab1").css("display","none");
  	    $("#outputPDF_div #tab2").css("display","block");
+ 		$("#outputPDF_div #tab2").css("height","60px");
+ 	    
+ 		$(".panel.window").css("width","480px");
+ 		$(".panel.window").css("height","150px");
+ 		$(".panel.window").css("margin-left",initWindowMarginLeft());
+ 		$(".window-shadow").css("width","500px");
+ 		$(".window-shadow").css("height","162px");
+ 		$(".window-shadow").css("margin-left",initWindowMarginLeft());
+ 		$(".dialog-content").css("height","60px");
+ 	    
  	    $("#outputPDF_div #next_but").css("display","none");
  	    $("#outputPDF_div #preview_but").css("display","block");
+ 		$("#outputPDF_div #preview_but").css("left","55%");
 		break;
 	case 3:
 		break;
@@ -291,22 +313,18 @@ function initWindowMarginLeft(){
 			</td>
 		  </tr>
 		</table>
+		
 		<table id="tab2" style="display: none;">
 		  <tr style="border-bottom: #CAD9EA solid 1px;">
 			<td align="right" style="width:40%;">
 				二维码数量：
 			</td>
 			<td>
-				<div style="width: 200px;">
+				<div style="width: 250px;">
 					<input id="createCount_inp" name="createCount" type="number" value="1" maxlength="20" onblur="checkCreateCount()"/>
 					<span style="color: #f00;">*</span>
 				</div>
 			</td>
-		  </tr>
-		  <tr>
-		  	<td colspan="2">
-				<div id="prePdf_div" style="width: 1000px;height:auto;margin:0 auto;overflow-y:scroll; background-color: yellow;position: absolute;"></div>
-		  	</td>
 		  </tr>
 		</table>
 	</div>
