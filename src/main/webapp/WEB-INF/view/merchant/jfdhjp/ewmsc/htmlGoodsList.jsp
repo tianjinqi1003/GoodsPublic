@@ -112,7 +112,7 @@ function initOutputPDFDiv(){
            {text:"下一步",id:"next_but",iconCls:"icon-ok",handler:function(){
         	   goStep(2);
            }},
-           {text:"导出Pdf",id:"outputPdf_but",iconCls:"icon-ok",handler:function(){
+           {text:"导出jpg",id:"outputPdf_but",iconCls:"icon-ok",handler:function(){
         	   outputPdf();
            }}
         ]
@@ -178,24 +178,46 @@ function outputPdf(){
 	else{
 		$("#qrcode_div").css("width","300px");
 		$("#qrcode_div").css("height","400px");
+		$("#qrcode_div #qrcode_img").css("margin-left","50px");
+		$("#qrcode_div #rdta_div").css("margin-left","73px");
+		$("#rdta_div").css("border","0");
 	}
 	$("#qrcode_img").css("border","0");
 	
 	var createCount=$("#createCount_inp").val();
 	for(var i=0;i<createCount;i++){
-		if(i==0){
-			
+		
+		if(checked){
+			if(i==0){
+				
+			}
+			else if(i%3==1){
+				marginTop=-262;
+			    marginLeft+=530;
+			}
+			else if(i%3==0){
+		    	marginTop+=282;
+		    	marginLeft=10;
+		    }
+			else{
+				marginLeft+=530;
+			}
 		}
-		else if(i%3==1){
-			marginTop=-262;
-		    marginLeft+=530;
-		}
-		else if(i%3==0){
-	    	marginTop+=282;
-	    	marginLeft=10;
-	    }
 		else{
-			marginLeft+=530;
+			if(i==0){
+				
+			}
+			else if(i%5==1){
+				marginTop=-422;
+			    marginLeft+=310;
+			}
+			else if(i%5==0){
+		    	marginTop+=410;
+		    	marginLeft=10;
+		    }
+			else{
+				marginLeft+=310;
+			}
 		}
 		
 		var qrcodeDiv=$("#qrcode_div").clone();
@@ -212,87 +234,27 @@ function outputPdf(){
 	*/
 
 
-	   //setTimeout(function(){
-			//使用html2canvas 转换html为canvas
-		      html2canvas(document.getElementById('outputPdf_div')).then(function (canvas) {
-		          var imgUri = canvas.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream"); // 获取生成的图片的url 　
-		          var saveLink = document.createElement('a');
-		          saveLink.href = imgUri;
-		          saveLink.download = 'downLoad.jpg';
-		          saveLink.click();
-		      });
-		 //},"1000","3000");
+	//使用html2canvas 转换html为canvas
+    html2canvas(document.getElementById('outputPdf_div')).then(function (canvas) {
+       var imgUri = canvas.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream"); // 获取生成的图片的url 　
+       var saveLink = document.createElement('a');
+       saveLink.href = imgUri;
+       saveLink.download = 'downLoad.jpg';
+       saveLink.click();
+    });
 	return false;
-	
-	/*
-	html2canvas(
-               document.getElementById("outputPdf_div"),
-               {
-                   dpi: 172,//导出pdf清晰度
-                   onrendered: function (canvas) {
-                       var contentWidth = canvas.width;
-                       var contentHeight = canvas.height;
 
-                       //一页pdf显示html页面生成的canvas高度;
-                       var pageHeight = contentWidth / 592.28 * 841.89;
-                       //var pageHeight = 300;
-                       //未生成pdf的html页面高度
-                       var leftHeight = contentHeight;
-                       //pdf页面偏移
-                       var position = 0;
-                       //html页面生成的canvas在pdf中图片的宽高（a4纸的尺寸[595.28,841.89]）
-                       var imgWidth = 595.28;
-                       var imgHeight = 592.28 / contentWidth * contentHeight;
-                       //var imgWidth = 500;
-                       //var imgHeight = 300;
-
-                       var pageData = canvas.toDataURL('image/jpeg', 1.0);
-                       var pdf = new jsPDF('', 'pt', 'a4');
-
-                       //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
-                       //alert(leftHeight+","+imgHeight);
-                       //当内容未超过pdf一页显示的范围，无需分页
-                       if (leftHeight < pageHeight) {
-                           pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight);
-                       } else {
-                           while (leftHeight > 0) {
-                               pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
-                               leftHeight -= pageHeight;
-                               position -= 841.89;
-                               //避免添加空白页
-                               if (leftHeight > 0) {
-                                   pdf.addPage();
-                               }
-                           }
-                       }
-                       pdf.save('aaa.pdf');
-                       $("#previewPdf_div").empty();
-                       /*
-                       var firstPdfDiv=$("#outputPdf_div div[id^='pdf_div']").first();
-                       firstPdfDiv.css("height","300px");
-                       $("#previewPdf_div").append(firstPdfDiv);
-                       
-                       $("#outputPdf_div").empty();
-	           		   $("#outputPdf_div").css("height","0px");
-	           		   $("#outputPdf_div").css("display","none");
-                   },
-                   //背景设为白色（默认为黑色）
-                   background: "#fff"  
-               }
-            )
-            */
-            
-            var shopLogo=$("#shopLogo_hid").val();
-            var score=$("#score_hid").val();
-            var endTime=$("#endTime_hid").val();
-            qrcodeUuidsStr=qrcodeUuidsStr.substring(1);
-			qrcodeUrlsStr=qrcodeUrlsStr.substring(1);
-            $.post("addBatchScoreQrcode",
- 				{shopLogo:shopLogo,score:score,endTime:endTime,accountNumber:accountNumber,example:false,qrcodeUuidsStr:qrcodeUuidsStr,qrcodeUrlsStr:qrcodeUrlsStr},
-			   function(data){
-  			   	  alert(data.info);
-   		   	   }
-   		   ,"json");
+    var shopLogo=$("#shopLogo_hid").val();
+    var score=$("#score_hid").val();
+    var endTime=$("#endTime_hid").val();
+    qrcodeUuidsStr=qrcodeUuidsStr.substring(1);
+	qrcodeUrlsStr=qrcodeUrlsStr.substring(1);
+    $.post("addBatchScoreQrcode",
+	   {shopLogo:shopLogo,score:score,endTime:endTime,accountNumber:accountNumber,example:false,qrcodeUuidsStr:qrcodeUuidsStr,qrcodeUrlsStr:qrcodeUrlsStr},
+	   function(data){
+	   	  alert(data.info);
+   	   }
+    ,"json");
 }
 
 var qrcodeUuidsStr="";
@@ -470,10 +432,10 @@ function initWindowMarginLeft(){
 				<td>
 					<div id="qrcode_div" style="width: 500px;height:400px;margin: 20px 0 20px;border: #999 solid 1px;">
 						<div id="luta_div" style="width: 200px;height:120px;margin-top:60px;margin-left:20px;word-wrap:break-word;border: #999 dotted 1px;">
-							<span id="luta_span"></span>
+							<span id="luta_span" style="font-size: 20px;"></span>
 						</div>
 						<img id="qrcode_img" alt="" src="/GoodsPublic/upload/jfdhjp/20200330132119.jpg" style="width: 200px;height:200px;margin-top: -162px;margin-left: 250px;border: #999 dotted 1px;">
-						<div id="rdta_div" style="width: 200px;height:130px;margin-top:25px;margin-left:250px;word-wrap:break-word;border: #999 dotted 0px;"></div>
+						<div id="rdta_div" style="width: 152px;height:130px;margin-top:16px;margin-left:273px;word-wrap:break-word;border: #999 dotted 0px;"></div>
 					</div>
 				</td>
 			  </tr>
