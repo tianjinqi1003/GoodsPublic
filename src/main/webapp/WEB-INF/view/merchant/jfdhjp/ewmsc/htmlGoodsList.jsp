@@ -441,13 +441,49 @@ function showTextLocArea(){
 		$("#luta_div").css("border","#999 dotted 1px");
 		$("#luta_span").text(text);
 		$("#rdta_div").css("border","0");
-		$("#rdta_div").text("");
+		$("#rdta_span").text("");
 	}
 	else{
 		$("#luta_div").css("border","0");
 		$("#luta_span").text("");
 		$("#rdta_div").css("border","#999 dotted 1px");
-		$("#rdta_div").text(text);
+		$("#rdta_span").text(text);
+	}
+}
+
+function resetJPGTextLocation(action){
+	var labelName;
+	var checked=$("#leftUp_rad").prop("checked");
+	if(checked){
+		labelName="luta_span";
+	}
+	else{
+		labelName="rdta_span";
+	}
+	
+	if(action=="up"){
+		var marginTop=$("#qrcode_div #"+labelName).css("margin-top");
+		marginTop=marginTop.substring(0,marginTop.length-2);
+		marginTop--;
+		$("#qrcode_div #"+labelName).css("margin-top",marginTop+"px");
+	}
+	else if(action=="down"){
+		var marginTop=$("#qrcode_div #"+labelName).css("margin-top");
+		marginTop=marginTop.substring(0,marginTop.length-2);
+		marginTop++;
+		$("#qrcode_div #"+labelName).css("margin-top",marginTop+"px");
+	}
+	else if(action=="left"){
+		var marginLeft=$("#qrcode_div #"+labelName).css("margin-left");
+		marginLeft=marginLeft.substring(0,marginLeft.length-2);
+		marginLeft--;
+		$("#qrcode_div #"+labelName).css("margin-left",marginLeft+"px");
+	}
+	else if(action=="right"){
+		var marginLeft=$("#qrcode_div #"+labelName).css("margin-left");
+		marginLeft=marginLeft.substring(0,marginLeft.length-2);
+		marginLeft++;
+		$("#qrcode_div #"+labelName).css("margin-left",marginLeft+"px");
 	}
 }
 
@@ -493,26 +529,30 @@ function initWindowMarginLeft(){
 					</div>
 					<div style="height: 45px;">
 						文字方位：
-						<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','up')">上移</a>
-						<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','down')">下移</a>
-						<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','left')">左移</a>
-						<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('cpxh_span','right')">右移</a>
+						<a class="easyui-linkbutton" onclick="resetJPGTextLocation('up')">上移</a>
+						<a class="easyui-linkbutton" onclick="resetJPGTextLocation('down')">下移</a>
+						<a class="easyui-linkbutton" onclick="resetJPGTextLocation('left')">左移</a>
+						<a class="easyui-linkbutton" onclick="resetJPGTextLocation('right')">右移</a>
 					</div>
+					<!-- 
 					<div style="height: 45px;">
 						二维码位置：
-						<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('qpbh_span','up')">上移</a>
-						<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('qpbh_span','down')">下移</a>
-						<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('qpbh_span','left')">左移</a>
-						<a class="easyui-linkbutton" onclick="resetPDFHtmlLocation('qpbh_span','right')">右移</a>
+						<a class="easyui-linkbutton" onclick="resetJPGTextLocation('qrcode','up')">上移</a>
+						<a class="easyui-linkbutton" onclick="resetJPGTextLocation('qrcode','down')">下移</a>
+						<a class="easyui-linkbutton" onclick="resetJPGTextLocation('qrcode','left')">左移</a>
+						<a class="easyui-linkbutton" onclick="resetJPGTextLocation('qrcode','right')">右移</a>
 					</div>
+					 -->
 				</td>
 				<td>
 					<div id="qrcode_div" style="width: 500px;height:400px;margin: 20px 0 20px;border: #999 solid 1px;">
 						<div id="luta_div" style="width: 200px;height:120px;margin-top:60px;margin-left:20px;word-wrap:break-word;border: #999 dotted 1px;">
-							<span id="luta_span" style="font-size: 20px;"></span>
+							<span id="luta_span" style="font-size: 20px;position: absolute;"></span>
 						</div>
 						<img id="qrcode_img" alt="" src="/GoodsPublic/upload/jfdhjp/20200330132119.jpg" style="width: 200px;height:200px;margin-top: -162px;margin-left: 250px;border: #999 dotted 1px;">
-						<div id="rdta_div" style="width: 152px;height:130px;margin-top:16px;margin-left:273px;word-wrap:break-word;border: #999 dotted 0px;"></div>
+						<div id="rdta_div" style="width: 152px;height:130px;margin-top:16px;margin-left:273px;word-wrap:break-word;border: #999 dotted 0px;">
+							<span id="rdta_span" style="font-size: 20px;position: absolute;"></span>
+						</div>
 					</div>
 				</td>
 			  </tr>
