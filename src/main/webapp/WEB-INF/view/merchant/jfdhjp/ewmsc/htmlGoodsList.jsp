@@ -165,7 +165,7 @@ function initOutputPDFDiv(){
 	$(".dialog-button .l-btn-text").css("font-size","20px");
 }
 
-var marginTop=30;
+var marginTop=10;
 var marginLeft=10;
 
 function outputPdf(){
@@ -179,28 +179,30 @@ function outputPdf(){
 		$("#qrcode_div").css("width","300px");
 		$("#qrcode_div").css("height","400px");
 	}
+	$("#qrcode_img").css("border","0");
 	
 	var createCount=$("#createCount_inp").val();
 	for(var i=0;i<createCount;i++){
-		/*
 		if(i==0){
 			
 		}
-		else if(i%2==1){
-			marginTop=-422;
-		    marginLeft=530;
+		else if(i%3==1){
+			marginTop=-262;
+		    marginLeft+=530;
 		}
-		else if(i%2==0){
-	    	marginTop+=420;
+		else if(i%3==0){
+	    	marginTop+=282;
 	    	marginLeft=10;
 	    }
-		*/
+		else{
+			marginLeft+=530;
+		}
 		
 		var qrcodeDiv=$("#qrcode_div").clone();
 		qrcodeDiv.attr("id","qrcode_div"+i);
-		//qrcodeDiv.css("margin-top",marginTop+"px");
-		qrcodeDiv.css("margin",marginTop+"px auto");
-		//qrcodeDiv.css("margin-left",marginLeft+"px");
+		qrcodeDiv.css("margin-top",marginTop+"px");
+		//qrcodeDiv.css("margin",marginTop+"px auto");
+		qrcodeDiv.css("margin-left",marginLeft+"px");
 	    $("#outputPdf_div").append(qrcodeDiv);
 	}
 	/*
@@ -208,7 +210,7 @@ function outputPdf(){
 		createJFDHJPQrcode($(this),i);
 	});
 	*/
-	
+
 
 	   //setTimeout(function(){
 			//使用html2canvas 转换html为canvas
@@ -222,6 +224,7 @@ function outputPdf(){
 		 //},"1000","3000");
 	return false;
 	
+	/*
 	html2canvas(
                document.getElementById("outputPdf_div"),
                {
@@ -272,12 +275,12 @@ function outputPdf(){
                        $("#outputPdf_div").empty();
 	           		   $("#outputPdf_div").css("height","0px");
 	           		   $("#outputPdf_div").css("display","none");
-                        */
                    },
                    //背景设为白色（默认为黑色）
                    background: "#fff"  
                }
             )
+            */
             
             var shopLogo=$("#shopLogo_hid").val();
             var score=$("#score_hid").val();
@@ -506,7 +509,7 @@ function initWindowMarginLeft(){
 	<%@include file="../../foot.jsp"%>
 	
 	<!-- background-color: yellow; -->
-	<div id="outputPdf_div" style="width: 595px;height:842px;margin:0 auto;padding: 1px;display: block;">
+	<div id="outputPdf_div" style="width: 1600px;height:2264px;margin:0 auto;padding: 1px;display: block;">
 	</div>
 </div>
 </body>
