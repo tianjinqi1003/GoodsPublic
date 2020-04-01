@@ -172,11 +172,15 @@ function initOutputPDFDiv(){
 	$("#outputPdf_but").css("display","none");
 	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","20px");
+	
+	//goStep(3);
 }
 
 var marginTop=10;
 var marginLeft=10;
 var qrcodeIndex=0;
+var jiShiTime=10;
+var t;
 
 function outputPdf(){
     var pageSize;
@@ -262,7 +266,9 @@ function outputPdf(){
     $.post("addBatchScoreQrcode",
 	   {shopLogo:shopLogo,score:score,endTime:endTime,accountNumber:accountNumber,example:false,qrcodeUuidsStr:qrcodeUuidsStr,qrcodeUrlsStr:qrcodeUrlsStr},
 	   function(data){
-	   	  alert(data.info);
+		  jiShiTime=10;
+	   	  $("#outputSuccess_div #message_div").text(data.info);
+	   	  goStep(3);
    	   }
     ,"json");
     
@@ -272,7 +278,6 @@ function outputPdf(){
     qrcodeUuidsStr="";
     qrcodeUrlsStr="";
 	$("#outputPdf_div").css("display","none");
-	hidePreviewPDFDiv();
 }
 
 function downLoadJpg(){
@@ -354,6 +359,36 @@ function goStep(stepIndex){
  		$("#previewPDF_div #outputPdf_but").css("left","55%");
 		break;
 	case 3:
+ 		$("#previewPDF_div").css("height","100px");
+		$("#previewPDF_div #tab1").css("display","none");
+ 	    $("#previewPDF_div #tab2").css("display","none");
+ 	    $("#previewPDF_div #outputSuccess_div").css("display","block");
+ 		$("#previewPDF_div #outputSuccess_div").css("height","60px");
+ 	    
+ 		$(".panel.window").css("width","480px");
+ 		$(".panel.window").css("height","150px");
+ 		$(".panel.window").css("margin-left",initWindowMarginLeft());
+ 		$(".window-shadow").css("width","500px");
+ 		$(".window-shadow").css("height","162px");
+ 		$(".window-shadow").css("margin-left",initWindowMarginLeft());
+ 		$(".dialog-content").css("height","60px");
+ 	    
+ 	    $("#previewPDF_div #pre_but").css("display","none");
+ 	    $("#previewPDF_div #next_but").css("display","none");
+ 	    $("#previewPDF_div #outputPdf_but").css("display","none");
+ 	    
+ 	    t=setInterval(function(){
+ 	    	jiShiTime--;
+ 	    	if(jiShiTime<=0){
+ 	    		clearInterval(t);
+ 	    		hidePreviewPDFDiv();
+ 	    		$("#outputSuccess_div #message_div").text("");
+ 	    		$("#outputSuccess_div #second_span").text("");
+ 	    	}
+ 	    	else
+	   	  		$("#outputSuccess_div #second_span").text(jiShiTime);
+ 	    }
+ 	    ,"1000","1000");
 		break;
 	}
 }
@@ -496,6 +531,11 @@ function initWindowMarginLeft(){
 				</td>
 			  </tr>
 			</table>
+			
+			<div id="outputSuccess_div" style="width:480px;height:60px;text-align:center;color:#138D13;display: none;">
+				<div id="message_div" style="width: 100%;height:30px;line-height:30px;font-size:20px;">aaaaaa</div>
+				<div style="width: 100%;height:30px;line-height:30px;font-size:15px;"><span id="second_span">10</span>秒后关闭</div>
+			</div>
 		</div>
 	</div>
 	
