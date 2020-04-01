@@ -167,6 +167,7 @@ function initOutputPDFDiv(){
 
 var marginTop=10;
 var marginLeft=10;
+var qrcodeIndex=0;
 
 function outputPdf(){
 	var checked=$("#leftUp_rad").prop("checked");
@@ -196,6 +197,7 @@ function outputPdf(){
 			    marginLeft+=530;
 			}
 			else if(i%3==0){
+				
 		    	marginTop+=282;
 		    	marginLeft=10;
 		    }
@@ -212,6 +214,7 @@ function outputPdf(){
 			    marginLeft+=310;
 			}
 			else if(i%5==0){
+				
 		    	marginTop+=410;
 		    	marginLeft=10;
 		    }
@@ -221,28 +224,22 @@ function outputPdf(){
 		}
 		
 		var qrcodeDiv=$("#qrcode_div").clone();
-		qrcodeDiv.attr("id","qrcode_div"+i);
+		qrcodeIndex++;
+		qrcodeDiv.attr("id","qrcode_div"+qrcodeIndex);
 		qrcodeDiv.css("margin-top",marginTop+"px");
 		//qrcodeDiv.css("margin",marginTop+"px auto");
 		qrcodeDiv.css("margin-left",marginLeft+"px");
 	    $("#outputPdf_div").append(qrcodeDiv);
+	    
+	    if((i+1)%24==0||i+1==createCount){
+	    	downLoadJpg();
+	    }
 	}
-	/*
-	$("#outputPdf_div div[id^='qrcode_div']").each(function(i){
-		createJFDHJPQrcode($(this),i);
-	});
-	*/
 
+	console.log("qrcodeUrlsStr==="+qrcodeUrlsStr);
+	//return false;
 
-	//使用html2canvas 转换html为canvas
-    html2canvas(document.getElementById('outputPdf_div')).then(function (canvas) {
-       var imgUri = canvas.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream"); // 获取生成的图片的url 　
-       var saveLink = document.createElement('a');
-       saveLink.href = imgUri;
-       saveLink.download = 'downLoad.jpg';
-       saveLink.click();
-    });
-	return false;
+	
 
     var shopLogo=$("#shopLogo_hid").val();
     var score=$("#score_hid").val();
@@ -255,6 +252,30 @@ function outputPdf(){
 	   	  alert(data.info);
    	   }
     ,"json");
+    
+    marginTop=10;
+    marginLeft=10;
+    qrcodeIndex=0;
+    qrcodeUuidsStr="";
+    qrcodeUrlsStr="";
+}
+
+function downLoadJpg(){
+	$("#outputPdf_div div[id^='qrcode_div']").each(function(){
+		var id=$(this).attr("id");
+		var qrcodeIndex=id.substring(10);
+		createJFDHJPQrcode($(this),qrcodeIndex);
+	});
+	
+	//使用html2canvas 转换html为canvas
+    html2canvas(document.getElementById('outputPdf_div')).then(function (canvas) {
+       var imgUri = canvas.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream"); // 获取生成的图片的url 　
+       var saveLink = document.createElement('a');
+       saveLink.href = imgUri;
+       saveLink.download = 'downLoad.jpg';
+       saveLink.click();
+    });
+	$("#outputPdf_div").empty();
 }
 
 var qrcodeUuidsStr="";
@@ -270,6 +291,10 @@ function createJFDHJPQrcode(qrcodeDiv,qrcodeIndex){
 		   qrcodeUrlsStr+=","+qrcodeUrl;
 		   qrcodeDiv.attr("uuid",uuid);
 		   qrcodeDiv.find("img[id='qrcode_img']").attr("src",qrcodeUrl);
+		   
+		   var ls=qrcodeDiv.find("#luta_span");
+		   var text=ls.text();
+		   ls.text(text+qrcodeIndex);
    	   }
    ,"json");
 }
@@ -471,7 +496,7 @@ function initWindowMarginLeft(){
 	<%@include file="../../foot.jsp"%>
 	
 	<!-- background-color: yellow; -->
-	<div id="outputPdf_div" style="width: 1600px;height:2264px;margin:0 auto;padding: 1px;display: block;">
+	<div id="outputPdf_div" style="width: 1600px;height:2264px;margin:0 auto;padding: 1px;background-color: yellow;display: block;">
 	</div>
 </div>
 </body>
