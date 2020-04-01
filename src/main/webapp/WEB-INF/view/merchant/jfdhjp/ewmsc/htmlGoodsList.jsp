@@ -100,6 +100,15 @@ function showPreviewPDFDiv(shopLogo,score,endTime){
 	$("#previewPDF_div #endTime_hid").val(endTime);
 }
 
+function hidePreviewPDFDiv(){
+	$("#bg_div").css("display","none");
+	$("#previewPDF_div").dialog('close');
+	
+	$("#previewPDF_div #shopLogo_hid").val("");
+	$("#previewPDF_div #score_hid").val("");
+	$("#previewPDF_div #endTime_hid").val("");
+}
+
 function initOutputPDFDiv(){
 	$("#previewPDF_div").dialog({
 		title:"pdf预览",
@@ -170,13 +179,16 @@ var marginLeft=10;
 var qrcodeIndex=0;
 
 function outputPdf(){
+    var pageSize;
 	var checked=$("#leftUp_rad").prop("checked");
 	if(checked){
+		pageSize=24;
 		$("#qrcode_div").css("width","500px");
 		$("#qrcode_div").css("height","240px");
 		$("#luta_div").css("border","0");
 	}
 	else{
+		pageSize=25;
 		$("#qrcode_div").css("width","300px");
 		$("#qrcode_div").css("height","400px");
 		$("#qrcode_div #qrcode_img").css("margin-left","50px");
@@ -185,6 +197,7 @@ function outputPdf(){
 	}
 	$("#qrcode_img").css("border","0");
 	
+	$("#outputPdf_div").css("display","block");
 	var createCount=$("#createCount_inp").val();
 	for(var i=0;i<createCount;i++){
 		
@@ -231,7 +244,7 @@ function outputPdf(){
 		qrcodeDiv.css("margin-left",marginLeft+"px");
 	    $("#outputPdf_div").append(qrcodeDiv);
 	    
-	    if((i+1)%24==0||i+1==createCount){
+	    if((i+1)%pageSize==0||i+1==createCount){
 	    	downLoadJpg();
 	    }
 	}
@@ -258,6 +271,8 @@ function outputPdf(){
     qrcodeIndex=0;
     qrcodeUuidsStr="";
     qrcodeUrlsStr="";
+	$("#outputPdf_div").css("display","none");
+	hidePreviewPDFDiv();
 }
 
 function downLoadJpg(){
@@ -292,9 +307,11 @@ function createJFDHJPQrcode(qrcodeDiv,qrcodeIndex){
 		   qrcodeDiv.attr("uuid",uuid);
 		   qrcodeDiv.find("img[id='qrcode_img']").attr("src",qrcodeUrl);
 		   
+		   /*
 		   var ls=qrcodeDiv.find("#luta_span");
 		   var text=ls.text();
 		   ls.text(text+qrcodeIndex);
+		   */
    	   }
    ,"json");
 }
@@ -496,7 +513,7 @@ function initWindowMarginLeft(){
 	<%@include file="../../foot.jsp"%>
 	
 	<!-- background-color: yellow; -->
-	<div id="outputPdf_div" style="width: 1600px;height:2264px;margin:0 auto;padding: 1px;background-color: yellow;display: block;">
+	<div id="outputPdf_div" style="width: 1600px;height:2264px;margin:0 auto;padding: 1px;display: none;">
 	</div>
 </div>
 </body>
