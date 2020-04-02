@@ -60,11 +60,6 @@ $(function(){
 	$("#ok_but").css("position","absolute");
 	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","20px");
-	
-	endTimeDTB=$("#endTime_dtb").datetimebox({
-		width:200,
-		editable:false
-	});
 });
 
 function checkAdd(){
@@ -75,13 +70,7 @@ function checkForm(){
 	if(checkIfLogined()){
 		if(checkIfPaid()){
 			if(checkScore()){
-				if(checkDhjpScore()){
-					if(checkJpmdhReg()){
-						if(checkEndTime()){
-							return true;
-						}
-					}
-				}
+				return true;
 			}
 		}
 	}
@@ -209,52 +198,6 @@ function initWindowMarginLeft(){
 					<span style="color: #f00;">*</span>
 				 </td>
 			   </tr>
-			   <tr style="border-bottom: #CAD9EA solid 1px;">
-				 <td align="right">
-					<span>兑换奖品积分</span>
-				 </td>
-				 <td>
-					<input id="dhjpScore_inp" name="dhjpScore" type="text" value="" maxlength="20" onfocus="focusDhjpScore()" onblur="checkDhjpScore()"/>
-					<span style="color: #f00;">*</span>
-				 </td>
-			   </tr>
-			   <tr style="border-bottom: #CAD9EA solid 1px;">
-				 <td align="right">
-					<span>兑换奖品规则</span>
-				 </td>
-				 <td>
-				 	<textarea id="jpmdhReg_ta" name="jpmdhReg" rows="6" cols="23" onfocus="focusJpmdhReg()" onblur="checkJpmdhReg()">${requestScope.accountMsg.jpmdhReg }</textarea>
-					<span style="color: #f00;">*</span>
-				 </td>
-			   </tr>
-			   <tr style="border-bottom: #CAD9EA solid 1px;">
-				 <td align="right">
-					<span>活动到期时间</span>
-				 </td>
-				 <td>
-					<input id="endTime_dtb" name="endTime" type="text" value="" maxlength="20"/>
-					<span style="color: #f00;">*</span>
-				 </td>
-			   </tr>
-			   <!-- 
-			   <tr style="border-bottom: #CAD9EA solid 1px;">
-				 <td align="right">
-					<span>生成数量</span>
-				 </td>
-				 <td>
-					<input id="createCount_inp" name="createCount" type="number" value="1" maxlength="20" onblur="checkCreateCount()"/>
-					<span style="color: #f00;">*</span>
-				 </td>
-			   </tr>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">兑换奖品积分：</span>
-			<span>${requestScope.accountMsg.dhjpScore }</span>
-		</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">兑换奖品规则：</span>
-			<span>${requestScope.accountMsg.jpmdhReg }</span>
-		</div>
-			    -->
 			   <input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
 			</table>
 			</form>

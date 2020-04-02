@@ -13,9 +13,6 @@ public class ScoreQrcodeHistory implements Serializable {
 	private String qrcode;
 	private String shopLogo;
 	private Integer score;
-	private Integer dhjpScore;
-	private String jpmdhReg;
-	private String endTime;
 	private Integer accountNumber;
 	private String openId;
 	public String getUuid() {
@@ -47,24 +44,6 @@ public class ScoreQrcodeHistory implements Serializable {
 	}
 	public void setScore(Integer score) {
 		this.score = score;
-	}
-	public Integer getDhjpScore() {
-		return dhjpScore;
-	}
-	public void setDhjpScore(Integer dhjpScore) {
-		this.dhjpScore = dhjpScore;
-	}
-	public String getJpmdhReg() {
-		return jpmdhReg;
-	}
-	public void setJpmdhReg(String jpmdhReg) {
-		this.jpmdhReg = jpmdhReg;
-	}
-	public String getEndTime() {
-		return endTime;
-	}
-	public void setEndTime(String endTime) {
-		this.endTime = endTime;
 	}
 	public Integer getAccountNumber() {
 		return accountNumber;
