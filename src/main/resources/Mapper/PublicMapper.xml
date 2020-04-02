@@ -1349,6 +1349,44 @@
 				1
 		</trim>
 	</insert>
+	<insert id="addJFDHJPActivity" parameterType="goodsPublic.entity.JFDHJPActivity">
+		insert into jfdhjp_activity
+		<trim prefix="(" suffix=")" suffixOverrides="," >
+			<if test="dhjpScore!=null">
+				dhjpScore,
+			</if>
+			<if test="jpmdhReg!=null">
+				jpmdhReg,
+			</if>
+			<if test="endTime!=null">
+				endTime,
+			</if>
+			<if test="accountNumber!=null">
+				accountNumber,
+			</if>
+			<if test="enable!=null">
+				enable,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="dhjpScore!=null">
+				#{dhjpScore},
+			</if>
+			<if test="jpmdhReg!=null">
+				#{jpmdhReg},
+			</if>
+			<if test="endTime!=null">
+				#{endTime},
+			</if>
+			<if test="accountNumber!=null">
+				#{accountNumber},
+			</if>
+			<if test="enable!=null">
+				#{enable},
+			</if>
+		</trim>
+	</insert>
 	<insert id="addGoodsLabelSet" parameterType="goodsPublic.entity.GoodsLabelSet">
 		insert into goods_label_set
 		<trim prefix="(" suffix=")" suffixOverrides="," >
@@ -2051,6 +2089,25 @@
 		</trim>
 		where id=#{id}
 	</update>
+	<update id="editJFDHJPActivity" parameterType="goodsPublic.entity.JFDHJPActivity">
+		update jfdhjp_activity set 
+		<trim suffixOverrides=",">
+			<if test="dhjpScore!=''&amp;dhjpScore!=null">
+				dhjpScore=#{dhjpScore},
+			</if>
+			<if test="jpmdhReg!=''&amp;jpmdhReg!=null">
+				jpmdhReg=#{jpmdhReg},
+			</if>
+			<if test="endTime!=''&amp;endTime!=null">
+				endTime=#{endTime},
+			</if>
+			<if test="accountNumber!=''&amp;accountNumber!=null">
+				accountNumber=#{accountNumber},
+			</if>
+				enable=#{enable}
+		</trim>
+		where id=#{id}
+	</update>
 	<select id="getAllGoodsMsg" resultType="goodsPublic.entity.Goods">
 		select * from public_goods
 		where goodsNumber=#{goodsNumber} and accountNumber=#{accountNumber}
@@ -2075,6 +2132,9 @@
 	</select>
 	<select id="getJCCountByOpenId" resultType="java.lang.Integer">
 		select count(*) from jfdhjp_customer where openId=#{openId}
+	</select>
+	<select id="getJAByAccountId" resultType="goodsPublic.entity.JFDHJPActivity">
+		select * from jfdhjp_activity where accountNumber=#{accountNumber}
 	</select>
 	<select id="queryGoodsList" resultType="goodsPublic.entity.Goods">
 		select * from public_goods where accountNumber=#{param1} and category_id=#{param2} limit ${param3},${param4}

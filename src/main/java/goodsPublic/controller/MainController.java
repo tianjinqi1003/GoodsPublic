@@ -55,6 +55,7 @@ import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
+import goodsPublic.entity.JFDHJPActivity;
 import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleJZSG;
@@ -1407,6 +1408,30 @@ public class MainController {
 		return json;
 	}
 	
+	@RequestMapping(value="/editJFDHJPActivity",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String editJFDHJPActivity(JFDHJPActivity jfdhjpActivity) {
+		String json="";
+		int a=0;
+		if(jfdhjpActivity.getId()==null) {
+			a=publicService.addJFDHJPActivity(jfdhjpActivity);
+		}
+		else
+			a=publicService.editJFDHJPActivity(jfdhjpActivity);
+
+		PlanResult plan=new PlanResult();
+		if(a==0) {
+			plan.setStatus(0);
+			plan.setMsg("活动设置编辑失败");
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("活动设置编辑成功");
+		}
+		json=JsonUtil.getJsonFromObject(plan);
+		return json;
+	}
+	
 	@RequestMapping(value="/updatePwdByAccountId")
 	@ResponseBody
 	public String updatePwdByAccountId(String passWord) {
@@ -2379,8 +2404,14 @@ public class MainController {
 			break;
 		case "jfdhjp":
 			String nav = request.getParameter("nav");
-			if("hdsz".equals(nav))
+			if("hdsz".equals(nav)) {
+				AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
+				request.setAttribute("accountMsg", msg);
+				
+				JFDHJPActivity ja = publicService.getJAByAccountId(msg.getId());
+				request.setAttribute("jfdhjpActivity", ja);
 				url="/merchant/jfdhjp/hdsz/activity";
+			}
 			else if("ewmsc".equals(nav))
 				url="/merchant/jfdhjp/ewmsc/htmlGoodsList";
 			else if("jfgl".equals(nav))

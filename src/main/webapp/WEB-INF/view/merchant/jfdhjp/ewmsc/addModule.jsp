@@ -108,56 +108,6 @@ function checkScore(){
 	}
 }
 
-function focusDhjpScore(){
-	var dhjpScore = $("#dhjpScore_inp").val();
-	if(dhjpScore=="兑换奖品积分不能为空"){
-		$("#dhjpScore_inp").val("");
-		$("#dhjpScore_inp").css("color", "#555555");
-	}
-}
-
-function checkDhjpScore(){
-	var dhjpScore = $("#dhjpScore_inp").val();
-	if(dhjpScore==null||dhjpScore==""||dhjpScore=="兑换奖品积分不能为空"){
-		$("#dhjpScore_inp").css("color","#E15748");
-    	$("#dhjpScore_inp").val("兑换奖品积分不能为空");
-    	return false;
-	}
-	else{
-		return true;
-	}
-}
-
-function focusJpmdhReg(){
-	var jpmdhReg = $("#jpmdhReg_ta").val();
-	if(jpmdhReg=="兑换奖品规则不能为空"){
-		$("#jpmdhReg_ta").val("");
-		$("#jpmdhReg_ta").css("color", "#555555");
-	}
-}
-
-function checkJpmdhReg(){
-	var jpmdhReg = $("#jpmdhReg_ta").val();
-	if(jpmdhReg==null||jpmdhReg==""||jpmdhReg=="兑换奖品规则不能为空"){
-		$("#jpmdhReg_ta").css("color","#E15748");
-    	$("#jpmdhReg_ta").val("兑换奖品规则不能为空");
-    	return false;
-	}
-	else{
-		return true;
-	}
-}
-
-function checkEndTime(){
-	var endTime=endTimeDTB.datetimebox("getValue");
-	if(endTime==""||endTime==null){
-		alert("请选择活动到期时间！");
-		return false;
-	}
-	else
-		return true;
-}
-
 function checkIfLogined(){
 	var bool=false;
 	$.ajaxSetup({async:false});

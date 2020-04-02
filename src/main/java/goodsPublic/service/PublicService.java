@@ -16,6 +16,7 @@ import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
+import goodsPublic.entity.JFDHJPActivity;
 import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.PrizeCode;
 import goodsPublic.entity.ScoreQrcode;
@@ -197,6 +198,8 @@ public interface PublicService {
 	 * @return
 	 */
 	public int editAccountInfo(AccountMsg accountMsg);
+
+	public int editJFDHJPActivity(JFDHJPActivity jfdhjpActivity);
 	/**
 	 * 根据用户信息查询用户名下有多少条商品
 	 */
@@ -360,6 +363,8 @@ public interface PublicService {
 
 	public int addPrizeCode(PrizeCode pz);
 
+	public int addJFDHJPActivity(JFDHJPActivity jfdhjpActivity);
+
 	public CreatePayCodeRecord getCreatePayCodeRecordByOutTradeNo(String outTradeNo);
 
 	public Map<String, Object> checkIfPaid(String accountNumber) throws ParseException;
@@ -379,6 +384,8 @@ public interface PublicService {
 	public boolean openJPDHJFRedBagByJC(ScoreQrcode sq);
 
 	public List<Map<String, Object>> queryCustomerScoreList(String accountNumber);
+
+	public JFDHJPActivity getJAByAccountId(String accountNumber);
 
 
 }

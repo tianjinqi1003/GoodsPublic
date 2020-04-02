@@ -36,6 +36,7 @@ import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
+import goodsPublic.entity.JFDHJPActivity;
 import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleJZSG;
@@ -357,6 +358,12 @@ public class PublicServiceImpl implements PublicService {
 	public int editAccountInfo(AccountMsg accountMsg) {
 		// TODO Auto-generated method stub
 		return publicDao.editAccountInfo(accountMsg);
+	}
+
+	@Override
+	public int editJFDHJPActivity(JFDHJPActivity jfdhjpActivity) {
+		// TODO Auto-generated method stub
+		return publicDao.editJFDHJPActivity(jfdhjpActivity);
 	}
 
 	@Override
@@ -729,6 +736,12 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
+	public int addJFDHJPActivity(JFDHJPActivity jfdhjpActivity) {
+		// TODO Auto-generated method stub
+		return publicDao.addJFDHJPActivity(jfdhjpActivity);
+	}
+
+	@Override
 	public CreatePayCodeRecord getCreatePayCodeRecordByOutTradeNo(String outTradeNo) {
 		// TODO Auto-generated method stub
 		return publicDao.getCreatePayCodeRecordByOutTradeNo(outTradeNo);
@@ -850,6 +863,12 @@ public class PublicServiceImpl implements PublicService {
 	public List<Map<String, Object>> queryCustomerScoreList(String accountNumber) {
 		// TODO Auto-generated method stub
 		return publicDao.queryCustomerScoreList(accountNumber);
+	}
+
+	@Override
+	public JFDHJPActivity getJAByAccountId(String accountNumber) {
+		// TODO Auto-generated method stub
+		return publicDao.getJAByAccountId(accountNumber);
 	}
 
 }

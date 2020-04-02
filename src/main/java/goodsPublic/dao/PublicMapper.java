@@ -15,6 +15,7 @@ import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
+import goodsPublic.entity.JFDHJPActivity;
 import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleJZSG;
@@ -188,6 +189,8 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public int editAccountInfo(AccountMsg accountMsg);
+
+	public int editJFDHJPActivity(JFDHJPActivity jfdhjpActivity);
 	/**
 	 * 根据商户信息查询名下商品条目数量
 	 */
@@ -347,6 +350,8 @@ public interface PublicMapper {
 
 	public int addPrizeCode(PrizeCode pz);
 
+	public int addJFDHJPActivity(JFDHJPActivity jfdhjpActivity);
+
 	public CreatePayCodeRecord getCreatePayCodeRecordByOutTradeNo(@Param("outTradeNo") String outTradeNo);
 
 	public AccountPayRecord getLastAccountPayRecordByNumber(@Param("accountNumber") String accountNumber);
@@ -362,6 +367,8 @@ public interface PublicMapper {
 	public int updatePwdByAccountId(@Param("passWord") String passWord, @Param("id") String id);
 
 	public int getJCCountByOpenId(@Param("openId") String openId);
+
+	public JFDHJPActivity getJAByAccountId(@Param("accountNumber") String accountNumber);
 
 	public JFDHJPCustomer getJCByOpenId(@Param("openId") String openId);
 
