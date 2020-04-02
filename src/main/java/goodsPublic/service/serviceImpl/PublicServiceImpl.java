@@ -835,7 +835,6 @@ public class PublicServiceImpl implements PublicService {
 			sqh.setQrcode(sq.getQrcode());
 			sqh.setShopLogo(sq.getShopLogo());
 			sqh.setScore(sq.getScore());
-			sqh.setEndTime(sq.getEndTime());
 			sqh.setAccountNumber(sq.getAccountNumber());
 			sqh.setOpenId(sq.getOpenId());
 			count1=publicDao.addScoreQrcodeHistory(sqh);

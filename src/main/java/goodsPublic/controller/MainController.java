@@ -2379,7 +2379,9 @@ public class MainController {
 			break;
 		case "jfdhjp":
 			String nav = request.getParameter("nav");
-			if("ewmsc".equals(nav))
+			if("hdsz".equals(nav))
+				url="/merchant/jfdhjp/hdsz/activity";
+			else if("ewmsc".equals(nav))
 				url="/merchant/jfdhjp/ewmsc/htmlGoodsList";
 			else if("jfgl".equals(nav))
 				url="/merchant/jfdhjp/jfgl/scoreList";

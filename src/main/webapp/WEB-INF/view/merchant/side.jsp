@@ -227,13 +227,18 @@ function checkIfPaidInSide(){
 						</a>
 					</li>
 						<li class="layui-nav-item">
+							<a class="third-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=jfdhjp&nav=hdsz&accountId=${sessionScope.user.id }">
+								活动设置
+							</a>
+						</li>
+						<li class="layui-nav-item">
 							<a class="third-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=jfdhjp&nav=ewmsc&accountId=${sessionScope.user.id }">
 								二维码生成
 							</a>
 						</li>
 						<li class="layui-nav-item">
 							<a class="third-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=jfdhjp&nav=jfgl&accountId=${sessionScope.user.id }">
-								积分管理
+								用户积分管理
 							</a>
 						</li>
 					<li class="layui-nav-item">

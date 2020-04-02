@@ -546,11 +546,11 @@ function initWindowMarginLeft(){
 				</td>
 				<td>
 					<div id="qrcode_div" style="width: 500px;height:400px;margin: 20px 0 20px;border: #999 solid 1px;">
-						<div id="luta_div" style="width: 200px;height:120px;margin-top:60px;margin-left:20px;word-wrap:break-word;border: #999 dotted 1px;">
+						<div id="luta_div" style="width: 200px;height:120px;margin-top:60px;margin-left:20px;word-wrap:break-word;border: #999 dotted 1px;position: absolute;">
 							<span id="luta_span" style="font-size: 20px;position: absolute;"></span>
 						</div>
-						<img id="qrcode_img" alt="" src="/GoodsPublic/upload/jfdhjp/20200330132119.jpg" style="width: 200px;height:200px;margin-top: -162px;margin-left: 250px;border: #999 dotted 1px;">
-						<div id="rdta_div" style="width: 152px;height:130px;margin-top:16px;margin-left:273px;word-wrap:break-word;border: #999 dotted 0px;">
+						<img id="qrcode_img" alt="" src="/GoodsPublic/upload/jfdhjp/20200330132119.jpg" style="width: 200px;height:200px;margin-top: 20px;margin-left: 250px;border: #999 dotted 1px;">
+						<div id="rdta_div" style="width: 152px;height:130px;margin-top:16px;margin-left:273px;word-wrap:break-word;border: #999 dotted 0px;position: absolute;">
 							<span id="rdta_span" style="font-size: 20px;position: absolute;"></span>
 						</div>
 					</div>
