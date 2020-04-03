@@ -2117,15 +2117,17 @@ public class MainController {
 	
 	@RequestMapping(value="/queryCustomerScoreList")
 	@ResponseBody
-	public Map<String, Object> queryCustomerScoreList(String accountId) {
+	public Map<String, Object> queryCustomerScoreList(String searchTxt, String accountId) {
 
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
 		//select s.uuid,date_format(max(s.createtime),'%m月%d日') createDate,date_format(s.createTime,'%H:%i:%s') createTime,j.nickName,p.codeNo,j.takeCount,j.takeScoreSum,j.score jfye,s.score takeScore,s.openId from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1 and s.accountNumber=#{accountNumber} GROUP BY date_format(s.createtime,'%m月%d日'),s.openid ORDER BY s.createtime desc
-		List<Map<String, Object>> list=publicService.queryCustomerScoreList(accountId);
-		if(list.size()>0) {
+		List<String> dateList=publicService.getCSDateList(searchTxt,accountId);
+		List<Map<String, Object>> scoreList=publicService.queryCustomerScoreList(searchTxt,accountId);
+		if(dateList.size()>0) {
 			jsonMap.put("status", "ok");
-			jsonMap.put("list", list);
+			jsonMap.put("dateList", dateList);
+			jsonMap.put("scoreList", scoreList);
 		}
 		else {
 			jsonMap.put("status", "no");

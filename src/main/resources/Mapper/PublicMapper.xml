@@ -2147,8 +2147,19 @@
 	<select id="queryGoodsListByCateId" resultType="goodsPublic.entity.Goods">
 		select goodsNumber,title,imgUrl,category_id from public_goods where category_id=#{param1} and accountNumber=#{param2}
 	</select>
+	<select id="getCSDateList" resultType="java.lang.String">
+		select date_format(max(s.createtime),'%m月%d日') createDate from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1
+		<if test="searchTxt!=''&amp;searchTxt!=null">
+			and p.codeNo=#{searchTxt}
+		</if>
+		 and s.accountNumber=#{accountNumber} GROUP BY date_format(s.createtime,'%m月%d日') ORDER BY s.createtime desc
+	</select>
 	<select id="queryCustomerScoreList" resultType="java.util.Map">
-		select s.uuid,date_format(max(s.createtime),'%m月%d日') createDate,date_format(s.createTime,'%H:%i:%s') createTime,j.nickName,p.codeNo,j.takeCount,j.takeScoreSum,j.score jfye,s.score takeScore,s.openId from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1 and s.accountNumber=#{accountNumber} GROUP BY date_format(s.createtime,'%m月%d日'),s.openid ORDER BY s.createtime desc
+		select s.uuid,date_format(max(s.createtime),'%m月%d日') createDate,date_format(s.createTime,'%H:%i:%s') createTime,j.nickName,p.codeNo,j.takeCount,j.takeScoreSum,j.score jfye,s.score takeScore,s.openId from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1
+		<if test="searchTxt!=''&amp;searchTxt!=null">
+			and p.codeNo=#{searchTxt}
+		</if>
+		 and s.accountNumber=#{accountNumber} GROUP BY date_format(s.createtime,'%m月%d日'),s.openid ORDER BY s.createtime desc
 	</select>
 	<select id="getGoodsById" resultType="goodsPublic.entity.Goods">
 		select * from public_goods where id=#{param1}

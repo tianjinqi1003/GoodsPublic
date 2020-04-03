@@ -860,9 +860,15 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public List<Map<String, Object>> queryCustomerScoreList(String accountNumber) {
+	public List<String> getCSDateList(String searchTxt, String accountNumber) {
 		// TODO Auto-generated method stub
-		return publicDao.queryCustomerScoreList(accountNumber);
+		return publicDao.getCSDateList(searchTxt, accountNumber);
+	}
+
+	@Override
+	public List<Map<String, Object>> queryCustomerScoreList(String searchTxt, String accountNumber) {
+		// TODO Auto-generated method stub
+		return publicDao.queryCustomerScoreList(searchTxt,accountNumber);
 	}
 
 	@Override

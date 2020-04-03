@@ -376,6 +376,8 @@ public interface PublicMapper {
 
 	public int updateJCScoreByOpenId(@Param("score") Integer score, @Param("openId") String openId);
 
-	public List<Map<String, Object>> queryCustomerScoreList(@Param("accountNumber") String accountNumber);
+	public List<String> getCSDateList(@Param("searchTxt") String searchTxt, @Param("accountNumber") String accountNumber);
+
+	public List<Map<String, Object>> queryCustomerScoreList(@Param("searchTxt") String searchTxt, @Param("accountNumber") String accountNumber);
 
 }
