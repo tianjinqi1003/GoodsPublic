@@ -35,8 +35,8 @@ function openRedBag(){
 	var createTime='${requestScope.scoreQrcode.createTime }';
 	var qrcode='${requestScope.scoreQrcode.qrcode }';
 	var shopLogo='${requestScope.scoreQrcode.shopLogo }';
-	//var redBagScore=parseInt('${requestScope.scoreQrcode.score }');
-	var redBagScore=10;
+	var redBagScore=parseInt('${requestScope.scoreQrcode.score }');
+	//var redBagScore=10;
 	var accountNumber='${requestScope.scoreQrcode.accountNumber }';
 	$.post(path+"merchant/phone/openJPDHJFRedBagByJC",
 		{openId:openId,uuid:sqUuid,createTime:createTime,qrcode:qrcode,shopLogo:shopLogo,score:redBagScore,accountNumber:accountNumber},

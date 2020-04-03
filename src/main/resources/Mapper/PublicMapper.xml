@@ -1447,7 +1447,7 @@
 		update score_qrcode set enable=1,openId=#{openId} where uuid=#{uuid}
 	</update>
 	<update id="updateJCScoreByOpenId">
-		update jfdhjp_customer set score=score+#{score} where openId=#{openId}
+		update jfdhjp_customer set score=score+#{score},takeCount=takeCount+1,takeScoreSum=takeScoreSum+#{score} where openId=#{openId}
 	</update>
 	<update id="editHtmlGoodsGRMP" parameterType="goodsPublic.entity.HtmlGoodsSPZS">
 		update html_goods_grmp set 
@@ -2146,7 +2146,7 @@
 		select goodsNumber,title,imgUrl,category_id from public_goods where category_id=#{param1} and accountNumber=#{param2}
 	</select>
 	<select id="queryCustomerScoreList" resultType="java.util.Map">
-		select uuid,t.openId,nickName,p.codeNo,takeCount,score,t.enable,t.createTime,date_format(t.createTime,'%m月%d日') createDate,date_format(t.createTime,'%H:%i:%s') createTime1 from(select s.uuid,s.openId,MAX(s.createTime) createTime,j.nickName,j.takeCount,j.score,s.enable from score_qrcode s left join jfdhjp_customer j on s.openId=j.openId where s.enable=1) t left join prize_code p on p.openId=t.openId and p.accountNumber=#{accountNumber} GROUP BY t.createTime order by t.createTime desc
+		select uuid,t.openId,nickName,p.codeNo,takeCount,jfye,takeScore,takeScoreSum,t.enable,t.createTime,date_format(t.createTime,'%m月%d日') createDate,date_format(t.createTime,'%H:%i:%s') createTime1 from(select s.uuid,s.openId,MAX(s.createTime) createTime,j.nickName,j.takeCount,j.takeScoreSum,j.score jfye,s.score takeScore,s.enable from score_qrcode s left join jfdhjp_customer j on s.openId=j.openId where s.enable=1) t left join prize_code p on p.openId=t.openId and p.accountNumber=#{accountNumber} GROUP BY t.createTime order by t.createTime desc
 	</select>
 	<select id="getGoodsById" resultType="goodsPublic.entity.Goods">
 		select * from public_goods where id=#{param1}

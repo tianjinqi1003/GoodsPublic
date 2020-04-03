@@ -13,6 +13,7 @@ public class JFDHJPCustomer implements Serializable {
 	private String nickName;
 	private String createTime;
 	private Integer takeCount;//消费次数
+	private Integer takeScoreSum;//消费总积分
 	private Integer score;//剩余积分
 	public Integer getId() {
 		return id;
@@ -43,6 +44,12 @@ public class JFDHJPCustomer implements Serializable {
 	}
 	public void setTakeCount(Integer takeCount) {
 		this.takeCount = takeCount;
+	}
+	public Integer getTakeScoreSum() {
+		return takeScoreSum;
+	}
+	public void setTakeScoreSum(Integer takeScoreSum) {
+		this.takeScoreSum = takeScoreSum;
 	}
 	public Integer getScore() {
 		return score;

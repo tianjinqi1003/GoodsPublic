@@ -37,11 +37,17 @@
 .list_div .item_div .codeDisable{
 	color: #f00;margin-top: 3px;margin-left: 10px;position: absolute;
 }
-.list_div .item_div .takeCount_span{
+.list_div .item_div .takeScore_span{
 	color: #999;margin-top: 40px;margin-left: 228px;position: absolute;
 }
-.list_div .item_div .score_span{
+.list_div .item_div .jfye_span{
+	color: #999;margin-top: 40px;margin-left: 390px;position: absolute;
+}
+.list_div .item_div .takeCount_span{
 	color: #999;margin-top: 70px;margin-left: 10px;position: absolute;
+}
+.list_div .item_div .takeScoreSum_span{
+	color: #999;margin-top: 70px;margin-left: 228px;position: absolute;
 }
 </style>
 <script type="text/javascript">
@@ -65,8 +71,10 @@ $(function(){
 						htmlStr+="<div class=\"codeNo_div\">奖品码   暂无</div>";
 					else
 						htmlStr+="<div class=\"codeNo_div\">奖品码   <span class=\""+(item.enable?"codeEnable":"codeDisable")+"\">"+item.codeNo+"<span></div>";
+					htmlStr+="<span class=\"takeScore_span\">消费积分:"+item.takeScore+"</span>";
+					htmlStr+="<span class=\"jfye_span\">积分余额:"+item.jfye+"</span>";
 					htmlStr+="<span class=\"takeCount_span\">消费次数:"+item.takeCount+"</span>";
-					htmlStr+="<span class=\"score_span\">剩余积分:"+item.score+"</span>";
+					htmlStr+="<span class=\"takeScoreSum_span\">消费总积分:"+item.takeScoreSum+"</span>";
 					htmlStr+="</div>";
 					htmlStr+="</div>";
 					listDiv.append(htmlStr);
@@ -92,7 +100,7 @@ $(function(){
 					<span class="nickName_span">李天赐</span>
 					<span class="showDetail_span">查看积分明细</span>
 					<div class="codeNo_div">奖品码   123</div>
-					<span class="takeCount_span">消费次数:12</span>
+					<span class="takeScore_span">消费积分:12</span>
 					<span class="score_span">剩余积分:20</span>
 				</div>
 			</div>

@@ -60,17 +60,16 @@ $(function(){
 			}},
 			{field:"score",title:"所含积分",width:200},
             {field:"createTime",title:"创建时间",width:200},
-            {field:"endTime",title:"活动到期时间",width:200},
             {field:"uuid",title:"操作",width:150,formatter:function(value,row){
             	var str="<a href=\"${pageContext.request.contextPath}/merchant/main/goEditModule?trade=spzs&moduleType="+row.moduleType+"&goodsNumber="+row.goodsNumber+"&accountNumber="+row.accountNumber+"\">编辑</a>";
-            	str+="&nbsp;&nbsp;<a onclick=\"showPreviewPDFDiv('"+row.shopLogo+"','"+row.score+"','"+row.endTime+"')\">导出pdf</a>";
+            	str+="&nbsp;&nbsp;<a onclick=\"showPreviewPDFDiv('"+row.shopLogo+"','"+row.score+"','"+row.endTime+"','"+row.qrcode+"')\">导出pdf</a>";
             	return str;
             }}
 	    ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
 				$(this).datagrid("appendRow",{score:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/goAddModule?trade=spzs&moduleType=redWine\">点击生成积分二维码</a><div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"score",colspan:5});
+				$(this).datagrid("mergeCells",{index:0,field:"score",colspan:4});
 				data.total=0;
 			}
 			
@@ -91,13 +90,14 @@ $(function(){
 	});
 });
 
-function showPreviewPDFDiv(shopLogo,score,endTime){
+function showPreviewPDFDiv(shopLogo,score,endTime,qrcode){
 	$("#bg_div").css("display","block");
 	$("#previewPDF_div").dialog('open');
 	
 	$("#previewPDF_div #shopLogo_hid").val(shopLogo);
 	$("#previewPDF_div #score_hid").val(score);
 	$("#previewPDF_div #endTime_hid").val(endTime);
+	$("#previewPDF_div #qrcode_img").attr("src",qrcode);
 }
 
 function hidePreviewPDFDiv(){
@@ -549,7 +549,7 @@ function initWindowMarginLeft(){
 						<div id="luta_div" style="width: 200px;height:120px;margin-top:60px;margin-left:20px;word-wrap:break-word;border: #999 dotted 1px;position: absolute;">
 							<span id="luta_span" style="font-size: 20px;position: absolute;"></span>
 						</div>
-						<img id="qrcode_img" alt="" src="/GoodsPublic/upload/jfdhjp/20200330132119.jpg" style="width: 200px;height:200px;margin-top: 20px;margin-left: 250px;border: #999 dotted 1px;">
+						<img id="qrcode_img" alt="" src="" style="width: 200px;height:200px;margin-top: 20px;margin-left: 250px;border: #999 dotted 1px;">
 						<div id="rdta_div" style="width: 152px;height:130px;margin-top:16px;margin-left:273px;word-wrap:break-word;border: #999 dotted 0px;position: absolute;">
 							<span id="rdta_span" style="font-size: 20px;position: absolute;"></span>
 						</div>
