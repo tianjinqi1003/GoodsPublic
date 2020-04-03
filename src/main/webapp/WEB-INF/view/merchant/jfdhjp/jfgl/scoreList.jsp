@@ -65,7 +65,7 @@ $(function(){
 					htmlStr+="<div class=\"item_div\">";
 					htmlStr+="<div class=\"content_div\">";
 					htmlStr+="<span class=\"nickName_span\">"+item.nickName+"</span>";
-					htmlStr+="<span class=\"createTime_span\">"+item.createTime1+"</span>";
+					htmlStr+="<span class=\"createTime_span\">"+item.createTime+"</span>";
 					htmlStr+="<span class=\"showDetail_span\">查看积分明细</span>";
 					if(item.enable==null)
 						htmlStr+="<div class=\"codeNo_div\">奖品码   暂无</div>";

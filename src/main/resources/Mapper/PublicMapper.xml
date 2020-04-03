@@ -1298,6 +1298,7 @@
 			</if>
 				createTime,
 				takeCount,
+				takeScoreSum,
 				score
 		</trim>
 		values
@@ -1309,6 +1310,7 @@
 				#{nickName},
 			</if>
 				now(),
+				0,
 				0,
 				0
 		</trim>
@@ -2146,7 +2148,7 @@
 		select goodsNumber,title,imgUrl,category_id from public_goods where category_id=#{param1} and accountNumber=#{param2}
 	</select>
 	<select id="queryCustomerScoreList" resultType="java.util.Map">
-		select uuid,t.openId,nickName,p.codeNo,takeCount,jfye,takeScore,takeScoreSum,t.enable,t.createTime,date_format(t.createTime,'%m月%d日') createDate,date_format(t.createTime,'%H:%i:%s') createTime1 from(select s.uuid,s.openId,MAX(s.createTime) createTime,j.nickName,j.takeCount,j.takeScoreSum,j.score jfye,s.score takeScore,s.enable from score_qrcode s left join jfdhjp_customer j on s.openId=j.openId where s.enable=1) t left join prize_code p on p.openId=t.openId and p.accountNumber=#{accountNumber} GROUP BY t.createTime order by t.createTime desc
+		select s.uuid,date_format(max(s.createtime),'%m月%d日') createDate,date_format(s.createTime,'%H:%i:%s') createTime,j.nickName,p.codeNo,j.takeCount,j.takeScoreSum,j.score jfye,s.score takeScore,s.openId from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1 and s.accountNumber=#{accountNumber} GROUP BY s.openid
 	</select>
 	<select id="getGoodsById" resultType="goodsPublic.entity.Goods">
 		select * from public_goods where id=#{param1}
