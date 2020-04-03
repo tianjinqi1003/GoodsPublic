@@ -23,7 +23,7 @@
 	color: #000;margin-top: 10px;margin-left: 10px;position: absolute;
 }
 .list_div .item_div .createTime_span{
-	color: #000;margin-top: 10px;margin-left: 100px;position: absolute;
+	color: #000;margin-top: 13px;margin-left: 100px;position: absolute;
 }
 .list_div .item_div .showDetail_span{
 	color: #00f;margin-top: 10px;margin-right: 110px;float: right;cursor: pointer;
@@ -37,17 +37,17 @@
 .list_div .item_div .codeDisable{
 	color: #f00;margin-top: 3px;margin-left: 10px;position: absolute;
 }
-.list_div .item_div .takeScore_span{
+.list_div .item_div .takeCount_span{
 	color: #999;margin-top: 40px;margin-left: 228px;position: absolute;
 }
-.list_div .item_div .jfye_span{
-	color: #999;margin-top: 40px;margin-left: 390px;position: absolute;
-}
-.list_div .item_div .takeCount_span{
+.list_div .item_div .takeScore_span{
 	color: #999;margin-top: 70px;margin-left: 10px;position: absolute;
 }
-.list_div .item_div .takeScoreSum_span{
+.list_div .item_div .jfye_span{
 	color: #999;margin-top: 70px;margin-left: 228px;position: absolute;
+}
+.list_div .item_div .takeScoreSum_span{
+	color: #999;margin-top: 70px;margin-left: 390px;position: absolute;
 }
 </style>
 <script type="text/javascript">
@@ -71,9 +71,9 @@ $(function(){
 						htmlStr+="<div class=\"codeNo_div\">奖品码   暂无</div>";
 					else
 						htmlStr+="<div class=\"codeNo_div\">奖品码   <span class=\""+(item.enable?"codeEnable":"codeDisable")+"\">"+item.codeNo+"<span></div>";
+					htmlStr+="<span class=\"takeCount_span\">消费次数:"+item.takeCount+"</span>";
 					htmlStr+="<span class=\"takeScore_span\">消费积分:"+item.takeScore+"</span>";
 					htmlStr+="<span class=\"jfye_span\">积分余额:"+item.jfye+"</span>";
-					htmlStr+="<span class=\"takeCount_span\">消费次数:"+item.takeCount+"</span>";
 					htmlStr+="<span class=\"takeScoreSum_span\">消费总积分:"+item.takeScoreSum+"</span>";
 					htmlStr+="</div>";
 					htmlStr+="</div>";

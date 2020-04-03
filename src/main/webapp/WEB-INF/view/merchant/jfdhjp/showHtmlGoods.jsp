@@ -92,7 +92,7 @@ function reloadDJS(){
 }
 
 function showJFYE(){
-	$("#jfye_div").text('${requestScope.scoreQrcode.score }'+"积分");
+	$("#jfye_div").text('${requestScope.jc.score }'+"积分");
 }
 </script>
 </head>
