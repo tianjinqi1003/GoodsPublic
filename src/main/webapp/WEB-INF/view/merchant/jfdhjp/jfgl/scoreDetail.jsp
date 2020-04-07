@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>积分明细</title>
 <%@include file="../../js.jsp"%>
 <style type="text/css">
-.gkjfqd_div{
+.gkjfmx_div{
 	height:230px;margin-top:20px;margin-left: 238px;padding-top:15px;padding-left:15px;background-color:#FAFDFE;
 }
-.gkjfqd_div .title_div{
+.gkjfmx_div .title_div{
 	width: 98%;font-size: 20px;color: #373737;font-weight:700;
 }
 .dateList_div .createDate_div{
@@ -19,17 +19,8 @@
 .scoreList_div .item_div{
 	width: 98%;height:120px;background-color: #fff;
 }
-.scoreList_div .item_div .nickName_span{
-	color: #000;margin-top: 10px;margin-left: 10px;position: absolute;
-}
 .scoreList_div .item_div .createTime_span{
-	color: #000;margin-top: 13px;margin-left: 100px;position: absolute;
-}
-.scoreList_div .item_div .showDetail_span{
-	margin-top: 10px;margin-right: 110px;float: right;cursor: pointer;
-}
-.scoreList_div .item_div .showDetail_span a{
-	color: #00f;
+	color: #000;margin-top: 13px;margin-left: 10px;position: absolute;
 }
 .scoreList_div .item_div .codeNo_div{
 	width:200px;color: #999;margin-top: 40px;margin-left: 10px;position: absolute;
@@ -55,13 +46,28 @@
 </style>
 <script type="text/javascript">
 $(function(){
+	startTimeDTB=$("#startTime_dtb").datetimebox({
+		width:157,
+		editable:false
+	});
+	endTimeDTB=$("#endTime_dtb").datetimebox({
+		width:157,
+		editable:false
+	});
+	$("#search_but").linkbutton({
+		iconCls:"icon-search",
+		onClick:function(){
+			initListDiv();
+		}
+	});
 	initListDiv();
 });
 
 function initListDiv(){
-	var searchTxt=$("#searchTxt_inp").val();
-	$.post("queryCustomerScoreList",
-		{searchTxt:searchTxt,accountId:'${sessionScope.user.id}'},
+	var startTime=startTimeDTB.datetimebox("getValue");
+	var endTime=endTimeDTB.datetimebox("getValue");
+	$.post("queryCSDetailList",
+		{startTime:startTime,endTime:endTime,accountId:'${sessionScope.user.id}',openId:'${param.openId}'},
 		function(data){
 			var dateListDiv=$("#dateList_div");
 			dateListDiv.empty();
@@ -75,9 +81,7 @@ function initListDiv(){
 				for(var i=0;i<scoreList.length;i++){
 					var item=scoreList[i];
 					var htmlStr="<div class=\"item_div\">";
-					htmlStr+="<span class=\"nickName_span\">"+item.nickName+"</span>";
 					htmlStr+="<span class=\"createTime_span\">"+item.createTime+"</span>";
-					htmlStr+="<span class=\"showDetail_span\"><a href=\"goScoreQrcodeDetail?openId="+item.openId+"\">查看积分明细</a></span>";
 					if(item.enable==null)
 						htmlStr+="<div class=\"codeNo_div\">奖品码   暂无</div>";
 					else
@@ -90,28 +94,6 @@ function initListDiv(){
 					var createDate=item.createDate;
 					$("#scoreList_div"+createDate).append(htmlStr);
 				}
-				/*
-				for(var i=0;i<list.length;i++){
-					var item=list[i];
-					var htmlStr="<div class=\"createDate_div\">"+item.createDate+"</div>";
-					htmlStr+="<div class=\"scoreList_div\" id=\"scoreList_div"+item.createDate+"\">";
-					htmlStr+="<div class=\"item_div\">";
-					htmlStr+="<span class=\"nickName_span\">"+item.nickName+"</span>";
-					htmlStr+="<span class=\"createTime_span\">"+item.createTime+"</span>";
-					htmlStr+="<span class=\"showDetail_span\">查看积分明细</span>";
-					if(item.enable==null)
-						htmlStr+="<div class=\"codeNo_div\">奖品码   暂无</div>";
-					else
-						htmlStr+="<div class=\"codeNo_div\">奖品码   <span class=\""+(item.enable?"codeEnable":"codeDisable")+"\">"+item.codeNo+"<span></div>";
-					htmlStr+="<span class=\"takeCount_span\">消费次数:"+item.takeCount+"</span>";
-					htmlStr+="<span class=\"takeScore_span\">消费积分:"+item.takeScore+"</span>";
-					htmlStr+="<span class=\"jfye_span\">积分余额:"+item.jfye+"</span>";
-					htmlStr+="<span class=\"takeScoreSum_span\">消费总积分:"+item.takeScoreSum+"</span>";
-					htmlStr+="</div>";
-					htmlStr+="</div>";
-					listDiv.append(htmlStr);
-				}
-				*/
 			}
 			else{
 				dateListDiv.append("<div style=\"text-align:center;\">"+data.message+"</div>");
@@ -124,20 +106,19 @@ function initListDiv(){
 <body>
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../../side.jsp"%>
-	<div class="gkjfqd_div" id="gkjfqd_div">
+	<div class="gkjfmx_div" id="gkjfmx_div">
 		<div class="title_div"">
-			顾客积分清单
-			<div style="width: 200px;height:30px;margin-top:-8px;float: right;border: #999 solid 1px;">
-				<input type="text" id="searchTxt_inp" placeholder="输入昵称或奖品码" style="width:150px;height:30px;line-height:30px;color:#999;font-size:15px;border: 0;"/>
-				<img alt="" src="<%=basePath %>resource/images/jfdhjp/005.png" onclick="initListDiv();" style="width: 30px;height:30px;float: right;cursor: pointer;">
+			顾客积分明细
+			<div style="width: 400px;height:25px;float: right;">
+				<input id="startTime_dtb" name="startTime" type="text" maxlength="20"/>
+				<input id="endTime_dtb" name="endTime" type="text" maxlength="20"/>
+				<a id="search_but">搜索</a>
 			</div>
 		</div>
 		<div class="dateList_div" id="dateList_div">
 			<div class="createTime_div">3月13日</div>
 			<div class="item_div">
 				<div class="content_div">
-					<span class="nickName_span">李天赐</span>
-					<span class="showDetail_span">查看积分明细</span>
 					<div class="codeNo_div">奖品码   123</div>
 					<span class="takeScore_span">消费积分:12</span>
 					<span class="score_span">剩余积分:20</span>

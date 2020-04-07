@@ -713,8 +713,8 @@ public class MainController {
 
 			String uuid = UUID.randomUUID().toString().replaceAll("-", "");
 			scoreQrcode.setUuid(uuid);
-			String jsonParams="{\"accountId\":\""+scoreQrcode.getAccountNumber()+"\",\"uuid\":\""+uuid+"\"}";
-			String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf600e162d89732da&redirect_uri=http://www.qrcodesy.com/getCode.asp?jsonParams="+jsonParams+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+			//String jsonParams="{\"accountId\":\""+scoreQrcode.getAccountNumber()+"\",\"uuid\":\""+uuid+"\"}";
+			String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf600e162d89732da&redirect_uri=http://www.qrcodesy.com/getCode.asp?params="+scoreQrcode.getAccountNumber()+","+uuid+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
 			String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
 			String avaPath="/GoodsPublic/upload/jfdhjp/"+fileName;
 			String path = "D:/resource/jfdhjp";
@@ -744,8 +744,9 @@ public class MainController {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
-		String jsonParams="{\"accountId\":\""+accountNumber+"\",\"uuid\":\""+uuid+"\"}";
-		String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf600e162d89732da&redirect_uri=http://www.qrcodesy.com/getCode.asp?jsonParams="+jsonParams+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+		//String jsonParams="{\"accountId\":\""+accountNumber+"\",\"uuid\":\""+uuid+"\"}";
+		//String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf600e162d89732da&redirect_uri=http://www.qrcodesy.com/getCode.asp?jsonParams="+jsonParams+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+		String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf600e162d89732da&redirect_uri=http://www.qrcodesy.com/getCode.asp?params="+accountNumber+","+uuid+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
 		String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) +qrcodeIndex+ ".jpg";
 		String avaPath="/GoodsPublic/upload/jfdhjp/"+fileName;
 		String path = "D:/resource/jfdhjp";
@@ -2137,6 +2138,29 @@ public class MainController {
 		return jsonMap;
 	}
 
+	@RequestMapping(value="/queryCSDetailList")
+	@ResponseBody
+	public Map<String, Object> queryCSDetailList(String startTime, String endTime, String accountId, String openId) {
+		
+		//select s.uuid,date_format(s.createtime,'%m月%d日') createDate,date_format(s.createTime,'%H:%i:%s') createTime,j.nickName,p.codeNo,j.takeCount,j.takeScoreSum,j.score jfye,s.score takeScore from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1
+	    //and s.createtime>DATE_SUB(s.createtime,INTERVAL 1 MONTH) and s.accountNumber=34 and s.openId='oNFEuwzkbP4OTTjBucFgBTWE5Bqg' ORDER BY s.createtime desc
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<String> dateList=publicService.getCSDDateList(startTime,endTime,accountId,openId);
+		List<Map<String, Object>> scoreList=publicService.queryCSDetailList(startTime,endTime,accountId,openId);
+		if(dateList.size()>0) {
+			jsonMap.put("status", "ok");
+			jsonMap.put("dateList", dateList);
+			jsonMap.put("scoreList", scoreList);
+		}
+		else {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "暂无数据");
+		}
+		
+		return jsonMap;
+	}
+
 	/**
 	 * 跳转至商品查询页面
 	 * @return
@@ -2424,6 +2448,12 @@ public class MainController {
 			break;
 		}
 		return url;
+	}
+	
+	@RequestMapping(value="/goScoreQrcodeDetail")
+	public String goScoreQrcodeDetail() {
+		
+		return "/merchant/jfdhjp/jfgl/scoreDetail";
 	}
 	
 	@RequestMapping(value="/goBatchAddModule")

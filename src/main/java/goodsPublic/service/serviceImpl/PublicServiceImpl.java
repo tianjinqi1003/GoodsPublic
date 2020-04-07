@@ -866,9 +866,22 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
+	public List<String> getCSDDateList(String startTime, String endTime, String accountNumber, String openId) {
+		// TODO Auto-generated method stub
+		return publicDao.getCSDDateList(startTime, endTime, accountNumber, openId);
+	}
+
+	@Override
 	public List<Map<String, Object>> queryCustomerScoreList(String searchTxt, String accountNumber) {
 		// TODO Auto-generated method stub
 		return publicDao.queryCustomerScoreList(searchTxt,accountNumber);
+	}
+
+	@Override
+	public List<Map<String, Object>> queryCSDetailList(String startTime, String endTime, String accountNumber,
+			String openId) {
+		// TODO Auto-generated method stub
+		return publicDao.queryCSDetailList(startTime, endTime, accountNumber, openId);
 	}
 
 	@Override

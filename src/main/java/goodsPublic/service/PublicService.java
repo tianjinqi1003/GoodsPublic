@@ -384,8 +384,13 @@ public interface PublicService {
 	public boolean openJPDHJFRedBagByJC(ScoreQrcode sq);
 
 	public List<String> getCSDateList(String searchTxt, String accountNumber);
+	
+	public List<String> getCSDDateList(String startTime, String endTime, String accountNumber, String openId);
 
 	public List<Map<String, Object>> queryCustomerScoreList(String searchTxt, String accountNumber);
+
+	public List<Map<String, Object>> queryCSDetailList(String startTime, String endTime, String accountNumber,
+			String openId);
 
 	public JFDHJPActivity getJAByAccountId(String accountNumber);
 

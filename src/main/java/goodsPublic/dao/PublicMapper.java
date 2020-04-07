@@ -378,6 +378,11 @@ public interface PublicMapper {
 
 	public List<String> getCSDateList(@Param("searchTxt") String searchTxt, @Param("accountNumber") String accountNumber);
 
+	public List<String> getCSDDateList( @Param("startTime")String startTime, @Param("endTime") String endTime, @Param("accountNumber") String accountNumber, @Param("openId") String openId);
+
 	public List<Map<String, Object>> queryCustomerScoreList(@Param("searchTxt") String searchTxt, @Param("accountNumber") String accountNumber);
+
+	public List<Map<String, Object>> queryCSDetailList(@Param("startTime") String startTime, @Param("endTime") String endTime, @Param("accountNumber") String accountNumber,
+			@Param("openId") String openId);
 
 }
