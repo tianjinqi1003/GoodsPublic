@@ -714,7 +714,9 @@ public class MainController {
 			String uuid = UUID.randomUUID().toString().replaceAll("-", "");
 			scoreQrcode.setUuid(uuid);
 			//String jsonParams="{\"accountId\":\""+scoreQrcode.getAccountNumber()+"\",\"uuid\":\""+uuid+"\"}";
-			String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf600e162d89732da&redirect_uri=http://www.qrcodesy.com/getCode.asp?params="+scoreQrcode.getAccountNumber()+","+uuid+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+			//String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+APP_ID+"&redirect_uri=http://www.qrcodesy.com/getCode.asp?params="+scoreQrcode.getAccountNumber()+","+uuid+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+			String url="http://www.qrcodesy.com:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jfdhjp&accountId="+scoreQrcode.getAccountNumber()+"&uuid="+uuid;
+			
 			String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
 			String avaPath="/GoodsPublic/upload/jfdhjp/"+fileName;
 			String path = "D:/resource/jfdhjp";
@@ -746,7 +748,8 @@ public class MainController {
 		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
 		//String jsonParams="{\"accountId\":\""+accountNumber+"\",\"uuid\":\""+uuid+"\"}";
 		//String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf600e162d89732da&redirect_uri=http://www.qrcodesy.com/getCode.asp?jsonParams="+jsonParams+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
-		String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf600e162d89732da&redirect_uri=http://www.qrcodesy.com/getCode.asp?params="+accountNumber+","+uuid+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+		//String url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf600e162d89732da&redirect_uri=http://www.qrcodesy.com/getCode.asp?params="+accountNumber+","+uuid+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+		String url="http://www.qrcodesy.com:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jfdhjp&accountId="+accountNumber+"&uuid="+uuid;
 		String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) +qrcodeIndex+ ".jpg";
 		String avaPath="/GoodsPublic/upload/jfdhjp/"+fileName;
 		String path = "D:/resource/jfdhjp";
@@ -1750,39 +1753,30 @@ public class MainController {
 				break;
 			case "jfdhjp":
 				//http://localhost:8088/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jfdhjp&uuid=134654686&accountId=34
-
 				String code = request.getParameter("code");
 				System.out.println("code======"+code);
-				JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+APP_ID+"&secret="+APP_SECRET+"&code="+code+"&grant_type=authorization_code"));
-				String openId = obj.getString("openid");
-				//String openId = "oNFEuwzkbP4OTTjBucFgBTWE5Bqg";
-				System.out.println("openId======"+openId);
-				
-				boolean bool=publicService.checkJCOpenIdExist(openId);
-				if(!bool) {
-					Map<String, String> userMap = queryUserFromApi(openId,APP_ID,APP_SECRET);
-					
-					JFDHJPCustomer jc=new JFDHJPCustomer();
-					jc.setOpenId(openId);
-					jc.setNickName(userMap.get("nickname"));
-					//jc.setHeadImgUrl(userMap.get("headimgurl"));
-					
-					publicService.addJFDHJPCustomer(jc);
+				HttpSession session = request.getSession();
+				Object openIdObj = session.getAttribute("openId");
+				String openId = null;
+				if(openIdObj==null&&StringUtils.isEmpty(code)) {
+					String uuid = request.getParameter("uuid").toString();
+					url="redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid="+APP_ID+"&redirect_uri=http://www.qrcodesy.com/getCode.asp?params="+accountId+","+uuid+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
 				}
-				JFDHJPCustomer jc = publicService.getJCByOpenId(openId);
-				request.setAttribute("jc", jc);
+				else if(openIdObj!=null&&StringUtils.isEmpty(code)) {
+					openId = openIdObj.toString();
+					System.out.println("openId======"+openId);
+					url=initJFDHJPObj(openId,accountId,request);
+				}
+				else
+				{
+					JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+APP_ID+"&secret="+APP_SECRET+"&code="+code+"&grant_type=authorization_code"));
+					openId = obj.getString("openid");
+					session.setAttribute("openId", openId);
+					//String openId = "oNFEuwzkbP4OTTjBucFgBTWE5Bqg";
+					System.out.println("openId======"+openId);
+					url=initJFDHJPObj(openId,accountId,request);
+				}
 				
-				String uuid = request.getParameter("uuid");
-				ScoreQrcode scoreQrcode = publicService.getScoreQrcode(uuid,accountId);
-				request.setAttribute("scoreQrcode", scoreQrcode);
-				
-				JFDHJPActivity jfdhjpActivity = publicService.getJAByAccountId(accountId);
-				request.setAttribute("jfdhjpActivity", jfdhjpActivity);
-				
-				AccountMsg accountMsg = publicService.getAccountById(accountId);
-				request.setAttribute("accountMsg", accountMsg);
-				
-				url = "/merchant/jfdhjp/showHtmlGoods.jsp?openId="+openId+"&sqUuid="+uuid+"&";
 				break;
 			}
 		}
@@ -1792,6 +1786,34 @@ public class MainController {
 			url = "/merchant/unPaid";
 		}
 		return url;
+	}
+	
+	public String initJFDHJPObj(String openId, String accountId, HttpServletRequest request) {
+
+		boolean bool=publicService.checkJCOpenIdExist(openId);
+		if(!bool) {
+			Map<String, String> userMap = queryUserFromApi(openId,APP_ID,APP_SECRET);
+			
+			JFDHJPCustomer jc=new JFDHJPCustomer();
+			jc.setOpenId(openId);
+			jc.setNickName(userMap.get("nickname"));
+			//jc.setHeadImgUrl(userMap.get("headimgurl"));
+			
+			publicService.addJFDHJPCustomer(jc);
+		}
+		JFDHJPCustomer jc = publicService.getJCByOpenId(openId);
+		request.setAttribute("jc", jc);
+		
+		String uuid = request.getParameter("uuid");
+		ScoreQrcode scoreQrcode = publicService.getScoreQrcode(uuid,accountId);
+		request.setAttribute("scoreQrcode", scoreQrcode);
+		
+		JFDHJPActivity jfdhjpActivity = publicService.getJAByAccountId(accountId);
+		request.setAttribute("jfdhjpActivity", jfdhjpActivity);
+		
+		AccountMsg accountMsg = publicService.getAccountById(accountId);
+		request.setAttribute("accountMsg", accountMsg);
+		return "/merchant/jfdhjp/showHtmlGoods.jsp?openId="+openId+"&sqUuid="+uuid+"&";
 	}
 
 	@RequestMapping(value="/addCreatePayCodeRecord")
