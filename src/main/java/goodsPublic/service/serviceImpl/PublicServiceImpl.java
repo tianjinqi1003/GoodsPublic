@@ -677,6 +677,18 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
+	public int deleteScoreQrcodeByUuids(String uuids) {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<String> uuidList = Arrays.asList(uuids.split(","));
+		count=publicDao.deleteScoreQrcodeByUuids(uuidList);
+		if(count>0) {
+			count=publicDao.deleteScoreQrcodeByExUuids(uuidList);
+		}
+		return count;
+	}
+
+	@Override
 	public int deleteHtmlGoodsSPZSByIds(String ids) {
 		// TODO Auto-generated method stub
 		int count=0;

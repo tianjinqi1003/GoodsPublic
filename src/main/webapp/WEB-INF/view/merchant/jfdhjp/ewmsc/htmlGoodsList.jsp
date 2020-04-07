@@ -34,7 +34,7 @@ $(function(){
 	$("#remove_but").linkbutton({
 		iconCls:"icon-remove",
 		onClick:function(){
-			
+			deleteJFDHJP();
 		}
 	});
 
@@ -54,7 +54,7 @@ $(function(){
             {field:"createTime",title:"创建时间",width:200},
             {field:"uuid",title:"操作",width:150,formatter:function(value,row){
             	var str="<a href=\"${pageContext.request.contextPath}/merchant/main/goEditModule?trade=spzs&moduleType="+row.moduleType+"&goodsNumber="+row.goodsNumber+"&accountNumber="+row.accountNumber+"\">编辑</a>";
-            	str+="&nbsp;&nbsp;<a onclick=\"showPreviewPDFDiv('"+row.shopLogo+"','"+row.score+"','"+row.endTime+"','"+row.qrcode+"')\">导出jpg</a>";
+            	str+="&nbsp;&nbsp;<a onclick=\"showPreviewPDFDiv('"+value+"','"+row.shopLogo+"','"+row.score+"','"+row.endTime+"','"+row.qrcode+"')\">导出jpg</a>";
             	return str;
             }}
 	    ]],
@@ -82,10 +82,62 @@ $(function(){
 	});
 });
 
-function showPreviewPDFDiv(shopLogo,score,endTime,qrcode){
+function deleteJFDHJP(){
+	var rows=tab1.datagrid("getSelections");
+	if (rows.length == 0) {
+		$.messager.alert("提示","请选择要删除的信息！","warning");
+		return false;
+	}
+	
+	var uuids = "";
+	for (var i = 0; i < rows.length; i++) {
+		uuids += "," + rows[i].uuid;
+	}
+	uuids=uuids.substring(1);
+	deleteByUuids(uuids);
+}
+
+function deleteByUuids(uuids){
+	if(checkIfPaid()){
+		$.messager.confirm("提示","确定要删除吗？",function(r){
+			if(r){
+				$.post("deleteScoreQrcodeByUuids",
+					{uuids:uuids},
+					function(result){
+						if(result.status==1){
+							tab1.datagrid("reload");
+						}
+						alert(result.msg);
+					}
+				,"json");
+			}
+		});
+	}
+}
+
+function checkIfPaid(){
+	var bool=false;
+	$.ajaxSetup({async:false});
+	$.post("checkIfPaid",
+		{accountNumber:'${sessionScope.user.id}'},
+		function(data){
+			if(data.status=="ok"){
+				bool=true;
+			}
+			else{
+				alert(data.message);
+				bool=false;
+			}
+		}
+	,"json");
+	return bool;
+}
+
+function showPreviewPDFDiv(uuid,shopLogo,score,endTime,qrcode){
 	$("#bg_div").css("display","block");
 	$("#previewPDF_div").dialog('open');
 	
+	$("#previewPDF_div #uuid_hid").val(uuid);
 	$("#previewPDF_div #shopLogo_hid").val(shopLogo);
 	$("#previewPDF_div #score_hid").val(score);
 	$("#previewPDF_div #endTime_hid").val(endTime);
@@ -96,6 +148,7 @@ function hidePreviewPDFDiv(){
 	$("#bg_div").css("display","none");
 	$("#previewPDF_div").dialog('close');
 	
+	$("#previewPDF_div #uuid_hid").val("");
 	$("#previewPDF_div #shopLogo_hid").val("");
 	$("#previewPDF_div #score_hid").val("");
 	$("#previewPDF_div #endTime_hid").val("");
@@ -250,13 +303,14 @@ function outputPdf(){
 
 	
 
+    var uuid=$("#uuid_hid").val();
     var shopLogo=$("#shopLogo_hid").val();
     var score=$("#score_hid").val();
     var endTime=$("#endTime_hid").val();
     qrcodeUuidsStr=qrcodeUuidsStr.substring(1);
 	qrcodeUrlsStr=qrcodeUrlsStr.substring(1);
     $.post("addBatchScoreQrcode",
-	   {shopLogo:shopLogo,score:score,endTime:endTime,accountNumber:accountNumber,example:false,qrcodeUuidsStr:qrcodeUuidsStr,qrcodeUrlsStr:qrcodeUrlsStr},
+	   {exUuid:uuid,shopLogo:shopLogo,score:score,endTime:endTime,accountNumber:accountNumber,example:false,qrcodeUuidsStr:qrcodeUuidsStr,qrcodeUrlsStr:qrcodeUrlsStr},
 	   function(data){
 		  jiShiTime=10;
 	   	  $("#outputSuccess_div #message_div").text(data.info);
@@ -502,6 +556,7 @@ function initWindowMarginLeft(){
 <div class="layui-layout layui-layout-admin">
 	<div class="bg_div" id="bg_div">
 		<div id="previewPDF_div">
+			<input type="hidden" id="uuid_hid"/>
 			<input type="hidden" id="shopLogo_hid"/>
 			<input type="hidden" id="score_hid"/>
 			<input type="hidden" id="endTime_hid"/>

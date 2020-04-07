@@ -308,6 +308,10 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public ModuleDMTZL getModuleDMTZLByMemo(String type);
+
+	public int deleteScoreQrcodeByUuids(List<String> uuidList);
+
+	public int deleteScoreQrcodeByExUuids(List<String> exUuidList);
 	
 	/**
 	 * 根据id删除商品展示模板内容

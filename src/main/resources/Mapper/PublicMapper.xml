@@ -989,6 +989,9 @@
 			<if test="example!=null">
 				example,
 			</if>
+			<if test="exUuid!=null">
+				exUuid,
+			</if>
 				enable
 		</trim>
 		values
@@ -1011,6 +1014,9 @@
 			</if>
 			<if test="example!=null">
 				#{example},
+			</if>
+			<if test="exUuid!=null">
+				#{exUuid},
 			</if>
 				0
 		</trim>
@@ -2253,6 +2259,18 @@
 	<select id="getHtmlGoodsGRMP" resultType="goodsPublic.entity.HtmlGoodsGRMP">
 		select * from html_goods_grmp where uuid=#{uuid}
 	</select>
+	<delete id="deleteScoreQrcodeByUuids">
+		delete from score_qrcode where 1=1
+		<foreach collection="list" item="uuid" open=" and cast(uuid as char) in (" separator="," close=")">
+		#{uuid}
+		</foreach>
+	</delete>
+	<delete id="deleteScoreQrcodeByExUuids">
+		delete from score_qrcode where 1=1
+		<foreach collection="list" item="exUuid" open=" and cast(exUuid as char) in (" separator="," close=")">
+		#{exUuid}
+		</foreach>
+	</delete>
 	<delete id="deleteHtmlGoodsSPZSByIds">
 		delete from html_goods_spzs where 1=1
 		<foreach collection="list" item="id" open=" and cast(id as char) in (" separator="," close=")">

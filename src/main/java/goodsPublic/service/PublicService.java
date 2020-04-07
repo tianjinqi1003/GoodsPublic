@@ -322,6 +322,8 @@ public interface PublicService {
 	 */
 	public int editHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG);
 
+	public int deleteScoreQrcodeByUuids(String uuids);
+
 	/**
 	 * 根据id删除商品展示模板内容
 	 * @param ids
