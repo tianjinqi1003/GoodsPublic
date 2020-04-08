@@ -22,6 +22,9 @@ var path='<%=basePath %>';
 var accountNumber='${sessionScope.user.id }';
 $(function(){
 	initOutputPDFDiv();
+	initEditDiv();
+	resetDivStyle();
+	showEditDiv();
 	
 	$("#add_but").linkbutton({
 		iconCls:"icon-add",
@@ -64,6 +67,7 @@ $(function(){
 				$(this).datagrid("mergeCells",{index:0,field:"score",colspan:4});
 				data.total=0;
 			}
+			$("#jpmdhReg_ta").val(data.jpmdhReg);
 			
 			$(".panel-header .panel-title").css("color","#000");
 			$(".panel-header .panel-title").css("font-size","15px");
@@ -136,7 +140,7 @@ function checkIfPaid(){
 function showPreviewPDFDiv(uuid,shopLogo,score,endTime,qrcode){
 	$("#bg_div").css("display","block");
 	$("#previewPDF_div").dialog('open');
-	
+
 	$("#previewPDF_div #uuid_hid").val(uuid);
 	$("#previewPDF_div #shopLogo_hid").val(shopLogo);
 	$("#previewPDF_div #score_hid").val(score);
@@ -159,6 +163,79 @@ function hidePreviewPDFDiv(){
 	$("#outputSuccess_div #message_div").text("");
 	$("#outputSuccess_div #second_span").text("");
 	goStep(1);
+}
+
+function resetDivStyle(){
+	$(".panel.window").css("width","983px");
+	$(".panel.window").css("margin-top","20px");
+	$(".panel.window").css("margin-left",initWindowMarginLeft());
+	$(".panel.window .panel-title").css("color","#000");
+	$(".panel.window .panel-title").css("font-size","15px");
+	$(".panel.window .panel-title").css("padding-left","10px");
+	
+	$(".panel-header, .panel-body").css("border-color","#ddd");
+	
+	//以下的是表格下面的面板
+	$(".window-shadow").css("width","1000px");
+	$(".window-shadow").css("margin-top","20px");
+	$(".window-shadow").css("margin-left",initWindowMarginLeft());
+	
+	$(".window,.window .window-body").css("border-color","#ddd");
+	
+	$(".dialog-button").css("background-color","#fff");
+	$(".dialog-button .l-btn-text").css("font-size","20px");
+}
+
+function showEditDiv(){
+	$(".panel.window").css("width","683px");
+	$(".panel.window").css("height","314px");
+	$(".panel.window").css("margin-left",initWindowMarginLeft());
+	$(".window-shadow").css("width","700px");
+	$(".window-shadow").css("height","326px");
+	$(".window-shadow").css("margin-left",initWindowMarginLeft());
+	$(".panel-body").css("height","230px");
+	
+	$("#edit_div #cancel_but").css("left","30%");
+	$("#edit_div #cancel_but").css("position","absolute");
+	$("#edit_div #save_but").css("left","55%");
+	$("#edit_div #save_but").css("position","absolute");
+}
+
+function initEditDiv(){
+	$("#edit_div").dialog({
+		title:"编辑",
+		width:setFitWidthInParent("body"),
+		height:setFitHeightInParent(".layui-side"),
+		buttons:[
+		   {text:"取消",id:"cancel_but",iconCls:"icon-cancel",handler:function(){
+	        	   hidePreviewPDFDiv();
+           }},
+           {text:"保存",id:"save_but",iconCls:"icon-ok",handler:function(){
+        	   
+           }}
+		]
+	});
+	
+	$("#edit_div").css("height","300px");
+	//$("#edit_div").dialog('close');
+	$("#edit_div #tab1").css("width","715px");
+	$("#edit_div #tab1").css("height","190px");
+	$("#edit_div table td").css("padding-left","20px");
+	$("#edit_div table td").css("padding-right","20px");
+	$("#edit_div table td").css("font-size","15px");
+	//$("#edit_div table tr").css("height","45px");
+	$("#edit_div table tr").each(function(){
+		$(this).find("td").eq(0).css("color","#006699");
+		$(this).find("td").eq(0).css("border-right","#CAD9EA solid 1px");
+		$(this).find("td").eq(0).css("font-weight","bold");
+		$(this).find("td").eq(0).css("background-color","#FAFDFE");
+	});
+
+	$("#edit_div table tr").mousemove(function(){
+		$(this).css("background-color","#ddd");
+	}).mouseout(function(){
+		$(this).css("background-color","#fff");
+	});
 }
 
 function initOutputPDFDiv(){
@@ -202,40 +279,19 @@ function initOutputPDFDiv(){
 		$(this).css("background-color","#fff");
 	});
 
-	$(".panel.window").css("width","983px");
-	$(".panel.window").css("margin-top","20px");
-	$(".panel.window").css("margin-left",initWindowMarginLeft());
-	$(".panel.window .panel-title").css("color","#000");
-	$(".panel.window .panel-title").css("font-size","15px");
-	$(".panel.window .panel-title").css("padding-left","10px");
+	$("#previewPDF_div #close_but").css("left","30%");
+	$("#previewPDF_div #close_but").css("position","absolute");
 	
-	$(".panel-header, .panel-body").css("border-color","#ddd");
+	$("#previewPDF_div #pre_but").css("left","30%");
+	$("#previewPDF_div #pre_but").css("position","absolute");
+	$("#previewPDF_div #pre_but").css("display","none");
 	
-	//以下的是表格下面的面板
-	$(".window-shadow").css("width","1000px");
-	$(".window-shadow").css("margin-top","20px");
-	$(".window-shadow").css("margin-left",initWindowMarginLeft());
+	$("#previewPDF_div #next_but").css("left","45%");
+	$("#previewPDF_div #next_but").css("position","absolute");
 	
-	$(".window,.window .window-body").css("border-color","#ddd");
-
-	$("#close_but").css("left","30%");
-	$("#close_but").css("position","absolute");
-	
-	$("#pre_but").css("left","30%");
-	$("#pre_but").css("position","absolute");
-	$("#pre_but").css("display","none");
-	
-	$("#next_but").css("left","45%");
-	$("#next_but").css("position","absolute");
-	
-	$("#outputPdf_but").css("left","45%");
-	$("#outputPdf_but").css("position","absolute");
-	$("#outputPdf_but").css("display","none");
-	
-	$(".dialog-button").css("background-color","#fff");
-	$(".dialog-button .l-btn-text").css("font-size","20px");
-	
-	//goStep(3);
+	$("#previewPDF_div #outputPdf_but").css("left","45%");
+	$("#previewPDF_div #outputPdf_but").css("position","absolute");
+	$("#previewPDF_div #outputPdf_but").css("display","none");
 }
 
 var marginTop=10;
@@ -472,6 +528,16 @@ function checkCreateCount(){
 		return true;
 }
 
+function checkSHJF(){
+	var shjf = $("#shjf_inp").val();
+	if(shjf==""||shjf==null){
+		alert("请输入积分！");
+		return false;
+	}
+	else
+		return true;
+}
+
 //重设列宽
 function reSizeCol(){
 	var width=$(".panel.datagrid").css("width");
@@ -646,6 +712,33 @@ function initWindowMarginLeft(){
 				<div id="message_div" style="width: 100%;height:30px;line-height:30px;font-size:20px;">aaaaaa</div>
 				<div style="width: 100%;height:30px;line-height:30px;font-size:15px;"><span id="second_span">10</span>秒后关闭</div>
 			</div>
+		</div>
+		
+		<div id="edit_div">
+			<table id="tab1">
+			  <tr style="border-bottom: #CAD9EA solid 1px;height: 45px;">
+				<td align="right" style="width:30%;">
+					所含积分：
+				</td>
+				<td>
+					<div style="width: 250px;">
+						<input id="shjf_inp" type="number" maxlength="20" onblur="checkSHJF()"/>
+						<span style="color: #f00;">*</span>
+					</div>
+				</td>
+			  </tr>
+			  <tr style="border-bottom: #CAD9EA solid 1px;height: 145px;">
+				<td align="right" style="width:30%;">
+					兑换奖品规则：
+				</td>
+				<td>
+					<div style="margin-top: 10px;">
+						<textarea id="jpmdhReg_ta" name="jpmdhReg" rows="6" cols="50" onfocus="focusJpmdhReg()" onblur="checkJpmdhReg()">${requestScope.jfdhjpActivity.jpmdhReg }</textarea>
+						<span style="color: #f00;">*</span>
+					</div>
+				</td>
+			  </tr>
+			</table>
 		</div>
 	</div>
 	

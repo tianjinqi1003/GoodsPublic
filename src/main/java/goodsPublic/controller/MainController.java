@@ -2255,7 +2255,8 @@ public class MainController {
 		sort="createTime";
 		order="desc";
 		List<ScoreQrcode> scList = publicService.queryScoreQrcodeList(accountId, page, rows, sort, order);
-		
+		JFDHJPActivity ja = publicService.getJAByAccountId(accountId);
+		jsonMap.put("jpmdhReg", ja.getJpmdhReg());
 		jsonMap.put("total", count);
 		jsonMap.put("rows", scList);
 		return jsonMap;
