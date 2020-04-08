@@ -1795,6 +1795,7 @@ public class MainController {
 				System.out.println("code======"+code);
 				HttpSession session = request.getSession();
 				Object openIdObj = session.getAttribute("openId");
+				//Object openIdObj = "oNFEuwzkbP4OTTjBucFgBTWE5Bqg";
 				String openId = null;
 				if(openIdObj==null&&StringUtils.isEmpty(code)) {
 					String uuid = request.getParameter("uuid").toString();
@@ -1810,7 +1811,6 @@ public class MainController {
 					JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+APP_ID+"&secret="+APP_SECRET+"&code="+code+"&grant_type=authorization_code"));
 					openId = obj.getString("openid");
 					session.setAttribute("openId", openId);
-					//String openId = "oNFEuwzkbP4OTTjBucFgBTWE5Bqg";
 					System.out.println("openId======"+openId);
 					url=initJFDHJPObj(openId,accountId,request);
 				}

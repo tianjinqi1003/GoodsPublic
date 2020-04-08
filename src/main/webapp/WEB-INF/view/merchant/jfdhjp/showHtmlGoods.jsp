@@ -16,8 +16,11 @@ var endTime='${requestScope.jfdhjpActivity.endTime }';
 var windowHeight=$(window).height();
 
 $(function(){
-	var enable='${requestScope.scoreQrcode.enable }';
-	if(enable=="true"){
+	if('${requestScope.scoreQrcode }'==""){
+		$("#redBag_div").css("display","none");
+		$("#ygq_div").css("display","block");
+	}
+	else if('${requestScope.scoreQrcode.enable }'=="true"){
 		$("#redBag_div").css("display","none");
 		$("#qrcodeUsed_div").css("display","block");
 	}
@@ -137,6 +140,9 @@ function showJFYE(){
 		</div>
 		<div id="jfye_div" style="width: 350px;height:32px;color:#FFF699;font-size: 25px;text-align: center;margin-top:333px;"></div>
 		<div id="jpmdhReg_div" style="color: #fff;font-size: 17px;margin-top:20px;padding: 0 35px 0 35px;word-wrap:break-word;display: block;">活动规则说明：${requestScope.jfdhjpActivity.jpmdhReg }</div>
+	</div>
+	<div id="ygq_div" style="width: 350px;height:330px;background-image: url('/GoodsPublic/resource/images/jfdhjp/006.png');background-size: 100% auto;
+	background-repeat: no-repeat;margin: 30px auto 0;padding: 1px;display: none;">
 	</div>
 	<div style="width: 100%;height:40px;line-height:40px;color: #fff;font-size: 17px;text-align: center;bottom: 0;position: fixed;">${requestScope.accountMsg.companyName }</div>
 </body>
