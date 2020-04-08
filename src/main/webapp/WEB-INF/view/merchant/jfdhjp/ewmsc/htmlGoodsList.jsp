@@ -145,6 +145,8 @@ function showPreviewPDFDiv(uuid,shopLogo,score,endTime,qrcode){
 }
 
 function hidePreviewPDFDiv(){
+	clearInterval(t);
+		
 	$("#bg_div").css("display","none");
 	$("#previewPDF_div").dialog('close');
 	
@@ -152,6 +154,11 @@ function hidePreviewPDFDiv(){
 	$("#previewPDF_div #shopLogo_hid").val("");
 	$("#previewPDF_div #score_hid").val("");
 	$("#previewPDF_div #endTime_hid").val("");
+
+	$("#outputSuccess_div").css("display","none");
+	$("#outputSuccess_div #message_div").text("");
+	$("#outputSuccess_div #second_span").text("");
+	goStep(1);
 }
 
 function initOutputPDFDiv(){
@@ -160,6 +167,9 @@ function initOutputPDFDiv(){
 		width:setFitWidthInParent("body"),
 		height:setFitHeightInParent(".layui-side"),
 		buttons:[
+           {text:"关闭",id:"close_but",iconCls:"icon-cancel",handler:function(){
+        	   hidePreviewPDFDiv();
+           }},
            {text:"上一步",id:"pre_but",iconCls:"icon-ok",handler:function(){
         	   goStep(1);
            }},
@@ -208,13 +218,20 @@ function initOutputPDFDiv(){
 	
 	$(".window,.window .window-body").css("border-color","#ddd");
 
+	$("#close_but").css("left","30%");
+	$("#close_but").css("position","absolute");
+	
 	$("#pre_but").css("left","30%");
 	$("#pre_but").css("position","absolute");
+	$("#pre_but").css("display","none");
+	
 	$("#next_but").css("left","45%");
 	$("#next_but").css("position","absolute");
+	
 	$("#outputPdf_but").css("left","45%");
 	$("#outputPdf_but").css("position","absolute");
 	$("#outputPdf_but").css("display","none");
+	
 	$(".dialog-button").css("background-color","#fff");
 	$(".dialog-button .l-btn-text").css("font-size","20px");
 	
@@ -370,19 +387,25 @@ function createJFDHJPQrcode(qrcodeDiv,qrcodeIndex){
 function goStep(stepIndex){
 	switch(stepIndex){
 	case 1:
- 		$("#previewPDF_div").css("height","527px");
-		$("#previewPDF_div #tab1").css("display","block");
+ 		$("#previewPDF_div").css("height","668px");
+		$("#previewPDF_div #tab1").css("display","table");
  		$("#previewPDF_div #tab1").css("height","443px");
 	    $("#previewPDF_div #tab2").css("display","none");
  	    
  		$(".panel.window").css("width","983px");
- 		$(".panel.window").css("height","586px");
+ 		$(".panel.window").css("height","714px");
  		$(".panel.window").css("margin-left",initWindowMarginLeft());
  		$(".window-shadow").css("width","1000px");
- 		$(".window-shadow").css("height","586px");
+ 		$(".window-shadow").css("height","726px");
  		$(".window-shadow").css("margin-left",initWindowMarginLeft());
  		$(".dialog-content").css("height","490px");
+ 		$(".panel-body").css("height","630px");
+ 		
+ 		$("#previewPDF_div #qrcode_div").css("height","400px");
+ 		$("#previewPDF_div #luta_div").css("border","#999 dotted 1px");
+ 		$("#previewPDF_div #qrcode_img").css("border","#999 dotted 1px");
 	    
+ 		$("#previewPDF_div #close_but").css("left","30%");
  	    $("#previewPDF_div #next_but").css("display","block");
  	    $("#previewPDF_div #outputPdf_but").css("display","none");
 		break;
@@ -399,7 +422,8 @@ function goStep(stepIndex){
  		$(".window-shadow").css("height","162px");
  		$(".window-shadow").css("margin-left",initWindowMarginLeft());
  		$(".dialog-content").css("height","60px");
- 	    
+
+ 		$("#previewPDF_div #close_but").css("left","30%");
  	    $("#previewPDF_div #next_but").css("display","none");
  	    $("#previewPDF_div #outputPdf_but").css("display","block");
  		$("#previewPDF_div #outputPdf_but").css("left","55%");
@@ -410,6 +434,7 @@ function goStep(stepIndex){
  	    $("#previewPDF_div #tab2").css("display","none");
  	    $("#previewPDF_div #outputSuccess_div").css("display","block");
  		$("#previewPDF_div #outputSuccess_div").css("height","60px");
+ 		$("#outputSuccess_div #second_span").text("10");
  	    
  		$(".panel.window").css("width","480px");
  		$(".panel.window").css("height","150px");
@@ -418,7 +443,8 @@ function goStep(stepIndex){
  		$(".window-shadow").css("height","162px");
  		$(".window-shadow").css("margin-left",initWindowMarginLeft());
  		$(".dialog-content").css("height","60px");
- 	    
+
+ 		$("#previewPDF_div #close_but").css("left","45%");
  	    $("#previewPDF_div #pre_but").css("display","none");
  	    $("#previewPDF_div #next_but").css("display","none");
  	    $("#previewPDF_div #outputPdf_but").css("display","none");
@@ -426,10 +452,7 @@ function goStep(stepIndex){
  	    t=setInterval(function(){
  	    	jiShiTime--;
  	    	if(jiShiTime<=0){
- 	    		clearInterval(t);
  	    		hidePreviewPDFDiv();
- 	    		$("#outputSuccess_div #message_div").text("");
- 	    		$("#outputSuccess_div #second_span").text("");
  	    	}
  	    	else
 	   	  		$("#outputSuccess_div #second_span").text(jiShiTime);
