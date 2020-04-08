@@ -733,6 +733,24 @@ public class MainController {
 		
 		return "../../merchant/main/goHtmlGoodsList?trade=jfdhjp&nav=ewmsc&accountId="+scoreQrcode.getAccountNumber();
 	}
+	
+	@RequestMapping(value="/editScoreQrcode")
+	@ResponseBody
+	public Map<String, Object> editScoreQrcode(ScoreQrcode sq, String jpmdhReg) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=publicService.editScoreQrcode(sq,jpmdhReg);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "编辑成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "编辑失败！");
+		}
+		return jsonMap;
+	}
 
 	/**
 	 * 生成积分兑换奖品二维码

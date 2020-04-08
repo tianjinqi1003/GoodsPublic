@@ -1451,6 +1451,9 @@
 	<select id="getJCByOpenId" resultType="goodsPublic.entity.JFDHJPCustomer">
 		select * from jfdhjp_customer where openId=#{openId}
 	</select>
+	<update id="updateScoreByQrcodeUuid">
+		update score_qrcode set score=#{score} where uuid=#{uuid}
+	</update>
 	<update id="updateSQEnableByUuid">
 		update score_qrcode set enable=1,openId=#{openId} where uuid=#{uuid}
 	</update>
@@ -2103,6 +2106,9 @@
 				enable=#{enable}
 		</trim>
 		where id=#{id}
+	</update>
+	<update id="updateJPMDHRegByAccountId">
+		update jfdhjp_activity set jpmdhReg=#{jpmdhReg} where accountNumber=#{accountNumber}
 	</update>
 	<select id="getAllGoodsMsg" resultType="goodsPublic.entity.Goods">
 		select * from public_goods

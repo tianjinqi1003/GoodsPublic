@@ -902,4 +902,14 @@ public class PublicServiceImpl implements PublicService {
 		return publicDao.getJAByAccountId(accountNumber);
 	}
 
+	@Override
+	public int editScoreQrcode(ScoreQrcode sq, String jpmdhReg) {
+		// TODO Auto-generated method stub
+		int count=publicDao.updateScoreByQrcodeUuid(sq.getScore(),sq.getUuid());
+		if(count>0) {
+			count=publicDao.updateJPMDHRegByAccountId(jpmdhReg,sq.getAccountNumber());
+		}
+		return count;
+	}
+
 }

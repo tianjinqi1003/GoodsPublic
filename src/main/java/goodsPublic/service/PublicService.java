@@ -396,5 +396,7 @@ public interface PublicService {
 
 	public JFDHJPActivity getJAByAccountId(String accountNumber);
 
+	public int editScoreQrcode(ScoreQrcode sq, String jpmdhReg);
+
 
 }

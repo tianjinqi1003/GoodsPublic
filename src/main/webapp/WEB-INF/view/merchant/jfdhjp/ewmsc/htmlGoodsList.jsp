@@ -24,7 +24,6 @@ $(function(){
 	initOutputPDFDiv();
 	initEditDiv();
 	resetDivStyle();
-	showEditDiv();
 	
 	$("#add_but").linkbutton({
 		iconCls:"icon-add",
@@ -56,7 +55,7 @@ $(function(){
 			{field:"score",title:"所含积分",width:200},
             {field:"createTime",title:"创建时间",width:200},
             {field:"uuid",title:"操作",width:150,formatter:function(value,row){
-            	var str="<a href=\"${pageContext.request.contextPath}/merchant/main/goEditModule?trade=spzs&moduleType="+row.moduleType+"&goodsNumber="+row.goodsNumber+"&accountNumber="+row.accountNumber+"\">编辑</a>";
+            	var str="<a onclick=\"showEditDiv('"+row.score+"','"+value+"')\">编辑</a>";
             	str+="&nbsp;&nbsp;<a onclick=\"showPreviewPDFDiv('"+value+"','"+row.shopLogo+"','"+row.score+"','"+row.endTime+"','"+row.qrcode+"')\">导出jpg</a>";
             	return str;
             }}
@@ -146,6 +145,7 @@ function showPreviewPDFDiv(uuid,shopLogo,score,endTime,qrcode){
 	$("#previewPDF_div #score_hid").val(score);
 	$("#previewPDF_div #endTime_hid").val(endTime);
 	$("#previewPDF_div #qrcode_img").attr("src",qrcode);
+	goStep(1);
 }
 
 function hidePreviewPDFDiv(){
@@ -186,19 +186,32 @@ function resetDivStyle(){
 	$(".dialog-button .l-btn-text").css("font-size","20px");
 }
 
-function showEditDiv(){
+function showEditDiv(score,uuid){
+	$("#bg_div").css("display","block");
+	$("#edit_div").dialog('open');
+
+	$("#edit_div #uuid_hid").val(uuid);
+	$("#edit_div #shjf_inp").val(score);
 	$(".panel.window").css("width","683px");
 	$(".panel.window").css("height","314px");
 	$(".panel.window").css("margin-left",initWindowMarginLeft());
 	$(".window-shadow").css("width","700px");
 	$(".window-shadow").css("height","326px");
 	$(".window-shadow").css("margin-left",initWindowMarginLeft());
-	$(".panel-body").css("height","230px");
+	$("#edit_div .panel-body").css("height","230px");
 	
 	$("#edit_div #cancel_but").css("left","30%");
 	$("#edit_div #cancel_but").css("position","absolute");
 	$("#edit_div #save_but").css("left","55%");
 	$("#edit_div #save_but").css("position","absolute");
+}
+
+function hideEditDiv(){
+	$("#bg_div").css("display","none");
+	$("#edit_div").dialog('close');
+
+	$("#edit_div #uuid_hid").val("");
+	$("#edit_div #shjf_inp").val("");
 }
 
 function initEditDiv(){
@@ -208,16 +221,16 @@ function initEditDiv(){
 		height:setFitHeightInParent(".layui-side"),
 		buttons:[
 		   {text:"取消",id:"cancel_but",iconCls:"icon-cancel",handler:function(){
-	        	   hidePreviewPDFDiv();
+			   hideEditDiv();
            }},
            {text:"保存",id:"save_but",iconCls:"icon-ok",handler:function(){
-        	   
+        	   editScoreQrcode();
            }}
 		]
 	});
 	
 	$("#edit_div").css("height","300px");
-	//$("#edit_div").dialog('close');
+	$("#edit_div").dialog('close');
 	$("#edit_div #tab1").css("width","715px");
 	$("#edit_div #tab1").css("height","190px");
 	$("#edit_div table td").css("padding-left","20px");
@@ -226,7 +239,7 @@ function initEditDiv(){
 	//$("#edit_div table tr").css("height","45px");
 	$("#edit_div table tr").each(function(){
 		$(this).find("td").eq(0).css("color","#006699");
-		$(this).find("td").eq(0).css("border-right","#CAD9EA solid 1px");
+		//$(this).find("td").eq(0).css("border-right","#CAD9EA solid 1px");
 		$(this).find("td").eq(0).css("font-weight","bold");
 		$(this).find("td").eq(0).css("background-color","#FAFDFE");
 	});
@@ -292,6 +305,28 @@ function initOutputPDFDiv(){
 	$("#previewPDF_div #outputPdf_but").css("left","45%");
 	$("#previewPDF_div #outputPdf_but").css("position","absolute");
 	$("#previewPDF_div #outputPdf_but").css("display","none");
+}
+
+function editScoreQrcode(){
+	if(checkSHJF()){
+		if(checkJpmdhReg()){
+			var uuid=$("#edit_div #uuid_hid").val();
+			var shjf = $("#shjf_inp").val();
+			var jpmdhReg = $("#jpmdhReg_ta").val();
+			$.post("editScoreQrcode",
+				{score:shjf,uuid:uuid,jpmdhReg:jpmdhReg,accountNumber:accountNumber},
+				function(data){
+					if(data.message=="ok"){
+						alert(data.info);
+						hideEditDiv();
+						tab1.datagrid("load");
+					}
+					else
+						alert(data.info);
+				}
+			,"json");
+		}
+	}
 }
 
 var marginTop=10;
@@ -538,6 +573,26 @@ function checkSHJF(){
 		return true;
 }
 
+function focusJpmdhReg(){
+	var jpmdhReg = $("#jpmdhReg_ta").val();
+	if(jpmdhReg=="兑换奖品规则不能为空"){
+		$("#jpmdhReg_ta").val("");
+		$("#jpmdhReg_ta").css("color", "#555555");
+	}
+}
+
+function checkJpmdhReg(){
+	var jpmdhReg = $("#jpmdhReg_ta").val();
+	if(jpmdhReg==null||jpmdhReg==""||jpmdhReg=="兑换奖品规则不能为空"){
+		$("#jpmdhReg_ta").css("color","#E15748");
+    	$("#jpmdhReg_ta").val("兑换奖品规则不能为空");
+    	return false;
+	}
+	else{
+		return true;
+	}
+}
+
 //重设列宽
 function reSizeCol(){
 	var width=$(".panel.datagrid").css("width");
@@ -715,8 +770,9 @@ function initWindowMarginLeft(){
 		</div>
 		
 		<div id="edit_div">
+			<input type="hidden" id="uuid_hid"/>
 			<table id="tab1">
-			  <tr style="border-bottom: #CAD9EA solid 1px;height: 45px;">
+			  <tr style="height: 45px;">
 				<td align="right" style="width:30%;">
 					所含积分：
 				</td>
@@ -727,13 +783,13 @@ function initWindowMarginLeft(){
 					</div>
 				</td>
 			  </tr>
-			  <tr style="border-bottom: #CAD9EA solid 1px;height: 145px;">
+			  <tr style="height: 145px;">
 				<td align="right" style="width:30%;">
-					兑换奖品规则：
+					兑奖规则：
 				</td>
 				<td>
 					<div style="margin-top: 10px;">
-						<textarea id="jpmdhReg_ta" name="jpmdhReg" rows="6" cols="50" onfocus="focusJpmdhReg()" onblur="checkJpmdhReg()">${requestScope.jfdhjpActivity.jpmdhReg }</textarea>
+						<textarea id="jpmdhReg_ta" rows="6" cols="50" onfocus="focusJpmdhReg()" onblur="checkJpmdhReg()">${requestScope.jfdhjpActivity.jpmdhReg }</textarea>
 						<span style="color: #f00;">*</span>
 					</div>
 				</td>
