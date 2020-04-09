@@ -15,10 +15,12 @@ $(function(){
 	$("#save_but").linkbutton({
 		iconCls:"icon-save",
 		onClick:function(){
-			if(checkDhjpScore()){
-				if(checkJpmdhReg()){
-					if(checkEndTime()){
-						editJFDHJPActivity();
+			if(checkJpmLimit()){
+				if(checkDhjpScore()){
+					if(checkJpmdhReg()){
+						if(checkEndTime()){
+							editJFDHJPActivity();
+						}
 					}
 				}
 			}
@@ -99,13 +101,14 @@ function checkEditPwd(){
 
 function editJFDHJPActivity(){
 	var id=$("#hdsz_div #id").val();
+	var jpmLimit = $("#jpmLimit_inp").val();
 	var dhjpScore = $("#dhjpScore_inp").val();
 	var jpmdhReg = $("#jpmdhReg_ta").val();
 	var endTime=endTimeDTB.datetimebox("getValue");
 	var accountNumber=$("#hdsz_div #accountNumber").val();
 	var enable=$("#open_rad").prop("checked");
 	$.post("editJFDHJPActivity",
-		{id:id,dhjpScore:dhjpScore,jpmdhReg:jpmdhReg,endTime:endTime,accountNumber:accountNumber,enable:enable},
+		{id:id,jpmLimit:jpmLimit,dhjpScore:dhjpScore,jpmdhReg:jpmdhReg,endTime:endTime,accountNumber:accountNumber,enable:enable},
 		function(data){
 			if(data.status==1){
 				alert(data.msg);
@@ -194,6 +197,26 @@ function checkNewPwd2(){
 	}
 	else
 		return true;
+}
+
+function focusJpmLimit(){
+	var jpmLimit = $("#jpmLimit_inp").val();
+	if(jpmLimit=="奖品码期限不能为空"){
+		$("#jpmLimit_inp").val("");
+		$("#jpmLimit_inp").css("color", "#555555");
+	}
+}
+
+function checkJpmLimit(){
+	var jpmLimit = $("#jpmLimit_inp").val();
+	if(jpmLimit==null||jpmLimit==""||jpmLimit=="奖品码期限不能为空"){
+		$("#jpmLimit_inp").css("color","#E15748");
+    	$("#jpmLimit_inp").val("奖品码期限不能为空");
+    	return false;
+	}
+	else{
+		return true;
+	}
 }
 
 function focusDhjpScore(){
@@ -397,6 +420,11 @@ function setFitWidthInParent(o){
 				开&nbsp;<input type="radio" id="open_rad" name="enable" checked="checked"/>&nbsp;&nbsp;&nbsp;
 				关&nbsp;<input type="radio" id="close_rad" name="enable"/>
 			</span>
+		</div>
+		<div style="margin-top:20px;">
+			<span style="font-size: 14px;color: #373737;font-weight: 700;">奖品码期限&nbsp;&nbsp;&nbsp;：</span>
+			<input id="jpmLimit_inp" name="jpmLimit" type="text" value="${requestScope.jfdhjpActivity.jpmLimit }" size="18" maxlength="20" onfocus="focusJpmLimit()" onblur="checkJpmLimit()"/>
+			（生成后几天）<span style="color: #f00;">*</span>
 		</div>
 		<div style="margin-top:20px;">
 			<span style="font-size: 14px;color: #373737;font-weight: 700;">兑换奖品积分：</span>

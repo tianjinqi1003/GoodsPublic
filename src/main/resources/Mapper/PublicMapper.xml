@@ -1363,6 +1363,9 @@
 			<if test="dhjpScore!=null">
 				dhjpScore,
 			</if>
+			<if test="jpmLimit!=null">
+				jpmLimit,
+			</if>
 			<if test="jpmdhReg!=null">
 				jpmdhReg,
 			</if>
@@ -1380,6 +1383,9 @@
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="dhjpScore!=null">
 				#{dhjpScore},
+			</if>
+			<if test="jpmLimit!=null">
+				#{jpmLimit},
 			</if>
 			<if test="jpmdhReg!=null">
 				#{jpmdhReg},
@@ -2109,6 +2115,9 @@
 			<if test="dhjpScore!=''&amp;dhjpScore!=null">
 				dhjpScore=#{dhjpScore},
 			</if>
+			<if test="jpmLimit!=''&amp;jpmLimit!=null">
+				jpmLimit=#{jpmLimit},
+			</if>
 			<if test="jpmdhReg!=''&amp;jpmdhReg!=null">
 				jpmdhReg=#{jpmdhReg},
 			</if>
@@ -2175,16 +2184,16 @@
 		select goodsNumber,title,imgUrl,category_id from public_goods where category_id=#{param1} and accountNumber=#{param2}
 	</select>
 	<select id="getCSDateList" resultType="java.lang.String">
-		select date_format(max(s.takeTime),'%m月%d日') takeDate from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1
+		select date_format(max(s.takeTime),'%m月%d日') takeDate from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1 and s.takeTime is not null
 		<if test="searchTxt!=''&amp;searchTxt!=null">
-			and p.codeNo=#{searchTxt}
+			and (p.codeNo like CONCAT('%',#{searchTxt},'%') or j.nickName like CONCAT('%',#{searchTxt},'%'))
 		</if>
 		 and s.accountNumber=#{accountNumber} GROUP BY date_format(s.takeTime,'%m月%d日') ORDER BY s.takeTime desc
 	</select>
 	<select id="queryCustomerScoreList" resultType="java.util.Map">
-		select s.uuid,date_format(max(s.takeTime),'%m月%d日') takeDate,date_format(max(s.takeTime),'%H:%i:%s') takeTime,j.nickName,p.codeNo,j.takeCount,j.takeScoreSum,j.score jfye,s.score takeScore,s.openId from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1
+		select s.uuid,date_format(max(s.takeTime),'%m月%d日') takeDate,date_format(max(s.takeTime),'%H:%i:%s') takeTime,j.nickName,p.codeNo,p.createTime,j.takeCount,j.takeScoreSum,j.score jfye,s.score takeScore,s.openId from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1 and s.takeTime is not null
 		<if test="searchTxt!=''&amp;searchTxt!=null">
-			and p.codeNo=#{searchTxt}
+			and (p.codeNo like CONCAT('%',#{searchTxt},'%') or j.nickName like CONCAT('%',#{searchTxt},'%'))
 		</if>
 		 and s.accountNumber=#{accountNumber} GROUP BY date_format(s.takeTime,'%m月%d日'),s.openid ORDER BY s.takeTime desc
 	</select>

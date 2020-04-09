@@ -2504,8 +2504,14 @@ public class MainController {
 			}
 			else if("ewmsc".equals(nav))
 				url="/merchant/jfdhjp/ewmsc/htmlGoodsList";
-			else if("jfgl".equals(nav))
+			else if("jfgl".equals(nav)) {
+				AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
+				request.setAttribute("accountMsg", msg);
+				
+				JFDHJPActivity ja = publicService.getJAByAccountId(msg.getId());
+				request.setAttribute("jpmLimit", ja.getJpmLimit());
 				url="/merchant/jfdhjp/jfgl/scoreList";
+			}
 			break;
 		}
 		return url;

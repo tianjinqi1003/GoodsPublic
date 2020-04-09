@@ -81,8 +81,8 @@ function initListDiv(){
 				for(var i=0;i<scoreList.length;i++){
 					var item=scoreList[i];
 					var htmlStr="<div class=\"item_div\">";
-					htmlStr+="<span class=\"createTime_span\">"+item.createTime+"</span>";
-					if(item.enable==null)
+					htmlStr+="<span class=\"createTime_span\">"+item.takeTime+"</span>";
+					if(item.codeNo==null)
 						htmlStr+="<div class=\"codeNo_div\">奖品码   暂无</div>";
 					else
 						htmlStr+="<div class=\"codeNo_div\">奖品码   <span class=\""+(item.enable?"codeEnable":"codeDisable")+"\">"+item.codeNo+"<span></div>";
@@ -91,8 +91,8 @@ function initListDiv(){
 					htmlStr+="<span class=\"jfye_span\">积分余额:"+item.jfye+"</span>";
 					htmlStr+="<span class=\"takeScoreSum_span\">消费总积分:"+item.takeScoreSum+"</span>";
 					htmlStr+="</div>";
-					var createDate=item.createDate;
-					$("#scoreList_div"+createDate).append(htmlStr);
+					var takeDate=item.takeDate;
+					$("#scoreList_div"+takeDate).append(htmlStr);
 				}
 			}
 			else{

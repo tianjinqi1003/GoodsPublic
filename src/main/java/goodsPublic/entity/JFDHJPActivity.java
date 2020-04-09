@@ -10,6 +10,7 @@ public class JFDHJPActivity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private Integer dhjpScore;
+	private String jpmLimit;
 	private String jpmdhReg;
 	private String endTime;
 	private Integer accountNumber;
@@ -25,6 +26,12 @@ public class JFDHJPActivity implements Serializable {
 	}
 	public void setDhjpScore(Integer dhjpScore) {
 		this.dhjpScore = dhjpScore;
+	}
+	public String getJpmLimit() {
+		return jpmLimit;
+	}
+	public void setJpmLimit(String jpmLimit) {
+		this.jpmLimit = jpmLimit;
 	}
 	public String getJpmdhReg() {
 		return jpmdhReg;
