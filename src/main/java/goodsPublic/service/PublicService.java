@@ -363,7 +363,7 @@ public interface PublicService {
 
 	public int addJFDHJPCustomer(JFDHJPCustomer jc);
 
-	public int addPrizeCode(PrizeCode pz);
+	public int addPrizeCode(PrizeCode pz, Integer dhjpScore);
 
 	public int addJFDHJPActivity(JFDHJPActivity jfdhjpActivity);
 

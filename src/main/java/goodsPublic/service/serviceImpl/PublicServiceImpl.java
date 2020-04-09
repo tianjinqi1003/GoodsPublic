@@ -742,9 +742,13 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public int addPrizeCode(PrizeCode pz) {
+	public int addPrizeCode(PrizeCode pz, Integer dhjpScore) {
 		// TODO Auto-generated method stub
-		return publicDao.addPrizeCode(pz);
+		int count=publicDao.addPrizeCode(pz);
+		if(count>0) {
+			count=publicDao.reduceJCScoreByOpenId(dhjpScore, pz.getOpenId());
+		}
+		return count;
 	}
 
 	@Override
@@ -864,7 +868,7 @@ public class PublicServiceImpl implements PublicService {
 			sqh.setOpenId(sq.getOpenId());
 			count1=publicDao.addScoreQrcodeHistory(sqh);
 		}
-		int count2=publicDao.updateJCScoreByOpenId(sq.getScore(),sq.getOpenId());
+		int count2=publicDao.addJCScoreByOpenId(sq.getScore(),sq.getOpenId());
 		if(count1>0&&count2>0)
 			return true;
 		else

@@ -378,7 +378,9 @@ public interface PublicMapper {
 
 	public int updateSQEnableByUuid(@Param("openId") String openId,@Param("uuid") String uuid);
 
-	public int updateJCScoreByOpenId(@Param("score") Integer score, @Param("openId") String openId);
+	public int addJCScoreByOpenId(@Param("score") Integer score, @Param("openId") String openId);
+
+	public int reduceJCScoreByOpenId(@Param("dhjpScore") Integer dhjpScore, @Param("openId") String openId);
 
 	public List<String> getCSDateList(@Param("searchTxt") String searchTxt, @Param("accountNumber") String accountNumber);
 

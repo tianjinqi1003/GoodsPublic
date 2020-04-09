@@ -1328,6 +1328,9 @@
 				codeNo,
 			</if>
 				createTime,
+			<if test="accountNumber!=null">
+				accountNumber,
+			</if>
 			<if test="openId!=null">
 				openId,
 			</if>
@@ -1339,6 +1342,9 @@
 				#{codeNo},
 			</if>
 				now(),
+			<if test="accountNumber!=null">
+				#{accountNumber},
+			</if>
 			<if test="openId!=null">
 				#{openId},
 			</if>
@@ -1457,8 +1463,11 @@
 	<update id="updateSQEnableByUuid">
 		update score_qrcode set enable=1,openId=#{openId} where uuid=#{uuid}
 	</update>
-	<update id="updateJCScoreByOpenId">
+	<update id="addJCScoreByOpenId">
 		update jfdhjp_customer set score=score+#{score},takeCount=takeCount+1,takeScoreSum=takeScoreSum+#{score} where openId=#{openId}
+	</update>
+	<update id="reduceJCScoreByOpenId">
+		update jfdhjp_customer set score=score-#{dhjpScore} where openId=#{openId}
 	</update>
 	<update id="editHtmlGoodsGRMP" parameterType="goodsPublic.entity.HtmlGoodsSPZS">
 		update html_goods_grmp set 

@@ -11,12 +11,16 @@
 var path='<%=basePath %>';
 var openId='${param.openId}';
 var sqUuid='${param.sqUuid}';
+var accountNumber='${requestScope.scoreQrcode.accountNumber }';
 var dhjpScore=parseInt('${requestScope.jfdhjpActivity.dhjpScore }');
+var shopScore=parseInt('${requestScope.jc.score }');
+var redBagScore=parseInt('${requestScope.scoreQrcode.score }');
+//var redBagScore=10;
 var endTime='${requestScope.jfdhjpActivity.endTime }';
 var windowHeight=$(window).height();
 
 $(function(){
-	if('${requestScope.scoreQrcode }'==""){
+	if('${requestScope.scoreQrcode }'==""||new Date(endTime).getTime()-new Date().getTime()<=0){
 		$("#redBag_div").css("display","none");
 		$("#ygq_div").css("display","block");
 	}
@@ -38,15 +42,11 @@ function openRedBag(){
 	var createTime='${requestScope.scoreQrcode.createTime }';
 	var qrcode='${requestScope.scoreQrcode.qrcode }';
 	var shopLogo='${requestScope.scoreQrcode.shopLogo }';
-	var redBagScore=parseInt('${requestScope.scoreQrcode.score }');
-	//var redBagScore=10;
-	var accountNumber='${requestScope.scoreQrcode.accountNumber }';
 	$.post(path+"merchant/phone/openJPDHJFRedBagByJC",
 		{openId:openId,uuid:sqUuid,createTime:createTime,qrcode:qrcode,shopLogo:shopLogo,score:redBagScore,accountNumber:accountNumber},
 		function(data){
 			if(data.status=="ok"){
 				$("#redBag_div").css("display","none");
-				var shopScore=parseInt($("#shopScore_span").text());
 				shopScore+=redBagScore
 				if(shopScore>=dhjpScore){
 					createPrizeCode();
@@ -66,13 +66,14 @@ function openRedBag(){
 
 function createPrizeCode(){
 	$.post(path+"merchant/phone/createPrizeCode",
-		{openId:openId},
+		{dhjpScore:dhjpScore,accountNumber:accountNumber,openId:openId},
 		function(data){
 			if(data.status=="ok"){
 				$("body").css("background-color","#009446");
 				$("#djm_div").css("display","block");
 				$("#codeNo_span").text(data.codeNo);
 				setInterval("reloadDJS()","1000","1000");
+				$("#syjf_span").text(shopScore-dhjpScore);
 			}
 		}
 	,"json");
@@ -95,7 +96,7 @@ function reloadDJS(){
 }
 
 function showJFYE(){
-	$("#jfye_div").text('${requestScope.jc.score }'+"积分");
+	$("#jfye_div").text(shopScore+"积分");
 }
 </script>
 </head>
@@ -126,7 +127,7 @@ function showJFYE(){
 			<span id="minute_span" style="margin-left: 60px;position: absolute;">3</span>
 			<span id="second_span" style="margin-left: 100px;position: absolute;">4</span>
 		</div>
-		<span id="syjf_span" style="color: #FFCC66;font-size:20px;margin-top:402px;margin-left: 163px;position: absolute;">50</span>
+		<span id="syjf_span" style="color: #FFCC66;font-size:20px;margin-top:402px;margin-left: 163px;position: absolute;"></span>
 		<div id="jpmdhReg_div" style="color: #FFCC66;font-size: 17px;margin-top:438px;word-wrap:break-word;display: block;">活动规则说明：${requestScope.jfdhjpActivity.jpmdhReg }</div>
 	</div>
 	
