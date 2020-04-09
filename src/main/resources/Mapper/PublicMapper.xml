@@ -1030,6 +1030,9 @@
 			<if test="createTime!=null">
 				createTime,
 			</if>
+			<if test="takeTime!=null">
+				takeTime,
+			</if>
 			<if test="qrcode!=null">
 				qrcode,
 			</if>
@@ -1053,6 +1056,9 @@
 			</if>
 			<if test="createTime!=null">
 				#{createTime},
+			</if>
+			<if test="takeTime!=null">
+				#{takeTime},
 			</if>
 			<if test="qrcode!=null">
 				#{qrcode},
@@ -1461,7 +1467,7 @@
 		update score_qrcode set score=#{score} where uuid=#{uuid}
 	</update>
 	<update id="updateSQEnableByUuid">
-		update score_qrcode set enable=1,openId=#{openId} where uuid=#{uuid}
+		update score_qrcode set takeTime=#{takeTime},enable=1,openId=#{openId} where uuid=#{uuid}
 	</update>
 	<update id="addJCScoreByOpenId">
 		update jfdhjp_customer set score=score+#{score},takeCount=takeCount+1,takeScoreSum=takeScoreSum+#{score} where openId=#{openId}
@@ -2169,32 +2175,32 @@
 		select goodsNumber,title,imgUrl,category_id from public_goods where category_id=#{param1} and accountNumber=#{param2}
 	</select>
 	<select id="getCSDateList" resultType="java.lang.String">
-		select date_format(max(s.createtime),'%m月%d日') createDate from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1
+		select date_format(max(s.takeTime),'%m月%d日') takeDate from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1
 		<if test="searchTxt!=''&amp;searchTxt!=null">
 			and p.codeNo=#{searchTxt}
 		</if>
-		 and s.accountNumber=#{accountNumber} GROUP BY date_format(s.createtime,'%m月%d日') ORDER BY s.createtime desc
+		 and s.accountNumber=#{accountNumber} GROUP BY date_format(s.takeTime,'%m月%d日') ORDER BY s.takeTime desc
 	</select>
 	<select id="queryCustomerScoreList" resultType="java.util.Map">
-		select s.uuid,date_format(max(s.createtime),'%m月%d日') createDate,date_format(s.createTime,'%H:%i:%s') createTime,j.nickName,p.codeNo,j.takeCount,j.takeScoreSum,j.score jfye,s.score takeScore,s.openId from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1
+		select s.uuid,date_format(max(s.takeTime),'%m月%d日') takeDate,date_format(max(s.takeTime),'%H:%i:%s') takeTime,j.nickName,p.codeNo,j.takeCount,j.takeScoreSum,j.score jfye,s.score takeScore,s.openId from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1
 		<if test="searchTxt!=''&amp;searchTxt!=null">
 			and p.codeNo=#{searchTxt}
 		</if>
-		 and s.accountNumber=#{accountNumber} GROUP BY date_format(s.createtime,'%m月%d日'),s.openid ORDER BY s.createtime desc
+		 and s.accountNumber=#{accountNumber} GROUP BY date_format(s.takeTime,'%m月%d日'),s.openid ORDER BY s.takeTime desc
 	</select>
 	<select id="getCSDDateList" resultType="java.lang.String">
-		select date_format(s.createtime,'%m月%d日') createDate from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1
+		select date_format(s.takeTime,'%m月%d日') takeDate from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1
  		<if test="startTime!=''&amp;startTime!=null&amp;endTime!=''&amp;endTime!=null">
- 			and s.createtime between #{startTime} and #{endTime}
+ 			and s.takeTime between #{startTime} and #{endTime}
  		</if>
- 		and s.createtime>DATE_SUB(s.createtime,INTERVAL 1 MONTH) and s.accountNumber=#{accountNumber} and s.openId=#{openId} GROUP BY date_format(s.createtime,'%m月%d日') ORDER BY s.createtime desc
+ 		and s.takeTime>DATE_SUB(s.takeTime,INTERVAL 1 MONTH) and s.accountNumber=#{accountNumber} and s.openId=#{openId} GROUP BY date_format(s.takeTime,'%m月%d日') ORDER BY s.takeTime desc
 	</select>
 	<select id="queryCSDetailList" resultType="java.util.Map">
-		select s.uuid,date_format(s.createtime,'%m月%d日') createDate,date_format(s.createTime,'%H:%i:%s') createTime,j.nickName,p.codeNo,j.takeCount,j.takeScoreSum,j.score jfye,s.score takeScore from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1
+		select s.uuid,date_format(s.takeTime,'%m月%d日') takeDate,date_format(s.takeTime,'%H:%i:%s') takeTime,j.nickName,p.codeNo,j.takeCount,j.takeScoreSum,j.score jfye,s.score takeScore from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1
  		<if test="startTime!=''&amp;startTime!=null&amp;endTime!=''&amp;endTime!=null">
- 			and s.createtime between #{startTime} and #{endTime}
+ 			and s.takeTime between #{startTime} and #{endTime}
  		</if>
- 		and s.createtime>DATE_SUB(s.createtime,INTERVAL 1 MONTH) and s.accountNumber=#{accountNumber} and s.openId=#{openId} ORDER BY s.createtime desc
+ 		and s.takeTime>DATE_SUB(s.takeTime,INTERVAL 1 MONTH) and s.accountNumber=#{accountNumber} and s.openId=#{openId} ORDER BY s.createtime desc
 	</select>
 	<select id="getGoodsById" resultType="goodsPublic.entity.Goods">
 		select * from public_goods where id=#{param1}

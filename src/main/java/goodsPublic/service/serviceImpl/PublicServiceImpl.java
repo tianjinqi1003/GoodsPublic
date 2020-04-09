@@ -856,11 +856,12 @@ public class PublicServiceImpl implements PublicService {
 	@Override
 	public boolean openJPDHJFRedBagByJC(ScoreQrcode sq) {
 		// TODO Auto-generated method stub
-		int count1=publicDao.updateSQEnableByUuid(sq.getOpenId(),sq.getUuid());
+		int count1=publicDao.updateSQEnableByUuid(sq.getTakeTime(),sq.getOpenId(),sq.getUuid());
 		if(count1>0) {
 			ScoreQrcodeHistory sqh=new ScoreQrcodeHistory();
 			sqh.setUuid(sq.getUuid());
 			sqh.setCreateTime(sq.getCreateTime());
+			sqh.setTakeTime(sq.getTakeTime());
 			sqh.setQrcode(sq.getQrcode());
 			sqh.setShopLogo(sq.getShopLogo());
 			sqh.setScore(sq.getScore());

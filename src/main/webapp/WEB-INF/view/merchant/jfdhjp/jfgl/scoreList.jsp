@@ -13,7 +13,7 @@
 .gkjfqd_div .title_div{
 	width: 98%;font-size: 20px;color: #373737;font-weight:700;
 }
-.dateList_div .createDate_div{
+.dateList_div .takeDate_div{
 	color: #999;width: 100%;height:30px;line-height:30px;
 }
 .scoreList_div .item_div{
@@ -22,7 +22,7 @@
 .scoreList_div .item_div .nickName_span{
 	color: #000;margin-top: 10px;margin-left: 10px;position: absolute;
 }
-.scoreList_div .item_div .createTime_span{
+.scoreList_div .item_div .takeTime_span{
 	color: #000;margin-top: 13px;margin-left: 100px;position: absolute;
 }
 .scoreList_div .item_div .showDetail_span{
@@ -69,14 +69,14 @@ function initListDiv(){
 				var dateList=data.dateList;
 				var scoreList=data.scoreList;
 				for(var i=0;i<dateList.length;i++){
-					dateListDiv.append("<div class=\"createDate_div\">"+dateList[i]+"</div>"
+					dateListDiv.append("<div class=\"takeDate_div\">"+dateList[i]+"</div>"
 							+"<div class=\"scoreList_div\" id=\"scoreList_div"+dateList[i]+"\"></div>");
 				}
 				for(var i=0;i<scoreList.length;i++){
 					var item=scoreList[i];
 					var htmlStr="<div class=\"item_div\">";
 					htmlStr+="<span class=\"nickName_span\">"+item.nickName+"</span>";
-					htmlStr+="<span class=\"createTime_span\">"+item.createTime+"</span>";
+					htmlStr+="<span class=\"takeTime_span\">"+item.takeTime+"</span>";
 					htmlStr+="<span class=\"showDetail_span\"><a href=\"goScoreQrcodeDetail?openId="+item.openId+"\">查看积分明细</a></span>";
 					if(item.enable==null)
 						htmlStr+="<div class=\"codeNo_div\">奖品码   暂无</div>";
@@ -87,17 +87,17 @@ function initListDiv(){
 					htmlStr+="<span class=\"jfye_span\">积分余额:"+item.jfye+"</span>";
 					htmlStr+="<span class=\"takeScoreSum_span\">消费总积分:"+item.takeScoreSum+"</span>";
 					htmlStr+="</div>";
-					var createDate=item.createDate;
-					$("#scoreList_div"+createDate).append(htmlStr);
+					var takeDate=item.takeDate;
+					$("#scoreList_div"+takeDate).append(htmlStr);
 				}
 				/*
 				for(var i=0;i<list.length;i++){
 					var item=list[i];
-					var htmlStr="<div class=\"createDate_div\">"+item.createDate+"</div>";
+					var htmlStr="<div class=\"takeDate_div\">"+item.createDate+"</div>";
 					htmlStr+="<div class=\"scoreList_div\" id=\"scoreList_div"+item.createDate+"\">";
 					htmlStr+="<div class=\"item_div\">";
 					htmlStr+="<span class=\"nickName_span\">"+item.nickName+"</span>";
-					htmlStr+="<span class=\"createTime_span\">"+item.createTime+"</span>";
+					htmlStr+="<span class=\"takeTime_span\">"+item.createTime+"</span>";
 					htmlStr+="<span class=\"showDetail_span\">查看积分明细</span>";
 					if(item.enable==null)
 						htmlStr+="<div class=\"codeNo_div\">奖品码   暂无</div>";
