@@ -45,7 +45,7 @@
 }
 </style>
 <script type="text/javascript">
-var jpmLimit='${param.jpmLimit }';
+var jpmLimit=parseInt('${param.jpmLimit }');
 $(function(){
 	startTimeDTB=$("#startTime_dtb").datetimebox({
 		width:157,
@@ -81,7 +81,6 @@ function initListDiv(){
 				}
 				for(var i=0;i<scoreList.length;i++){
 					var item=scoreList[i];
-					console.log(item.takeTime);
 					var htmlStr="<div class=\"item_div\">";
 					htmlStr+="<span class=\"createTime_span\">"+item.takeTime+"</span>";
 					if(item.codeNo==null)
@@ -93,6 +92,7 @@ function initListDiv(){
 					htmlStr+="<span class=\"jfye_span\">积分余额:"+item.jfye+"</span>";
 					htmlStr+="<span class=\"takeScoreSum_span\">消费总积分:"+item.takeScoreSum+"</span>";
 					htmlStr+="</div>";
+
 					var takeDate=item.takeDate;
 					$("#scoreList_div"+takeDate).append(htmlStr);
 				}
@@ -107,7 +107,7 @@ function initListDiv(){
 function checkIfLimit(ctTime){
 	var ctDate=new Date(ctTime);
 	var overTime=ctDate.setDate(ctDate.getDate() + jpmLimit);
-	return overTime>new Date().getTime();
+	return overTime<new Date().getTime();
 }
 </script>
 </head>

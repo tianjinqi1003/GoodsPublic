@@ -2209,7 +2209,7 @@
  		<if test="startTime!=''&amp;startTime!=null&amp;endTime!=''&amp;endTime!=null">
  			and s.takeTime between #{startTime} and #{endTime}
  		</if>
- 		and s.takeTime>DATE_SUB(s.takeTime,INTERVAL 1 MONTH) and s.accountNumber=#{accountNumber} and s.openId=#{openId} ORDER BY s.createtime desc
+ 		and s.takeTime>DATE_SUB(s.takeTime,INTERVAL 1 MONTH) and s.accountNumber=#{accountNumber} and s.openId=#{openId} ORDER BY s.takeTime desc
 	</select>
 	<select id="getGoodsById" resultType="goodsPublic.entity.Goods">
 		select * from public_goods where id=#{param1}

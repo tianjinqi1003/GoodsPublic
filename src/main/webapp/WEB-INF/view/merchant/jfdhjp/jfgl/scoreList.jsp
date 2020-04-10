@@ -54,7 +54,7 @@
 }
 </style>
 <script type="text/javascript">
-var jpmLimit='${requestScope.jpmLimit }';
+var jpmLimit=parseInt('${requestScope.jpmLimit }');
 $(function(){
 	initListDiv();
 });
@@ -124,7 +124,7 @@ function initListDiv(){
 function checkIfLimit(ctTime){
 	var ctDate=new Date(ctTime);
 	var overTime=ctDate.setDate(ctDate.getDate() + jpmLimit);
-	return overTime>new Date().getTime();
+	return overTime<new Date().getTime();
 }
 </script>
 </head>
