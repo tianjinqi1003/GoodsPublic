@@ -23,6 +23,7 @@ import goodsPublic.entity.ModuleSPZS;
 import goodsPublic.entity.PrizeCode;
 import goodsPublic.entity.ScoreQrcode;
 import goodsPublic.entity.ScoreQrcodeHistory;
+import goodsPublic.entity.ScoreTakeRecord;
 
 public interface PublicMapper {
 	//保存发布的产品信息
@@ -376,9 +377,11 @@ public interface PublicMapper {
 
 	public JFDHJPCustomer getJCByOpenId(@Param("openId") String openId);
 
-	public int updateSQEnableByUuid(@Param("takeTime") String takeTime,@Param("openId") String openId,@Param("uuid") String uuid);
+	public int updateSQEnableByUuid(@Param("openId") String openId,@Param("uuid") String uuid);
 
 	public int addJCScoreByOpenId(@Param("score") Integer score, @Param("openId") String openId);
+
+	public int addScoreTakeRecord(ScoreTakeRecord str);
 
 	public int reduceJCScoreByOpenId(@Param("dhjpScore") Integer dhjpScore, @Param("openId") String openId);
 

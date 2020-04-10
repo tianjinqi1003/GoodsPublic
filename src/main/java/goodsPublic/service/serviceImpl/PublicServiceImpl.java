@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -44,6 +45,7 @@ import goodsPublic.entity.ModuleSPZS;
 import goodsPublic.entity.PrizeCode;
 import goodsPublic.entity.ScoreQrcode;
 import goodsPublic.entity.ScoreQrcodeHistory;
+import goodsPublic.entity.ScoreTakeRecord;
 import goodsPublic.service.PublicService;
 /**
  * 这是用来处理商品的对应接口
@@ -856,12 +858,11 @@ public class PublicServiceImpl implements PublicService {
 	@Override
 	public boolean openJPDHJFRedBagByJC(ScoreQrcode sq) {
 		// TODO Auto-generated method stub
-		int count1=publicDao.updateSQEnableByUuid(sq.getTakeTime(),sq.getOpenId(),sq.getUuid());
+		int count1=publicDao.updateSQEnableByUuid(sq.getOpenId(),sq.getUuid());
 		if(count1>0) {
 			ScoreQrcodeHistory sqh=new ScoreQrcodeHistory();
 			sqh.setUuid(sq.getUuid());
 			sqh.setCreateTime(sq.getCreateTime());
-			sqh.setTakeTime(sq.getTakeTime());
 			sqh.setQrcode(sq.getQrcode());
 			sqh.setShopLogo(sq.getShopLogo());
 			sqh.setScore(sq.getScore());
@@ -870,6 +871,18 @@ public class PublicServiceImpl implements PublicService {
 			count1=publicDao.addScoreQrcodeHistory(sqh);
 		}
 		int count2=publicDao.addJCScoreByOpenId(sq.getScore(),sq.getOpenId());
+		JFDHJPCustomer jc = publicDao.getJCByOpenId(sq.getOpenId());
+		ScoreTakeRecord str=new ScoreTakeRecord();
+		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+		str.setUuid(uuid);
+		str.setNickName(jc.getNickName());
+		str.setTakeCount(jc.getTakeCount());
+		str.setTakeScore(sq.getScore());
+		str.setJfye(jc.getScore());
+		str.setTakeScoreSum(jc.getTakeScoreSum());
+		str.setSqUuid(sq.getUuid());
+		str.setAccountNumber(sq.getAccountNumber());
+		count2=publicDao.addScoreTakeRecord(str);
 		if(count1>0&&count2>0)
 			return true;
 		else

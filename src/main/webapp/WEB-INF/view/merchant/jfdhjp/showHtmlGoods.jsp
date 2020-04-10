@@ -40,11 +40,11 @@ $(function(){
 
 function openRedBag(){
 	var createTime='${requestScope.scoreQrcode.createTime }';
-	var takeTime=createTakeTime();
+	//var takeTime=createTakeTime();
 	var qrcode='${requestScope.scoreQrcode.qrcode }';
 	var shopLogo='${requestScope.scoreQrcode.shopLogo }';
 	$.post(path+"merchant/phone/openJPDHJFRedBagByJC",
-		{openId:openId,uuid:sqUuid,createTime:createTime,takeTime:takeTime,qrcode:qrcode,shopLogo:shopLogo,score:redBagScore,accountNumber:accountNumber},
+		{openId:openId,uuid:sqUuid,createTime:createTime,qrcode:qrcode,shopLogo:shopLogo,score:redBagScore,accountNumber:accountNumber},
 		function(data){
 			if(data.status=="ok"){
 				$("#redBag_div").css("display","none");
@@ -65,6 +65,7 @@ function openRedBag(){
 	,"json");
 }
 
+/*
 function createTakeTime(){
 	var date=new Date();
 	var year=date.getFullYear();
@@ -75,6 +76,7 @@ function createTakeTime(){
 	var seconds=date.getSeconds();
 	return year+"-"+month+"-"+date1+" "+hours+":"+minutes+":"+seconds;
 }
+*/
 
 function createPrizeCode(){
 	$.post(path+"merchant/phone/createPrizeCode",

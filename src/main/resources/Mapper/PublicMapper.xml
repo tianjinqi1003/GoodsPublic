@@ -1030,9 +1030,6 @@
 			<if test="createTime!=null">
 				createTime,
 			</if>
-			<if test="takeTime!=null">
-				takeTime,
-			</if>
 			<if test="qrcode!=null">
 				qrcode,
 			</if>
@@ -1056,9 +1053,6 @@
 			</if>
 			<if test="createTime!=null">
 				#{createTime},
-			</if>
-			<if test="takeTime!=null">
-				#{takeTime},
 			</if>
 			<if test="qrcode!=null">
 				#{qrcode},
@@ -1473,7 +1467,7 @@
 		update score_qrcode set score=#{score} where uuid=#{uuid}
 	</update>
 	<update id="updateSQEnableByUuid">
-		update score_qrcode set takeTime=#{takeTime},enable=1,openId=#{openId} where uuid=#{uuid}
+		update score_qrcode set enable=1,openId=#{openId} where uuid=#{uuid}
 	</update>
 	<update id="addJCScoreByOpenId">
 		update jfdhjp_customer set score=score+#{score},takeCount=takeCount+1,takeScoreSum=takeScoreSum+#{score} where openId=#{openId}
@@ -2184,18 +2178,18 @@
 		select goodsNumber,title,imgUrl,category_id from public_goods where category_id=#{param1} and accountNumber=#{param2}
 	</select>
 	<select id="getCSDateList" resultType="java.lang.String">
-		select date_format(max(s.takeTime),'%m月%d日') takeDate from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.uuid=p.sqUuid where s.enable=1 and s.takeTime is not null
+		select date_format(max(t.createTime),'%m月%d日') takeDate from score_qrcode s LEFT JOIN score_take_record t on s.uuid=t.sqUuid LEFT JOIN prize_code p on s.uuid=p.sqUuid where s.enable=1 and t.createTime is not null
 		<if test="searchTxt!=''&amp;searchTxt!=null">
 			and (p.codeNo like CONCAT('%',#{searchTxt},'%') or j.nickName like CONCAT('%',#{searchTxt},'%'))
 		</if>
-		 and s.accountNumber=#{accountNumber} GROUP BY date_format(s.takeTime,'%m月%d日') ORDER BY s.takeTime desc
+		 and s.accountNumber=#{accountNumber} GROUP BY date_format(t.createTime,'%m月%d日') ORDER BY t.createTime desc
 	</select>
 	<select id="queryCustomerScoreList" resultType="java.util.Map">
-		select s.uuid,date_format(max(s.takeTime),'%m月%d日') takeDate,date_format(max(s.takeTime),'%H:%i:%s') takeTime,j.nickName,p.codeNo,p.createTime,j.takeCount,j.takeScoreSum,j.score jfye,s.score takeScore,s.openId from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.uuid=p.sqUuid where s.enable=1 and s.takeTime is not null
+		select s.uuid,date_format(max(t.createTime),'%m月%d日') takeDate,date_format(max(t.createTime),'%H:%i:%s') takeTime,t.nickName,p.codeNo,p.createTime,t.takeCount,t.takeScoreSum,t.jfye,s.score takeScore,s.openId from score_qrcode s LEFT JOIN score_take_record t on s.uuid=t.sqUuid LEFT JOIN prize_code p on s.uuid=p.sqUuid where s.enable=1 and t.createTime is not null
 		<if test="searchTxt!=''&amp;searchTxt!=null">
-			and (p.codeNo like CONCAT('%',#{searchTxt},'%') or j.nickName like CONCAT('%',#{searchTxt},'%'))
+			and (p.codeNo like CONCAT('%',#{searchTxt},'%') or t.nickName like CONCAT('%',#{searchTxt},'%'))
 		</if>
-		 and s.accountNumber=#{accountNumber} GROUP BY date_format(s.takeTime,'%m月%d日'),s.openid ORDER BY s.takeTime desc
+		 and s.accountNumber=#{accountNumber} GROUP BY date_format(t.createTime,'%m月%d日'),s.openid ORDER BY t.createTime desc
 	</select>
 	<select id="getCSDDateList" resultType="java.lang.String">
 		select date_format(s.takeTime,'%m月%d日') takeDate from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.uuid=p.sqUuid where s.enable=1
@@ -2261,6 +2255,64 @@
 	</select>
 	<insert id="insertGoodsLabel" parameterType="goodsPublic.entity.GoodsLabelSet">
 		insert into goods_label_set(`key`,label,module,isShow,isPublic,isCheck,accountNumber,sort) values(#{key},#{label},#{module},#{isShow},0,0,#{accountNumber},#{sort})
+	</insert>
+	<insert id="addScoreTakeRecord" parameterType="goodsPublic.entity.ScoreTakeRecord">
+		insert into score_take_record
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="uuid!=null">
+				uuid,
+			</if>
+			<if test="nickName!=null">
+				nickName,
+			</if>
+			<if test="takeCount!=null">
+				takeCount,
+			</if>
+			<if test="takeScore!=null">
+				takeScore,
+			</if>
+			<if test="jfye!=null">
+				jfye,
+			</if>
+			<if test="takeScoreSum!=null">
+				takeScoreSum,
+			</if>
+				createTime,
+			<if test="sqUuid!=null">
+				sqUuid,
+			</if>
+			<if test="accountNumber!=null">
+				accountNumber,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="uuid!=null">
+				#{uuid},
+			</if>
+			<if test="nickName!=null">
+				#{nickName},
+			</if>
+			<if test="takeCount!=null">
+				#{takeCount},
+			</if>
+			<if test="takeScore!=null">
+				#{takeScore},
+			</if>
+			<if test="jfye!=null">
+				#{jfye},
+			</if>
+			<if test="takeScoreSum!=null">
+				#{takeScoreSum},
+			</if>
+				now(),
+			<if test="sqUuid!=null">
+				#{sqUuid},
+			</if>
+			<if test="accountNumber!=null">
+				#{accountNumber},
+			</if>
+		</trim>
 	</insert>
 	<select id="getModuleSPZSByType" resultType="goodsPublic.entity.ModuleSPZS">
 		select * from module_spzs where type=#{param1} and moduleType=#{param2}

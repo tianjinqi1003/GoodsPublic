@@ -21,12 +21,6 @@ public class ScoreQrcode implements Serializable {
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	public String getTakeTime() {
-		return takeTime;
-	}
-	public void setTakeTime(String takeTime) {
-		this.takeTime = takeTime;
-	}
 	public String getQrcode() {
 		return qrcode;
 	}
@@ -76,7 +70,6 @@ public class ScoreQrcode implements Serializable {
 		this.exUuid = exUuid;
 	}
 	private String createTime;
-	private String takeTime;
 	private String qrcode;
 	private String shopLogo;
 	private Integer score;

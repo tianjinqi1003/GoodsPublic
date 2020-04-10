@@ -10,7 +10,6 @@ public class ScoreQrcodeHistory implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String uuid;
 	private String createTime;
-	private String takeTime;
 	private String qrcode;
 	private String shopLogo;
 	private Integer score;
@@ -27,12 +26,6 @@ public class ScoreQrcodeHistory implements Serializable {
 	}
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
-	}
-	public String getTakeTime() {
-		return takeTime;
-	}
-	public void setTakeTime(String takeTime) {
-		this.takeTime = takeTime;
 	}
 	public String getQrcode() {
 		return qrcode;
