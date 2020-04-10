@@ -742,11 +742,11 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public int addPrizeCode(PrizeCode pz, Integer dhjpScore) {
+	public int addPrizeCode(PrizeCode pz, Integer dhjpScore, String openId) {
 		// TODO Auto-generated method stub
 		int count=publicDao.addPrizeCode(pz);
 		if(count>0) {
-			count=publicDao.reduceJCScoreByOpenId(dhjpScore, pz.getOpenId());
+			count=publicDao.reduceJCScoreByOpenId(dhjpScore, openId);
 		}
 		return count;
 	}

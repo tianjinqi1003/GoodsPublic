@@ -41,13 +41,13 @@ public class PhoneController {
 
 	@RequestMapping(value="/createPrizeCode")
 	@ResponseBody
-	public Map<String, Object> createPrizeCode(PrizeCode pz, Integer dhjpScore) {
+	public Map<String, Object> createPrizeCode(PrizeCode pz, Integer dhjpScore, String openId) {
 
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
 		pz.setCodeNo(new Random().nextInt(10000)+"");
 		
-		int count=publicService.addPrizeCode(pz,dhjpScore);
+		int count=publicService.addPrizeCode(pz,dhjpScore,openId);
 		
 		if(count>0) {
 			jsonMap.put("status", "ok");

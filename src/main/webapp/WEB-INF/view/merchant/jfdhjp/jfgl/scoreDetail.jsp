@@ -45,6 +45,7 @@
 }
 </style>
 <script type="text/javascript">
+var jpmLimit='${param.jpmLimit }';
 $(function(){
 	startTimeDTB=$("#startTime_dtb").datetimebox({
 		width:157,
@@ -80,12 +81,13 @@ function initListDiv(){
 				}
 				for(var i=0;i<scoreList.length;i++){
 					var item=scoreList[i];
+					console.log(item.takeTime);
 					var htmlStr="<div class=\"item_div\">";
 					htmlStr+="<span class=\"createTime_span\">"+item.takeTime+"</span>";
 					if(item.codeNo==null)
 						htmlStr+="<div class=\"codeNo_div\">奖品码   暂无</div>";
 					else
-						htmlStr+="<div class=\"codeNo_div\">奖品码   <span class=\""+(item.enable?"codeEnable":"codeDisable")+"\">"+item.codeNo+"<span></div>";
+						htmlStr+="<div class=\"codeNo_div\">奖品码   <span class=\""+(checkIfLimit(item.createTime)?"codeDisable":"codeEnable")+"\">"+item.codeNo+"<span></div>";
 					htmlStr+="<span class=\"takeCount_span\">消费次数:"+item.takeCount+"</span>";
 					htmlStr+="<span class=\"takeScore_span\">消费积分:"+item.takeScore+"</span>";
 					htmlStr+="<span class=\"jfye_span\">积分余额:"+item.jfye+"</span>";
@@ -100,6 +102,12 @@ function initListDiv(){
 			}
 		}
 	,"json");
+}
+
+function checkIfLimit(ctTime){
+	var ctDate=new Date(ctTime);
+	var overTime=ctDate.setDate(ctDate.getDate() + jpmLimit);
+	return overTime>new Date().getTime();
 }
 </script>
 </head>

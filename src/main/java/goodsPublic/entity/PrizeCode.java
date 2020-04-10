@@ -12,7 +12,7 @@ public class PrizeCode implements Serializable {
 	private String codeNo;
 	private String createTime;
 	private String accountNumber;
-	private String openId;
+	private String sqUuid;
 	private String enable;
 	public Integer getId() {
 		return id;
@@ -38,11 +38,11 @@ public class PrizeCode implements Serializable {
 	public void setAccountNumber(String accountNumber) {
 		this.accountNumber = accountNumber;
 	}
-	public String getOpenId() {
-		return openId;
+	public String getSqUuid() {
+		return sqUuid;
 	}
-	public void setOpenId(String openId) {
-		this.openId = openId;
+	public void setSqUuid(String sqUuid) {
+		this.sqUuid = sqUuid;
 	}
 	public String getEnable() {
 		return enable;

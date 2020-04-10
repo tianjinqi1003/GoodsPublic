@@ -78,7 +78,7 @@ function createTakeTime(){
 
 function createPrizeCode(){
 	$.post(path+"merchant/phone/createPrizeCode",
-		{dhjpScore:dhjpScore,accountNumber:accountNumber,openId:openId},
+		{dhjpScore:dhjpScore,accountNumber:accountNumber,sqUuid:sqUuid,openId:openId},
 		function(data){
 			if(data.status=="ok"){
 				$("body").css("background-color","#009446");
