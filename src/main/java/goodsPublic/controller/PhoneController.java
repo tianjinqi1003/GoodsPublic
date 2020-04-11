@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import goodsPublic.entity.PrizeCode;
 import goodsPublic.entity.ScoreQrcode;
+import goodsPublic.entity.ScoreTakeRecord;
 import goodsPublic.service.PublicService;
 
 @Controller
@@ -56,6 +57,25 @@ public class PhoneController {
 		else {
 			jsonMap.put("status", "no");
 			jsonMap.put("message", "生成兑奖码失败！");
+		}
+		
+		return jsonMap;
+	}
+	
+	@RequestMapping(value="/addScoreTakeRecord")
+	@ResponseBody
+	public Map<String, Object> addScoreTakeRecord(ScoreTakeRecord str) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		int count=publicService.addScoreTakeRecord(str);
+		
+		if(count>0) {
+			jsonMap.put("status", "ok");
+		}
+		else {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "添加积分消费记录失败！");
 		}
 		
 		return jsonMap;

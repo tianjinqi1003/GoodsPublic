@@ -20,7 +20,7 @@ var endTime='${requestScope.jfdhjpActivity.endTime }';
 var windowHeight=$(window).height();
 
 $(function(){
-	if('${requestScope.scoreQrcode }'==""||new Date(endTime).getTime()-new Date().getTime()<=0){
+	if(new Date(endTime).getTime()-new Date().getTime()<=0){
 		$("#redBag_div").css("display","none");
 		$("#ygq_div").css("display","block");
 	}
@@ -53,6 +53,7 @@ function openRedBag(){
 					createPrizeCode();
 				}
 				else{
+					addScoreTakeRecord();
 					$("body").css("background-color","#009446");
 					$("#score_div").css("display","block");
 					$("#shopScore_span").text(shopScore);
@@ -61,6 +62,15 @@ function openRedBag(){
 			else{
 				alert(data.message);
 			}
+		}
+	,"json");
+}
+
+function addScoreTakeRecord(){
+	$.post(path+"merchant/phone/addScoreTakeRecord",
+		{openId:openId,takeScore:redBagScore,sqUuid:sqUuid,accountNumber:accountNumber},
+		function(data){
+			
 		}
 	,"json");
 }
@@ -83,6 +93,7 @@ function createPrizeCode(){
 		{dhjpScore:dhjpScore,accountNumber:accountNumber,sqUuid:sqUuid,openId:openId},
 		function(data){
 			if(data.status=="ok"){
+				addScoreTakeRecord();
 				$("body").css("background-color","#009446");
 				$("#djm_div").css("display","block");
 				$("#codeNo_span").text(data.codeNo);

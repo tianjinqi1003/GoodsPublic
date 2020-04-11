@@ -989,6 +989,9 @@
 			<if test="example!=null">
 				example,
 			</if>
+			<if test="jfewmlbShow!=null">
+				jfewmlbShow,
+			</if>
 			<if test="exUuid!=null">
 				exUuid,
 			</if>
@@ -1014,6 +1017,9 @@
 			</if>
 			<if test="example!=null">
 				#{example},
+			</if>
+			<if test="jfewmlbShow!=null">
+				#{jfewmlbShow},
 			</if>
 			<if test="exUuid!=null">
 				#{exUuid},
@@ -2129,7 +2135,7 @@
 		update jfdhjp_activity set jpmdhReg=#{jpmdhReg} where accountNumber=#{accountNumber}
 	</update>
 	<update id="updateSTRGkjfqdShow">
-		update score_take_record set gkjfqdShow=0 where openId=#{openId} and accountNumber=#{accountNumber}
+		update score_take_record set gkjfqdShow=0 where gkjfqdShow=1 and openId=#{openId} and accountNumber=#{accountNumber}
 	</update>
 	<select id="getAllGoodsMsg" resultType="goodsPublic.entity.Goods">
 		select * from public_goods
@@ -2139,7 +2145,7 @@
 		select count(*) from public_goods where accountNumber=#{param1} and category_id=#{param2}
 	</select>
 	<select id="queryScoreQrcodeForInt" resultType="java.lang.Integer">
-		select count(*) from score_qrcode where example=1 and accountNumber=#{param1}
+		select count(*) from score_qrcode where example=1 and jfewmlbShow=1 and accountNumber=#{param1}
 	</select>
 	<select id="queryHtmlGoodsSPZSForInt" resultType="java.lang.Integer">
 		select count(*) from html_goods_spzs where accountNumber=#{param1} and moduleType=#{param2}
@@ -2163,7 +2169,7 @@
 		select * from public_goods where accountNumber=#{param1} and category_id=#{param2} limit ${param3},${param4}
 	</select>
 	<select id="queryScoreQrcodeList" resultType="goodsPublic.entity.ScoreQrcode">
-		select * from score_qrcode where example=1 and accountNumber=#{param1} order by ${param4} ${param5} limit ${param2},${param3}
+		select * from score_qrcode where example=1 and jfewmlbShow=1 and accountNumber=#{param1} order by ${param4} ${param5} limit ${param2},${param3}
 	</select>
 	<select id="queryHtmlGoodsSPZSList" resultType="goodsPublic.entity.HtmlGoodsSPZS">
 		select * from html_goods_spzs where accountNumber=#{param1} and moduleType=#{param2} limit ${param3},${param4}
@@ -2353,17 +2359,19 @@
 		select * from html_goods_grmp where uuid=#{uuid}
 	</select>
 	<delete id="deleteScoreQrcodeByUuids">
-		delete from score_qrcode where 1=1
+		update score_qrcode set jfewmlbShow=0 where 1=1
 		<foreach collection="list" item="uuid" open=" and cast(uuid as char) in (" separator="," close=")">
 		#{uuid}
 		</foreach>
 	</delete>
+	<!-- 
 	<delete id="deleteScoreQrcodeByExUuids">
 		delete from score_qrcode where 1=1
 		<foreach collection="list" item="exUuid" open=" and cast(exUuid as char) in (" separator="," close=")">
 		#{exUuid}
 		</foreach>
 	</delete>
+	 -->
 	<delete id="deleteHtmlGoodsSPZSByIds">
 		delete from html_goods_spzs where 1=1
 		<foreach collection="list" item="id" open=" and cast(id as char) in (" separator="," close=")">

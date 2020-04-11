@@ -312,7 +312,10 @@ public interface PublicMapper {
 
 	public int deleteScoreQrcodeByUuids(List<String> uuidList);
 
+	/**
+	 *现在不直接从数据库里删除积分二维码数据了，这个方法暂时不用了 
 	public int deleteScoreQrcodeByExUuids(List<String> exUuidList);
+	*/
 	
 	/**
 	 * 根据id删除商品展示模板内容

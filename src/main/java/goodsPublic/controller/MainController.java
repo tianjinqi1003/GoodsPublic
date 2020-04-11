@@ -724,6 +724,7 @@ public class MainController {
 			
 			scoreQrcode.setQrcode(avaPath);
 			scoreQrcode.setExample(true);
+			scoreQrcode.setJfewmlbShow(true);
 			
 			int a=publicService.addScoreQrcode(scoreQrcode);
 		} catch (Exception e) {

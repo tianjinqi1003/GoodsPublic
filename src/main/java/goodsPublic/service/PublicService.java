@@ -20,6 +20,7 @@ import goodsPublic.entity.JFDHJPActivity;
 import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.PrizeCode;
 import goodsPublic.entity.ScoreQrcode;
+import goodsPublic.entity.ScoreTakeRecord;
 
 public interface PublicService {
 
@@ -384,6 +385,8 @@ public interface PublicService {
 	public JFDHJPCustomer getJCByOpenId(String openId);
 
 	public boolean openJPDHJFRedBagByJC(ScoreQrcode sq);
+
+	public int addScoreTakeRecord(ScoreTakeRecord str);
 
 	public List<String> getCSDateList(String searchTxt, String accountNumber);
 	

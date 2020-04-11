@@ -684,9 +684,11 @@ public class PublicServiceImpl implements PublicService {
 		int count=0;
 		List<String> uuidList = Arrays.asList(uuids.split(","));
 		count=publicDao.deleteScoreQrcodeByUuids(uuidList);
+		/*
 		if(count>0) {
 			count=publicDao.deleteScoreQrcodeByExUuids(uuidList);
 		}
+		*/
 		return count;
 	}
 
@@ -871,24 +873,31 @@ public class PublicServiceImpl implements PublicService {
 			count1=publicDao.addScoreQrcodeHistory(sqh);
 		}
 		int count2=publicDao.addJCScoreByOpenId(sq.getScore(),sq.getOpenId());
-		publicDao.updateSTRGkjfqdShow(sq.getOpenId(),sq.getAccountNumber());
-		JFDHJPCustomer jc = publicDao.getJCByOpenId(sq.getOpenId());
-		ScoreTakeRecord str=new ScoreTakeRecord();
-		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
-		str.setUuid(uuid);
-		str.setOpenId(sq.getOpenId());
-		str.setNickName(jc.getNickName());
-		str.setTakeCount(jc.getTakeCount());
-		str.setTakeScore(sq.getScore());
-		str.setJfye(jc.getScore());
-		str.setTakeScoreSum(jc.getTakeScoreSum());
-		str.setSqUuid(sq.getUuid());
-		str.setAccountNumber(sq.getAccountNumber());
-		count2=publicDao.addScoreTakeRecord(str);
+		
 		if(count1>0&&count2>0)
 			return true;
 		else
 			return false;
+	}
+
+	@Override
+	public int addScoreTakeRecord(ScoreTakeRecord str) {
+		// TODO Auto-generated method stub
+
+		int count=publicDao.updateSTRGkjfqdShow(str.getOpenId(),str.getAccountNumber());
+		JFDHJPCustomer jc = publicDao.getJCByOpenId(str.getOpenId());
+		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+		str.setUuid(uuid);
+		//str.setOpenId(sq.getOpenId());
+		str.setNickName(jc.getNickName());
+		str.setTakeCount(jc.getTakeCount());
+		//str.setTakeScore(sq.getScore());
+		str.setJfye(jc.getScore());
+		str.setTakeScoreSum(jc.getTakeScoreSum());
+		//str.setSqUuid(sq.getUuid());
+		//str.setAccountNumber(sq.getAccountNumber());
+		count=publicDao.addScoreTakeRecord(str);
+		return count;
 	}
 
 	@Override
