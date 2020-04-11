@@ -9,6 +9,7 @@ public class ScoreTakeRecord implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private String uuid;
+	private String openId;
 	private String nickName;
 	private Integer takeCount;
 	private Integer takeScore;
@@ -17,11 +18,18 @@ public class ScoreTakeRecord implements Serializable {
 	private String createTime;
 	private String sqUuid;
 	private Integer accountNumber;
+	private Boolean gkjfqdShow;
 	public String getUuid() {
 		return uuid;
 	}
 	public void setUuid(String uuid) {
 		this.uuid = uuid;
+	}
+	public String getOpenId() {
+		return openId;
+	}
+	public void setOpenId(String openId) {
+		this.openId = openId;
 	}
 	public String getNickName() {
 		return nickName;
@@ -70,6 +78,12 @@ public class ScoreTakeRecord implements Serializable {
 	}
 	public void setAccountNumber(Integer accountNumber) {
 		this.accountNumber = accountNumber;
+	}
+	public Boolean getGkjfqdShow() {
+		return gkjfqdShow;
+	}
+	public void setGkjfqdShow(Boolean gkjfqdShow) {
+		this.gkjfqdShow = gkjfqdShow;
 	}
 
 }

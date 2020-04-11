@@ -871,10 +871,12 @@ public class PublicServiceImpl implements PublicService {
 			count1=publicDao.addScoreQrcodeHistory(sqh);
 		}
 		int count2=publicDao.addJCScoreByOpenId(sq.getScore(),sq.getOpenId());
+		publicDao.updateSTRGkjfqdShow(sq.getOpenId(),sq.getAccountNumber());
 		JFDHJPCustomer jc = publicDao.getJCByOpenId(sq.getOpenId());
 		ScoreTakeRecord str=new ScoreTakeRecord();
 		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
 		str.setUuid(uuid);
+		str.setOpenId(sq.getOpenId());
 		str.setNickName(jc.getNickName());
 		str.setTakeCount(jc.getTakeCount());
 		str.setTakeScore(sq.getScore());

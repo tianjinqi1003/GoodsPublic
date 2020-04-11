@@ -2128,6 +2128,9 @@
 	<update id="updateJPMDHRegByAccountId">
 		update jfdhjp_activity set jpmdhReg=#{jpmdhReg} where accountNumber=#{accountNumber}
 	</update>
+	<update id="updateSTRGkjfqdShow">
+		update score_take_record set gkjfqdShow=0 where openId=#{openId} and accountNumber=#{accountNumber}
+	</update>
 	<select id="getAllGoodsMsg" resultType="goodsPublic.entity.Goods">
 		select * from public_goods
 		where goodsNumber=#{goodsNumber} and accountNumber=#{accountNumber}
@@ -2178,32 +2181,32 @@
 		select goodsNumber,title,imgUrl,category_id from public_goods where category_id=#{param1} and accountNumber=#{param2}
 	</select>
 	<select id="getCSDateList" resultType="java.lang.String">
-		select date_format(max(t.createTime),'%m月%d日') takeDate from score_qrcode s LEFT JOIN score_take_record t on s.uuid=t.sqUuid LEFT JOIN prize_code p on s.uuid=p.sqUuid where s.enable=1 and t.createTime is not null
+		select date_format(max(t.createTime),'%m月%d日') takeDate from score_take_record t LEFT JOIN score_qrcode s on t.sqUuid=s.uuid LEFT JOIN prize_code p on s.uuid=p.sqUuid where s.enable=1 and t.gkjfqdShow=1
 		<if test="searchTxt!=''&amp;searchTxt!=null">
-			and (p.codeNo like CONCAT('%',#{searchTxt},'%') or j.nickName like CONCAT('%',#{searchTxt},'%'))
+			and (p.codeNo like CONCAT('%',#{searchTxt},'%') or t.nickName like CONCAT('%',#{searchTxt},'%'))
 		</if>
 		 and s.accountNumber=#{accountNumber} GROUP BY date_format(t.createTime,'%m月%d日') ORDER BY t.createTime desc
 	</select>
 	<select id="queryCustomerScoreList" resultType="java.util.Map">
-		select s.uuid,date_format(max(t.createTime),'%m月%d日') takeDate,date_format(max(t.createTime),'%H:%i:%s') takeTime,t.nickName,p.codeNo,p.createTime,t.takeCount,t.takeScoreSum,t.jfye,s.score takeScore,s.openId from score_qrcode s LEFT JOIN score_take_record t on s.uuid=t.sqUuid LEFT JOIN prize_code p on s.uuid=p.sqUuid where s.enable=1 and t.createTime is not null
+		select s.uuid,date_format(max(t.createTime),'%m月%d日') takeDate,date_format(max(t.createTime),'%H:%i:%s') takeTime,t.nickName,p.codeNo,p.createTime,t.takeCount,t.takeScoreSum,t.jfye,s.score takeScore,s.openId from score_take_record t LEFT JOIN score_qrcode s on t.sqUuid=s.uuid LEFT JOIN prize_code p on s.uuid=p.sqUuid where s.enable=1 and t.gkjfqdShow=1
 		<if test="searchTxt!=''&amp;searchTxt!=null">
 			and (p.codeNo like CONCAT('%',#{searchTxt},'%') or t.nickName like CONCAT('%',#{searchTxt},'%'))
 		</if>
 		 and s.accountNumber=#{accountNumber} GROUP BY date_format(t.createTime,'%m月%d日'),s.openid ORDER BY t.createTime desc
 	</select>
 	<select id="getCSDDateList" resultType="java.lang.String">
-		select date_format(s.takeTime,'%m月%d日') takeDate from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.uuid=p.sqUuid where s.enable=1
+		select date_format(t.createTime,'%m月%d日') takeDate from score_take_record t LEFT JOIN score_qrcode s on t.sqUuid=s.uuid LEFT JOIN prize_code p on s.uuid=p.sqUuid where s.enable=1
  		<if test="startTime!=''&amp;startTime!=null&amp;endTime!=''&amp;endTime!=null">
- 			and s.takeTime between #{startTime} and #{endTime}
+ 			and t.createTime between #{startTime} and #{endTime}
  		</if>
- 		and s.takeTime>DATE_SUB(s.takeTime,INTERVAL 1 MONTH) and s.accountNumber=#{accountNumber} and s.openId=#{openId} GROUP BY date_format(s.takeTime,'%m月%d日') ORDER BY s.takeTime desc
+ 		and t.createTime>DATE_SUB(t.createTime,INTERVAL 1 MONTH) and s.accountNumber=#{accountNumber} and s.openId=#{openId} GROUP BY date_format(t.createTime,'%m月%d日') ORDER BY t.createTime desc
 	</select>
 	<select id="queryCSDetailList" resultType="java.util.Map">
-		select s.uuid,date_format(s.takeTime,'%m月%d日') takeDate,date_format(s.takeTime,'%H:%i:%s') takeTime,j.nickName,p.codeNo,p.createTime,j.takeCount,j.takeScoreSum,j.score jfye,s.score takeScore from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.uuid=p.sqUuid where s.enable=1
+		select s.uuid,date_format(t.createTime,'%m月%d日') takeDate,date_format(t.createTime,'%H:%i:%s') takeTime,t.nickName,p.codeNo,p.createTime,t.takeCount,t.takeScoreSum,t.jfye,s.score takeScore from score_take_record t LEFT JOIN score_qrcode s on t.sqUuid=s.uuid LEFT JOIN prize_code p on s.uuid=p.sqUuid where s.enable=1
  		<if test="startTime!=''&amp;startTime!=null&amp;endTime!=''&amp;endTime!=null">
- 			and s.takeTime between #{startTime} and #{endTime}
+ 			and t.createTime between #{startTime} and #{endTime}
  		</if>
- 		and s.takeTime>DATE_SUB(s.takeTime,INTERVAL 1 MONTH) and s.accountNumber=#{accountNumber} and s.openId=#{openId} ORDER BY s.takeTime desc
+ 		and t.createTime>DATE_SUB(t.createTime,INTERVAL 1 MONTH) and s.accountNumber=#{accountNumber} and s.openId=#{openId} ORDER BY t.createTime desc
 	</select>
 	<select id="getGoodsById" resultType="goodsPublic.entity.Goods">
 		select * from public_goods where id=#{param1}
@@ -2262,6 +2265,9 @@
 			<if test="uuid!=null">
 				uuid,
 			</if>
+			<if test="openId!=null">
+				openId,
+			</if>
 			<if test="nickName!=null">
 				nickName,
 			</if>
@@ -2284,11 +2290,15 @@
 			<if test="accountNumber!=null">
 				accountNumber,
 			</if>
+				gkjfqdShow
 		</trim>
 		values
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="uuid!=null">
 				#{uuid},
+			</if>
+			<if test="openId!=null">
+				#{openId},
 			</if>
 			<if test="nickName!=null">
 				#{nickName},
@@ -2312,6 +2322,7 @@
 			<if test="accountNumber!=null">
 				#{accountNumber},
 			</if>
+				1
 		</trim>
 	</insert>
 	<select id="getModuleSPZSByType" resultType="goodsPublic.entity.ModuleSPZS">

@@ -398,4 +398,6 @@ public interface PublicMapper {
 
 	public int updateJPMDHRegByAccountId(@Param("jpmdhReg") String jpmdhReg, @Param("accountNumber") Integer accountNumber);
 
+	public int updateSTRGkjfqdShow(@Param("openId") String openId, @Param("accountNumber") Integer accountNumber);
+
 }
