@@ -25,11 +25,17 @@
 .scoreList_div .item_div .codeNo_div{
 	width:200px;color: #999;margin-top: 40px;margin-left: 10px;position: absolute;
 }
-.scoreList_div .item_div .codeEnable{
+.scoreList_div .item_div .codeUnExc{
 	color: #0f0;margin-top: 3px;margin-left: 10px;position: absolute;
 }
-.scoreList_div .item_div .codeDisable{
+.scoreList_div .item_div .codeLimit{
 	color: #f00;margin-top: 3px;margin-left: 10px;position: absolute;
+}
+.scoreList_div .item_div .codeExc{
+	color: #666;margin-top: 3px;margin-left: 10px;position: absolute;
+}
+.scoreList_div .item_div .excCode_span{
+	color: #00f;margin-top: 3px;margin-left: 80px;position: absolute;cursor: pointer;
 }
 .scoreList_div .item_div .takeCount_span{
 	color: #999;margin-top: 40px;margin-left: 228px;position: absolute;
@@ -85,8 +91,19 @@ function initListDiv(){
 					htmlStr+="<span class=\"createTime_span\">"+item.takeTime+"</span>";
 					if(item.codeNo==null)
 						htmlStr+="<div class=\"codeNo_div\">奖品码   暂无</div>";
-					else
-						htmlStr+="<div class=\"codeNo_div\">奖品码   <span class=\""+(checkIfLimit(item.createTime)?"codeDisable":"codeEnable")+"\">"+item.codeNo+"<span></div>";
+					else{
+						switch(item.pcState){
+						case 0:
+							htmlStr+="<div class=\"codeNo_div\">奖品码   <span class=\"codeUnExc\">"+item.codeNo+"</span><span class=\"excCode_span\" onclick=\"updatePcExcById('"+item.pcId+"')\">已兑换</span></div>";
+							break;
+						case 1:
+							htmlStr+="<div class=\"codeNo_div\">奖品码   <span class=\"codeExc\">"+item.codeNo+"</span></div>";
+							break;
+						case 2:
+							htmlStr+="<div class=\"codeNo_div\">奖品码   <span class=\"codeLimit\">"+item.codeNo+"</span></div>";
+							break;
+						}
+					}
 					htmlStr+="<span class=\"takeCount_span\">消费次数:"+item.takeCount+"</span>";
 					htmlStr+="<span class=\"takeScore_span\">消费积分:"+item.takeScore+"</span>";
 					htmlStr+="<span class=\"jfye_span\">积分余额:"+item.jfye+"</span>";
@@ -104,11 +121,30 @@ function initListDiv(){
 	,"json");
 }
 
+function updatePcExcById(id){
+	if(confirm("点击按钮后，此兑奖码将会失效")){
+		$.post("updatePcExcById",
+			{id:id},
+			function(data){
+				if(data.status==1){
+					alert(data.msg);
+					initListDiv();
+				}
+				else{
+					alert(data.msg);
+				}
+			}
+		,"json");
+	}
+}
+
+/*
 function checkIfLimit(ctTime){
 	var ctDate=new Date(ctTime);
 	var overTime=ctDate.setDate(ctDate.getDate() + jpmLimit);
 	return overTime<new Date().getTime();
 }
+*/
 </script>
 </head>
 <body>

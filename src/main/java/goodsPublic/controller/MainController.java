@@ -1552,6 +1552,26 @@ public class MainController {
 		}
 		return json;
 	}
+
+	@RequestMapping(value="/updatePcExcById",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String updatePcExcById(String id) {
+		
+		int count=publicService.updatePcExcById(id);
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("更新状态失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("更新状态成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
 	
 	/**
 	 * 根据id删除商品展示模板内容
@@ -2182,6 +2202,9 @@ public class MainController {
 	public Map<String, Object> queryCustomerScoreList(String searchTxt, String accountId) {
 
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
+
+		JFDHJPActivity ja = publicService.getJAByAccountId(accountId);
+		int c=publicService.updatePcLimitByAccountId(ja.getJpmLimit(),accountId);//更新已过期的奖品码
 		
 		//select s.uuid,date_format(max(s.createtime),'%m月%d日') createDate,date_format(s.createTime,'%H:%i:%s') createTime,j.nickName,p.codeNo,j.takeCount,j.takeScoreSum,j.score jfye,s.score takeScore,s.openId from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1 and s.accountNumber=#{accountNumber} GROUP BY date_format(s.createtime,'%m月%d日'),s.openid ORDER BY s.createtime desc
 		List<String> dateList=publicService.getCSDateList(searchTxt,accountId);
@@ -2270,6 +2293,7 @@ public class MainController {
 	public Map<String, Object> queryScoreQrcodeList(String accountId,int page,int rows,String sort,String order) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
 		int count = publicService.queryScoreQrcodeForInt(accountId);
 		sort="createTime";
 		order="desc";

@@ -13,7 +13,7 @@ public class PrizeCode implements Serializable {
 	private String createTime;
 	private String accountNumber;
 	private String sqUuid;
-	private String enable;
+	private Integer state;
 	public Integer getId() {
 		return id;
 	}
@@ -44,11 +44,11 @@ public class PrizeCode implements Serializable {
 	public void setSqUuid(String sqUuid) {
 		this.sqUuid = sqUuid;
 	}
-	public String getEnable() {
-		return enable;
+	public Integer getState() {
+		return state;
 	}
-	public void setEnable(String enable) {
-		this.enable = enable;
+	public void setState(Integer state) {
+		this.state = state;
 	}
 
 }

@@ -374,6 +374,10 @@ public interface PublicMapper {
 
 	public int updatePwdByAccountId(@Param("passWord") String passWord, @Param("id") String id);
 
+	public int updatePcExcById(@Param("id") String id);
+
+	public int updatePcLimitByAccountId(@Param("jpmLimit") String jpmLimit, @Param("accountNumber") String accountNumber);
+
 	public int getJCCountByOpenId(@Param("openId") String openId);
 
 	public JFDHJPActivity getJAByAccountId(@Param("accountNumber") String accountNumber);

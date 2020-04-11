@@ -380,6 +380,10 @@ public interface PublicService {
 
 	public int updatePwdByAccountId(String passWord, String id);
 
+	public int updatePcExcById(String id);
+
+	public int updatePcLimitByAccountId(String jpmLimit, String accountId);
+
 	public boolean checkJCOpenIdExist(String openId);
 
 	public JFDHJPCustomer getJCByOpenId(String openId);

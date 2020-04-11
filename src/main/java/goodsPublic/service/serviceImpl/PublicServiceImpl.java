@@ -842,6 +842,18 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
+	public int updatePcExcById(String id) {
+		// TODO Auto-generated method stub
+		return publicDao.updatePcExcById(id);
+	}
+
+	@Override
+	public int updatePcLimitByAccountId(String jpmLimit, String accountNumber) {
+		// TODO Auto-generated method stub
+		return publicDao.updatePcLimitByAccountId(jpmLimit,accountNumber);
+	}
+
+	@Override
 	public boolean checkJCOpenIdExist(String openId) {
 		// TODO Auto-generated method stub
 		int count=publicDao.getJCCountByOpenId(openId);
