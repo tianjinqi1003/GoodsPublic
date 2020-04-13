@@ -589,23 +589,27 @@ function uploadExcel(){
 
 function downloadExcelModule(){
 	var jsonStr="[";
-	for(var i=0;i<4;i++){
+	var rowCount=4;
+	for(var i=0;i<rowCount;i++){
 		jsonStr+="{";
 		$("input[id^='spxqIfShow']").each(function(j){
 			var checked=$(this).val();
-			if(!checked)
-				continue;
+			if(!(checked=="true"))
+				return true;
 			
-			if(j<$("input[id^='spxqIfShow'][value='true']").length)
-				jsonStr+="\"title\":\""+$("td[id^='name_td']").eq(j).text()+i+"\",";
+			if(j<$("input[id^='spxqIfShow']").length-1)
+				jsonStr+="\"value"+j+"\":\""+$("td[id^='name_td']").eq(j).text()+(i==0?"":i)+"\",";
 			else
-				jsonStr+="\"title\":\""+$("td[id^='name_td']").eq(j).text()+i+"\"";
+				jsonStr+="\"value"+j+"\":\""+$("td[id^='name_td']").eq(j).text()+(i==0?"":i)+"\"";
 		});
-		jsonStr+="}";
+		if(i<rowCount-1)
+			jsonStr+="},";
+		else
+			jsonStr+="}";
 	}
 	jsonStr+="]";
 	console.log(jsonStr);
-	//location.href=path+"merchant/excel/downloadExcelModule?trade=spzs&moduleType=redWine";
+	location.href=path+"merchant/excel/downloadExcelModule?trade=spzs&moduleType=redWine&jsonStr="+jsonStr;
 }
 </script>
 </head>
@@ -683,7 +687,7 @@ function downloadExcelModule(){
 		<div class="scwj_div" id="scwj_div">
 			<div class="main_div">
 				<div class="uploadBut_div" onclick="uploadExcel()">上传 Excel</div>
-				<div class="downloadBut_div">下载Excel模板</div>
+				<div class="downloadBut_div" onclick="downloadExcelModule()">下载Excel模板</div>
 			</div>
 			<div class="but_div">
 				<div class="preBut_div" onclick="nextStep(-1)">上一步</div>

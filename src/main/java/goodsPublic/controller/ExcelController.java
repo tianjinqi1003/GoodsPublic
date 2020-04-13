@@ -7,6 +7,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
@@ -23,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import goodsPublic.entity.ModuleSPZS;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/merchant/excel")
@@ -37,22 +40,34 @@ public class ExcelController {
 		switch (trade) {
 		case "spzs":
 			if(ModuleSPZS.RED_WINE.equals(moduleType)) {
-				exportRedWineModule(response);
+				exportRedWineModule(request, response);
 			}
 			break;
 		}
 	}
 	
 	@RequestMapping(value="/exportRedWineModule")
-	public void exportRedWineModule(HttpServletResponse response) {
+	public void exportRedWineModule(HttpServletRequest request, HttpServletResponse response) {
 		try {
+			String jsonStr = request.getParameter("jsonStr");
+			JSONArray ja = JSONArray.fromObject(jsonStr);
 			HSSFWorkbook wb=new HSSFWorkbook();
 			HSSFSheet sheet = wb.createSheet("excel模板生成码");
-			HSSFRow row = sheet.createRow(0);
 			HSSFCellStyle style = wb.createCellStyle();
-			HSSFCell cell = row.createCell(0);
-			cell.setCellValue("序号");
-			cell.setCellStyle(style);
+			for (int i = 0; i < ja.size(); i++) {
+				JSONObject jo = ja.getJSONObject(i);
+				HSSFRow row = sheet.createRow(i);
+				Iterator<String> it = jo.keys();
+				int colIndex=0;
+				while (it.hasNext()) {
+					String key = it.next().toString();
+					String value = jo.getString(key);
+					HSSFCell cell = row.createCell(colIndex);
+					cell.setCellValue(value);
+					cell.setCellStyle(style);
+					colIndex++;
+				}
+			}
 		
 			download("红酒_excel模板", wb, response);
 		} catch (IOException e) {
