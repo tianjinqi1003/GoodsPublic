@@ -6,8 +6,11 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -17,23 +20,41 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import goodsPublic.entity.ModuleSPZS;
 
 @Controller
 @RequestMapping("/merchant/excel")
 public class ExcelController {
 
+	@RequestMapping(value="/downloadExcelModule")
+	public void downloadExcelModule(HttpServletRequest request, HttpServletResponse response) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		String trade = request.getParameter("trade");
+		String moduleType = request.getParameter("moduleType");
+		switch (trade) {
+		case "spzs":
+			if(ModuleSPZS.RED_WINE.equals(moduleType)) {
+				exportRedWineModule(response);
+			}
+			break;
+		}
+	}
+	
 	@RequestMapping(value="/exportRedWineModule")
 	public void exportRedWineModule(HttpServletResponse response) {
 		try {
 			HSSFWorkbook wb=new HSSFWorkbook();
-			HSSFSheet sheet = wb.createSheet("关注者查询");
+			HSSFSheet sheet = wb.createSheet("excel模板生成码");
 			HSSFRow row = sheet.createRow(0);
 			HSSFCellStyle style = wb.createCellStyle();
 			HSSFCell cell = row.createCell(0);
 			cell.setCellValue("序号");
 			cell.setCellStyle(style);
 		
-			download("奖品兑换管理", wb, response);
+			download("红酒_excel模板", wb, response);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

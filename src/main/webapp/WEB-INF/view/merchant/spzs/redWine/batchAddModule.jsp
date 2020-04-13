@@ -20,6 +20,7 @@
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
 <script type="text/javascript">
+var path='<%=basePath %>';
 var stepIndex=1;
 KindEditor.ready(function(K) {
 	var editor1 = K.create('textarea[name="memo1"]', {
@@ -476,6 +477,55 @@ function nextStep(flag){
 		stepIndex=1;
 	
 	if(stepIndex==1){
+		var txtColIndex=0;
+		var titTrStr="<tr class=\"tit_tr\">";
+		var txtTdStr="";
+		var noTxtTdStr="";
+		$("input[id^='spxqIfShow']").each(function(i){
+			if(txtColIndex>=6)
+				return false;
+			var checked=$(this).val();
+			if(checked=="true"){
+				txtTdStr+="<td>"+$("td[id^='name_td']").eq(i).text()+"</td>";
+				txtColIndex++;
+			}
+			else{
+				noTxtTdStr+="<td></td>";
+			}
+		});
+		titTrStr+=txtTdStr+noTxtTdStr;
+		titTrStr+="</tr>";
+		var conStr="";
+		for(var i=1;i<=3;i++){
+			txtColIndex=0;
+			txtTdStr="";
+			noTxtTdStr="";
+			conStr+="<tr class=\"content_tr\">";
+			$("input[id^='spxqIfShow']").each(function(j){
+				if(txtColIndex>=6)
+					return false;
+				var checked=$(this).val();
+				if(checked=="true"){
+					if(txtColIndex==0)
+						txtTdStr+="<td class=\"num_td\">"+$("td[id^='name_td']").eq(j).text()+i+"</td>";
+					else
+						txtTdStr+="<td>"+$("td[id^='name_td']").eq(j).text()+i+"</td>";
+					txtColIndex++;
+				}
+				else{
+					if(txtColIndex==0)
+						noTxtTdStr+="<td class=\"num_td\"></td>";
+					else
+						noTxtTdStr+="<td></td>";
+				}
+			});
+			conStr+=txtTdStr+noTxtTdStr;
+			conStr+="</tr>";
+		}
+		var excelTab=$("#excel_tab");
+		excelTab.empty();
+		excelTab.append(titTrStr+conStr);
+		
 		$("#first_div").text("1");
 		$("#first_div").css("color","#fff");
 		$("#first_div").css("background","#4caf50");
@@ -536,6 +586,27 @@ function openUploadExcelDialog(flag){
 function uploadExcel(){
 	nextStep(1);
 }
+
+function downloadExcelModule(){
+	var jsonStr="[";
+	for(var i=0;i<4;i++){
+		jsonStr+="{";
+		$("input[id^='spxqIfShow']").each(function(j){
+			var checked=$(this).val();
+			if(!checked)
+				continue;
+			
+			if(j<$("input[id^='spxqIfShow'][value='true']").length)
+				jsonStr+="\"title\":\""+$("td[id^='name_td']").eq(j).text()+i+"\",";
+			else
+				jsonStr+="\"title\":\""+$("td[id^='name_td']").eq(j).text()+i+"\"";
+		});
+		jsonStr+="}";
+	}
+	jsonStr+="]";
+	console.log(jsonStr);
+	//location.href=path+"merchant/excel/downloadExcelModule?trade=spzs&moduleType=redWine";
+}
 </script>
 </head>
 <body>
@@ -558,7 +629,7 @@ function uploadExcel(){
 			<div class="mbxgContent_div">
 				<div class="left_div">
 					<img class="excel_img" src="<%=basePath %>/resource/images/spzs/excel_bg.19fbdf2a.jpg" alt="">
-					<table class="excel_tab">
+					<table class="excel_tab" id="excel_tab">
 						<tr class="tit_tr">
 							<td>品牌</td>
 							<td>系列</td>
@@ -599,7 +670,7 @@ function uploadExcel(){
 					<div class="qxz_div">请下载Excel模板，按左图格式填入信息</div>
 					<div class="dyh_div">第一行作为标题</div>
 					<div class="deh_div">第二行开始填入信息，每行信息都会生成一个二维码</div>
-					<div class="xzmbBut_div">下载Excel模板</div>
+					<div class="xzmbBut_div" onclick="downloadExcelModule()">下载Excel模板</div>
 					<div class="ckzysx_div">查看Excel填写注意事项</div>
 				</div>
 				
@@ -794,7 +865,7 @@ function uploadExcel(){
 			<c:forEach items="${requestScope.spxqList }" var="spxq" varStatus="status">
 			<tr class="item_tr" id="tr${status.index+1 }" height="50">
 				<input type="hidden" name="spxqName${status.index+1 }" value="${spxq.name }" />
-				<td class="name_td">${spxq.name }</td>
+				<td class="name_td" id="name_td${status.index+1 }">${spxq.name }</td>
 				<td class="value_td">
 					<input type="text" name="spxqValue${status.index+1 }" />
 				</td>
