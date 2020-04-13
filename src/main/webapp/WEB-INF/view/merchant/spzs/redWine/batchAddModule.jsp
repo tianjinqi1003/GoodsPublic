@@ -472,6 +472,8 @@ function nextStep(flag){
 		stepIndex++;
 	else if(flag==-1)
 		stepIndex--;
+	else if(flag==0)
+		stepIndex=1;
 	
 	if(stepIndex==1){
 		$("#first_div").text("1");
@@ -485,8 +487,14 @@ function nextStep(flag){
 		$("#second_div").css("border","1px solid #bbb");
 		$("#sc_span").css("color","rgba(0,0,0,.45)");
 		
+		$("#third_div").css("color","rgba(0,0,0,.45)");
+		$("#third_div").css("background","#fff");
+		$("#third_div").css("border","1px solid #bbb");
+		$("#qrsj_span").css("color","rgba(0,0,0,.45)");
+		
 		$("#xzmb_div").css("display","block");
 		$("#scwj_div").css("display","none");
+		$("#qrsjbsc_div").css("display","none");
 	}
 	else if(stepIndex==2){
 		$("#first_div").text("√");
@@ -503,10 +511,30 @@ function nextStep(flag){
 		$("#xzmb_div").css("display","none");
 		$("#scwj_div").css("display","block");
 	}
+	else if(stepIndex==3){
+		$("#second_div").text("√");
+		$("#second_div").css("color","#4caf50");
+		$("#second_div").css("background","#fff");
+		$("#second_div").css("border","1px solid #4caf50");
+		$("#sc_span").css("color","rgba(0,0,0,.45)");
+		
+		$("#third_div").css("color","#fff");
+		$("#third_div").css("background","#4caf50");
+		$("#third_div").css("border","1px solid #4caf50");
+		$("#qrsj_span").css("color","#000");
+
+		$("#scwj_div").css("display","none");
+		$("#qrsjbsc_div").css("display","block");
+	}
 }
 
 function openUploadExcelDialog(flag){
 	$("#uploadExcelBg_div").css("display",flag==1?"block":"none");
+	nextStep(0);
+}
+
+function uploadExcel(){
+	nextStep(1);
 }
 </script>
 </head>
@@ -521,11 +549,11 @@ function openUploadExcelDialog(flag){
 			<div class="second_div" id="second_div">2</div>
 			<span class="sc_span" id="sc_span">上传Excel</span>
 			<div class="line2_div"></div>
-			<div class="third_div">3</div>
+			<div class="third_div" id="third_div">3</div>
 			<span class="qrsj_span">确认数据并生成</span>
 		</div>
 		
-		<div class="xzmb_div" id="xzmb_div" style="display: none;">
+		<div class="xzmb_div" id="xzmb_div">
 			<div class="mbxgTxt_div">Excel模板效果：（此处最多只预览6个字段）</div>
 			<div class="mbxgContent_div">
 				<div class="left_div">
@@ -583,7 +611,7 @@ function openUploadExcelDialog(flag){
 		
 		<div class="scwj_div" id="scwj_div">
 			<div class="main_div">
-				<div class="uploadBut_div">上传 Excel</div>
+				<div class="uploadBut_div" onclick="uploadExcel()">上传 Excel</div>
 				<div class="downloadBut_div">下载Excel模板</div>
 			</div>
 			<div class="but_div">
@@ -594,7 +622,7 @@ function openUploadExcelDialog(flag){
 		<div class="qrsjbsc_div" id="qrsjbsc_div">
 			<div class="ylsjTxt_div">
 				预览数据：本次共上传<span class="num_span">4</span>条数据， 将生成<span class="num_span">4</span>个二维码
-				<span class="reUpload_span">重新上传</span>
+				<span class="reUpload_span" onclick="nextStep(0)">重新上传</span>
 			</div>
 			<div class="tab_div">
 				<table class="excel_tab">
@@ -813,7 +841,10 @@ function openUploadExcelDialog(flag){
 </div>
 <div class="right_div" id="right_div">
 	<img class="uncreate_img" alt="" src="/GoodsPublic/resource/images/007.png">
+	<!-- 
 	<div class="createQrcode_div" onclick="addHtmlGoodsSPZS();">上传Excel生成一批码</div>
+	 -->
+	<div class="scscypm_div" onclick="openUploadExcelDialog(1);">上传Excel生成一批码</div>
 </div>
 	<input type="hidden" id="accountNumber_hid" name="accountNumber" value="${sessionScope.user.id }" />
 	<input type="hidden" name="from" value="${param.from}"/>

@@ -2554,7 +2554,31 @@ public class MainController {
 		String trade = request.getParameter("trade");
 		String moduleType = request.getParameter("moduleType");
 		String url=null;
-		url="/merchant/spzs/redWine/batchAddModule";
+		switch (trade) {
+		case "spzs":
+			if(ModuleSPZS.RED_WINE.equals(moduleType)) {
+				List<ModuleSPZS> spxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq",moduleType);
+				request.setAttribute("spxqList", spxqList);
+				
+				request.setAttribute("memo1", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo1",moduleType)).get(0).getValue());
+				
+				request.setAttribute("memo2", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo2",moduleType)).get(0).getValue());
+				
+				request.setAttribute("memo3", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo3",moduleType)).get(0).getValue());
+				
+				List<ModuleSPZS> image1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1",moduleType);
+				request.setAttribute("image1List", image1List);
+				
+				List<ModuleSPZS> image2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2",moduleType);
+				request.setAttribute("image2List", image2List);
+				
+				List<ModuleSPZS> image3List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image3",moduleType);
+				request.setAttribute("image3List", image3List);
+				
+				url="/merchant/spzs/redWine/batchAddModule";
+			}
+			break;
+		}
 		return url;
 	}
 	
