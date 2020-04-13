@@ -6,8 +6,10 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletOutputStream;
@@ -21,9 +23,16 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.goodsPublic.util.JsonUtil;
+import com.goodsPublic.util.PlanResult;
 
 import goodsPublic.entity.ModuleSPZS;
+import jxl.Sheet;
+import jxl.Workbook;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -76,6 +85,59 @@ public class ExcelController {
 		}
 	}
 	
+
+	@RequestMapping(value="/loadExcelData",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String loadExcelData(@RequestParam(value="excel_file",required=false) MultipartFile excel_file) {
+		PlanResult plan=new PlanResult();
+		String json=null;
+		try {
+			System.out.println(excel_file.getSize());
+			// 创建输入流，读取Excel  
+			InputStream is = excel_file.getInputStream();  
+			// jxl提供的Workbook类  
+			Workbook wb = Workbook.getWorkbook(is);  
+			// Excel的页签数量  
+			int sheet_size = wb.getNumberOfSheets();  
+			
+			JSONArray ja = new JSONArray();
+			for (int index = 0; index < sheet_size; index++) {  
+			    // 每个页签创建一个Sheet对象  
+			    Sheet sheet = wb.getSheet(index);  
+			    // sheet.getRows()返回该页的总行数  
+			    for (int i = 0; i < sheet.getRows(); i++) {  
+			        // sheet.getColumns()返回该页的总列数  
+			        for (int j = 0; j < sheet.getColumns(); j++) {  
+			            String cellinfo = sheet.getCell(j, i).getContents();  
+			            System.out.print(cellinfo+"   ");  
+			        }
+			        System.out.println("  ");
+			    	/*
+			    	String cpxh_qc = sheet.getCell(0, i).getContents();
+			    	String qpbh = sheet.getCell(1, i).getContents();
+		        	String zl = sheet.getCell(2, i).getContents().replaceAll("\"", "");
+		        	String scrj = sheet.getCell(3, i).getContents().replaceAll("\"", "");
+		        	String qpzjxh = sheet.getCell(4, i).getContents();
+		        	String qpzzdw = sheet.getCell(5, i).getContents();
+			        System.out.println("zl==="+zl);
+			        System.out.println("scrj==="+scrj);
+			        System.out.println("qpzjxh==="+qpzjxh);
+			        System.out.println("qpzzdw==="+qpzzdw);
+			        */
+			        
+			    }  
+			}
+			plan.setStatus(1);
+			//plan.setData(abList);
+			json=JsonUtil.getJsonFromObject(plan);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			plan.setStatus(0);
+			plan.setMsg("查询失败！");
+		}
+		return json;
+	}
 
 	private void download(String fileName, HSSFWorkbook wb, HttpServletResponse response) throws IOException {  
 	      ByteArrayOutputStream os = new ByteArrayOutputStream();

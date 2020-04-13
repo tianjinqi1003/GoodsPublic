@@ -584,6 +584,29 @@ function openUploadExcelDialog(flag){
 }
 
 function uploadExcel(){
+	var formData = new FormData($("#form1")[0]);
+	 
+	$.ajax({
+		type:"post",
+		url:path+"merchant/excel/loadExcelData",
+		//dataType: "json",
+		data:formData,
+		cache: false,
+		processData: false,
+		contentType: false,
+		success: function (result){
+			var resultJO=JSON.parse(result);
+			var data=resultJO.data;
+			//console.log(data);
+			if(resultJO.status==1){
+				//var data={"total":2,"rows":[{cpxh:"1",qpbh:"一"},{cpxh:"2",qpbh:"二"}]};
+				//tab2.datagrid('loadData',JSON.parse(result).data);
+			}
+			else{
+				alert(data.msg);
+			}
+		}
+	});
 	nextStep(1);
 }
 
@@ -610,6 +633,10 @@ function downloadExcelModule(){
 	jsonStr+="]";
 	console.log(jsonStr);
 	location.href=path+"merchant/excel/downloadExcelModule?trade=spzs&moduleType=redWine&jsonStr="+jsonStr;
+}
+
+function chooseExcel(){
+	document.getElementById("excel_file").click();
 }
 </script>
 </head>
@@ -686,7 +713,10 @@ function downloadExcelModule(){
 		
 		<div class="scwj_div" id="scwj_div">
 			<div class="main_div">
-				<div class="uploadBut_div" onclick="uploadExcel()">上传 Excel</div>
+				<form id="form1">
+				<input type="file"  id="excel_file" name="excel_file" onchange="uploadExcel(this)" style="display: none;"/>
+				</form>
+				<div class="uploadBut_div" id="uploadBut_div" onclick="chooseExcel()">上传 Excel</div>
 				<div class="downloadBut_div" onclick="downloadExcelModule()">下载Excel模板</div>
 			</div>
 			<div class="but_div">
