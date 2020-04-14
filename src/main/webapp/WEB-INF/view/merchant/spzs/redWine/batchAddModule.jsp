@@ -598,6 +598,8 @@ function uploadExcel(){
 			var resultJO=JSON.parse(result);
 			var ja=resultJO.data;
 			if(resultJO.status==1){
+				checkExcelKey();
+				
 				var excelTab=$("#qrsjbsc_div #excel_tab");
 				excelTab.empty();
 				var jo=ja[0];
@@ -609,14 +611,8 @@ function uploadExcel(){
 				}
 				trStr+="</tr></thead>";
 				console.log(trStr);
-				
 				trStr+="<tbody>";
-				trStr+="";
 				
-				
-					
-						
-					
 				for(var i=0;i<ja.length;i++){
 					var jo=ja[i];
 					if(i==0){
@@ -640,15 +636,6 @@ function uploadExcel(){
 				}
 				trStr+="</tbody>";
 				excelTab.append(trStr);
-				/*
-				for(var item in ja){
-					for(var it in ja[item]){
-						console.log(ja[item][it]);
-					}
-				}
-				*/
-				//var data={"total":2,"rows":[{cpxh:"1",qpbh:"一"},{cpxh:"2",qpbh:"二"}]};
-				//tab2.datagrid('loadData',JSON.parse(result).data);
 			}
 			else{
 				alert(resultJO.msg);
@@ -656,6 +643,10 @@ function uploadExcel(){
 		}
 	});
 	nextStep(1);
+}
+
+function checkExcelKey(){
+	
 }
 
 function downloadExcelModule(){
@@ -689,7 +680,7 @@ function chooseExcel(){
 </script>
 </head>
 <body>
-<div class="uploadExcelBg_div" id="uploadExcelBg_div">
+<div class="uploadExcelBg_div" id="uploadExcelBg_div" style="display: block;">
 	<div class="uploadExcel_div">
 		<span class="close_span" onclick="openUploadExcelDialog(0)">×</span>
 		<div class="step_div">
@@ -703,7 +694,7 @@ function chooseExcel(){
 			<span class="qrsj_span">确认数据并生成</span>
 		</div>
 		
-		<div class="xzmb_div" id="xzmb_div">
+		<div class="xzmb_div" id="xzmb_div" style="display: none;">
 			<div class="mbxgTxt_div">Excel模板效果：（此处最多只预览6个字段）</div>
 			<div class="mbxgContent_div">
 				<div class="left_div">
@@ -759,16 +750,29 @@ function chooseExcel(){
 			</div>
 		</div>
 		
-		<div class="scwj_div" id="scwj_div">
-			<div class="main_div">
+		<div class="scwj_div" id="scwj_div" style="display: block;">
+			<div class="main_div" style="display: none;">
 				<form id="form1">
 				<input type="file"  id="excel_file" name="excel_file" onchange="uploadExcel(this)" style="display: none;"/>
 				</form>
 				<div class="uploadBut_div" id="uploadBut_div" onclick="chooseExcel()">上传 Excel</div>
 				<div class="downloadBut_div" onclick="downloadExcelModule()">下载Excel模板</div>
 			</div>
-			<div class="but_div">
+			<div class="but_div" style="display: none;">
 				<div class="preBut_div" onclick="nextStep(-1)">上一步</div>
+			</div>
+			<div class="warn_div">
+				<div class="slbxd_div">上传的Excel列数与模板中Excel内容的字段数量不相等</div>
+				<div class="mbezd_div">模板Excel字段：工号、姓名、班组、工种、身份证号、联系电话、血型、进场...等12个字段</div>
+				<div class="scezd_div">上传Excel字段：班组、工种、身份证号、联系电话、血型、进场时间、特种作...等10个字段</div>
+				<div class="xzExcelMb_div" onclick="">下载Excel模板</div>
+			</div>
+			<div class="sffgmb_div">
+				<div class="sffg_div">是否将上传的Excel字段覆盖模板Excel字段?</div>
+				<div class="but_div">
+					<div class="cxscBut_div">否，重新上传</div>
+					<div class="fgmbnrBut_div">是，覆盖Excel模板内容</div>
+				</div>
 			</div>
 		</div>
 		
