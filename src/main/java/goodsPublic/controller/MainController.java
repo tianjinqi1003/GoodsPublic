@@ -193,6 +193,18 @@ public class MainController {
 		return "../../merchant/main/operation?";
 	}
 	
+	@RequestMapping(value="/addBatchHtmlGoodsSPZS",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public Map<String, Object> addBatchHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file1_2",required=false) MultipartFile file1_2) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		System.out.println("==="+htmlGoodsSPZS);
+		
+		return jsonMap;
+	}
+	
 	/**
 	 * 添加商品展示模板内容
 	 * @param htmlGoodsSPZS
