@@ -113,7 +113,7 @@ body{
 	width: 75px;height:32px;line-height:32px;text-align:center;background-color: #4caf50;border-color: #4caf50;color: #fff;font-size: 14px;border-radius: 4px;cursor: pointer;
 }
 .scwj_div .warn_div{
-	width: 736px;height:180px;margin: 30px auto 0;
+	width: 736px;height:180px;margin: 30px auto 0;display: none;
 }
 .scwj_div .slbxd_div{
 	text-align: center;font-size: 16px;color: rgba(0,0,0,.87);font-weight: 700;margin-top: 20px;
@@ -128,7 +128,7 @@ body{
 	width: 125px;height:32px;line-height:32px;text-align:center;background-color: #4caf50;border-color: #4caf50;color: #fff;font-size: 14px;margin: 13px auto 0;border-radius: 15px;cursor: pointer;
 }
 .scwj_div .sffgmb_div{
-	width: 736px;height:180px;margin: auto;background: #f7f9f7;padding: 1px;
+	width: 736px;height:180px;margin: auto;background: #f7f9f7;padding: 1px;display: none;
 }
 .scwj_div .sffg_div{
 	font-size: 16px;color: #4caf50;text-align: center;margin: 30px auto 0;
