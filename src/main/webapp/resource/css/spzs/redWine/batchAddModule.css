@@ -141,6 +141,9 @@ body{
 .qrsjbsc_div .excel_tab .tit_tr{
 	height:30px;background: #edf7ee;
 }
+.qrsjbsc_div .excel_tab .val_td{
+	padding-left:10px;
+}
 .qrsjbsc_div .excel_tab .content_tr{
 	height:30px;
 }

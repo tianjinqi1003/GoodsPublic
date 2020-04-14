@@ -522,7 +522,7 @@ function nextStep(flag){
 			conStr+=txtTdStr+noTxtTdStr;
 			conStr+="</tr>";
 		}
-		var excelTab=$("#excel_tab");
+		var excelTab=$("#xzmb_div #excel_tab");
 		excelTab.empty();
 		excelTab.append(titTrStr+conStr);
 		
@@ -596,14 +596,62 @@ function uploadExcel(){
 		contentType: false,
 		success: function (result){
 			var resultJO=JSON.parse(result);
-			var data=resultJO.data;
-			//console.log(data);
+			var ja=resultJO.data;
 			if(resultJO.status==1){
+				var excelTab=$("#qrsjbsc_div #excel_tab");
+				excelTab.empty();
+				var jo=ja[0];
+				var trStr="<thead><tr class=\"xh_tr\"><th></th>";
+				for(var it in jo){
+					//console.log(it.substring(5));
+					//console.log(jo[it]);
+					trStr+="<th>"+String.fromCharCode(65+parseInt(it.substring(5)))+"</th>";
+				}
+				trStr+="</tr></thead>";
+				console.log(trStr);
+				
+				trStr+="<tbody>";
+				trStr+="";
+				
+				
+					
+						
+					
+				for(var i=0;i<ja.length;i++){
+					var jo=ja[i];
+					if(i==0){
+						trStr+="<tr class=\"tit_tr\">";
+						trStr+="<td><div style=\"width:55px;height:25px;line-height:25px;text-align:center;margin:2px auto 0; background: #4caf50;color: #fff;border-radius: 4px;\">标题行</div></td>";
+						for(var key in jo){
+							//console.log(key.substring(5));
+							//console.log(jo[key]);
+							trStr+="<td class=\"val_td\">"+jo[key]+"</td>";
+						}
+						trStr+="</tr>";
+					}
+					else{
+						trStr+="<tr class=\"content_tr\">";
+						trStr+="<td class=\"num_td\">"+(i+1)+"</td>";
+						for(var key in jo){
+							trStr+="<td class=\"val_td\">"+jo[key]+"</td>";
+						}
+						trStr+="</tr>";
+					}
+				}
+				trStr+="</tbody>";
+				excelTab.append(trStr);
+				/*
+				for(var item in ja){
+					for(var it in ja[item]){
+						console.log(ja[item][it]);
+					}
+				}
+				*/
 				//var data={"total":2,"rows":[{cpxh:"1",qpbh:"一"},{cpxh:"2",qpbh:"二"}]};
 				//tab2.datagrid('loadData',JSON.parse(result).data);
 			}
 			else{
-				alert(data.msg);
+				alert(resultJO.msg);
 			}
 		}
 	});
@@ -730,7 +778,7 @@ function chooseExcel(){
 				<span class="reUpload_span" onclick="nextStep(0)">重新上传</span>
 			</div>
 			<div class="tab_div">
-				<table class="excel_tab">
+				<table class="excel_tab" id="excel_tab">
 					<thead>
 						<tr class="xh_tr">
 							<th>1</th>
@@ -748,7 +796,7 @@ function chooseExcel(){
 						</tr>
 						<tr class="content_tr">
 							<td class="num_td">3</td>
-							<td>3</td>
+							<td class="val_td">3</td>
 							<td>3</td>
 						</tr>
 						<tr class="content_tr">
