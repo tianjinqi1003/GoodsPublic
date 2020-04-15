@@ -51,10 +51,43 @@ public class ExcelController {
 			if(ModuleSPZS.RED_WINE.equals(moduleType)) {
 				exportRedWineModule(request, response);
 			}
+			else if(ModuleSPZS.WHITE_WINE.equals(moduleType)) {
+				exportWhiteWineModule(request, response);
+			}
 			break;
 		}
 	}
 	
+	private void exportWhiteWineModule(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		try {
+			String jsonStr = request.getParameter("jsonStr");
+			JSONArray ja = JSONArray.fromObject(jsonStr);
+			HSSFWorkbook wb=new HSSFWorkbook();
+			HSSFSheet sheet = wb.createSheet("excel模板生成码");
+			HSSFCellStyle style = wb.createCellStyle();
+			for (int i = 0; i < ja.size(); i++) {
+				JSONObject jo = ja.getJSONObject(i);
+				HSSFRow row = sheet.createRow(i);
+				Iterator<String> it = jo.keys();
+				int colIndex=0;
+				while (it.hasNext()) {
+					String key = it.next().toString();
+					String value = jo.getString(key);
+					HSSFCell cell = row.createCell(colIndex);
+					cell.setCellValue(value);
+					cell.setCellStyle(style);
+					colIndex++;
+				}
+			}
+		
+			download("白酒_excel模板", wb, response);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	@RequestMapping(value="/exportRedWineModule")
 	public void exportRedWineModule(HttpServletRequest request, HttpServletResponse response) {
 		try {
