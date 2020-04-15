@@ -180,7 +180,7 @@ body{
 .qrsjbsc_div .excel_tab .val_td{
 	padding-left:10px;
 }
-.qrsjbsc_div .excel_tab .content_tr{
+.qrsjbsc_div .excel_tab .content_tr,.qrsjbsc_div .excel_tab .noContent_tr{
 	height:40px;
 }
 .qrsjbsc_div .excel_tab .content_tr .num_td{

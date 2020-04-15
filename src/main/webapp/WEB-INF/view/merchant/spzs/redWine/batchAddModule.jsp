@@ -721,7 +721,7 @@ function resetQrsjbscExcelTabStyle(){
 		var trStr="";
 		var jo=ja[0];
 		for(var i=0;i<6-rowCount;i++){
-			trStr+="<tr class=\"content_tr\">";
+			trStr+="<tr class=\"noContent_tr\">";
 			trStr+="<td class=\"num_td\"></td>";
 			for(var key in jo){
 				trStr+="<td class=\"val_td\"></td>";

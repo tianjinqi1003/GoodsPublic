@@ -58,9 +58,64 @@ function hideOptionDiv(o){
 	$(o).parent().find("#but_div").css("display","none");
 }
 
-function addHtmlGoodsSPZS(){
+function addBatchHtmlGoodsSPZS(){
+	var jsonStr="[";
+	jsonStr+="{";
+	var colCount;
+	var valTds=$("#qrsjbsc_div #excel_tab .tit_tr .val_td");
+	colCount=valTds.length;
+	//val_td
+	valTds.each(function(i){
+		if(i<colCount-1)
+			jsonStr+="\"value"+(i+1)+"\":\""+$(this).text()+"\",";
+		else
+			jsonStr+="\"value"+(i+1)+"\":\""+$(this).text()+"\"";
+	});
+	jsonStr+="},";
+	
+	var rowCount=$("#qrsjbsc_div #excel_tab .content_tr").length;
+	$("#qrsjbsc_div #excel_tab .content_tr").each(function(i){
+		jsonStr+="{";
+		valTds=$(this).find(".val_td");
+		colCount=valTds.length;
+		valTds.each(function(j){
+			if(j<colCount-1)
+				jsonStr+="\"value"+(j+1)+"\":\""+$(this).text()+"\",";
+			else
+				jsonStr+="\"value"+(j+1)+"\":\""+$(this).text()+"\"";
+		});
+		if(i<rowCount-1)
+			jsonStr+="},";
+		else
+			jsonStr+="}";
+	});
+	jsonStr+="]";
+	$("#jaStr").val(jsonStr);
+	console.log(jsonStr);
+	//return false;
+	
 	renameFile();
-	document.getElementById("sub_but").click();
+	var formData = new FormData($("#form2")[0]);
+	 
+	$.ajax({
+		type:"post",
+		url:"addBatchHtmlGoodsSPZS",
+		//dataType: "json",
+		data:formData,
+		cache: false,
+		processData: false,
+		contentType: false,
+		success: function (data){
+			if(data.message=="ok"){
+				alert(data.info);
+				goBack();
+			}
+			else{
+				alert(data.info);
+			}
+		}
+	});
+	//document.getElementById("sub_but").click();
 }
 
 function openImage1ModBgDiv(){
@@ -463,7 +518,7 @@ function resetXzmbExcelTabStyle(){
 	var colCount=$("#xzmb_div #excel_tab .tit_tr td").length;
 	if(colCount<6){
 		var trs=$("#xzmb_div #excel_tab tr");
-		for(var i=0;i<6-colCount;i){
+		for(var i=0;i<6-colCount;i++){
 			trs.append("<td></td>");
 		}
 	}
@@ -557,7 +612,7 @@ function resetQrsjbscExcelTabStyle(){
 		var trStr="";
 		var jo=ja[0];
 		for(var i=0;i<6-rowCount;i++){
-			trStr+="<tr class=\"content_tr\">";
+			trStr+="<tr class=\"noContent_tr\">";
 			trStr+="<td class=\"num_td\"></td>";
 			for(var key in jo){
 				trStr+="<td class=\"val_td\"></td>";
@@ -772,7 +827,7 @@ function chooseExcel(){
 </div>
 
 <%@include file="../../loginDialog.jsp"%>
-<form id="form1" name="form1" method="post" action="addHtmlGoodsSPZS" onsubmit="return checkForm();" enctype="multipart/form-data">
+<form id="form2" name="form2" method="post" action="addHtmlGoodsSPZS" onsubmit="return checkForm();" enctype="multipart/form-data">
 <div class="image1ModBg_div" id="image1ModBg_div">
 	<div class="image1Mod_div" id="image1Mod_div">
 		<div class="title_div">
@@ -912,7 +967,10 @@ function chooseExcel(){
 </div>
 	<input type="hidden" id="accountNumber_hid" name="accountNumber" value="${sessionScope.user.id }" />
 	<input type="hidden" name="moduleType" value="${param.moduleType}"/>
+	<input type="hidden" id="jaStr" name="jaStr"/>
+	<!-- 
 	<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
+	 -->
 </form>
 </body>
 </html>
