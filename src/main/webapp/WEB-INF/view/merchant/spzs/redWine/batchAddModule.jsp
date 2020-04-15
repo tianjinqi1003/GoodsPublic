@@ -65,7 +65,7 @@ function hideOptionDiv(o){
 	$(o).parent().find("#but_div").css("display","none");
 }
 
-function addHtmlGoodsSPZS(){
+function addBatchHtmlGoodsSPZS(){
 	var jsonStr="[";
 	jsonStr+="{";
 	var colCount;
@@ -97,8 +97,9 @@ function addHtmlGoodsSPZS(){
 			jsonStr+="}";
 	});
 	jsonStr+="]";
+	$("#jaStr").val(jsonStr);
 	console.log(jsonStr);
-	return false;
+	//return false;
 	
 	renameFile();
 	var formData = new FormData($("#form2")[0]);
@@ -111,18 +112,14 @@ function addHtmlGoodsSPZS(){
 		cache: false,
 		processData: false,
 		contentType: false,
-		success: function (result){
-			/*
-			var resultJO=JSON.parse(result);
-			ja=resultJO.data;
-			if(resultJO.status==1){
-				if(checkExcelKey(ja[0]))
-					initQrsjbscExcelTab();
+		success: function (data){
+			if(data.message=="ok"){
+				alert(data.info);
+				goBack();
 			}
 			else{
-				alert(resultJO.msg);
+				alert(data.info);
 			}
-			*/
 		}
 	});
 	//document.getElementById("sub_but").click();
@@ -908,7 +905,7 @@ function chooseExcel(){
 					</tbody>
 				</table>
 			</div>
-			<div class="ksscBut_div" onclick="addHtmlGoodsSPZS()">开始生成</div>
+			<div class="ksscBut_div" onclick="addBatchHtmlGoodsSPZS()">开始生成</div>
 		</div>
 	</div>
 </div>
@@ -1104,6 +1101,7 @@ function chooseExcel(){
 	<input type="hidden" id="accountNumber_hid" name="accountNumber" value="${sessionScope.user.id }" />
 	<input type="hidden" name="from" value="${param.from}"/>
 	<input type="hidden" name="moduleType" value="${param.moduleType}"/>
+	<input type="hidden" id="jaStr" name="jaStr"/>
 	<!-- 
 	<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
 	 -->

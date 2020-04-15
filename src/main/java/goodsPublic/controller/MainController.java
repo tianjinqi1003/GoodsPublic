@@ -63,6 +63,7 @@ import goodsPublic.entity.ModuleSPZS;
 import goodsPublic.entity.ScoreQrcode;
 import goodsPublic.service.CategoryService;
 import goodsPublic.service.PublicService;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
 @Controller
@@ -193,16 +194,316 @@ public class MainController {
 		return "../../merchant/main/operation?";
 	}
 	
-	@RequestMapping(value="/addBatchHtmlGoodsSPZS",produces="plain/text; charset=UTF-8")
+	@RequestMapping(value="/addBatchHtmlGoodsSPZS")
 	@ResponseBody
 	public Map<String, Object> addBatchHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS,
+			String jaStr,
 			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
-			@RequestParam(value="file1_2",required=false) MultipartFile file1_2) {
+			@RequestParam(value="file1_2",required=false) MultipartFile file1_2,
+			@RequestParam(value="file1_3",required=false) MultipartFile file1_3,
+			@RequestParam(value="file1_4",required=false) MultipartFile file1_4,
+			@RequestParam(value="file1_5",required=false) MultipartFile file1_5,
+			@RequestParam(value="file2_1",required=false) MultipartFile file2_1,
+			@RequestParam(value="file2_2",required=false) MultipartFile file2_2,
+			@RequestParam(value="file2_3",required=false) MultipartFile file2_3,
+			@RequestParam(value="file2_4",required=false) MultipartFile file2_4,
+			@RequestParam(value="file2_5",required=false) MultipartFile file2_5,
+			@RequestParam(value="file3_1",required=false) MultipartFile file3_1,
+			@RequestParam(value="file3_2",required=false) MultipartFile file3_2,
+			@RequestParam(value="file3_3",required=false) MultipartFile file3_3,
+			@RequestParam(value="file3_4",required=false) MultipartFile file3_4,
+			@RequestParam(value="file3_5",required=false) MultipartFile file3_5,
+			@RequestParam(value="file4_1",required=false) MultipartFile file4_1,
+			@RequestParam(value="file4_2",required=false) MultipartFile file4_2,
+			@RequestParam(value="file4_3",required=false) MultipartFile file4_3,
+			@RequestParam(value="file4_4",required=false) MultipartFile file4_4,
+			@RequestParam(value="file4_5",required=false) MultipartFile file4_5,
+			HttpServletRequest request) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		System.out.println("==="+htmlGoodsSPZS);
+		//System.out.println("==="+jaStr);
+		JSONArray ja = JSONArray.fromObject(jaStr);
 		
-		return jsonMap;
+		String moduleType = htmlGoodsSPZS.getModuleType();
+		
+		try {
+			MultipartFile[] fileArr=new MultipartFile[20];
+			fileArr[0]=file1_1;
+			fileArr[1]=file1_2;
+			fileArr[2]=file1_3;
+			fileArr[3]=file1_4;
+			fileArr[4]=file1_5;
+			fileArr[5]=file2_1;
+			fileArr[6]=file2_2;
+			fileArr[7]=file2_3;
+			fileArr[8]=file2_4;
+			fileArr[9]=file2_5;
+			fileArr[10]=file3_1;
+			fileArr[11]=file3_2;
+			fileArr[12]=file3_3;
+			fileArr[13]=file3_4;
+			fileArr[14]=file3_5;
+			fileArr[15]=file4_1;
+			fileArr[16]=file4_2;
+			fileArr[17]=file4_3;
+			fileArr[18]=file4_4;
+			fileArr[19]=file4_5;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						jsonStr = FileUploadUtils.appUploadContentImg(request,fileArr[i],"");
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								htmlGoodsSPZS.setImage1_1(dataJO.get("src").toString());
+								break;
+							case 1:
+								htmlGoodsSPZS.setImage1_2(dataJO.get("src").toString());
+								break;
+							case 2:
+								htmlGoodsSPZS.setImage1_3(dataJO.get("src").toString());
+								break;
+							case 3:
+								htmlGoodsSPZS.setImage1_4(dataJO.get("src").toString());
+								break;
+							case 4:
+								htmlGoodsSPZS.setImage1_5(dataJO.get("src").toString());
+								break;
+							case 5:
+								htmlGoodsSPZS.setImage2_1(dataJO.get("src").toString());
+								break;
+							case 6:
+								htmlGoodsSPZS.setImage2_2(dataJO.get("src").toString());
+								break;
+							case 7:
+								htmlGoodsSPZS.setImage2_3(dataJO.get("src").toString());
+								break;
+							case 8:
+								htmlGoodsSPZS.setImage2_4(dataJO.get("src").toString());
+								break;
+							case 9:
+								htmlGoodsSPZS.setImage2_5(dataJO.get("src").toString());
+								break;
+							case 10:
+								if("productExplain".equals(moduleType))
+									htmlGoodsSPZS.setEmbed1_1(dataJO.get("src").toString());
+								else
+									htmlGoodsSPZS.setImage3_1(dataJO.get("src").toString());
+								break;
+							case 11:
+								htmlGoodsSPZS.setImage3_2(dataJO.get("src").toString());
+								break;
+							case 12:
+								htmlGoodsSPZS.setImage3_3(dataJO.get("src").toString());
+								break;
+							case 13:
+								htmlGoodsSPZS.setImage3_4(dataJO.get("src").toString());
+								break;
+							case 14:
+								htmlGoodsSPZS.setImage3_5(dataJO.get("src").toString());
+								break;
+							case 15:
+								htmlGoodsSPZS.setImage4_1(dataJO.get("src").toString());
+								break;
+							case 16:
+								htmlGoodsSPZS.setImage4_2(dataJO.get("src").toString());
+								break;
+							case 17:
+								htmlGoodsSPZS.setImage4_3(dataJO.get("src").toString());
+								break;
+							case 18:
+								htmlGoodsSPZS.setImage4_4(dataJO.get("src").toString());
+								break;
+							case 19:
+								htmlGoodsSPZS.setImage4_5(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+					else {
+						if("redWine".equals(moduleType)) {
+							switch (i) {
+							case 0:
+								htmlGoodsSPZS.setImage1_1("/GoodsPublic/resource/images/spzs/22ad5cebe49933335608eeb6356e6ab9.png");
+								break;
+							case 5:
+								htmlGoodsSPZS.setImage2_1("/GoodsPublic/resource/images/spzs/41116eb627d54a623813c01bcadd05ce.png");
+								break;
+							case 10:
+								htmlGoodsSPZS.setImage3_1("/GoodsPublic/resource/images/spzs/573ab1fc91d98528915519d96dc2e6ec.png");
+								break;
+							}
+						}
+						else if("whiteWine".equals(moduleType)) {
+							switch (i) {
+							case 0:
+								htmlGoodsSPZS.setImage1_1("/GoodsPublic/resource/images/spzs/258bb5b4e0d98344406a5f71e32ad767.png");
+								break;
+							case 5:
+								htmlGoodsSPZS.setImage2_1("/GoodsPublic/resource/images/spzs/25787fd7408641e333869e762e514fdd.png");
+								break;
+							}
+						}
+						else if("homeTextiles".equals(moduleType)) {
+							switch (i) {
+							case 0:
+								htmlGoodsSPZS.setImage1_1("/GoodsPublic/resource/images/spzs/8878b699bd21eeaeeaec254b5d4e6f79.png");
+								break;
+							case 5:
+								htmlGoodsSPZS.setImage2_1("/GoodsPublic/resource/images/spzs/e3f0c2aa261ac2b652fbdca9eaba04f3.png");
+								break;
+							case 10:
+								htmlGoodsSPZS.setImage3_1("/GoodsPublic/resource/images/spzs/bc40c19357bcf636e9ad6e71581686c4.png");
+								break;
+							case 15:
+								htmlGoodsSPZS.setImage4_1("/GoodsPublic/resource/images/spzs/f078f4614735e89cd7608110115c6ad6.png");
+								break;
+							}
+						}
+						else if("artwork".equals(moduleType)) {
+							switch (i) {
+							case 0:
+								htmlGoodsSPZS.setImage1_1("/GoodsPublic/resource/images/spzs/f21c462d8e78cbe6f31d4b8c67a0560e.png");
+								break;
+							case 5:
+								htmlGoodsSPZS.setImage2_1("/GoodsPublic/resource/images/spzs/a61777ec9042bb003308d961f185a4e1.png");
+								break;
+							}
+						}
+						else if("productExplain".equals(moduleType)) {
+							switch (i) {
+							case 0:
+								htmlGoodsSPZS.setImage1_1("/GoodsPublic/resource/images/spzs/81a5d69b81bda7b772771e31b57e4fae.png");
+								break;
+							case 5:
+								htmlGoodsSPZS.setImage2_1("/GoodsPublic/resource/images/spzs/59a9157e809d046c12699bc4f431266c.png");
+								break;
+							case 6:
+								htmlGoodsSPZS.setImage2_2("/GoodsPublic/resource/images/spzs/594c03f1f5e93d78248d9d268f8070b6.png");
+								break;
+							case 10:
+								htmlGoodsSPZS.setEmbed1_1("/GoodsPublic/resource/embed/spzs/4c4a6999823cc4088a4996896ae136c2.mp4");
+								break;
+							}
+						}
+					}
+				}
+			}
+		
+			JSONObject jo = ja.getJSONObject(0);
+			Iterator<String> it = jo.keys();
+			while (it.hasNext()) {
+				String key = it.next();
+				String value = jo.getString(key);
+				Integer colIndex = Integer.valueOf(key.substring(5));
+				switch (colIndex) {
+				case 1:
+					htmlGoodsSPZS.setSpxqName1(value);
+					break;
+				case 2:
+					htmlGoodsSPZS.setSpxqName2(value);
+					break;
+				case 3:
+					htmlGoodsSPZS.setSpxqName3(value);
+					break;
+				case 4:
+					htmlGoodsSPZS.setSpxqName4(value);
+					break;
+				case 5:
+					htmlGoodsSPZS.setSpxqName5(value);
+					break;
+				case 6:
+					htmlGoodsSPZS.setSpxqName6(value);
+					break;
+				case 7:
+					htmlGoodsSPZS.setSpxqName7(value);
+					break;
+				case 8:
+					htmlGoodsSPZS.setSpxqName8(value);
+					break;
+				case 9:
+					htmlGoodsSPZS.setSpxqName9(value);
+					break;
+				case 10:
+					htmlGoodsSPZS.setSpxqName10(value);
+					break;
+				}
+			}
+			
+			for(int i=1;i<ja.size();i++) {
+				String goodsNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+i;
+				htmlGoodsSPZS.setGoodsNumber(goodsNumber);
+				jo = ja.getJSONObject(i);
+				it = jo.keys();
+				while (it.hasNext()) {
+					String key = it.next();
+					String value = jo.getString(key);
+					Integer colIndex = Integer.valueOf(key.substring(5));
+					//System.out.println("key==="+key);
+					switch (colIndex) {
+					case 1:
+						htmlGoodsSPZS.setSpxqValue1(value);
+						break;
+					case 2:
+						htmlGoodsSPZS.setSpxqValue2(value);
+						break;
+					case 3:
+						htmlGoodsSPZS.setSpxqValue3(value);
+						break;
+					case 4:
+						htmlGoodsSPZS.setSpxqValue4(value);
+						break;
+					case 5:
+						htmlGoodsSPZS.setSpxqValue5(value);
+						break;
+					case 6:
+						htmlGoodsSPZS.setSpxqValue6(value);
+						break;
+					case 7:
+						htmlGoodsSPZS.setSpxqValue7(value);
+						break;
+					case 8:
+						htmlGoodsSPZS.setSpxqValue8(value);
+						break;
+					case 9:
+						htmlGoodsSPZS.setSpxqValue9(value);
+						break;
+					case 10:
+						htmlGoodsSPZS.setSpxqValue10(value);
+						break;
+					}
+				}
+				
+				String addr = request.getLocalAddr();
+				int port = request.getLocalPort();
+				String contextPath = request.getContextPath();
+				String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoods?trade=spzs&moduleType="+moduleType+"&goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
+				//String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/main/goShowHtmlGoods?trade=spzs&moduleType="+moduleType+"&goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
+				
+				String fileName = goodsNumber + ".jpg";
+				String avaPath="/GoodsPublic/upload/"+fileName;
+				String path = "D:/resource";
+		        Qrcode.createQrCode(url, path, fileName);
+				
+		        htmlGoodsSPZS.setQrCode(avaPath);
+				int a=publicService.addHtmlGoodsSPZS(htmlGoodsSPZS);
+				//System.out.println("a==="+a);
+				
+				jsonMap.put("message", "ok");
+				jsonMap.put("info", "批量导入成功！");
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "批量导入失败！");
+		}
+		finally {
+			return jsonMap;
+		}
 	}
 	
 	/**
