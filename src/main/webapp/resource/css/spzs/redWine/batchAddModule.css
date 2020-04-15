@@ -145,9 +145,11 @@ body{
 
 .qrsjbsc_div{
 	width:736px;
-	height:258px;
+	height:363px;
 	margin:auto;
+	/*
 	border: 1px solid hsla(210,8%,51%,.13);
+	*/
 	display: none;
 }
 .qrsjbsc_div .ylsjTxt_div{
@@ -162,6 +164,9 @@ body{
 .qrsjbsc_div .tab_div{
 	width: 736px;height:258px;margin: auto;
 }
+.qrsjbsc_div .excel_tab td{
+	border-right: 1px solid #e8e8e8;border-bottom: 1px solid #e8e8e8;
+}
 .qrsjbsc_div .excel_tab .xh_tr{
 	height:30px;background: #fafafa;
 }
@@ -169,19 +174,19 @@ body{
 	width: 90px;border-right: 1px solid #e8e8e8;
 }
 .qrsjbsc_div .excel_tab .tit_tr{
-	height:30px;background: #edf7ee;
+	height:40px;background: #edf7ee;
 }
 .qrsjbsc_div .excel_tab .val_td{
 	padding-left:10px;
 }
 .qrsjbsc_div .excel_tab .content_tr{
-	height:30px;
+	height:40px;
 }
 .qrsjbsc_div .excel_tab .content_tr .num_td{
 	text-align:center;font-weight:bold;background: #fafafa;
 }
 .qrsjbsc_div .ksscBut_div{
-	width: 75px;height:32px;line-height:32px;text-align:center;float:right;margin-top:100px;color: #fff;font-size: 14px;background-color: #4caf50;border-color: #4caf50;border-radius: 4px;cursor: pointer;
+	width: 90px;height:32px;line-height:32px;text-align:center;float:right;margin-top:90px;color: #fff;font-size: 14px;background-color: #4caf50;border-color: #4caf50;border-radius: 4px;cursor: pointer;
 }
 
 .image1ModBg_div{

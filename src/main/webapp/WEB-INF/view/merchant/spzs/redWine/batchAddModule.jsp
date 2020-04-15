@@ -706,6 +706,31 @@ function initQrsjbscExcelTab(){
 	var dataCount=$("#qrsjbsc_div #excel_tab .content_tr").length;
 	$("#qrsjbsc_div #dataCount_span").text(dataCount);
 	$("#qrsjbsc_div #qrcodeCount_span").text(dataCount);
+	
+	resetQrsjbscExcelTabStyle();
+}
+
+function resetQrsjbscExcelTabStyle(){
+	var colCount=$("#qrsjbsc_div #excel_tab .tit_tr .val_td").length;
+	if(colCount<6){
+		$("#qrsjbsc_div #excel_tab .tit_tr .val_td").css("width",(650/colCount)+"px");
+	}
+	var rowCount=$("#qrsjbsc_div #excel_tab .content_tr").length;
+	if(rowCount<6){
+		var tbody=$("#qrsjbsc_div #excel_tab tbody");
+		var trStr="";
+		var jo=ja[0];
+		for(var i=0;i<6-rowCount;i++){
+			trStr+="<tr class=\"content_tr\">";
+			trStr+="<td class=\"num_td\"></td>";
+			for(var key in jo){
+				trStr+="<td class=\"val_td\"></td>";
+			}
+			trStr+="</tr>";
+			trStr+="";
+		}
+		tbody.append(trStr);
+	}
 }
 
 function checkExcelKey(jo){
