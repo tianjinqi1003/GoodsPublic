@@ -42,30 +42,13 @@ public class ExcelController {
 
 	@RequestMapping(value="/downloadExcelModule")
 	public void downloadExcelModule(HttpServletRequest request, HttpServletResponse response) {
-
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		String trade = request.getParameter("trade");
-		String moduleType = request.getParameter("moduleType");
-		switch (trade) {
-		case "spzs":
-			if(ModuleSPZS.RED_WINE.equals(moduleType)) {
-				exportRedWineModule(request, response);
-			}
-			else if(ModuleSPZS.WHITE_WINE.equals(moduleType)) {
-				exportWhiteWineModule(request, response);
-			}
-			else if(ModuleSPZS.HOME_TEXTILES.equals(moduleType)) {
-				exportHomeTextilesModule(request, response);
-			}
-			break;
-		}
-	}
-	
-	private void exportHomeTextilesModule(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
 		try {
+			String trade = request.getParameter("trade");
+			String moduleType = request.getParameter("moduleType");
 			String jsonStr = request.getParameter("jsonStr");
 			JSONArray ja = JSONArray.fromObject(jsonStr);
+			String fileName = null;
+			
 			HSSFWorkbook wb=new HSSFWorkbook();
 			HSSFSheet sheet = wb.createSheet("excel模板生成码");
 			HSSFCellStyle style = wb.createCellStyle();
@@ -84,73 +67,28 @@ public class ExcelController {
 				}
 			}
 		
-			download("家纺_excel模板", wb, response);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	private void exportWhiteWineModule(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		try {
-			String jsonStr = request.getParameter("jsonStr");
-			JSONArray ja = JSONArray.fromObject(jsonStr);
-			HSSFWorkbook wb=new HSSFWorkbook();
-			HSSFSheet sheet = wb.createSheet("excel模板生成码");
-			HSSFCellStyle style = wb.createCellStyle();
-			for (int i = 0; i < ja.size(); i++) {
-				JSONObject jo = ja.getJSONObject(i);
-				HSSFRow row = sheet.createRow(i);
-				Iterator<String> it = jo.keys();
-				int colIndex=0;
-				while (it.hasNext()) {
-					String key = it.next().toString();
-					String value = jo.getString(key);
-					HSSFCell cell = row.createCell(colIndex);
-					cell.setCellValue(value);
-					cell.setCellStyle(style);
-					colIndex++;
+			switch (trade) {
+			case "spzs":
+				if(ModuleSPZS.RED_WINE.equals(moduleType)) {
+					fileName="红酒_excel模板";
 				}
-			}
-		
-			download("白酒_excel模板", wb, response);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-	@RequestMapping(value="/exportRedWineModule")
-	public void exportRedWineModule(HttpServletRequest request, HttpServletResponse response) {
-		try {
-			String jsonStr = request.getParameter("jsonStr");
-			JSONArray ja = JSONArray.fromObject(jsonStr);
-			HSSFWorkbook wb=new HSSFWorkbook();
-			HSSFSheet sheet = wb.createSheet("excel模板生成码");
-			HSSFCellStyle style = wb.createCellStyle();
-			for (int i = 0; i < ja.size(); i++) {
-				JSONObject jo = ja.getJSONObject(i);
-				HSSFRow row = sheet.createRow(i);
-				Iterator<String> it = jo.keys();
-				int colIndex=0;
-				while (it.hasNext()) {
-					String key = it.next().toString();
-					String value = jo.getString(key);
-					HSSFCell cell = row.createCell(colIndex);
-					cell.setCellValue(value);
-					cell.setCellStyle(style);
-					colIndex++;
+				else if(ModuleSPZS.WHITE_WINE.equals(moduleType)) {
+					fileName="白酒_excel模板";
 				}
+				else if(ModuleSPZS.HOME_TEXTILES.equals(moduleType)) {
+					fileName="家纺_excel模板";
+				}
+				else if(ModuleSPZS.ARTWORK.equals(moduleType)) {
+					fileName="艺术品_excel模板";
+				}
+				break;
 			}
-		
-			download("红酒_excel模板", wb, response);
+			download(fileName, wb, response);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
 
 	@RequestMapping(value="/loadExcelData",produces="plain/text; charset=UTF-8")
 	@ResponseBody

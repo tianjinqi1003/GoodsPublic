@@ -2928,6 +2928,22 @@ public class MainController {
 				
 				url="/merchant/spzs/homeTextiles/batchAddModule";
 			}
+			else if(ModuleSPZS.ARTWORK.equals(moduleType)) {
+				request.setAttribute("productName", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("productName",moduleType)).get(0).getValue());
+				
+				List<ModuleSPZS> wwSpxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq",moduleType);
+				request.setAttribute("spxqList", wwSpxqList);
+
+				request.setAttribute("memo1", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo1",moduleType)).get(0).getValue());
+				
+				List<ModuleSPZS> wwImage1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1",moduleType);
+				request.setAttribute("image1List", wwImage1List);
+				
+				List<ModuleSPZS> wwImage2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2",moduleType);
+				request.setAttribute("image2List", wwImage2List);
+				
+				url="/merchant/spzs/artwork/batchAddModule";
+			}
 			break;
 		}
 		return url;
