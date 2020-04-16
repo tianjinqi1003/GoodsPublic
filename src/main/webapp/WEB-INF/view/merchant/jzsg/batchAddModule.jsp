@@ -634,7 +634,7 @@ function downloadExcelModule(){
 	}
 	jsonStr+="]";
 	console.log(jsonStr);
-	location.href=path+"merchant/excel/downloadExcelModule?trade=jzsg&jsonStr="+jsonStr;
+	location.href=path+"merchant/excel/downloadExcelModule?trade=jzsg&jsonStr="+encodeURI(jsonStr);
 }
 
 function chooseExcel(){

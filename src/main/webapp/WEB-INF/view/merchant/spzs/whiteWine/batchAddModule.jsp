@@ -683,7 +683,7 @@ function downloadExcelModule(){
 	}
 	jsonStr+="]";
 	console.log(jsonStr);
-	location.href=path+"merchant/excel/downloadExcelModule?trade=spzs&moduleType=whiteWine&jsonStr="+jsonStr;
+	location.href=path+"merchant/excel/downloadExcelModule?trade=spzs&moduleType=whiteWine&jsonStr="+encodeURI(jsonStr);
 }
 
 function chooseExcel(){

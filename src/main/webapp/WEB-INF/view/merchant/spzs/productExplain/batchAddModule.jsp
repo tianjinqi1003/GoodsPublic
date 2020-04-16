@@ -755,7 +755,7 @@ function downloadExcelModule(){
 	}
 	jsonStr+="]";
 	console.log(jsonStr);
-	location.href=path+"merchant/excel/downloadExcelModule?trade=spzs&moduleType=productExplain&jsonStr="+jsonStr;
+	location.href=path+"merchant/excel/downloadExcelModule?trade=spzs&moduleType=productExplain&jsonStr="+encodeURI(jsonStr);
 }
 
 function chooseExcel(){
