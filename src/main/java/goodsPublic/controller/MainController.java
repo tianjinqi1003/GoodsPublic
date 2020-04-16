@@ -2908,6 +2908,26 @@ public class MainController {
 				
 				url="/merchant/spzs/whiteWine/batchAddModule";
 			}
+			else if(ModuleSPZS.HOME_TEXTILES.equals(moduleType)) {
+				request.setAttribute("productName", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("productName",moduleType)).get(0).getValue());
+				
+				List<ModuleSPZS> wwSpxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq",moduleType);
+				request.setAttribute("spxqList", wwSpxqList);
+				
+				List<ModuleSPZS> wwImage1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1",moduleType);
+				request.setAttribute("image1List", wwImage1List);
+				
+				List<ModuleSPZS> wwImage2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2",moduleType);
+				request.setAttribute("image2List", wwImage2List);
+				
+				List<ModuleSPZS> wwImage3List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image3",moduleType);
+				request.setAttribute("image3List", wwImage3List);
+				
+				List<ModuleSPZS> wwImage4List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image4",moduleType);
+				request.setAttribute("image4List", wwImage4List);
+				
+				url="/merchant/spzs/homeTextiles/batchAddModule";
+			}
 			break;
 		}
 		return url;

@@ -1,0 +1,747 @@
+@charset "UTF-8";
+body{
+	background-color: #fbfbfb;
+}
+.uploadExcelBg_div{
+	width: 100%;height:100%;background: rgba(0,0,0,0.65);position: fixed;display:none;z-index: 1;
+}
+.uploadExcel_div{
+	width:800px;height:503px;margin:145px auto;padding-top: 40px;background-color: #fff;border: 0;border-radius: 4px;
+}
+.uploadExcel_div .close_span{
+	float: right;margin-top: -25px;margin-right: 20px;color: rgba(0,0,0,.45);font-size: 25px;cursor: pointer;
+}
+.uploadExcel_div .step_div{
+	width:550px;margin: auto;
+}
+.uploadExcel_div .step_div .first_div{
+	width: 24px;height: 24px;line-height: 24px;text-align: center;color: #fff;background: #4caf50;border: 1px solid #4caf50;border-radius: 50%;
+}
+.uploadExcel_div .step_div .xzmb_span{
+	margin-left: 35px;margin-top: -22px;position: absolute;
+}
+.uploadExcel_div .step_div .line1_div{
+	width: 70px;height: 1px;background: rgba(0,0,0,.15);margin-left: 138px;margin-top: -12px;
+}
+.uploadExcel_div .step_div .second_div{
+	width: 24px;height: 24px;line-height: 24px;margin-left: 218px;margin-top: -12px;text-align: center;color: rgba(0,0,0,.45);background: #fff;border: 1px solid #bbb;border-radius: 50%;
+}
+.uploadExcel_div .step_div .sc_span{
+	margin-left: 254px;margin-top: -24px;color: rgba(0,0,0,.45);position: absolute;
+}
+.uploadExcel_div .step_div .line2_div{
+	width: 70px;height: 1px;background: rgba(0,0,0,.15);margin-left: 328px;margin-top: -12px;
+}
+.uploadExcel_div .step_div .third_div{
+	width: 24px;height: 24px;line-height: 24px;margin-left: 408px;margin-top: -12px;text-align: center;color: rgba(0,0,0,.45);background: #fff;border: 1px solid #bbb;border-radius: 50%;
+}
+.uploadExcel_div .step_div .qrsj_span{
+	margin-left: 447px;margin-top: -24px;color: rgba(0,0,0,.45);position: absolute;
+}
+
+.xzmb_div{
+	display: block;
+}
+.xzmb_div .mbxgTxt_div{
+	width:740px;margin: 35px auto 12px;color: #9b9b9b;font-size: 12px;font-weight: 700;
+}
+.xzmb_div .mbxgContent_div{
+	width:740px;height:300px;margin: auto;
+}
+.xzmb_div .left_div{
+	width:405px;height:275px;
+}
+.xzmb_div .excel_img{
+	width: 419px;height: 249px;margin-left: -14px;
+}
+.xzmb_div .excel_tab{
+	width: 378px;height:56px;margin-top: -194px;margin-left: 14px;font-size: 12px;text-align: center;position: absolute;
+}
+.xzmb_div .excel_tab .tit_tr{
+	height: 14px;line-height: 14px;background: rgba(245,166,35,.1);
+}
+.xzmb_div .excel_tab .tit_tr td{
+	width: 63px;font-weight: 700;
+}
+.xzmb_div .excel_tab .content_tr{
+	height: 14px;line-height: 14px;
+}
+.xzmb_div .ckxgBut_div{
+	margin-top: 8px;text-align: center;font-size: 12px;color: #357bb3;font-weight: 600;cursor: default;
+}
+.xzmb_div .right_div{
+	width: 331px;height:237px;border: 1px dashed #9b9b9b;margin-top: -275px;float: right;
+}
+.xzmb_div .qxz_div{
+	margin-top: 20px;margin-bottom: 8px;font-size: 16px;font-weight: 500;line-height: 2em;text-align: center;
+}
+.xzmb_div .dyh_div{
+	width: 197px;height:24px;line-height:24px;font-size: 12px;color: #9b9b9b;margin-left: 67px;
+}
+.xzmb_div .deh_div{
+	width: 197px;height:24px;line-height:24px;font-size: 12px;color: #9b9b9b;margin-left: 67px;
+}
+.xzmb_div .xzmbBut_div{
+	width: 142px;height:32px;line-height:32px;margin: 38px auto 0;text-align:center;color:#fff;background-color: #4caf50;border-color: #4caf50;border-radius: 16px;cursor: pointer;
+}
+.xzmb_div .ckzysx_div{
+	margin-top: 15px;text-align:center;font-size: 12px;color: #357bb3;
+}
+.xzmb_div .wyth_div{
+	width:740px;height:32px;margin:auto;
+}
+.xzmb_div .wythBut_div{
+	width: 176px;height:32px;line-height:32px;float:right;text-align:center;color:#fff;background-color: #4caf50;border-color: #4caf50;border-radius: 4px;cursor: pointer;
+}
+
+.scwj_div{
+	display: none;
+}
+.scwj_div .main_div{
+	width: 736px;height:250px;margin: 30px auto 0;border: 1px dashed #9b9b9b;
+}
+.scwj_div .uploadBut_div{
+	width: 118px;height:32px;line-height:32px;margin:100px auto 0; text-align:center;color:#fff;font-size: 14px;background-color: #4caf50;border-radius: 4px;cursor: pointer;
+}
+.scwj_div .downloadBut_div{
+	width:78px;height:18px;font-size: 12px;color: #357bb3;margin:40px auto 0;cursor: pointer;
+}
+.scwj_div .but_div{
+	width: 736px;margin: 30px auto 0;
+}
+.scwj_div .preBut_div{
+	width: 75px;height:32px;line-height:32px;text-align:center;background-color: #4caf50;border-color: #4caf50;color: #fff;font-size: 14px;border-radius: 4px;cursor: pointer;
+}
+.scwj_div .warn_div{
+	width: 736px;height:180px;margin: 30px auto 0;display: none;
+}
+.scwj_div .slbxd_div{
+	text-align: center;font-size: 16px;color: rgba(0,0,0,.87);font-weight: 700;margin-top: 20px;
+}
+.scwj_div .mbezd_div{
+	text-align: center;font-size: 14px;color: #999;margin-top: 8px;
+}
+.scwj_div .scezd_div{
+	text-align: center;font-size: 14px;color: #999;margin-top: 8px;
+}
+.scwj_div .xzExcelMb_div{
+	width: 125px;height:32px;line-height:32px;text-align:center;background-color: #4caf50;border-color: #4caf50;color: #fff;font-size: 14px;margin: 13px auto 0;border-radius: 15px;cursor: pointer;
+}
+.scwj_div .sffgmb_div{
+	width: 736px;height:180px;margin: auto;background: #f7f9f7;padding: 1px;display: none;
+}
+.scwj_div .sffg_div{
+	font-size: 16px;color: #4caf50;text-align: center;margin: 30px auto 0;
+}
+.scwj_div .sffgmb_div .but_div{
+	width: 310px;margin: 30px auto 0;
+}
+.scwj_div .cxscBut_div{
+	width: 140px;height:30px;line-height:30px;color: rgba(0,0,0,.65);font-size: 14px;text-align:center;background-color: #fff;border: #eee solid 1px;border-radius: 4px;cursor: pointer;
+}
+.scwj_div .fgmbnrBut_div{
+	width: 140px;height:30px;line-height:30px;margin-top:-32px;margin-left:170px;color: #fff;font-size: 12px;text-align:center;background-color: #4caf50;border-color: #4caf50;border-radius: 4px;cursor: pointer;
+}
+
+.qrsjbsc_div{
+	width:736px;
+	height:363px;
+	margin:auto;
+	/*
+	border: 1px solid hsla(210,8%,51%,.13);
+	*/
+	display: none;
+}
+.qrsjbsc_div .ylsjTxt_div{
+	width: 736px;height:21px;margin: auto;font-size: 14px;font-weight: 500;color: #000;margin: 20px auto 10px;
+}
+.qrsjbsc_div .ylsjTxt_div .num_span{
+	color: #4caf50;
+}
+.qrsjbsc_div .reUpload_span{
+	margin-left: 19px;color: #357bb3;cursor: pointer;
+}
+.qrsjbsc_div .tab_div{
+	width: 736px;height:258px;margin: auto;
+}
+.qrsjbsc_div .excel_tab td{
+	border-right: 1px solid #e8e8e8;border-bottom: 1px solid #e8e8e8;
+}
+.qrsjbsc_div .excel_tab .xh_tr{
+	height:30px;background: #fafafa;
+}
+.qrsjbsc_div .excel_tab .xh_tr th{
+	width: 90px;border-right: 1px solid #e8e8e8;
+}
+.qrsjbsc_div .excel_tab .tit_tr{
+	height:40px;background: #edf7ee;
+}
+.qrsjbsc_div .excel_tab .val_td{
+	padding-left:10px;
+}
+.qrsjbsc_div .excel_tab .content_tr,.qrsjbsc_div .excel_tab .noContent_tr{
+	height:40px;
+}
+.qrsjbsc_div .excel_tab .content_tr .num_td{
+	text-align:center;font-weight:bold;background: #fafafa;
+}
+.qrsjbsc_div .ksscBut_div{
+	width: 90px;height:32px;line-height:32px;text-align:center;float:right;margin-top:90px;color: #fff;font-size: 14px;background-color: #4caf50;border-color: #4caf50;border-radius: 4px;cursor: pointer;
+}
+
+.image1ModBg_div{
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,0.5);
+	position: fixed;
+	display:none;
+	z-index: 1;
+}
+.image1Mod_div{
+	width: 600px;
+	margin: 0 auto;
+	margin-top: 100px;
+	background-color: #fff;
+}
+.image1Mod_div .title_div{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	border-bottom: #999 solid 1px;
+}
+.image1Mod_div .title_span{
+	margin-left: 20px;
+}
+.image1Mod_div .close_span{
+	float: right;
+	margin-right: 20px;
+	cursor: pointer;
+}
+.image1Mod_div table{
+	width: 550px;
+	margin:0 auto;
+	margin-top: 20px;
+	border: #eee solid 1px;
+}
+.image1Mod_div table .file_td{
+	width: 25%;
+}
+.image1Mod_div table .delete_img{
+	margin-top: 5px;
+	margin-left: 80px;
+	cursor:pointer;
+	position: absolute;
+}
+.image1Mod_div table .item_img{
+	width: 120px;
+	height: 120px;
+}
+.image1Mod_div .upload_img{
+	cursor:pointer;
+}
+.image1Mod_div .uploadFile1_div{
+	display: none;
+}
+.image1Mod_div .but_div{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	margin-top: 20px;
+	border-top: #999 solid 1px;
+}
+.image1Mod_div .confirm_div{
+	width:80px;
+	height:35px;
+	line-height:35px;
+	text-align:center;
+	color:#fff;
+	float:right;
+	margin-top: 7px;
+	margin-right:13px;
+	background-color: #4caf50;
+	cursor:pointer;
+	border-radius:5px;
+}
+.image1Mod_div .cancel_div{
+	width:80px;
+	height:33px;
+	line-height:33px;
+	text-align:center;
+	color:#999;
+	float:right;
+	margin-top: 7px;
+	margin-right:13px;
+	border: #999 solid 1px;
+	cursor:pointer;
+	border-radius:5px;
+}
+
+.image2ModBg_div{
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,0.5);
+	position: fixed;
+	display:none;
+	z-index: 1;
+}
+.image2Mod_div{
+	width: 600px;
+	margin: 0 auto;
+	margin-top: 100px;
+	background-color: #fff;
+}
+.image2Mod_div .title_div{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	border-bottom: #999 solid 1px;
+}
+.image2Mod_div .title_span{
+	margin-left: 20px;
+	}
+.image2Mod_div .close_span{
+	float: right;
+	margin-right: 20px;
+	cursor: pointer;
+}
+.image2Mod_div table{
+	width: 550px;
+	margin:0 auto;
+	margin-top: 20px;
+	border: #eee solid 1px;
+}
+.image2Mod_div table .file_td{
+	width: 25%;
+}
+.image2Mod_div table .delete_img{
+	margin-top: 5px;
+	margin-left: 80px;
+	cursor:pointer;
+	position: absolute;
+}
+.image2Mod_div table .item_img{
+	width: 120px;
+	height: 120px;
+}
+.image2Mod_div .upload_img{
+	cursor:pointer;
+}
+.image2Mod_div .uploadFile2_div{
+	display: none;
+}
+.image2Mod_div .but_div{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	margin-top: 20px;
+	border-top: #999 solid 1px;
+}
+.image2Mod_div .confirm_div{
+	width:80px;
+	height:35px;
+	line-height:35px;
+	text-align:center;
+	color:#fff;
+	float:right;
+	margin-top: 7px;
+	margin-right:13px;
+	cursor:pointer;
+	background-color: #4caf50;border-radius:5px;
+}
+.image2Mod_div .cancel_div{
+	width:80px;
+	height:33px;
+	line-height:33px;
+	text-align:center;
+	color:#999;
+	float:right;
+	margin-top: 7px;
+	margin-right:13px;
+	border: #999 solid 1px;
+	cursor:pointer;
+	border-radius:5px;
+}
+
+.image3ModBg_div{
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,0.5);
+	position: fixed;
+	display:none;
+	z-index: 1;
+}
+.image3Mod_div{
+	width: 600px;
+	margin: 0 auto;
+	margin-top: 100px;
+	background-color: #fff;
+}
+.image3Mod_div .title_div{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	border-bottom: #999 solid 1px;
+}
+.image3Mod_div .title_span{
+	margin-left: 20px;
+}
+.image3Mod_div .close_span{
+	float: right;
+	margin-right: 20px;
+	cursor: pointer;
+}
+.image3Mod_div table{
+	width: 550px;
+	margin:0 auto;
+	margin-top: 20px;
+	border: #eee solid 1px;
+}
+.image3Mod_div table .file_td{
+	width: 25%;
+}
+.image3Mod_div table .delete_img{
+	position: absolute;
+	margin-top: 5px;
+	margin-left: 80px;
+	cursor:pointer;
+}
+.image3Mod_div table .item_img{
+	width: 120px;
+	height: 120px;
+}
+.image3Mod_div .upload_img{
+	cursor:pointer;
+}
+.image3Mod_div .uploadFile3_div{
+	display: none;
+}
+.image3Mod_div .but_div{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	margin-top: 20px;
+	border-top: #999 solid 1px;
+}
+.image3Mod_div .confirm_div{
+	width:80px;
+	height:35px;
+	line-height:35px;
+	text-align:center;
+	color:#fff;
+	float:right;
+	margin-top: 7px;
+	margin-right:13px;
+	background-color: #4caf50;
+	cursor:pointer;
+	border-radius:5px;
+}
+.image3Mod_div .cancel_div{
+	width:80px;
+	height:33px;
+	line-height:33px;
+	text-align:center;
+	color:#999;
+	float:right;
+	margin-top: 7px;
+	margin-right:13px;
+	border: #999 solid 1px;
+	cursor:pointer;
+	border-radius:5px;
+}
+
+.image4ModBg_div{
+	width:100%;
+	height:100%;
+	background:rgba(0,0,0,0.5);
+	position: fixed;
+	display:none;
+	z-index: 1;
+}
+.image4Mod_div{
+	width: 600px;
+	margin: 0 auto;
+	margin-top: 100px;
+	background-color: #fff;
+}
+.image4Mod_div .title_div{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	border-bottom: #999 solid 1px;
+}
+.image4Mod_div .title_span{
+	margin-left: 20px;
+}
+.image4Mod_div .close_span{
+	float: right;
+	margin-right: 20px;
+	cursor: pointer;
+}
+.image4Mod_div table{
+	width: 550px;
+	margin:0 auto;
+	margin-top: 20px;
+	border: #eee solid 1px;
+}
+.image4Mod_div table .file_td{
+	width: 25%;
+}
+.image4Mod_div table .delete_img{
+	position: absolute;
+	margin-top: 5px;
+	margin-left: 80px;
+	cursor:pointer;
+}
+.image4Mod_div table .item_img{
+	width: 120px;
+	height: 120px;
+}
+.image4Mod_div .upload_img{
+	cursor:pointer;
+}
+.image4Mod_div .uploadFile4_div{
+	display: none;
+}
+.image4Mod_div .but_div{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	margin-top: 20px;
+	border-top: #999 solid 1px;
+}
+.image4Mod_div .confirm_div{
+	width:80px;
+	height:35px;
+	line-height:35px;
+	text-align:center;
+	color:#fff;
+	float:right;
+	margin-top: 7px;
+	margin-right:13px;
+	background-color: #4caf50;
+	cursor:pointer;
+	border-radius:5px;
+}
+.image4Mod_div .cancel_div{
+	width:80px;
+	height:33px;
+	line-height:33px;
+	text-align:center;
+	color:#999;
+	float:right;
+	margin-top: 7px;
+	margin-right:13px;
+	border: #999 solid 1px;
+	cursor:pointer;
+	border-radius:5px;
+}
+
+.top_div{
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	background-color: #fff;
+}
+.top_div .return_div{
+	float:left;
+	width: 70px;
+	height: 30px;
+	line-height: 30px;
+	text-align:center;
+	margin-top:10px;
+	margin-left:20px;
+	border:1px solid #eee;
+	cursor:pointer;
+	border-radius:3px;
+}
+.top_div .title_div{
+	width:200px;
+	margin:0 auto;
+	font-size:18px;
+	font-weight: bold;
+	text-align: center;
+}
+.top_div .myQrcode_div{
+	float:right;
+	height: 30px;
+	line-height: 30px;
+	text-align:center;
+	margin-top:-40px;
+	margin-right:20px;
+	border-radius:3px;
+}
+.middle_div{
+	width: 650px;
+	margin: 0 auto;
+	margin-top: 25px;
+	background-color: #fff;
+}
+.productName_input{
+	width: 100%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+}
+.image1_div{
+	width: 650px;
+	text-align: center;
+}
+.image1_div .option_div{
+	width:650px;
+	position:absolute;
+}
+.image1_div .but_div{
+	width:100px;
+	height:30px;
+	line-height:30px;
+	margin:0 auto;
+	margin-top: 50px;
+	text-align:center;
+	z-index: 1;
+	background-color: #fff;
+	border-radius:5px;
+	display:none;
+}
+.image1_div .list_div .item_img{
+	width: 600px;
+	height: 600px;
+	margin-top: 25px;
+}
+.spxq_div{
+	margin-top: 20px;
+}
+.spxq_tab{
+	width: 600px;
+	margin: 0 auto;
+	border: #eee solid 1px;
+}
+.spxq_tab .head_tr{
+	height:60px;
+}
+.spxq_tab .head_tr .spxq_td{
+	text-align: center;
+	background-color: #fbfbfb;
+}
+.spxq_tab .head_tr .cz_td{
+	text-align: center;
+	background-color: #fbfbfb;
+}
+.spxq_tab .item_tr .name_td{
+	width:20%;
+	border: #eee solid 1px;
+	padding-left: 20px;
+}
+.spxq_tab .item_tr .value_td{
+	width:70%;
+	border: #eee solid 1px;
+	padding-left: 20px;
+}
+.spxq_tab .item_tr .cz_td{
+	width:10%;
+	border: #eee solid 1px;
+	text-align: center;
+}
+.spxq_tab .item_tr .spxqIfShow_inp{
+	cursor: pointer;
+}
+.image2_div{
+	width: 650px;
+	text-align: center;
+	margin-top: 25px;
+}
+.image2_div .option_div{
+	width:650px;
+	position:absolute;
+}
+.image2_div .but_div{
+	width:100px;
+	height:30px;
+	line-height:30px;
+	margin:0 auto;
+	margin-top: 50px;
+	text-align:center;
+	z-index: 1;
+	background-color: #fff;
+	border-radius:5px;
+	display:none;
+}
+.image2_div .list_div .item_img{
+	width: 600px;
+	height: 600px;
+	margin-top: 25px;
+}
+.image3_div{
+	width: 650px;
+	text-align: center;
+	margin-top: 25px;
+}
+.image3_div .option_div{
+	width:650px;
+	position:absolute;
+}
+.image3_div .but_div{
+	width:100px;
+	height:30px;
+	line-height:30px;
+	margin:0 auto;
+	margin-top: 50px;
+	text-align:center;
+	z-index: 1;
+	background-color: #fff;
+	border-radius:5px;
+	display:none;
+}
+.image3_div .list_div .item_img{
+	width: 600px;
+	height: 600px;
+	margin-top: 25px;
+}
+.image4_div{
+	width: 650px;
+	text-align: center;
+	margin-top: 25px;
+}
+.image4_div .option_div{
+	width:650px;
+	position:absolute;
+}
+.image4_div .but_div{
+	width:100px;
+	height:30px;
+	line-height:30px;
+	margin:0 auto;
+	margin-top: 50px;
+	text-align:center;
+	z-index: 1;
+	background-color: #fff;
+	border-radius:5px;
+	display:none;
+}
+.image4_div .list_div .item_img{
+	width: 600px;
+	height: 600px;
+	margin-top: 25px;
+}
+.right_div{
+	width: 150px;
+	height: 200px;
+	text-align: center;
+}
+.uncreate_img{
+	width: 120px;
+	height: 120px;
+}
+.scscypm_div{
+	width: 165px;
+	height: 30px;
+	line-height: 30px;
+	text-align:center;
+	margin:0 auto;
+	margin-top:15px;
+	color:#fff;
+	background-color:#4caf50;
+	cursor:pointer;
+	border-radius:3px;
+}
