@@ -573,6 +573,8 @@ function resetQrsjbscExcelTabStyle(){
 		}
 		tbody.append(trStr);
 	}
+	var tdCount=$("#qrsjbsc_div #excel_tab .tit_tr td").length;
+	$("#qrsjbsc_div #excel_tab").css("width",93*tdCount+"px");
 }
 
 function checkExcelKey(jo){
@@ -868,7 +870,7 @@ function chooseExcel(){
 				<input type="hidden" name="ryxxName${status.index+1 }" value="${ryxx.name }" />
 				<td class="name_td" id="name_td${status.index+1 }">${ryxx.name }</td>
 				<td class="value_td">
-					<input type="text" name="ryxxValue${status.index+1 }" />
+					默认显示Excel导入内容
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow${status.index+1 }" name="ryxxIfShow${status.index+1 }" value="true" />
