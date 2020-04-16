@@ -81,6 +81,9 @@ public class ExcelController {
 				else if(ModuleSPZS.ARTWORK.equals(moduleType)) {
 					fileName="艺术品_excel模板";
 				}
+				else if(ModuleSPZS.PRODUCT_EXPLAIN.equals(moduleType)) {
+					fileName="说明书_excel模板";
+				}
 				break;
 			}
 			download(fileName, wb, response);

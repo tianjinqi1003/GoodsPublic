@@ -2944,6 +2944,27 @@ public class MainController {
 				
 				url="/merchant/spzs/artwork/batchAddModule";
 			}
+			else if(ModuleSPZS.PRODUCT_EXPLAIN.equals(moduleType)) {
+				List<ModuleSPZS> wwSpxqList = (List<ModuleSPZS>)publicService.getModuleSPZSByType("spxq",moduleType);
+				request.setAttribute("spxqList", wwSpxqList);
+				
+				request.setAttribute("memo1", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo1",moduleType)).get(0).getValue());
+				
+				request.setAttribute("memo2", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo2",moduleType)).get(0).getValue());
+				
+				request.setAttribute("memo3", ((List<ModuleSPZS>)publicService.getModuleSPZSByType("memo3",moduleType)).get(0).getValue());
+				
+				List<ModuleSPZS> wwImage1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image1",moduleType);
+				request.setAttribute("image1List", wwImage1List);
+				
+				List<ModuleSPZS> wwImage2List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("image2",moduleType);
+				request.setAttribute("image2List", wwImage2List);
+
+				List<ModuleSPZS> spzsEmbed1List = (List<ModuleSPZS>)publicService.getModuleSPZSByType("embed1",moduleType);
+				request.setAttribute("embed1List", spzsEmbed1List);
+				
+				url="/merchant/spzs/productExplain/batchAddModule";
+			}
 			break;
 		}
 		return url;
