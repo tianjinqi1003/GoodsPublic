@@ -872,6 +872,186 @@ public class MainController {
 			return "../../merchant/main/goBrowseHtmlGoodsDMTZL?goodsNumber="+htmlGoodsDMTZL.getGoodsNumber()+"&accountNumber="+htmlGoodsDMTZL.getAccountNumber();
 	}
 	
+
+	@RequestMapping(value="/addBatchHtmlGoodsJZSG")
+	@ResponseBody
+	public Map<String, Object> addBatchHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG,
+			String jaStr,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file1_2",required=false) MultipartFile file1_2,
+			@RequestParam(value="file1_3",required=false) MultipartFile file1_3,
+			@RequestParam(value="file2_1",required=false) MultipartFile file2_1,
+			@RequestParam(value="file2_2",required=false) MultipartFile file2_2,
+			@RequestParam(value="file2_3",required=false) MultipartFile file2_3,
+			HttpServletRequest request) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		//System.out.println("==="+jaStr);
+		JSONArray ja = JSONArray.fromObject(jaStr);
+		try {
+			MultipartFile[] fileArr=new MultipartFile[6];
+			fileArr[0]=file1_1;
+			fileArr[1]=file1_2;
+			fileArr[2]=file1_3;
+			fileArr[3]=file2_1;
+			fileArr[4]=file2_2;
+			fileArr[5]=file2_3;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						jsonStr = FileUploadUtils.appUploadContentImg(request,fileArr[i],"");
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								htmlGoodsJZSG.setImage1_1(dataJO.get("src").toString());
+								break;
+							case 1:
+								htmlGoodsJZSG.setImage1_2(dataJO.get("src").toString());
+								break;
+							case 2:
+								htmlGoodsJZSG.setImage1_3(dataJO.get("src").toString());
+								break;
+							case 3:
+								htmlGoodsJZSG.setImage2_1(dataJO.get("src").toString());
+								break;
+							case 4:
+								htmlGoodsJZSG.setImage2_2(dataJO.get("src").toString());
+								break;
+							case 5:
+								htmlGoodsJZSG.setImage2_3(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+					else {
+						switch (i) {
+						case 0:
+							htmlGoodsJZSG.setImage1_1("/GoodsPublic/resource/images/jzsg/bf0b334d871019cf3b2359e22b405d1c.png");
+							break;
+						case 3:
+							htmlGoodsJZSG.setImage2_1("/GoodsPublic/resource/images/jzsg/43a339cd90f1a6b00c0c256d49d6a119.png");
+							break;
+						}
+					}
+				}
+			}
+			
+			JSONObject jo = ja.getJSONObject(0);
+			Iterator<String> it = jo.keys();
+			while (it.hasNext()) {
+				String key = it.next();
+				String value = jo.getString(key);
+				Integer colIndex = Integer.valueOf(key.substring(5));
+				switch (colIndex) {
+				case 1:
+					htmlGoodsJZSG.setRyxxName1(value);
+					break;
+				case 2:
+					htmlGoodsJZSG.setRyxxName2(value);
+					break;
+				case 3:
+					htmlGoodsJZSG.setRyxxName3(value);
+					break;
+				case 4:
+					htmlGoodsJZSG.setRyxxName4(value);
+					break;
+				case 5:
+					htmlGoodsJZSG.setRyxxName5(value);
+					break;
+				case 6:
+					htmlGoodsJZSG.setRyxxName6(value);
+					break;
+				case 7:
+					htmlGoodsJZSG.setRyxxName7(value);
+					break;
+				case 8:
+					htmlGoodsJZSG.setRyxxName8(value);
+					break;
+				case 9:
+					htmlGoodsJZSG.setRyxxName9(value);
+					break;
+				case 10:
+					htmlGoodsJZSG.setRyxxName10(value);
+					break;
+				}
+			}
+			
+			for(int i=1;i<ja.size();i++) {
+				String userNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+i;
+				htmlGoodsJZSG.setUserNumber(userNumber);
+				jo = ja.getJSONObject(i);
+				it = jo.keys();
+				while (it.hasNext()) {
+					String key = it.next();
+					String value = jo.getString(key);
+					Integer colIndex = Integer.valueOf(key.substring(5));
+					//System.out.println("key==="+key);
+					switch (colIndex) {
+					case 1:
+						htmlGoodsJZSG.setRyxxValue1(value);
+						break;
+					case 2:
+						htmlGoodsJZSG.setRyxxValue2(value);
+						break;
+					case 3:
+						htmlGoodsJZSG.setRyxxValue3(value);
+						break;
+					case 4:
+						htmlGoodsJZSG.setRyxxValue4(value);
+						break;
+					case 5:
+						htmlGoodsJZSG.setRyxxValue5(value);
+						break;
+					case 6:
+						htmlGoodsJZSG.setRyxxValue6(value);
+						break;
+					case 7:
+						htmlGoodsJZSG.setRyxxValue7(value);
+						break;
+					case 8:
+						htmlGoodsJZSG.setRyxxValue8(value);
+						break;
+					case 9:
+						htmlGoodsJZSG.setRyxxValue9(value);
+						break;
+					case 10:
+						htmlGoodsJZSG.setRyxxValue10(value);
+						break;
+					}
+				}
+			
+				String addr = request.getLocalAddr();
+				int port = request.getLocalPort();
+				String contextPath = request.getContextPath();
+				String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoods?trade=jzsg&userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountId="+htmlGoodsJZSG.getAccountNumber();
+				//String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/main/goShowHtmlGoods?trade=jzsg&userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountId="+htmlGoodsJZSG.getAccountNumber();
+				
+				String fileName = userNumber + ".jpg";
+				String avaPath="/GoodsPublic/upload/"+fileName;
+				String path = "D:/resource";
+				Qrcode.createQrCode(url, path, fileName);
+				
+				htmlGoodsJZSG.setQrCode(avaPath);
+	
+				int a=publicService.addHtmlGoodsJZSG(htmlGoodsJZSG);
+			}
+
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "批量导入成功！");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "批量导入失败！");
+		}
+		finally {
+			return jsonMap;
+		}
+	}
+	
 	/**
 	 * 添加建筑施工模板内容
 	 * @param htmlGoodsJZSG
@@ -2965,6 +3145,18 @@ public class MainController {
 				
 				url="/merchant/spzs/productExplain/batchAddModule";
 			}
+			break;
+		case "jzsg":
+			List<ModuleJZSG> ryxxList = (List<ModuleJZSG>)publicService.getModuleJZSGByType("ryxx");
+			request.setAttribute("ryxxList", ryxxList);
+			
+			List<ModuleJZSG> jzsgImage1List = (List<ModuleJZSG>)publicService.getModuleJZSGByType("image1");
+			request.setAttribute("image1List", jzsgImage1List);
+			
+			List<ModuleJZSG> jzsgImage2List = (List<ModuleJZSG>)publicService.getModuleJZSGByType("image2");
+			request.setAttribute("image2List", jzsgImage2List);
+			
+			url="/merchant/jzsg/batchAddModule";
 			break;
 		}
 		return url;

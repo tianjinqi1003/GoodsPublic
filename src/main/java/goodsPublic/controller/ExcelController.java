@@ -85,6 +85,9 @@ public class ExcelController {
 					fileName="说明书_excel模板";
 				}
 				break;
+			case "jzsg":
+				fileName="建筑施工_excel模板";
+				break;
 			}
 			download(fileName, wb, response);
 		} catch (IOException e) {
