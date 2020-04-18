@@ -66,7 +66,7 @@ body{
 	width: 220px;height:38px;line-height:38px;margin:25px auto 0; font-size: 16px;color:#fff;text-align:center;background-color: #4caf50;border-radius:4px;cursor: pointer;
 }
 .cutLine_div{
-	width: 1px;height: 200px;left: 50%;margin-top: -250px;background-color: #e6e6e6;position: absolute;
+	width: 1px;height: 250px;left: 50%;margin-top: -250px;background-color: #e6e6e6;position: absolute;
 }
 .right_div{
 	width: 406px;height:250px;margin-left: 410px;margin-top: -250px;
