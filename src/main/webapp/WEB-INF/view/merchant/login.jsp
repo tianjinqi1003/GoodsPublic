@@ -7,6 +7,7 @@
 <title>二维码商品发布登录</title>
 <%@include file="js.jsp"%>
 <style>
+/*
 .beg-login-box {
 	width: 450px;
 	height: 330px;
@@ -39,9 +40,59 @@ body {
 .beg-pull-left {
 	float: left;
 }
+*/
+body{
+	background-color: #f0f0f0;
+}
+.login_div{
+	width: 816px;height:465px;background-color: #fff;margin: 108px auto 0;padding: 1px;
+}
+.main_div{
+	margin-top: 70px;width: 100%;height: 250px;
+}
+.left_div{
+	width: 406px;height:250px;
+}
+.sjhdl_h2{
+	height: 20px;line-height: 20px;font-size: 16px;font-weight: 700;color: #4a4a4a;text-align: center;
+}
+.userName_div,.password_div{
+	width: 220px;height:48px;margin: 20px auto 0;border-bottom: 1px solid #eee;
+}
+.userName_inp,.password_inp{
+	height:48px;border:0;
+}
+.loginBut_div{
+	width: 220px;height:38px;line-height:38px;margin:25px auto 0; font-size: 16px;color:#fff;text-align:center;background-color: #4caf50;border-radius:4px;cursor: pointer;
+}
+.cutLine_div{
+	width: 1px;height: 200px;left: 50%;margin-top: -250px;background-color: #e6e6e6;position: absolute;
+}
+.right_div{
+	width: 406px;height:250px;margin-left: 410px;margin-top: -250px;
+}
+.wxkjdl_h2{
+	height: 20px;line-height: 20px;font-size: 16px;font-weight: 700;color: #4a4a4a;text-align: center;
+}
+.wxkjdl_div{
+	width: 100%;height:210px;margin: 20px auto 0;text-align: center;
+}
+.qrcode_img{
+	width: 180px;height:180px;
+}
+.wxsys_div{
+	font-size: 12px;color: #9B9B9B;
+}
+.regist_div{
+	font-size: 12px;color: #9b9b9b;text-align: center;margin-top: 80px;
+}
+.regist_a{
+	color: #357bb3;
+}
 </style>
 </head>
 <body>
+<!-- 
 	<div class="beg-login-box">
 		<header>
 		<h1>二维码商品发布登录</h1>
@@ -94,11 +145,48 @@ body {
 			</form>
 		</div>
 	</div>
+ -->
+ <div class="login_div">
+ 	<div class="main_div">
+ 		<div class="left_div">
+ 			<h2 class="sjhdl_h2">手机号登录</h2>
+ 			<div class="userName_div">
+ 				<input class="userName_inp layui-input" type="text" id="userName" placeholder="请输入登录名" value="" onfocus="focusUserName();" onblur="checkUserName();">
+ 			</div>
+ 			<div class="password_div">
+ 				<input class="password_inp layui-input" type="password" id="password" placeholder="请输入密码" value="" onblur="checkPassword()">
+ 			</div>
+ 			<!-- 
+ 			<div style="width: 220px;height:48px;margin: 20px auto 0;border-bottom: 1px solid #eee;">
+ 				<input type="text" id="loginVCode" name="loginVCode" lay-verify="verifyCode"
+							autocomplete="off" placeholder="验证码" lay-verify="required" onblur="checkVerifyCode()"
+							class="layui-input" style="padding-left: 9px;width:85px;height:48px;">
+				<img src="<%=basePath%>/merchant/login/captcha" id="loginVCode"
+							style="width: 115px;height: 48px;margin-top: -48px;margin-left: 95px;" />
+				<span style="font-size: 14px; line-height: 39px; float: right"><a
+							href="javascript:void(0)" class="replace_code"
+							style="cursor: pointer;margin-top: -48px;margin-left: ">换一张?</a></span>
+ 			</div>
+ 			 -->
+ 			<div class="loginBut_div" onclick="login()">登录</div>
+ 		</div>
+ 		<div class="cutLine_div"></div>
+ 		<div class="right_div">
+ 			<h2 class="wxkjdl_h2">微信快捷登录</h2>
+ 			<div class="wxkjdl_div">
+ 				<img class="qrcode_img" alt="" src="http://www.qrcodesy.com:8080/GoodsPublic/resource/images/qrcode.png">
+ 				<div class="wxsys_div">微信扫一扫，快速登录</div>
+ 			</div>
+ 		</div>
+ 	</div>
+ 	<div class="regist_div">还没有账号？<a class="regist_a" href="<%=basePath%>merchant/regist">立即免费注册</a></div>
+ </div>
 </body>
 <script type="text/javascript" src="<%=basePath %>resource/js/MD5.js"></script>
 <script type="text/javascript">
     //更换验证码
-    var baseUrl="${pageContext.request.contextPath}"
+    var baseUrl="${pageContext.request.contextPath}";
+    /*
     $(".replace_code").bind("click",function () {
         $("#loginVCode").hide().attr('src', baseUrl+ "/merchant/login/captcha?" + Math.floor(Math.random() * 100) ).fadeIn();
     });
@@ -155,5 +243,84 @@ body {
             }
         });
     });
+    */
+function focusUserName(){
+	var userName=$("#userName").val();
+	if(userName=="请填写用户名"||userName=="用户名不能有特殊字符"||userName=="用户名首尾不能出现下划线\'_\'"){
+		$("#userName").val("");
+		$("#userName").css("color","#000");
+	}
+}
+    
+function checkUserName(){
+    var userName=$("#userName").val();
+    if(userName==null||userName==""||userName=="请填写用户名"){
+		$("#userName").css("color","#f00");
+		$("#userName").val("请填写用户名");
+		return false;
+	}
+    else if (!new RegExp("^[a-zA-Z0-9_\u4e00-\u9fa5\\s·]+$").test(userName)) {
+    	$("#userName").css("color","#f00");
+		$("#userName").val("用户名不能有特殊字符");
+        return false;
+    }
+    else if (/(^\_)|(\__)|(\_+$)/.test(userName)) {
+    	$("#userName").css("color","#f00");
+		$("#userName").val("用户名首尾不能出现下划线\'_\'");
+        return false;
+    }
+	else
+		return true;
+}
+
+function checkPassword(){
+	var password=$("#password").val();
+	if(password==null||password==""||password=="请填写密码"){
+		alert("请填写密码");
+		return false;
+	}
+	else
+		return true;
+}
+
+function checkVerifyCode(){
+	var loginVCode=$("#loginVCode").val();
+	if (loginVCode === '') {
+		alert("验证码不能为空");
+        return false;
+    } 
+	else if (loginVCode.length > 4) {
+    	alert("请输入四个字母验证码");
+        return false;
+    } 
+	else if (loginVCode.length < 4) {
+    	alert("请输入四个字母验证码");
+        return false;
+    }
+    else{
+    	return true;
+    }
+}
+
+function login(){
+	if(checkUserName()){
+		if(checkPassword()){
+			var userName=$("#userName").val();
+			var password=MD5($("#password").val()).toUpperCase();
+			//var loginVCode=$("#loginVCode").val();
+			$.post(baseUrl + "/merchant/login",
+				{userName:userName,password:password},
+				function(json){
+		        	console.log(json)
+		        	if(json.status==0){
+		        		window.location.href=baseUrl+json.url;
+		        	}else if(json.status==1){
+		        		alert(json.msg);
+		        	}
+				}
+			,"json");
+		}
+	}
+}
 </script>
 </html>

@@ -76,13 +76,15 @@ public class GoodsController {
 		//返回值的json
 		PlanResult plan=new PlanResult();
 		HttpSession session=request.getSession();
+		/*
 		String verifyCode = (String) session.getAttribute("验证码");
 		System.out.println("verifyCode==="+verifyCode);
 		System.out.println("loginVCode==="+loginVCode);
 		if(verifyCode.equals(loginVCode)) {
+		*/
 			//TODO在这附近添加登录储存信息步骤，将用户的账号以及密码储存到shiro框架的管理配置当中方便后续查询
 			try {
-				System.out.println("验证码一致");
+				//System.out.println("验证码一致");
 				UsernamePasswordToken token = new UsernamePasswordToken(userName,password);  
 				Subject currentUser = SecurityUtils.getSubject();  
 				if (!currentUser.isAuthenticated()){
@@ -105,10 +107,12 @@ public class GoodsController {
 			plan.setMsg("验证通过");
 			plan.setUrl("/merchant/main/goAccountInfo");
 			return JsonUtil.getJsonFromObject(plan);
+			/*
 		}
 		plan.setStatus(1);
 		plan.setMsg("验证码错误");
 		return JsonUtil.getJsonFromObject(plan);
+		*/
 	}
 	
 	@RequestMapping(value="/loginQL",method=RequestMethod.GET,produces="plain/text; charset=UTF-8")
