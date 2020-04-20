@@ -953,4 +953,10 @@ public class PublicServiceImpl implements PublicService {
 		return count;
 	}
 
+	@Override
+	public List<Map<String, Object>> selectAdminQrcodeList(String searchTxt, String accountNumber) {
+		// TODO Auto-generated method stub
+		return publicDao.selectAdminQrcodeList(searchTxt,accountNumber);
+	}
+
 }

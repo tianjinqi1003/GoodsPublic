@@ -405,5 +405,7 @@ public interface PublicService {
 
 	public int editScoreQrcode(ScoreQrcode sq, String jpmdhReg);
 
+	public List<Map<String, Object>> selectAdminQrcodeList(String searchTxt, String accountNumber);
+
 
 }

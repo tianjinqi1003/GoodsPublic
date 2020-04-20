@@ -407,4 +407,6 @@ public interface PublicMapper {
 
 	public int updateSTRGkjfqdShow(@Param("openId") String openId, @Param("accountNumber") Integer accountNumber);
 
+	public List<Map<String, Object>> selectAdminQrcodeList(@Param("searchTxt") String searchTxt, @Param("accountNumber") String accountNumber);
+
 }

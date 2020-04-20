@@ -2364,6 +2364,19 @@
 	<select id="getHtmlGoodsGRMP" resultType="goodsPublic.entity.HtmlGoodsGRMP">
 		select * from html_goods_grmp where uuid=#{uuid}
 	</select>
+	<select id="selectAdminQrcodeList" resultType="java.util.Map">
+		select name,date_format(createTime,'%Y年%m月%d日 %k:%i:%s') createTime,qrcode from(
+			SELECT productName name,gmtCreate createTime,qrcode from html_goods_spzs where accountNumber=#{accountNumber}
+			union
+			SELECT title name,gmtCreate createTime,qrcode from html_goods_dmtzl where accountNumber=#{accountNumber}
+			union
+			SELECT title name,gmtCreate createTime,qrcode from html_goods_jzsg where accountNumber=#{accountNumber}
+		)t where 1=1 
+		<if test="searchTxt!=''&amp;searchTxt!=null">
+		 and name like CONCAT('%',#{searchTxt},'%')
+		</if>
+		ORDER BY createTime DESC
+	</select>
 	<delete id="deleteScoreQrcodeByUuids">
 		update score_qrcode set jfewmlbShow=0 where 1=1
 		<foreach collection="list" item="uuid" open=" and cast(uuid as char) in (" separator="," close=")">

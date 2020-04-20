@@ -1,6 +1,7 @@
 package goodsPublic.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -85,5 +86,30 @@ public class PhoneController {
 	public String goAdminCreateQrcode() {
 		
 		return "/merchant/phoneAdmin/createQrcode";
+	}
+	
+	@RequestMapping(value="/goAdminQrcodeList")
+	public String goAdminQrcodeList() {
+		
+		return "/merchant/phoneAdmin/qrcodeList";
+	}
+
+	@RequestMapping(value="/selectAdminQrcodeList")
+	@ResponseBody
+	public Map<String, Object> selectAdminQrcodeList(String searchTxt, String accountId) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		List<Map<String, Object>> qrcodeList=publicService.selectAdminQrcodeList(searchTxt,accountId);
+		
+		if(qrcodeList.size()>0) {
+			jsonMap.put("status", "ok");
+			jsonMap.put("list", qrcodeList);
+		}
+		else {
+			jsonMap.put("status", "no");
+			jsonMap.put("message", "暂无数据");
+		}
+		return jsonMap;
 	}
 }
