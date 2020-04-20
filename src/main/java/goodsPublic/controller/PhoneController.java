@@ -80,4 +80,10 @@ public class PhoneController {
 		
 		return jsonMap;
 	}
+	
+	@RequestMapping(value="/goAdminCreateQrcode")
+	public String goAdminCreateQrcode() {
+		
+		return "/merchant/phoneAdmin/createQrcode";
+	}
 }
