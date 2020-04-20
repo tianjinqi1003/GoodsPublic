@@ -7,9 +7,133 @@
 <title>新用户注册</title>
 <%@include file="js.jsp"%>
 <script type="text/javascript">
+var baseUrl="${pageContext.request.contextPath}";
 $(function(){
 	
 });
+
+function focusUserName(){
+	var userName=$("#userName").val();
+	if(userName=="请输入用户名"){
+		$("#userName").val("");
+		$("#userName").css("color","#000");
+	}
+}
+
+function checkUserName(){
+	var userName=$("#userName").val();
+	if(userName==null||userName==""||userName=="请输入用户名"){
+		$("#userName").css("color","#f00");
+		$("#userName").val("请输入用户名");
+		return false;
+	}
+	else
+		return true;
+}
+
+function checkPassword(){
+	var password=$("#password").val();
+	if(password==null||password==""||password=="请输入密码"){
+		alert("请输入密码");
+		return false;
+	}
+	else
+		return true;
+}
+
+function checkPassword1(){
+	var password=$("#password").val();
+	var password1=$("#password1").val();
+	if(password1==null||password1==""||password1=="请输入确认密码"){
+		alert("请输入确认密码");
+		return false;
+	}
+	if(password!=password1){
+		alert("两次密码不一致");
+		return false;
+	}
+	else
+		return true;
+}
+
+function focusNickName(){
+	var nickName=$("#nickName").val();
+	if(nickName=="请输入用户昵称"){
+		$("#nickName").val("");
+		$("#nickName").css("color","#000");
+	}
+}
+
+function checkNickName(){
+	var nickName=$("#nickName").val();
+	if(nickName==null||nickName==""||nickName=="请输入用户昵称"){
+		$("#nickName").css("color","#f00");
+		$("#nickName").val("请输入用户昵称");
+		return false;
+	}
+	else
+		return true;
+}
+
+function focusPhone(){
+	var phone=$("#phone").val();
+	if(phone=="请输入手机号"){
+		$("#phone").val("");
+		$("#phone").css("color","#000");
+	}
+}
+
+function checkPhone(){
+	var phone=$("#phone").val();
+	if(phone==null||phone==""||phone=="请输入手机号"){
+		$("#phone").css("color","#f00");
+		$("#phone").val("请输入手机号");
+		return false;
+	}
+	else
+		return true;
+}
+
+function checkForm(){
+	if(checkUserName()){
+		if(checkPassword()){
+			if(checkPassword1()){
+				if(checkNickName()){
+					if(checkPhone()){
+						submit();
+					}
+				}
+			}
+		}
+	}
+}
+
+function submit(){
+	var userName=$("#userName").val();
+	var password=MD5($("#password").val()).toUpperCase();
+	var nickName=$("#nickName").val();
+	var phone=$("#phone").val();
+	var email=$("#email").val();
+	$.post(baseUrl+"/merchant/regist",
+		{userName:userName,password:password,nickName:nickName,phone:phone,email:email},
+		function(result){
+			if(result.status==0){
+				window.location.href=baseUrl+result.url
+			}else if(result.status==2){
+				alert(result.msg);
+			}
+		}
+	,"json");
+}
+
+function reset(){
+	$("#userName").val("");
+	$("#password").val("");
+	$("#password1").val("");
+	$("#nickName").val("");
+	$("#phone").val("");
+	$("#email").val("");
+}
 </script>
 <style>
 /*
@@ -239,10 +363,10 @@ body{
 			</div>
 			<div class="email_div">
 				<div class="tit_div"><span class="tit_span">邮箱</span></div>
-				<input type="text" class="email_inp" id="email" placeholder="请输入邮箱地址" onfocus="focusEmail();" onblur="checkEmail();"/>
+				<input type="text" class="email_inp" id="email" placeholder="请输入邮箱地址"/>
 			</div>
 			<div style="width: 240px;height: 38px;margin: auto;">
-				<div class="submitBut_div" onclick="submit();">立即提交</div>
+				<div class="submitBut_div" onclick="checkForm();">立即提交</div>
 				<div class="resetBut_div" onclick="reset();">重置</div>
 			</div>
 		</div>
@@ -260,6 +384,7 @@ body{
 	 
 	<script type="text/javascript" src="<%=basePath %>resource/js/MD5.js"></script>
 	<script type="text/javascript">
+	/*
 	var baseUrl="${pageContext.request.contextPath}"
 		layui.use('form', function() {
 			var form = layui.form;
@@ -289,6 +414,7 @@ body{
 		            }
 		        });
 		})
+		*/
 	</script>
 </body>
 </html>
