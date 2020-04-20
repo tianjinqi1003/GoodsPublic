@@ -45,7 +45,7 @@ body{
 	background-color: #f0f0f0;
 }
 .login_div{
-	width: 816px;height:465px;background-color: #fff;margin: 108px auto 0;padding: 1px;
+	width: 816px;height:465px;background-color: #fff;margin: 175px auto 0;padding: 1px;
 }
 .main_div{
 	margin-top: 70px;width: 100%;height: 250px;
