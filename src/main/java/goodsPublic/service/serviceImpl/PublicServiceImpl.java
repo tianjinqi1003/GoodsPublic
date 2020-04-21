@@ -959,4 +959,10 @@ public class PublicServiceImpl implements PublicService {
 		return publicDao.selectAdminQrcodeList(searchTxt,accountNumber);
 	}
 
+	@Override
+	public int updateBwxQrcodeByAccountId(String bwxQrcode, String accountNumber) {
+		// TODO Auto-generated method stub
+		return publicDao.updateBwxQrcodeByAccountId(bwxQrcode, accountNumber);
+	}
+
 }

@@ -407,5 +407,7 @@ public interface PublicService {
 
 	public List<Map<String, Object>> selectAdminQrcodeList(String searchTxt, String accountNumber);
 
+	public int updateBwxQrcodeByAccountId(String avaPath, String id);
+
 
 }

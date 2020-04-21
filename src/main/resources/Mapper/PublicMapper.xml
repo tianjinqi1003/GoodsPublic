@@ -2265,6 +2265,9 @@
 		</if>
 		where `key`=#{key} and accountNumber=#{accountNumber} and module!=#{module}
 	</update>
+	<update id="updateBwxQrcodeByAccountId">
+		update account_info set bwxQrcode=#{bwxQrcode} where id=#{accountNumber}
+	</update>
 	<select id="checkGoodsLabelExist" resultType="java.lang.Integer">
 		select count(*) from goods_label_set where `key`=#{key} and module=#{module} and accountNumber=#{accountNumber}
 	</select>

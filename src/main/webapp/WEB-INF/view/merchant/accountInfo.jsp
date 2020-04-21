@@ -285,6 +285,10 @@ function openEditPwdDialog(flag){
 function openEditCompanyDialog(flag){
 	$("#editCompanyBg_div").css("display",flag==1?"block":"none");
 }
+
+function openBwxQrcodeBgDiv(flag){
+	$("#bwxQrcodeBg_div").css("display",flag==1?"block":"none");
+}
 </script>
 <style type="text/css">
 .editNickNameBg_div{
@@ -393,6 +397,28 @@ function openEditCompanyDialog(flag){
 .editCompany_div .submit_but{
 	color: #FFF;background: #4CAF52;margin-left: 12px;
 }
+
+.bwxQrcodeBg_div{
+	width: 100%;height:100%;background: rgba(0,0,0,0.65);position: fixed;display:none;z-index: 1001;
+}
+.bwxQrcode_div{
+	width:600px;height:340px;margin:100px auto;background: #f8f8f8;border-radius: 6px;padding: 1px;
+}
+.bwxQrcode_div .title_h3{
+	margin-top: 30px;text-align: center;font-size: 18px;font-weight: 700;color: #4caf50;
+}
+.bwxQrcode_div .title_div{
+	font-size: 14px;margin-top: 16px;text-align: center;
+}
+.bwxQrcode_div .qrcode_div{
+	width: 100%;height: 200px;text-align: center;margin-top: 20px;
+}
+.bwxQrcode_div .qrcode_img{
+	width: 200px;height:200px;
+}
+.bwxQrcode_div .close_span{
+	float: right;margin-right: 25px;color: #4caf50;font-size: 12px;cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -456,6 +482,17 @@ function openEditCompanyDialog(flag){
 	</div>
 </div>
 
+<div class="bwxQrcodeBg_div" id="bwxQrcodeBg_div">
+	<div class="bwxQrcode_div">
+		<h3 class="title_h3">成为二维码管理员</h3>
+		<div class="title_div">扫描下方二维码，绑定微信后，可直接使用微信扫码登录</div>
+		<div class="qrcode_div">
+			<img class="qrcode_img" alt="" src="${requestScope.accountMsg.bwxQrcode }">
+		</div>
+		<span class="close_span" onclick="openBwxQrcodeBgDiv(0)">以后再说</span>
+	</div>	
+</div>
+
 <div class="layui-layout layui-layout-admin">
 	<%@include file="side.jsp"%>
 	<div id="zhxx_div" style="height:230px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">
@@ -475,7 +512,15 @@ function openEditCompanyDialog(flag){
 			<span style="font-size: 14px;color: #357bb3;margin-left: 15px;cursor: pointer;" onclick="openEditPwdDialog(1)">修改密码</span>
 		</div>
 		<div style="margin-top:20px;">
-			<a>绑定微信</a>
+			<span style="font-size: 14px;color: #373737;font-weight: 700;">绑定微信：</span>
+			<c:choose>
+			<c:when test="${requestScope.accountMsg.openId eq null }">
+				<span onclick="openBwxQrcodeBgDiv(1)">未绑定</span>
+			</c:when>
+			<c:otherwise>
+				<span>解除绑定</span>
+			</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 	<div id="gsxx_div" style="height:350px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">

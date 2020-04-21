@@ -2957,6 +2957,16 @@ public class MainController {
 	@RequestMapping(value="/goAccountInfo")
 	public String goAccountInfo(HttpServletRequest request) {
 		AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
+		
+		if(StringUtils.isEmpty(msg.getBwxQrcode())) {//初始化微信绑定码
+			String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/phone/goBindWX?accountId="+msg.getId();
+			String fileName = "bwx"+new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
+			String avaPath="/GoodsPublic/upload/"+fileName;
+			String path = "D:/resource";
+	        Qrcode.createQrCode(url, path, fileName);
+	        msg.setBwxQrcode(avaPath);
+	        publicService.updateBwxQrcodeByAccountId(avaPath,msg.getId());
+		}
 		request.setAttribute("accountMsg", msg);
 		return "/merchant/accountInfo";
 	}

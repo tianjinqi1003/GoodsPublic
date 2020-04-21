@@ -20,6 +20,8 @@ public class AccountMsg {
 	private String recordNumber;
 	private String accountStatus;
 	private String role;
+	private String bwxQrcode;
+	private String openId;
 
 	public AccountMsg(String userName,String passWord) {
 		this.userName=userName;
@@ -150,6 +152,22 @@ public class AccountMsg {
 		this.gmt_create = gmt_create;
 	}
 
+	public String getBwxQrcode() {
+		return bwxQrcode;
+	}
+
+	public void setBwxQrcode(String bwxQrcode) {
+		this.bwxQrcode = bwxQrcode;
+	}
+
+	public String getOpenId() {
+		return openId;
+	}
+
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
+
 	@Override
 	public String toString() {
 		return "AccountMsg [id=" + id + ", userName=" + userName + ", passWord=" + passWord + ", nickName=" + nickName
@@ -157,7 +175,7 @@ public class AccountMsg {
 				+ ", createUser=" + createUser + ", avatar_img=" + avatar_img + ", companyName=" + companyName
 				+ ", companyAddress=" + companyAddress + ", postcode=" + postcode + ", quotient=" + quotient + ", fax="
 				+ fax + ", countCode=" + countCode + ", recordNumber=" + recordNumber + ", accountStatus="
-				+ accountStatus + ", role=" + role + "]";
+				+ accountStatus + ", role=" + role + ", bwxQrcode=" + bwxQrcode + ", openId=" + openId + "]";
 	}
 	
 	

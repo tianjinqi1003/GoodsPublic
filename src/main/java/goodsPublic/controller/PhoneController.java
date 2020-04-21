@@ -99,6 +99,12 @@ public class PhoneController {
 		
 		return "/merchant/phoneAdmin/mine";
 	}
+	
+	@RequestMapping(value="/goBindWX")
+	public String goBindWX() {
+		
+		return "/merchant/phoneAdmin/bindWX";
+	}
 
 	@RequestMapping(value="/selectAdminQrcodeList")
 	@ResponseBody

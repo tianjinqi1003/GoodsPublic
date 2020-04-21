@@ -23,7 +23,7 @@ function initQrcodeListDiv(){
 				var qrcodeList=data.list;
 				for(var i=0;i<qrcodeList.length;i++){
 					var qrcode=qrcodeList[i];
-					qrcodeListDiv.append("<div class=\"item_div\">"
+					qrcodeListDiv.append("<div class=\"item_div\" onclick=\"openPreQrcodeBgDiv(1,'"+qrcode.qrcode+"')\">"
 							+"<div class=\"name_div\">"+(qrcode.name==""?"暂无":qrcode.name)+"</div>"
 							+"<div class=\"createTime_div\">"+qrcode.createTime+"</div>"
 							+"<img class=\"qrcode_img\" alt=\"\" src=\"http://www.qrcodesy.com:8080/GoodsPublic/resource/images/qrcode.png\">"
@@ -33,11 +33,22 @@ function initQrcodeListDiv(){
 		}
 	,"json");
 }
+
+function openPreQrcodeBgDiv(flag,src){
+	if(flag==1){
+		$("#preQrcodeBg_div").css("display","block");
+		$("#preQrcodeBg_div #qrcode_img").attr("src",src);
+	}
+	else{
+		$("#preQrcodeBg_div").css("display","none");
+		$("#preQrcodeBg_div #qrcode_img").attr("src","");
+	}
+}
 </script>
 <title>二维码列表</title>
 <style type="text/css">
 .preQrcodeBg_div{
-	width: 100%;height:100%;background: rgba(0,0,0,0.65);position: fixed;
+	width: 100%;height:100%;background: rgba(0,0,0,0.65);position: fixed;display: none;
 }
 .preQrcode_div{
 	width: 300px;height: 300px;margin: 100px auto;padding: 1px;
@@ -85,11 +96,11 @@ function initQrcodeListDiv(){
 </style>
 </head>
 <body>
-<div class="preQrcodeBg_div">
+<div class="preQrcodeBg_div" id="preQrcodeBg_div">
 	<div class="preQrcode_div" >
-		<span class="close_span">X</span>
+		<span class="close_span" onclick="openPreQrcodeBgDiv(0)">X</span>
 		<div class="qrcode_div">
-			<img class="qrcode_img" alt="" src="">
+			<img class="qrcode_img" id="qrcode_img" alt="" src="">
 		</div>
 	</div>
 </div>
