@@ -88,5 +88,6 @@ body{
 	<textarea class="content_ta" rows="" cols="" placeholder="输入文本或网址"></textarea>
 </div>
 <div class="cqBut_div" onclick="createQrcode()">生成二维码</div>
+<%@include file="nav.jsp"%>
 </body>
 </html>

@@ -93,6 +93,12 @@ public class PhoneController {
 		
 		return "/merchant/phoneAdmin/qrcodeList";
 	}
+	
+	@RequestMapping(value="/goAdminMine")
+	public String goAdminMine() {
+		
+		return "/merchant/phoneAdmin/mine";
+	}
 
 	@RequestMapping(value="/selectAdminQrcodeList")
 	@ResponseBody
