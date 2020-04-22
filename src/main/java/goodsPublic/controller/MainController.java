@@ -77,9 +77,6 @@ public class MainController {
 	private SimpleDateFormat timeSDF=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private SimpleDateFormat orderIdSDF=new SimpleDateFormat("yyyyMMddHHmmss");
 	
-	private static final String APP_ID="wxf600e162d89732da";
-	private static final String APP_SECRET="097ee3404400bdf4b75ac8cfb0cc1c26";
-	
 	/**
 	 * 跳转至商品发布页面
 	 * @return
@@ -2313,7 +2310,7 @@ public class MainController {
 				String openId = null;
 				if(openIdObj==null&&StringUtils.isEmpty(code)) {
 					String uuid = request.getParameter("uuid").toString();
-					url="redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid="+APP_ID+"&redirect_uri=http://www.qrcodesy.com/getCode.asp?params="+accountId+","+uuid+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+					url="redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid="+com.goodsPublic.util.StringUtils.APP_ID+"&redirect_uri=http://www.qrcodesy.com/getCode.asp?params=showGoods,"+accountId+","+uuid+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
 				}
 				else if(openIdObj!=null&&StringUtils.isEmpty(code)) {
 					openId = openIdObj.toString();
@@ -2322,7 +2319,7 @@ public class MainController {
 				}
 				else
 				{
-					JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+APP_ID+"&secret="+APP_SECRET+"&code="+code+"&grant_type=authorization_code"));
+					JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+com.goodsPublic.util.StringUtils.APP_ID+"&secret="+com.goodsPublic.util.StringUtils.APP_SECRET+"&code="+code+"&grant_type=authorization_code"));
 					openId = obj.getString("openid");
 					session.setAttribute("openId", openId);
 					System.out.println("openId======"+openId);
@@ -2344,7 +2341,7 @@ public class MainController {
 
 		boolean bool=publicService.checkJCOpenIdExist(openId);
 		if(!bool) {
-			Map<String, String> userMap = queryUserFromApi(openId,APP_ID,APP_SECRET);
+			Map<String, String> userMap = queryUserFromApi(openId,com.goodsPublic.util.StringUtils.APP_ID,com.goodsPublic.util.StringUtils.APP_SECRET);
 			
 			JFDHJPCustomer jc=new JFDHJPCustomer();
 			jc.setOpenId(openId);

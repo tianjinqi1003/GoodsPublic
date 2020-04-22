@@ -32,6 +32,8 @@ import sun.misc.BASE64Decoder;
 public class StringUtils extends org.apache.commons.lang.StringUtils{
 	
 	public static final String REALM_NAME="http://www.qrcodesy.com:8080/";
+	public static final String APP_ID="wxf600e162d89732da";
+	public static final String APP_SECRET="097ee3404400bdf4b75ac8cfb0cc1c26";
 	
 	/**
 	 * 一次性判断多个或单个对象为空。

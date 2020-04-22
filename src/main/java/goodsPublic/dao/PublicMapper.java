@@ -380,6 +380,8 @@ public interface PublicMapper {
 
 	public int getJCCountByOpenId(@Param("openId") String openId);
 
+	public int getAccountCountByOpenId(@Param("openId") String openId);
+
 	public JFDHJPActivity getJAByAccountId(@Param("accountNumber") String accountNumber);
 
 	public JFDHJPCustomer getJCByOpenId(@Param("openId") String openId);
@@ -410,5 +412,7 @@ public interface PublicMapper {
 	public List<Map<String, Object>> selectAdminQrcodeList(@Param("searchTxt") String searchTxt, @Param("accountNumber") String accountNumber);
 
 	public int updateBwxQrcodeByAccountId(@Param("bwxQrcode") String bwxQrcode, @Param("accountNumber") String accountNumber);
+
+	public int updateAccountOpenIdById(@Param("openId") String openId, @Param("id") String id);
 
 }

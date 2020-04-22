@@ -2168,6 +2168,9 @@
 	<select id="getJCCountByOpenId" resultType="java.lang.Integer">
 		select count(*) from jfdhjp_customer where openId=#{openId}
 	</select>
+	<select id="getAccountCountByOpenId" resultType="java.lang.Integer">
+		select count(*) from account_info where openId=#{openId}
+	</select>
 	<select id="getJAByAccountId" resultType="goodsPublic.entity.JFDHJPActivity">
 		select * from jfdhjp_activity where accountNumber=#{accountNumber}
 	</select>
@@ -2267,6 +2270,9 @@
 	</update>
 	<update id="updateBwxQrcodeByAccountId">
 		update account_info set bwxQrcode=#{bwxQrcode} where id=#{accountNumber}
+	</update>
+	<update id="updateAccountOpenIdById">
+		update account_info set openId=#{openId} where id=#{id}
 	</update>
 	<select id="checkGoodsLabelExist" resultType="java.lang.Integer">
 		select count(*) from goods_label_set where `key`=#{key} and module=#{module} and accountNumber=#{accountNumber}

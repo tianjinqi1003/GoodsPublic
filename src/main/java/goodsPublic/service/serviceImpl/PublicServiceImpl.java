@@ -965,4 +965,21 @@ public class PublicServiceImpl implements PublicService {
 		return publicDao.updateBwxQrcodeByAccountId(bwxQrcode, accountNumber);
 	}
 
+	@Override
+	public int updateAccountOpenIdById(String openId, String id) {
+		// TODO Auto-generated method stub
+		return publicDao.updateAccountOpenIdById(openId,id);
+	}
+
+	@Override
+	public boolean checkAccountOpenIdExist(String openId) {
+		// TODO Auto-generated method stub
+		
+		int count=publicDao.getAccountCountByOpenId(openId);
+		if(count>0)
+			return true;
+		else
+			return false;
+	}
+
 }

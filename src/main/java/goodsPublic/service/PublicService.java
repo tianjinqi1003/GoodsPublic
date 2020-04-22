@@ -409,5 +409,9 @@ public interface PublicService {
 
 	public int updateBwxQrcodeByAccountId(String avaPath, String id);
 
+	public int updateAccountOpenIdById(String openId, String accountId);
+
+	public boolean checkAccountOpenIdExist(String openId);
+
 
 }

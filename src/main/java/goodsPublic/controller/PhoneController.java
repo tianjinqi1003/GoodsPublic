@@ -5,15 +5,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.goodsPublic.util.MethodUtil;
+
 import goodsPublic.entity.PrizeCode;
 import goodsPublic.entity.ScoreQrcode;
 import goodsPublic.entity.ScoreTakeRecord;
 import goodsPublic.service.PublicService;
+import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/merchant/phone")
@@ -104,6 +110,36 @@ public class PhoneController {
 	public String goBindWX() {
 		
 		return "/merchant/phoneAdmin/bindWX";
+	}
+
+	@RequestMapping(value="/bindWX")
+	public String bindWX(HttpServletRequest request) {
+
+		String url=null;
+		String code = request.getParameter("code");
+		String accountId = request.getParameter("accountId");
+		if(StringUtils.isEmpty(code)) {
+			url="redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid="+com.goodsPublic.util.StringUtils.APP_ID+"&redirect_uri=http://www.qrcodesy.com/getCode.asp?params=bindWX,"+accountId+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
+		}
+		else {
+			JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+com.goodsPublic.util.StringUtils.APP_ID+"&secret="+com.goodsPublic.util.StringUtils.APP_SECRET+"&code="+code+"&grant_type=authorization_code"));
+			String openId = obj.getString("openid");
+			System.out.println("openId======"+openId);
+			boolean bool=publicService.checkAccountOpenIdExist(openId);
+			//boolean bool=false;
+			if(bool) {
+				request.setAttribute("status", "no");
+				request.setAttribute("message", "你的微信号已绑定其他辰麒账号");
+			}
+			else {
+				publicService.updateAccountOpenIdById(openId,accountId);
+				
+				request.setAttribute("status", "ok");
+				request.setAttribute("message", "你已成功绑定辰麒账号");
+			}
+			url="/merchant/phoneAdmin/bindStatus";
+		}
+		return url;
 	}
 
 	@RequestMapping(value="/selectAdminQrcodeList")
