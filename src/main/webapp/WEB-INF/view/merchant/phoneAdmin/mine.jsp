@@ -17,30 +17,30 @@ body{
 	<div style="font-size: 20px;color: #373737;font-weight:700;">账户信息</div>
 	<div style="margin-top:20px;">
 		<span style="font-size: 14px;color: #373737;font-weight: 700;">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：</span>
-		<span>${requestScope.accountMsg.nickName }</span>
+		<span>${sessionScope.user.nickName }</span>
 	</div>
 	<div style="margin-top:20px;">
 		<span style="font-size: 14px;color: #373737;font-weight: 700;">用户账号：</span>
-		<span>${requestScope.accountMsg.userName }</span>
+		<span>${sessionScope.user.userName }</span>
 	</div>
 </div>
 <div id="gsxx_div" style="height:210px;margin-top:20px;padding-top:20px;padding-left:30px;background-color:#f9f9f9;">
 	<div style="font-size: 20px;color: #373737;font-weight:700;">公司信息</div>
 	<div style="margin-top:20px;">
 		<span style="font-size: 14px;color: #373737;font-weight: 700;">公&nbsp;&nbsp;司&nbsp;&nbsp;&nbsp;名&nbsp;&nbsp;称：</span>
-		<span>${requestScope.accountMsg.companyName }</span>
+		<span>${sessionScope.user.companyName }</span>
 	</div>
 	<div style="margin-top:20px;">
 		<span style="font-size: 14px;color: #373737;font-weight: 700;">公&nbsp;&nbsp;司&nbsp;&nbsp;&nbsp;地&nbsp;&nbsp;址：</span>
-		<span>${requestScope.accountMsg.companyAddress }</span>
+		<span>${sessionScope.user.companyAddress }</span>
 	</div>
 	<div style="margin-top:20px;">
 		<span style="font-size: 14px;color: #373737;font-weight: 700;">联&nbsp;&nbsp;系&nbsp;&nbsp;&nbsp;电&nbsp;&nbsp;话：</span>
-		<span>${requestScope.accountMsg.phone }</span>
+		<span>${sessionScope.user.phone }</span>
 	</div>
 	<div style="margin-top:20px;">
 		<span style="font-size: 14px;color: #373737;font-weight: 700;">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</span>
-		<span>${requestScope.accountMsg.email }</span>
+		<span>${sessionScope.user.email }</span>
 	</div>
 </div>
 <%@include file="nav.jsp"%>

@@ -155,9 +155,40 @@ public class PhoneController {
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
 		HttpSession session = request.getSession();
+		String code = request.getParameter("code");
+		Object openIdObj = session.getAttribute("openId");
+		//Object openIdObj = "oNFEuwzkbP4OTTjBucFgBTWE5Bqg";
+		String openId = null;
+		if(openIdObj==null&&StringUtils.isEmpty(code)) {
+			jsonMap.put("status", "noCode");
+			jsonMap.put("getCodeUrl", "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+com.goodsPublic.util.StringUtils.APP_ID+"&redirect_uri=http://www.qrcodesy.com/getCode.asp?params=checkPhoneAdmin,"+fromUrl+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect");
+		}
+		else {
+			if(openIdObj!=null&&StringUtils.isEmpty(code)) {
+				openId = openIdObj.toString();
+			}
+			else {
+				JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+com.goodsPublic.util.StringUtils.APP_ID+"&secret="+com.goodsPublic.util.StringUtils.APP_SECRET+"&code="+code+"&grant_type=authorization_code"));
+				openId = obj.getString("openid");
+				System.out.println("openId======"+openId);
+				session.setAttribute("openId", openId);
+			}
+			boolean bool=publicService.checkAccountOpenIdExist(openId);
+			if(!bool) {
+				jsonMap.put("status", "unBind");
+				jsonMap.put("message", "该微信号未绑定辰麒账号，请先进后台绑定微信！");
+			}
+			else {
+				AccountMsg user=publicService.getAccountByOpenId(openId);
+				session.setAttribute("user", user);
+				
+				jsonMap.put("status", "ok");
+			}
+		}
+		
+		/*
 		Object userObj = session.getAttribute("user");
 		if(userObj==null) {
-			String code = request.getParameter("code");
 			if(StringUtils.isEmpty(code)) {
 				jsonMap.put("status", "noCode");
 				jsonMap.put("getCodeUrl", "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+com.goodsPublic.util.StringUtils.APP_ID+"&redirect_uri=http://www.qrcodesy.com/getCode.asp?params=checkPhoneAdmin,"+fromUrl+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect");
@@ -182,6 +213,7 @@ public class PhoneController {
 		else {
 			jsonMap.put("status", "ok");
 		}
+		*/
 		return jsonMap;
 	}
 

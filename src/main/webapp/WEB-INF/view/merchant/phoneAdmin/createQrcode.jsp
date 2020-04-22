@@ -52,7 +52,7 @@ body{
 	width: 300px;height:300px;
 }
 .createSuccess_div .but_div{
-	width: 100%;bottom: 30px;position: fixed;
+	width: 100%;bottom: 80px;position: fixed;
 }
 .createSuccess_div .dlqcBut_div{
 	width: 90%;height: 38px;line-height: 38px;margin: 0 auto;text-align: center;color: rgba(255,255,255,1);background-color: #00A3FF;cursor: pointer;border-radius: 3px;
