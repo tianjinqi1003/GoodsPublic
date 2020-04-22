@@ -3450,6 +3450,24 @@ public class MainController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/unBindAccountWX")
+	@ResponseBody
+	public Map<String, Object> unBindAccountWX(String accountId) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=publicService.updateAccountOpenIdById(null,accountId);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "解除绑定成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "解除绑定失败！");
+		}
+		return jsonMap;
+	}
+	
 	@RequestMapping(value="/alipay")
 	public void alipay(HttpServletRequest request, HttpServletResponse response) {
 		

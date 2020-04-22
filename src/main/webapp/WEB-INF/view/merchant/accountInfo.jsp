@@ -289,6 +289,25 @@ function openEditCompanyDialog(flag){
 function openBwxQrcodeBgDiv(flag){
 	$("#bwxQrcodeBg_div").css("display",flag==1?"block":"none");
 }
+
+function openJbcgBgDiv(flag){
+	$("#jbcgBg_div").css("display",flag==1?"block":"none");
+}
+
+function unBindWX(){
+	var accountId='${sessionScope.user.id}';
+	$.post("unBindAccountWX",
+		{accountId:accountId},
+		function(data){
+			if(data.message=="ok"){
+				openJbcgBgDiv(1);
+			}
+			else{
+				alert(data.info);
+			}
+		}
+	,"json");
+}
 </script>
 <style type="text/css">
 .editNickNameBg_div{
@@ -419,6 +438,31 @@ function openBwxQrcodeBgDiv(flag){
 .bwxQrcode_div .close_span{
 	float: right;margin-right: 25px;color: #4caf50;font-size: 12px;cursor: pointer;
 }
+
+.jbcgBg_div{
+	width: 100%;height:100%;background: rgba(0,0,0,0.65);position: fixed;display:none;z-index: 1001;
+}
+.jbcg_div{
+	width:600px;height:340px;margin:100px auto;background: #f8f8f8;border-radius: 6px;padding: 1px;
+}
+.jbcg_div .title_h3{
+	font-size: 20px;color: #373737;font-weight:700;text-align: center;margin: 30px auto 0;
+}
+.jbcg_div .title_div{
+	font-size: 14px;margin-top: 16px;text-align: center;
+}
+.jbcg_div .but_div{
+	width:168px;margin: auto;padding-top: 20px;
+}
+.jbcg_div .but{
+	width: 76px;padding: 5px 10px;font-size: 14px;border: 1px solid #d9d9d9;border-radius: 4px;cursor: pointer;
+}
+.jbcg_div .no_but{
+	color: #323232;background: #FFF;
+}
+.jbcg_div .yes_but{
+	color: #FFF;background: #4CAF52;margin-left: 12px;
+}
 </style>
 </head>
 <body>
@@ -493,6 +537,17 @@ function openBwxQrcodeBgDiv(flag){
 	</div>	
 </div>
 
+<div class="jbcgBg_div" id="jbcgBg_div">
+	<div class="jbcg_div">
+		<h3 class="title_h3">微信账号解绑成功</h3>
+		<div class="title_div">重新登录生效！是否重新登录？</div>
+		<div class="but_div">
+			<button class="but yes_but" onclick="location.href='../exit';">是</button>
+			<button class="but no_but" onclick="openJbcgBgDiv(0)">否</button>
+		</div>
+	</div>
+</div>
+
 <div class="layui-layout layui-layout-admin">
 	<%@include file="side.jsp"%>
 	<div id="zhxx_div" style="height:230px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">
@@ -518,7 +573,7 @@ function openBwxQrcodeBgDiv(flag){
 				<span onclick="openBwxQrcodeBgDiv(1)">未绑定</span>
 			</c:when>
 			<c:otherwise>
-				<span>解除绑定</span>
+				<span onclick="unBindWX()">解除绑定</span>
 			</c:otherwise>
 			</c:choose>
 		</div>
