@@ -2171,6 +2171,9 @@
 	<select id="getAccountCountByOpenId" resultType="java.lang.Integer">
 		select count(*) from account_info where openId=#{openId}
 	</select>
+	<select id="getAccountByOpenId" resultType="goodsPublic.entity.AccountMsg">
+		select * from account_info where openId=#{openId}
+	</select>
 	<select id="getJAByAccountId" resultType="goodsPublic.entity.JFDHJPActivity">
 		select * from jfdhjp_activity where accountNumber=#{accountNumber}
 	</select>

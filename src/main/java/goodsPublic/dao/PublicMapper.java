@@ -382,6 +382,8 @@ public interface PublicMapper {
 
 	public int getAccountCountByOpenId(@Param("openId") String openId);
 
+	public AccountMsg getAccountByOpenId(@Param("openId") String openId);
+
 	public JFDHJPActivity getJAByAccountId(@Param("accountNumber") String accountNumber);
 
 	public JFDHJPCustomer getJCByOpenId(@Param("openId") String openId);

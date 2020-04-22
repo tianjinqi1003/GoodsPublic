@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.goodsPublic.util.MethodUtil;
 
+import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.PrizeCode;
 import goodsPublic.entity.ScoreQrcode;
 import goodsPublic.entity.ScoreTakeRecord;
@@ -89,27 +91,98 @@ public class PhoneController {
 	}
 	
 	@RequestMapping(value="/goAdminCreateQrcode")
-	public String goAdminCreateQrcode() {
+	public String goAdminCreateQrcode(HttpServletRequest request) {
 		
-		return "/merchant/phoneAdmin/createQrcode";
+		Map<String, Object> resultMap = checkAdminAccount("goAdminCreateQrcode",request);
+		String status = resultMap.get("status").toString();
+		if("noCode".equals(status)) {
+			String getCodeUrl = resultMap.get("getCodeUrl").toString();
+			return "redirect:"+getCodeUrl;
+		}
+		else if("unBind".equals(status)) {
+			String message = resultMap.get("message").toString();
+			request.setAttribute("message", message);
+			return "/merchant/phoneAdmin/unBind";
+		}
+		else
+			return "/merchant/phoneAdmin/createQrcode";
 	}
 	
 	@RequestMapping(value="/goAdminQrcodeList")
-	public String goAdminQrcodeList() {
-		
-		return "/merchant/phoneAdmin/qrcodeList";
+	public String goAdminQrcodeList(HttpServletRequest request) {
+
+		Map<String, Object> resultMap = checkAdminAccount("goAdminQrcodeList",request);
+		String status = resultMap.get("status").toString();
+		if("noCode".equals(status)) {
+			String getCodeUrl = resultMap.get("getCodeUrl").toString();
+			return "redirect:"+getCodeUrl;
+		}
+		else if("unBind".equals(status)) {
+			String message = resultMap.get("message").toString();
+			request.setAttribute("message", message);
+			return "/merchant/phoneAdmin/unBind";
+		}
+		else
+			return "/merchant/phoneAdmin/qrcodeList";
 	}
 	
 	@RequestMapping(value="/goAdminMine")
-	public String goAdminMine() {
-		
-		return "/merchant/phoneAdmin/mine";
+	public String goAdminMine(HttpServletRequest request) {
+
+		Map<String, Object> resultMap = checkAdminAccount("goAdminMine",request);
+		String status = resultMap.get("status").toString();
+		if("noCode".equals(status)) {
+			String getCodeUrl = resultMap.get("getCodeUrl").toString();
+			return "redirect:"+getCodeUrl;
+		}
+		else if("unBind".equals(status)) {
+			String message = resultMap.get("message").toString();
+			request.setAttribute("message", message);
+			return "/merchant/phoneAdmin/unBind";
+		}
+		else
+			return "/merchant/phoneAdmin/mine";
 	}
 	
 	@RequestMapping(value="/goBindWX")
 	public String goBindWX() {
 		
 		return "/merchant/phoneAdmin/bindWX";
+	}
+	
+	public Map<String, Object> checkAdminAccount(String fromUrl, HttpServletRequest request) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		HttpSession session = request.getSession();
+		Object userObj = session.getAttribute("user");
+		if(userObj==null) {
+			String code = request.getParameter("code");
+			if(StringUtils.isEmpty(code)) {
+				jsonMap.put("status", "noCode");
+				jsonMap.put("getCodeUrl", "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+com.goodsPublic.util.StringUtils.APP_ID+"&redirect_uri=http://www.qrcodesy.com/getCode.asp?params=checkPhoneAdmin,"+fromUrl+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect");
+			}
+			else {
+				JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+com.goodsPublic.util.StringUtils.APP_ID+"&secret="+com.goodsPublic.util.StringUtils.APP_SECRET+"&code="+code+"&grant_type=authorization_code"));
+				String openId = obj.getString("openid");
+				System.out.println("openId======"+openId);
+				boolean bool=publicService.checkAccountOpenIdExist(openId);
+				if(!bool) {
+					jsonMap.put("status", "unBind");
+					jsonMap.put("message", "该微信号未绑定辰麒账号，请先进后台绑定微信！");
+				}
+				else {
+					AccountMsg user=publicService.getAccountByOpenId(openId);
+					session.setAttribute("user", user);
+					
+					jsonMap.put("status", "ok");
+				}
+			}
+		}
+		else {
+			jsonMap.put("status", "ok");
+		}
+		return jsonMap;
 	}
 
 	@RequestMapping(value="/bindWX")

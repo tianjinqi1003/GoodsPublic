@@ -413,5 +413,7 @@ public interface PublicService {
 
 	public boolean checkAccountOpenIdExist(String openId);
 
+	public AccountMsg getAccountByOpenId(String openId);
+
 
 }

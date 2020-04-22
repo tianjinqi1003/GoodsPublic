@@ -982,4 +982,10 @@ public class PublicServiceImpl implements PublicService {
 			return false;
 	}
 
+	@Override
+	public AccountMsg getAccountByOpenId(String openId) {
+		// TODO Auto-generated method stub
+		return publicDao.getAccountByOpenId(openId);
+	}
+
 }
