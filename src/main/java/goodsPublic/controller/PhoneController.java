@@ -151,8 +151,11 @@ public class PhoneController {
 	}
 	
 	@RequestMapping(value="/goRemoveBind")
-	public String goRemoveBind() {
+	public String goRemoveBind(HttpServletRequest request) {
 		
+		String accountId = request.getParameter("accountId");
+		AccountMsg user = publicService.getAccountById(accountId);
+		request.setAttribute("user", user);
 		return "/merchant/phoneAdmin/removeBind";
 	}
 	

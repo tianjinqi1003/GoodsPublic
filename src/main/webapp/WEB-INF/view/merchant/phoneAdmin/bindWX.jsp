@@ -11,6 +11,6 @@
 <div style="font-size: 16px;text-align: center;">授权微信号</div>
 <div style="font-size: 16px;text-align: center;">绑定你的辰麒账号</div>
 <a style="text-decoration: none;" href="bindWX?accountId=${param.accountId}"><div style="width: 200px;height:30px;line-height:30px;margin:auto;color:#fff;text-align:center;background-color: #00A3FF;border-radius:4px;">立即授权绑定</div></a>
-<div style="width: 200px;height:30px;line-height:30px;margin:auto;text-align:center;">取消</div>
+<div style="width: 200px;height:30px;line-height:30px;margin:auto;text-align:center;" onclick="WeixinJSBridge.call('closeWindow')">取消</div>
 </body>
 </html>

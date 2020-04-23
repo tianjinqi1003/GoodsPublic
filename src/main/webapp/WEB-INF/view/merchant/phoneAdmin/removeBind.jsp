@@ -29,7 +29,7 @@ function openJbcgBgDiv(flag){
 </script>
 <style type="text/css">
 .jbcgBg_div{
-	width: 100%;height:100%;background: rgba(0,0,0,0.65);position: fixed;z-index: 1001;
+	width: 100%;height:100%;background: rgba(0,0,0,0.65);position: fixed;display:none;z-index: 1001;
 }
 .jbcg_div{
 	width:100%;height:180px;background: #f8f8f8;border-radius: 6px;padding: 1px;bottom: 0;position: fixed;
@@ -52,8 +52,8 @@ function openJbcgBgDiv(flag){
 </div>
 
 <div style="font-size: 16px;text-align: center;">解除绑定微信</div>
-<div style="font-size: 14px;text-align: center;">用户账号：110</div>
+<div style="font-size: 14px;text-align: center;">用户账号：${requestScope.user.userName }</div>
 <div style="width: 200px;height:30px;line-height:30px;margin:auto;color:#fff;text-align:center;background-color: #f00;border-radius:4px;" onclick="unBindWX()">解除绑定</div>
-<div style="width: 200px;height:30px;line-height:30px;margin:auto;text-align:center;">取消</div>
+<div style="width: 200px;height:30px;line-height:30px;margin:auto;text-align:center;" onclick="WeixinJSBridge.call('closeWindow')">取消</div>
 </body>
 </html>
