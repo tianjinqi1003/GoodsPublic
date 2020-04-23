@@ -2954,15 +2954,24 @@ public class MainController {
 	@RequestMapping(value="/goAccountInfo")
 	public String goAccountInfo(HttpServletRequest request) {
 		AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
-		
+
+		String accountId = msg.getId();
+		String path = "D:/resource";
 		if(StringUtils.isEmpty(msg.getBwxQrcode())) {//初始化微信绑定码
-			String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/phone/goBindWX?accountId="+msg.getId();
-			String fileName = "bwx"+new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
+			String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/phone/goBindWX?accountId="+accountId;
+			String fileName = "bwx"+accountId + ".jpg";
 			String avaPath="/GoodsPublic/upload/"+fileName;
-			String path = "D:/resource";
 	        Qrcode.createQrCode(url, path, fileName);
 	        msg.setBwxQrcode(avaPath);
-	        publicService.updateBwxQrcodeByAccountId(avaPath,msg.getId());
+	        publicService.updateWXQrcodeByAccountId(AccountMsg.BWX,avaPath,msg.getId());
+		}
+		if(StringUtils.isEmpty(msg.getRbwxQrcode())) {//初始化微信解绑码
+			String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/phone/goRemoveBind?accountId="+accountId;
+			String fileName = "rbwx"+accountId + ".jpg";
+			String avaPath="/GoodsPublic/upload/"+fileName;
+	        Qrcode.createQrCode(url, path, fileName);
+	        msg.setRbwxQrcode(avaPath);
+	        publicService.updateWXQrcodeByAccountId(AccountMsg.RBWX,avaPath,msg.getId());
 		}
 		request.setAttribute("accountMsg", msg);
 		return "/merchant/accountInfo";
@@ -3446,24 +3455,6 @@ public class MainController {
 		else {
 			jsonMap.put("message", "no");
 			jsonMap.put("info", "编辑标签失败！");
-		}
-		return jsonMap;
-	}
-	
-	@RequestMapping(value="/unBindAccountWX")
-	@ResponseBody
-	public Map<String, Object> unBindAccountWX(String accountId) {
-
-		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		
-		int count=publicService.updateAccountOpenIdById(null,accountId);
-		if(count>0) {
-			jsonMap.put("message", "ok");
-			jsonMap.put("info", "解除绑定成功！");
-		}
-		else {
-			jsonMap.put("message", "no");
-			jsonMap.put("info", "解除绑定失败！");
 		}
 		return jsonMap;
 	}

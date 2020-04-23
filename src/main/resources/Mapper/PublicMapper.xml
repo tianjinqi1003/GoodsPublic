@@ -2271,8 +2271,15 @@
 		</if>
 		where `key`=#{key} and accountNumber=#{accountNumber} and module!=#{module}
 	</update>
-	<update id="updateBwxQrcodeByAccountId">
-		update account_info set bwxQrcode=#{bwxQrcode} where id=#{accountNumber}
+	<update id="updateWXQrcodeByAccountId">
+		update account_info 
+		<if test="wxFlag==@goodsPublic.entity.AccountMsg@BWX">
+		   set bwxQrcode=#{wxQrcode}
+		</if>
+		<if test="wxFlag==@goodsPublic.entity.AccountMsg@RBWX">
+		   set rbwxQrcode=#{wxQrcode}
+		</if>
+		 where id=#{accountNumber}
 	</update>
 	<update id="updateAccountOpenIdById">
 		update account_info set openId=#{openId} where id=#{id}

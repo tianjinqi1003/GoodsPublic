@@ -150,6 +150,12 @@ public class PhoneController {
 		return "/merchant/phoneAdmin/bindWX";
 	}
 	
+	@RequestMapping(value="/goRemoveBind")
+	public String goRemoveBind() {
+		
+		return "/merchant/phoneAdmin/removeBind";
+	}
+	
 	public Map<String, Object> checkAdminAccount(String fromUrl, HttpServletRequest request) {
 
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
@@ -245,6 +251,24 @@ public class PhoneController {
 			url="/merchant/phoneAdmin/bindStatus";
 		}
 		return url;
+	}
+	
+	@RequestMapping(value="/unBindAccountWX")
+	@ResponseBody
+	public Map<String, Object> unBindAccountWX(String accountId) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		
+		int count=publicService.updateAccountOpenIdById(null,accountId);
+		if(count>0) {
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "解除绑定成功！");
+		}
+		else {
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "解除绑定失败！");
+		}
+		return jsonMap;
 	}
 
 	@RequestMapping(value="/selectAdminQrcodeList")

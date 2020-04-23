@@ -413,7 +413,7 @@ public interface PublicMapper {
 
 	public List<Map<String, Object>> selectAdminQrcodeList(@Param("searchTxt") String searchTxt, @Param("accountNumber") String accountNumber);
 
-	public int updateBwxQrcodeByAccountId(@Param("bwxQrcode") String bwxQrcode, @Param("accountNumber") String accountNumber);
+	public int updateWXQrcodeByAccountId(@Param("wxFlag") int wxFlag, @Param("wxQrcode") String wxQrcode, @Param("accountNumber") String accountNumber);
 
 	public int updateAccountOpenIdById(@Param("openId") String openId, @Param("id") String id);
 

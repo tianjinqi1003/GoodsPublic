@@ -960,9 +960,9 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public int updateBwxQrcodeByAccountId(String bwxQrcode, String accountNumber) {
+	public int updateWXQrcodeByAccountId(int wxFlag, String wxQrcode, String accountNumber) {
 		// TODO Auto-generated method stub
-		return publicDao.updateBwxQrcodeByAccountId(bwxQrcode, accountNumber);
+		return publicDao.updateWXQrcodeByAccountId(wxFlag, wxQrcode, accountNumber);
 	}
 
 	@Override

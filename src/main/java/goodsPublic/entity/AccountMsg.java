@@ -1,6 +1,9 @@
 package goodsPublic.entity;
 
 public class AccountMsg {
+	
+	public static final int BWX=1;
+	public static final int RBWX=2;
 	private String id;//用户id
 	private String userName;//用户名
 	private String passWord;//密码
@@ -21,6 +24,7 @@ public class AccountMsg {
 	private String accountStatus;
 	private String role;
 	private String bwxQrcode;
+	private String rbwxQrcode;
 	private String openId;
 
 	public AccountMsg(String userName,String passWord) {
@@ -160,6 +164,14 @@ public class AccountMsg {
 		this.bwxQrcode = bwxQrcode;
 	}
 
+	public String getRbwxQrcode() {
+		return rbwxQrcode;
+	}
+
+	public void setRbwxQrcode(String rbwxQrcode) {
+		this.rbwxQrcode = rbwxQrcode;
+	}
+
 	public String getOpenId() {
 		return openId;
 	}
@@ -175,7 +187,7 @@ public class AccountMsg {
 				+ ", createUser=" + createUser + ", avatar_img=" + avatar_img + ", companyName=" + companyName
 				+ ", companyAddress=" + companyAddress + ", postcode=" + postcode + ", quotient=" + quotient + ", fax="
 				+ fax + ", countCode=" + countCode + ", recordNumber=" + recordNumber + ", accountStatus="
-				+ accountStatus + ", role=" + role + ", bwxQrcode=" + bwxQrcode + ", openId=" + openId + "]";
+				+ accountStatus + ", role=" + role + ", bwxQrcode=" + bwxQrcode + ", rbwxQrcode="+ rbwxQrcode +", openId=" + openId + "]";
 	}
 	
 	
