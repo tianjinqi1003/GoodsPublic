@@ -58,6 +58,7 @@ import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.JFDHJPActivity;
 import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.ModuleDMTZL;
+import goodsPublic.entity.ModuleHDQD;
 import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
 import goodsPublic.entity.ScoreQrcode;
@@ -3317,6 +3318,14 @@ public class MainController {
 			url="/merchant/jzsg/addModule";
 			break;
 		case "hdqd":
+			List<ModuleHDQD> hdapList = (List<ModuleHDQD>)publicService.getModuleHDQDByType("hdap");
+			request.setAttribute("hdapList", hdapList);
+
+			List<ModuleHDQD> hdqdImage1List = (List<ModuleHDQD>)publicService.getModuleHDQDByType("image1");
+			request.setAttribute("image1List", hdqdImage1List);
+			
+			//String dmtzlMemo1 = (String)publicService.getModuleDMTZLByType("memo1");
+			//request.setAttribute("memo1", dmtzlMemo1);
 			
 			url="/merchant/hdqd/addModule";
 			break;

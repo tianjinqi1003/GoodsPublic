@@ -18,6 +18,7 @@ import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.JFDHJPActivity;
 import goodsPublic.entity.JFDHJPCustomer;
+import goodsPublic.entity.ModuleHDQD;
 import goodsPublic.entity.PrizeCode;
 import goodsPublic.entity.ScoreQrcode;
 import goodsPublic.entity.ScoreTakeRecord;
@@ -275,6 +276,13 @@ public interface PublicService {
 	 * @return
 	 */
 	public Object getModuleJZSGByType(String type);
+
+	/**
+	 * 根据类型查询活动签到模板
+	 * @param type
+	 * @return
+	 */
+	public Object getModuleHDQDByType(String type);
 
 	/**
 	 * 获得商品展示模板内容

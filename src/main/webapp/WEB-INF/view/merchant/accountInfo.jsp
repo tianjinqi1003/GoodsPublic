@@ -552,10 +552,10 @@ function openRbwxQrcodeBgDiv(flag){
 			<span style="font-size: 14px;color: #373737;font-weight: 700;">绑定微信：</span>
 			<c:choose>
 			<c:when test="${requestScope.accountMsg.openId eq null||requestScope.accountMsg.openId eq '' }">
-				<span onclick="openBwxQrcodeBgDiv(1)">未绑定</span>
+				<span style="cursor: pointer;" onclick="openBwxQrcodeBgDiv(1)">未绑定</span>
 			</c:when>
 			<c:otherwise>
-				<span onclick="openRbwxQrcodeBgDiv(1)">解除绑定</span>
+				<span style="cursor: pointer;" onclick="openRbwxQrcodeBgDiv(1)">解除绑定</span>
 			</c:otherwise>
 			</c:choose>
 		</div>

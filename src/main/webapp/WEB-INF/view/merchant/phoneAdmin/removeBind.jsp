@@ -40,6 +40,19 @@ function openJbcgBgDiv(flag){
 .jbcg_div .finishBut_div{
 	width: 112px;height: 38px;line-height: 38px;margin: 30px auto 0;text-align: center;color: rgba(255,255,255,1);background-color: #00A3FF;border-radius: 3px;
 }
+
+.jcbd_div{
+	font-size: 16px;text-align: center;margin: 100px auto 0;
+}
+.yhzh_div{
+	font-size: 14px;text-align: center;margin: 30px auto 0;
+}
+.jcbdBut_div{
+	width: 200px;height:30px;line-height:30px;margin: 50px auto 0;color:#fff;text-align:center;background-color: #f00;border-radius:4px;
+}
+.cannelBut_div{
+	width: 200px;height:30px;line-height:30px;margin:20px auto 0;text-align:center;border:#999 solid 1px;border-radius:4px;
+}
 </style>
 <title>解绑</title>
 </head>
@@ -51,9 +64,9 @@ function openJbcgBgDiv(flag){
 	</div>
 </div>
 
-<div style="font-size: 16px;text-align: center;">解除绑定微信</div>
-<div style="font-size: 14px;text-align: center;">用户账号：${requestScope.user.userName }</div>
-<div style="width: 200px;height:30px;line-height:30px;margin:auto;color:#fff;text-align:center;background-color: #f00;border-radius:4px;" onclick="unBindWX()">解除绑定</div>
-<div style="width: 200px;height:30px;line-height:30px;margin:auto;text-align:center;" onclick="WeixinJSBridge.call('closeWindow')">取消</div>
+<div class="jcbd_div">解除绑定微信</div>
+<div class="yhzh_div">用户账号：${requestScope.user.userName }</div>
+<div class="jcbdBut_div" onclick="unBindWX()">解除绑定</div>
+<div class="cannelBut_div" onclick="WeixinJSBridge.call('closeWindow')">取消</div>
 </body>
 </html>

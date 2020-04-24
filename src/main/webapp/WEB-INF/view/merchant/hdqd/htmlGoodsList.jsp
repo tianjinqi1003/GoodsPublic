@@ -4,10 +4,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Insert title here</title>
+<title>活动签到模板列表</title>
 <%@include file="../js.jsp"%>
 <script type="text/javascript">
-
+var path='<%=basePath %>';
 $(function(){
 	$("#add_but").linkbutton({
 		iconCls:"icon-add",
@@ -77,6 +77,24 @@ function reSizeCol(){
 	cols=$(".datagrid-btable tr").eq(0).find("td");
 	colCount=cols.length;
 	cols.css("width",width/colCount+"px");
+}
+
+function checkIfPaid(){
+	var bool=false;
+	$.ajaxSetup({async:false});
+	$.post("checkIfPaid",
+		{accountNumber:'${sessionScope.user.id}'},
+		function(data){
+			if(data.status=="ok"){
+				bool=true;
+			}
+			else{
+				alert(data.message);
+				bool=false;
+			}
+		}
+	,"json");
+	return bool;
 }
 
 function setFitWidthInParent(o){

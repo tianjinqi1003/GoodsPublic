@@ -40,6 +40,7 @@ import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.JFDHJPActivity;
 import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.ModuleDMTZL;
+import goodsPublic.entity.ModuleHDQD;
 import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
 import goodsPublic.entity.PrizeCode;
@@ -649,6 +650,21 @@ public class PublicServiceImpl implements PublicService {
 		case "image2":
 			List<ModuleJZSG> spxqList = publicDao.getModuleJZSGByType(type);
 			obj=spxqList;
+			break;
+		}
+		return obj;
+	}
+
+	@Override
+	public Object getModuleHDQDByType(String type) {
+		// TODO Auto-generated method stub
+		
+		Object obj=null;
+		switch (type) {
+		case "hdap":
+		case "image1":
+			List<ModuleHDQD> hdqdList = publicDao.getModuleHDQDByType(type);
+			obj=hdqdList;
 			break;
 		}
 		return obj;

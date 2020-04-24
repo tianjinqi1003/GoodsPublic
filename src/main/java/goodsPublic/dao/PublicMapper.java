@@ -18,6 +18,7 @@ import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.JFDHJPActivity;
 import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.ModuleDMTZL;
+import goodsPublic.entity.ModuleHDQD;
 import goodsPublic.entity.ModuleJZSG;
 import goodsPublic.entity.ModuleSPZS;
 import goodsPublic.entity.PrizeCode;
@@ -276,6 +277,13 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public List<ModuleJZSG> getModuleJZSGByType(String type);
+
+	/**
+	 * 根据类型，查询活动签到模板列表
+	 * @param type
+	 * @return
+	 */
+	public List<ModuleHDQD> getModuleHDQDByType(String type);
 	
 	/**
 	 * 获得商品展示模板内容
