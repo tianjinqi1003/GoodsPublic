@@ -7,15 +7,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <%@include file="../js.jsp"%>
 <title>Insert title here</title>
+<style type="text/css">
+.status_div{
+	font-size: 16px;text-align: center;margin: 100px auto 0;
+}
+.message_div{
+	font-size: 16px;text-align: center;margin: 30px auto 0;
+}
+.finishBut_div{
+	width: 200px;height:30px;line-height:30px;margin: 50px auto 0;color:#fff;text-align:center;background-color: #00A3FF;border-radius:4px;
+}
+</style>
 </head>
 <body>
-<div style="font-size: 16px;text-align: center;">
+<div class="status_div">
 <c:choose>
 <c:when test="${requestScope.status eq 'ok' }">绑定成功</c:when>
 <c:otherwise>绑定失败</c:otherwise>
 </c:choose>
 </div>
-<div style="font-size: 16px;text-align: center;">${requestScope.message }</div>
-<div style="width: 200px;height:30px;line-height:30px;margin:auto;color:#fff;text-align:center;background-color: #00A3FF;border-radius:4px;" onclick="WeixinJSBridge.call('closeWindow')">完成</div>
+<div class="message_div">${requestScope.message }</div>
+<div class="finishBut_div" onclick="WeixinJSBridge.call('closeWindow')">完成</div>
 </body>
 </html>

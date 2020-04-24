@@ -181,6 +181,7 @@ public class PhoneController {
 				openId = obj.getString("openid");
 				System.out.println("openId======"+openId);
 				session.setAttribute("openId", openId);
+				//openId = "oNFEuwzkbP4OTTjBucFgBTWE5Bqg";
 			}
 			boolean bool=publicService.checkAccountOpenIdExist(openId);
 			if(!bool) {
@@ -236,17 +237,19 @@ public class PhoneController {
 			url="redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid="+com.goodsPublic.util.StringUtils.APP_ID+"&redirect_uri=http://www.qrcodesy.com/getCode.asp?params=bindWX,"+accountId+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
 		}
 		else {
+			/*
 			JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+com.goodsPublic.util.StringUtils.APP_ID+"&secret="+com.goodsPublic.util.StringUtils.APP_SECRET+"&code="+code+"&grant_type=authorization_code"));
 			String openId = obj.getString("openid");
 			System.out.println("openId======"+openId);
 			boolean bool=publicService.checkAccountOpenIdExist(openId);
-			//boolean bool=false;
+			*/
+			boolean bool=false;
 			if(bool) {
 				request.setAttribute("status", "no");
 				request.setAttribute("message", "你的微信号已绑定其他辰麒账号");
 			}
 			else {
-				publicService.updateAccountOpenIdById(openId,accountId);
+				//publicService.updateAccountOpenIdById(openId,accountId);
 				
 				request.setAttribute("status", "ok");
 				request.setAttribute("message", "你已成功绑定辰麒账号");
