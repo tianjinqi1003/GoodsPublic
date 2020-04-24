@@ -408,6 +408,9 @@ function openRbwxQrcodeBgDiv(flag){
 .bwxQrcode_div{
 	width:600px;height:340px;margin:100px auto;background: #f8f8f8;border-radius: 6px;padding: 1px;
 }
+.bwxQrcode_div .close_span{
+	float: right;margin-top: 20px;margin-right: 20px;font-size: 25px;cursor: pointer;
+}
 .bwxQrcode_div .title_h3{
 	margin-top: 30px;text-align: center;font-size: 18px;font-weight: 700;color: #4caf50;
 }
@@ -420,7 +423,7 @@ function openRbwxQrcodeBgDiv(flag){
 .bwxQrcode_div .qrcode_img{
 	width: 200px;height:200px;
 }
-.bwxQrcode_div .close_span{
+.bwxQrcode_div .yhzs_span{
 	float: right;margin-right: 25px;color: #4caf50;font-size: 12px;cursor: pointer;
 }
 
@@ -429,6 +432,9 @@ function openRbwxQrcodeBgDiv(flag){
 }
 .rbwxQrcode_div{
 	width:600px;height:340px;margin:100px auto;background: #f8f8f8;border-radius: 6px;padding: 1px;
+}
+.rbwxQrcode_div .close_span{
+	float: right;margin-top: 20px;margin-right: 20px;font-size: 25px;cursor: pointer;
 }
 .rbwxQrcode_div .title_h3{
 	margin-top: 30px;text-align: center;font-size: 18px;font-weight: 700;color: #4caf50;
@@ -442,7 +448,7 @@ function openRbwxQrcodeBgDiv(flag){
 .rbwxQrcode_div .qrcode_img{
 	width: 200px;height:200px;
 }
-.rbwxQrcode_div .close_span{
+.rbwxQrcode_div .yhzs_span{
 	float: right;margin-right: 25px;color: #4caf50;font-size: 12px;cursor: pointer;
 }
 </style>
@@ -510,76 +516,80 @@ function openRbwxQrcodeBgDiv(flag){
 
 <div class="bwxQrcodeBg_div" id="bwxQrcodeBg_div">
 	<div class="bwxQrcode_div">
+		<div>
+			<span class="close_span" onclick="openBwxQrcodeBgDiv(0)">×</span>
+		</div>
 		<h3 class="title_h3">成为二维码管理员</h3>
 		<div class="title_div">扫描下方二维码，绑定微信后，可直接使用微信扫码登录</div>
 		<div class="qrcode_div">
 			<img class="qrcode_img" alt="" src="${requestScope.accountMsg.bwxQrcode }">
 		</div>
-		<span class="close_span" onclick="openBwxQrcodeBgDiv(0)">以后再说</span>
+		<span class="yhzs_span" onclick="openBwxQrcodeBgDiv(0)">以后再说</span>
 	</div>	
 </div>
 
 <div class="rbwxQrcodeBg_div" id="rbwxQrcodeBg_div">
 	<div class="rbwxQrcode_div">
+		<div>
+			<span class="close_span" onclick="openRbwxQrcodeBgDiv(0)">×</span>
+		</div>
 		<h3 class="title_h3">解除微信绑定</h3>
 		<div class="title_div">扫描下方二维码，解除微信绑定。解除后，将无法使用微信扫码登录</div>
 		<div class="qrcode_div">
 			<img class="qrcode_img" alt="" src="${requestScope.accountMsg.rbwxQrcode }">
 		</div>
-		<span class="close_span" onclick="openRbwxQrcodeBgDiv(0)">以后再说</span>
+		<span class="yhzs_span" onclick="openRbwxQrcodeBgDiv(0)">以后再说</span>
 	</div>	
 </div>
 
 <div class="layui-layout layui-layout-admin">
 	<%@include file="side.jsp"%>
-	<div id="zhxx_div" style="height:230px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">
+	<div id="zhxx_div" style="height:260px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">
 		<div style="font-size: 20px;color: #373737;font-weight:700;">账户信息</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：</span>
-			<span>${requestScope.accountMsg.nickName }</span>
-			<span style="font-size: 14px;color: #357bb3;margin-left: 15px;cursor: pointer;" onclick="openEditNickNameDialog(1)">修改昵称</span>
+		<div style="margin-top:40px;">
+			<span style="font-size: 15px;color: #373737;font-weight: 700;">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：</span>
+			<span style="font-size: 15px;">${requestScope.accountMsg.nickName }</span>
+			<span style="font-size: 15px;color: #357bb3;margin-left: 15px;cursor: pointer;" onclick="openEditNickNameDialog(1)">修改昵称</span>
 		</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">用户账号：</span>
-			<span>${requestScope.accountMsg.userName }</span>
+		<div style="margin-top:40px;">
+			<span style="font-size: 15px;color: #373737;font-weight: 700;">用户账号：</span>
+			<span style="font-size: 15px;">${requestScope.accountMsg.userName }</span>
+			<span style="font-size: 15px;color: #373737;font-weight: 700;margin-left: 100px;">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</span>
+			<span style="font-size: 15px;">已设置</span>
+			<span style="font-size: 15px;color: #357bb3;margin-left: 15px;cursor: pointer;" onclick="openEditPwdDialog(1)">修改密码</span>
 		</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</span>
-			<span>已设置</span>
-			<span style="font-size: 14px;color: #357bb3;margin-left: 15px;cursor: pointer;" onclick="openEditPwdDialog(1)">修改密码</span>
-		</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">绑定微信：</span>
+		<div style="margin-top:40px;">
+			<span style="font-size: 15px;color: #373737;font-weight: 700;">绑定微信：</span>
 			<c:choose>
 			<c:when test="${requestScope.accountMsg.openId eq null||requestScope.accountMsg.openId eq '' }">
-				<span style="cursor: pointer;" onclick="openBwxQrcodeBgDiv(1)">未绑定</span>
+				<span style="font-size: 15px;cursor: pointer;" onclick="openBwxQrcodeBgDiv(1)">未绑定</span>
 			</c:when>
 			<c:otherwise>
-				<span style="cursor: pointer;" onclick="openRbwxQrcodeBgDiv(1)">解除绑定</span>
+				<span style="font-size: 15px;cursor: pointer;" onclick="openRbwxQrcodeBgDiv(1)">解除绑定</span>
 			</c:otherwise>
 			</c:choose>
 		</div>
 	</div>
-	<div id="gsxx_div" style="height:350px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">
+	<div id="gsxx_div" style="height:370px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">
 		<div style="font-size: 20px;color: #373737;font-weight:700;">公司信息</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">公&nbsp;&nbsp;司&nbsp;&nbsp;&nbsp;名&nbsp;&nbsp;称：</span>
-			<span>${requestScope.accountMsg.companyName }</span>
+		<div style="margin-top:40px;">
+			<span style="font-size: 15px;color: #373737;font-weight: 700;">公&nbsp;&nbsp;司&nbsp;&nbsp;&nbsp;名&nbsp;&nbsp;称：</span>
+			<span style="font-size: 15px;">${requestScope.accountMsg.companyName }</span>
 		</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">公&nbsp;&nbsp;司&nbsp;&nbsp;&nbsp;地&nbsp;&nbsp;址：</span>
-			<span>${requestScope.accountMsg.companyAddress }</span>
+		<div style="margin-top:40px;">
+			<span style="font-size: 15px;color: #373737;font-weight: 700;">公&nbsp;&nbsp;司&nbsp;&nbsp;&nbsp;地&nbsp;&nbsp;址：</span>
+			<span style="font-size: 15px;">${requestScope.accountMsg.companyAddress }</span>
 		</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">联&nbsp;&nbsp;系&nbsp;&nbsp;&nbsp;电&nbsp;&nbsp;话：</span>
-			<span>${requestScope.accountMsg.phone }</span>
+		<div style="margin-top:40px;">
+			<span style="font-size: 15px;color: #373737;font-weight: 700;">联&nbsp;&nbsp;系&nbsp;&nbsp;&nbsp;电&nbsp;&nbsp;话：</span>
+			<span style="font-size: 15px;">${requestScope.accountMsg.phone }</span>
 		</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</span>
-			<span>${requestScope.accountMsg.email }</span>
+		<div style="margin-top:40px;">
+			<span style="font-size: 15px;color: #373737;font-weight: 700;">邮&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;箱：</span>
+			<span style="font-size: 15px;">${requestScope.accountMsg.email }</span>
 		</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #357bb3;cursor: pointer;" onclick="openEditCompanyDialog(1)">修改公司信息</span>
+		<div style="margin-top:40px;">
+			<span style="font-size: 15px;color: #357bb3;cursor: pointer;" onclick="openEditCompanyDialog(1)">修改公司信息</span>
 		</div>
 	</div>
 	<%@include file="foot.jsp"%>

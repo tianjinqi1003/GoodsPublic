@@ -56,7 +56,7 @@ $(function(){
             {field:"createTime",title:"创建时间",width:200},
             {field:"uuid",title:"操作",width:150,formatter:function(value,row){
             	var str="<a onclick=\"showEditDiv('"+row.score+"','"+value+"')\">编辑</a>";
-            	str+="&nbsp;&nbsp;<a onclick=\"showPreviewPDFDiv('"+value+"','"+row.shopLogo+"','"+row.score+"','"+row.endTime+"','"+row.qrcode+"')\">导出jpg</a>";
+            	str+="&nbsp;&nbsp;<a onclick=\"showPreviewPDFDiv('"+value+"','"+row.shopLogo+"','"+row.score+"','"+row.endTime+"','"+row.qrcode+"')\">导出</a>";
             	return str;
             }}
 	    ]],

@@ -277,6 +277,14 @@ function openEditPwdDialog(flag){
 	$("#editPwdBg_div").css("display",flag==1?"block":"none");
 }
 
+function openBwxQrcodeBgDiv(flag){
+	$("#bwxQrcodeBg_div").css("display",flag==1?"block":"none");
+}
+
+function openRbwxQrcodeBgDiv(flag){
+	$("#rbwxQrcodeBg_div").css("display",flag==1?"block":"none");
+}
+
 function setFitWidthInParent(o){
 	var width=$(o).css("width");
 	return width.substring(0,width.length-2)-310;
@@ -351,6 +359,56 @@ function setFitWidthInParent(o){
 .editPwd_div .warn_div{
 	width: 100%;margin-top: 20px;border-radius: 0 0 4px 4px;font-size: 12px;text-align: center;color: #9b9b9b;
 }
+
+.bwxQrcodeBg_div{
+	width: 100%;height:100%;background: rgba(0,0,0,0.65);position: fixed;display:none;z-index: 1001;
+}
+.bwxQrcode_div{
+	width:600px;height:340px;margin:100px auto;background: #f8f8f8;border-radius: 6px;padding: 1px;
+}
+.bwxQrcode_div .close_span{
+	float: right;margin-top: 20px;margin-right: 20px;font-size: 25px;cursor: pointer;
+}
+.bwxQrcode_div .title_h3{
+	margin-top: 30px;text-align: center;font-size: 18px;font-weight: 700;color: #4caf50;
+}
+.bwxQrcode_div .title_div{
+	font-size: 14px;margin-top: 16px;text-align: center;
+}
+.bwxQrcode_div .qrcode_div{
+	width: 100%;height: 200px;text-align: center;margin-top: 20px;
+}
+.bwxQrcode_div .qrcode_img{
+	width: 200px;height:200px;
+}
+.bwxQrcode_div .yhzs_span{
+	float: right;margin-right: 25px;color: #4caf50;font-size: 12px;cursor: pointer;
+}
+
+.rbwxQrcodeBg_div{
+	width: 100%;height:100%;background: rgba(0,0,0,0.65);position: fixed;display:none;z-index: 1001;
+}
+.rbwxQrcode_div{
+	width:600px;height:340px;margin:100px auto;background: #f8f8f8;border-radius: 6px;padding: 1px;
+}
+.rbwxQrcode_div .close_span{
+	float: right;margin-top: 20px;margin-right: 20px;font-size: 25px;cursor: pointer;
+}
+.rbwxQrcode_div .title_h3{
+	margin-top: 30px;text-align: center;font-size: 18px;font-weight: 700;color: #4caf50;
+}
+.rbwxQrcode_div .title_div{
+	font-size: 14px;margin-top: 16px;text-align: center;
+}
+.rbwxQrcode_div .qrcode_div{
+	width: 100%;height: 200px;text-align: center;margin-top: 20px;
+}
+.rbwxQrcode_div .qrcode_img{
+	width: 200px;height:200px;
+}
+.rbwxQrcode_div .yhzs_span{
+	float: right;margin-right: 25px;color: #4caf50;font-size: 12px;cursor: pointer;
+}
 </style>
 </head>
 <body>
@@ -388,63 +446,97 @@ function setFitWidthInParent(o){
 	</div>
 </div>
 
+<div class="bwxQrcodeBg_div" id="bwxQrcodeBg_div">
+	<div class="bwxQrcode_div">
+		<div>
+			<span class="close_span" onclick="openBwxQrcodeBgDiv(0)">×</span>
+		</div>
+		<h3 class="title_h3">成为二维码管理员</h3>
+		<div class="title_div">扫描下方二维码，绑定微信后，可直接使用微信扫码登录</div>
+		<div class="qrcode_div">
+			<img class="qrcode_img" alt="" src="${requestScope.accountMsg.bwxQrcode }">
+		</div>
+		<span class="yhzs_span" onclick="openBwxQrcodeBgDiv(0)">以后再说</span>
+	</div>	
+</div>
+
+<div class="rbwxQrcodeBg_div" id="rbwxQrcodeBg_div">
+	<div class="rbwxQrcode_div">
+		<div>
+			<span class="close_span" onclick="openRbwxQrcodeBgDiv(0)">×</span>
+		</div>
+		<h3 class="title_h3">解除微信绑定</h3>
+		<div class="title_div">扫描下方二维码，解除微信绑定。解除后，将无法使用微信扫码登录</div>
+		<div class="qrcode_div">
+			<img class="qrcode_img" alt="" src="${requestScope.accountMsg.rbwxQrcode }">
+		</div>
+		<span class="yhzs_span" onclick="openRbwxQrcodeBgDiv(0)">以后再说</span>
+	</div>	
+</div>
+
 <div class="layui-layout layui-layout-admin">
 	<%@include file="../../side.jsp"%>
-	<div id="zhxx_div" style="height:230px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">
+	<div id="zhxx_div" style="height:210px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">
 		<div style="font-size: 20px;color: #373737;font-weight:700;">账户信息</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：</span>
+		<div style="margin-top:23px;">
+			<span style="font-size: 15px;color: #373737;font-weight: 700;">昵&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：</span>
 			<span>${requestScope.accountMsg.nickName }</span>
-			<span style="font-size: 14px;color: #357bb3;margin-left: 15px;cursor: pointer;" onclick="openEditNickNameDialog(1)">修改昵称</span>
+			<span style="font-size: 15px;color: #357bb3;margin-left: 15px;cursor: pointer;" onclick="openEditNickNameDialog(1)">修改昵称</span>
 		</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">用户账号：</span>
+		<div style="margin-top:23px;">
+			<span style="font-size: 15px;color: #373737;font-weight: 700;">用户账号：</span>
 			<span>${requestScope.accountMsg.userName }</span>
-		</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</span>
+			<span style="font-size: 15px;color: #373737;font-weight: 700;margin-left: 100px;">密&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：</span>
 			<span>已设置</span>
-			<span style="font-size: 14px;color: #357bb3;margin-left: 15px;cursor: pointer;" onclick="openEditPwdDialog(1)">修改密码</span>
+			<span style="font-size: 15px;color: #357bb3;margin-left: 15px;cursor: pointer;" onclick="openEditPwdDialog(1)">修改密码</span>
 		</div>
-		<div style="margin-top:20px;">
-			<a>绑定微信</a>
+		<div style="margin-top:23px;">
+			<span style="font-size: 15px;color: #373737;font-weight: 700;">绑定微信：</span>
+			<c:choose>
+			<c:when test="${requestScope.accountMsg.openId eq null||requestScope.accountMsg.openId eq '' }">
+				<span style="font-size: 15px;cursor: pointer;" onclick="openBwxQrcodeBgDiv(1)">未绑定</span>
+			</c:when>
+			<c:otherwise>
+				<span style="font-size: 15px;cursor: pointer;" onclick="openRbwxQrcodeBgDiv(1)">解除绑定</span>
+			</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
-	<div id="hdsz_div" style="height:350px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">
+	<div id="hdsz_div" style="height:415px;margin-top:20px;margin-left: 238px;padding-top:40px;padding-left:40px;background-color:#FAFDFE;">
 		<input type="hidden" id="id" value="${requestScope.jfdhjpActivity.id eq null?'':requestScope.jfdhjpActivity.id }"/>
 		<input type="hidden" id="accountNumber" value="${requestScope.accountMsg.id }"/>
 		<div style="font-size: 20px;color: #373737;font-weight:700;">活动设置</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">活动开关&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span>
-			<span>
+		<div style="margin-top:23px;">
+			<span style="font-size: 15px;color: #373737;font-weight: 700;">活动开关&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;：</span>
+			<span style="margin-left: 24px;">
 				开&nbsp;<input type="radio" id="open_rad" name="enable" checked="checked"/>&nbsp;&nbsp;&nbsp;
 				关&nbsp;<input type="radio" id="close_rad" name="enable"/>
 			</span>
 		</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">奖品码期限&nbsp;&nbsp;&nbsp;：</span>
-			<input id="jpmLimit_inp" name="jpmLimit" type="text" value="${requestScope.jfdhjpActivity.jpmLimit }" size="18" maxlength="20" onfocus="focusJpmLimit()" onblur="checkJpmLimit()"/>
+		<div style="margin-top:23px;">
+			<span style="font-size: 15px;color: #373737;font-weight: 700;">奖品码期限&nbsp;&nbsp;&nbsp;：</span>
+			<input id="jpmLimit_inp" name="jpmLimit" type="text" value="${requestScope.jfdhjpActivity.jpmLimit }" size="18" maxlength="20" style="margin-left: 24px;" onfocus="focusJpmLimit()" onblur="checkJpmLimit()"/>
 			（生成后几天）<span style="color: #f00;">*</span>
 		</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">兑换奖品积分：</span>
-			<input id="dhjpScore_inp" name="dhjpScore" type="text" value="${requestScope.jfdhjpActivity.dhjpScore }" maxlength="20" onfocus="focusDhjpScore()" onblur="checkDhjpScore()"/>
+		<div style="margin-top:23px;">
+			<span style="font-size: 15px;color: #373737;font-weight: 700;">兑换奖品积分：</span>
+			<input id="dhjpScore_inp" name="dhjpScore" type="text" value="${requestScope.jfdhjpActivity.dhjpScore }" maxlength="20" style="margin-left: 21px;" onfocus="focusDhjpScore()" onblur="checkDhjpScore()"/>
 			<span style="color: #f00;">*</span>
 		</div>
-		<div style="margin-top:20px;">
-			<span style="font-size: 14px;color: #373737;font-weight: 700;">兑奖截止日期：</span>
-			<span><input id="endTime_dtb" name="endTime" type="text" maxlength="20"/>
+		<div style="margin-top:23px;">
+			<span style="font-size: 15px;color: #373737;font-weight: 700;">兑奖截止日期：</span>
+			<span style="margin-left: 21px;"><input id="endTime_dtb" name="endTime" type="text" maxlength="20"/>
 					<span style="color: #f00;">*</span>
 					</span>
 		</div>
-		<div style="margin-top:20px;">
-			<div style="width:100px;height:100px;font-size: 14px;color: #373737;font-weight: 700;">兑换奖品规则：</div>
-			<div style="margin-left:102px;margin-top: -100px;">
+		<div style="margin-top:23px;">
+			<div style="width:110px;height:100px;font-size: 15px;color: #373737;font-weight: 700;">兑换奖品规则：</div>
+			<div style="margin-left:130px;margin-top: -100px;">
 				<textarea id="jpmdhReg_ta" name="jpmdhReg" rows="6" cols="50" onfocus="focusJpmdhReg()" onblur="checkJpmdhReg()">${requestScope.jfdhjpActivity.jpmdhReg }</textarea>
 				<span style="color: #f00;">*</span>
 			</div>
 		</div>
-		<div style="margin-top:20px;">
+		<div style="margin-top:23px;">
 			<a id="save_but">保存设置</a>
 		</div>
 	</div>
