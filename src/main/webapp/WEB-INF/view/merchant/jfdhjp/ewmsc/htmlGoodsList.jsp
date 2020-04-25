@@ -293,16 +293,20 @@ function initOutputPDFDiv(){
 	});
 
 	$("#previewPDF_div #close_but").css("left","30%");
+	$("#previewPDF_div #close_but").css("margin-top","10px");
 	$("#previewPDF_div #close_but").css("position","absolute");
 	
 	$("#previewPDF_div #pre_but").css("left","30%");
+	$("#previewPDF_div #pre_but").css("margin-top","10px");
 	$("#previewPDF_div #pre_but").css("position","absolute");
 	$("#previewPDF_div #pre_but").css("display","none");
 	
 	$("#previewPDF_div #next_but").css("left","45%");
+	$("#previewPDF_div #next_but").css("margin-top","10px");
 	$("#previewPDF_div #next_but").css("position","absolute");
 	
 	$("#previewPDF_div #outputPdf_but").css("left","45%");
+	$("#previewPDF_div #outputPdf_but").css("margin-top","10px");
 	$("#previewPDF_div #outputPdf_but").css("position","absolute");
 	$("#previewPDF_div #outputPdf_but").css("display","none");
 }
@@ -446,7 +450,7 @@ function downLoadJpg(){
        var imgUri = canvas.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream"); // 获取生成的图片的url 　
        var saveLink = document.createElement('a');
        saveLink.href = imgUri;
-       saveLink.download = 'downLoad.jpg';
+       saveLink.download = '商品二维码.jpg';
        saveLink.click();
     });
 	$("#outputPdf_div").empty();
@@ -484,13 +488,13 @@ function goStep(stepIndex){
 	    $("#previewPDF_div #tab2").css("display","none");
  	    
  		$(".panel.window").css("width","983px");
- 		$(".panel.window").css("height","714px");
+ 		$(".panel.window").css("height","540px");
  		$(".panel.window").css("margin-left",initWindowMarginLeft());
  		$(".window-shadow").css("width","1000px");
- 		$(".window-shadow").css("height","726px");
+ 		$(".window-shadow").css("height","562px");
  		$(".window-shadow").css("margin-left",initWindowMarginLeft());
- 		$(".dialog-content").css("height","490px");
- 		$(".panel-body").css("height","630px");
+ 		$(".dialog-content").css("height","442px");
+ 		$(".panel-body").css("height","442px");
  		
  		$("#previewPDF_div #qrcode_div").css("height","400px");
  		$("#previewPDF_div #luta_div").css("border","#999 dotted 1px");
@@ -512,7 +516,7 @@ function goStep(stepIndex){
  		$(".window-shadow").css("width","500px");
  		$(".window-shadow").css("height","162px");
  		$(".window-shadow").css("margin-left",initWindowMarginLeft());
- 		$(".dialog-content").css("height","60px");
+ 		$(".dialog-content").css("height","45px");
 
  		$("#previewPDF_div #close_but").css("left","30%");
  	    $("#previewPDF_div #next_but").css("display","none");
@@ -520,7 +524,7 @@ function goStep(stepIndex){
  		$("#previewPDF_div #outputPdf_but").css("left","55%");
 		break;
 	case 3:
- 		$("#previewPDF_div").css("height","100px");
+ 		$("#previewPDF_div").css("height","115px");
 		$("#previewPDF_div #tab1").css("display","none");
  	    $("#previewPDF_div #tab2").css("display","none");
  	    $("#previewPDF_div #outputSuccess_div").css("display","block");
@@ -528,10 +532,10 @@ function goStep(stepIndex){
  		$("#outputSuccess_div #second_span").text("10");
  	    
  		$(".panel.window").css("width","480px");
- 		$(".panel.window").css("height","150px");
+ 		$(".panel.window").css("height","165px");
  		$(".panel.window").css("margin-left",initWindowMarginLeft());
  		$(".window-shadow").css("width","500px");
- 		$(".window-shadow").css("height","162px");
+ 		$(".window-shadow").css("height","177px");
  		$(".window-shadow").css("margin-left",initWindowMarginLeft());
  		$(".dialog-content").css("height","60px");
 
@@ -736,7 +740,7 @@ function initWindowMarginLeft(){
 					 -->
 				</td>
 				<td>
-					<div id="qrcode_div" style="width: 500px;height:400px;margin: 20px 0 20px;border: #999 solid 1px;">
+					<div id="qrcode_div" style="width: 500px;height:400px;margin: 20px 0 20px;border: #999 dotted 1px;">
 						<div id="luta_div" style="width: 200px;height:120px;margin-top:60px;margin-left:20px;word-wrap:break-word;border: #999 dotted 1px;position: absolute;">
 							<span id="luta_span" style="font-size: 20px;position: absolute;"></span>
 						</div>
