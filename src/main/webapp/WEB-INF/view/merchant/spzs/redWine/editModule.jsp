@@ -19,20 +19,21 @@
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
 <script type="text/javascript">
+var editor1,editor2,editor3;
 KindEditor.ready(function(K) {
-	var editor1 = K.create('textarea[name="memo1"]', {
+	editor1 = K.create('textarea[name="memo1"]', {
 		cssPath : '<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css',
 		uploadJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/upload_json.jsp',
 		fileManagerJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/file_manager_json.jsp',
 		allowFileManager : true
 	});
-	var editor2 = K.create('textarea[name="memo2"]', {
+	editor2 = K.create('textarea[name="memo2"]', {
 		cssPath : '<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css',
 		uploadJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/upload_json.jsp',
 		fileManagerJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/file_manager_json.jsp',
 		allowFileManager : true
 	});
-	var editor3 = K.create('textarea[name="memo3"]', {
+	editor3 = K.create('textarea[name="memo3"]', {
 		cssPath : '<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css',
 		uploadJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/upload_json.jsp',
 		fileManagerJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/file_manager_json.jsp',
@@ -47,7 +48,41 @@ $(function(){
 	var middleDivHeight=$("#middle_div").css("height").substring(0,$("#middle_div").css("height").length-2);
 	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
 	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight)+40)+"px");
+	
+	initDefaultHtmlVal();
 });
+
+var dpn;
+var disArr1=[];
+var disArr2=[];
+var disArr3=[];
+var dm1Html,dm2Html,dm3Html;
+var dSpxqIfShowArr=[];
+var dSpxqValueArr=[];
+function initDefaultHtmlVal(){
+	dpn=$("#productName").val();
+	$("#uploadFile1_div input[id^='image']").each(function(i){
+		disArr1[i]=$(this).val();
+	});
+	$("#spxq_tab input[id^='spxqIfShow']").each(function(i){
+		dSpxqIfShowArr[i]=$(this).val();
+		var spxqValue=$("#spxq_tab input[name^='spxqValue']").eq(i).val();
+		//console.log("spxqValue==="+spxqValue);
+		dSpxqValueArr[i]=spxqValue;
+	});
+	$("#uploadFile2_div input[id^='image']").each(function(i){
+		disArr2[i]=$(this).val();
+	});
+	$("#uploadFile3_div input[id^='image']").each(function(i){
+		disArr3[i]=$(this).val();
+	});
+	setTimeout(function(){
+		dm1Html=editor1.html();
+		dm2Html=editor2.html();
+		dm3Html=editor3.html();
+		//console.log(dm1Html);
+	},"100");
+}
 
 function resetDivPosition(){
 	var middleDivHeight=$("#middle_div").css("height").substring(0,$("#middle_div").css("height").length-2);
@@ -60,6 +95,87 @@ function showOptionDiv(o){
 
 function hideOptionDiv(o){
 	$(o).parent().find("#but_div").css("display","none");
+}
+
+function previewHtmlGoodsSPZS(){
+	if(!compareHtmlVal()){
+		saveEditHtmlGoodsSPZS();
+		$.post("getPreviewHtmlGoods",
+			{},
+			function(data){
+			
+			}
+		,"json");
+	}
+}
+
+function compareHtmlVal(){
+	var flag=true;
+	var cpn=$("#productName").val();
+	if(dpn!=cpn){
+		flag=false;
+		return flag;
+	}
+	
+	var cisArr1=[];
+	$("#uploadFile1_div input[id^='image']").each(function(i){
+		var imgSrc=$(this).val();
+		if(disArr1[i]!=imgSrc){
+			flag=false;
+			return flag;
+		}
+	});
+	
+	var cm1Html=editor1.html();
+	if(dm1Html!=cm1Html){
+		flag=false;
+		return flag;
+	}
+
+	$("#spxq_tab input[id^='spxqIfShow']").each(function(i){
+		var spxqIfShow=$(this).val();
+		var spxqValue=$("#spxq_tab input[name^='spxqValue']").eq(i).val();
+		if(spxqIfShow!=dSpxqIfShowArr[i]||spxqValue!=dSpxqValueArr[i]){
+			flag=false;
+			return flag;
+		}
+	});
+
+	var cm2Html=editor2.html();
+	if(dm2Html!=cm2Html){
+		flag=false;
+		return flag;
+	}
+
+	var cisArr2=[];
+	$("#uploadFile2_div input[id^='image']").each(function(i){
+		var imgSrc=$(this).val();
+		if(disArr2[i]!=imgSrc){
+			flag=false;
+			return flag;
+		}
+	});
+
+	var cisArr3=[];
+	$("#uploadFile3_div input[id^='image']").each(function(i){
+		var imgSrc=$(this).val();
+		if(disArr3[i]!=imgSrc){
+			flag=false;
+			return flag;
+		}
+	});
+	
+	var cm3Html=editor3.html();
+	/*
+	console.log("dm3Html==="+dm3Html);
+	console.log("cm3Html==="+cm3Html);
+	console.log("==="+(dm3Html==cm3Html));
+	*/
+	if(dm3Html!=cm3Html){
+		flag=false;
+		return flag;
+	}
+	return flag;
 }
 
 function saveEditHtmlGoodsSPZS(){
@@ -931,7 +1047,7 @@ function goBack(){
 </div>
 <div class="right_div" id="right_div">
 	<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsSPZS.qrCode }">
-	<div class="preview_div">预览</div>
+	<div class="preview_div" onclick="previewHtmlGoodsSPZS();">预览</div>
 	<div class="save_div" onclick="saveEditHtmlGoodsSPZS();">保存</div>
 	<div class="finishEdit_div" onclick="finishEditHtmlGoodsSPZS();">完成编辑</div>
 	<div class="saveStatus_div" id="saveStatus_div"></div>
