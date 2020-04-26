@@ -49,6 +49,13 @@ $(function(){
 	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
 	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight)+40)+"px");
 	
+	//var pBgDivWidth=$("#preview_div").css("width").substring(0,$("#previewBg_div").css("width").length-2);
+	var preDivWidth=$("#preview_div").css("width").substring(0,$("#preview_div").css("width").length-2);
+	var preDivHeight=$("#preview_div").css("height").substring(0,$("#preview_div").css("height").length-2);
+	$("#smck_div").css("margin-left",(parseInt(bodyWidth)+parseInt(preDivWidth))/2+20+"px");
+	$("#smck_div").css("margin-top","-"+(parseInt(preDivHeight))+"px");
+	$("#previewBg_div").css("height",(parseInt(preDivHeight)+80)+"px");
+	
 	initDefaultHtmlVal();
 });
 
@@ -98,15 +105,21 @@ function hideOptionDiv(o){
 }
 
 function previewHtmlGoodsSPZS(){
+	/*
 	if(!compareHtmlVal()){
 		saveEditHtmlGoodsSPZS();
+		
+		var moduleType='${requestScope.htmlGoodsSPZS.moduleType }';
+		var goodsNumber='${requestScope.htmlGoodsSPZS.goodsNumber }';
+		var accountId='${sessionScope.user.id }';
 		$.post("getPreviewHtmlGoods",
-			{},
+			{trade:"spzs",moduleType:moduleType,goodsNumber:goodsNumber,accountId:accountId},
 			function(data){
-			
+				console.log(data);
 			}
 		,"json");
 	}
+	*/
 }
 
 function compareHtmlVal(){
@@ -867,6 +880,129 @@ function goBack(){
 			<div class="confirm_div" onclick="closeImage3ModBgDiv();">确&nbsp;认</div>
 			<div class="cancel_div" onclick="closeImage3ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
 		</div>
+	</div>
+</div>
+
+<div class="previewBg_div" id="previewBg_div">
+	<div class="preview_div" id="preview_div">
+		<div class="productName_div">
+			${requestScope.htmlGoodsSPZS.productName }
+		</div>
+		<div class="image1_div"  id="image1_div">
+			<img class="image1_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_1 }">
+			<img class="image1_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_2 }">
+			<img class="image1_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_3 }">
+			<img class="image1_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_4 }">
+			<img class="image1_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_5 }">
+		</div>
+		<div class="memo1_div">
+			${requestScope.htmlGoodsSPZS.memo1 }
+		</div>
+		
+		<div class="spxq_div">
+			<table class="spxq_tab" id="spxq_tab">
+				<tr height="60">
+					<td class="head_td" colspan="2">商品详情</td>
+				</tr>
+				
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName1 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue1 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName2 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue2 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName3 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue3 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName4 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue4 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName5 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue5 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName6 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue6 }
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="memo2_div">
+			${requestScope.htmlGoodsSPZS.memo2 }
+		</div>
+		<div class="image2_div" id="image2_div">
+			<c:if test="${requestScope.htmlGoodsSPZS.image2_1 ne null }">
+				<img class="image2_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsSPZS.image2_2 ne null }">
+				<img class="image2_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_2 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsSPZS.image2_3 ne null }">
+				<img class="image2_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_3 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsSPZS.image2_4 ne null }">
+				<img class="image2_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_4 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsSPZS.image2_5 ne null }">
+				<img class="image2_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }">
+			</c:if>
+		</div>
+		<div class="image3_div" id="image3_div">
+			<c:if test="${requestScope.htmlGoodsSPZS.image3_1 ne null }">
+				<img class="image3_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsSPZS.image3_2 ne null }">
+				<img class="image3_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsSPZS.image3_3 ne null }">
+				<img class="image3_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsSPZS.image3_4 ne null }">
+				<img class="image3_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }">
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsSPZS.image3_5 ne null }">
+				<img class="image3_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }">
+			</c:if>
+		</div>
+		<div class="memo3_div">
+			${requestScope.htmlGoodsSPZS.memo3 }
+		</div>
+		<div style="width: 100%;height:40px;"></div>
+	</div>
+	<div class="smck_div" id="smck_div">
+		<div class="tiShi_div">手机端实际效果可能存在差异，请扫码查看</div>
+		<div class="qrCode_div">
+			<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsSPZS.qrCode }">
+		</div>
+		<div class="jxbjBut_div">继续编辑</div>
 	</div>
 </div>
 

@@ -2262,6 +2262,21 @@ public class MainController {
 		}
 	}
 	
+
+	@RequestMapping(value="/getPreviewHtmlGoods")
+	@ResponseBody
+	public Map<String, Object> getPreviewHtmlGoods(String trade,String moduleType,String goodsNumber,String accountId) {
+
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		switch (trade) {
+		case "spzs":
+			HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(moduleType,goodsNumber,accountId);
+			jsonMap.put("previewSPZS", htmlGoodsSPZS);
+			break;
+		}
+		return jsonMap;
+	}
+	
 	/**
 	 * 这个是显示各行业的模板内容，用于前端手机上显示
 	 * @param goodsNumber
