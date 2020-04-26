@@ -42,19 +42,13 @@ KindEditor.ready(function(K) {
 	prettyPrint();
 });
 
+var bodyWidth;
 $(function(){
-	var bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
+	bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
 	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
 	var middleDivHeight=$("#middle_div").css("height").substring(0,$("#middle_div").css("height").length-2);
 	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
 	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight)+40)+"px");
-	
-	//var pBgDivWidth=$("#preview_div").css("width").substring(0,$("#previewBg_div").css("width").length-2);
-	var preDivWidth=$("#preview_div").css("width").substring(0,$("#preview_div").css("width").length-2);
-	var preDivHeight=$("#preview_div").css("height").substring(0,$("#preview_div").css("height").length-2);
-	$("#smck_div").css("margin-left",(parseInt(bodyWidth)+parseInt(preDivWidth))/2+20+"px");
-	$("#smck_div").css("margin-top","-"+(parseInt(preDivHeight))+"px");
-	$("#previewBg_div").css("height",(parseInt(preDivHeight)+80)+"px");
 	
 	initDefaultHtmlVal();
 });
@@ -105,7 +99,8 @@ function hideOptionDiv(o){
 }
 
 function previewHtmlGoodsSPZS(){
-	/*
+	openPreviewBgDiv(1);
+	
 	if(!compareHtmlVal()){
 		saveEditHtmlGoodsSPZS();
 		
@@ -116,10 +111,31 @@ function previewHtmlGoodsSPZS(){
 			{trade:"spzs",moduleType:moduleType,goodsNumber:goodsNumber,accountId:accountId},
 			function(data){
 				console.log(data);
+				var previewSPZS=data.previewSPZS;
+				$("#preview_div #productName_div").text(previewSPZS.productName);
+				
+				var image1_1=previewSPZS.image1_1;
+				if(image1_1==null){
+					$("#preview_div #image1_1_img").css("display","none");
+					$("#preview_div #image1_1_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_1_img").css("display","block");
+					$("#preview_div #image1_1_img").attr("src",image1_1);
+				}
+				
+				var image1_2=previewSPZS.image1_2;
+				if(image1_2==null){
+					$("#preview_div #image1_2_img").css("display","none");
+					$("#preview_div #image1_2_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_2_img").css("display","block");
+					$("#preview_div #image1_2_img").attr("src",image1_2);
+				}
 			}
 		,"json");
 	}
-	*/
 }
 
 function compareHtmlVal(){
@@ -618,6 +634,16 @@ function changeSPXQTrIfShow(index,o){
 	}
 }
 
+function openPreviewBgDiv(flag){
+	$("#previewBg_div").css("display",flag==1?"block":"none");
+	
+	var preDivWidth=$("#preview_div").css("width").substring(0,$("#preview_div").css("width").length-2);
+	var preDivHeight=$("#preview_div").css("height").substring(0,$("#preview_div").css("height").length-2);
+	$("#smck_div").css("margin-left",(parseInt(bodyWidth)+parseInt(preDivWidth))/2+20+"px");
+	$("#smck_div").css("margin-top","-"+(parseInt(preDivHeight))+"px");
+	$("#previewBg_div").css("height",(parseInt(preDivHeight)+80)+"px");
+}
+
 function goBack(){
 	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=spzs&moduleType="+'${param.moduleType}';
 }
@@ -885,15 +911,13 @@ function goBack(){
 
 <div class="previewBg_div" id="previewBg_div">
 	<div class="preview_div" id="preview_div">
-		<div class="productName_div">
-			${requestScope.htmlGoodsSPZS.productName }
-		</div>
+		<div class="productName_div" id="productName_div"></div>
 		<div class="image1_div"  id="image1_div">
-			<img class="image1_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_1 }">
-			<img class="image1_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_2 }">
-			<img class="image1_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_3 }">
-			<img class="image1_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_4 }">
-			<img class="image1_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_5 }">
+			<img class="image1_1_img" id="image1_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_1 }">
+			<img class="image1_2_img" id="image1_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_2 }">
+			<img class="image1_3_img" id="image1_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_3 }">
+			<img class="image1_4_img" id="image1_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_4 }">
+			<img class="image1_5_img" id="image1_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_5 }">
 		</div>
 		<div class="memo1_div">
 			${requestScope.htmlGoodsSPZS.memo1 }
@@ -1002,7 +1026,7 @@ function goBack(){
 		<div class="qrCode_div">
 			<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsSPZS.qrCode }">
 		</div>
-		<div class="jxbjBut_div">继续编辑</div>
+		<div class="jxbjBut_div" onclick="openPreviewBgDiv(0)">继续编辑</div>
 	</div>
 </div>
 

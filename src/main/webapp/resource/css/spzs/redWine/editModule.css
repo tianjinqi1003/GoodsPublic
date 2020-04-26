@@ -261,7 +261,7 @@ body{
 }
 
 .previewBg_div{
-	width: 100%;height:auto;background: rgba(0,0,0,0.65);position: absolute;z-index: 1001;
+	width: 100%;height:auto;background: rgba(0,0,0,0.65);position: absolute;display:none;z-index: 1001;
 }
 .preview_div{
 	width: 325px;height: auto;margin:40px auto 0; background-color: #fff;border-radius:20px;
@@ -532,6 +532,7 @@ body{
 	margin-top:15px;
 	border:1px solid #eee;
 	background-color:#fff;
+	cursor:pointer;
 	border-radius:3px;
 }
 .right_div .save_div{
