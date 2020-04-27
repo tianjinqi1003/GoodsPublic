@@ -14,10 +14,12 @@ body{
 	text-align: center;
 	font-size: 20px;
 	font-weight: bold;
+	margin: auto;
 }
 .image1_div{
 	width: 95%;
 	text-align: center;
+	margin: auto;
 }
 .image1_1_img,.image1_2_img,.image1_3_img,.image1_4_img,.image1_5_img,
 .image2_1_img,.image2_2_img,.image2_3_img,.image2_4_img,.image2_5_img,
@@ -28,7 +30,7 @@ body{
 }
 .memo1_div,.memo2_div,.memo3_div{
 	width:95%;
-	margin-top: 20px;
+	margin: 20px auto 0;
 }
 .spxq_div{
 	margin-top: 20px;
@@ -53,5 +55,5 @@ body{
 	padding-left: 20px;
 }
 .image2_div,.image3_div{
-	width: 95%;text-align: center;margin-top: 20px;
+	width: 95%;text-align: center;margin: 20px auto 0;
 }
