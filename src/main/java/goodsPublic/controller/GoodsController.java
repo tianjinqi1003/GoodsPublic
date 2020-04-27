@@ -70,7 +70,7 @@ public class GoodsController {
 	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST,produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String login(Model model,String userName,String password,
+	public String login(Model model,String userName,String password,String from,
 			String rememberMe,String loginVCode,HttpServletRequest request) {
 		System.out.println("===登录接口===");
 		//返回值的json
@@ -105,7 +105,15 @@ public class GoodsController {
 			
 			plan.setStatus(0);
 			plan.setMsg("验证通过");
-			plan.setUrl("/merchant/main/goAccountInfo");
+			switch (from) {
+			case "jfdhjp":
+				plan.setUrl("/merchant/main/goAddModule?trade=jfdhjp");
+				break;
+
+			default:
+				plan.setUrl("/merchant/main/goAccountInfo");
+				break;
+			}
 			return JsonUtil.getJsonFromObject(plan);
 			/*
 		}

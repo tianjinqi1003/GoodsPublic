@@ -307,9 +307,10 @@ function login(){
 		if(checkPassword()){
 			var userName=$("#userName").val();
 			var password=MD5($("#password").val()).toUpperCase();
+			var from='${param.from}';
 			//var loginVCode=$("#loginVCode").val();
 			$.post(baseUrl + "/merchant/login",
-				{userName:userName,password:password},
+				{userName:userName,password:password,from:from},
 				function(json){
 		        	console.log(json)
 		        	if(json.status==0){

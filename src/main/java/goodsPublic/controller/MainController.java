@@ -557,7 +557,8 @@ public class MainController {
 		String moduleType = htmlGoodsSPZS.getModuleType();
         String accountNumberCq = null;
 		String from=htmlGoodsSPZS.getFrom();
-		
+
+    	System.out.println("from==="+from);
         if("cq".equals(from)) {
         	accountNumberCq=getCQAccountNumber(request);
         	htmlGoodsSPZS.setAccountNumber(accountNumberCq);
