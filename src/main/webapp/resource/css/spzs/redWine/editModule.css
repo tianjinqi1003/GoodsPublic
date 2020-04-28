@@ -267,22 +267,23 @@ body{
 	width: 325px;height: auto;margin:40px auto 0; background-color: #fff;border-radius:20px;
 }
 .preview_div .productName_div{
-	width: 95%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;
+	width: 95%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;margin: auto;
 }
 .preview_div .image1_div{
 	width: 95%;
 	text-align: center;
+	margin: auto;
 }
 .preview_div .image1_1_img,.preview_div .image1_2_img,.preview_div .image1_3_img,.preview_div .image1_4_img,.preview_div .image1_5_img,
 .preview_div .image2_1_img,.preview_div .image2_2_img,.preview_div .image2_3_img,.preview_div .image2_4_img,.preview_div .image2_5_img,
 .preview_div .image3_1_img,.preview_div .image3_2_img,.preview_div .image3_3_img,.preview_div .image3_4_img,.preview_div .image3_5_img{
 	width: 95%;
 	height: 300px;
-	margin-top: 25px;
+	margin: 25px auto 0;
 }
 .preview_div .memo1_div,.preview_div .memo2_div,.preview_div .memo3_div{
 	width:95%;
-	margin-top: 20px;
+	margin: 20px auto 0;
 }
 .preview_div .spxq_div{
 	margin-top: 20px;
@@ -307,7 +308,7 @@ body{
 	padding-left: 20px;
 }
 .preview_div .image2_div,.preview_div .image3_div{
-	width: 95%;text-align: center;margin-top: 20px;
+	width: 95%;text-align: center;margin: 20px auto 0;
 }
 .previewBg_div .smck_div{
 	width: 145px;

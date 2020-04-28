@@ -99,9 +99,8 @@ function hideOptionDiv(o){
 }
 
 function previewHtmlGoodsSPZS(){
-	openPreviewBgDiv(1);
-	
 	if(!compareHtmlVal()){
+		initDefaultHtmlVal();
 		saveEditHtmlGoodsSPZS();
 		
 		var moduleType='${requestScope.htmlGoodsSPZS.moduleType }';
@@ -133,6 +132,137 @@ function previewHtmlGoodsSPZS(){
 					$("#preview_div #image1_2_img").css("display","block");
 					$("#preview_div #image1_2_img").attr("src",image1_2);
 				}
+				
+				var image1_3=previewSPZS.image1_3;
+				if(image1_3==null){
+					$("#preview_div #image1_3_img").css("display","none");
+					$("#preview_div #image1_3_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_3_img").css("display","block");
+					$("#preview_div #image1_3_img").attr("src",image1_3);
+				}
+				
+				var image1_4=previewSPZS.image1_4;
+				if(image1_4==null){
+					$("#preview_div #image1_4_img").css("display","none");
+					$("#preview_div #image1_4_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_4_img").css("display","block");
+					$("#preview_div #image1_4_img").attr("src",image1_4);
+				}
+				
+				var image1_5=previewSPZS.image1_5;
+				if(image1_5==null){
+					$("#preview_div #image1_5_img").css("display","none");
+					$("#preview_div #image1_5_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_5_img").css("display","block");
+					$("#preview_div #image1_5_img").attr("src",image1_5);
+				}
+				
+				var image2_1=previewSPZS.image2_1;
+				if(image2_1==null){
+					$("#preview_div #image2_1_img").css("display","none");
+					$("#preview_div #image2_1_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image2_1_img").css("display","block");
+					$("#preview_div #image2_1_img").attr("src",image2_1);
+				}
+				
+				var image2_2=previewSPZS.image2_2;
+				if(image2_2==null){
+					$("#preview_div #image2_2_img").css("display","none");
+					$("#preview_div #image2_2_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image2_2_img").css("display","block");
+					$("#preview_div #image2_2_img").attr("src",image2_2);
+				}
+				
+				var image2_3=previewSPZS.image2_3;
+				if(image2_3==null){
+					$("#preview_div #image2_3_img").css("display","none");
+					$("#preview_div #image2_3_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image2_3_img").css("display","block");
+					$("#preview_div #image2_3_img").attr("src",image2_3);
+				}
+				
+				var image2_4=previewSPZS.image2_4;
+				if(image2_4==null){
+					$("#preview_div #image2_4_img").css("display","none");
+					$("#preview_div #image2_4_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image2_4_img").css("display","block");
+					$("#preview_div #image2_4_img").attr("src",image2_4);
+				}
+				
+				var image2_5=previewSPZS.image2_5;
+				if(image2_5==null){
+					$("#preview_div #image2_5_img").css("display","none");
+					$("#preview_div #image2_5_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image2_5_img").css("display","block");
+					$("#preview_div #image2_5_img").attr("src",image2_5);
+				}
+				
+				var image3_1=previewSPZS.image3_1;
+				if(image3_1==null){
+					$("#preview_div #image3_1_img").css("display","none");
+					$("#preview_div #image3_1_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image3_1_img").css("display","block");
+					$("#preview_div #image3_1_img").attr("src",image3_1);
+				}
+				
+				var image3_2=previewSPZS.image3_2;
+				if(image3_2==null){
+					$("#preview_div #image3_2_img").css("display","none");
+					$("#preview_div #image3_2_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image3_2_img").css("display","block");
+					$("#preview_div #image3_2_img").attr("src",image3_2);
+				}
+				
+				var image3_3=previewSPZS.image3_3;
+				if(image3_3==null){
+					$("#preview_div #image3_3_img").css("display","none");
+					$("#preview_div #image3_3_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image3_3_img").css("display","block");
+					$("#preview_div #image3_3_img").attr("src",image3_3);
+				}
+				
+				var image3_4=previewSPZS.image3_4;
+				if(image3_4==null){
+					$("#preview_div #image3_4_img").css("display","none");
+					$("#preview_div #image3_4_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image3_4_img").css("display","block");
+					$("#preview_div #image3_4_img").attr("src",image3_4);
+				}
+				
+				var image3_5=previewSPZS.image3_5;
+				if(image3_5==null){
+					$("#preview_div #image3_5_img").css("display","none");
+					$("#preview_div #image3_5_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image3_5_img").css("display","block");
+					$("#preview_div #image3_5_img").attr("src",image3_5);
+				}
+				openPreviewBgDiv(1);
 			}
 		,"json");
 	}
@@ -983,38 +1113,18 @@ function goBack(){
 			${requestScope.htmlGoodsSPZS.memo2 }
 		</div>
 		<div class="image2_div" id="image2_div">
-			<c:if test="${requestScope.htmlGoodsSPZS.image2_1 ne null }">
-				<img class="image2_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }">
-			</c:if>
-			<c:if test="${requestScope.htmlGoodsSPZS.image2_2 ne null }">
-				<img class="image2_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_2 }">
-			</c:if>
-			<c:if test="${requestScope.htmlGoodsSPZS.image2_3 ne null }">
-				<img class="image2_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_3 }">
-			</c:if>
-			<c:if test="${requestScope.htmlGoodsSPZS.image2_4 ne null }">
-				<img class="image2_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_4 }">
-			</c:if>
-			<c:if test="${requestScope.htmlGoodsSPZS.image2_5 ne null }">
-				<img class="image2_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }">
-			</c:if>
+			<img class="image2_1_img" id="image2_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }">
+			<img class="image2_2_img" id="image2_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_2 }">
+			<img class="image2_3_img" id="image2_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_3 }">
+			<img class="image2_4_img" id="image2_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_4 }">
+			<img class="image2_5_img" id="image2_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }">
 		</div>
 		<div class="image3_div" id="image3_div">
-			<c:if test="${requestScope.htmlGoodsSPZS.image3_1 ne null }">
-				<img class="image3_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }">
-			</c:if>
-			<c:if test="${requestScope.htmlGoodsSPZS.image3_2 ne null }">
-				<img class="image3_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }">
-			</c:if>
-			<c:if test="${requestScope.htmlGoodsSPZS.image3_3 ne null }">
-				<img class="image3_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }">
-			</c:if>
-			<c:if test="${requestScope.htmlGoodsSPZS.image3_4 ne null }">
-				<img class="image3_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }">
-			</c:if>
-			<c:if test="${requestScope.htmlGoodsSPZS.image3_5 ne null }">
-				<img class="image3_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }">
-			</c:if>
+			<img class="image3_1_img" id="image3_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }">
+			<img class="image3_2_img" id="image3_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }">
+			<img class="image3_3_img" id="image3_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }">
+			<img class="image3_4_img" id="image3_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }">
+			<img class="image3_5_img" id="image3_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }">
 		</div>
 		<div class="memo3_div">
 			${requestScope.htmlGoodsSPZS.memo3 }
