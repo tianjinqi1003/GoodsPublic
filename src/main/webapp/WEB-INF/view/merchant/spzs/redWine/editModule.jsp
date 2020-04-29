@@ -274,7 +274,6 @@ function previewHtmlGoodsSPZS(){
 		$("#preview_div #productName_div").text(dpn);
 		
 		var image1_1_src=disArr1[0];
-		alert(image1_1_src);
 		if(image1_1_src==undefined||image1_1_src==""){
 			$("#preview_div #image1_div #image1_1_img").css("display","none");
 			$("#preview_div #image1_div #image1_1_img").attr("src","");
