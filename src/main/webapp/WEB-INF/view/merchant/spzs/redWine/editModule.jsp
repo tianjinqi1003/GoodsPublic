@@ -62,9 +62,12 @@ var dSpxqIfShowArr=[];
 var dSpxqValueArr=[];
 function initDefaultHtmlVal(){
 	dpn=$("#productName").val();
-	$("#uploadFile1_div input[id^='image']").each(function(i){
-		disArr1[i]=$(this).val();
-	});
+	for(var i=0;i<5;i++){
+		disArr1[i]="";
+		disArr1[i]=$("#image1_div #list_div img[id^='img']").eq(i).attr("src");
+		console.log("reset"+i+"==="+disArr1[i]);
+	}
+	console.log(disArr1);
 	$("#spxq_tab input[id^='spxqIfShow']").each(function(i){
 		dSpxqIfShowArr[i]=$(this).val();
 		var spxqValue=$("#spxq_tab input[name^='spxqValue']").eq(i).val();
@@ -99,8 +102,8 @@ function hideOptionDiv(o){
 }
 
 function previewHtmlGoodsSPZS(){
-	if(!compareHtmlVal()){
-		initDefaultHtmlVal();
+	if(!compareHtmlVal()){//这是已经编辑过内容的情况
+		console.log(1123);
 		saveEditHtmlGoodsSPZS();
 		
 		var moduleType='${requestScope.htmlGoodsSPZS.moduleType }';
@@ -262,10 +265,48 @@ function previewHtmlGoodsSPZS(){
 					$("#preview_div #image3_5_img").css("display","block");
 					$("#preview_div #image3_5_img").attr("src",image3_5);
 				}
-				openPreviewBgDiv(1);
+				
+				initDefaultHtmlVal();
 			}
 		,"json");
 	}
+	else{
+		$("#preview_div #productName_div").text(dpn);
+		
+		var image1_1_src=disArr1[0];
+		alert(image1_1_src);
+		if(image1_1_src==undefined||image1_1_src==""){
+			$("#preview_div #image1_div #image1_1_img").css("display","none");
+			$("#preview_div #image1_div #image1_1_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_1_img").css("display","block");
+			$("#preview_div #image1_div #image1_1_img").attr("src",image1_1_src);
+		}
+		
+		var image1_2_src=disArr1[1];
+		if(image1_2_src==undefined||image1_2_src==""){
+			$("#preview_div #image1_div #image1_2_img").css("display","none");
+			$("#preview_div #image1_div #image1_2_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_2_img").css("display","block");
+			$("#preview_div #image1_div #image1_2_img").attr("src",image1_2_src);
+		}
+		
+		var image1_3_src=disArr1[2];
+		if(image1_3_src==undefined||image1_3_src==""){
+			$("#preview_div #image1_div #image1_3_img").css("display","none");
+			$("#preview_div #image1_div #image1_3_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_3_img").css("display","block");
+			$("#preview_div #image1_div #image1_3_img").attr("src",image1_3_src);
+		}
+		$("#preview_div #image1_div #image1_4_img").attr("src",$("#middle_div #image1_div #list_div #image1_4_img").attr("src"));
+		$("#preview_div #image1_div #image1_5_img").attr("src",$("#middle_div #image1_div #list_div #image1_5_img").attr("src"));
+	}
+	openPreviewBgDiv(1);
 }
 
 function compareHtmlVal(){
@@ -277,13 +318,13 @@ function compareHtmlVal(){
 	}
 	
 	var cisArr1=[];
-	$("#uploadFile1_div input[id^='image']").each(function(i){
-		var imgSrc=$(this).val();
+	for(var i=0;i<5;i++){
+		var imgSrc=$("#uploadFile1_div input[id^='image']").eq(i).val();
 		if(disArr1[i]!=imgSrc){
 			flag=false;
 			return flag;
 		}
-	});
+	}
 	
 	var cm1Html=editor1.html();
 	if(dm1Html!=cm1Html){
@@ -1043,11 +1084,11 @@ function goBack(){
 	<div class="preview_div" id="preview_div">
 		<div class="productName_div" id="productName_div"></div>
 		<div class="image1_div"  id="image1_div">
-			<img class="image1_1_img" id="image1_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_1 }">
-			<img class="image1_2_img" id="image1_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_2 }">
-			<img class="image1_3_img" id="image1_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_3 }">
-			<img class="image1_4_img" id="image1_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_4 }">
-			<img class="image1_5_img" id="image1_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image1_5 }">
+			<img class="image1_1_img" id="image1_1_img" alt="" src="">
+			<img class="image1_2_img" id="image1_2_img" alt="" src="">
+			<img class="image1_3_img" id="image1_3_img" alt="" src="">
+			<img class="image1_4_img" id="image1_4_img" alt="" src="">
+			<img class="image1_5_img" id="image1_5_img" alt="" src="">
 		</div>
 		<div class="memo1_div">
 			${requestScope.htmlGoodsSPZS.memo1 }
