@@ -9,6 +9,46 @@
 <title>商品</title>
 <%@include file="../../js.jsp"%>
 <link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/homeTextiles/showHtmlGoods.css" />
+<script type="text/javascript">
+$(function(){
+	//以下代码是按照原图比例缩放网页上的图片
+	$("#image1_div img").each(function(){
+		var width=$(this).css("width");
+		width=width.substring(0,width.length-2);
+		var src=$(this).attr("src");
+		if(src.indexOf("spzs/8878b699bd21eeaeeaec254b5d4e6f79")!=-1){
+			$(this).css("height",width+"px")
+		}
+	});
+	
+	$("#image2_div img").each(function(){
+		var width=$(this).css("width");
+		width=width.substring(0,width.length-2);
+		var src=$(this).attr("src");
+		if(src.indexOf("spzs/e3f0c2aa261ac2b652fbdca9eaba04f3")!=-1){
+			$(this).css("height",width*0.43+"px")
+		}
+	});
+	
+	$("#image3_div img").each(function(){
+		var width=$(this).css("width");
+		width=width.substring(0,width.length-2);
+		var src=$(this).attr("src");
+		if(src.indexOf("spzs/bc40c19357bcf636e9ad6e71581686c4")!=-1){
+			$(this).css("height",width*1.66+"px")
+		}
+	});
+	
+	$("#image4_div img").each(function(){
+		var width=$(this).css("width");
+		width=width.substring(0,width.length-2);
+		var src=$(this).attr("src");
+		if(src.indexOf("spzs/f078f4614735e89cd7608110115c6ad6")!=-1){
+			$(this).css("height",width*1.84+"px")
+		}
+	});
+});
+</script>
 </head>
 <body>
 <div class="main_div" id="main_div">

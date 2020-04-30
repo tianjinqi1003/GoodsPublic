@@ -9,6 +9,31 @@
 <title>商品</title>
 <%@include file="../../js.jsp"%>
 <link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/productExplain/showHtmlGoods.css" />
+<script type="text/javascript">
+$(function(){
+	//以下代码是按照原图比例缩放网页上的图片
+	$("#image1_div img").each(function(){
+		var width=$(this).css("width");
+		width=width.substring(0,width.length-2);
+		var src=$(this).attr("src");
+		if(src.indexOf("spzs/81a5d69b81bda7b772771e31b57e4fae")!=-1){
+			$(this).css("height",width*1.23+"px");
+		}
+	});
+	
+	$("#image2_div img").each(function(){
+		var width=$(this).css("width");
+		width=width.substring(0,width.length-2);
+		var src=$(this).attr("src");
+		if(src.indexOf("spzs/59a9157e809d046c12699bc4f431266c")!=-1){
+			$(this).css("height",width*1.016+"px");
+		}
+		else if(src.indexOf("spzs/594c03f1f5e93d78248d9d268f8070b6")!=-1){
+			$(this).css("height",width+"px");
+		}
+	});
+});
+</script>
 </head>
 <body>
 <div class="main_div" id="main_div">

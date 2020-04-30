@@ -9,6 +9,28 @@
 <title>商品</title>
 <%@include file="../../js.jsp"%>
 <link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/whiteWine/showHtmlGoods.css" />
+<script type="text/javascript">
+$(function(){
+	//以下代码是按照原图比例缩放网页上的图片
+	$("#image1_div img").each(function(){
+		var width=$(this).css("width");
+		width=width.substring(0,width.length-2);
+		var src=$(this).attr("src");
+		if(src.indexOf("spzs/258bb5b4e0d98344406a5f71e32ad767")!=-1){
+			$(this).css("height",width*1.27+"px");
+		}
+	});
+	
+	$("#image2_div img").each(function(){
+		var width=$(this).css("width");
+		width=width.substring(0,width.length-2);
+		var src=$(this).attr("src");
+		if(src.indexOf("spzs/25787fd7408641e333869e762e514fdd")!=-1){
+			$(this).css("height",width*1.464+"px");
+		}
+	});
+});
+</script>
 </head>
 <body>
 <div class="main_div" id="main_div">
