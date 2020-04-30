@@ -9,6 +9,28 @@
 <title>建筑施工</title>
 <%@include file="../js.jsp"%>
 <link rel="stylesheet" href="<%=basePath %>/resource/css/jzsg/showHtmlGoods.css" />
+<script type="text/javascript">
+$(function(){
+	//以下代码是按照原图比例缩放网页上的图片
+	$("#image1_div img").each(function(){
+		var width=$(this).css("width");
+		width=width.substring(0,width.length-2);
+		var src=$(this).attr("src");
+		if(src.indexOf("jzsg/bf0b334d871019cf3b2359e22b405d1c")!=-1){
+			$(this).css("height",width+"px");
+		}
+	});
+
+	$("#image2_div img").each(function(){
+		var width=$(this).css("width");
+		width=width.substring(0,width.length-2);
+		var src=$(this).attr("src");
+		if(src.indexOf("jzsg/43a339cd90f1a6b00c0c256d49d6a119")!=-1){
+			$(this).css("height",width*0.644+"px");
+		}
+	});
+});
+</script>
 </head>
 <body>
 <div class="main_div" id="main_div">
