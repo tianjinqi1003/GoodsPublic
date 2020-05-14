@@ -109,7 +109,9 @@ public class GoodsController {
 			case "jfdhjp":
 				plan.setUrl("/merchant/main/goAddModule?trade=jfdhjp");
 				break;
-
+			case "cqCodePh":
+				plan.setUrl("/merchant/phone/goAdminCreateQrcode");
+				break;
 			default:
 				plan.setUrl("/merchant/main/goAccountInfo");
 				break;

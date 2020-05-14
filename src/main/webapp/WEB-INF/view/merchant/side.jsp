@@ -215,7 +215,7 @@ function checkIfPaidInSide(){
 							说明书
 						</a>
 					</li>
-					<li class="layui-nav-item">
+					<li class="layui-nav-item" style="display: none;">
 						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=spzs&accountId=${sessionScope.user.id }">
 							展示样品
 						</a>
@@ -251,22 +251,22 @@ function checkIfPaidInSide(){
 							建筑施工
 						</a>
 					</li>
-					<li class="layui-nav-item">
+					<li class="layui-nav-item" style="display: none;">
 						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=hdqd&accountId=${sessionScope.user.id }">
 							活动签到
 						</a>
 					</li>
-					<li class="layui-nav-item">
+					<li class="layui-nav-item" style="display: none;">
 						<a class="second-level-a">
 							多媒体图书
 						</a>
 					</li>
-					<li class="layui-nav-item">
+					<li class="layui-nav-item" style="display: none;">
 						<a class="second-level-a">
 							名片
 						</a>
 					</li>
-					<li class="layui-nav-item">
+					<li class="layui-nav-item" style="display: none;">
 						<a class="second-level-a">
 							设备管理
 						</a>
