@@ -55,6 +55,7 @@ import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
+import goodsPublic.entity.HtmlGoodsText;
 import goodsPublic.entity.JFDHJPActivity;
 import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.ModuleDMTZL;
@@ -2289,6 +2290,7 @@ public class MainController {
 	public String goShowHtmlGoods(String trade,String moduleType,String goodsNumber,String accountId,HttpServletRequest request) {
 		
 		String url=null;
+		String uuid=null;
 		Map<String, Object> jsonMap = checkIfPaid(accountId,request);
 		String status = jsonMap.get("status").toString();
 		if("ok".equals(status)) {
@@ -2317,6 +2319,14 @@ public class MainController {
 				request.setAttribute("htmlGoodsJZSG", htmlGoodsJZSG);
 				url = "/merchant/jzsg/showHtmlGoods";
 				break;
+			case "text":
+				uuid = request.getParameter("uuid");
+				String textType = request.getParameter("textType");
+				HtmlGoodsText htmlGoodsText=publicService.getHtmlGoodsText(textType,uuid,accountId);
+				request.setAttribute("htmlGoodsText", htmlGoodsText);
+				if((HtmlGoodsText.TEXT+"").equals(moduleType))
+					url = "/merchant/text/showTextHtml";
+				break;
 			case "jfdhjp":
 				//http://localhost:8088/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jfdhjp&uuid=134654686&accountId=34
 				String code = request.getParameter("code");
@@ -2326,7 +2336,7 @@ public class MainController {
 				//Object openIdObj = "oNFEuwzkbP4OTTjBucFgBTWE5Bqg";
 				String openId = null;
 				if(openIdObj==null&&StringUtils.isEmpty(code)) {
-					String uuid = request.getParameter("uuid").toString();
+					uuid = request.getParameter("uuid").toString();
 					url="redirect:https://open.weixin.qq.com/connect/oauth2/authorize?appid="+com.goodsPublic.util.StringUtils.APP_ID+"&redirect_uri=http://www.qrcodesy.com/getCode.asp?params=showGoods,"+accountId+","+uuid+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect";
 				}
 				else if(openIdObj!=null&&StringUtils.isEmpty(code)) {

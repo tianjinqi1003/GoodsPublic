@@ -19,6 +19,7 @@ import com.goodsPublic.util.FileUploadUtils;
 import com.goodsPublic.util.qrcode.Qrcode;
 
 import goodsPublic.entity.HtmlGoodsGRMP;
+import goodsPublic.entity.HtmlGoodsText;
 import goodsPublic.service.PublicService;
 import net.sf.json.JSONObject;
 
@@ -31,13 +32,27 @@ public class ChenQiController {
 
 	@RequestMapping(value="/createQrcodeByCQSCQ")
 	@ResponseBody
-	public void createQrcodeByCQSCQ(String url, HttpServletResponse response) {
+	public void createQrcodeByCQSCQ(HtmlGoodsText htmlGoodsText, HttpServletResponse response) {
 
 		String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
-		String avaPath="/GoodsPublic/upload/"+fileName;
-		String path = "D:/resource";
+		String avaPath="/GoodsPublic/upload/ChenQiQrcode/"+fileName;
+		String path = "D:/resource/ChenQiQrcode/";
+		String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+		String url=null;
+		switch (htmlGoodsText.getTextType()) {
+		case HtmlGoodsText.TEXT:
+			url="http://www.qrcodesy.com:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=text&textType="+htmlGoodsText.getTextType()+"&uuid="+uuid+"&accountId="+htmlGoodsText.getAccountNumber();
+			break;
+		case HtmlGoodsText.URL:
+			url=htmlGoodsText.getText();
+			break;
+		}
         Qrcode.createQrCode(url, path, fileName);
         
+		htmlGoodsText.setUuid(uuid);
+		htmlGoodsText.setQrcode(avaPath);
+		int a=publicService.addHtmlGoodsText(htmlGoodsText);
+		
         String jsonpCallback="jsonpCallback(\"{\\\"qrcode\\\":\\\""+avaPath+"\\\"}\")";
         try {
 			response.getWriter().print(jsonpCallback);

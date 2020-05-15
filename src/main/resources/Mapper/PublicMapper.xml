@@ -1077,6 +1077,46 @@
 			</if>
 		</trim>
 	</insert>
+	<insert id="addHtmlGoodsText" parameterType="goodsPublic.entity.HtmlGoodsText">
+		insert into html_goods_text
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="uuid!=null">
+				uuid,
+			</if>
+			<if test="text!=null">
+				text,
+			</if>
+				gmtCreate,
+			<if test="qrcode!=null">
+				qrcode,
+			</if>
+			<if test="textType!=null">
+				textType,
+			</if>
+			<if test="accountNumber!=null">
+				accountNumber,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="uuid!=null">
+				#{uuid},
+			</if>
+			<if test="text!=null">
+				#{text},
+			</if>
+				now(),
+			<if test="qrcode!=null">
+				#{qrcode},
+			</if>
+			<if test="textType!=null">
+				#{textType},
+			</if>
+			<if test="accountNumber!=null">
+				#{accountNumber},
+			</if>
+		</trim>
+	</insert>
 	<insert id="addHtmlGoodsGRMP" parameterType="goodsPublic.entity.HtmlGoodsGRMP">
 		insert into html_goods_grmp
 		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -2379,6 +2419,12 @@
 	</select>
 	<select id="getHtmlGoodsJZSG" resultType="goodsPublic.entity.HtmlGoodsJZSG">
 		select * from html_goods_jzsg where userNumber=#{param1} and accountNumber=#{param2}
+	</select>
+	<select id="getHtmlGoodsText" resultType="goodsPublic.entity.HtmlGoodsText">
+		select * from html_goods_text where textType=#{textType} and uuid=#{uuid}
+		<if test="accountNumber!=null">
+		 and accountNumber=#{accountNumber}
+		 </if>
 	</select>
 	<select id="getScoreQrcode" resultType="goodsPublic.entity.ScoreQrcode">
 		select * from score_qrcode where uuid=#{param1} and accountNumber=#{param2}

@@ -38,6 +38,7 @@ import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
+import goodsPublic.entity.HtmlGoodsText;
 import goodsPublic.entity.JFDHJPActivity;
 import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.ModuleDMTZL;
@@ -102,6 +103,12 @@ public class PublicServiceImpl implements PublicService {
 	public int editHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP) {
 		// TODO Auto-generated method stub
 		return publicDao.editHtmlGoodsGRMP(htmlGoodsGRMP);
+	}
+
+	@Override
+	public int addHtmlGoodsText(HtmlGoodsText htmlGoodsText) {
+		// TODO Auto-generated method stub
+		return publicDao.addHtmlGoodsText(htmlGoodsText);
 	}
 	
 	@Override
@@ -689,6 +696,12 @@ public class PublicServiceImpl implements PublicService {
 	public HtmlGoodsJZSG getHtmlGoodsJZSG(String userNumber, String accountId) {
 		// TODO Auto-generated method stub
 		return publicDao.getHtmlGoodsJZSG(userNumber,accountId);
+	}
+
+	@Override
+	public HtmlGoodsText getHtmlGoodsText(String textType, String uuid, String accountNumber) {
+		// TODO Auto-generated method stub
+		return publicDao.getHtmlGoodsText(textType, uuid, accountNumber);
 	}
 
 	@Override

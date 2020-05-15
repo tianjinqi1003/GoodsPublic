@@ -11,7 +11,7 @@ var path='<%=basePath %>';
 function createQrcode(){
 	$.ajax({
 		url:path+"/merchant/chenQi/createQrcodeByCQSCQ",
-		data:{url:"aaaaaa"},
+		data:{text:"aaaaaa",accountId:'${sessionScope.user.id }'},
 		dataType:"jsonp",
 		type:"post",
 		jsonpCallback:"jsonpCallback",

@@ -15,6 +15,7 @@ import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
+import goodsPublic.entity.HtmlGoodsText;
 import goodsPublic.entity.JFDHJPActivity;
 import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.ModuleDMTZL;
@@ -57,6 +58,7 @@ public interface PublicMapper {
 
 	public int addHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);
 	public int editHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);
+	public int addHtmlGoodsText(HtmlGoodsText htmlGoodsText);
 	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS);
 	public int editHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoodsDMTZL);
 	public int editHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG);
@@ -308,6 +310,8 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public HtmlGoodsJZSG getHtmlGoodsJZSG(String userNumber, String accountId);
+
+	public HtmlGoodsText getHtmlGoodsText(@Param("textType") String textType, @Param("uuid") String uuid, @Param("accountNumber") String accountNumber);
 
 	public ScoreQrcode getScoreQrcode(String uuid, String accountId);
 	

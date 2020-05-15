@@ -16,6 +16,7 @@ import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
+import goodsPublic.entity.HtmlGoodsText;
 import goodsPublic.entity.JFDHJPActivity;
 import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.ModuleHDQD;
@@ -58,6 +59,8 @@ public interface PublicService {
 	public int addHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);
 
 	public int editHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);
+
+	public int addHtmlGoodsText(HtmlGoodsText htmlGoodsText);
 
 	/**
 	 * 获得所有跟当前用户有关的商品列表
@@ -307,6 +310,8 @@ public interface PublicService {
 	 * @return
 	 */
 	public HtmlGoodsJZSG getHtmlGoodsJZSG(String userNumber, String accountId);
+
+	public HtmlGoodsText getHtmlGoodsText(String textType, String uuid, String accountNumber);
 
 	public ScoreQrcode getScoreQrcode(String uuid, String accountId);
 
