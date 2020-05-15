@@ -21,6 +21,7 @@ import goodsPublic.entity.PrizeCode;
 import goodsPublic.entity.ScoreQrcode;
 import goodsPublic.entity.ScoreTakeRecord;
 import goodsPublic.service.PublicService;
+import goodsPublic.service.UserService;
 import net.sf.json.JSONObject;
 
 @Controller
@@ -29,6 +30,8 @@ public class PhoneController {
 
 	@Autowired
 	private PublicService publicService;
+	@Autowired
+	private UserService userService;
 
 	@RequestMapping(value="/openJPDHJFRedBagByJC")
 	@ResponseBody
@@ -176,9 +179,10 @@ public class PhoneController {
 			Object openIdObj = session.getAttribute("openId");
 			//Object openIdObj = "oNFEuwzkbP4OTTjBucFgBTWE5Bqg";
 			String openId = null;
+			String fromWebSite = request.getParameter("fromWebSite");
 			if(openIdObj==null&&StringUtils.isEmpty(code)) {
 				jsonMap.put("status", "noCode");
-				jsonMap.put("getCodeUrl", "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+com.goodsPublic.util.StringUtils.APP_ID+"&redirect_uri=http://www.qrcodesy.com/getCode.asp?params=checkPhoneAdmin,"+fromUrl+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect");
+				jsonMap.put("getCodeUrl", "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+com.goodsPublic.util.StringUtils.APP_ID+"&redirect_uri=http://www.qrcodesy.com/getCode.asp?params=checkPhoneAdmin,"+fromUrl+","+fromWebSite+"&response_type=code&scope=snsapi_base&state=1&connect_redirect=1#wechat_redirect");
 			}
 			else {
 				if(openIdObj!=null&&StringUtils.isEmpty(code)) {
@@ -191,10 +195,22 @@ public class PhoneController {
 					session.setAttribute("openId", openId);
 					//openId = "oNFEuwzkbP4OTTjBucFgBTWE5Bqg";
 				}
-				boolean bool=publicService.checkAccountOpenIdExist(openId);
-				if(!bool) {
-					jsonMap.put("status", "unBind");
-					jsonMap.put("message", "该微信号未绑定辰麒账号，请先进后台绑定微信！");
+				int exist=publicService.checkAccountOpenIdExist(openId);
+				if(exist==0) {
+					if("cqCodePh".equals(fromWebSite)) {
+						AccountMsg msg = new AccountMsg();
+						msg.setUserName(openId);
+						userService.saveUser(msg);
+						
+						AccountMsg user = userService.checkUser(msg);
+						session.setAttribute("user", user);
+						
+						jsonMap.put("status", "ok");
+					}
+					else if("admin".equals(fromWebSite)) {
+						jsonMap.put("status", "unBind");
+						jsonMap.put("message", "该微信号未绑定辰麒账号，请先进后台绑定微信！");
+					}
 				}
 				else {
 					AccountMsg user=publicService.getAccountByOpenId(openId);
@@ -252,13 +268,18 @@ public class PhoneController {
 			JSONObject obj = JSONObject.fromObject(MethodUtil.httpRequest("https://api.weixin.qq.com/sns/oauth2/access_token?appid="+com.goodsPublic.util.StringUtils.APP_ID+"&secret="+com.goodsPublic.util.StringUtils.APP_SECRET+"&code="+code+"&grant_type=authorization_code"));
 			String openId = obj.getString("openid");
 			System.out.println("openId======"+openId);
-			boolean bool=publicService.checkAccountOpenIdExist(openId);
-			//boolean bool=false;
-			if(bool) {
+			int exist=publicService.checkAccountOpenIdExist(openId);
+			if(exist==1) {
 				request.setAttribute("status", "no");
 				request.setAttribute("message", "你的微信号已绑定其他辰麒账号");
 			}
-			else {
+			if(exist==2) {
+				publicService.syncUserNameOpenIdById(openId,accountId);
+
+				request.setAttribute("status", "ok");
+				request.setAttribute("message", "你已成功绑定辰麒账号");
+			}
+			else {//exist=0
 				publicService.updateAccountOpenIdById(openId,accountId);
 				
 				request.setAttribute("status", "ok");

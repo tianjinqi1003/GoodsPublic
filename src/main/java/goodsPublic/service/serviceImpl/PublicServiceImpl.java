@@ -27,6 +27,7 @@ import com.goodsPublic.util.StringUtils;
 import com.goodsPublic.util.qrcode.Qrcode;
 
 import goodsPublic.dao.PublicMapper;
+import goodsPublic.dao.UserMapper;
 import goodsPublic.entity.AccountMsg;
 import goodsPublic.entity.AccountPayRecord;
 import goodsPublic.entity.CreatePayCodeRecord;
@@ -57,6 +58,8 @@ import goodsPublic.service.PublicService;
 public class PublicServiceImpl implements PublicService {
 	@Autowired
 	private PublicMapper publicDao;
+	@Autowired
+	private UserMapper userDao;
 	private SimpleDateFormat timeSDF=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	//发布商品接口，将商品保存在数据库中
@@ -988,20 +991,41 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public boolean checkAccountOpenIdExist(String openId) {
+	public int checkAccountOpenIdExist(String openId) {
 		// TODO Auto-generated method stub
 		
+		int flag=0;
 		int count=publicDao.getAccountCountByOpenId(openId);
-		if(count>0)
-			return true;
-		else
-			return false;
+		if(count>0) {
+			flag=1;
+		}
+		else {
+			AccountMsg msg=new AccountMsg();
+			msg.setUserName(openId);
+			AccountMsg user=userDao.getUser(msg);
+			if(user==null) {
+				flag=0;
+			}
+			else
+				flag=2;
+		}
+		return flag;
 	}
 
 	@Override
 	public AccountMsg getAccountByOpenId(String openId) {
 		// TODO Auto-generated method stub
 		return publicDao.getAccountByOpenId(openId);
+	}
+
+	@Override
+	public int syncUserNameOpenIdById(String openId, String accountId) {
+		// TODO Auto-generated method stub
+		int count  =publicDao.updateAccountOpenIdById(openId,accountId);
+		if(count>0) {
+			count = publicDao.deleteAccountByUserName(openId);
+		}
+		return count;
 	}
 
 }

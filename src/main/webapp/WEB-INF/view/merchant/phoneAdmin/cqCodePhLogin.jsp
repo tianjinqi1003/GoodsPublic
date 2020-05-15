@@ -137,7 +137,10 @@ body{
 		<input class="password_inp layui-input" type="password" id="password" placeholder="请输入密码" value="" onblur="checkPassword()">
 	</div>
 	<div class="loginBut_div" onclick="login()">登录</div>
-	<div style="width:220px;margin: 25px auto 0;">想使用二维码生成功能，请登录网址：http://www.qrcodesy.com</div>
+	<div style="text-align: center;margin-top: 10px;">
+		<a href="<%=basePath %>merchant/phone/goAdminCreateQrcode?fromWebSite=cqCodePh">微信登录</a>
+	</div>
+	<div style="width:225px;margin: 25px auto 0;">想试用二维码生成功能，请登录电脑版页面：http://www.qrcodesy.com</div>
 </div>
 </body>
 </html>

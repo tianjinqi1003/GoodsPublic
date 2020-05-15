@@ -14,7 +14,7 @@ $(function(){
 function initQrcodeListDiv(){
 	var searchTxt=$("#search_inp").val();
 	$.post("selectAdminQrcodeList",
-		{searchTxt:searchTxt,accountId:34},
+		{searchTxt:searchTxt,accountId:'${sessionScope.user.id}'},
 		function(data){
 			console.log(data);
 			var qrcodeListDiv=$("#qrcodeList_div");

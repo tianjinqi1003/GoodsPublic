@@ -2399,6 +2399,9 @@
 		</if>
 		ORDER BY createTime DESC
 	</select>
+	<delete id="deleteAccountByUserName">
+		delete from account_info where userName=#{userName}
+	</delete>
 	<delete id="deleteScoreQrcodeByUuids">
 		update score_qrcode set jfewmlbShow=0 where 1=1
 		<foreach collection="list" item="uuid" open=" and cast(uuid as char) in (" separator="," close=")">

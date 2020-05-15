@@ -419,9 +419,11 @@ public interface PublicService {
 
 	public int updateAccountOpenIdById(String openId, String accountId);
 
-	public boolean checkAccountOpenIdExist(String openId);
+	public int checkAccountOpenIdExist(String openId);
 
 	public AccountMsg getAccountByOpenId(String openId);
+
+	public int syncUserNameOpenIdById(String openId, String accountId);
 
 
 }
