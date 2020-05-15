@@ -63,8 +63,8 @@ public class ChenQiController {
 			String userNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
 			String url = "http://www.iot-mes.com:8081/";
 			String fileName = userNumber + ".jpg";
-			String avaPath="/ChenQiQrcode/upload/"+fileName;
-			String path = "D:/resource/ChenQiQrcode/upload/";
+			String avaPath="/GoodsPublic/upload/ChenQiQrcode/"+fileName;
+			String path = "D:/resource/ChenQiQrcode/";
 			Qrcode.createQrCode(url, path, fileName);
 
 			String uuid = UUID.randomUUID().toString().replaceAll("-", "");
@@ -74,7 +74,7 @@ public class ChenQiController {
 			
 	        //String jsonpCallback="jsonpCallback(\"{\\\"qrcode\\\":\\\"1111111111\\\"}\")";
 			//response.getWriter().print(jsonpCallback);
-			response.sendRedirect("http://www.qrcodesy.com/qrcodeCreate/vcard.html?type=1");
+			response.sendRedirect("http://www.qrcodesy.com/qrcodeCreate/vcard.html?type=1&uuid="+uuid);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
