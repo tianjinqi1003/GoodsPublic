@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 <%@include file="../js.jsp"%>
 <script type="text/javascript">
+var accountId='${sessionScope.user.id}';
 $(function(){
 	initQrcodeListDiv();
 });
@@ -14,7 +15,7 @@ $(function(){
 function initQrcodeListDiv(){
 	var searchTxt=$("#search_inp").val();
 	$.post("selectAdminQrcodeList",
-		{searchTxt:searchTxt,accountId:'${sessionScope.user.id}'},
+		{searchTxt:searchTxt,accountId:accountId},
 		function(data){
 			console.log(data);
 			var qrcodeListDiv=$("#qrcodeList_div");

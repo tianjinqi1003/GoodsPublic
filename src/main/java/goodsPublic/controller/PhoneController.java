@@ -177,12 +177,14 @@ public class PhoneController {
 	}
 	
 	@RequestMapping(value="/goShowTextHtml",method=RequestMethod.GET)
-	public String goShowTextHtml(String textType, String uuid, HttpServletRequest request) {
+	public String goShowTextHtml(String textType, String uuid, String accountId, HttpServletRequest request) {
 		
-		HtmlGoodsText htmlGoodsText=publicService.getHtmlGoodsText(textType,uuid,null);
+		String url=null;
+		HtmlGoodsText htmlGoodsText=publicService.getHtmlGoodsText(textType,uuid,accountId);
 		request.setAttribute("htmlGoodsText", htmlGoodsText);
-		
-	    return  "/merchant/text/showTextHtml";
+		if((HtmlGoodsText.TEXT+"").equals(textType))
+			url = "/merchant/text/showTextHtml";
+	    return  url;
 	}
 	
 	public Map<String, Object> checkAdminAccount(String fromUrl, HttpServletRequest request) {
@@ -228,6 +230,15 @@ public class PhoneController {
 						jsonMap.put("status", "unBind");
 						jsonMap.put("message", "该微信号未绑定辰麒账号，请先进后台绑定微信！");
 					}
+				}
+				else if(exist==2) {
+					AccountMsg msg = new AccountMsg();
+					msg.setUserName(openId);
+
+					AccountMsg user = userService.checkUser(msg);
+					session.setAttribute("user", user);
+					
+					jsonMap.put("status", "ok");
 				}
 				else {
 					AccountMsg user=publicService.getAccountByOpenId(openId);

@@ -2319,6 +2319,7 @@ public class MainController {
 				request.setAttribute("htmlGoodsJZSG", htmlGoodsJZSG);
 				url = "/merchant/jzsg/showHtmlGoods";
 				break;
+				/*
 			case "text":
 				uuid = request.getParameter("uuid");
 				String textType = request.getParameter("textType");
@@ -2327,6 +2328,7 @@ public class MainController {
 				if((HtmlGoodsText.TEXT+"").equals(textType))
 					url = "/merchant/text/showTextHtml";
 				break;
+				*/
 			case "jfdhjp":
 				//http://localhost:8088/GoodsPublic/merchant/main/goShowHtmlGoods?trade=jfdhjp&uuid=134654686&accountId=34
 				String code = request.getParameter("code");

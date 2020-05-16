@@ -4,12 +4,26 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script type="text/javascript">
+function goPage(navNum){
+	var url;
+	switch(navNum){
+	case 1:
+		url="goAdminCreateQrcode?nav="+navNum;
+		break;
+	case 2:
+		url="goAdminQrcodeList?nav="+navNum;
+		break;
+	case 3:
+		url="goAdminMine?nav="+navNum;
+		break;
+	}
+	location.href=url;
+}
+</script>
 <style type="text/css">
 .nav_div{
 	width: 100%;height: 50px;bottom: 0;border-top: #eee solid 1px;background-color: #fff;position: fixed;
-}
-.nav_div a{
-    text-decoration: none;
 }
 .nav_div .item_div{
 	width: 33%;height: 50px;
@@ -37,30 +51,24 @@
 </head>
 <body>
 <div class="nav_div">
-	<a href="goAdminCreateQrcode?nav=1">
-		<div class="item_div">
-			<div class="navImg_div">
-				<img class="nav_img" alt="" src="http://www.qrcodesy.com:8080/GoodsPublic/resource/images/qrcode.png">
-			</div>
-			<div class="but_div ${param.nav eq 1?'selected':'' }">立即生码</div>
+	<div class="item_div" onclick="goPage(1)">
+		<div class="navImg_div">
+			<img class="nav_img" alt="" src="http://www.qrcodesy.com:8080/GoodsPublic/resource/images/qrcode.png">
 		</div>
-	</a>
-	<a href="goAdminQrcodeList?nav=2">
-		<div class="item_div zjgx_div">
-			<div class="navImg_div">
-				<img class="nav_img" alt="" src="http://www.qrcodesy.com:8080/GoodsPublic/resource/images/qrcode.png">
-			</div>
-			<div class="but_div ${param.nav eq 2?'selected':'' }">最近更新</div>
+		<div class="but_div ${param.nav eq 1?'selected':'' }">立即生码</div>
+	</div>
+	<div class="item_div zjgx_div" onclick="goPage(2)">
+		<div class="navImg_div">
+			<img class="nav_img" alt="" src="http://www.qrcodesy.com:8080/GoodsPublic/resource/images/qrcode.png">
 		</div>
-	</a>
-	<a href="goAdminMine?nav=3">
-		<div class="item_div mine_div">
-			<div class="navImg_div">
-				<img class="nav_img" alt="" src="http://www.qrcodesy.com:8080/GoodsPublic/resource/images/qrcode.png">
-			</div>
-			<div class="but_div ${param.nav eq 3?'selected':'' }">我的</div>
+		<div class="but_div ${param.nav eq 2?'selected':'' }">最近更新</div>
+	</div>
+	<div class="item_div mine_div" onclick="goPage(3)">
+		<div class="navImg_div">
+			<img class="nav_img" alt="" src="http://www.qrcodesy.com:8080/GoodsPublic/resource/images/qrcode.png">
 		</div>
-	</a>
+		<div class="but_div ${param.nav eq 3?'selected':'' }">我的</div>
+	</div>
 </div>
 </body>
 </html>

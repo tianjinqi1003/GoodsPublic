@@ -1036,6 +1036,11 @@ public class PublicServiceImpl implements PublicService {
 		// TODO Auto-generated method stub
 		int count  =publicDao.updateAccountOpenIdById(openId,accountId);
 		if(count>0) {
+			AccountMsg msg=new AccountMsg();
+			msg.setUserName(openId);
+			AccountMsg user=userDao.getUser(msg);
+			String userId = user.getId();
+			publicDao.updateHGTAccoNumByUserId(accountId,userId);
 			count = publicDao.deleteAccountByUserName(openId);
 		}
 		return count;

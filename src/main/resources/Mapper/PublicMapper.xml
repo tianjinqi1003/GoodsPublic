@@ -2324,6 +2324,9 @@
 	<update id="updateAccountOpenIdById">
 		update account_info set openId=#{openId} where id=#{id}
 	</update>
+	<update id="updateHGTAccoNumByUserId">
+		update html_goods_text set accountNumber=#{accountNumber} where accountNumber=#{userId}
+	</update>
 	<select id="checkGoodsLabelExist" resultType="java.lang.Integer">
 		select count(*) from goods_label_set where `key`=#{key} and module=#{module} and accountNumber=#{accountNumber}
 	</select>
@@ -2439,6 +2442,8 @@
 			SELECT title name,gmtCreate createTime,qrcode from html_goods_dmtzl where accountNumber=#{accountNumber}
 			union
 			SELECT title name,gmtCreate createTime,qrcode from html_goods_jzsg where accountNumber=#{accountNumber}
+			union
+			SELECT text name,gmtCreate createTime,qrcode from html_goods_text where accountNumber=#{accountNumber}
 		)t where 1=1 
 		<if test="searchTxt!=''&amp;searchTxt!=null">
 		 and name like CONCAT('%',#{searchTxt},'%')

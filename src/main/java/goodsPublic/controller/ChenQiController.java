@@ -43,10 +43,7 @@ public class ChenQiController {
 		String url=null;
 		switch (htmlGoodsText.getTextType()) {
 		case HtmlGoodsText.TEXT:
-			if(StringUtils.isEmpty(accountNumber))
-				url="http://www.qrcodesy.com:8080/GoodsPublic/merchant/phone/goShowTextHtml?textType="+htmlGoodsText.getTextType()+"&uuid="+uuid;
-			else
-				url="http://www.qrcodesy.com:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=text&textType="+htmlGoodsText.getTextType()+"&uuid="+uuid+"&accountId="+accountNumber;
+			url="http://www.qrcodesy.com:8080/GoodsPublic/merchant/phone/goShowTextHtml?textType="+htmlGoodsText.getTextType()+"&uuid="+uuid+"&accountId="+accountNumber;
 			break;
 		case HtmlGoodsText.URL:
 			url=htmlGoodsText.getText();

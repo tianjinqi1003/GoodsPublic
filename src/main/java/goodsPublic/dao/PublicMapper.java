@@ -429,6 +429,8 @@ public interface PublicMapper {
 
 	public int updateAccountOpenIdById(@Param("openId") String openId, @Param("id") String id);
 
+	public int updateHGTAccoNumByUserId(@Param("accountNumber") String accountNumber, @Param("userId") String userId);
+
 	public int deleteAccountByUserName(@Param("userName") String userName);
 
 }
