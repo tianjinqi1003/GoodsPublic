@@ -2324,7 +2324,7 @@ public class MainController {
 				String textType = request.getParameter("textType");
 				HtmlGoodsText htmlGoodsText=publicService.getHtmlGoodsText(textType,uuid,accountId);
 				request.setAttribute("htmlGoodsText", htmlGoodsText);
-				if((HtmlGoodsText.TEXT+"").equals(moduleType))
+				if((HtmlGoodsText.TEXT+"").equals(textType))
 					url = "/merchant/text/showTextHtml";
 				break;
 			case "jfdhjp":

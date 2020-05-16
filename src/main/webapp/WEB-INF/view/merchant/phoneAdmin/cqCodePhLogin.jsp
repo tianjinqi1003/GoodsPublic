@@ -124,6 +124,15 @@ body{
     background-color: #4caf50;
     border-radius: 4px;
 }
+.wxdl_div{
+	text-align: center;margin-top: 10px;
+}
+.wxdl_div a{
+	color: #4caf50;font-size: 16px;text-decoration: underline;
+}
+.tiShi_div{
+	width:225px;margin: 25px auto 0;text-align: center;
+}
 </style>
 </head>
 <body>
@@ -137,10 +146,10 @@ body{
 		<input class="password_inp layui-input" type="password" id="password" placeholder="请输入密码" value="" onblur="checkPassword()">
 	</div>
 	<div class="loginBut_div" onclick="login()">登录</div>
-	<div style="text-align: center;margin-top: 10px;">
-		<a href="<%=basePath %>merchant/phone/goAdminCreateQrcode?fromWebSite=cqCodePh">微信登录</a>
+	<div class="wxdl_div">
+		<a href="<%=basePath %>merchant/phone/goWxScanLogin">微信登录</a>
 	</div>
-	<div style="width:225px;margin: 25px auto 0;">想试用二维码生成功能，请登录电脑版页面：http://www.qrcodesy.com</div>
+	<div class="tiShi_div">请用电脑登录http://www.qrcodesy.com，体验辰麒二维码追溯平台动态码生成功能</div>
 </div>
 </body>
 </html>

@@ -8,6 +8,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,7 @@ public class ChenQiController {
 	@ResponseBody
 	public void createQrcodeByCQSCQ(HtmlGoodsText htmlGoodsText, HttpServletResponse response) {
 
+		String accountNumber = htmlGoodsText.getAccountNumber();
 		String fileName = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + ".jpg";
 		String avaPath="/GoodsPublic/upload/ChenQiQrcode/"+fileName;
 		String path = "D:/resource/ChenQiQrcode/";
@@ -41,7 +43,10 @@ public class ChenQiController {
 		String url=null;
 		switch (htmlGoodsText.getTextType()) {
 		case HtmlGoodsText.TEXT:
-			url="http://www.qrcodesy.com:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=text&textType="+htmlGoodsText.getTextType()+"&uuid="+uuid+"&accountId="+htmlGoodsText.getAccountNumber();
+			if(StringUtils.isEmpty(accountNumber))
+				url="http://www.qrcodesy.com:8080/GoodsPublic/merchant/phone/goShowTextHtml?textType="+htmlGoodsText.getTextType()+"&uuid="+uuid;
+			else
+				url="http://www.qrcodesy.com:8080/GoodsPublic/merchant/main/goShowHtmlGoods?trade=text&textType="+htmlGoodsText.getTextType()+"&uuid="+uuid+"&accountId="+accountNumber;
 			break;
 		case HtmlGoodsText.URL:
 			url=htmlGoodsText.getText();

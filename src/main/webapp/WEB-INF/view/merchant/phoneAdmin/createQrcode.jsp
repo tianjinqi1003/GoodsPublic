@@ -9,9 +9,10 @@
 <script type="text/javascript">
 var path='<%=basePath %>';
 function createQrcode(){
+	var content=$("#content_ta").val();
 	$.ajax({
 		url:path+"/merchant/chenQi/createQrcodeByCQSCQ",
-		data:{text:"aaaaaa",accountId:'${sessionScope.user.id }'},
+		data:{textType:1,text:content,accountNumber:'${sessionScope.user.id }'},
 		dataType:"jsonp",
 		type:"post",
 		jsonpCallback:"jsonpCallback",
@@ -85,7 +86,7 @@ body{
 
 <div class="ljsm_div">立即生码</div>
 <div class="contentTa_div">
-	<textarea class="content_ta" rows="" cols="" placeholder="输入文本或网址"></textarea>
+	<textarea class="content_ta" id="content_ta" rows="" cols="" placeholder="输入文本或网址"></textarea>
 </div>
 <div class="cqBut_div" onclick="createQrcode()">生成二维码</div>
 <%@include file="nav.jsp"%>

@@ -12,11 +12,13 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.goodsPublic.util.MethodUtil;
 
 import goodsPublic.entity.AccountMsg;
+import goodsPublic.entity.HtmlGoodsText;
 import goodsPublic.entity.PrizeCode;
 import goodsPublic.entity.ScoreQrcode;
 import goodsPublic.entity.ScoreTakeRecord;
@@ -159,6 +161,12 @@ public class PhoneController {
 		return "/merchant/phoneAdmin/cqCodePhLogin";
 	}
 	
+	@RequestMapping(value="/goWxScanLogin")
+	public String goWxScanLogin() {
+		
+		return "/merchant/phoneAdmin/wxScanLogin";
+	}
+	
 	@RequestMapping(value="/goRemoveBind")
 	public String goRemoveBind(HttpServletRequest request) {
 		
@@ -166,6 +174,15 @@ public class PhoneController {
 		AccountMsg user = publicService.getAccountById(accountId);
 		request.setAttribute("user", user);
 		return "/merchant/phoneAdmin/removeBind";
+	}
+	
+	@RequestMapping(value="/goShowTextHtml",method=RequestMethod.GET)
+	public String goShowTextHtml(String textType, String uuid, HttpServletRequest request) {
+		
+		HtmlGoodsText htmlGoodsText=publicService.getHtmlGoodsText(textType,uuid,null);
+		request.setAttribute("htmlGoodsText", htmlGoodsText);
+		
+	    return  "/merchant/text/showTextHtml";
 	}
 	
 	public Map<String, Object> checkAdminAccount(String fromUrl, HttpServletRequest request) {
