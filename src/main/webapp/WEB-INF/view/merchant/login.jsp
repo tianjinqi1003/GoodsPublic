@@ -174,7 +174,7 @@ body{
  		<div class="right_div">
  			<h2 class="wxkjdl_h2">微信快捷登录</h2>
  			<div class="wxkjdl_div">
- 				<img class="qrcode_img" alt="" src="<%=basePath%>resource/images/009.png">
+ 				<img class="qrcode_img" alt="" src="<%=basePath%>resource/images/010.png">
  				<div class="wxsys_div">微信扫一扫，快速登录</div>
  			</div>
  		</div>

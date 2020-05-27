@@ -105,7 +105,7 @@ function openPreQrcodeBgDiv(flag,src){
 		</div>
 	</div>
 </div>
-<div class="ewmlbTit_div">二维吗列表</div>
+<div class="ewmlbTit_div">二维码列表</div>
 <div class="search_div">
 	<img class="search_img" alt="" src="<%=basePath %>resource/images/jfdhjp/005.png" onclick="initQrcodeListDiv()">
 	<input class="search_inp" id="search_inp" type="text" placeholder="搜索"/>
