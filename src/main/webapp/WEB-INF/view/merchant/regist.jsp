@@ -115,7 +115,7 @@ function submit(){
 	var phone=$("#phone").val();
 	var email=$("#email").val();
 	$.post(baseUrl+"/merchant/regist",
-		{userName:userName,password:password,nickName:nickName,phone:phone,email:email},
+		{userName:userName,passWord:password,nickName:nickName,phone:phone,email:email},
 		function(result){
 			if(result.status==0){
 				window.location.href=baseUrl+result.url

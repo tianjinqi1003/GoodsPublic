@@ -124,10 +124,10 @@ body{
     background-color: #4caf50;
     border-radius: 4px;
 }
-.wxdl_div{
+.wxdl_div,.yhzc_div{
 	text-align: center;margin-top: 10px;
 }
-.wxdl_div a{
+.wxdl_div a,.yhzc_div a{
 	color: #4caf50;font-size: 16px;text-decoration: underline;
 }
 .tiShi_div{
@@ -138,7 +138,7 @@ body{
 <body>
 <div class="main_div">
 	<span class="back_span" onclick="goBack()">&lt;返回</span>
-	<h2 class="sjhdl_h2">手机号登录</h2>
+	<h2 class="sjhdl_h2">用户登录</h2>
 	<div class="userName_div">
 		<input class="userName_inp layui-input" type="text" id="userName" placeholder="请输入登录名" value="" onfocus="focusUserName();" onblur="checkUserName();">
 	</div>
@@ -148,6 +148,9 @@ body{
 	<div class="loginBut_div" onclick="login()">登录</div>
 	<div class="wxdl_div">
 		<a href="<%=basePath %>merchant/phone/goWxScanLogin">微信登录</a>
+	</div>
+	<div class="yhzc_div">
+		<a href="<%=basePath %>merchant/phone/goCQCodePhRegister">用户注册</a>
 	</div>
 	<div class="tiShi_div">请用电脑登录http://www.qrcodesy.com，体验辰麒二维码追溯平台动态码生成功能</div>
 </div>

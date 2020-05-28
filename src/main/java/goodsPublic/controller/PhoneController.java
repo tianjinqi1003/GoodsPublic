@@ -161,6 +161,12 @@ public class PhoneController {
 		return "/merchant/phoneAdmin/cqCodePhLogin";
 	}
 	
+	@RequestMapping(value="/goCQCodePhRegister")
+	public String goCQCodePhRegister() {
+		
+		return "/merchant/phoneAdmin/cqCodePhRegister";
+	}
+	
 	@RequestMapping(value="/goWxScanLogin")
 	public String goWxScanLogin() {
 		
@@ -193,6 +199,7 @@ public class PhoneController {
 		
 		HttpSession session = request.getSession();
 		Object userObj = session.getAttribute("user");
+		//System.out.println("userObj==="+userObj);
 		if(userObj==null) {
 			String code = request.getParameter("code");
 			Object openIdObj = session.getAttribute("openId");
