@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
+import org.json.JSONException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -3597,8 +3598,8 @@ public class MainController {
 		/**
 		 * 获取用户信息
 		 */
-		String nickname = "";
-		String headimgurl = "";
+		String nickname = null;
+		String headimgurl = null;
 		String userInfoUrl = "https://api.weixin.qq.com/cgi-bin/user/info?access_token=" + access_token + "&openid=" + openid + "&lang=zh_CN";
 		TenpayHttpClient httpClientUser = new TenpayHttpClient();																
 		httpClientUser.setMethod("GET");
@@ -3612,8 +3613,14 @@ public class MainController {
             headimgurl = JsonUtil.getJsonValue(resContent, "headimgurl");
             */
             org.json.JSONObject rsJO = new org.json.JSONObject(resContent);
-            nickname = rsJO.getString("nickname");
-            headimgurl = rsJO.getString("headimgurl");
+            try {
+				nickname = rsJO.getString("nickname");
+				headimgurl = rsJO.getString("headimgurl");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				nickname = "";
+				headimgurl = "";
+			}
         }
         Map<String, String> jsonMap = new HashMap<String, String>();
         jsonMap.put("openid", openid);
