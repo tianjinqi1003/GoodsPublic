@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>多媒体资料模板列表</title>
+<title>多媒体资料模版列表</title>
 <%@include file="../js.jsp"%>
 <script type="text/javascript">
 var path='<%=basePath %>';
@@ -24,7 +24,7 @@ $(function(){
 	});
 	
 	tab1=$("#tab1").datagrid({
-		title:"多媒体资料模板查询",
+		title:"多媒体资料模版查询",
 		url:"queryHtmlGoodsDMTZLList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),
@@ -43,7 +43,7 @@ $(function(){
 	    ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
-				$(this).datagrid("appendRow",{title:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/goAddModule?trade=dmtzl\">点击生成多媒体资料模板</a><div>"});
+				$(this).datagrid("appendRow",{title:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/goAddModule?trade=dmtzl\">点击生成多媒体资料模版</a><div>"});
 				$(this).datagrid("mergeCells",{index:0,field:"title",colspan:3});
 				data.total=0;
 			}

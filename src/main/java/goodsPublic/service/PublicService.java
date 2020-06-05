@@ -34,21 +34,21 @@ public interface PublicService {
 	public int addGoodsPublic(Goods goods);
 
 	/**
-	 * 保存商品模板内容到数据库
+	 * 保存商品模版内容到数据库
 	 * @param htmlGoods
 	 * @return
 	 */
 	public int addHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoods);
 	
 	/**
-	 * 添加多媒体资料模板内容
+	 * 添加多媒体资料模版内容
 	 * @param htmlGoods
 	 * @return
 	 */
 	public int addHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoods);
 	
 	/**
-	 * 保存建筑施工模板内容到数据库
+	 * 保存建筑施工模版内容到数据库
 	 * @param htmlGoods
 	 * @return
 	 */
@@ -112,7 +112,7 @@ public interface PublicService {
 	public int queryScoreQrcodeForInt(String accountId);
 
 	/**
-	 * 查询商品模板内容数量
+	 * 查询商品模版内容数量
 	 * @param accountId
 	 * @param moduleType 
 	 * @return
@@ -120,14 +120,14 @@ public interface PublicService {
 	public int queryHtmlGoodsSPZSForInt(String accountId, String moduleType);
 	
 	/**
-	 * 查询多媒体资料模板内容数量
+	 * 查询多媒体资料模版内容数量
 	 * @param accountId
 	 * @return
 	 */
 	public int queryHtmlGoodsDMTZLForInt(String accountId);
 	
 	/**
-	 * 查询建筑施工模板内容数量
+	 * 查询建筑施工模版内容数量
 	 * @param accountId
 	 * @return
 	 */
@@ -159,7 +159,7 @@ public interface PublicService {
 	public List<ScoreQrcode> queryScoreQrcodeList(String accountId, int page, int rows, String sort, String order);
 
 	/**
-	 * 根据商户编号，查询商品展示模板内容
+	 * 根据商户编号，查询商品展示模版内容
 	 * @param accountId
 	 * @param moduleType 
 	 * @param page
@@ -172,7 +172,7 @@ public interface PublicService {
 			String order);
 	
 	/**
-	 * 根据商户编号，查询多媒体资料模板内容
+	 * 根据商户编号，查询多媒体资料模版内容
 	 * @param accountId
 	 * @param page
 	 * @param rows
@@ -184,7 +184,7 @@ public interface PublicService {
 			String order);
 	
 	/**
-	 * 根据商户编号，查询建筑施工模板内容信息
+	 * 根据商户编号，查询建筑施工模版内容信息
 	 * @param accountId
 	 * @param page
 	 * @param rows
@@ -259,7 +259,7 @@ public interface PublicService {
 	public void initGoodsLabelSet(String accountNumber);
 
 	/**
-	 * 根据类型查询商品展示模板
+	 * 根据类型查询商品展示模版
 	 * @param type
 	 * @param moduleType 
 	 * @return
@@ -267,28 +267,28 @@ public interface PublicService {
 	public Object getModuleSPZSByType(String type, String moduleType);
 	
 	/**
-	 * 根据类型查询多媒体资料模板
+	 * 根据类型查询多媒体资料模版
 	 * @param type
 	 * @return
 	 */
 	public Object getModuleDMTZLByType(String type);
 	
 	/**
-	 * 根据类型查询建筑施工模板
+	 * 根据类型查询建筑施工模版
 	 * @param type
 	 * @return
 	 */
 	public Object getModuleJZSGByType(String type);
 
 	/**
-	 * 根据类型查询活动签到模板
+	 * 根据类型查询活动签到模版
 	 * @param type
 	 * @return
 	 */
 	public Object getModuleHDQDByType(String type);
 
 	/**
-	 * 获得商品展示模板内容
+	 * 获得商品展示模版内容
 	 * @param goodsNumber
 	 * @param accountId
 	 * @return
@@ -296,7 +296,7 @@ public interface PublicService {
 	public HtmlGoodsSPZS getHtmlGoodsSPZS(String moduleType,String goodsNumber, String accountId);
 	
 	/**
-	 * 获得多媒体资料模板内容
+	 * 获得多媒体资料模版内容
 	 * @param goodsNumber
 	 * @param accountId
 	 * @return
@@ -304,7 +304,7 @@ public interface PublicService {
 	public HtmlGoodsDMTZL getHtmlGoodsDMTZL(String goodsNumber, String accountId);
 	
 	/**
-	 * 获得建筑施工模板内容
+	 * 获得建筑施工模版内容
 	 * @param userNumber
 	 * @param accountId
 	 * @return
@@ -316,21 +316,21 @@ public interface PublicService {
 	public ScoreQrcode getScoreQrcode(String uuid, String accountId);
 
 	/**
-	 * 编辑商品展示模板内容
+	 * 编辑商品展示模版内容
 	 * @param htmlGoodsSPZS
 	 * @return
 	 */
 	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS);
 	
 	/**
-	 * 编辑多媒体资料模板内容
+	 * 编辑多媒体资料模版内容
 	 * @param htmlGoodsDMTZL
 	 * @return
 	 */
 	public int editHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoodsDMTZL);
 	
 	/**
-	 * 编辑建筑施工模板内容
+	 * 编辑建筑施工模版内容
 	 * @param htmlGoodsJZSG
 	 * @return
 	 */
@@ -339,21 +339,21 @@ public interface PublicService {
 	public int deleteScoreQrcodeByUuids(String uuids);
 
 	/**
-	 * 根据id删除商品展示模板内容
+	 * 根据id删除商品展示模版内容
 	 * @param ids
 	 * @return
 	 */
 	public int deleteHtmlGoodsSPZSByIds(String ids);
 	
 	/**
-	 * 根据id删除多媒体资料模板内容
+	 * 根据id删除多媒体资料模版内容
 	 * @param ids
 	 * @return
 	 */
 	public int deleteHtmlGoodsDMTZLByIds(String ids);
 	
 	/**
-	 * 根据id删除建筑施工模板内容
+	 * 根据id删除建筑施工模版内容
 	 * @param ids
 	 * @return
 	 */

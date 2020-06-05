@@ -187,7 +187,7 @@ function checkIfPaidInSide(){
 						<img class="first-level-img" alt="" src="<%=basePath%>resource/images/008.png" />
 						<img class="pointer-img" alt="" src="<%=basePath%>resource/images/ico_5.jpg" />
 						<a class="first-level-a">
-							行业模板
+							行业模版
 						</a>
 					</li>
 					<li class="layui-nav-item">

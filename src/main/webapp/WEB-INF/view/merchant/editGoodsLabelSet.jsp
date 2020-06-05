@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>编辑模板</title>
+<title>编辑模版</title>
 <%@include file="js.jsp"%>
 <script type="text/javascript">
 $(function(){
 	$("#edit_div").dialog({
-		title:"编辑模板",
+		title:"编辑模版",
 		width:setFitWidthInParent("body"),
 		height:setFitHeightInParent(".layui-side"),
 		top:60,

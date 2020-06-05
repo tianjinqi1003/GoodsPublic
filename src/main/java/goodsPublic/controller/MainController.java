@@ -507,7 +507,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 添加商品展示模板内容
+	 * 添加商品展示模版内容
 	 * @param htmlGoodsSPZS
 	 * @param file1_1
 	 * @param file1_2
@@ -770,7 +770,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 添加多媒体资料模板内容
+	 * 添加多媒体资料模版内容
 	 * @param htmlGoodsDMTZL
 	 * @param file1_1
 	 * @param file1_2
@@ -1062,7 +1062,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 添加建筑施工模板内容
+	 * 添加建筑施工模版内容
 	 * @param htmlGoodsJZSG
 	 * @param file1_1
 	 * @param file1_2
@@ -1291,7 +1291,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 完成编辑商品展示模板内容
+	 * 完成编辑商品展示模版内容
 	 * @param htmlGoodsSPZS
 	 * @param file1_1
 	 * @param file1_2
@@ -1341,7 +1341,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 完成编辑多媒体资料模板内容
+	 * 完成编辑多媒体资料模版内容
 	 * @param htmlGoodsDMTZL
 	 * @param file1_1
 	 * @param file1_2
@@ -1368,7 +1368,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 完成编辑建筑施工模板内容
+	 * 完成编辑建筑施工模版内容
 	 * @param htmlGoodsJZSG
 	 * @param file1_1
 	 * @param file1_2
@@ -1395,7 +1395,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 保存编辑商品展示模板内容
+	 * 保存编辑商品展示模版内容
 	 * @param htmlGoodsSPZS
 	 * @param file1_1
 	 * @param file1_2
@@ -1457,7 +1457,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 保存编辑多媒体资料模板内容
+	 * 保存编辑多媒体资料模版内容
 	 * @param htmlGoodsDMTZL
 	 * @param file1_1
 	 * @param file1_2
@@ -1496,7 +1496,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 保存编辑建筑施工模板内容
+	 * 保存编辑建筑施工模版内容
 	 * @param htmlGoodsJZSG
 	 * @param file1_1
 	 * @param file1_2
@@ -1535,7 +1535,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 提交编辑好的商品展示的模板内容
+	 * 提交编辑好的商品展示的模版内容
 	 * @param htmlGoodsSPZS
 	 * @param file1_1
 	 * @param file1_2
@@ -1668,7 +1668,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 编辑多媒体资料模板内容
+	 * 编辑多媒体资料模版内容
 	 * @param htmlGoodsDMTZL
 	 * @param file1_1
 	 * @param file1_2
@@ -1732,7 +1732,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 编辑建筑施工模板内容
+	 * 编辑建筑施工模版内容
 	 * @param htmlGoodsJZSG
 	 * @param file1_1
 	 * @param file1_2
@@ -1796,7 +1796,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 这个是显示商品的模板内容，用于后台商户浏览
+	 * 这个是显示商品的模版内容，用于后台商户浏览
 	 * @param goodsNumber
 	 * @param accountNumber
 	 * @param request
@@ -1828,7 +1828,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 这个是显示建筑施工的模板内容，用于后台商户浏览
+	 * 这个是显示建筑施工的模版内容，用于后台商户浏览
 	 * @param userNumber
 	 * @param accountNumber
 	 * @param request
@@ -2088,7 +2088,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 根据id删除商品展示模板内容
+	 * 根据id删除商品展示模版内容
 	 * @param ids
 	 * @return
 	 */
@@ -2117,7 +2117,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 根据id删除多媒体资料模板内容
+	 * 根据id删除多媒体资料模版内容
 	 * @param ids
 	 * @return
 	 */
@@ -2146,7 +2146,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 根据id删除建筑施工模板内容
+	 * 根据id删除建筑施工模版内容
 	 * @param ids
 	 * @return
 	 */
@@ -2313,7 +2313,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 这个是显示各行业的模板内容，用于前端手机上显示
+	 * 这个是显示各行业的模版内容，用于前端手机上显示
 	 * @param goodsNumber
 	 * @param accountId
 	 * @param request
@@ -2858,7 +2858,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 根据商户编号，查询商品展示模板内容
+	 * 根据商户编号，查询商品展示模版内容
 	 * @param accountId
 	 * @param page
 	 * @param rows
@@ -2880,7 +2880,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 根据商户编号，查询多媒体资料模板内容
+	 * 根据商户编号，查询多媒体资料模版内容
 	 * @param accountId
 	 * @param page
 	 * @param rows
@@ -2902,7 +2902,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 根据商户编号，查询建筑施工模板内容信息
+	 * 根据商户编号，查询建筑施工模版内容信息
 	 * @param accountId
 	 * @param page
 	 * @param rows
@@ -3068,7 +3068,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 跳转至行业模板快速生成页面
+	 * 跳转至行业模版快速生成页面
 	 * @return
 	 */
 	@RequestMapping(value="/goHtmlGoodsList")
@@ -3241,7 +3241,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 跳转至模板添加页面
+	 * 跳转至模版添加页面
 	 * @param type
 	 * @return
 	 */
@@ -3399,7 +3399,7 @@ public class MainController {
 	}
 	
 	/**
-	 * 跳转至模板编辑页面
+	 * 跳转至模版编辑页面
 	 * @param request
 	 * @param trade
 	 * @param goodsNumber

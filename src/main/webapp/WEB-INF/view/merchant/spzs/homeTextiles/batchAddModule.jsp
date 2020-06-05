@@ -813,7 +813,7 @@ function resetQrsjbscExcelTabStyle(){
 function checkExcelKey(jo){
 	var colCount=$("input[id^='spxqIfShow'][value='true']").length;
 	var keyCount=0;
-	var mbezdStr="模板Excel字段：";
+	var mbezdStr="模版Excel字段：";
 	var scezdStr="上传Excel字段：";
 	for(var key in jo){
 		keyCount++;
@@ -881,7 +881,7 @@ function chooseExcel(){
 		<span class="close_span" onclick="openUploadExcelDialog(0)">×</span>
 		<div class="step_div">
 			<div class="first_div" id="first_div">1</div>
-			<span class="xzmb_span" id="xzmb_span">下载Excel模板</span>
+			<span class="xzmb_span" id="xzmb_span">下载Excel模版</span>
 			<div class="line1_div"></div>
 			<div class="second_div" id="second_div">2</div>
 			<span class="sc_span" id="sc_span">上传Excel</span>
@@ -891,7 +891,7 @@ function chooseExcel(){
 		</div>
 		
 		<div class="xzmb_div" id="xzmb_div">
-			<div class="mbxgTxt_div">Excel模板效果：（此处最多只预览6个字段）</div>
+			<div class="mbxgTxt_div">Excel模版效果：（此处最多只预览6个字段）</div>
 			<div class="mbxgContent_div">
 				<div class="left_div">
 					<img class="excel_img" src="<%=basePath %>/resource/images/spzs/excel_bg.19fbdf2a.jpg" alt="">
@@ -933,10 +933,10 @@ function chooseExcel(){
 				</div>
 				
 				<div class="right_div">
-					<div class="qxz_div">请下载Excel模板，按左图格式填入信息</div>
+					<div class="qxz_div">请下载Excel模版，按左图格式填入信息</div>
 					<div class="dyh_div">第一行作为标题</div>
 					<div class="deh_div">第二行开始填入信息，每行信息都会生成一个二维码</div>
-					<div class="xzmbBut_div" onclick="downloadExcelModule()">下载Excel模板</div>
+					<div class="xzmbBut_div" onclick="downloadExcelModule()">下载Excel模版</div>
 					<div class="ckzysx_div">查看Excel填写注意事项</div>
 				</div>
 				
@@ -952,22 +952,22 @@ function chooseExcel(){
 				<input type="file"  id="excel_file" name="excel_file" onchange="uploadExcel(this)" style="display: none;"/>
 				</form>
 				<div class="uploadBut_div" id="uploadBut_div" onclick="chooseExcel()">上传 Excel</div>
-				<div class="downloadBut_div" onclick="downloadExcelModule()">下载Excel模板</div>
+				<div class="downloadBut_div" onclick="downloadExcelModule()">下载Excel模版</div>
 			</div>
 			<div class="but_div" id="but_div">
 				<div class="preBut_div" onclick="nextStep(-1)">上一步</div>
 			</div>
 			<div class="warn_div" id="warn_div">
-				<div class="slbxd_div">上传的Excel列数与模板中Excel内容的字段数量不相等</div>
-				<div class="mbezd_div" id="mbezd_div">模板Excel字段：工号、姓名、班组、工种、身份证号、联系电话、血型、进场...等12个字段</div>
+				<div class="slbxd_div">上传的Excel列数与模版中Excel内容的字段数量不相等</div>
+				<div class="mbezd_div" id="mbezd_div">模版Excel字段：工号、姓名、班组、工种、身份证号、联系电话、血型、进场...等12个字段</div>
 				<div class="scezd_div" id="scezd_div">上传Excel字段：班组、工种、身份证号、联系电话、血型、进场时间、特种作...等10个字段</div>
-				<div class="xzExcelMb_div" onclick="downloadExcelModule()">下载Excel模板</div>
+				<div class="xzExcelMb_div" onclick="downloadExcelModule()">下载Excel模版</div>
 			</div>
 			<div class="sffgmb_div" id="sffgmb_div">
-				<div class="sffg_div">是否将上传的Excel字段覆盖模板Excel字段?</div>
+				<div class="sffg_div">是否将上传的Excel字段覆盖模版Excel字段?</div>
 				<div class="but_div">
 					<div class="cxscBut_div" onclick="chooseExcel()">否，重新上传</div>
-					<div class="fgmbnrBut_div" onclick="initQrsjbscExcelTab()">是，覆盖Excel模板内容</div>
+					<div class="fgmbnrBut_div" onclick="initQrsjbscExcelTab()">是，覆盖Excel模版内容</div>
 				</div>
 			</div>
 		</div>

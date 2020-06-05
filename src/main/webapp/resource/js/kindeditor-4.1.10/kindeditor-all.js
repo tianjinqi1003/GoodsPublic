@@ -6020,7 +6020,7 @@ KindEditor.lang({
 	pagebreak : '插入分页符',
 	quickformat : '一键排版',
 	insertfile : '插入文件',
-	template : '插入模板',
+	template : '插入模版',
 	anchor : '锚点',
 	yes : '确定',
 	no : '取消',
@@ -6186,7 +6186,7 @@ KindEditor.lang({
 		{'2.5' : '2.5倍行距'},
 		{'3' : '3倍行距'}
 	],
-	'template.selectTemplate' : '可选模板',
+	'template.selectTemplate' : '可选模版',
 	'template.replaceContent' : '替换当前内容',
 	'template.fileList' : {
 		'1.html' : '图片和文字',

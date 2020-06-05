@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>商品展示模板列表</title>
+<title>商品展示模版列表</title>
 <%@include file="../js.jsp"%>
 <script type="text/javascript">
 var path='<%=basePath %>';
@@ -53,7 +53,7 @@ $(function(){
 	});
 
 	tab1=$("#tab1").datagrid({
-		title:tab1Title+"模板生成",
+		title:tab1Title+"模版生成",
 		url:"queryHtmlGoodsSPZSList",
 		toolbar:"#toolbar",
 		width:setFitWidthInParent("body"),
@@ -72,7 +72,7 @@ $(function(){
 	    ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
-				$(this).datagrid("appendRow",{productName:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/goAddModule?trade=spzs&moduleType=redWine\">点击生成商品模板</a><div>"});
+				$(this).datagrid("appendRow",{productName:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/goAddModule?trade=spzs&moduleType=redWine\">点击生成商品模版</a><div>"});
 				$(this).datagrid("mergeCells",{index:0,field:"productName",colspan:3});
 				data.total=0;
 			}

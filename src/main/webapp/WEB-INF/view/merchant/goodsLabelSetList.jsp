@@ -64,7 +64,7 @@ $(function(){
         ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
-				$(this).datagrid("appendRow",{goodsNumber:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/operation?categoryId=${param.categoryId}\">点击添加模板</a><div>"});
+				$(this).datagrid("appendRow",{goodsNumber:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/operation?categoryId=${param.categoryId}\">点击添加模版</a><div>"});
 				$(this).datagrid("mergeCells",{index:0,field:"label",colspan:6});
 				data.total=0;
 			}

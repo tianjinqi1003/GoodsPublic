@@ -55,7 +55,7 @@ public class UtilServiceImpl implements UtilService {
 		Map<String, Object> root = new HashMap<String, Object>();
 		//2.赋值
 		root.put("user_name", "胖先生");
-		String path=FreeMakerUtil.fprint("Model.flt", root,"第一个模板.html",request);
+		String path=FreeMakerUtil.fprint("Model.flt", root,"第一个模版.html",request);
 		return path;
 	}
 

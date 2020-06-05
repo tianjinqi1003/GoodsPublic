@@ -50,7 +50,7 @@ public class ExcelController {
 			String fileName = null;
 			
 			HSSFWorkbook wb=new HSSFWorkbook();
-			HSSFSheet sheet = wb.createSheet("excel模板生成码");
+			HSSFSheet sheet = wb.createSheet("excel模版生成码");
 			HSSFCellStyle style = wb.createCellStyle();
 			for (int i = 0; i < ja.size(); i++) {
 				JSONObject jo = ja.getJSONObject(i);
@@ -70,23 +70,23 @@ public class ExcelController {
 			switch (trade) {
 			case "spzs":
 				if(ModuleSPZS.RED_WINE.equals(moduleType)) {
-					fileName="红酒_excel模板";
+					fileName="红酒_excel模版";
 				}
 				else if(ModuleSPZS.WHITE_WINE.equals(moduleType)) {
-					fileName="白酒_excel模板";
+					fileName="白酒_excel模版";
 				}
 				else if(ModuleSPZS.HOME_TEXTILES.equals(moduleType)) {
-					fileName="家纺_excel模板";
+					fileName="家纺_excel模版";
 				}
 				else if(ModuleSPZS.ARTWORK.equals(moduleType)) {
-					fileName="艺术品_excel模板";
+					fileName="艺术品_excel模版";
 				}
 				else if(ModuleSPZS.PRODUCT_EXPLAIN.equals(moduleType)) {
-					fileName="说明书_excel模板";
+					fileName="说明书_excel模版";
 				}
 				break;
 			case "jzsg":
-				fileName="建筑施工_excel模板";
+				fileName="建筑施工_excel模版";
 				break;
 			}
 			download(fileName, wb, response);

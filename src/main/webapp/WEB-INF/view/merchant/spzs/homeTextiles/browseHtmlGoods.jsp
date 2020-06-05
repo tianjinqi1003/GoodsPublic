@@ -190,7 +190,7 @@ function editContent(moduleType,goodsNumber,accountNumber){
 					<a class="ewmmh_a">二维码美化</a>
 				</div>
 				<div class="hgmhmb_div">
-					<a class="hgmhmb_a">换个美化模板</a>
+					<a class="hgmhmb_a">换个美化模版</a>
 				</div>
 			</div>
 			 -->

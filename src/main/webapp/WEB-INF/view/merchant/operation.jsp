@@ -275,7 +275,7 @@ function initWindowMarginLeft(){
 	<div class="layui-layout layui-layout-admin">
 		<%@include file="side.jsp"%>
 		<div id="edit_div">
-			<!-- 因为页面套用了标签模板，必须在请求后面附加参数，以便提交完成后返回页面能显示模板 -->
+			<!-- 因为页面套用了标签模版，必须在请求后面附加参数，以便提交完成后返回页面能显示模版 -->
 			<form id="form1" name="form1" method="post" action="addGoodsPublic?categoryId=${param.categoryId }&accountId=${sessionScope.user.id}" enctype="multipart/form-data">
 			<input type="hidden" id="accountNumber" name="accountNumber" value="${sessionScope.user.id }"/>
 			<input type="hidden" id="category_id" name="category_id" value="${param.categoryId }"/>
