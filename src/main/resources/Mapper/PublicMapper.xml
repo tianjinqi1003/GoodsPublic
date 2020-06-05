@@ -2110,6 +2110,9 @@
 	<update id="updatePwdByAccountId">
 		update account_info set passWord=#{passWord} where id=#{id}
 	</update>
+	<update id="updateAccountQCById">
+		update account_info set qrcodeCount=qrcodeCount+#{qrcodeCount} where id=#{id}
+	</update>
 	<update id="updatePcExcById">
 		update prize_code set state=1 where id=#{id}
 	</update>

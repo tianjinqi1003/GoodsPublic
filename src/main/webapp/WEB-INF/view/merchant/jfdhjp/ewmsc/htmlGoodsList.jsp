@@ -105,7 +105,7 @@ function deleteByUuids(uuids){
 		$.messager.confirm("提示","确定要删除吗？",function(r){
 			if(r){
 				$.post("deleteScoreQrcodeByUuids",
-					{uuids:uuids},
+					{uuids:uuids,accountNumber:'${sessionScope.user.id}'},
 					function(result){
 						if(result.status==1){
 							tab1.datagrid("reload");

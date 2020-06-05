@@ -107,7 +107,7 @@ function deleteByIds(ids){
 		$.messager.confirm("提示","确定要删除吗？",function(r){
 			if(r){
 				$.post("deleteHtmlGoodsJZSGByIds",
-					{ids:ids},
+					{ids:ids,accountNumber:'${sessionScope.user.id}'},
 					function(result){
 						if(result.status==1){
 							tab1.datagrid("reload");

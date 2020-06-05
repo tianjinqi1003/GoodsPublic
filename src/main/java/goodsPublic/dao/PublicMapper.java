@@ -386,6 +386,8 @@ public interface PublicMapper {
 
 	public int updatePwdByAccountId(@Param("passWord") String passWord, @Param("id") String id);
 
+	public int updateAccountQCById(@Param("qrcodeCount") int qrcodeCount, @Param("id") String id);
+
 	public int updatePcExcById(@Param("id") String id);
 
 	public int updatePcLimitByAccountId(@Param("jpmLimit") String jpmLimit, @Param("accountNumber") String accountNumber);

@@ -748,6 +748,10 @@ public class MainController {
 			
 	        htmlGoodsSPZS.setQrCode(avaPath);
 			int a=publicService.addHtmlGoodsSPZS(htmlGoodsSPZS);
+			if(a>0) {
+				int qrcodeCount=1;
+				a=publicService.updateAccountQCById(qrcodeCount,htmlGoodsSPZS.getAccountNumber());
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -863,6 +867,10 @@ public class MainController {
 			htmlGoodsDMTZL.setQrCode(avaPath);
 
 			int a=publicService.addHtmlGoodsDMTZL(htmlGoodsDMTZL);
+			if(a>0) {
+				int qrcodeCount=1;
+				a=publicService.updateAccountQCById(qrcodeCount,htmlGoodsDMTZL.getAccountNumber());
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1152,6 +1160,10 @@ public class MainController {
 			htmlGoodsJZSG.setQrCode(avaPath);
 
 			int a=publicService.addHtmlGoodsJZSG(htmlGoodsJZSG);
+			if(a>0) {
+				int qrcodeCount=1;
+				a=publicService.updateAccountQCById(qrcodeCount,htmlGoodsJZSG.getAccountNumber());
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -1221,6 +1233,10 @@ public class MainController {
 			scoreQrcode.setJfewmlbShow(true);
 			
 			int a=publicService.addScoreQrcode(scoreQrcode);
+			if(a>0) {
+				int qrcodeCount=1;
+				a=publicService.updateAccountQCById(qrcodeCount,String.valueOf(scoreQrcode.getAccountNumber()));
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -2029,9 +2045,13 @@ public class MainController {
 	
 	@RequestMapping(value="/deleteScoreQrcodeByUuids",produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String deleteScoreQrcodeByUuids(String uuids) {
+	public String deleteScoreQrcodeByUuids(String uuids, String accountNumber) {
 
 		int count=publicService.deleteScoreQrcodeByUuids(uuids);
+		if(count>0) {
+			int qrcodeCount=-uuids.split(",").length;
+			publicService.updateAccountQCById(qrcodeCount, accountNumber);
+		}
 		PlanResult plan=new PlanResult();
 		String json;
 		if(count==0) {
@@ -2074,9 +2094,13 @@ public class MainController {
 	 */
 	@RequestMapping(value="/deleteHtmlGoodsSPZSByIds",produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String deleteHtmlGoodsSPZSByIds(String ids) {
+	public String deleteHtmlGoodsSPZSByIds(String ids, String accountNumber) {
 		
 		int count=publicService.deleteHtmlGoodsSPZSByIds(ids);
+		if(count>0) {
+			int qrcodeCount=-ids.split(",").length;
+			publicService.updateAccountQCById(qrcodeCount, accountNumber);
+		}
 		PlanResult plan=new PlanResult();
 		String json;
 		if(count==0) {
@@ -2099,9 +2123,13 @@ public class MainController {
 	 */
 	@RequestMapping(value="/deleteHtmlGoodsDMTZLByIds",produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String deleteHtmlGoodsDMTZLByIds(String ids) {
+	public String deleteHtmlGoodsDMTZLByIds(String ids, String accountNumber) {
 		
 		int count=publicService.deleteHtmlGoodsDMTZLByIds(ids);
+		if(count>0) {
+			int qrcodeCount=-ids.split(",").length;
+			publicService.updateAccountQCById(qrcodeCount, accountNumber);
+		}
 		PlanResult plan=new PlanResult();
 		String json;
 		if(count==0) {
@@ -2124,9 +2152,13 @@ public class MainController {
 	 */
 	@RequestMapping(value="/deleteHtmlGoodsJZSGByIds",produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String deleteHtmlGoodsJZSGByIds(String ids) {
+	public String deleteHtmlGoodsJZSGByIds(String ids, String accountNumber) {
 		
 		int count=publicService.deleteHtmlGoodsJZSGByIds(ids);
+		if(count>0) {
+			int qrcodeCount=-ids.split(",").length;
+			publicService.updateAccountQCById(qrcodeCount, accountNumber);
+		}
 		PlanResult plan=new PlanResult();
 		String json;
 		if(count==0) {

@@ -22,6 +22,7 @@ public class AccountMsg {
 	private String countCode;
 	private String recordNumber;
 	private String accountStatus;
+	private Integer qrcodeCount;
 	private String role;
 	private String bwxQrcode;
 	private String rbwxQrcode;
@@ -50,6 +51,14 @@ public class AccountMsg {
 
 	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public Integer getQrcodeCount() {
+		return qrcodeCount;
+	}
+
+	public void setQrcodeCount(Integer qrcodeCount) {
+		this.qrcodeCount = qrcodeCount;
 	}
 
 	public String getAccountStatus() {

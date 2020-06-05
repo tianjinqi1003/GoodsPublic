@@ -430,5 +430,7 @@ public interface PublicService {
 
 	public int syncUserNameOpenIdById(String openId, String accountId);
 
+	public int updateAccountQCById(int qrcodeCount, String id);
+
 
 }

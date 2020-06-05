@@ -17,6 +17,7 @@ $(function(){
 		columns:[[
             {field:"phone",title:"手机号"},
             {field:"nickName",title:"昵称"},
+            {field:"qrcodeCount",title:"二维码数量"},
             {field:"email",title:"邮箱"},
             {field:"role",title:"权限"},
             {field:"gmt_create",title:"注册时间"},
@@ -35,7 +36,7 @@ $(function(){
         onLoadSuccess:function(data){
 			if(data.total==0){
 				$(this).datagrid("appendRow",{phone:"<div style=\"text-align:center;\">暂无商户<div>"});
-				$(this).datagrid("mergeCells",{index:0,field:"phone",colspan:6});
+				$(this).datagrid("mergeCells",{index:0,field:"phone",colspan:7});
 				data.total=0;
 			}
 

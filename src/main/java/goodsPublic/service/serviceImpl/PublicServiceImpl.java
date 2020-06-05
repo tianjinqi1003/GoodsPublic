@@ -1046,4 +1046,10 @@ public class PublicServiceImpl implements PublicService {
 		return count;
 	}
 
+	@Override
+	public int updateAccountQCById(int qrcodeCount, String id) {
+		// TODO Auto-generated method stub
+		return publicDao.updateAccountQCById(qrcodeCount,id);
+	}
+
 }
