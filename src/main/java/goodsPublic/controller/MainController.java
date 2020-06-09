@@ -2506,6 +2506,7 @@ public class MainController {
 					calendar.setTime(date);
 					int vipType = cpcr.getVipType();
 					switch (vipType) {
+						/*
 						case CreatePayCodeRecord.ONE_MONTH:
 						case CreatePayCodeRecord.CONTINUE_MONTH:
 							calendar.add(Calendar.MONTH, 1);
@@ -2514,6 +2515,12 @@ public class MainController {
 							calendar.add(Calendar.MONTH, 3);
 							break;
 						case CreatePayCodeRecord.ONE_YEAR:
+							calendar.add(Calendar.YEAR, 1);
+							break;
+							*/
+						case 2:
+						case 3:
+						case 4:
 							calendar.add(Calendar.YEAR, 1);
 							break;
 					}
@@ -2606,6 +2613,7 @@ public class MainController {
 				calendar.setTime(date);
 				int vipType = cpcr.getVipType();
 				switch (vipType) {
+					/*
 					case CreatePayCodeRecord.ONE_MONTH:
 					case CreatePayCodeRecord.CONTINUE_MONTH:
 						calendar.add(Calendar.MONTH, 1);
@@ -2616,6 +2624,12 @@ public class MainController {
 					case CreatePayCodeRecord.ONE_YEAR:
 						calendar.add(Calendar.YEAR, 1);
 						break;
+						*/
+					case 2:
+					case 3:
+					case 4:
+						calendar.add(Calendar.YEAR, 1);
+						break;
 				}
 				apr.setEndTime(timeSDF.format(calendar.getTime()));
 				apr.setVipType(vipType);
@@ -2624,7 +2638,7 @@ public class MainController {
 				apr.setPhone(cpcr.getPhone());
 				
 				int count=publicService.addAccountPayRecord(apr);
-				System.out.println("改变的条数==="+count);
+				//System.out.println("改变的条数==="+count);
 				response.getWriter().write("success");
 				
 			}else {//验证失败

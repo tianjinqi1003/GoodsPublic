@@ -260,14 +260,14 @@ public class GoodsController {
 		AccountMsg resultUser=userService.checkUser(msg);
 		publicService.initGoodsLabelSet(resultUser.getId());
 		
-		//这里是注册完成后，自动开通24小时免费试用，过期要继续使用就得付费
+		//这里是注册完成后，自动开通7天免费试用，过期要继续使用就得付费
 		AccountPayRecord apr = new AccountPayRecord();
 		apr.setAccountNumber(resultUser.getId());
 		Date date = new Date();
 		apr.setPayTime(timeSDF.format(date));
 		Calendar calendar=Calendar.getInstance();
 		calendar.setTime(date);
-		calendar.add(Calendar.DAY_OF_MONTH, 1);
+		calendar.add(Calendar.DAY_OF_MONTH, 7);
 		apr.setEndTime(timeSDF.format(calendar.getTime()));
 		apr.setVipType(AccountPayRecord.FREE_TRIAL);
 		apr.setMoney((float)0.00);
