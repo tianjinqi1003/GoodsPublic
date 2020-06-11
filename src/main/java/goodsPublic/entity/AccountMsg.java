@@ -23,6 +23,8 @@ public class AccountMsg {
 	private String recordNumber;
 	private String accountStatus;
 	private Integer qrcodeCount;
+	private Float payMoney;//总付款金额
+	private String payTime;
 	private String role;
 	private String bwxQrcode;
 	private String rbwxQrcode;
@@ -59,6 +61,22 @@ public class AccountMsg {
 
 	public void setQrcodeCount(Integer qrcodeCount) {
 		this.qrcodeCount = qrcodeCount;
+	}
+	
+	public Float getPayMoney() {
+		return payMoney;
+	}
+
+	public void setPayMoney(Float payMoney) {
+		this.payMoney = payMoney;
+	}
+	
+	public String getPayTime() {
+		return payTime;
+	}
+
+	public void setPayTime(String payTime) {
+		this.payTime = payTime;
 	}
 
 	public String getAccountStatus() {

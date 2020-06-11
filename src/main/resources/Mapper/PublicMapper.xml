@@ -1509,6 +1509,9 @@
 	<select id="getJCByOpenId" resultType="goodsPublic.entity.JFDHJPCustomer">
 		select * from jfdhjp_customer where openId=#{openId}
 	</select>
+	<update id="updateAccountPayInfo" parameterType="goodsPublic.entity.AccountPayRecord">
+		update account_info set payMoney=payMoney+#{money},payTime=#{payTime} where id=#{accountNumber}
+	</update>
 	<update id="updateScoreByQrcodeUuid">
 		update score_qrcode set score=#{score} where uuid=#{uuid}
 	</update>

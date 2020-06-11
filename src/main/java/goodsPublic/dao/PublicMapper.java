@@ -419,6 +419,8 @@ public interface PublicMapper {
 	public List<Map<String, Object>> queryCSDetailList(@Param("startTime") String startTime, @Param("endTime") String endTime, @Param("accountNumber") String accountNumber,
 			@Param("openId") String openId);
 
+	public int updateAccountPayInfo(AccountPayRecord accountPayRecord);
+	
 	public int updateScoreByQrcodeUuid(@Param("score") Integer score, @Param("uuid") String uuid);
 
 	public int updateJPMDHRegByAccountId(@Param("jpmdhReg") String jpmdhReg, @Param("accountNumber") Integer accountNumber);

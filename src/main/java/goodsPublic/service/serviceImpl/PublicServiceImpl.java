@@ -763,7 +763,9 @@ public class PublicServiceImpl implements PublicService {
 	@Override
 	public int addAccountPayRecord(AccountPayRecord accountPayRecord) {
 		// TODO Auto-generated method stub
-		return publicDao.addAccountPayRecord(accountPayRecord);
+		int count=publicDao.addAccountPayRecord(accountPayRecord);
+		publicDao.updateAccountPayInfo(accountPayRecord);
+		return count;
 	}
 
 	@Override

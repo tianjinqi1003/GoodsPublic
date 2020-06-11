@@ -128,11 +128,14 @@ function checkIfPaidInSide(){
 							商家信息
 						</a>
 					</li>
+		  			<!--  有权限   -->
+					<shiro:hasRole  name="admin">
 					<li class="layui-nav-item">
-						<a class="second-level-a">
+						<a class="second-level-a" href="<%=basePath%>admin/goAccountList">
 							成员管理
 						</a>
 					</li>
+					</shiro:hasRole>
 				</div>
 				<div style="width: 100%; margin: 0 auto; margin-top: 5px;background-color: #F5FAFE;">
 					<li class="layui-nav-item first-level">
@@ -286,8 +289,7 @@ function checkIfPaidInSide(){
 						</a>
 					</li>
 				</div>
-	  			<!--  有权限   -->
-				<shiro:hasRole  name="admin">
+				<!-- 
 				<div style="width: 100%; margin: 0 auto; margin-top: 20px;background-color: #F5FAFE;">
 					<li class="layui-nav-item first-level">
 						<img class="first-level-img" alt="" src="<%=basePath%>resource/images/008.png" />
@@ -300,7 +302,7 @@ function checkIfPaidInSide(){
 						<a class="second-level-a" href="<%=basePath%>admin/goAccountList">商户查询</a>
 					</li>
 				</div>
-				</shiro:hasRole>
+				 -->
 			</ul>
 		</div>
 	</div>
