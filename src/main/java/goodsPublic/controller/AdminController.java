@@ -15,6 +15,7 @@ import com.goodsPublic.util.JsonUtil;
 import com.goodsPublic.util.PlanResult;
 
 import goodsPublic.entity.AccountMsg;
+import goodsPublic.entity.AccountPayRecord;
 import goodsPublic.service.UserService;
 
 @Controller
@@ -34,6 +35,15 @@ public class AdminController {
 	}
 	
 	/**
+	 * 跳转至支付记录查询页面
+	 * @return
+	 */
+	@RequestMapping(value="/goAprList")
+	public String goAprList() {
+		return "/admin/aprList";
+	}
+	
+	/**
 	 * 查询商户信息
 	 * @param page
 	 * @param rows
@@ -49,6 +59,26 @@ public class AdminController {
 		List<AccountMsg> accList = userService.queryAccountList(page, rows, sort, order);
 		jsonMap.put("total", count);
 		jsonMap.put("rows", accList);
+		return jsonMap;
+	}
+	
+	/**
+	 * 查询支付记录
+	 * @param accountId
+	 * @param page
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
+	@RequestMapping(value="/queryAprList")
+	@ResponseBody
+	public Map<String, Object> queryAprList(String accountId,int page,int rows,String sort,String order) {
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count = userService.queryAprForInt(accountId);
+		List<AccountPayRecord> aprList = userService.queryAprList(page, rows, sort, order, accountId);
+		jsonMap.put("total", count);
+		jsonMap.put("rows", aprList);
 		return jsonMap;
 	}
 	

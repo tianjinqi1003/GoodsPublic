@@ -1,7 +1,11 @@
 package goodsPublic.dao;
 
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import goodsPublic.entity.AccountMsg;
+import goodsPublic.entity.AccountPayRecord;
 
 
 public interface UserMapper {
@@ -25,6 +29,8 @@ public interface UserMapper {
 	 * @return
 	 */
 	public List<AccountMsg> queryAccountList(int start, int rows, String sort, String order);
+	public int queryAprForInt(String accountId); 
+	public List<AccountPayRecord> queryAprList(@Param("start") int start, @Param("rows") int rows, String sort, String order, @Param("accountId") String accountId);
 	/**
 	 * 更新商户状态
 	 * @param id

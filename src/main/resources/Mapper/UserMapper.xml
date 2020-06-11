@@ -99,6 +99,12 @@
 	<select id="queryAccountForInt" resultType="java.lang.Integer">
 		select count(*) from account_info
 	</select>
+	<select id="queryAprForInt" resultType="java.lang.Integer">
+		select count(*) from account_pay_record where accountNumber=#{param1}
+	</select>
+	<select id="queryAprList" resultType="goodsPublic.entity.AccountPayRecord">
+		select r.id,r.money,r.payTime,r.vipType,r.payType,r.endTime from account_pay_record r,account_info i where r.accountNumber=i.id and i.id=#{accountId} ORDER BY r.payTime DESC limit #{start},#{rows}
+	</select>
 	<select id="queryAccountList" resultType="goodsPublic.entity.AccountMsg">
 		select * from account_info limit ${param1},${param2}
 	</select>

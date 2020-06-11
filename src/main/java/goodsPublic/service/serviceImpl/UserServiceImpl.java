@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import goodsPublic.entity.AccountMsg;
+import goodsPublic.entity.AccountPayRecord;
 import goodsPublic.service.UserService;
 import goodsPublic.dao.UserMapper;
 /**
@@ -49,6 +50,16 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		
 		return userMapper.queryAccountList((page-1)*rows, rows, sort, order);
+	}
+	@Override
+	public int queryAprForInt(String accountId) {
+		// TODO Auto-generated method stub
+		return userMapper.queryAprForInt(accountId);
+	}
+	@Override
+	public List<AccountPayRecord> queryAprList(int page, int rows, String sort, String order, String accountId) {
+		// TODO Auto-generated method stub
+		return userMapper.queryAprList((page-1)*rows, rows, sort, order, accountId);
 	}
 	@Override
 	public int updateAccountStatus(String id, String status) {

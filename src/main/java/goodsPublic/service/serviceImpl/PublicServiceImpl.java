@@ -813,19 +813,13 @@ public class PublicServiceImpl implements PublicService {
 		int vipType = apr.getVipType();
 		switch (vipType) {
 			case AccountPayRecord.FREE_TRIAL:
-			case AccountPayRecord.ONE_MONTH:
-			case AccountPayRecord.THREE_MONTHS:
-			case AccountPayRecord.ONE_YEAR:
+			case AccountPayRecord.JI_CHU:
+			case AccountPayRecord.GAO_JI:
+			case AccountPayRecord.HANG_YE:
 				endTime = timeSDF.parse(apr.getEndTime());
 				if(new Date().before(endTime)) {
 					ifPaid=true;
 				}
-				break;
-			case AccountPayRecord.FOREVER:
-				ifPaid=true;
-				break;
-			case AccountPayRecord.CONTINUE_MONTH:
-				ifPaid=true;
 				break;
 		}
 		

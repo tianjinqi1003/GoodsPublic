@@ -3,6 +3,7 @@ package goodsPublic.service;
 import java.util.List;
 
 import goodsPublic.entity.AccountMsg;
+import goodsPublic.entity.AccountPayRecord;
 
 public interface UserService {
 	//检查账户信息
@@ -24,6 +25,8 @@ public interface UserService {
 	 * @return
 	 */
 	public List<AccountMsg> queryAccountList(int page, int rows, String sort, String order);
+	public int queryAprForInt(String accountId);
+	public List<AccountPayRecord> queryAprList(int page, int rows, String sort, String order, String accountId);
 	/**
 	 * 更新商户状态
 	 * @param id

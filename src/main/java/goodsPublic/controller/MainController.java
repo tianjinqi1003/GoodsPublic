@@ -2506,21 +2506,9 @@ public class MainController {
 					calendar.setTime(date);
 					int vipType = cpcr.getVipType();
 					switch (vipType) {
-						/*
-						case CreatePayCodeRecord.ONE_MONTH:
-						case CreatePayCodeRecord.CONTINUE_MONTH:
-							calendar.add(Calendar.MONTH, 1);
-							break;
-						case CreatePayCodeRecord.THREE_MONTHS:
-							calendar.add(Calendar.MONTH, 3);
-							break;
-						case CreatePayCodeRecord.ONE_YEAR:
-							calendar.add(Calendar.YEAR, 1);
-							break;
-							*/
-						case 2:
-						case 3:
-						case 4:
+						case CreatePayCodeRecord.JI_CHU:
+						case CreatePayCodeRecord.GAO_JI:
+						case CreatePayCodeRecord.HANG_YE:
 							calendar.add(Calendar.YEAR, 1);
 							break;
 					}

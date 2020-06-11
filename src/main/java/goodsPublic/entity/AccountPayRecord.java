@@ -8,18 +8,16 @@ public class AccountPayRecord implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public static final int FREE_TRIAL=0;
-	public static final int ONE_MONTH=1;
-	public static final int THREE_MONTHS=2;
-	public static final int ONE_YEAR=3;
-	public static final int FOREVER=4;
-	public static final int CONTINUE_MONTH=5;
+	public static final int FREE_TRIAL=1;
+	public static final int JI_CHU=2;
+	public static final int GAO_JI=3;
+	public static final int HANG_YE=4;
 	private Integer id;
 	private String outTradeNo;
 	private String accountNumber;
 	private String payTime;
 	private String endTime;
-	private Integer vipType;//会员类型 0.免费 1.一个月 2.三个月 3.一年 4.永久 5.连续包月
+	private Integer vipType;//会员类型 1.免费版 2.基础版 3.高级版 4.行业版
 	private Integer payType;
 	private Float money;
 	private String phone;
