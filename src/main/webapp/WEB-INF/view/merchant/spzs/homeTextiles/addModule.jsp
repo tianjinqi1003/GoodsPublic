@@ -20,7 +20,7 @@ $(function(){
 	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
 	var middleDivHeight=$("#middle_div").css("height").substring(0,$("#middle_div").css("height").length-2);
 	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
-	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight)+40)+"px");
+	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight)+4)+"px");
 });
 
 function resetDivPosition(){
@@ -291,8 +291,11 @@ function showQrcodePic1(obj){
         
         var listDiv=$("#image1_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
-        
-    	resetDivPosition();
+
+        //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+        setTimeout(function(){
+        	resetDivPosition();
+        },"100")
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -345,8 +348,11 @@ function showQrcodePic2(obj){
         
         var listDiv=$("#image2_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
-        
-    	resetDivPosition();
+
+        //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+        setTimeout(function(){
+        	resetDivPosition();
+        },"100")
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -400,7 +406,10 @@ function showQrcodePic3(obj){
         var listDiv=$("#image3_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
 
-    	resetDivPosition();
+        //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+        setTimeout(function(){
+        	resetDivPosition();
+        },"100")
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -454,7 +463,10 @@ function showQrcodePic4(obj){
         var listDiv=$("#image4_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
 
-    	resetDivPosition();
+        //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+        setTimeout(function(){
+        	resetDivPosition();
+        },"100")
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");

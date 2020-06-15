@@ -22,7 +22,7 @@ $(function(){
 	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
 	var middleDivHeight=$("#middle_div").css("height").substring(0,$("#middle_div").css("height").length-2);
 	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
-	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight)+40)+"px");
+	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight)+4)+"px");
 });
 
 function resetDivPosition(){
@@ -348,8 +348,11 @@ function showQrcodePic1(obj){
         
         var listDiv=$("#image1_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
-        
-    	resetDivPosition();
+
+        //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+        setTimeout(function(){
+        	resetDivPosition();
+        },"100")
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -402,8 +405,11 @@ function showQrcodePic2(obj){
         
         var listDiv=$("#image2_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
-        
-    	resetDivPosition();
+
+        //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+        setTimeout(function(){
+        	resetDivPosition();
+        },"100")
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -457,7 +463,10 @@ function showQrcodePic3(obj){
         var listDiv=$("#image3_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
 
-    	resetDivPosition();
+        //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+        setTimeout(function(){
+        	resetDivPosition();
+        },"100")
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -511,7 +520,10 @@ function showQrcodePic4(obj){
         var listDiv=$("#image4_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
 
-    	resetDivPosition();
+        //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+        setTimeout(function(){
+        	resetDivPosition();
+        },"100")
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -661,7 +673,8 @@ function nextStep(flag){
 		$("#first_div").css("background","#4caf50");
 		$("#first_div").css("border","1px solid #4caf50");
 		$("#xzmb_span").css("color","#000");
-		
+
+		$("#second_div").text("2");
 		$("#second_div").css("color","rgba(0,0,0,.45)");
 		$("#second_div").css("background","#fff");
 		$("#second_div").css("border","1px solid #bbb");
@@ -690,6 +703,11 @@ function nextStep(flag){
 		
 		$("#xzmb_div").css("display","none");
 		$("#scwj_div").css("display","block");
+		
+		$("#scwj_div #main_div").css("display","block");
+		$("#scwj_div #but_div").css("display","block");
+		$("#scwj_div #warn_div").css("display","none");
+		$("#scwj_div #sffgmb_div").css("display","none");
 	}
 	else if(stepIndex==3){
 		$("#second_div").text("√");
