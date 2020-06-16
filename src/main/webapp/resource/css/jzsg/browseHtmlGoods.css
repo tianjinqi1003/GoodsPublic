@@ -61,7 +61,6 @@ body{
 .image1_1_img,.image1_2_img,.image1_3_img,
 .image2_1_img,.image2_2_img,.image2_3_img{
 	width: 95%;
-	height: 300px;
 	margin-top: 25px;
 }
 .ryxx_div{
@@ -85,7 +84,7 @@ body{
 .image2_div{
 	width: 95%;
 	text-align: center;
-	margin-top: 20px;
+	margin: 20px auto 0;
 }
 .right_div{
 	width:250px;

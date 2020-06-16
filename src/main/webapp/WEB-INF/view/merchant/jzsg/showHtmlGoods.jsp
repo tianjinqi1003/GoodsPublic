@@ -11,24 +11,7 @@
 <link rel="stylesheet" href="<%=basePath %>/resource/css/jzsg/showHtmlGoods.css" />
 <script type="text/javascript">
 $(function(){
-	//以下代码是按照原图比例缩放网页上的图片
-	$("#image1_div img").each(function(){
-		var width=$(this).css("width");
-		width=width.substring(0,width.length-2);
-		var src=$(this).attr("src");
-		if(src.indexOf("jzsg/bf0b334d871019cf3b2359e22b405d1c")!=-1){
-			$(this).css("height",width+"px");
-		}
-	});
-
-	$("#image2_div img").each(function(){
-		var width=$(this).css("width");
-		width=width.substring(0,width.length-2);
-		var src=$(this).attr("src");
-		if(src.indexOf("jzsg/43a339cd90f1a6b00c0c256d49d6a119")!=-1){
-			$(this).css("height",width*0.644+"px");
-		}
-	});
+	
 });
 </script>
 </head>
@@ -42,10 +25,10 @@ $(function(){
 			<img class="image1_1_img" alt="" src="${requestScope.htmlGoodsJZSG.image1_1 }">
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsJZSG.image1_2 ne null }">
-			<img class="image1_2_img" alt="" src="${requestScope.htmlGoodsJZSG.image1_2 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image1_2_img" alt="" src="${requestScope.htmlGoodsJZSG.image1_2 }">
 		</c:if>
 		<c:if test="${requestScope.htmlGoodsJZSG.image1_3 ne null }">
-			<img class="image1_3_img" alt="" src="${requestScope.htmlGoodsJZSG.image1_3 }" style="width: 95%;height: 300px;margin-top: 25px;">
+			<img class="image1_3_img" alt="" src="${requestScope.htmlGoodsJZSG.image1_3 }">
 		</c:if>
 	</div>
 	
