@@ -31,9 +31,12 @@ KindEditor.ready(function(K) {
 $(function(){
 	var bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
 	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
-	var middleDivHeight=$("#middle_div").css("height").substring(0,$("#middle_div").css("height").length-2);
 	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
-	$("#right_div").css("margin-top","-"+(parseInt(middleDivHeight)+40)+"px");
+
+    //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+    setTimeout(function(){
+    	resetDivPosition();
+    },"1000")
 });
 
 function resetDivPosition(){
