@@ -243,7 +243,10 @@ function showQrcodePic1(obj){
         var listDiv=$("#image1_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
 
-    	resetDivPosition();
+        //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+        setTimeout(function(){
+        	resetDivPosition();
+        },"100")
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");

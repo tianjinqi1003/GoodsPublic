@@ -62,12 +62,11 @@ body{
 .image2_1_img,.image2_2_img,.image2_3_img,.image2_4_img,.image2_5_img,
 .image3_1_img,.image3_2_img,.image3_3_img,.image3_4_img,.image3_5_img{
 	width: 95%;
-	height: 300px;
 	margin-top: 25px;
 }
 .memo1_div,.memo2_div,.memo3_div{
 	width:95%;
-	margin-top: 20px;
+	margin: 20px auto 0;
 }
 .spxq_div{
 	margin-top: 20px;
@@ -94,7 +93,7 @@ body{
 .image2_div,.image3_div{
 	width: 95%;
 	text-align: center;
-	margin-top: 20px;
+	margin: 20px auto 0;
 }
 .right_div{
 	width:250px;

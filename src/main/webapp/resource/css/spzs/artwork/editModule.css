@@ -243,7 +243,6 @@ body{
 }
 .image1_div .list_div .item_img{
 	width: 600px;
-	height: 600px;
 	margin-top: 25px;
 }
 .memo1_div{
@@ -313,7 +312,8 @@ body{
 	display:none;
 }
 .image2_div .list_div .item_img{
-	width: 600px;height: 600px;margin-top: 25px;
+	width: 600px;
+	margin-top: 25px;
 }
 .right_div{
 	width: 150px;

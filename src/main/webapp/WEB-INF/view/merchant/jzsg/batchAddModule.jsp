@@ -232,9 +232,12 @@ function showQrcodePic1(obj){
         $img.attr("src", dataURL);
 
         var listDiv=$("#image1_div #list_div");
-        listDiv.append("<img id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\" style=\"width: 600px;height: 600px;margin-top: 25px;\">");
-        
-    	resetDivPosition();
+        listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
+
+        //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+        setTimeout(function(){
+        	resetDivPosition();
+        },"100")
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
@@ -276,9 +279,12 @@ function showQrcodePic2(obj){
         $img.attr("src", dataURL);
 
         var listDiv=$("#image2_div #list_div");
-        listDiv.append("<img id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\" style=\"width: 600px;height: 600px;margin-top: 25px;\">");
+        listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
 
-    	resetDivPosition();
+        //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+        setTimeout(function(){
+        	resetDivPosition();
+        },"100")
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");
