@@ -313,6 +313,14 @@ public interface PublicService {
 	 */
 	public HtmlGoodsJZSG getHtmlGoodsJZSG(String userNumber, String accountId);
 
+	/**
+	 * 获得活动签到模版内容
+	 * @param goodsNumber
+	 * @param accountNumber
+	 * @return
+	 */
+	public HtmlGoodsHDQD getHtmlGoodsHDQD(String goodsNumber, String accountNumber);
+
 	public HtmlGoodsText getHtmlGoodsText(String textType, String uuid, String accountNumber);
 
 	public ScoreQrcode getScoreQrcode(String uuid, String accountId);

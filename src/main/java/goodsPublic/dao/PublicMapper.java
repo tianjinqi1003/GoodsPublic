@@ -313,6 +313,14 @@ public interface PublicMapper {
 	 */
 	public HtmlGoodsJZSG getHtmlGoodsJZSG(String userNumber, String accountId);
 
+	/**
+	 * 获得活动签到模版内容
+	 * @param goodsNumber
+	 * @param accountNumber
+	 * @return
+	 */
+	public HtmlGoodsHDQD getHtmlGoodsHDQD(String goodsNumber, String accountNumber);
+
 	public HtmlGoodsText getHtmlGoodsText(@Param("textType") String textType, @Param("uuid") String uuid, @Param("accountNumber") String accountNumber);
 
 	public ScoreQrcode getScoreQrcode(String uuid, String accountId);

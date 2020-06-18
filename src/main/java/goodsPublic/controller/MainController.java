@@ -1227,16 +1227,16 @@ public class MainController {
 				}
 			}
 			
-			String userNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-			htmlGoodsHDQD.setUserNumber(userNumber);
+			String goodsNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+			htmlGoodsHDQD.setGoodsNumber(goodsNumber);
 			
 			String addr = request.getLocalAddr();
 			int port = request.getLocalPort();
 			String contextPath = request.getContextPath();
 			//String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoods?trade=hdqd&userNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
-			String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/main/goShowHtmlGoods?trade=hdqd&userNumber="+htmlGoodsHDQD.getUserNumber()+"&accountId="+htmlGoodsHDQD.getAccountNumber();
+			String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/main/goShowHtmlGoods?trade=hdqd&goodsNumber="+htmlGoodsHDQD.getGoodsNumber()+"&accountId="+htmlGoodsHDQD.getAccountNumber();
 			
-			String fileName = userNumber + ".jpg";
+			String fileName = goodsNumber + ".jpg";
 			String avaPath="/GoodsPublic/upload/"+fileName;
 			String path = "D:/resource";
 			Qrcode.createQrCode(url, path, fileName);
@@ -1253,7 +1253,7 @@ public class MainController {
 			e.printStackTrace();
 		}
 		
-		return "../../merchant/main/goBrowseHtmlGoodsHDQD?userNumber="+htmlGoodsHDQD.getUserNumber()+"&accountNumber="+htmlGoodsHDQD.getAccountNumber();
+		return "../../merchant/main/goBrowseHtmlGoodsHDQD?goods="+htmlGoodsHDQD.getGoodsNumber()+"&accountNumber="+htmlGoodsHDQD.getAccountNumber();
 	}
 	
 	@RequestMapping(value="/addBatchScoreQrcode")
@@ -1921,6 +1921,20 @@ public class MainController {
 		HtmlGoodsJZSG htmlGoodsJZSG = publicService.getHtmlGoodsJZSG(userNumber,accountNumber);
 		request.setAttribute("htmlGoodsJZSG", htmlGoodsJZSG);
 		return "/merchant/jzsg/browseHtmlGoods";
+	}
+	
+	/**
+	 * 这个是显示活动签到的模版内容，用于后台商户浏览
+	 * @param userNumber
+	 * @param accountNumber
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/goBrowseHtmlGoodsHDQD")
+	public String goBrowseHtmlGoodsHDQD(String goodsNumber, String accountNumber, HttpServletRequest request) {
+		HtmlGoodsHDQD htmlGoodsHDQD = publicService.getHtmlGoodsHDQD(goodsNumber,accountNumber);
+		request.setAttribute("htmlGoodsHDQD", htmlGoodsHDQD);
+		return "/merchant/hdqd/browseHtmlGoods";
 	}
 	
 	/**
@@ -3520,6 +3534,11 @@ public class MainController {
 			HtmlGoodsJZSG htmlGoodsJZSG = publicService.getHtmlGoodsJZSG(request.getParameter("userNumber"),accountNumber);
 			request.setAttribute("htmlGoodsJZSG", htmlGoodsJZSG);
 			url="/merchant/jzsg/editModule";
+			break;
+		case "hdqd":
+			HtmlGoodsHDQD htmlGoodsHDQD = publicService.getHtmlGoodsHDQD(goodsNumber,accountNumber);
+			request.setAttribute("htmlGoodsHDQD", htmlGoodsHDQD);
+			url="/merchant/hdqd/editModule";
 			break;
 		}
 		return url;

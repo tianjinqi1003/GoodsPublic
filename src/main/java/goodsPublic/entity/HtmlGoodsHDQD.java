@@ -59,7 +59,7 @@ public class HtmlGoodsHDQD implements Serializable {
 	private String qrCode;
 	private String gmtCreate;
 	private String gmtModified;
-	private String userNumber;
+	private String goodsNumber;
 	private String accountNumber;
 	public int getId() {
 		return id;
@@ -367,11 +367,11 @@ public class HtmlGoodsHDQD implements Serializable {
 	public void setGmtModified(String gmtModified) {
 		this.gmtModified = gmtModified;
 	}
-	public String getUserNumber() {
-		return userNumber;
+	public String getGoodsNumber() {
+		return goodsNumber;
 	}
-	public void setUserNumber(String userNumber) {
-		this.userNumber = userNumber;
+	public void setGoodsNumber(String goodsNumber) {
+		this.goodsNumber = goodsNumber;
 	}
 	public String getAccountNumber() {
 		return accountNumber;

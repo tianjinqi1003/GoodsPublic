@@ -1115,8 +1115,8 @@
 				qrCode,
 			</if>
 				gmtCreate,
-			<if test="userNumber!=null">
-				userNumber,
+			<if test="goodsNumber!=null">
+				goodsNumber,
 			</if>
 			<if test="accountNumber!=null">
 				accountNumber,
@@ -1269,8 +1269,8 @@
 				#{qrCode},
 			</if>
 				now(),
-			<if test="userNumber!=null">
-				#{userNumber},
+			<if test="goodsNumber!=null">
+				#{goodsNumber},
 			</if>
 			<if test="accountNumber!=null">
 				#{accountNumber},
@@ -2738,6 +2738,9 @@
 	</select>
 	<select id="getHtmlGoodsJZSG" resultType="goodsPublic.entity.HtmlGoodsJZSG">
 		select * from html_goods_jzsg where userNumber=#{param1} and accountNumber=#{param2}
+	</select>
+	<select id="getHtmlGoodsHDQD" resultType="goodsPublic.entity.HtmlGoodsHDQD">
+		select * from html_goods_hdqd where goodsNumber=#{param1} and accountNumber=#{param2}
 	</select>
 	<select id="getHtmlGoodsText" resultType="goodsPublic.entity.HtmlGoodsText">
 		select * from html_goods_text where textType=#{textType} and uuid=#{uuid}
