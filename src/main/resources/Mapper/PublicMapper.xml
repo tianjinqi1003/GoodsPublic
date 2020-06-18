@@ -2110,6 +2110,142 @@
 		gmtModified=now()
 		where id=#{id}
 	</update>
+	<update id="editHtmlGoodsHDQD" parameterType="goodsPublic.entity.HtmlGoodsHDQD">
+		update html_goods_hdqd set
+		<if test="title!=null">
+			title=#{title},
+		</if>		
+			image1_1=#{image1_1},
+			image1_2=#{image1_2},
+			image1_3=#{image1_3},
+			image1_4=#{image1_4},
+			image1_5=#{image1_5},
+		<if test="memo1!=null">
+			memo1=#{memo1},
+		</if>
+		<if test="hdapName1!=null">
+			hdapName1=#{hdapName1},
+		</if>
+		<if test="hdapValue1_1!=null">
+			hdapValue1_1=#{hdapValue1_1},
+		</if>
+		<if test="hdapValue1_2!=null">
+			hdapValue1_2=#{hdapValue1_2},
+		</if>
+		<if test="hdapIfShow1!=null">
+			hdapIfShow1=#{hdapIfShow1},
+		</if>
+		<if test="hdapName2!=null">
+			hdapName2=#{hdapName2},
+		</if>
+		<if test="hdapValue2_1!=null">
+			hdapValue2_1=#{hdapValue2_1},
+		</if>
+		<if test="hdapValue2_2!=null">
+			hdapValue2_2=#{hdapValue2_2},
+		</if>
+		<if test="hdapIfShow2!=null">
+			hdapIfShow2=#{hdapIfShow2},
+		</if>
+		<if test="hdapName3!=null">
+			hdapName3=#{hdapName3},
+		</if>
+		<if test="hdapValue3_1!=null">
+			hdapValue3_1=#{hdapValue3_1},
+		</if>
+		<if test="hdapValue3_2!=null">
+			hdapValue3_2=#{hdapValue3_2},
+		</if>
+		<if test="hdapIfShow3!=null">
+			hdapIfShow3=#{hdapIfShow3},
+		</if>
+		<if test="hdapName4!=null">
+			hdapName4=#{hdapName4},
+		</if>
+		<if test="hdapValue4_1!=null">
+			hdapValue4_1=#{hdapValue4_1},
+		</if>
+		<if test="hdapValue4_2!=null">
+			hdapValue4_2=#{hdapValue4_2},
+		</if>
+		<if test="hdapIfShow4!=null">
+			hdapIfShow4=#{hdapIfShow4},
+		</if>
+		<if test="hdapName5!=null">
+			hdapName5=#{hdapName5},
+		</if>
+		<if test="hdapValue5_1!=null">
+			hdapValue5_1=#{hdapValue5_1},
+		</if>
+		<if test="hdapValue5_2!=null">
+			hdapValue5_2=#{hdapValue5_2},
+		</if>
+		<if test="hdapIfShow5!=null">
+			hdapIfShow5=#{hdapIfShow5},
+		</if>
+		<if test="hdapName6!=null">
+			hdapName6=#{hdapName6},
+		</if>
+		<if test="hdapValue6_1!=null">
+			hdapValue6_1=#{hdapValue6_1},
+		</if>
+		<if test="hdapValue6_2!=null">
+			hdapValue6_2=#{hdapValue6_2},
+		</if>
+		<if test="hdapIfShow6!=null">
+			hdapIfShow6=#{hdapIfShow6},
+		</if>
+		<if test="hdapName7!=null">
+			hdapName7=#{hdapName7},
+		</if>
+		<if test="hdapValue7_1!=null">
+			hdapValue7_1=#{hdapValue7_1},
+		</if>
+		<if test="hdapValue7_2!=null">
+			hdapValue7_2=#{hdapValue7_2},
+		</if>
+		<if test="hdapIfShow7!=null">
+			hdapIfShow7=#{hdapIfShow7},
+		</if>
+		<if test="hdapName8!=null">
+			hdapName8=#{hdapName8},
+		</if>
+		<if test="hdapValue8_1!=null">
+			hdapValue8_1=#{hdapValue8_1},
+		</if>
+		<if test="hdapValue8_2!=null">
+			hdapValue8_2=#{hdapValue8_2},
+		</if>
+		<if test="hdapIfShow8!=null">
+			hdapIfShow8=#{hdapIfShow8},
+		</if>
+		<if test="hdapName9!=null">
+			hdapName9=#{hdapName9},
+		</if>
+		<if test="hdapValue9_1!=null">
+			hdapValue9_1=#{hdapValue9_1},
+		</if>
+		<if test="hdapValue9_2!=null">
+			hdapValue9_2=#{hdapValue9_2},
+		</if>
+		<if test="hdapIfShow9!=null">
+			hdapIfShow9=#{hdapIfShow9},
+		</if>
+		<if test="hdapName10!=null">
+			hdapName10=#{hdapName10},
+		</if>
+		<if test="hdapValue10_1!=null">
+			hdapValue10_1=#{hdapValue10_1},
+		</if>
+		<if test="hdapValue10_2!=null">
+			hdapValue10_2=#{hdapValue10_2},
+		</if>
+		<if test="hdapIfShow10!=null">
+			hdapIfShow10=#{hdapIfShow10},
+		</if>
+		gmtModified=now()
+		where id=#{id}
+	</update>
 	<update id="updateQrcode" parameterType="java.lang.String">
 		update public_goods set qrCode=#{param1} where goodsNumber=#{param2} and accountNumber=#{param3}
 	</update>

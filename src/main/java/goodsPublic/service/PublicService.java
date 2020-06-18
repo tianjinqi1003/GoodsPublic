@@ -346,6 +346,13 @@ public interface PublicService {
 	 */
 	public int editHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG);
 
+	/**
+	 * 编辑活动签到模版内容
+	 * @param htmlGoodsHDQD
+	 * @return
+	 */
+	public int editHtmlGoodsHDQD(HtmlGoodsHDQD htmlGoodsHDQD);
+
 	public int deleteScoreQrcodeByUuids(String uuids);
 
 	/**
