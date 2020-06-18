@@ -1174,6 +1174,88 @@ public class MainController {
 			return "../../merchant/main/goBrowseHtmlGoodsJZSG?userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountNumber="+htmlGoodsJZSG.getAccountNumber();
 	}
 	
+	@RequestMapping(value="/addHtmlGoodsHDQD",produces="plain/text; charset=UTF-8")
+	public String addHtmlGoodsHDQD(HtmlGoodsHDQD htmlGoodsHDQD,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file1_2",required=false) MultipartFile file1_2,
+			@RequestParam(value="file1_3",required=false) MultipartFile file1_3,
+			@RequestParam(value="file1_4",required=false) MultipartFile file1_4,
+			@RequestParam(value="file1_5",required=false) MultipartFile file1_5,
+			HttpServletRequest request) {
+		
+		try {
+			MultipartFile[] fileArr=new MultipartFile[5];
+			fileArr[0]=file1_1;
+			fileArr[1]=file1_2;
+			fileArr[2]=file1_3;
+			fileArr[3]=file1_4;
+			fileArr[4]=file1_5;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						jsonStr = FileUploadUtils.appUploadContentImg(request,fileArr[i],"");
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								htmlGoodsHDQD.setImage1_1(dataJO.get("src").toString());
+								break;
+							case 1:
+								htmlGoodsHDQD.setImage1_2(dataJO.get("src").toString());
+								break;
+							case 2:
+								htmlGoodsHDQD.setImage1_3(dataJO.get("src").toString());
+								break;
+							case 3:
+								htmlGoodsHDQD.setImage1_4(dataJO.get("src").toString());
+								break;
+							case 4:
+								htmlGoodsHDQD.setImage1_5(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+					else {
+						switch (i) {
+						case 0:
+							htmlGoodsHDQD.setImage1_1("/GoodsPublic/resource/images/hdqd/202004240001.png");
+							break;
+						}
+					}
+				}
+			}
+			
+			String userNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+			htmlGoodsHDQD.setUserNumber(userNumber);
+			
+			String addr = request.getLocalAddr();
+			int port = request.getLocalPort();
+			String contextPath = request.getContextPath();
+			//String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoods?trade=hdqd&userNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountId="+htmlGoodsSPZS.getAccountNumber();
+			String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/main/goShowHtmlGoods?trade=hdqd&userNumber="+htmlGoodsHDQD.getUserNumber()+"&accountId="+htmlGoodsHDQD.getAccountNumber();
+			
+			String fileName = userNumber + ".jpg";
+			String avaPath="/GoodsPublic/upload/"+fileName;
+			String path = "D:/resource";
+			Qrcode.createQrCode(url, path, fileName);
+			
+			htmlGoodsHDQD.setQrCode(avaPath);
+
+			int a=publicService.addHtmlGoodsHDQD(htmlGoodsHDQD);
+			if(a>0) {
+				int qrcodeCount=1;
+				a=publicService.updateAccountQCById(qrcodeCount,htmlGoodsHDQD.getAccountNumber());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "../../merchant/main/goBrowseHtmlGoodsHDQD?userNumber="+htmlGoodsHDQD.getUserNumber()+"&accountNumber="+htmlGoodsHDQD.getAccountNumber();
+	}
+	
 	@RequestMapping(value="/addBatchScoreQrcode")
 	@ResponseBody
 	public Map<String, Object> addBatchScoreQrcode(ScoreQrcode scoreQrcode,String qrcodeUuidsStr,String qrcodeUrlsStr) {

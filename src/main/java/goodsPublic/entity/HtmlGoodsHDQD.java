@@ -19,31 +19,31 @@ public class HtmlGoodsHDQD implements Serializable {
 	private String hdapName1;
 	private String hdapValue1_1;
 	private String hdapValue1_2;
-	private Boolean hdapIfShow1;
+	private Boolean hdapIfShow1=false;
 	private String hdapName2;
 	private String hdapValue2_1;
 	private String hdapValue2_2;
-	private Boolean hdapIfShow2;
+	private Boolean hdapIfShow2=false;
 	private String hdapName3;
 	private String hdapValue3_1;
 	private String hdapValue3_2;
-	private Boolean hdapIfShow3;
+	private Boolean hdapIfShow3=false;
 	private String hdapName4;
 	private String hdapValue4_1;
 	private String hdapValue4_2;
-	private Boolean hdapIfShow4;
+	private Boolean hdapIfShow4=false;
 	private String hdapName5;
 	private String hdapValue5_1;
 	private String hdapValue5_2;
-	private String hdapIfShow5;
+	private Boolean hdapIfShow5=false;
 	private String hdapName6;
 	private String hdapValue6_1;
 	private String hdapValue6_2;
-	private Boolean hdapIfShow6;
+	private Boolean hdapIfShow6=false;
 	private String hdapName7;
 	private String hdapValue7_1;
 	private String hdapValue7_2;
-	private Boolean hdapIfShow7;
+	private Boolean hdapIfShow7=false;
 	private String hdapName8;
 	private String hdapValue8_1;
 	private String hdapValue8_2;
@@ -223,10 +223,10 @@ public class HtmlGoodsHDQD implements Serializable {
 	public void setHdapValue5_2(String hdapValue5_2) {
 		this.hdapValue5_2 = hdapValue5_2;
 	}
-	public String getHdapIfShow5() {
+	public Boolean getHdapIfShow5() {
 		return hdapIfShow5;
 	}
-	public void setHdapIfShow5(String hdapIfShow5) {
+	public void setHdapIfShow5(Boolean hdapIfShow5) {
 		this.hdapIfShow5 = hdapIfShow5;
 	}
 	public String getHdapName6() {

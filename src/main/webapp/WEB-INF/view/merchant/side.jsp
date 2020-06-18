@@ -254,7 +254,7 @@ function checkIfPaidInSide(){
 							建筑施工
 						</a>
 					</li>
-					<li class="layui-nav-item" style="display: none;">
+					<li class="layui-nav-item">
 						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=hdqd&accountId=${sessionScope.user.id }">
 							活动签到
 						</a>
