@@ -34,21 +34,10 @@ function hideOptionDiv(o){
 	$(o).parent().find("#but_div").css("display","none");
 }
 
-function addBatchHtmlGoodsJZSG(){
+function addBatchHtmlGoodsHDQD(){
 	var jsonStr="[";
-	jsonStr+="{";
 	var colCount;
-	var valTds=$("#qrsjbsc_div #excel_tab .tit_tr .val_td");
-	colCount=valTds.length;
-	//val_td
-	valTds.each(function(i){
-		if(i<colCount-1)
-			jsonStr+="\"value"+(i+1)+"\":\""+$(this).text()+"\",";
-		else
-			jsonStr+="\"value"+(i+1)+"\":\""+$(this).text()+"\"";
-	});
-	jsonStr+="},";
-	
+	var valTds;
 	var rowCount=$("#qrsjbsc_div #excel_tab .content_tr").length;
 	$("#qrsjbsc_div #excel_tab .content_tr").each(function(i){
 		jsonStr+="{";
@@ -75,7 +64,7 @@ function addBatchHtmlGoodsJZSG(){
 	 
 	$.ajax({
 		type:"post",
-		url:"addBatchHtmlGoodsJZSG",
+		url:"addBatchHtmlGoodsHDQD",
 		//dataType: "json",
 		data:formData,
 		cache: false,
@@ -314,20 +303,20 @@ function createUUID() {
     return uuid;
 }
 
-function changeRYXXTrIfShow(index,o){
-	var ifShow=$("#ryxxIfShow"+index).val();
+function changeHDAPTrIfShow(index,o){
+	var ifShow=$("#hdapIfShow"+index).val();
 	if(ifShow=="true"){
-		$("#ryxxIfShow"+index).val(false);
+		$("#hdapIfShow"+index).val(false);
 		$(o).val("隐藏");
 	}
 	else{
-		$("#ryxxIfShow"+index).val(true);
+		$("#hdapIfShow"+index).val(true);
 		$(o).val("显示");
 	}
 }
 
 function goBack(){
-	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=jzsg";
+	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=hdqd";
 }
 
 function checkForm(){
@@ -383,54 +372,32 @@ function nextStep(flag){
 		stepIndex=1;
 	
 	if(stepIndex==1){
-		var txtColIndex=0;
-		var titTrStr="<tr class=\"tit_tr\">";
+		var hdsjArr=[];
 		var txtTdStr="";
 		var noTxtTdStr="";
-		$("input[id^='ryxxIfShow']").each(function(i){
-			if(txtColIndex>=6)
-				return false;
+		$("input[id^='hdapIfShow']").each(function(i){
 			var checked=$(this).val();
 			if(checked=="true"){
-				txtTdStr+="<td>"+$("td[id^='name_td']").eq(i).text()+"</td>";
-				txtColIndex++;
-			}
-			else{
-				noTxtTdStr+="<td></td>";
+				hdsjArr.push($("td[id^='name_td']").eq(i).text());
 			}
 		});
-		titTrStr+=txtTdStr+noTxtTdStr;
-		titTrStr+="</tr>";
 		var conStr="";
-		for(var i=1;i<=3;i++){
-			txtColIndex=0;
+		for(var i=1;i<=hdsjArr.length;i++){
 			txtTdStr="";
 			noTxtTdStr="";
 			conStr+="<tr class=\"content_tr\">";
-			$("input[id^='ryxxIfShow']").each(function(j){
-				if(txtColIndex>=6)
-					return false;
-				var checked=$(this).val();
-				if(checked=="true"){
-					if(txtColIndex==0)
-						txtTdStr+="<td class=\"num_td\">"+$("td[id^='name_td']").eq(j).text()+i+"</td>";
-					else
-						txtTdStr+="<td>"+$("td[id^='name_td']").eq(j).text()+i+"</td>";
-					txtColIndex++;
-				}
-				else{
-					if(txtColIndex==0)
-						noTxtTdStr+="<td class=\"num_td\"></td>";
-					else
-						noTxtTdStr+="<td></td>";
-				}
-			});
-			conStr+=txtTdStr+noTxtTdStr;
+				txtTdStr+="<td>"+hdsjArr[i-1]+"</td>";
+				txtTdStr+="<td>项目"+i+"</td>";
+				txtTdStr+="<td>地点"+i+"</td>";
+				noTxtTdStr+="<td></td><td></td><td></td>";
+				conStr+=txtTdStr+noTxtTdStr;
 			conStr+="</tr>";
 		}
+		console.log(conStr);
+		
 		var excelTab=$("#xzmb_div #excel_tab");
 		excelTab.empty();
-		excelTab.append(titTrStr+conStr);
+		excelTab.append(conStr);
 		
 		$("#first_div").text("1");
 		$("#first_div").css("color","#fff");
@@ -538,31 +505,19 @@ function initQrsjbscExcelTab(){
 	
 	for(var i=0;i<ja.length;i++){
 		var jo=ja[i];
-		if(i==0){
-			trStr+="<tr class=\"tit_tr\">";
-			trStr+="<td><div style=\"width:55px;height:25px;line-height:25px;text-align:center;margin:2px auto 0; background: #4caf50;color: #fff;border-radius: 4px;\">标题行</div></td>";
-			for(var key in jo){
-				//console.log(key.substring(5));
-				//console.log(jo[key]);
-				trStr+="<td class=\"val_td\">"+jo[key]+"</td>";
-			}
-			trStr+="</tr>";
+		trStr+="<tr class=\"content_tr\">";
+		trStr+="<td class=\"num_td\">"+(i+1)+"</td>";
+		for(var key in jo){
+			trStr+="<td class=\"val_td\">"+jo[key]+"</td>";
 		}
-		else{
-			trStr+="<tr class=\"content_tr\">";
-			trStr+="<td class=\"num_td\">"+(i+1)+"</td>";
-			for(var key in jo){
-				trStr+="<td class=\"val_td\">"+jo[key]+"</td>";
-			}
-			trStr+="</tr>";
-		}
+		trStr+="</tr>";
 	}
 	trStr+="</tbody>";
 	excelTab.append(trStr);
 	
 	var dataCount=$("#qrsjbsc_div #excel_tab .content_tr").length;
 	$("#qrsjbsc_div #dataCount_span").text(dataCount);
-	$("#qrsjbsc_div #qrcodeCount_span").text(dataCount);
+	$("#qrsjbsc_div #qrcodeCount_span").text(1);
 	
 	resetQrsjbscExcelTabStyle();
 }
@@ -593,9 +548,9 @@ function resetQrsjbscExcelTabStyle(){
 }
 
 function checkExcelKey(jo){
-	var colCount=$("input[id^='ryxxIfShow'][value='true']").length;
+	var colCount=3;
 	var keyCount=0;
-	var mbezdStr="模版Excel字段：";
+	var mbezdStr="模版Excel字段：时间、项目、地点";
 	var scezdStr="上传Excel字段：";
 	for(var key in jo){
 		keyCount++;
@@ -610,12 +565,6 @@ function checkExcelKey(jo){
 		$("#scwj_div #warn_div").css("display","block");
 		$("#scwj_div #sffgmb_div").css("display","block");
 		
-		$("input[id^='ryxxIfShow']").each(function(i){
-			var checked=$(this).val();
-			if(checked=="true"){
-				mbezdStr+=$("td[id^='name_td']").eq(i).text()+"、";
-			}
-		});
 		mbezdStr=mbezdStr.substring(0,mbezdStr.length-1);
 		scezdStr=scezdStr.substring(0,scezdStr.length-1);
 		mbezdStr+="等"+colCount+"个字段";
@@ -628,20 +577,22 @@ function checkExcelKey(jo){
 }
 
 function downloadExcelModule(){
+	var hdsjArr=[];
+	$("input[id^='hdapIfShow']").each(function(i){
+		var checked=$(this).val();
+		if(checked=="true"){
+			hdsjArr.push($("td[id^='name_td']").eq(i).text());
+		}
+	});
+	
 	var jsonStr="[";
-	var rowCount=4;
+	var rowCount=hdsjArr.length;
 	for(var i=0;i<rowCount;i++){
 		jsonStr+="{";
-		$("input[id^='ryxxIfShow']").each(function(j){
-			var checked=$(this).val();
-			if(!(checked=="true"))
-				return true;
-			
-			if(j<$("input[id^='ryxxIfShow']").length-1)
-				jsonStr+="\"value"+j+"\":\""+$("td[id^='name_td']").eq(j).text()+(i==0?"":i)+"\",";
-			else
-				jsonStr+="\"value"+j+"\":\""+$("td[id^='name_td']").eq(j).text()+(i==0?"":i)+"\"";
-		});
+		jsonStr+="\"value0\":\""+hdsjArr[i]+"\",";
+		jsonStr+="\"value1\":\"项目"+(i+1)+"\",";
+		jsonStr+="\"value2\":\"地点"+(i+1)+"\"";
+		
 		if(i<rowCount-1)
 			jsonStr+="},";
 		else
@@ -649,7 +600,8 @@ function downloadExcelModule(){
 	}
 	jsonStr+="]";
 	console.log(jsonStr);
-	location.href=path+"merchant/excel/downloadExcelModule?trade=jzsg&jsonStr="+encodeURI(jsonStr);
+	//return false;
+	location.href=path+"merchant/excel/downloadExcelModule?trade=hdqd&jsonStr="+encodeURI(jsonStr);
 }
 
 function chooseExcel(){
@@ -678,38 +630,6 @@ function chooseExcel(){
 				<div class="left_div">
 					<img class="excel_img" src="<%=basePath %>/resource/images/spzs/excel_bg.19fbdf2a.jpg" alt="">
 					<table class="excel_tab" id="excel_tab">
-						<tr class="tit_tr">
-							<td>品牌</td>
-							<td>系列</td>
-							<td>产地</td>
-							<td>葡萄品种</td>
-							<td>醒酒时间</td>
-							<td>采摘年份</td>
-						</tr>
-						<tr class="content_tr">
-							<td>品牌</td>
-							<td>系列</td>
-							<td>产地</td>
-							<td>葡萄品种</td>
-							<td>醒酒时间</td>
-							<td>采摘年份</td>
-						</tr>
-						<tr class="content_tr">
-							<td>品牌</td>
-							<td>系列</td>
-							<td>产地</td>
-							<td>葡萄品种</td>
-							<td>醒酒时间</td>
-							<td>采摘年份</td>
-						</tr>
-						<tr class="content_tr">
-							<td>品牌</td>
-							<td>系列</td>
-							<td>产地</td>
-							<td>葡萄品种</td>
-							<td>醒酒时间</td>
-							<td>采摘年份</td>
-						</tr>
 					</table>
 					<div class="ckxgBut_div">查看二维码效果</div>
 				</div>
@@ -789,7 +709,7 @@ function chooseExcel(){
 					</tbody>
 				</table>
 			</div>
-			<div class="ksscBut_div" onclick="addBatchHtmlGoodsJZSG()">开始生成</div>
+			<div class="ksscBut_div" onclick="addBatchHtmlGoodsHDQD()">开始生成</div>
 		</div>
 	</div>
 </div>
@@ -878,18 +798,21 @@ function chooseExcel(){
 			</c:forEach>
 		</div>
 	</div>
-	<div class="ryxx_div" id="ryxx_div">
-		<table class="ryxx_tab" id="ryxx_tab">
+	<div class="hdap_div" id="hdap_div">
+		<table class="hdap_tab" id="hdap_tab">
 			<c:forEach items="${requestScope.hdapList }" var="hdap" varStatus="status">
 			<tr class="item_tr" id="tr${status.index+1 }" height="50">
-				<input type="hidden" name="ryxxName${status.index+1 }" value="${hdap.name }" />
+				<input type="hidden" name="hdapName${status.index+1 }" value="${hdap.name }" />
 				<td class="name_td" id="name_td${status.index+1 }">${hdap.name }</td>
 				<td class="value_td">
 					默认显示Excel导入内容
 				</td>
+				<td class="value2_td">
+					默认显示Excel导入内容
+				</td>
 				<td class="cz_td">
-					<input type="hidden" id="ryxxIfShow${status.index+1 }" name="ryxxIfShow${status.index+1 }" value="true" />
-					<input type="button" class="ryxxIfShow_inp" value="显示" onclick="changeRYXXTrIfShow(${status.index+1 },this)"/>
+					<input type="hidden" id="hdapIfShow${status.index+1 }" name="hdapIfShow${status.index+1 }" value="true" />
+					<input type="button" class="hdapIfShow_inp" value="显示" onclick="changeHDAPTrIfShow(${status.index+1 },this)"/>
 				</td>
 			</tr>
 			</c:forEach>

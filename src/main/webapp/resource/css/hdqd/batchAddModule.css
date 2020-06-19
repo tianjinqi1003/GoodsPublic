@@ -57,14 +57,11 @@ body{
 .xzmb_div .excel_tab{
 	width: 378px;height:56px;margin-top: -194px;margin-left: 14px;font-size: 12px;text-align: center;position: absolute;
 }
-.xzmb_div .excel_tab .tit_tr{
-	height: 14px;line-height: 14px;background: rgba(245,166,35,.1);
-}
-.xzmb_div .excel_tab .tit_tr td{
-	width: 63px;font-weight: 700;
-}
 .xzmb_div .excel_tab .content_tr{
 	height: 14px;line-height: 14px;
+}
+.xzmb_div .excel_tab .content_tr td{
+	width:16.6%;
 }
 .xzmb_div .ckxgBut_div{
 	margin-top: 8px;text-align: center;font-size: 12px;color: #357bb3;font-weight: 600;cursor: default;
@@ -147,9 +144,6 @@ body{
 	width:736px;
 	height:363px;
 	margin:auto;
-	/*
-	border: 1px solid hsla(210,8%,51%,.13);
-	*/
 	display: none;
 }
 .qrsjbsc_div .ylsjTxt_div{
@@ -172,9 +166,6 @@ body{
 }
 .qrsjbsc_div .excel_tab .xh_tr th{
 	width: 90px;border-right: 1px solid #e8e8e8;
-}
-.qrsjbsc_div .excel_tab .tit_tr{
-	height:40px;background: #edf7ee;
 }
 .qrsjbsc_div .excel_tab .val_td{
 	padding-left:10px;
@@ -435,31 +426,31 @@ body{
 	width: 600px;
 	margin-top: 25px;
 }
-.ryxx_div{
+.hdap_div{
 	margin-top: 20px;
 }
-.ryxx_tab{
+.hdap_tab{
 	width: 600px;
 	margin: 0 auto;
 	border: #eee solid 1px;
 }
-.ryxx_tab .item_tr .name_td{
+.hdap_tab .item_tr .name_td{
 	width:20%;
 	border: #eee solid 1px;
-	padding-left: 20px;
+	padding-left: 5px;
 }
-.ryxx_tab .item_tr .value_td{
-	width:70%;
+.hdap_tab .item_tr .value_td,.hdap_tab .item_tr .value2_td{
+	width:35%;
 	color:#bbb;
 	border: #eee solid 1px;
-	padding-left: 20px;
+	padding-left: 10px;
 }
-.ryxx_tab .item_tr .cz_td{
+.hdap_tab .item_tr .cz_td{
 	width:10%;
 	border: #eee solid 1px;
 	text-align: center;
 }
-.ryxx_tab .item_tr .ryxxIfShow_inp{
+.hdap_tab .item_tr .hdapIfShow_inp{
 	cursor: pointer;
 }
 .space_div{

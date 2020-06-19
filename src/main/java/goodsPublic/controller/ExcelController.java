@@ -88,6 +88,9 @@ public class ExcelController {
 			case "jzsg":
 				fileName="建筑施工_excel模版";
 				break;
+			case "hdqd":
+				fileName="活动签到_excel模版";
+				break;
 			}
 			download(fileName, wb, response);
 		} catch (IOException e) {

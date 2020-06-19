@@ -1061,6 +1061,146 @@ public class MainController {
 		}
 	}
 	
+	@RequestMapping(value="/addBatchHtmlGoodsHDQD")
+	@ResponseBody
+	public Map<String, Object> addBatchHtmlGoodsHDQD(HtmlGoodsHDQD htmlGoodsHDQD,
+			String jaStr,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file1_2",required=false) MultipartFile file1_2,
+			@RequestParam(value="file1_3",required=false) MultipartFile file1_3,
+			@RequestParam(value="file1_4",required=false) MultipartFile file1_4,
+			@RequestParam(value="file1_5",required=false) MultipartFile file1_5,
+			HttpServletRequest request) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		//System.out.println("==="+jaStr);
+		JSONArray ja = JSONArray.fromObject(jaStr);
+		try {
+			MultipartFile[] fileArr=new MultipartFile[6];
+			fileArr[0]=file1_1;
+			fileArr[1]=file1_2;
+			fileArr[2]=file1_3;
+			fileArr[3]=file1_4;
+			fileArr[4]=file1_5;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						jsonStr = FileUploadUtils.appUploadContentImg(request,fileArr[i],"");
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								htmlGoodsHDQD.setImage1_1(dataJO.get("src").toString());
+								break;
+							case 1:
+								htmlGoodsHDQD.setImage1_2(dataJO.get("src").toString());
+								break;
+							case 2:
+								htmlGoodsHDQD.setImage1_3(dataJO.get("src").toString());
+								break;
+							case 3:
+								htmlGoodsHDQD.setImage1_4(dataJO.get("src").toString());
+								break;
+							case 4:
+								htmlGoodsHDQD.setImage1_5(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+					else {
+						switch (i) {
+						case 0:
+							htmlGoodsHDQD.setImage1_1("/GoodsPublic/resource/images/hdqd/202004240001.png");
+							break;
+						}
+					}
+				}
+			}
+			
+			String goodsNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+			htmlGoodsHDQD.setGoodsNumber(goodsNumber);
+			for(int i=1;i<=ja.size();i++) {
+				JSONObject jo = ja.getJSONObject(i-1);
+				Iterator<String> it = jo.keys();
+				while (it.hasNext()) {
+					String key = it.next();
+					String value = jo.getString(key);
+					Integer colIndex = Integer.valueOf(key.substring(5));
+					//System.out.println("key==="+key);
+					switch (i) {
+					case 1:
+							switch (colIndex) {
+							case 1:
+								htmlGoodsHDQD.setHdapName1(value);
+								break;
+							case 2:
+								htmlGoodsHDQD.setHdapValue1_1(value);
+								break;
+							case 3:
+								htmlGoodsHDQD.setHdapValue1_2(value);
+								break;
+							}
+						break;
+					case 2:
+						switch (colIndex) {
+						case 1:
+							htmlGoodsHDQD.setHdapName2(value);
+							break;
+						case 2:
+							htmlGoodsHDQD.setHdapValue2_1(value);
+							break;
+						case 3:
+							htmlGoodsHDQD.setHdapValue2_2(value);
+							break;
+						}
+						break;
+					case 3:
+						switch (colIndex) {
+						case 1:
+							htmlGoodsHDQD.setHdapName3(value);
+							break;
+						case 2:
+							htmlGoodsHDQD.setHdapValue3_1(value);
+							break;
+						case 3:
+							htmlGoodsHDQD.setHdapValue3_2(value);
+							break;
+						}
+						break;
+					}
+				}
+			}
+			
+			String addr = request.getLocalAddr();
+			int port = request.getLocalPort();
+			String contextPath = request.getContextPath();
+			//String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoods?trade=hdqd&userNumber="+htmlGoodsJZSG.getUserNumber()+"&accountId="+htmlGoodsJZSG.getAccountNumber();
+			String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/main/goShowHtmlGoods?trade=hdqd&goodsNumber="+htmlGoodsHDQD.getGoodsNumber()+"&accountId="+htmlGoodsHDQD.getAccountNumber();
+			
+			String fileName = goodsNumber + ".jpg";
+			String avaPath="/GoodsPublic/upload/"+fileName;
+			String path = "D:/resource";
+			Qrcode.createQrCode(url, path, fileName);
+			
+			htmlGoodsHDQD.setQrCode(avaPath);
+			
+			int a=publicService.addHtmlGoodsHDQD(htmlGoodsHDQD);
+			
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "批量导入成功！");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "批量导入失败！");
+		}
+		finally {
+			return jsonMap;
+		}
+	}
+	
 	/**
 	 * 添加建筑施工模版内容
 	 * @param htmlGoodsJZSG
@@ -3639,8 +3779,7 @@ public class MainController {
 			List<ModuleHDQD> hdqdImage1List = (List<ModuleHDQD>)publicService.getModuleHDQDByType("image1");
 			request.setAttribute("image1List", hdqdImage1List);
 			
-			String hdqdMemo1 = (String)publicService.getModuleHDQDByType("memo1");
-			request.setAttribute("memo1", hdqdMemo1);
+			request.setAttribute("memo1", ((List<ModuleHDQD>)publicService.getModuleHDQDByType("memo1")).get(0).getValue());
 			
 			url="/merchant/hdqd/addModule";
 			break;
