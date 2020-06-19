@@ -1,3 +1,4 @@
+<%@ page import="com.goodsPublic.util.StringUtils"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -17,6 +18,16 @@
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
 <script type="text/javascript">
+KindEditor.ready(function(K) {
+	var editor1 = K.create('textarea[name="memo1"]', {
+		cssPath : '<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css',
+		uploadJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/upload_json.jsp',
+		fileManagerJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/file_manager_json.jsp',
+		allowFileManager : true
+	});
+	prettyPrint();
+});
+
 $(function(){
 	var bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
 	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
@@ -286,6 +297,9 @@ function checkIfPaid(){
 			</c:forEach>
 		</div>
 	</div>
+	<div class="memo1_div">
+		<textarea class="memo1_ta" id="memo1" name="memo1" cols="100" rows="8"><%=htmlspecialchars(memo1) %></textarea>
+	</div>
 	<div class="hdap_div" id="hdap_div">
 		<table class="hdap_tab" id="hdap_tab">
 			<tr class="head_tr">
@@ -293,7 +307,6 @@ function checkIfPaid(){
 			</tr>
 			<c:forEach items="${requestScope.hdapList }" var="hdap" varStatus="status">
 			<tr class="item_tr" id="tr${status.index+1 }" height="50">
-				<input type="hidden" name="hdapName${status.index+1 }" value="${hdap.name }" />
 				<td class="name_td">
 					<input type="text" name="hdapName${status.index+1 }" value="${hdap.name }" size="10" />
 				</td>
@@ -321,3 +334,16 @@ function checkIfPaid(){
 </form>
 </body>
 </html>
+
+<%!
+private String htmlspecialchars(String str) {
+	//System.out.println(str);
+	if(!StringUtils.isEmpty(str)){
+		str = str.replaceAll("&", "&amp;");
+		str = str.replaceAll("<", "&lt;");
+		str = str.replaceAll(">", "&gt;");
+		str = str.replaceAll("\"", "&quot;");
+	}
+	return str;
+}
+%>

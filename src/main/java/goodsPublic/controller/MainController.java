@@ -1253,7 +1253,7 @@ public class MainController {
 			e.printStackTrace();
 		}
 		
-		return "../../merchant/main/goBrowseHtmlGoodsHDQD?goods="+htmlGoodsHDQD.getGoodsNumber()+"&accountNumber="+htmlGoodsHDQD.getAccountNumber();
+		return "../../merchant/main/goBrowseHtmlGoodsHDQD?goodsNumber="+htmlGoodsHDQD.getGoodsNumber()+"&accountNumber="+htmlGoodsHDQD.getAccountNumber();
 	}
 	
 	@RequestMapping(value="/addBatchScoreQrcode")
@@ -2323,6 +2323,36 @@ public class MainController {
 	}
 	
 	/**
+	 * 根据id删除活动签到模版内容
+	 * @param ids
+	 * @param accountNumber
+	 * @return
+	 */
+	@RequestMapping(value="/deleteHtmlGoodsHDQDByIds",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String deleteHtmlGoodsHDQDByIds(String ids, String accountNumber) {
+		
+		int count=publicService.deleteHtmlGoodsHDQDByIds(ids);
+		if(count>0) {
+			int qrcodeCount=-ids.split(",").length;
+			publicService.updateAccountQCById(qrcodeCount, accountNumber);
+		}
+		PlanResult plan=new PlanResult();
+		String json;
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("删除活动签到信息失败");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("删除活动签到信息成功");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
+	/**
 	 * 根据id删除多媒体资料模版内容
 	 * @param ids
 	 * @return
@@ -2557,6 +2587,11 @@ public class MainController {
 				HtmlGoodsJZSG htmlGoodsJZSG = publicService.getHtmlGoodsJZSG(request.getParameter("userNumber"),accountId);
 				request.setAttribute("htmlGoodsJZSG", htmlGoodsJZSG);
 				url = "/merchant/jzsg/showHtmlGoods";
+				break;
+			case "hdqd":
+				HtmlGoodsHDQD htmlGoodsHDQD = publicService.getHtmlGoodsHDQD(goodsNumber,accountId);
+				request.setAttribute("htmlGoodsHDQD", htmlGoodsHDQD);
+				url = "/merchant/hdqd/showHtmlGoods";
 				break;
 				/*
 			case "text":
@@ -3593,8 +3628,8 @@ public class MainController {
 			List<ModuleHDQD> hdqdImage1List = (List<ModuleHDQD>)publicService.getModuleHDQDByType("image1");
 			request.setAttribute("image1List", hdqdImage1List);
 			
-			//String dmtzlMemo1 = (String)publicService.getModuleDMTZLByType("memo1");
-			//request.setAttribute("memo1", dmtzlMemo1);
+			String hdqdMemo1 = (String)publicService.getModuleHDQDByType("memo1");
+			request.setAttribute("memo1", hdqdMemo1);
 			
 			url="/merchant/hdqd/addModule";
 			break;

@@ -1,0 +1,48 @@
+@charset "UTF-8";
+body{
+	width: 100%;
+}
+.main_div{
+	width: 100%;
+	margin: 0 auto;
+	background-color: #fff;
+}
+.title_div{
+	width: 95%;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+}
+.image1_div{
+	width: 95%;
+	text-align: center;
+	margin: auto;
+}
+.image1_1_img,.image1_2_img,.image1_3_img{
+	width: 95%;
+	margin-top: 25px;
+}
+.memo1_div{
+	width:95%;
+	margin: 20px auto 0;
+}
+.hdap_div{
+	margin-top: 20px;
+}
+.hdap_tab{
+	width: 95%;
+	margin: 0 auto;
+	border: #eee solid 1px;
+}
+.hdap_tab .name_td{
+	width:30%;
+	border: #eee solid 1px;
+	padding-left: 5px;
+}
+.hdap_tab .value_td,.hdap_tab .value2_td{
+	width:33%;
+	border: #eee solid 1px;
+	padding-left: 10px;
+}

@@ -1,13 +1,33 @@
+<%@ page import="com.goodsPublic.util.StringUtils"%>
+<%@ page import="goodsPublic.entity.HtmlGoodsHDQD"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%
+	HtmlGoodsHDQD htmlGoodsHDQD=(HtmlGoodsHDQD)request.getAttribute("htmlGoodsHDQD");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>编辑</title>
 <%@include file="../js.jsp"%>
+<link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/themes/default/default.css" />
+<link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css" />
 <link rel="stylesheet" href="<%=basePath %>/resource/css/hdqd/editModule.css" />
+<script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/kindeditor.js"></script>
+<script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
 <script type="text/javascript">
+KindEditor.ready(function(K) {
+	var editor1 = K.create('textarea[name="memo1"]', {
+		cssPath : '<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css',
+		uploadJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/upload_json.jsp',
+		fileManagerJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/file_manager_json.jsp',
+		allowFileManager : true
+	});
+	prettyPrint();
+});
+
 $(function(){
 	var bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
 	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
@@ -351,6 +371,9 @@ function goBack(){
 			</c:if>
 		</div>
 	</div>
+	<div class="memo1_div">
+		<textarea class="memo1_ta" id="memo1" name="memo1" cols="100" rows="8"><%=htmlspecialchars(htmlGoodsHDQD.getMemo1()) %></textarea>
+	</div>
 	<div class="hdap_div" id="hdap_div">
 		<table class="hdap_tab" id="hdap_tab">
 			<tr class="item_tr" id="tr1" height="50">
@@ -445,3 +468,15 @@ function goBack(){
 </form>
 </body>
 </html>
+<%!
+private String htmlspecialchars(String str) {
+	//System.out.println(str);
+	if(!StringUtils.isEmpty(str)){
+		str = str.replaceAll("&", "&amp;");
+		str = str.replaceAll("<", "&lt;");
+		str = str.replaceAll(">", "&gt;");
+		str = str.replaceAll("\"", "&quot;");
+	}
+	return str;
+}
+%>

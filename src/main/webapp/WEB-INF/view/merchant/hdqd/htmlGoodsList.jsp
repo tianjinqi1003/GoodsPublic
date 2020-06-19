@@ -20,7 +20,7 @@ $(function(){
 	$("#remove_but").linkbutton({
 		iconCls:"icon-remove",
 		onClick:function(){
-			deleteHtmlGoodsSPZS();
+			deleteHtmlGoodsHDQD();
 		}
 	});
 	
@@ -77,6 +77,39 @@ function reSizeCol(){
 	cols=$(".datagrid-btable tr").eq(0).find("td");
 	colCount=cols.length;
 	cols.css("width",width/colCount+"px");
+}
+
+function deleteHtmlGoodsHDQD() {
+	var rows=tab1.datagrid("getSelections");
+	if (rows.length == 0) {
+		$.messager.alert("提示","请选择要删除的信息！","warning");
+		return false;
+	}
+	
+	var ids = "";
+	for (var i = 0; i < rows.length; i++) {
+		ids += "," + rows[i].id;
+	}
+	ids=ids.substring(1);
+	deleteByIds(ids);
+}
+
+function deleteByIds(ids){
+	if(checkIfPaid()){
+		$.messager.confirm("提示","确定要删除吗？",function(r){
+			if(r){
+				$.post("deleteHtmlGoodsHDQDByIds",
+					{ids:ids,accountNumber:'${sessionScope.user.id}'},
+					function(result){
+						if(result.status==1){
+							tab1.datagrid("reload");
+						}
+						alert(result.msg);
+					}
+				,"json");
+			}
+		});
+	}
 }
 
 function checkIfPaid(){

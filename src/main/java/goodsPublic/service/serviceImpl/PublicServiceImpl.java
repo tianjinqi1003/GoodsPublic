@@ -688,6 +688,10 @@ public class PublicServiceImpl implements PublicService {
 			List<ModuleHDQD> hdqdList = publicDao.getModuleHDQDByType(type);
 			obj=hdqdList;
 			break;
+		case "memo1":
+			ModuleHDQD moduleHDQD = publicDao.getModuleHDQDByMemo(type);
+			obj=moduleHDQD.getValue();
+			break;
 		}
 		return obj;
 	}
@@ -748,6 +752,15 @@ public class PublicServiceImpl implements PublicService {
 		int count=0;
 		List<String> idList = Arrays.asList(ids.split(","));
 		count=publicDao.deleteHtmlGoodsSPZSByIds(idList);
+		return count;
+	}
+
+	@Override
+	public int deleteHtmlGoodsHDQDByIds(String ids) {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<String> idList = Arrays.asList(ids.split(","));
+		count=publicDao.deleteHtmlGoodsHDQDByIds(idList);
 		return count;
 	}
 	

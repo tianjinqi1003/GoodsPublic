@@ -162,6 +162,14 @@
 	width: 600px;
 	margin-top: 25px;
 }
+.memo1_div{
+	margin-top: 25px;
+}
+.memo1_ta{
+	width:650px;
+	height:150px;
+	visibility:hidden;
+}
 .hdap_div{
 	margin-top: 20px;
 }

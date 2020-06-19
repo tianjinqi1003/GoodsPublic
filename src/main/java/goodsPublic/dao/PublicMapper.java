@@ -333,6 +333,13 @@ public interface PublicMapper {
 	 */
 	public ModuleDMTZL getModuleDMTZLByMemo(String type);
 
+	/**
+	 * 根据备注类型，获得活动签到模版对应的值
+	 * @param type
+	 * @return
+	 */
+	public ModuleHDQD getModuleHDQDByMemo(String type);
+
 	public int deleteScoreQrcodeByUuids(List<String> uuidList);
 
 	/**
@@ -346,6 +353,13 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public int deleteHtmlGoodsSPZSByIds(List<String> idList);
+
+	/**
+	 * 根据id删除活动签到模版内容
+	 * @param idList
+	 * @return
+	 */
+	public int deleteHtmlGoodsHDQDByIds(List<String> idList);
 	
 	/**
 	 * 根据id删除多媒体资料模版内容

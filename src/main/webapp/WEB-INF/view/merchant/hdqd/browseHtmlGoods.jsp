@@ -36,6 +36,9 @@ function editContent(goodsNumber,accountNumber){
 				<img class="image1_3_img" alt="" src="${requestScope.htmlGoodsHDQD.image1_3 }">
 			</c:if>
 		</div>
+		<div class="memo1_div">
+			${requestScope.htmlGoodsHDQD.memo1 }
+		</div>
 		<div class="hdap_div">
 			<table class="hdap_tab" id="hdap_tab">
 				<c:if test="${requestScope.htmlGoodsHDQD.hdapIfShow1 }">

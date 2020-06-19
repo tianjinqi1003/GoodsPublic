@@ -58,9 +58,13 @@ body{
 	margin: auto;
 	text-align: center;
 }
-.image1_1_img,.image1_2_img,.image1_3_img{
+.image1_1_img,.image1_2_img,.image1_3_img,.image1_4_img,.image1_5_img{
 	width: 95%;
 	margin-top: 25px;
+}
+.memo1_div{
+	width:95%;
+	margin: 20px auto 0;
 }
 .hdap_div{
 	margin-top: 20px;

@@ -361,6 +361,13 @@ public interface PublicService {
 	 * @return
 	 */
 	public int deleteHtmlGoodsSPZSByIds(String ids);
+
+	/**
+	 * 根据id删除活动签到模版内容
+	 * @param ids
+	 * @return
+	 */
+	public int deleteHtmlGoodsHDQDByIds(String ids);
 	
 	/**
 	 * 根据id删除多媒体资料模版内容

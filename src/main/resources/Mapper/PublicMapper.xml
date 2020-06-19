@@ -2866,6 +2866,9 @@
 	<select id="getModuleDMTZLByMemo" resultType="goodsPublic.entity.ModuleDMTZL">
 		select * from module_dmtzl where type=#{param1}
 	</select>
+	<select id="getModuleHDQDByMemo" resultType="goodsPublic.entity.ModuleHDQD">
+		select * from module_hdqd where type=#{param1}
+	</select>
 	<select id="getHtmlGoodsSPZS" resultType="goodsPublic.entity.HtmlGoodsSPZS">
 		select * from html_goods_spzs where moduleType=#{param1} and goodsNumber=#{param2} and accountNumber=#{param3}
 	</select>
@@ -2924,6 +2927,12 @@
 	 -->
 	<delete id="deleteHtmlGoodsSPZSByIds">
 		delete from html_goods_spzs where 1=1
+		<foreach collection="list" item="id" open=" and cast(id as char) in (" separator="," close=")">
+		#{id}
+		</foreach>
+	</delete>
+	<delete id="deleteHtmlGoodsHDQDByIds">
+		delete from html_goods_hdqd where 1=1
 		<foreach collection="list" item="id" open=" and cast(id as char) in (" separator="," close=")">
 		#{id}
 		</foreach>
