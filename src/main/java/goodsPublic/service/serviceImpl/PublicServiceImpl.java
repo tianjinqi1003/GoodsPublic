@@ -685,12 +685,9 @@ public class PublicServiceImpl implements PublicService {
 		switch (type) {
 		case "hdap":
 		case "image1":
+		case "memo1":
 			List<ModuleHDQD> hdqdList = publicDao.getModuleHDQDByType(type);
 			obj=hdqdList;
-			break;
-		case "memo1":
-			ModuleHDQD moduleHDQD = publicDao.getModuleHDQDByMemo(type);
-			obj=moduleHDQD.getValue();
 			break;
 		}
 		return obj;

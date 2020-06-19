@@ -3479,6 +3479,17 @@ public class MainController {
 			
 			url="/merchant/jzsg/batchAddModule";
 			break;
+		case "hdqd":
+			List<ModuleHDQD> hdapList = (List<ModuleHDQD>)publicService.getModuleHDQDByType("hdap");
+			request.setAttribute("hdapList", hdapList);
+			
+			List<ModuleHDQD> hdqdImage1List = (List<ModuleHDQD>)publicService.getModuleHDQDByType("image1");
+			request.setAttribute("image1List", hdqdImage1List);
+			
+			request.setAttribute("memo1", ((List<ModuleHDQD>)publicService.getModuleHDQDByType("memo1")).get(0).getValue());
+			
+			url="/merchant/hdqd/batchAddModule";
+			break;
 		}
 		return url;
 	}

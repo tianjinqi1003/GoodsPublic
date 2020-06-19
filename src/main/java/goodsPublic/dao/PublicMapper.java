@@ -333,13 +333,6 @@ public interface PublicMapper {
 	 */
 	public ModuleDMTZL getModuleDMTZLByMemo(String type);
 
-	/**
-	 * 根据备注类型，获得活动签到模版对应的值
-	 * @param type
-	 * @return
-	 */
-	public ModuleHDQD getModuleHDQDByMemo(String type);
-
 	public int deleteScoreQrcodeByUuids(List<String> uuidList);
 
 	/**
