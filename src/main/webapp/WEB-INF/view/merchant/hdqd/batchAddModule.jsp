@@ -305,7 +305,7 @@ function nextStep(flag){
 		$("input[id^='hdapIfShow']").each(function(i){
 			var checked=$(this).val();
 			if(checked=="true"){
-				hdsjArr.push($("td[id^='name_td']").eq(i).text());
+				hdsjArr.push($("input[name^='hdapName']").eq(i).val());
 			}
 		});
 		var conStr="";
@@ -508,7 +508,7 @@ function downloadExcelModule(){
 	$("input[id^='hdapIfShow']").each(function(i){
 		var checked=$(this).val();
 		if(checked=="true"){
-			hdsjArr.push($("td[id^='name_td']").eq(i).text());
+			hdsjArr.push($("input[name^='hdapName']").eq(i).val());
 		}
 	});
 	
@@ -702,8 +702,9 @@ function chooseExcel(){
 		<table class="hdap_tab" id="hdap_tab">
 			<c:forEach items="${requestScope.hdapList }" var="hdap" varStatus="status">
 			<tr class="item_tr" id="tr${status.index+1 }" height="50">
-				<input type="hidden" name="hdapName${status.index+1 }" value="${hdap.name }" />
-				<td class="name_td" id="name_td${status.index+1 }">${hdap.name }</td>
+				<td class="name_td">
+					<input type="text" name="hdapName${status.index+1 }" value="${hdap.name }" size="10" />
+				</td>
 				<td class="value_td">
 					默认显示Excel导入内容
 				</td>

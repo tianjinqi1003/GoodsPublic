@@ -284,6 +284,9 @@ body{
 	border: #eee solid 1px;
 	padding-left: 20px;
 }
+.spxq_tab .item_tr .name_td input,.spxq_tab .item_tr .value_td input{
+	border: 0;
+}
 .spxq_tab .item_tr .cz_td{
 	width:10%;
 	border: #eee solid 1px;

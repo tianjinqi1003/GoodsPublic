@@ -19,14 +19,15 @@
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
 <script type="text/javascript">
+var editor1,editor2;
 KindEditor.ready(function(K) {
-	var editor1 = K.create('textarea[name="memo1"]', {
+	editor1 = K.create('textarea[name="memo1"]', {
 		cssPath : '<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css',
 		uploadJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/upload_json.jsp',
 		fileManagerJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/file_manager_json.jsp',
 		allowFileManager : true
 	});
-	var editor2 = K.create('textarea[name="memo2"]', {
+	editor2 = K.create('textarea[name="memo2"]', {
 		cssPath : '<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css',
 		uploadJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/upload_json.jsp',
 		fileManagerJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/file_manager_json.jsp',
@@ -51,7 +52,7 @@ var dpn;
 var disArr1=[];
 var disArr2=[];
 var disArr3=[];
-var dm1Html,dm2Html,dm3Html;
+var dm1Html,dm2Html;
 var dSpxqIfShowArr=[];
 var dSpxqValueArr=[];
 function initDefaultHtmlVal(){
@@ -77,8 +78,6 @@ function initDefaultHtmlVal(){
 	setTimeout(function(){
 		dm1Html=editor1.html();
 		dm2Html=editor2.html();
-		dm3Html=editor3.html();
-		//console.log(dm1Html);
 	},"100");
 }
 
@@ -96,7 +95,6 @@ function hideOptionDiv(o){
 }
 
 function previewHtmlGoodsSPZS(){
-	alert(1);
 	if(!compareHtmlVal()){//这是已经编辑过内容的情况
 		console.log(1123);
 		saveEditHtmlGoodsSPZS();
@@ -359,16 +357,6 @@ function compareHtmlVal(){
 		}
 	});
 	
-	var cm3Html=editor3.html();
-	/*
-	console.log("dm3Html==="+dm3Html);
-	console.log("cm3Html==="+cm3Html);
-	console.log("==="+(dm3Html==cm3Html));
-	*/
-	if(dm3Html!=cm3Html){
-		flag=false;
-		return flag;
-	}
 	return flag;
 }
 
@@ -1034,8 +1022,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr1" height="50">
-				<input type="hidden" name="spxqName1" value="${requestScope.htmlGoodsSPZS.spxqName1 }" />
-				<td class="name_td">${requestScope.htmlGoodsSPZS.spxqName1 }</td>
+				<td class="name_td">
+					<input type="text" name="spxqName1" value="${requestScope.htmlGoodsSPZS.spxqName1 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="spxqValue1" value="${requestScope.htmlGoodsSPZS.spxqValue1 }" />
 				</td>
@@ -1046,8 +1035,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr2" height="50">
-				<input type="hidden" name="spxqName2" value="${requestScope.htmlGoodsSPZS.spxqName2 }" />
-				<td class="name_td">${requestScope.htmlGoodsSPZS.spxqName2 }</td>
+				<td class="name_td">
+					<input type="text" name="spxqName2" value="${requestScope.htmlGoodsSPZS.spxqName2 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="spxqValue2" value="${requestScope.htmlGoodsSPZS.spxqValue2 }" />
 				</td>
@@ -1058,8 +1048,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr3" height="50">
-				<input type="hidden" name="spxqName3" value="${requestScope.htmlGoodsSPZS.spxqName3 }" />
-				<td class="name_td">${requestScope.htmlGoodsSPZS.spxqName3 }</td>
+				<td class="name_td">
+					<input type="text" name="spxqName3" value="${requestScope.htmlGoodsSPZS.spxqName3 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="spxqValue3" value="${requestScope.htmlGoodsSPZS.spxqValue3 }" />
 				</td>
@@ -1070,8 +1061,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr4" height="50">
-				<input type="hidden" name="spxqName4" value="${requestScope.htmlGoodsSPZS.spxqName4 }" />
-				<td class="name_td">${requestScope.htmlGoodsSPZS.spxqName4 }</td>
+				<td class="name_td">
+					<input type="text" name="spxqName4" value="${requestScope.htmlGoodsSPZS.spxqName4 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="spxqValue4" value="${requestScope.htmlGoodsSPZS.spxqValue4 }" />
 				</td>

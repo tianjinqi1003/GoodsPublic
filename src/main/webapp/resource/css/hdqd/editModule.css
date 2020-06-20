@@ -187,6 +187,9 @@ body{
 	border: #eee solid 1px;
 	padding-left: 20px;
 }
+.hdap_tab .item_tr .name_td input,.hdap_tab .item_tr .value_td input,.hdap_tab .item_tr .value2_td input{
+	border: 0;
+}
 .hdap_tab .item_tr .cz_td{
 	width:10%;
 	border: #eee solid 1px;

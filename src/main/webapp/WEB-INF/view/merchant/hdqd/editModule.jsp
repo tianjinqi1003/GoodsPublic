@@ -377,8 +377,9 @@ function goBack(){
 	<div class="hdap_div" id="hdap_div">
 		<table class="hdap_tab" id="hdap_tab">
 			<tr class="item_tr" id="tr1" height="50">
-				<input type="hidden" name="hdapName1" value="${requestScope.htmlGoodsHDQD.hdapName1 }" />
-				<td class="name_td">${requestScope.htmlGoodsHDQD.hdapName1 }</td>
+				<td class="name_td">
+					<input type="text" name="hdapName1" value="${requestScope.htmlGoodsHDQD.hdapName1 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="hdapValue1_1" value="${requestScope.htmlGoodsHDQD.hdapValue1_1 }" />
 				</td>
@@ -392,8 +393,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr2" height="50">
-				<input type="hidden" name="hdapName2" value="${requestScope.htmlGoodsHDQD.hdapName2 }" />
-				<td class="name_td">${requestScope.htmlGoodsHDQD.hdapName2 }</td>
+				<td class="name_td">
+					<input type="text" name="hdapName2" value="${requestScope.htmlGoodsHDQD.hdapName2 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="hdapValue2_1" value="${requestScope.htmlGoodsHDQD.hdapValue2_1 }" />
 				</td>
@@ -407,8 +409,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr3" height="50">
-				<input type="hidden" name="hdapName3" value="${requestScope.htmlGoodsHDQD.hdapName3 }" />
-				<td class="name_td">${requestScope.htmlGoodsHDQD.hdapName3 }</td>
+				<td class="name_td">
+					<input type="text" name="hdapName3" value="${requestScope.htmlGoodsHDQD.hdapName3 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="hdapValue3_1" value="${requestScope.htmlGoodsHDQD.hdapValue3_1 }" />
 				</td>
@@ -422,8 +425,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr4" height="50">
-				<input type="hidden" name="hdapName4" value="${requestScope.htmlGoodsHDQD.hdapName4 }" />
-				<td class="name_td">${requestScope.htmlGoodsHDQD.hdapName4 }</td>
+				<td class="name_td">
+					<input type="text" name="hdapName4" value="${requestScope.htmlGoodsHDQD.hdapName4 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="hdapValue4_1" value="${requestScope.htmlGoodsHDQD.hdapValue4_1 }" />
 				</td>
@@ -437,8 +441,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr5" height="50">
-				<input type="hidden" name="hdapName5" value="${requestScope.htmlGoodsHDQD.hdapName5 }" />
-				<td class="name_td">${requestScope.htmlGoodsHDQD.hdapName5 }</td>
+				<td class="name_td">
+					<input type="text" name="hdapName5" value="${requestScope.htmlGoodsHDQD.hdapName5 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="hdapValue5_1" value="${requestScope.htmlGoodsHDQD.hdapValue5_1 }" />
 				</td>
