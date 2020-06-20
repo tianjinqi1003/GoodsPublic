@@ -440,7 +440,7 @@ public interface PublicService {
 
 	public JFDHJPActivity getJAByAccountId(String accountNumber);
 
-	public int editScoreQrcode(ScoreQrcode sq, String jpmdhReg);
+	public int editScoreQrcode(ScoreQrcode sq, Integer jaId, String jpmdhReg);
 
 	public List<Map<String, Object>> selectAdminQrcodeList(String searchTxt, String accountNumber);
 

@@ -1570,11 +1570,11 @@ public class MainController {
 	
 	@RequestMapping(value="/editScoreQrcode")
 	@ResponseBody
-	public Map<String, Object> editScoreQrcode(ScoreQrcode sq, String jpmdhReg) {
+	public Map<String, Object> editScoreQrcode(ScoreQrcode sq, Integer jaId, String jpmdhReg) {
 		
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		
-		int count=publicService.editScoreQrcode(sq,jpmdhReg);
+		int count=publicService.editScoreQrcode(sq,jaId,jpmdhReg);
 		if(count>0) {
 			jsonMap.put("message", "ok");
 			jsonMap.put("info", "编辑成功！");
@@ -3240,7 +3240,8 @@ public class MainController {
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 
 		JFDHJPActivity ja = publicService.getJAByAccountId(accountId);
-		int c=publicService.updatePcLimitByAccountId(ja.getJpmLimit(),accountId);//更新已过期的奖品码
+		if(ja!=null) 
+			publicService.updatePcLimitByAccountId(ja.getJpmLimit(),accountId);//更新已过期的奖品码
 		
 		//select s.uuid,date_format(max(s.createtime),'%m月%d日') createDate,date_format(s.createTime,'%H:%i:%s') createTime,j.nickName,p.codeNo,j.takeCount,j.takeScoreSum,j.score jfye,s.score takeScore,s.openId from score_qrcode s LEFT JOIN jfdhjp_customer j on s.openid=j.openid LEFT JOIN prize_code p on s.openid=p.openid where s.enable=1 and s.accountNumber=#{accountNumber} GROUP BY date_format(s.createtime,'%m月%d日'),s.openid ORDER BY s.createtime desc
 		List<String> dateList=publicService.getCSDateList(searchTxt,accountId);
@@ -3335,7 +3336,14 @@ public class MainController {
 		order="desc";
 		List<ScoreQrcode> scList = publicService.queryScoreQrcodeList(accountId, page, rows, sort, order);
 		JFDHJPActivity ja = publicService.getJAByAccountId(accountId);
-		jsonMap.put("jpmdhReg", ja.getJpmdhReg());
+		if(ja!=null) {
+			jsonMap.put("jaId", ja.getId());
+			jsonMap.put("jpmdhReg", ja.getJpmdhReg());
+		}
+		else {
+			jsonMap.put("jaId", null);
+			jsonMap.put("jpmdhReg", null);
+		}
 		jsonMap.put("total", count);
 		jsonMap.put("rows", scList);
 		return jsonMap;
@@ -3585,11 +3593,6 @@ public class MainController {
 			else if("ewmsc".equals(nav))
 				url="/merchant/jfdhjp/ewmsc/htmlGoodsList";
 			else if("jfgl".equals(nav)) {
-				AccountMsg msg=(AccountMsg)SecurityUtils.getSubject().getPrincipal();
-				request.setAttribute("accountMsg", msg);
-				
-				JFDHJPActivity ja = publicService.getJAByAccountId(msg.getId());
-				request.setAttribute("jpmLimit", ja.getJpmLimit());
 				url="/merchant/jfdhjp/jfgl/scoreList";
 			}
 			break;

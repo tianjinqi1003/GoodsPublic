@@ -28,8 +28,7 @@ $(function(){
 	$("#add_but").linkbutton({
 		iconCls:"icon-add",
 		onClick:function(){
-			if(checkIfPaid())
-				location.href=path+"merchant/main/goAddModule?trade=jfdhjp";
+			goAddScoreQrcode();
 		}
 	});
 	
@@ -62,10 +61,12 @@ $(function(){
 	    ]],
         onLoadSuccess:function(data){
 			if(data.total==0){
-				$(this).datagrid("appendRow",{score:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/goAddModule?trade=spzs&moduleType=redWine\">点击生成积分二维码</a><div>"});
+				$(this).datagrid("appendRow",{score:"<div style=\"text-align:center;\"><a onclick=\"goAddScoreQrcode()\">点击生成积分二维码</a><div>"});
 				$(this).datagrid("mergeCells",{index:0,field:"score",colspan:4});
 				data.total=0;
 			}
+			
+			$("#jaId").val(data.jaId);
 			$("#jpmdhReg_ta").val(data.jpmdhReg);
 			
 			$(".panel-header .panel-title").css("color","#000");
@@ -84,6 +85,11 @@ $(function(){
 		}
 	});
 });
+
+function goAddScoreQrcode(){
+	if(checkIfPaid())
+		location.href=path+"merchant/main/goAddModule?trade=jfdhjp";
+}
 
 function deleteJFDHJP(){
 	var rows=tab1.datagrid("getSelections");
@@ -316,9 +322,10 @@ function editScoreQrcode(){
 		if(checkJpmdhReg()){
 			var uuid=$("#edit_div #uuid_hid").val();
 			var shjf = $("#shjf_inp").val();
+			var jaId = $("#jaId").val();
 			var jpmdhReg = $("#jpmdhReg_ta").val();
 			$.post("editScoreQrcode",
-				{score:shjf,uuid:uuid,jpmdhReg:jpmdhReg,accountNumber:accountNumber},
+				{score:shjf,uuid:uuid,jaId:jaId,jpmdhReg:jpmdhReg,accountNumber:accountNumber},
 				function(data){
 					if(data.message=="ok"){
 						alert(data.info);
@@ -787,13 +794,14 @@ function initWindowMarginLeft(){
 					</div>
 				</td>
 			  </tr>
-			  <tr style="height: 145px;">
+			  <tr id="jpmdhReg_tr" style="height: 145px;">
 				<td align="right" style="width:30%;">
 					兑奖规则：
 				</td>
 				<td>
 					<div style="margin-top: 10px;">
-						<textarea id="jpmdhReg_ta" rows="6" cols="50" onfocus="focusJpmdhReg()" onblur="checkJpmdhReg()">${requestScope.jfdhjpActivity.jpmdhReg }</textarea>
+						<input type="hidden" id="jaId"/>
+						<textarea id="jpmdhReg_ta" rows="6" cols="50" onfocus="focusJpmdhReg()" onblur="checkJpmdhReg()"></textarea>
 						<span style="color: #f00;">*</span>
 					</div>
 				</td>

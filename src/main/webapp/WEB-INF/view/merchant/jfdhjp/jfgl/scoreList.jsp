@@ -60,7 +60,6 @@
 }
 </style>
 <script type="text/javascript">
-var jpmLimit=parseInt('${requestScope.jpmLimit }');
 $(function(){
 	initListDiv();
 });
@@ -84,7 +83,7 @@ function initListDiv(){
 					var htmlStr="<div class=\"item_div\">";
 					htmlStr+="<span class=\"nickName_span\">"+item.nickName+"</span>";
 					htmlStr+="<span class=\"takeTime_span\">"+item.takeTime+"</span>";
-					htmlStr+="<span class=\"showDetail_span\"><a href=\"goScoreQrcodeDetail?openId="+item.openId+"&jpmLimit="+jpmLimit+"\">查看积分明细</a></span>";
+					htmlStr+="<span class=\"showDetail_span\"><a href=\"goScoreQrcodeDetail?openId="+item.openId+"\">查看积分明细</a></span>";
 					if(item.codeNo==null)
 						htmlStr+="<div class=\"codeNo_div\">奖品码   暂无</div>";
 					else{
@@ -132,14 +131,6 @@ function updatePcExcById(id){
 		,"json");
 	}
 }
-
-/*
-function checkIfLimit(ctTime){
-	var ctDate=new Date(ctTime);
-	var overTime=ctDate.setDate(ctDate.getDate() + jpmLimit);
-	return overTime<new Date().getTime();
-}
-*/
 </script>
 </head>
 <body>

@@ -51,7 +51,6 @@
 }
 </style>
 <script type="text/javascript">
-var jpmLimit=parseInt('${param.jpmLimit }');
 $(function(){
 	startTimeDTB=$("#startTime_dtb").datetimebox({
 		width:157,
@@ -137,14 +136,6 @@ function updatePcExcById(id){
 		,"json");
 	}
 }
-
-/*
-function checkIfLimit(ctTime){
-	var ctDate=new Date(ctTime);
-	var overTime=ctDate.setDate(ctDate.getDate() + jpmLimit);
-	return overTime<new Date().getTime();
-}
-*/
 </script>
 </head>
 <body>

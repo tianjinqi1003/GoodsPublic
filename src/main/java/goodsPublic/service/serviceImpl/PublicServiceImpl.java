@@ -1000,11 +1000,18 @@ public class PublicServiceImpl implements PublicService {
 	}
 
 	@Override
-	public int editScoreQrcode(ScoreQrcode sq, String jpmdhReg) {
+	public int editScoreQrcode(ScoreQrcode sq, Integer jaId, String jpmdhReg) {
 		// TODO Auto-generated method stub
 		int count=publicDao.updateScoreByQrcodeUuid(sq.getScore(),sq.getUuid());
 		if(count>0) {
-			count=publicDao.updateJPMDHRegByAccountId(jpmdhReg,sq.getAccountNumber());
+			if(jaId==null) {
+				JFDHJPActivity jfdhjpActivity=new JFDHJPActivity();
+				jfdhjpActivity.setJpmdhReg(jpmdhReg);
+				jfdhjpActivity.setAccountNumber(sq.getAccountNumber());
+				count=publicDao.addJFDHJPActivity(jfdhjpActivity);
+			}
+			else
+				count=publicDao.updateJPMDHRegByAccountId(jpmdhReg,sq.getAccountNumber());
 		}
 		return count;
 	}
