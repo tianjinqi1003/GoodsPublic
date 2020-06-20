@@ -2985,7 +2985,13 @@ public class MainController {
 					Date date = new Date();
 					apr.setPayTime(timeSDF.format(date));
 					Calendar calendar=Calendar.getInstance();
-					calendar.setTime(date);
+					String endTime=publicService.getAccountEndTimeByNumber(cpcr.getAccountNumber());
+					if(StringUtils.isEmpty(endTime)) {
+						calendar.setTime(date);
+					}
+					else {
+						calendar.setTime(timeSDF.parse(endTime));
+					}
 					int vipType = cpcr.getVipType();
 					switch (vipType) {
 						case CreatePayCodeRecord.JI_CHU:
@@ -3008,6 +3014,9 @@ public class MainController {
 				}
 			}
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -3080,7 +3089,13 @@ public class MainController {
 				Date date = new Date();
 				apr.setPayTime(timeSDF.format(date));
 				Calendar calendar=Calendar.getInstance();
-				calendar.setTime(date);
+				String endTime=publicService.getAccountEndTimeByNumber(cpcr.getAccountNumber());
+				if(StringUtils.isEmpty(endTime)) {
+					calendar.setTime(date);
+				}
+				else {
+					calendar.setTime(timeSDF.parse(endTime));
+				}
 				int vipType = cpcr.getVipType();
 				switch (vipType) {
 					/*
@@ -3094,10 +3109,11 @@ public class MainController {
 					case CreatePayCodeRecord.ONE_YEAR:
 						calendar.add(Calendar.YEAR, 1);
 						break;
+					case 1:
 						*/
-					case 2:
-					case 3:
-					case 4:
+					case CreatePayCodeRecord.JI_CHU:
+					case CreatePayCodeRecord.GAO_JI:
+					case CreatePayCodeRecord.HANG_YE:
 						calendar.add(Calendar.YEAR, 1);
 						break;
 				}
@@ -3127,6 +3143,9 @@ public class MainController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

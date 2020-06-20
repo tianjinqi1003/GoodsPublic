@@ -394,6 +394,8 @@ public interface PublicMapper {
 
 	public AccountPayRecord getLastAccountPayRecordByNumber(@Param("accountNumber") String accountNumber);
 
+	public String getAccountEndTimeByNumber(@Param("accountNumber") String accountNumber);
+
 	public int deleteLabelByKeys(@Param("accountNumber") String accountNumber, @Param("keys") String keys);
 
 	public List<String> getLabelKeyList(@Param("module") String module, @Param("accountNumber") String accountNumber);

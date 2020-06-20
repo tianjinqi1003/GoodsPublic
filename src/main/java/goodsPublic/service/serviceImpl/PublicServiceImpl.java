@@ -1083,4 +1083,10 @@ public class PublicServiceImpl implements PublicService {
 		return publicDao.updateAccountQCById(qrcodeCount,id);
 	}
 
+	@Override
+	public String getAccountEndTimeByNumber(String accountNumber) {
+		// TODO Auto-generated method stub
+		return publicDao.getAccountEndTimeByNumber(accountNumber);
+	}
+
 }

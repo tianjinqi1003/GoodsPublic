@@ -10,7 +10,6 @@
 <script type="text/javascript">
 /*这个验证方法与其他页面的验证恰好相反，其他页面都是未付费不让用，而这里是未付费就跳转到相应链接页面付费，付过费了就不能再继续付费了
 因为其他页面包含了这个页，虽然调用了同一个接口，必须用checkIfPaidInSide这个方法，把方法名区分开
-*/
 function checkIfPaidInSide(){
 	var bool=false;
 	$.ajaxSetup({async:false});
@@ -28,6 +27,7 @@ function checkIfPaidInSide(){
 	,"json");
 	return bool;
 }
+*/
 </script>
 <style type="text/css">
 .side {
@@ -284,7 +284,7 @@ function checkIfPaidInSide(){
 						</a>
 					</li>
 					<li class="layui-nav-item">
-						<a class="second-level-a" href="<%=basePath%>merchant/main/goFeePrice?accountId=${sessionScope.user.id }" onclick="return checkIfPaidInSide();">
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goFeePrice?accountId=${sessionScope.user.id }">
 							付费
 						</a>
 					</li>

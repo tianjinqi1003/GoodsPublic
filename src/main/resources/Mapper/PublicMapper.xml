@@ -1816,6 +1816,9 @@
 	<select id="getLastAccountPayRecordByNumber" resultType="goodsPublic.entity.AccountPayRecord">
 		select * from account_pay_record where accountNumber=#{accountNumber} order by payTime desc limit 1
 	</select>
+	<select id="getAccountEndTimeByNumber" resultType="java.lang.String">
+		select endTime from account_pay_record where accountNumber=#{accountNumber} order by payTime desc limit 1
+	</select>
 	<select id="getJCByOpenId" resultType="goodsPublic.entity.JFDHJPCustomer">
 		select * from jfdhjp_customer where openId=#{openId}
 	</select>

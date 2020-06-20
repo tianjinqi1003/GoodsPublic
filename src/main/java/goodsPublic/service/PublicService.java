@@ -456,5 +456,7 @@ public interface PublicService {
 
 	public int updateAccountQCById(int qrcodeCount, String id);
 
+	public String getAccountEndTimeByNumber(String accountNumber);
+
 
 }
