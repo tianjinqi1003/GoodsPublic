@@ -1131,21 +1131,23 @@ public class MainController {
 					//System.out.println("key==="+key);
 					switch (i) {
 					case 1:
-							switch (colIndex) {
-							case 1:
-								htmlGoodsHDQD.setHdapName1(value);
-								break;
-							case 2:
-								htmlGoodsHDQD.setHdapValue1_1(value);
-								break;
-							case 3:
-								htmlGoodsHDQD.setHdapValue1_2(value);
-								break;
-							}
+						switch (colIndex) {
+						case 1:
+							htmlGoodsHDQD.setHdapIfShow1(true);
+							htmlGoodsHDQD.setHdapName1(value);
+							break;
+						case 2:
+							htmlGoodsHDQD.setHdapValue1_1(value);
+							break;
+						case 3:
+							htmlGoodsHDQD.setHdapValue1_2(value);
+							break;
+						}
 						break;
 					case 2:
 						switch (colIndex) {
 						case 1:
+							htmlGoodsHDQD.setHdapIfShow2(true);
 							htmlGoodsHDQD.setHdapName2(value);
 							break;
 						case 2:
@@ -1159,6 +1161,7 @@ public class MainController {
 					case 3:
 						switch (colIndex) {
 						case 1:
+							htmlGoodsHDQD.setHdapIfShow3(true);
 							htmlGoodsHDQD.setHdapName3(value);
 							break;
 						case 2:
@@ -1166,6 +1169,104 @@ public class MainController {
 							break;
 						case 3:
 							htmlGoodsHDQD.setHdapValue3_2(value);
+							break;
+						}
+						break;
+					case 4:
+						switch (colIndex) {
+						case 1:
+							htmlGoodsHDQD.setHdapIfShow4(true);
+							htmlGoodsHDQD.setHdapName4(value);
+							break;
+						case 2:
+							htmlGoodsHDQD.setHdapValue4_1(value);
+							break;
+						case 3:
+							htmlGoodsHDQD.setHdapValue4_2(value);
+							break;
+						}
+						break;
+					case 5:
+						switch (colIndex) {
+						case 1:
+							htmlGoodsHDQD.setHdapIfShow5(true);
+							htmlGoodsHDQD.setHdapName5(value);
+							break;
+						case 2:
+							htmlGoodsHDQD.setHdapValue5_1(value);
+							break;
+						case 3:
+							htmlGoodsHDQD.setHdapValue5_2(value);
+							break;
+						}
+						break;
+					case 6:
+						switch (colIndex) {
+						case 1:
+							htmlGoodsHDQD.setHdapIfShow6(true);
+							htmlGoodsHDQD.setHdapName6(value);
+							break;
+						case 2:
+							htmlGoodsHDQD.setHdapValue6_1(value);
+							break;
+						case 3:
+							htmlGoodsHDQD.setHdapValue6_2(value);
+							break;
+						}
+						break;
+					case 7:
+						switch (colIndex) {
+						case 1:
+							htmlGoodsHDQD.setHdapIfShow7(true);
+							htmlGoodsHDQD.setHdapName7(value);
+							break;
+						case 2:
+							htmlGoodsHDQD.setHdapValue7_1(value);
+							break;
+						case 3:
+							htmlGoodsHDQD.setHdapValue7_2(value);
+							break;
+						}
+						break;
+					case 8:
+						switch (colIndex) {
+						case 1:
+							htmlGoodsHDQD.setHdapIfShow8(true);
+							htmlGoodsHDQD.setHdapName8(value);
+							break;
+						case 2:
+							htmlGoodsHDQD.setHdapValue8_1(value);
+							break;
+						case 3:
+							htmlGoodsHDQD.setHdapValue8_2(value);
+							break;
+						}
+						break;
+					case 9:
+						switch (colIndex) {
+						case 1:
+							htmlGoodsHDQD.setHdapIfShow9(true);
+							htmlGoodsHDQD.setHdapName9(value);
+							break;
+						case 2:
+							htmlGoodsHDQD.setHdapValue9_1(value);
+							break;
+						case 3:
+							htmlGoodsHDQD.setHdapValue9_2(value);
+							break;
+						}
+						break;
+					case 10:
+						switch (colIndex) {
+						case 1:
+							htmlGoodsHDQD.setHdapIfShow10(true);
+							htmlGoodsHDQD.setHdapName10(value);
+							break;
+						case 2:
+							htmlGoodsHDQD.setHdapValue10_1(value);
+							break;
+						case 3:
+							htmlGoodsHDQD.setHdapValue10_2(value);
 							break;
 						}
 						break;

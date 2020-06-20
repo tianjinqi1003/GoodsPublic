@@ -1,13 +1,32 @@
+<%@ page import="com.goodsPublic.util.StringUtils"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%
+	String memo1=(String)request.getAttribute("memo1");
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>编辑</title>
 <%@include file="../js.jsp"%>
+<link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/themes/default/default.css" />
+<link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css" />
 <link rel="stylesheet" href="<%=basePath %>/resource/css/hdqd/batchAddModule.css" />
+<script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/kindeditor.js"></script>
+<script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
+<script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
 <script type="text/javascript">
+KindEditor.ready(function(K) {
+	var editor1 = K.create('textarea[name="memo1"]', {
+		cssPath : '<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css',
+		uploadJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/upload_json.jsp',
+		fileManagerJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/file_manager_json.jsp',
+		allowFileManager : true
+	});
+	prettyPrint();
+});
+
 var path='<%=basePath %>';
 var stepIndex=1;
 $(function(){
@@ -87,19 +106,9 @@ function openImage1ModBgDiv(){
 	$("#image1ModBg_div").css("display","block");
 }
 
-function openImage2ModBgDiv(){
-	$("#image2ModBg_div").css("display","block");
-}
-
 function deleteImage1Div(){
 	$("#image1_div").remove();
 	$("#uploadFile1_div input[type='file']").remove();
-	resetDivPosition();
-}
-
-function deleteImage2Div(){
-	$("#image2_div").remove();
-	$("#uploadFile2_div input[type='file']").remove();
 	resetDivPosition();
 }
 
@@ -108,18 +117,14 @@ function renameFile(){
 		$(this).attr("name","file1_"+(i+1));
 		//console.log($(this).attr("name"));
 	});
-	$("#uploadFile2_div input[type='file']").each(function(i){
-		$(this).attr("name","file2_"+(i+1));
-		//console.log($(this).attr("name"));
+	
+	$("#hdap_tab input[id^='hdapIfShow']").each(function(){
+		$(this).attr("value",false);
 	});
 }
 
 function closeImage1ModBgDiv(){
 	$("#image1ModBg_div").css("display","none");
-}
-
-function closeImage2ModBgDiv(){
-	$("#image2ModBg_div").css("display","none");
 }
 
 function changeButStyle(o,flag){
@@ -144,17 +149,6 @@ function uploadImage1(){
 	document.getElementById("uploadFile1_inp").click();
 }
 
-function uploadImage2(){
-	if($("#image2Mod_div table td[class='file_td']").length>=5){
-		alert("最多上传5张图片!");
-		return false;
-	}
-	var uuid=createUUID();
-	$("#uuid_hid2").val(uuid);
-	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\"/>");
-	document.getElementById("uploadFile2_inp").click();
-}
-
 function deleteImage1(o){
 	var td=$(o).parent();
 	var uuid=td.attr("id").substring(7);
@@ -163,26 +157,6 @@ function deleteImage1(o){
 	$("#uploadFile1_div input[type='file'][name='file"+uuid+"']").remove();
 
 	var imageTab=$("#image1Mod_div table");
-	var tdArr1=imageTab.find("td");
-	imageTab.empty();
-	for(var i=0;i<tdArr1.length;i++){
-		var tdArr2=imageTab.find("td");
-		if(tdArr2.length==0||tdArr2.length%4==0)
-			imageTab.append("<tr></tr>");
-		imageTab.find("tr").eq(imageTab.find("tr").length-1).append(tdArr1[i]);
-	}
-	
-	resetDivPosition();
-}
-
-function deleteImage2(o){
-	var td=$(o).parent();
-	var uuid=td.attr("id").substring(7);
-	$("#image2_div #list_div img[id='img"+uuid+"']").remove();
-	td.remove();
-	$("#uploadFile2_div input[type='file'][name='file"+uuid+"']").remove();
-
-	var imageTab=$("#image2Mod_div table");
 	var tdArr1=imageTab.find("td");
 	imageTab.empty();
 	for(var i=0;i<tdArr1.length;i++){
@@ -224,53 +198,6 @@ function showQrcodePic1(obj){
         $img.attr("src", dataURL);
 
         var listDiv=$("#image1_div #list_div");
-        listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
-
-        //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
-        setTimeout(function(){
-        	resetDivPosition();
-        },"100")
-    } else {
-        dataURL = $file.val();
-        var imgObj = document.getElementById("preview");
-        // 两个坑:
-        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
-        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
-        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
-        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
-
-    }
-}
-
-function showQrcodePic2(obj){
-	var uuid=$("#uuid_hid2").val();
-	var file=$(obj);
-	file.attr("id","file"+uuid);
-	file.attr("name","file"+uuid);
-	file.removeAttr("onchange");
-	file.css("display","none");
-	var fileHtml=file.prop("outerHTML");
-	
-	var imageTab=$("#image2Mod_div table");
-	var length=imageTab.find("td[id^='file_td']").length;
-	imageTab.find("#upload_td").before("<td id=\"file_td"+uuid+"\" style=\"width: 25%;\">"
-			+"<img alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" style=\"position: absolute;margin-top: 5px;margin-left: 80px;\" onclick=\"deleteImage2(this);\">"
-			+"<img id=\"img"+uuid+"\" style=\"width: 120px;height: 120px;\" alt=\"\">"
-			+fileHtml
-		+"</td>");
-
-	var $file = $(obj);
-    var fileObj = $file[0];
-    file=$file;
-    var windowURL = window.URL || window.webkitURL;
-    var dataURL;
-    var $img = $("#image2Mod_div table #img"+uuid);
-
-    if (fileObj && fileObj.files && fileObj.files[0]) {
-        dataURL = windowURL.createObjectURL(fileObj.files[0]);
-        $img.attr("src", dataURL);
-
-        var listDiv=$("#image2_div #list_div");
         listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
 
         //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
@@ -746,36 +673,6 @@ function chooseExcel(){
 	</div>
 </div>
 
-<div class="image2ModBg_div" id="image2ModBg_div">
-	<div class="image2Mod_div" id="image2Mod_div">
-		<div class="title_div">
-			<span class="title_span">图片模块</span>
-			<span class="close_span" onclick="closeImage2ModBgDiv();">关闭</span>
-		</div>
-		<div id="tab_div">
-			<table>
-				<tr>
-					<td class="file_td" id="file_td2_1">
-						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
-						<img class="item_img" id="img2_1" alt="" src="/GoodsPublic/resource/images/jzsg/43a339cd90f1a6b00c0c256d49d6a119.png">
-					</td>
-					<td id="upload_td">
-						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
-					</td>
-				</tr>
-			</table>
-			<div class="uploadFile2_div" id="uploadFile2_div">
-				<input type="file" id="file2_1" name="file2_1" onchange="showQrcodePic2(this)" />
-			</div>
-			<input type="hidden" id="uuid_hid2"/>
-		</div>
-		<div class="but_div" id="but_div">
-			<div class="confirm_div" onclick="closeImage2ModBgDiv();">确&nbsp;认</div>
-			<div class="cancel_div" onclick="closeImage2ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
-		</div>
-	</div>
-</div>
-
 <div class="top_div">
 	<div class="return_div" onclick="goBack();">&lt返回</div>
 	<div class="title_div">活动签到信息展示</div>
@@ -797,6 +694,9 @@ function chooseExcel(){
 			<img class="item_img" id="img1_1" alt="" src="${image1.value }">
 			</c:forEach>
 		</div>
+	</div>
+	<div class="memo1_div">
+		<textarea class="memo1_ta" id="memo1" name="memo1" cols="100" rows="8"><%=htmlspecialchars(memo1) %></textarea>
 	</div>
 	<div class="hdap_div" id="hdap_div">
 		<table class="hdap_tab" id="hdap_tab">
@@ -833,3 +733,16 @@ function chooseExcel(){
 </form>
 </body>
 </html>
+
+<%!
+private String htmlspecialchars(String str) {
+	//System.out.println(str);
+	if(!StringUtils.isEmpty(str)){
+		str = str.replaceAll("&", "&amp;");
+		str = str.replaceAll("<", "&lt;");
+		str = str.replaceAll(">", "&gt;");
+		str = str.replaceAll("\"", "&quot;");
+	}
+	return str;
+}
+%>
