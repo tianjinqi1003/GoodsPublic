@@ -48,7 +48,7 @@ $(function(){
 	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
 	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
 
-    //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+    //这里必须延迟1s，等图片加载完再重新设定右边div位置
     setTimeout(function(){
     	resetDivPosition();
     },"1000")
@@ -90,7 +90,7 @@ function initDefaultHtmlVal(){
 		dm1Html=editor1.html();
 		dm2Html=editor2.html();
 		dm3Html=editor3.html();
-	},"100");
+	},"1000");
 }
 
 function resetDivPosition(){
