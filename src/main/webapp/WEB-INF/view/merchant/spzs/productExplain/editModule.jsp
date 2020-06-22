@@ -660,8 +660,9 @@ function goBack(){
 	<div class="spxq_div" id="spxq_div">
 		<table class="spxq_tab" id="spxq_tab">
 			<tr class="item_tr" id="tr1" height="50">
-				<input type="hidden" name="spxqName1" value="${requestScope.htmlGoodsSPZS.spxqName1 }" />
-				<td class="name_td">${requestScope.htmlGoodsSPZS.spxqName1 }</td>
+				<td class="name_td">
+					<input type="text" name="spxqName1" value="${requestScope.htmlGoodsSPZS.spxqName1 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="spxqValue1" value="${requestScope.htmlGoodsSPZS.spxqValue1 }" />
 				</td>
@@ -672,8 +673,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr2" height="50">
-				<input type="hidden" name="spxqName2" value="${requestScope.htmlGoodsSPZS.spxqName2 }" />
-				<td class="name_td">${requestScope.htmlGoodsSPZS.spxqName2 }</td>
+				<td class="name_td">
+					<input type="text" name="spxqName2" value="${requestScope.htmlGoodsSPZS.spxqName2 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="spxqValue2" value="${requestScope.htmlGoodsSPZS.spxqValue2 }" />
 				</td>
@@ -684,8 +686,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr3" height="50">
-				<input type="hidden" name="spxqName3" value="${requestScope.htmlGoodsSPZS.spxqName3 }" />
-				<td class="name_td">${requestScope.htmlGoodsSPZS.spxqName3 }</td>
+				<td class="name_td">
+					<input type="text" name="spxqName3" value="${requestScope.htmlGoodsSPZS.spxqName3 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="spxqValue3" value="${requestScope.htmlGoodsSPZS.spxqValue3 }" />
 				</td>
@@ -696,8 +699,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr4" height="50">
-				<input type="hidden" name="spxqName4" value="${requestScope.htmlGoodsSPZS.spxqName4 }" />
-				<td class="name_td">${requestScope.htmlGoodsSPZS.spxqName4 }</td>
+				<td class="name_td">
+					<input type="text" name="spxqName4" value="${requestScope.htmlGoodsSPZS.spxqName4 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="spxqValue4" value="${requestScope.htmlGoodsSPZS.spxqValue4 }" />
 				</td>
@@ -708,8 +712,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr5" height="50">
-				<input type="hidden" name="spxqName5" value="${requestScope.htmlGoodsSPZS.spxqName5 }" />
-				<td class="name_td">${requestScope.htmlGoodsSPZS.spxqName5 }</td>
+				<td class="name_td">
+					<input type="text" name="spxqName5" value="${requestScope.htmlGoodsSPZS.spxqName5 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="spxqValue5" value="${requestScope.htmlGoodsSPZS.spxqValue5 }" />
 				</td>
@@ -720,8 +725,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr6" height="50">
-				<input type="hidden" name="spxqName6" value="${requestScope.htmlGoodsSPZS.spxqName6 }" />
-				<td class="name_td">${requestScope.htmlGoodsSPZS.spxqName6 }</td>
+				<td class="name_td">
+					<input type="text" name="spxqName6" value="${requestScope.htmlGoodsSPZS.spxqName6 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="spxqValue6" value="${requestScope.htmlGoodsSPZS.spxqValue6 }" />
 				</td>
@@ -732,8 +738,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr7" height="50">
-				<input type="hidden" name="spxqName7" value="${requestScope.htmlGoodsSPZS.spxqName7 }" />
-				<td class="name_td">${requestScope.htmlGoodsSPZS.spxqName7 }</td>
+				<td class="name_td">
+					<input type="text" name="spxqName7" value="${requestScope.htmlGoodsSPZS.spxqName7 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="spxqValue7" value="${requestScope.htmlGoodsSPZS.spxqValue7 }" />
 				</td>

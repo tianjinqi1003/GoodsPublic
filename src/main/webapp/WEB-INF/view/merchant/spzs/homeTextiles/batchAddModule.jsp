@@ -631,7 +631,7 @@ function nextStep(flag){
 				return false;
 			var checked=$(this).val();
 			if(checked=="true"){
-				txtTdStr+="<td>"+$("td[id^='name_td']").eq(i).text()+"</td>";
+				txtTdStr+="<td>"+$("input[name^='spxqName']").eq(i).val()+"</td>";
 				txtColIndex++;
 			}
 			else{
@@ -652,9 +652,9 @@ function nextStep(flag){
 				var checked=$(this).val();
 				if(checked=="true"){
 					if(txtColIndex==0)
-						txtTdStr+="<td class=\"num_td\">"+$("td[id^='name_td']").eq(j).text()+i+"</td>";
+						txtTdStr+="<td class=\"num_td\">"+$("input[name^='spxqName']").eq(j).val()+i+"</td>";
 					else
-						txtTdStr+="<td>"+$("td[id^='name_td']").eq(j).text()+i+"</td>";
+						txtTdStr+="<td>"+$("input[name^='spxqName']").eq(j).val()+i+"</td>";
 					txtColIndex++;
 				}
 				else{
@@ -852,7 +852,7 @@ function checkExcelKey(jo){
 		$("input[id^='spxqIfShow']").each(function(i){
 			var checked=$(this).val();
 			if(checked=="true"){
-				mbezdStr+=$("td[id^='name_td']").eq(i).text()+"、";
+				mbezdStr+=$("input[name^='spxqName']").eq(i).val()+"、";
 			}
 		});
 		mbezdStr=mbezdStr.substring(0,mbezdStr.length-1);
@@ -877,9 +877,9 @@ function downloadExcelModule(){
 				return true;
 			
 			if(j<$("input[id^='spxqIfShow']").length-1)
-				jsonStr+="\"value"+j+"\":\""+$("td[id^='name_td']").eq(j).text()+(i==0?"":i)+"\",";
+				jsonStr+="\"value"+j+"\":\""+$("input[name^='spxqName']").eq(j).val()+(i==0?"":i)+"\",";
 			else
-				jsonStr+="\"value"+j+"\":\""+$("td[id^='name_td']").eq(j).text()+(i==0?"":i)+"\"";
+				jsonStr+="\"value"+j+"\":\""+$("input[name^='spxqName']").eq(j).val()+(i==0?"":i)+"\"";
 		});
 		if(i<rowCount-1)
 			jsonStr+="},";
@@ -1195,8 +1195,9 @@ function chooseExcel(){
 			</tr>
 			<c:forEach items="${requestScope.spxqList }" var="spxq" varStatus="status">
 			<tr class="item_tr" id="tr${status.index+1 }" height="50">
-				<input type="hidden" name="spxqName${status.index+1 }" value="${spxq.name }" />
-				<td class="name_td" id="name_td${status.index+1 }">${spxq.name }</td>
+				<td class="name_td">
+					<input type="text" name="spxqName${status.index+1 }" value="${spxq.name }" size="10" />
+				</td>
 				<td class="value_td">
 					默认显示Excel导入内容
 				</td>

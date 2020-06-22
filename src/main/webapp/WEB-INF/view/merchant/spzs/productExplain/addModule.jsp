@@ -569,8 +569,9 @@ function checkIfPaid(){
 		<table class="spxq_tab" id="spxq_tab">
 			<c:forEach items="${requestScope.spxqList }" var="spxq" varStatus="status">
 			<tr class="item_tr" id="tr${status.index+1 }" height="50">
-				<input type="hidden" name="spxqName${status.index+1 }" value="${spxq.name }" />
-				<td class="name_td">${spxq.name }</td>
+				<td class="name_td">
+					<input type="text" name="spxqName${status.index+1 }" value="${spxq.name }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="spxqValue${status.index+1 }" />
 				</td>
