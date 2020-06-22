@@ -90,7 +90,6 @@ function initDefaultHtmlVal(){
 		dm1Html=editor1.html();
 		dm2Html=editor2.html();
 		dm3Html=editor3.html();
-		//console.log(dm1Html);
 	},"100");
 }
 

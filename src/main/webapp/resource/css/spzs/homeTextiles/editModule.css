@@ -619,6 +619,7 @@ body{
 	margin-top:15px;
 	border:1px solid #eee;
 	background-color:#fff;
+	cursor:pointer;
 	border-radius:3px;
 }
 .right_div .save_div{
