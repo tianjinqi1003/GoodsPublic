@@ -407,8 +407,9 @@ function checkIfPaid(){
 		<table class="ryxx_tab" id="ryxx_tab">
 			<c:forEach items="${requestScope.ryxxList }" var="ryxx" varStatus="status">
 			<tr class="item_tr" id="tr${status.index+1 }" height="50">
-				<input type="hidden" name="ryxxName${status.index+1 }" value="${ryxx.name }" />
-				<td class="name_td">${ryxx.name }</td>
+				<td class="name_td">
+					<input type="text" name="ryxxName${status.index+1 }" value="${ryxx.name }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="ryxxValue${status.index+1 }" />
 				</td>

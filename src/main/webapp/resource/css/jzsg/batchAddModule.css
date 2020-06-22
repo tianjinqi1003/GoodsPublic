@@ -454,6 +454,9 @@ body{
 	border: #eee solid 1px;
 	padding-left: 20px;
 }
+.ryxx_tab .item_tr .name_td input{
+	border: 0;
+}
 .ryxx_tab .item_tr .cz_td{
 	width:10%;
 	border: #eee solid 1px;

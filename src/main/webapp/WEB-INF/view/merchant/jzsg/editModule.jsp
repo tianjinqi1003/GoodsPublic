@@ -483,8 +483,9 @@ function goBack(){
 	<div class="ryxx_div" id="ryxx_div">
 		<table class="ryxx_tab" id="ryxx_tab">
 			<tr class="item_tr" id="tr1" height="50">
-				<input type="hidden" name="ryxxName1" value="${requestScope.htmlGoodsJZSG.ryxxName1 }" />
-				<td class="name_td">${requestScope.htmlGoodsJZSG.ryxxName1 }</td>
+				<td class="name_td">
+					<input type="text" name="ryxxName1" value="${requestScope.htmlGoodsJZSG.ryxxName1 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="ryxxValue1" value="${requestScope.htmlGoodsJZSG.ryxxValue1 }" />
 				</td>
@@ -495,8 +496,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr2" height="50">
-				<input type="hidden" name="ryxxName2" value="${requestScope.htmlGoodsJZSG.ryxxName2 }" />
-				<td class="name_td">${requestScope.htmlGoodsJZSG.ryxxName2 }</td>
+				<td class="name_td">
+					<input type="text" name="ryxxName2" value="${requestScope.htmlGoodsJZSG.ryxxName2 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="ryxxValue2" value="${requestScope.htmlGoodsJZSG.ryxxValue2 }" />
 				</td>
@@ -507,8 +509,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr3" height="50">
-				<input type="hidden" name="ryxxName3" value="${requestScope.htmlGoodsJZSG.ryxxName3 }" />
-				<td class="name_td">${requestScope.htmlGoodsJZSG.ryxxName3 }</td>
+				<td class="name_td">
+					<input type="text" name="ryxxName3" value="${requestScope.htmlGoodsJZSG.ryxxName3 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="ryxxValue3" value="${requestScope.htmlGoodsJZSG.ryxxValue3 }" />
 				</td>
@@ -519,8 +522,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr4" height="50">
-				<input type="hidden" name="ryxxName4" value="${requestScope.htmlGoodsJZSG.ryxxName4 }" />
-				<td class="name_td">${requestScope.htmlGoodsJZSG.ryxxName4 }</td>
+				<td class="name_td">
+					<input type="text" name="ryxxName4" value="${requestScope.htmlGoodsJZSG.ryxxName4 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="ryxxValue4" value="${requestScope.htmlGoodsJZSG.ryxxValue4 }" />
 				</td>
@@ -531,8 +535,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr5" height="50">
-				<input type="hidden" name="ryxxName5" value="${requestScope.htmlGoodsJZSG.ryxxName5 }" />
-				<td class="name_td">${requestScope.htmlGoodsJZSG.ryxxName5 }</td>
+				<td class="name_td">
+					<input type="text" name="ryxxName5" value="${requestScope.htmlGoodsJZSG.ryxxName5 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="ryxxValue5" value="${requestScope.htmlGoodsJZSG.ryxxValue5 }" />
 				</td>
@@ -543,8 +548,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr6" height="50">
-				<input type="hidden" name="ryxxName6" value="${requestScope.htmlGoodsJZSG.ryxxName6 }" />
-				<td class="name_td">${requestScope.htmlGoodsJZSG.ryxxName6 }</td>
+				<td class="name_td">
+					<input type="text" name="ryxxName6" value="${requestScope.htmlGoodsJZSG.ryxxName6 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="ryxxValue6" value="${requestScope.htmlGoodsJZSG.ryxxValue6 }" />
 				</td>
@@ -555,8 +561,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr7" height="50">
-				<input type="hidden" name="ryxxName7" value="${requestScope.htmlGoodsJZSG.ryxxName7 }" />
-				<td class="name_td">${requestScope.htmlGoodsJZSG.ryxxName7 }</td>
+				<td class="name_td">
+					<input type="text" name="ryxxName7" value="${requestScope.htmlGoodsJZSG.ryxxName7 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="ryxxValue7" value="${requestScope.htmlGoodsJZSG.ryxxValue7 }" />
 				</td>
@@ -567,8 +574,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr8" height="50">
-				<input type="hidden" name="ryxxName8" value="${requestScope.htmlGoodsJZSG.ryxxName8 }" />
-				<td class="name_td">${requestScope.htmlGoodsJZSG.ryxxName8 }</td>
+				<td class="name_td">
+					<input type="text" name="ryxxName8" value="${requestScope.htmlGoodsJZSG.ryxxName8 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="ryxxValue8" value="${requestScope.htmlGoodsJZSG.ryxxValue8 }" />
 				</td>
@@ -579,8 +587,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr9" height="50">
-				<input type="hidden" name="ryxxName9" value="${requestScope.htmlGoodsJZSG.ryxxName9 }" />
-				<td class="name_td">${requestScope.htmlGoodsJZSG.ryxxName9 }</td>
+				<td class="name_td">
+					<input type="text" name="ryxxName9" value="${requestScope.htmlGoodsJZSG.ryxxName9 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="ryxxValue9" value="${requestScope.htmlGoodsJZSG.ryxxValue9 }" />
 				</td>
@@ -591,8 +600,9 @@ function goBack(){
 			</tr>
 			
 			<tr class="item_tr" id="tr10" height="50">
-				<input type="hidden" name="ryxxName10" value="${requestScope.htmlGoodsJZSG.ryxxName10 }" />
-				<td class="name_td">${requestScope.htmlGoodsJZSG.ryxxName10 }</td>
+				<td class="name_td">
+					<input type="text" name="ryxxName10" value="${requestScope.htmlGoodsJZSG.ryxxName10 }" size="10" />
+				</td>
 				<td class="value_td">
 					<input type="text" name="ryxxValue10" value="${requestScope.htmlGoodsJZSG.ryxxValue10 }" />
 				</td>
