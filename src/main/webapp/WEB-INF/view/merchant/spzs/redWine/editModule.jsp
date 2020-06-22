@@ -62,6 +62,7 @@ var disArr2=[];
 var disArr3=[];
 var dm1Html,dm2Html,dm3Html;
 var dSpxqIfShowArr=[];
+var dSpxqNameArr=[];
 var dSpxqValueArr=[];
 function initDefaultHtmlVal(){
 	dpn=$("#productName").val();
@@ -73,6 +74,8 @@ function initDefaultHtmlVal(){
 	console.log(disArr1);
 	$("#spxq_tab input[id^='spxqIfShow']").each(function(i){
 		dSpxqIfShowArr[i]=$(this).val();
+		var spxqName=$("#spxq_tab input[name^='spxqName']").eq(i).val();
+		dSpxqNameArr[i]=spxqName;
 		var spxqValue=$("#spxq_tab input[name^='spxqValue']").eq(i).val();
 		//console.log("spxqValue==="+spxqValue);
 		dSpxqValueArr[i]=spxqValue;
@@ -106,7 +109,7 @@ function hideOptionDiv(o){
 
 function previewHtmlGoodsSPZS(){
 	if(!compareHtmlVal()){//这是已经编辑过内容的情况
-		console.log(1123);
+		//return false;
 		saveEditHtmlGoodsSPZS();
 		
 		var moduleType='${requestScope.htmlGoodsSPZS.moduleType }';
@@ -168,6 +171,66 @@ function previewHtmlGoodsSPZS(){
 					$("#preview_div #image1_5_img").css("display","block");
 					$("#preview_div #image1_5_img").attr("src",image1_5);
 				}
+				
+				$("#preview_div #memo1_div").html(previewSPZS.memo1);
+				
+				var trs=$("#preview_div #spxq_tab tr");
+				
+				var tr=trs.eq(1);
+				if(previewSPZS.spxqIfShow1)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				var tds=trs.eq(1).find("td");
+				tds.eq(0).text(previewSPZS.spxqName1);
+				tds.eq(1).text(previewSPZS.spxqValue1);
+				
+				tr=trs.eq(2);
+				if(previewSPZS.spxqIfShow2)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName2);
+				tds.eq(1).text(previewSPZS.spxqValue2);
+				
+				tr=trs.eq(3);
+				if(previewSPZS.spxqIfShow3)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName3);
+				tds.eq(1).text(previewSPZS.spxqValue3);
+				
+				tr=trs.eq(4);
+				if(previewSPZS.spxqIfShow4)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName4);
+				tds.eq(1).text(previewSPZS.spxqValue4);
+				
+				tr=trs.eq(5);
+				if(previewSPZS.spxqIfShow5)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName5);
+				tds.eq(1).text(previewSPZS.spxqValue5);
+				
+				tr=trs.eq(6);
+				if(previewSPZS.spxqIfShow6)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName6);
+				tds.eq(1).text(previewSPZS.spxqValue6);
+				
+				$("#preview_div #memo2_div").html(previewSPZS.memo2);
 				
 				var image2_1=previewSPZS.image2_1;
 				if(image2_1==null){
@@ -269,6 +332,8 @@ function previewHtmlGoodsSPZS(){
 					$("#preview_div #image3_5_img").attr("src",image3_5);
 				}
 				
+				$("#preview_div #memo3_div").html(previewSPZS.memo3);
+				
 				initDefaultHtmlVal();
 			}
 		,"json");
@@ -305,8 +370,128 @@ function previewHtmlGoodsSPZS(){
 			$("#preview_div #image1_div #image1_3_img").css("display","block");
 			$("#preview_div #image1_div #image1_3_img").attr("src",image1_3_src);
 		}
-		$("#preview_div #image1_div #image1_4_img").attr("src",$("#middle_div #image1_div #list_div #image1_4_img").attr("src"));
-		$("#preview_div #image1_div #image1_5_img").attr("src",$("#middle_div #image1_div #list_div #image1_5_img").attr("src"));
+		
+		var image1_4_src=disArr1[3];
+		if(image1_4_src==undefined||image1_4_src==""){
+			$("#preview_div #image1_div #image1_4_img").css("display","none");
+			$("#preview_div #image1_div #image1_4_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_4_img").css("display","block");
+			$("#preview_div #image1_div #image1_4_img").attr("src",image1_4_src);
+		}
+		
+		var image1_5_src=disArr1[4];
+		if(image1_5_src==undefined||image1_5_src==""){
+			$("#preview_div #image1_div #image1_5_img").css("display","none");
+			$("#preview_div #image1_div #image1_5_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_5_img").css("display","block");
+			$("#preview_div #image1_div #image1_5_img").attr("src",image1_5_src);
+		}
+		
+		var image2_1_src=disArr2[0];
+		if(image2_1_src==undefined||image2_1_src==""){
+			$("#preview_div #image2_div #image2_1_img").css("display","none");
+			$("#preview_div #image2_div #image2_1_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image2_div #image2_1_img").css("display","block");
+			$("#preview_div #image2_div #image2_1_img").attr("src",image2_1_src);
+		}
+		
+		var image2_2_src=disArr2[1];
+		if(image2_2_src==undefined||image2_2_src==""){
+			$("#preview_div #image2_div #image2_2_img").css("display","none");
+			$("#preview_div #image2_div #image2_2_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image2_div #image2_2_img").css("display","block");
+			$("#preview_div #image2_div #image2_2_img").attr("src",image2_2_src);
+		}
+		
+		var image2_3_src=disArr2[2];
+		if(image2_3_src==undefined||image2_3_src==""){
+			$("#preview_div #image2_div #image2_3_img").css("display","none");
+			$("#preview_div #image2_div #image2_3_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image2_div #image2_3_img").css("display","block");
+			$("#preview_div #image2_div #image2_3_img").attr("src",image2_3_src);
+		}
+		
+		var image2_4_src=disArr2[3];
+		if(image2_4_src==undefined||image2_4_src==""){
+			$("#preview_div #image2_div #image2_4_img").css("display","none");
+			$("#preview_div #image2_div #image2_4_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image2_div #image2_4_img").css("display","block");
+			$("#preview_div #image2_div #image2_4_img").attr("src",image2_4_src);
+		}
+		
+		var image2_5_src=disArr2[4];
+		if(image2_5_src==undefined||image2_5_src==""){
+			$("#preview_div #image2_div #image2_5_img").css("display","none");
+			$("#preview_div #image2_div #image2_5_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image2_div #image2_5_img").css("display","block");
+			$("#preview_div #image2_div #image2_5_img").attr("src",image2_5_src);
+		}
+		
+		var image3_1_src=disArr3[0];
+		if(image3_1_src==undefined||image3_1_src==""){
+			$("#preview_div #image3_div #image3_1_img").css("display","none");
+			$("#preview_div #image3_div #image3_1_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image3_div #image3_1_img").css("display","block");
+			$("#preview_div #image3_div #image3_1_img").attr("src",image3_1_src);
+		}
+		
+		var image3_2_src=disArr3[1];
+		if(image3_2_src==undefined||image3_2_src==""){
+			$("#preview_div #image3_div #image3_2_img").css("display","none");
+			$("#preview_div #image3_div #image3_2_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image3_div #image3_2_img").css("display","block");
+			$("#preview_div #image3_div #image3_2_img").attr("src",image3_2_src);
+		}
+		
+		var image3_3_src=disArr3[2];
+		if(image3_3_src==undefined||image3_3_src==""){
+			$("#preview_div #image3_div #image3_3_img").css("display","none");
+			$("#preview_div #image3_div #image3_3_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image3_div #image3_3_img").css("display","block");
+			$("#preview_div #image3_div #image3_3_img").attr("src",image3_3_src);
+		}
+		
+		var image3_4_src=disArr3[3];
+		if(image3_4_src==undefined||image3_4_src==""){
+			$("#preview_div #image3_div #image3_4_img").css("display","none");
+			$("#preview_div #image3_div #image3_4_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image3_div #image3_4_img").css("display","block");
+			$("#preview_div #image3_div #image3_4_img").attr("src",image3_4_src);
+		}
+		
+		var image3_5_src=disArr3[4];
+		if(image3_5_src==undefined||image3_5_src==""){
+			$("#preview_div #image3_div #image3_5_img").css("display","none");
+			$("#preview_div #image3_div #image3_5_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image3_div #image3_5_img").css("display","block");
+			$("#preview_div #image3_div #image3_5_img").attr("src",image3_5_src);
+		}
+		//$("#preview_div #image1_div #image1_4_img").attr("src",$("#middle_div #image1_div #list_div #image1_4_img").attr("src"));
+		//$("#preview_div #image1_div #image1_5_img").attr("src",$("#middle_div #image1_div #list_div #image1_5_img").attr("src"));
 	}
 	openPreviewBgDiv(1);
 }
@@ -336,8 +521,9 @@ function compareHtmlVal(){
 
 	$("#spxq_tab input[id^='spxqIfShow']").each(function(i){
 		var spxqIfShow=$(this).val();
+		var spxqName=$("#spxq_tab input[name^='spxqName']").eq(i).val();
 		var spxqValue=$("#spxq_tab input[name^='spxqValue']").eq(i).val();
-		if(spxqIfShow!=dSpxqIfShowArr[i]||spxqValue!=dSpxqValueArr[i]){
+		if(spxqIfShow!=dSpxqIfShowArr[i]||spxqName!=dSpxqNameArr[i]||spxqValue!=dSpxqValueArr[i]){
 			flag=false;
 			return flag;
 		}
@@ -382,6 +568,7 @@ function compareHtmlVal(){
 
 function saveEditHtmlGoodsSPZS(){
 	if(checkIfPaid()){
+		resetEditorHtml();
 		renameFile();
 		renameImage();
 		
@@ -477,6 +664,12 @@ function deleteImage3Div(){
 	$("#uploadFile3_div input[type='file']").remove();
 	$("#uploadFile3_div input[type='text']").remove();
 	resetDivPosition();
+}
+
+function resetEditorHtml(){
+	$("#memo1").val(editor1.html());
+	$("#memo2").val(editor2.html());
+	$("#memo3").val(editor3.html());
 }
 
 function renameFile(){
@@ -1101,7 +1294,7 @@ function goBack(){
 			<img class="image1_4_img" id="image1_4_img" alt="" src="">
 			<img class="image1_5_img" id="image1_5_img" alt="" src="">
 		</div>
-		<div class="memo1_div">
+		<div class="memo1_div" id="memo1_div">
 			${requestScope.htmlGoodsSPZS.memo1 }
 		</div>
 		
@@ -1161,7 +1354,7 @@ function goBack(){
 				</tr>
 			</table>
 		</div>
-		<div class="memo2_div">
+		<div class="memo2_div" id="memo2_div">
 			${requestScope.htmlGoodsSPZS.memo2 }
 		</div>
 		<div class="image2_div" id="image2_div">
@@ -1178,7 +1371,7 @@ function goBack(){
 			<img class="image3_4_img" id="image3_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }">
 			<img class="image3_5_img" id="image3_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }">
 		</div>
-		<div class="memo3_div">
+		<div class="memo3_div" id="memo3_div">
 			${requestScope.htmlGoodsSPZS.memo3 }
 		</div>
 		<div style="width: 100%;height:40px;"></div>
