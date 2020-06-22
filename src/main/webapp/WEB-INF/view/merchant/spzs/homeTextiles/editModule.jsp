@@ -14,8 +14,9 @@
 <%@include file="../../js.jsp"%>
 <link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/homeTextiles/editModule.css" />
 <script type="text/javascript">
+var bodyWidth;
 $(function(){
-	var bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
+	bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
 	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
 	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
 
@@ -23,7 +24,43 @@ $(function(){
     setTimeout(function(){
     	resetDivPosition();
     },"1000")
+    
+	initDefaultHtmlVal();
 });
+
+var dpn;
+var disArr1=[];
+var disArr2=[];
+var disArr3=[];
+var disArr4=[];
+var dSpxqIfShowArr=[];
+var dSpxqNameArr=[];
+var dSpxqValueArr=[];
+function initDefaultHtmlVal(){
+	dpn=$("#productName").val();
+	for(var i=0;i<5;i++){
+		disArr1[i]="";
+		disArr1[i]=$("#image1_div #list_div img[id^='img']").eq(i).attr("src");
+		console.log("reset"+i+"==="+disArr1[i]);
+	}
+	console.log(disArr1);
+	$("#spxq_tab input[id^='spxqIfShow']").each(function(i){
+		dSpxqIfShowArr[i]=$(this).val();
+		var spxqName=$("#spxq_tab input[name^='spxqName']").eq(i).val();
+		dSpxqNameArr[i]=spxqName;
+		var spxqValue=$("#spxq_tab input[name^='spxqValue']").eq(i).val();
+		dSpxqValueArr[i]=spxqValue;
+	});
+	$("#uploadFile2_div input[id^='image']").each(function(i){
+		disArr2[i]=$(this).val();
+	});
+	$("#uploadFile3_div input[id^='image']").each(function(i){
+		disArr3[i]=$(this).val();
+	});
+	$("#uploadFile4_div input[id^='image']").each(function(i){
+		disArr4[i]=$(this).val();
+	});
+}
 
 function resetDivPosition(){
 	var middleDivHeight=$("#middle_div").css("height").substring(0,$("#middle_div").css("height").length-2);
@@ -36,6 +73,545 @@ function showOptionDiv(o){
 
 function hideOptionDiv(o){
 	$(o).parent().find("#but_div").css("display","none");
+}
+
+function previewHtmlGoodsSPZS(){
+	if(!compareHtmlVal()){//这是已经编辑过内容的情况
+		saveEditHtmlGoodsSPZS();
+		
+		var moduleType='${requestScope.htmlGoodsSPZS.moduleType }';
+		var goodsNumber='${requestScope.htmlGoodsSPZS.goodsNumber }';
+		var accountId='${sessionScope.user.id }';
+		$.post("getPreviewHtmlGoods",
+			{trade:"spzs",moduleType:moduleType,goodsNumber:goodsNumber,accountId:accountId},
+			function(data){
+				console.log(data);
+				var previewSPZS=data.previewSPZS;
+				$("#preview_div #productName_div").text(previewSPZS.productName);
+				
+				var image1_1=previewSPZS.image1_1;
+				if(image1_1==null){
+					$("#preview_div #image1_1_img").css("display","none");
+					$("#preview_div #image1_1_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_1_img").css("display","block");
+					$("#preview_div #image1_1_img").attr("src",image1_1);
+				}
+				
+				var image1_2=previewSPZS.image1_2;
+				if(image1_2==null){
+					$("#preview_div #image1_2_img").css("display","none");
+					$("#preview_div #image1_2_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_2_img").css("display","block");
+					$("#preview_div #image1_2_img").attr("src",image1_2);
+				}
+				
+				var image1_3=previewSPZS.image1_3;
+				if(image1_3==null){
+					$("#preview_div #image1_3_img").css("display","none");
+					$("#preview_div #image1_3_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_3_img").css("display","block");
+					$("#preview_div #image1_3_img").attr("src",image1_3);
+				}
+				
+				var image1_4=previewSPZS.image1_4;
+				if(image1_4==null){
+					$("#preview_div #image1_4_img").css("display","none");
+					$("#preview_div #image1_4_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_4_img").css("display","block");
+					$("#preview_div #image1_4_img").attr("src",image1_4);
+				}
+				
+				var image1_5=previewSPZS.image1_5;
+				if(image1_5==null){
+					$("#preview_div #image1_5_img").css("display","none");
+					$("#preview_div #image1_5_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_5_img").css("display","block");
+					$("#preview_div #image1_5_img").attr("src",image1_5);
+				}
+				
+				var trs=$("#preview_div #spxq_tab tr");
+				
+				var tr=trs.eq(1);
+				if(previewSPZS.spxqIfShow1)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				var tds=trs.eq(1).find("td");
+				tds.eq(0).text(previewSPZS.spxqName1);
+				tds.eq(1).text(previewSPZS.spxqValue1);
+				
+				tr=trs.eq(2);
+				if(previewSPZS.spxqIfShow2)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName2);
+				tds.eq(1).text(previewSPZS.spxqValue2);
+				
+				tr=trs.eq(3);
+				if(previewSPZS.spxqIfShow3)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName3);
+				tds.eq(1).text(previewSPZS.spxqValue3);
+				
+				tr=trs.eq(4);
+				if(previewSPZS.spxqIfShow4)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName4);
+				tds.eq(1).text(previewSPZS.spxqValue4);
+				
+				tr=trs.eq(5);
+				if(previewSPZS.spxqIfShow5)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName5);
+				tds.eq(1).text(previewSPZS.spxqValue5);
+				
+				tr=trs.eq(6);
+				if(previewSPZS.spxqIfShow6)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName6);
+				tds.eq(1).text(previewSPZS.spxqValue6);
+				
+				tr=trs.eq(7);
+				if(previewSPZS.spxqIfShow7)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName7);
+				tds.eq(1).text(previewSPZS.spxqValue7);
+				
+				var image2_1=previewSPZS.image2_1;
+				if(image2_1==null){
+					$("#preview_div #image2_1_img").css("display","none");
+					$("#preview_div #image2_1_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image2_1_img").css("display","block");
+					$("#preview_div #image2_1_img").attr("src",image2_1);
+				}
+				
+				var image2_2=previewSPZS.image2_2;
+				if(image2_2==null){
+					$("#preview_div #image2_2_img").css("display","none");
+					$("#preview_div #image2_2_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image2_2_img").css("display","block");
+					$("#preview_div #image2_2_img").attr("src",image2_2);
+				}
+				
+				var image2_3=previewSPZS.image2_3;
+				if(image2_3==null){
+					$("#preview_div #image2_3_img").css("display","none");
+					$("#preview_div #image2_3_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image2_3_img").css("display","block");
+					$("#preview_div #image2_3_img").attr("src",image2_3);
+				}
+				
+				var image2_4=previewSPZS.image2_4;
+				if(image2_4==null){
+					$("#preview_div #image2_4_img").css("display","none");
+					$("#preview_div #image2_4_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image2_4_img").css("display","block");
+					$("#preview_div #image2_4_img").attr("src",image2_4);
+				}
+				
+				var image2_5=previewSPZS.image2_5;
+				if(image2_5==null){
+					$("#preview_div #image2_5_img").css("display","none");
+					$("#preview_div #image2_5_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image2_5_img").css("display","block");
+					$("#preview_div #image2_5_img").attr("src",image2_5);
+				}
+				
+				var image3_1=previewSPZS.image3_1;
+				if(image3_1==null){
+					$("#preview_div #image3_1_img").css("display","none");
+					$("#preview_div #image3_1_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image3_1_img").css("display","block");
+					$("#preview_div #image3_1_img").attr("src",image3_1);
+				}
+				
+				var image3_2=previewSPZS.image3_2;
+				if(image3_2==null){
+					$("#preview_div #image3_2_img").css("display","none");
+					$("#preview_div #image3_2_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image3_2_img").css("display","block");
+					$("#preview_div #image3_2_img").attr("src",image3_2);
+				}
+				
+				var image3_3=previewSPZS.image3_3;
+				if(image3_3==null){
+					$("#preview_div #image3_3_img").css("display","none");
+					$("#preview_div #image3_3_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image3_3_img").css("display","block");
+					$("#preview_div #image3_3_img").attr("src",image3_3);
+				}
+				
+				var image3_4=previewSPZS.image3_4;
+				if(image3_4==null){
+					$("#preview_div #image3_4_img").css("display","none");
+					$("#preview_div #image3_4_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image3_4_img").css("display","block");
+					$("#preview_div #image3_4_img").attr("src",image3_4);
+				}
+				
+				var image3_5=previewSPZS.image3_5;
+				if(image3_5==null){
+					$("#preview_div #image3_5_img").css("display","none");
+					$("#preview_div #image3_5_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image3_5_img").css("display","block");
+					$("#preview_div #image3_5_img").attr("src",image3_5);
+				}
+				
+				var image4_1=previewSPZS.image4_1;
+				if(image4_1==null){
+					$("#preview_div #image4_1_img").css("display","none");
+					$("#preview_div #image4_1_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image4_1_img").css("display","block");
+					$("#preview_div #image4_1_img").attr("src",image4_1);
+				}
+				
+				var image4_2=previewSPZS.image4_2;
+				if(image4_2==null){
+					$("#preview_div #image4_2_img").css("display","none");
+					$("#preview_div #image4_2_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image4_2_img").css("display","block");
+					$("#preview_div #image4_2_img").attr("src",image4_2);
+				}
+				
+				var image4_3=previewSPZS.image4_3;
+				if(image4_3==null){
+					$("#preview_div #image4_3_img").css("display","none");
+					$("#preview_div #image4_3_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image4_3_img").css("display","block");
+					$("#preview_div #image4_3_img").attr("src",image4_3);
+				}
+				
+				var image4_4=previewSPZS.image4_4;
+				if(image4_4==null){
+					$("#preview_div #image4_4_img").css("display","none");
+					$("#preview_div #image4_4_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image4_4_img").css("display","block");
+					$("#preview_div #image4_4_img").attr("src",image4_4);
+				}
+				
+				var image4_5=previewSPZS.image4_5;
+				if(image4_5==null){
+					$("#preview_div #image4_5_img").css("display","none");
+					$("#preview_div #image4_5_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image4_5_img").css("display","block");
+					$("#preview_div #image4_5_img").attr("src",image4_5);
+				}
+				
+				initDefaultHtmlVal();
+			}
+		,"json");
+	}
+	else{
+		$("#preview_div #productName_div").text(dpn);
+		
+		var image1_1_src=disArr1[0];
+		if(image1_1_src==undefined||image1_1_src==""){
+			$("#preview_div #image1_div #image1_1_img").css("display","none");
+			$("#preview_div #image1_div #image1_1_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_1_img").css("display","block");
+			$("#preview_div #image1_div #image1_1_img").attr("src",image1_1_src);
+		}
+		
+		var image1_2_src=disArr1[1];
+		if(image1_2_src==undefined||image1_2_src==""){
+			$("#preview_div #image1_div #image1_2_img").css("display","none");
+			$("#preview_div #image1_div #image1_2_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_2_img").css("display","block");
+			$("#preview_div #image1_div #image1_2_img").attr("src",image1_2_src);
+		}
+		
+		var image1_3_src=disArr1[2];
+		if(image1_3_src==undefined||image1_3_src==""){
+			$("#preview_div #image1_div #image1_3_img").css("display","none");
+			$("#preview_div #image1_div #image1_3_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_3_img").css("display","block");
+			$("#preview_div #image1_div #image1_3_img").attr("src",image1_3_src);
+		}
+		
+		var image1_4_src=disArr1[3];
+		if(image1_4_src==undefined||image1_4_src==""){
+			$("#preview_div #image1_div #image1_4_img").css("display","none");
+			$("#preview_div #image1_div #image1_4_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_4_img").css("display","block");
+			$("#preview_div #image1_div #image1_4_img").attr("src",image1_4_src);
+		}
+		
+		var image1_5_src=disArr1[4];
+		if(image1_5_src==undefined||image1_5_src==""){
+			$("#preview_div #image1_div #image1_5_img").css("display","none");
+			$("#preview_div #image1_div #image1_5_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_5_img").css("display","block");
+			$("#preview_div #image1_div #image1_5_img").attr("src",image1_5_src);
+		}
+		
+		var image2_1_src=disArr2[0];
+		if(image2_1_src==undefined||image2_1_src==""){
+			$("#preview_div #image2_div #image2_1_img").css("display","none");
+			$("#preview_div #image2_div #image2_1_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image2_div #image2_1_img").css("display","block");
+			$("#preview_div #image2_div #image2_1_img").attr("src",image2_1_src);
+		}
+		
+		var image2_2_src=disArr2[1];
+		if(image2_2_src==undefined||image2_2_src==""){
+			$("#preview_div #image2_div #image2_2_img").css("display","none");
+			$("#preview_div #image2_div #image2_2_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image2_div #image2_2_img").css("display","block");
+			$("#preview_div #image2_div #image2_2_img").attr("src",image2_2_src);
+		}
+		
+		var image2_3_src=disArr2[2];
+		if(image2_3_src==undefined||image2_3_src==""){
+			$("#preview_div #image2_div #image2_3_img").css("display","none");
+			$("#preview_div #image2_div #image2_3_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image2_div #image2_3_img").css("display","block");
+			$("#preview_div #image2_div #image2_3_img").attr("src",image2_3_src);
+		}
+		
+		var image2_4_src=disArr2[3];
+		if(image2_4_src==undefined||image2_4_src==""){
+			$("#preview_div #image2_div #image2_4_img").css("display","none");
+			$("#preview_div #image2_div #image2_4_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image2_div #image2_4_img").css("display","block");
+			$("#preview_div #image2_div #image2_4_img").attr("src",image2_4_src);
+		}
+		
+		var image2_5_src=disArr2[4];
+		if(image2_5_src==undefined||image2_5_src==""){
+			$("#preview_div #image2_div #image2_5_img").css("display","none");
+			$("#preview_div #image2_div #image2_5_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image2_div #image2_5_img").css("display","block");
+			$("#preview_div #image2_div #image2_5_img").attr("src",image2_5_src);
+		}
+		
+		var image3_1_src=disArr3[0];
+		if(image3_1_src==undefined||image3_1_src==""){
+			$("#preview_div #image3_div #image3_1_img").css("display","none");
+			$("#preview_div #image3_div #image3_1_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image3_div #image3_1_img").css("display","block");
+			$("#preview_div #image3_div #image3_1_img").attr("src",image3_1_src);
+		}
+		
+		var image3_2_src=disArr3[1];
+		if(image3_2_src==undefined||image3_2_src==""){
+			$("#preview_div #image3_div #image3_2_img").css("display","none");
+			$("#preview_div #image3_div #image3_2_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image3_div #image3_2_img").css("display","block");
+			$("#preview_div #image3_div #image3_2_img").attr("src",image3_2_src);
+		}
+		
+		var image3_3_src=disArr3[2];
+		if(image3_3_src==undefined||image3_3_src==""){
+			$("#preview_div #image3_div #image3_3_img").css("display","none");
+			$("#preview_div #image3_div #image3_3_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image3_div #image3_3_img").css("display","block");
+			$("#preview_div #image3_div #image3_3_img").attr("src",image3_3_src);
+		}
+		
+		var image3_4_src=disArr3[3];
+		if(image3_4_src==undefined||image3_4_src==""){
+			$("#preview_div #image3_div #image3_4_img").css("display","none");
+			$("#preview_div #image3_div #image3_4_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image3_div #image3_4_img").css("display","block");
+			$("#preview_div #image3_div #image3_4_img").attr("src",image3_4_src);
+		}
+		
+		var image3_5_src=disArr3[4];
+		if(image3_5_src==undefined||image3_5_src==""){
+			$("#preview_div #image3_div #image3_5_img").css("display","none");
+			$("#preview_div #image3_div #image3_5_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image3_div #image3_5_img").css("display","block");
+			$("#preview_div #image3_div #image3_5_img").attr("src",image3_5_src);
+		}
+		
+		var image4_1_src=disArr4[0];
+		if(image4_1_src==undefined||image4_1_src==""){
+			$("#preview_div #image4_div #image4_1_img").css("display","none");
+			$("#preview_div #image4_div #image4_1_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image4_div #image4_1_img").css("display","block");
+			$("#preview_div #image4_div #image4_1_img").attr("src",image4_1_src);
+		}
+		
+		var image4_2_src=disArr4[1];
+		if(image4_2_src==undefined||image4_2_src==""){
+			$("#preview_div #image4_div #image4_2_img").css("display","none");
+			$("#preview_div #image4_div #image4_2_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image4_div #image4_2_img").css("display","block");
+			$("#preview_div #image4_div #image4_2_img").attr("src",image4_2_src);
+		}
+		
+		var image4_3_src=disArr4[2];
+		if(image4_3_src==undefined||image4_3_src==""){
+			$("#preview_div #image4_div #image4_3_img").css("display","none");
+			$("#preview_div #image4_div #image4_3_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image4_div #image4_3_img").css("display","block");
+			$("#preview_div #image4_div #image4_3_img").attr("src",image4_3_src);
+		}
+		
+		var image4_4_src=disArr4[3];
+		if(image4_4_src==undefined||image4_4_src==""){
+			$("#preview_div #image4_div #image4_4_img").css("display","none");
+			$("#preview_div #image4_div #image4_4_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image4_div #image4_4_img").css("display","block");
+			$("#preview_div #image4_div #image4_4_img").attr("src",image4_4_src);
+		}
+		
+		var image4_5_src=disArr4[4];
+		if(image4_5_src==undefined||image4_5_src==""){
+			$("#preview_div #image4_div #image4_5_img").css("display","none");
+			$("#preview_div #image4_div #image4_5_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image4_div #image4_5_img").css("display","block");
+			$("#preview_div #image4_div #image4_5_img").attr("src",image4_5_src);
+		}
+		//$("#preview_div #image1_div #image1_4_img").attr("src",$("#middle_div #image1_div #list_div #image1_4_img").attr("src"));
+		//$("#preview_div #image1_div #image1_5_img").attr("src",$("#middle_div #image1_div #list_div #image1_5_img").attr("src"));
+	}
+	openPreviewBgDiv(1);
+}
+
+function compareHtmlVal(){
+	var flag=true;
+	var cpn=$("#productName").val();
+	if(dpn!=cpn){
+		flag=false;
+		return flag;
+	}
+	
+	var cisArr1=[];
+	for(var i=0;i<5;i++){
+		var imgSrc=$("#uploadFile1_div input[id^='image']").eq(i).val();
+		if(disArr1[i]!=imgSrc){
+			flag=false;
+			return flag;
+		}
+	}
+	
+	$("#spxq_tab input[id^='spxqIfShow']").each(function(i){
+		var spxqIfShow=$(this).val();
+		var spxqName=$("#spxq_tab input[name^='spxqName']").eq(i).val();
+		var spxqValue=$("#spxq_tab input[name^='spxqValue']").eq(i).val();
+		if(spxqIfShow!=dSpxqIfShowArr[i]||spxqName!=dSpxqNameArr[i]||spxqValue!=dSpxqValueArr[i]){
+			flag=false;
+			return flag;
+		}
+	});
+
+	var cisArr2=[];
+	$("#uploadFile2_div input[id^='image']").each(function(i){
+		var imgSrc=$(this).val();
+		if(disArr2[i]!=imgSrc){
+			flag=false;
+			return flag;
+		}
+	});
+
+	var cisArr3=[];
+	$("#uploadFile3_div input[id^='image']").each(function(i){
+		var imgSrc=$(this).val();
+		if(disArr3[i]!=imgSrc){
+			flag=false;
+			return flag;
+		}
+	});
+	
+	return flag;
 }
 
 function saveEditHtmlGoodsSPZS(){
@@ -583,6 +1159,16 @@ function changeSPXQTrIfShow(index,o){
 	}
 }
 
+function openPreviewBgDiv(flag){
+	$("#previewBg_div").css("display",flag==1?"block":"none");
+	
+	var preDivWidth=$("#preview_div").css("width").substring(0,$("#preview_div").css("width").length-2);
+	var preDivHeight=$("#preview_div").css("height").substring(0,$("#preview_div").css("height").length-2);
+	$("#smck_div").css("margin-left",(parseInt(bodyWidth)+parseInt(preDivWidth))/2+20+"px");
+	$("#smck_div").css("margin-top","-"+(parseInt(preDivHeight))+"px");
+	$("#previewBg_div").css("height",(parseInt(preDivHeight)+80)+"px");
+}
+
 function goBack(){
 	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=spzs&moduleType="+'${param.moduleType}';
 }
@@ -934,6 +1520,112 @@ function goBack(){
 	</div>
 </div>
 
+<div class="previewBg_div" id="previewBg_div">
+	<div class="preview_div" id="preview_div">
+		<div class="productName_div" id="productName_div"></div>
+		<div class="image1_div"  id="image1_div">
+			<img class="image1_1_img" id="image1_1_img" alt="" src="">
+			<img class="image1_2_img" id="image1_2_img" alt="" src="">
+			<img class="image1_3_img" id="image1_3_img" alt="" src="">
+			<img class="image1_4_img" id="image1_4_img" alt="" src="">
+			<img class="image1_5_img" id="image1_5_img" alt="" src="">
+		</div>
+		<div class="spxq_div">
+			<table class="spxq_tab" id="spxq_tab">
+				<tr height="60">
+					<td class="head_td" colspan="2">商品详情</td>
+				</tr>
+				
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName1 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue1 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName2 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue2 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName3 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue3 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName4 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue4 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName5 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue5 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName6 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue6 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName7 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue7 }
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="image2_div" id="image2_div">
+			<img class="image2_1_img" id="image2_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_1 }">
+			<img class="image2_2_img" id="image2_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_2 }">
+			<img class="image2_3_img" id="image2_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_3 }">
+			<img class="image2_4_img" id="image2_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_4 }">
+			<img class="image2_5_img" id="image2_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }">
+		</div>
+		<div class="image3_div" id="image3_div">
+			<img class="image3_1_img" id="image3_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }">
+			<img class="image3_2_img" id="image3_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }">
+			<img class="image3_3_img" id="image3_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }">
+			<img class="image3_4_img" id="image3_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }">
+			<img class="image3_5_img" id="image3_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }">
+		</div>
+		<div class="image4_div" id="image4_div">
+			<img class="image4_1_img" id="image4_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image4_1 }">
+			<img class="image4_2_img" id="image4_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image4_2 }">
+			<img class="image4_3_img" id="image4_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image4_3 }">
+			<img class="image4_4_img" id="image4_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image4_4 }">
+			<img class="image4_5_img" id="image4_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image4_5 }">
+		</div>
+		<div style="width: 100%;height:40px;"></div>
+	</div>
+	<div class="smck_div" id="smck_div">
+		<div class="tiShi_div">手机端实际效果可能存在差异，请扫码查看</div>
+		<div class="qrCode_div">
+			<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsSPZS.qrCode }">
+		</div>
+		<div class="jxbjBut_div" onclick="openPreviewBgDiv(0)">继续编辑</div>
+	</div>
+</div>
+
 <div class="top_div">
 	<div class="return_div" onclick="goBack();">&lt返回</div>
 	<div class="title_div">家纺-案例</div>
@@ -1146,7 +1838,7 @@ function goBack(){
 </div>
 <div class="right_div" id="right_div">
 	<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsSPZS.qrCode }">
-	<div class="preview_div">预览</div>
+	<div class="preview_div" onclick="previewHtmlGoodsSPZS();">预览</div>
 	<div class="save_div" onclick="saveEditHtmlGoodsSPZS();">保存</div>
 	<div class="finishEdit_div" onclick="finishEditHtmlGoodsSPZS();">完成编辑</div>
 	<div class="saveStatus_div" id="saveStatus_div"></div>
