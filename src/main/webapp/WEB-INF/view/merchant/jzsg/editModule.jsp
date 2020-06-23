@@ -8,16 +8,46 @@
 <%@include file="../js.jsp"%>
 <link rel="stylesheet" href="<%=basePath %>/resource/css/jzsg/editModule.css" />
 <script type="text/javascript">
+var bodyWidth;
 $(function(){
-	var bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
+	bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
 	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
 	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
 
-    //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+    //这里必须延迟1s，等图片加载完再重新设定右边div位置
     setTimeout(function(){
     	resetDivPosition();
     },"1000")
+    
+    initDefaultHtmlVal();
 });
+
+var dpn;
+var disArr1=[];
+var disArr2=[];
+var dRyxxIfShowArr=[];
+var dRyxxNameArr=[];
+var dRyxxValueArr=[];
+function initDefaultHtmlVal(){
+	dpn=$("#middle_div #title").val();
+	for(var i=0;i<5;i++){
+		disArr1[i]="";
+		disArr1[i]=$("#image1_div #list_div img[id^='img']").eq(i).attr("src");
+		console.log("reset"+i+"==="+disArr1[i]);
+	}
+	console.log(disArr1);
+	$("#ryxx_tab input[id^='ryxxIfShow']").each(function(i){
+		dRyxxIfShowArr[i]=$(this).val();
+		var spxqName=$("#ryxx_tab input[name^='spxqName']").eq(i).val();
+		dRyxxNameArr[i]=spxqName;
+		var spxqValue=$("#ryxx_tab input[name^='spxqValue']").eq(i).val();
+		//console.log("spxqValue==="+spxqValue);
+		dRyxxValueArr[i]=spxqValue;
+	});
+	$("#uploadFile2_div input[id^='image']").each(function(i){
+		disArr2[i]=$(this).val();
+	});
+}
 
 function resetDivPosition(){
 	var middleDivHeight=$("#middle_div").css("height").substring(0,$("#middle_div").css("height").length-2);
@@ -30,6 +60,280 @@ function showOptionDiv(o){
 
 function hideOptionDiv(o){
 	$(o).parent().find("#but_div").css("display","none");
+}
+
+function previewhtmlGoodsJZSG(){
+	if(!compareHtmlVal()){//这是已经编辑过内容的情况
+		saveEditHtmlGoodsJZSG();
+		
+		var userNumber='${requestScope.htmlGoodsJZSG.userNumber }';
+		var accountId='${sessionScope.user.id }';
+		$.post("getPreviewHtmlGoods",
+			{trade:"jzsg",userNumber:userNumber,accountId:accountId},
+			function(data){
+				console.log(data);
+				var previewJZSG=data.previewJZSG;
+				$("#preview_div #title_div").text(previewJZSG.title);
+				
+				var image1_1=previewJZSG.image1_1;
+				if(image1_1==null){
+					$("#preview_div #image1_1_img").css("display","none");
+					$("#preview_div #image1_1_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_1_img").css("display","block");
+					$("#preview_div #image1_1_img").attr("src",image1_1);
+				}
+				
+				var image1_2=previewJZSG.image1_2;
+				if(image1_2==null){
+					$("#preview_div #image1_2_img").css("display","none");
+					$("#preview_div #image1_2_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_2_img").css("display","block");
+					$("#preview_div #image1_2_img").attr("src",image1_2);
+				}
+				
+				var image1_3=previewJZSG.image1_3;
+				if(image1_3==null){
+					$("#preview_div #image1_3_img").css("display","none");
+					$("#preview_div #image1_3_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_3_img").css("display","block");
+					$("#preview_div #image1_3_img").attr("src",image1_3);
+				}
+				
+				var trs=$("#preview_div #ryxx_tab tr");
+				
+				var tr=trs.eq(1);
+				if(previewJZSG.ryxxIfShow1)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				var tds=trs.eq(1).find("td");
+				tds.eq(0).text(previewJZSG.ryxxName1);
+				tds.eq(1).text(previewJZSG.ryxxValue1);
+				
+				tr=trs.eq(2);
+				if(previewJZSG.ryxxIfShow2)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewJZSG.ryxxName2);
+				tds.eq(1).text(previewJZSG.ryxxValue2);
+				
+				tr=trs.eq(3);
+				if(previewJZSG.ryxxIfShow3)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewJZSG.ryxxName3);
+				tds.eq(1).text(previewJZSG.ryxxValue3);
+				
+				tr=trs.eq(4);
+				if(previewJZSG.ryxxIfShow4)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewJZSG.ryxxName4);
+				tds.eq(1).text(previewJZSG.ryxxValue4);
+				
+				tr=trs.eq(5);
+				if(previewJZSG.ryxxIfShow5)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewJZSG.ryxxName5);
+				tds.eq(1).text(previewJZSG.ryxxValue5);
+				
+				tr=trs.eq(6);
+				if(previewJZSG.ryxxIfShow6)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewJZSG.ryxxName6);
+				tds.eq(1).text(previewJZSG.ryxxValue6);
+				
+				tr=trs.eq(7);
+				if(previewJZSG.ryxxIfShow7)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewJZSG.ryxxName7);
+				tds.eq(1).text(previewJZSG.ryxxValue7);
+				
+				tr=trs.eq(8);
+				if(previewJZSG.ryxxIfShow8)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewJZSG.ryxxName8);
+				tds.eq(1).text(previewJZSG.ryxxValue8);
+				
+				tr=trs.eq(9);
+				if(previewJZSG.ryxxIfShow9)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewJZSG.ryxxName9);
+				tds.eq(1).text(previewJZSG.ryxxValue9);
+				
+				tr=trs.eq(10);
+				if(previewJZSG.ryxxIfShow10)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewJZSG.ryxxName10);
+				tds.eq(1).text(previewJZSG.ryxxValue10);
+				
+				var image2_1=previewJZSG.image2_1;
+				if(image2_1==null){
+					$("#preview_div #image2_1_img").css("display","none");
+					$("#preview_div #image2_1_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image2_1_img").css("display","block");
+					$("#preview_div #image2_1_img").attr("src",image2_1);
+				}
+				
+				var image2_2=previewJZSG.image2_2;
+				if(image2_2==null){
+					$("#preview_div #image2_2_img").css("display","none");
+					$("#preview_div #image2_2_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image2_2_img").css("display","block");
+					$("#preview_div #image2_2_img").attr("src",image2_2);
+				}
+				
+				var image2_3=previewJZSG.image2_3;
+				if(image2_3==null){
+					$("#preview_div #image2_3_img").css("display","none");
+					$("#preview_div #image2_3_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image2_3_img").css("display","block");
+					$("#preview_div #image2_3_img").attr("src",image2_3);
+				}
+				
+				initDefaultHtmlVal();
+			}
+		,"json");
+	}
+	else{
+		$("#preview_div #title_div").text(dpn);
+		
+		var image1_1_src=disArr1[0];
+		if(image1_1_src==undefined||image1_1_src==""){
+			$("#preview_div #image1_div #image1_1_img").css("display","none");
+			$("#preview_div #image1_div #image1_1_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_1_img").css("display","block");
+			$("#preview_div #image1_div #image1_1_img").attr("src",image1_1_src);
+		}
+		
+		var image1_2_src=disArr1[1];
+		if(image1_2_src==undefined||image1_2_src==""){
+			$("#preview_div #image1_div #image1_2_img").css("display","none");
+			$("#preview_div #image1_div #image1_2_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_2_img").css("display","block");
+			$("#preview_div #image1_div #image1_2_img").attr("src",image1_2_src);
+		}
+		
+		var image1_3_src=disArr1[2];
+		if(image1_3_src==undefined||image1_3_src==""){
+			$("#preview_div #image1_div #image1_3_img").css("display","none");
+			$("#preview_div #image1_div #image1_3_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_3_img").css("display","block");
+			$("#preview_div #image1_div #image1_3_img").attr("src",image1_3_src);
+		}
+		
+		var image2_1_src=disArr2[0];
+		if(image2_1_src==undefined||image2_1_src==""){
+			$("#preview_div #image2_div #image2_1_img").css("display","none");
+			$("#preview_div #image2_div #image2_1_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image2_div #image2_1_img").css("display","block");
+			$("#preview_div #image2_div #image2_1_img").attr("src",image2_1_src);
+		}
+		
+		var image2_2_src=disArr2[1];
+		if(image2_2_src==undefined||image2_2_src==""){
+			$("#preview_div #image2_div #image2_2_img").css("display","none");
+			$("#preview_div #image2_div #image2_2_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image2_div #image2_2_img").css("display","block");
+			$("#preview_div #image2_div #image2_2_img").attr("src",image2_2_src);
+		}
+		
+		var image2_3_src=disArr2[2];
+		if(image2_3_src==undefined||image2_3_src==""){
+			$("#preview_div #image2_div #image2_3_img").css("display","none");
+			$("#preview_div #image2_div #image2_3_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image2_div #image2_3_img").css("display","block");
+			$("#preview_div #image2_div #image2_3_img").attr("src",image2_3_src);
+		}
+	}
+	openPreviewBgDiv(1);
+}
+
+function compareHtmlVal(){
+	var flag=true;
+	var cpn=$("#middle_div #title").val();
+	if(dpn!=cpn){
+		flag=false;
+		return flag;
+	}
+	
+	var cisArr1=[];
+	$("#uploadFile1_div input[id^='image']").each(function(i){
+		var imgSrc=$(this).val();
+		if(disArr1[i]!=imgSrc){
+			flag=false;
+			return flag;
+		}
+	});
+
+	$("#ryxx_tab input[id^='ryxxIfShow']").each(function(i){
+		var ryxxIfShow=$(this).val();
+		var ryxxName=$("#ryxx_tab input[name^='ryxxName']").eq(i).val();
+		var ryxxValue=$("#ryxx_tab input[name^='ryxxValue']").eq(i).val();
+		if(ryxxIfShow!=dRyxxIfShowArr[i]||ryxxName!=dRyxxNameArr[i]||ryxxValue!=dRyxxValueArr[i]){
+			flag=false;
+			return flag;
+		}
+	});
+
+	var cisArr2=[];
+	$("#uploadFile2_div input[id^='image']").each(function(i){
+		var imgSrc=$(this).val();
+		if(disArr2[i]!=imgSrc){
+			flag=false;
+			return flag;
+		}
+	});
+	
+	return flag;
 }
 
 function saveEditHtmlGoodsJZSG(){
@@ -335,6 +639,16 @@ function changeRYXXTrIfShow(index,o){
 	}
 }
 
+function openPreviewBgDiv(flag){
+	$("#previewBg_div").css("display",flag==1?"block":"none");
+	
+	var preDivWidth=$("#preview_div").css("width").substring(0,$("#preview_div").css("width").length-2);
+	var preDivHeight=$("#preview_div").css("height").substring(0,$("#preview_div").css("height").length-2);
+	$("#smck_div").css("margin-left",(parseInt(bodyWidth)+parseInt(preDivWidth))/2+20+"px");
+	$("#smck_div").css("margin-top","-"+(parseInt(preDivHeight))+"px");
+	$("#previewBg_div").css("height",(parseInt(preDivHeight)+80)+"px");
+}
+
 function goBack(){
 	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=jzsg";
 }
@@ -452,6 +766,119 @@ function goBack(){
 	</div>
 </div>
 
+<div class="previewBg_div" id="previewBg_div">
+	<div class="preview_div" id="preview_div">
+		<div class="title_div" id="title_div"></div>
+		<div class="image1_div"  id="image1_div">
+			<img class="image1_1_img" id="image1_1_img" alt="" src="">
+			<img class="image1_2_img" id="image1_2_img" alt="" src="">
+			<img class="image1_3_img" id="image1_3_img" alt="" src="">
+		</div>
+		
+		<div class="ryxx_div">
+			<table class="ryxx_tab" id="ryxx_tab">
+				<tr height="60">
+					<td class="head_td" colspan="2">商品详情</td>
+				</tr>
+				
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJZSG.ryxxName1 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJZSG.ryxxValue1 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJZSG.ryxxName2 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJZSG.ryxxValue2 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJZSG.ryxxName3 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJZSG.ryxxValue3 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJZSG.ryxxName4 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJZSG.ryxxValue4 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJZSG.ryxxName5 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJZSG.ryxxValue5 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJZSG.ryxxName6 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJZSG.ryxxValue6 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJZSG.ryxxName7 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJZSG.ryxxValue7 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJZSG.ryxxName8 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJZSG.ryxxValue8 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJZSG.ryxxName9 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJZSG.ryxxValue9 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJZSG.ryxxName10 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJZSG.ryxxValue10 }
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="image2_div" id="image2_div">
+			<img class="image2_1_img" id="image2_1_img" alt="" src="${requestScope.htmlGoodsJZSG.image2_1 }">
+			<img class="image2_2_img" id="image2_2_img" alt="" src="${requestScope.htmlGoodsJZSG.image2_2 }">
+			<img class="image2_3_img" id="image2_3_img" alt="" src="${requestScope.htmlGoodsJZSG.image2_3 }">
+		</div>
+		<div style="width: 100%;height:40px;"></div>
+	</div>
+	<div class="smck_div" id="smck_div">
+		<div class="tiShi_div">手机端实际效果可能存在差异，请扫码查看</div>
+		<div class="qrCode_div">
+			<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsJZSG.qrCode }">
+		</div>
+		<div class="jxbjBut_div" onclick="openPreviewBgDiv(0)">继续编辑</div>
+	</div>
+</div>
+
 <div class="top_div">
 	<div class="return_div" onclick="goBack();">&lt返回</div>
 	<div class="title_div">建筑施工-案例</div>
@@ -459,7 +886,7 @@ function goBack(){
 </div>
 <div class="middle_div" id="middle_div">
 	<div>
-		<input type="text" class="productName_input" id="productName" name="productName" placeholder="请输入标题" value="${requestScope.htmlGoodsJZSG.title }"/>
+		<input type="text" class="title_input" id="title" name="title" placeholder="请输入标题" value="${requestScope.htmlGoodsJZSG.title }"/>
 	</div>
 	<div class="image1_div" id="image1_div">
 		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
@@ -491,7 +918,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow1" name="ryxxIfShow1" value="${requestScope.htmlGoodsJZSG.ryxxIfShow1 }" />
-					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow1?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(1,this)"/>
+					<input type="button" class="ryxxIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow1?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(1,this)"/>
 				</td>
 			</tr>
 			
@@ -504,7 +931,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow2" name="ryxxIfShow2" value="${requestScope.htmlGoodsJZSG.ryxxIfShow2 }" />
-					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow2?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(2,this)"/>
+					<input type="button" class="ryxxIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow2?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(2,this)"/>
 				</td>
 			</tr>
 			
@@ -517,7 +944,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow3" name="ryxxIfShow3" value="${requestScope.htmlGoodsJZSG.ryxxIfShow3 }" />
-					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow3?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(3,this)"/>
+					<input type="button" class="ryxxIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow3?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(3,this)"/>
 				</td>
 			</tr>
 			
@@ -530,7 +957,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow4" name="ryxxIfShow4" value="${requestScope.htmlGoodsJZSG.ryxxIfShow4 }" />
-					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow4?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(4,this)"/>
+					<input type="button" class="ryxxIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow4?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(4,this)"/>
 				</td>
 			</tr>
 			
@@ -543,7 +970,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow5" name="ryxxIfShow5" value="${requestScope.htmlGoodsJZSG.ryxxIfShow5 }" />
-					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow5?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(5,this)"/>
+					<input type="button" class="ryxxIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow5?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(5,this)"/>
 				</td>
 			</tr>
 			
@@ -556,7 +983,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow6" name="ryxxIfShow6" value="${requestScope.htmlGoodsJZSG.ryxxIfShow6 }" />
-					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow6?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(6,this)"/>
+					<input type="button" class="ryxxIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow6?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(6,this)"/>
 				</td>
 			</tr>
 			
@@ -569,7 +996,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow7" name="ryxxIfShow7" value="${requestScope.htmlGoodsJZSG.ryxxIfShow7 }" />
-					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow7?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(7,this)"/>
+					<input type="button" class="ryxxIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow7?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(7,this)"/>
 				</td>
 			</tr>
 			
@@ -582,7 +1009,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow8" name="ryxxIfShow8" value="${requestScope.htmlGoodsJZSG.ryxxIfShow8 }" />
-					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow8?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(8,this)"/>
+					<input type="button" class="ryxxIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow8?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(8,this)"/>
 				</td>
 			</tr>
 			
@@ -595,7 +1022,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow9" name="ryxxIfShow9" value="${requestScope.htmlGoodsJZSG.ryxxIfShow9 }" />
-					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow9?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(9,this)"/>
+					<input type="button" class="ryxxIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow9?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(9,this)"/>
 				</td>
 			</tr>
 			
@@ -608,7 +1035,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow10" name="ryxxIfShow10" value="${requestScope.htmlGoodsJZSG.ryxxIfShow10 }" />
-					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow10?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(10,this)"/>
+					<input type="button" class="ryxxIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow10?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(10,this)"/>
 				</td>
 			</tr>
 			
@@ -636,7 +1063,7 @@ function goBack(){
 </div>
 <div class="right_div" id="right_div">
 	<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsJZSG.qrCode }">
-	<div class="preview_div">预览</div>
+	<div class="preview_div" onclick="previewhtmlGoodsJZSG();">预览</div>
 	<div class="save_div" onclick="saveEditHtmlGoodsJZSG();">保存</div>
 	<div class="finishEdit_div" onclick="finishEditHtmlGoodsJZSG();">完成编辑</div>
 	<div class="saveStatus_div" id="saveStatus_div"></div>

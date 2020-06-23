@@ -2777,7 +2777,7 @@ public class MainController {
 
 	@RequestMapping(value="/getPreviewHtmlGoods")
 	@ResponseBody
-	public Map<String, Object> getPreviewHtmlGoods(String trade,String moduleType,String goodsNumber,String accountId) {
+	public Map<String, Object> getPreviewHtmlGoods(String trade,String moduleType,String goodsNumber,String accountId,HttpServletRequest request) {
 
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		switch (trade) {
@@ -2788,6 +2788,10 @@ public class MainController {
 		case "dmtzl":
 			HtmlGoodsDMTZL htmlGoodsDMTZL = publicService.getHtmlGoodsDMTZL(goodsNumber, accountId);
 			jsonMap.put("previewDMTZL", htmlGoodsDMTZL);
+			break;
+		case "jzsg":
+			HtmlGoodsJZSG htmlGoodsJZSG = publicService.getHtmlGoodsJZSG(request.getParameter("userNumber"), accountId);
+			jsonMap.put("previewJZSG", htmlGoodsJZSG);
 			break;
 		}
 		return jsonMap;
