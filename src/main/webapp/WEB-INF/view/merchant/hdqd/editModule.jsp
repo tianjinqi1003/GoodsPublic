@@ -18,8 +18,9 @@
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
 <script type="text/javascript">
+var editor1;
 KindEditor.ready(function(K) {
-	var editor1 = K.create('textarea[name="memo1"]', {
+	editor1 = K.create('textarea[name="memo1"]', {
 		cssPath : '<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css',
 		uploadJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/upload_json.jsp',
 		fileManagerJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/file_manager_json.jsp',
@@ -28,16 +29,45 @@ KindEditor.ready(function(K) {
 	prettyPrint();
 });
 
+var bodyWidth;
 $(function(){
-	var bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
+	bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
 	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
 	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
 
-    //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+    //这里必须延迟1s，等图片加载完再重新设定右边div位置
     setTimeout(function(){
     	resetDivPosition();
     },"1000")
+
+	initDefaultHtmlVal();
 });
+
+var dpn;
+var disArr1=[];
+var dm1Html;
+var dHdapIfShowArr=[];
+var dHdapNameArr=[];
+var dHdapValueArr=[];
+function initDefaultHtmlVal(){
+	dpn=$("#middle_div #title").val();
+	$("#uploadFile1_div input[id^='image']").each(function(i){
+		disArr1[i]=$(this).val();
+	});
+	
+	$("#hdap_tab input[id^='hdapIfShow']").each(function(i){
+		dHdapIfShowArr[i]=$(this).val();
+		var hdapName=$("#hdap_tab input[name^='hdapName']").eq(i).val();
+		dHdapNameArr[i]=hdapName;
+		var hdapValue=$("#hdap_tab input[name^='hdapValue']").eq(i).val();
+		//console.log("hdapValue==="+hdapValue);
+		dHdapValueArr[i]=hdapValue;
+	});
+	
+	setTimeout(function(){
+		dm1Html=editor1.html();
+	},"1000");
+}
 
 function resetDivPosition(){
 	var middleDivHeight=$("#middle_div").css("height").substring(0,$("#middle_div").css("height").length-2);
@@ -52,8 +82,222 @@ function hideOptionDiv(o){
 	$(o).parent().find("#but_div").css("display","none");
 }
 
+function previewHtmlGoodsHDQD(){
+	if(!compareHtmlVal()){//这是已经编辑过内容的情况
+		saveEdithtmlGoodsHDQD();
+		
+		var goodsNumber='${requestScope.htmlGoodsHDQD.goodsNumber }';
+		var accountId='${sessionScope.user.id }';
+		$.post("getPreviewHtmlGoods",
+			{trade:"hdqd",goodsNumber:goodsNumber,accountId:accountId},
+			function(data){
+				//console.log("==="+JSON.stringify(data));
+				var previewHDQD=data.previewHDQD;
+				$("#preview_div #title_div").text(previewHDQD.title);
+				
+				var image1_1=previewHDQD.image1_1;
+				if(image1_1==null){
+					$("#preview_div #image1_1_img").css("display","none");
+					$("#preview_div #image1_1_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_1_img").css("display","block");
+					$("#preview_div #image1_1_img").attr("src",image1_1);
+				}
+				
+				var image1_2=previewHDQD.image1_2;
+				if(image1_2==null){
+					$("#preview_div #image1_2_img").css("display","none");
+					$("#preview_div #image1_2_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_2_img").css("display","block");
+					$("#preview_div #image1_2_img").attr("src",image1_2);
+				}
+				
+				var image1_3=previewHDQD.image1_3;
+				if(image1_3==null){
+					$("#preview_div #image1_3_img").css("display","none");
+					$("#preview_div #image1_3_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_3_img").css("display","block");
+					$("#preview_div #image1_3_img").attr("src",image1_3);
+				}
+				
+				var image1_4=previewHDQD.image1_4;
+				if(image1_4==null){
+					$("#preview_div #image1_4_img").css("display","none");
+					$("#preview_div #image1_4_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_4_img").css("display","block");
+					$("#preview_div #image1_4_img").attr("src",image1_4);
+				}
+				
+				var image1_5=previewHDQD.image1_5;
+				if(image1_5==null){
+					$("#preview_div #image1_5_img").css("display","none");
+					$("#preview_div #image1_5_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_5_img").css("display","block");
+					$("#preview_div #image1_5_img").attr("src",image1_5);
+				}
+				
+				$("#preview_div #memo1_div").html(previewHDQD.memo1);
+				
+				var trs=$("#preview_div #hdap_tab tr");
+				
+				var tr=trs.eq(0);
+				if(previewHDQD.hdapIfShow1)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				var tds=tr.find("td");
+				tds.eq(0).text(previewHDQD.hdapName1);
+				tds.eq(1).text(previewHDQD.hdapValue1_1);
+				tds.eq(2).text(previewHDQD.hdapValue1_2);
+				
+				tr=trs.eq(1);
+				if(previewHDQD.hdapIfShow2)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewHDQD.hdapName2);
+				tds.eq(1).text(previewHDQD.hdapValue2_1);
+				tds.eq(2).text(previewHDQD.hdapValue2_2);
+				
+				tr=trs.eq(2);
+				if(previewHDQD.hdapIfShow3)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewHDQD.hdapName3);
+				tds.eq(1).text(previewHDQD.hdapValue3_1);
+				tds.eq(2).text(previewHDQD.hdapValue3_2);
+				
+				tr=trs.eq(3);
+				if(previewHDQD.hdapIfShow4)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewHDQD.hdapName4);
+				tds.eq(1).text(previewHDQD.hdapValue4_1);
+				tds.eq(2).text(previewHDQD.hdapValue4_2);
+				
+				tr=trs.eq(4);
+				if(previewHDQD.hdapIfShow5)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewHDQD.hdapName5);
+				tds.eq(1).text(previewHDQD.hdapValue5_1);
+				tds.eq(2).text(previewHDQD.hdapValue5_2);
+				
+				initDefaultHtmlVal();
+			}
+		,"json");
+	}
+	else{
+		$("#preview_div #title_div").text(dpn);
+		
+		var image1_1_src=disArr1[0];
+		if(image1_1_src==undefined||image1_1_src==""){
+			$("#preview_div #image1_div #image1_1_img").css("display","none");
+			$("#preview_div #image1_div #image1_1_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_1_img").css("display","block");
+			$("#preview_div #image1_div #image1_1_img").attr("src",image1_1_src);
+		}
+		
+		var image1_2_src=disArr1[1];
+		if(image1_2_src==undefined||image1_2_src==""){
+			$("#preview_div #image1_div #image1_2_img").css("display","none");
+			$("#preview_div #image1_div #image1_2_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_2_img").css("display","block");
+			$("#preview_div #image1_div #image1_2_img").attr("src",image1_2_src);
+		}
+		
+		var image1_3_src=disArr1[2];
+		if(image1_3_src==undefined||image1_3_src==""){
+			$("#preview_div #image1_div #image1_3_img").css("display","none");
+			$("#preview_div #image1_div #image1_3_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_3_img").css("display","block");
+			$("#preview_div #image1_div #image1_3_img").attr("src",image1_3_src);
+		}
+		
+		var image1_4_src=disArr1[3];
+		if(image1_4_src==undefined||image1_4_src==""){
+			$("#preview_div #image1_div #image1_4_img").css("display","none");
+			$("#preview_div #image1_div #image1_4_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_4_img").css("display","block");
+			$("#preview_div #image1_div #image1_4_img").attr("src",image1_4_src);
+		}
+		
+		var image1_5_src=disArr1[4];
+		if(image1_5_src==undefined||image1_5_src==""){
+			$("#preview_div #image1_div #image1_5_img").css("display","none");
+			$("#preview_div #image1_div #image1_5_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_5_img").css("display","block");
+			$("#preview_div #image1_div #image1_5_img").attr("src",image1_5_src);
+		}
+	}
+	openPreviewBgDiv(1);
+}
+
+function compareHtmlVal(){
+	var flag=true;
+	var cpn=$("#middle_div #title").val();
+	if(dpn!=cpn){
+		flag=false;
+		return flag;
+	}
+	
+	var cisArr1=[];
+	$("#uploadFile1_div input[id^='image']").each(function(i){
+		var imgSrc=$(this).val();
+		if(disArr1[i]!=imgSrc){
+			flag=false;
+			return flag;
+		}
+	});
+	
+	var cm1Html=editor1.html();
+	if(dm1Html!=cm1Html){
+		flag=false;
+		return flag;
+	}
+
+	$("#hdap_tab input[id^='hdapIfShow']").each(function(i){
+		var hdapIfShow=$(this).val();
+		var hdapName=$("#hdap_tab input[name^='hdapName']").eq(i).val();
+		var hdapValue=$("#hdap_tab input[name^='hdapValue']").eq(i).val();
+		if(hdapIfShow!=dHdapIfShowArr[i]||hdapName!=dHdapNameArr[i]||hdapValue!=dHdapValueArr[i]){
+			flag=false;
+			return flag;
+		}
+	});
+
+	return flag;
+}
+
 function saveEdithtmlGoodsHDQD(){
 	if(checkIfPaid()){
+		resetEditorHtml();
 		renameFile();
 		renameImage();
 		
@@ -119,6 +363,9 @@ function deleteImage1Div(){
 	$("#uploadFile1_div input[type='file']").remove();
 	$("#uploadFile1_div input[type='text']").remove();
 	resetDivPosition();
+}
+function resetEditorHtml(){
+	$("#memo1").val(editor1.html());
 }
 
 function renameFile(){
@@ -255,6 +502,16 @@ function changeHdapTrIfShow(index,o){
 	}
 }
 
+function openPreviewBgDiv(flag){
+	$("#previewBg_div").css("display",flag==1?"block":"none");
+	
+	var preDivWidth=$("#preview_div").css("width").substring(0,$("#preview_div").css("width").length-2);
+	var preDivHeight=$("#preview_div").css("height").substring(0,$("#preview_div").css("height").length-2);
+	$("#smck_div").css("margin-left",(parseInt(bodyWidth)+parseInt(preDivWidth))/2+20+"px");
+	$("#smck_div").css("margin-top","-"+(parseInt(preDivHeight))+"px");
+	$("#previewBg_div").css("height",(parseInt(preDivHeight)+80)+"px");
+}
+
 function goBack(){
 	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=hdqd";
 }
@@ -337,6 +594,90 @@ function goBack(){
 	</div>
 </div>
 
+<div class="previewBg_div" id="previewBg_div">
+	<div class="preview_div" id="preview_div">
+		<div class="title_div" id="title_div"></div>
+		<div class="image1_div"  id="image1_div">
+			<img class="image1_1_img" id="image1_1_img" alt="" src="">
+			<img class="image1_2_img" id="image1_2_img" alt="" src="">
+			<img class="image1_3_img" id="image1_3_img" alt="" src="">
+			<img class="image1_4_img" id="image1_4_img" alt="" src="">
+			<img class="image1_5_img" id="image1_5_img" alt="" src="">
+		</div>
+		<div class="memo1_div" id="memo1_div">
+			${requestScope.htmlGoodsHDQD.memo1 }
+		</div>
+		
+		<div class="hdap_div">
+			<table class="hdap_tab" id="hdap_tab">
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsHDQD.hdapName1 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsHDQD.hdapValue1_1 }
+					</td>
+					<td class="value2_td">
+						${requestScope.htmlGoodsHDQD.hdapValue1_2 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsHDQD.hdapName2 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsHDQD.hdapValue2_1 }
+					</td>
+					<td class="value2_td">
+						${requestScope.htmlGoodsHDQD.hdapValue2_2 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsHDQD.hdapName3 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsHDQD.hdapValue3_1 }
+					</td>
+					<td class="value2_td">
+						${requestScope.htmlGoodsHDQD.hdapValue3_2 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsHDQD.hdapName4 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsHDQD.hdapValue4_1 }
+					</td>
+					<td class="value2_td">
+						${requestScope.htmlGoodsHDQD.hdapValue4_2 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsHDQD.hdapName5 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsHDQD.hdapValue5_1 }
+					</td>
+					<td class="value2_td">
+						${requestScope.htmlGoodsHDQD.hdapValue5_2 }
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div style="width: 100%;height:40px;"></div>
+	</div>
+	<div class="smck_div" id="smck_div">
+		<div class="tiShi_div">手机端实际效果可能存在差异，请扫码查看</div>
+		<div class="qrCode_div">
+			<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsHDQD.qrCode }">
+		</div>
+		<div class="jxbjBut_div" onclick="openPreviewBgDiv(0)">继续编辑</div>
+	</div>
+</div>
+
 <div class="top_div">
 	<div class="return_div" onclick="goBack();">&lt返回</div>
 	<div class="title_div">活动签到-案例</div>
@@ -388,7 +729,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="hdapIfShow1" name="hdapIfShow1" value="${requestScope.htmlGoodsHDQD.hdapIfShow1 }" />
-					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow1?'显示':'隐藏' }" onclick="changeHdapTrIfShow(1,this)"/>
+					<input type="button" class="hdapIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow1?'显示':'隐藏' }" onclick="changeHdapTrIfShow(1,this)"/>
 				</td>
 			</tr>
 			
@@ -404,7 +745,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="hdapIfShow2" name="hdapIfShow2" value="${requestScope.htmlGoodsHDQD.hdapIfShow2 }" />
-					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow2?'显示':'隐藏' }" onclick="changeHdapTrIfShow(2,this)"/>
+					<input type="button" class="hdapIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow2?'显示':'隐藏' }" onclick="changeHdapTrIfShow(2,this)"/>
 				</td>
 			</tr>
 			
@@ -420,7 +761,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="hdapIfShow3" name="hdapIfShow3" value="${requestScope.htmlGoodsHDQD.hdapIfShow3 }" />
-					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow3?'显示':'隐藏' }" onclick="changeHdapTrIfShow(3,this)"/>
+					<input type="button" class="hdapIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow3?'显示':'隐藏' }" onclick="changeHdapTrIfShow(3,this)"/>
 				</td>
 			</tr>
 			
@@ -436,7 +777,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="hdapIfShow4" name="hdapIfShow4" value="${requestScope.htmlGoodsHDQD.hdapIfShow4 }" />
-					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow4?'显示':'隐藏' }" onclick="changeHdapTrIfShow(4,this)"/>
+					<input type="button" class="hdapIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow4?'显示':'隐藏' }" onclick="changeHdapTrIfShow(4,this)"/>
 				</td>
 			</tr>
 			
@@ -452,7 +793,7 @@ function goBack(){
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="hdapIfShow5" name="hdapIfShow5" value="${requestScope.htmlGoodsHDQD.hdapIfShow5 }" />
-					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow5?'显示':'隐藏' }" onclick="changeHdapTrIfShow(5,this)"/>
+					<input type="button" class="hdapIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow5?'显示':'隐藏' }" onclick="changeHdapTrIfShow(5,this)"/>
 				</td>
 			</tr>
 			
@@ -461,7 +802,7 @@ function goBack(){
 </div>
 <div class="right_div" id="right_div">
 	<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsHDQD.qrCode }">
-	<div class="preview_div">预览</div>
+	<div class="preview_div" onclick="previewHtmlGoodsHDQD();">预览</div>
 	<div class="save_div" onclick="saveEdithtmlGoodsHDQD();">保存</div>
 	<div class="finishEdit_div" onclick="finishEditHtmlGoodsHDQD();">完成编辑</div>
 	<div class="saveStatus_div" id="saveStatus_div"></div>

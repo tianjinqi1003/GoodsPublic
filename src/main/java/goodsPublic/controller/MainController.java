@@ -2793,6 +2793,10 @@ public class MainController {
 			HtmlGoodsJZSG htmlGoodsJZSG = publicService.getHtmlGoodsJZSG(request.getParameter("userNumber"), accountId);
 			jsonMap.put("previewJZSG", htmlGoodsJZSG);
 			break;
+		case "hdqd":
+			HtmlGoodsHDQD htmlGoodsHDQD = publicService.getHtmlGoodsHDQD(goodsNumber, accountId);
+			jsonMap.put("previewHDQD", htmlGoodsHDQD);
+			break;
 		}
 		return jsonMap;
 	}
