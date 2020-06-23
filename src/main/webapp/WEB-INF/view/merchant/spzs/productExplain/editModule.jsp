@@ -495,8 +495,6 @@ function previewHtmlGoodsSPZS(){
 			$("#preview_div #image3_div #image3_5_img").css("display","block");
 			$("#preview_div #image3_div #image3_5_img").attr("src",image3_5_src);
 		}
-		//$("#preview_div #image1_div #image1_4_img").attr("src",$("#middle_div #image1_div #list_div #image1_4_img").attr("src"));
-		//$("#preview_div #image1_div #image1_5_img").attr("src",$("#middle_div #image1_div #list_div #image1_5_img").attr("src"));
 	}
 	openPreviewBgDiv(1);
 }

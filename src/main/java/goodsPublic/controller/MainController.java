@@ -2785,6 +2785,10 @@ public class MainController {
 			HtmlGoodsSPZS htmlGoodsSPZS = publicService.getHtmlGoodsSPZS(moduleType,goodsNumber,accountId);
 			jsonMap.put("previewSPZS", htmlGoodsSPZS);
 			break;
+		case "dmtzl":
+			HtmlGoodsDMTZL htmlGoodsDMTZL = publicService.getHtmlGoodsDMTZL(goodsNumber, accountId);
+			jsonMap.put("previewDMTZL", htmlGoodsDMTZL);
+			break;
 		}
 		return jsonMap;
 	}

@@ -19,14 +19,15 @@
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
 <script type="text/javascript">
+var editor1,editor2;
 KindEditor.ready(function(K) {
-	var editor1 = K.create('textarea[name="memo1"]', {
+	editor1 = K.create('textarea[name="memo1"]', {
 		cssPath : '<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css',
 		uploadJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/upload_json.jsp',
 		fileManagerJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/file_manager_json.jsp',
 		allowFileManager : true
 	});
-	var editor2 = K.create('textarea[name="memo2"]', {
+	editor2 = K.create('textarea[name="memo2"]', {
 		cssPath : '<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css',
 		uploadJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/upload_json.jsp',
 		fileManagerJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/file_manager_json.jsp',
@@ -35,8 +36,9 @@ KindEditor.ready(function(K) {
 	prettyPrint();
 });
 
+var bodyWidth;
 $(function(){
-	var bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
+	bodyWidth=$("body").css("width").substring(0,$("body").css("width").length-2);
 	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
 	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
 
@@ -44,7 +46,24 @@ $(function(){
     setTimeout(function(){
     	resetDivPosition();
     },"1000")
+    
+	initDefaultHtmlVal();
 });
+
+var dpn;
+var disArr1=[];
+var dm1Html,dm2Html;
+function initDefaultHtmlVal(){
+	dpn=$("#middle_div #title").val();
+	for(var i=0;i<5;i++){
+		disArr1[i]="";
+		disArr1[i]=$("#image1_div #list_div img[id^='img']").eq(i).attr("src");
+	}
+	setTimeout(function(){
+		dm1Html=editor1.html();
+		dm2Html=editor2.html();
+	},"1000");
+}
 
 function resetDivPosition(){
 	var middleDivHeight=$("#middle_div").css("height").substring(0,$("#middle_div").css("height").length-2);
@@ -59,8 +78,168 @@ function hideOptionDiv(o){
 	$(o).parent().find("#but_div").css("display","none");
 }
 
+function previewHtmlGoodsDMTZL(){
+	if(!compareHtmlVal()){//这是已经编辑过内容的情况
+		saveEdithtmlGoodsDMTZL();
+		
+		var goodsNumber='${requestScope.htmlGoodsDMTZL.goodsNumber }';
+		var accountId='${sessionScope.user.id }';
+		$.post("getPreviewHtmlGoods",
+			{trade:"dmtzl",goodsNumber:goodsNumber,accountId:accountId},
+			function(data){
+				console.log("==="+JSON.stringify(data));
+				var previewDMTZL=data.previewDMTZL;
+				$("#preview_div #title_div").text(previewDMTZL.title);
+				
+				$("#preview_div #memo1_div").html(previewDMTZL.memo1);
+				
+				$("#preview_div #memo2_div").html(previewDMTZL.memo2);
+				
+				var image1_1=previewDMTZL.image1_1;
+				if(image1_1==null){
+					$("#preview_div #image1_1_img").css("display","none");
+					$("#preview_div #image1_1_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_1_img").css("display","block");
+					$("#preview_div #image1_1_img").attr("src",image1_1);
+				}
+				
+				var image1_2=previewDMTZL.image1_2;
+				if(image1_2==null){
+					$("#preview_div #image1_2_img").css("display","none");
+					$("#preview_div #image1_2_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_2_img").css("display","block");
+					$("#preview_div #image1_2_img").attr("src",image1_2);
+				}
+				
+				var image1_3=previewDMTZL.image1_3;
+				if(image1_3==null){
+					$("#preview_div #image1_3_img").css("display","none");
+					$("#preview_div #image1_3_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_3_img").css("display","block");
+					$("#preview_div #image1_3_img").attr("src",image1_3);
+				}
+				
+				var image1_4=previewDMTZL.image1_4;
+				if(image1_4==null){
+					$("#preview_div #image1_4_img").css("display","none");
+					$("#preview_div #image1_4_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_4_img").css("display","block");
+					$("#preview_div #image1_4_img").attr("src",image1_4);
+				}
+				
+				var image1_5=previewDMTZL.image1_5;
+				if(image1_5==null){
+					$("#preview_div #image1_5_img").css("display","none");
+					$("#preview_div #image1_5_img").attr("src","");
+				}
+				else{
+					$("#preview_div #image1_5_img").css("display","block");
+					$("#preview_div #image1_5_img").attr("src",image1_5);
+				}
+				
+				initDefaultHtmlVal();
+			}
+		,"json");
+	}
+	else{
+		$("#preview_div #title_div").text(dpn);
+		
+		var image1_1_src=disArr1[0];
+		if(image1_1_src==undefined||image1_1_src==""){
+			$("#preview_div #image1_div #image1_1_img").css("display","none");
+			$("#preview_div #image1_div #image1_1_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_1_img").css("display","block");
+			$("#preview_div #image1_div #image1_1_img").attr("src",image1_1_src);
+		}
+		
+		var image1_2_src=disArr1[1];
+		if(image1_2_src==undefined||image1_2_src==""){
+			$("#preview_div #image1_div #image1_2_img").css("display","none");
+			$("#preview_div #image1_div #image1_2_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_2_img").css("display","block");
+			$("#preview_div #image1_div #image1_2_img").attr("src",image1_2_src);
+		}
+		
+		var image1_3_src=disArr1[2];
+		if(image1_3_src==undefined||image1_3_src==""){
+			$("#preview_div #image1_div #image1_3_img").css("display","none");
+			$("#preview_div #image1_div #image1_3_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_3_img").css("display","block");
+			$("#preview_div #image1_div #image1_3_img").attr("src",image1_3_src);
+		}
+		
+		var image1_4_src=disArr1[3];
+		if(image1_4_src==undefined||image1_4_src==""){
+			$("#preview_div #image1_div #image1_4_img").css("display","none");
+			$("#preview_div #image1_div #image1_4_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_4_img").css("display","block");
+			$("#preview_div #image1_div #image1_4_img").attr("src",image1_4_src);
+		}
+		
+		var image1_5_src=disArr1[4];
+		if(image1_5_src==undefined||image1_5_src==""){
+			$("#preview_div #image1_div #image1_5_img").css("display","none");
+			$("#preview_div #image1_div #image1_5_img").attr("src","");
+		}
+		else{
+			$("#preview_div #image1_div #image1_5_img").css("display","block");
+			$("#preview_div #image1_div #image1_5_img").attr("src",image1_5_src);
+		}
+	}
+	openPreviewBgDiv(1);
+}
+
+function compareHtmlVal(){
+	var flag=true;
+	var cpn=$("#middle_div #title").val();
+	if(dpn!=cpn){
+		flag=false;
+		return flag;
+	}
+	
+	var cm1Html=editor1.html();
+	if(dm1Html!=cm1Html){
+		flag=false;
+		return flag;
+	}
+
+	var cm2Html=editor2.html();
+	if(dm2Html!=cm2Html){
+		flag=false;
+		return flag;
+	}
+	
+	var cisArr1=[];
+	$("#uploadFile1_div input[id^='image']").each(function(i){
+		var imgSrc=$(this).val();
+		if(disArr1[i]!=imgSrc){
+			flag=false;
+			return flag;
+		}
+	});
+	
+	return flag;
+}
+
 function saveEdithtmlGoodsDMTZL(){
 	if(checkIfPaid()){
+		resetEditorHtml();
 		renameFile();
 		renameImage();
 		
@@ -137,6 +316,11 @@ function deleteImage1Div(){
 	$("#uploadFile1_div input[type='file']").remove();
 	$("#uploadFile1_div input[type='text']").remove();
 	resetDivPosition();
+}
+
+function resetEditorHtml(){
+	$("#memo1").val(editor1.html());
+	$("#memo2").val(editor2.html());
 }
 
 function renameFile(){
@@ -329,6 +513,16 @@ function createUUID() {
     return uuid;
 }
 
+function openPreviewBgDiv(flag){
+	$("#previewBg_div").css("display",flag==1?"block":"none");
+	
+	var preDivWidth=$("#preview_div").css("width").substring(0,$("#preview_div").css("width").length-2);
+	var preDivHeight=$("#preview_div").css("height").substring(0,$("#preview_div").css("height").length-2);
+	$("#smck_div").css("margin-left",(parseInt(bodyWidth)+parseInt(preDivWidth))/2+20+"px");
+	$("#smck_div").css("margin-top","-"+(parseInt(preDivHeight))+"px");
+	$("#previewBg_div").css("height",(parseInt(preDivHeight)+80)+"px");
+}
+
 function goBack(){
 	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=dmtzl";
 }
@@ -448,6 +642,36 @@ function goBack(){
 	</div>
 </div>
 
+<div class="previewBg_div" id="previewBg_div">
+	<div class="preview_div" id="preview_div">
+		<div class="title_div" id="title_div"></div>
+		<div class="memo1_div" id="memo1_div">
+			${requestScope.htmlGoodsDMTZL.memo1 }
+		</div>
+		<div class="embed1_div" id="embed1_div">
+			<embed class="embed1_1_embed" id="embed1_1_embed" alt="" src="${requestScope.htmlGoodsDMTZL.embed1_1 }"/>
+		</div>
+		<div class="memo2_div" id="memo2_div">
+			${requestScope.htmlGoodsDMTZL.memo2 }
+		</div>
+		<div class="image1_div"  id="image1_div">
+			<img class="image1_1_img" id="image1_1_img" alt="" src="">
+			<img class="image1_2_img" id="image1_2_img" alt="" src="">
+			<img class="image1_3_img" id="image1_3_img" alt="" src="">
+			<img class="image1_4_img" id="image1_4_img" alt="" src="">
+			<img class="image1_5_img" id="image1_5_img" alt="" src="">
+		</div>
+		<div style="width: 100%;height:40px;"></div>
+	</div>
+	<div class="smck_div" id="smck_div">
+		<div class="tiShi_div">手机端实际效果可能存在差异，请扫码查看</div>
+		<div class="qrCode_div">
+			<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsDMTZL.qrCode }">
+		</div>
+		<div class="jxbjBut_div" onclick="openPreviewBgDiv(0)">继续编辑</div>
+	</div>
+</div>
+
 <div class="top_div">
 	<div class="return_div" onclick="goBack();">&lt返回</div>
 	<div class="title_div">多媒体资料</div>
@@ -504,7 +728,7 @@ function goBack(){
 </div>
 <div class="right_div" id="right_div">
 	<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsDMTZL.qrCode }">
-	<div class="preview_div">预览</div>
+	<div class="preview_div" onclick="previewHtmlGoodsDMTZL();">预览</div>
 	<div class="save_div" onclick="saveEdithtmlGoodsDMTZL();">保存</div>
 	<div class="finishEdit_div" onclick="finishEdithtmlGoodsDMTZL();">完成编辑</div>
 	<div class="saveStatus_div" id="saveStatus_div"></div>

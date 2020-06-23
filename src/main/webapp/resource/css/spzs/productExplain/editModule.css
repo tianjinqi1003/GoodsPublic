@@ -264,15 +264,14 @@ body{
 	width: 100%;height:auto;background: rgba(0,0,0,0.65);position: absolute;display:none;z-index: 1001;
 }
 .preview_div{
-	width: 325px;height: auto;margin:40px auto 0; background-color: #fff;border-radius:20px;
+	width: 325px;height: auto;margin:40px auto 0;padding: 1px;background-color: #fff;border-radius:20px;
 }
 .preview_div .productName_div{
 	width: 95%;height: 40px;line-height: 40px;text-align: center;font-size: 20px;font-weight: bold;margin: auto;
 }
-.preview_div .image1_div{
-	width: 95%;
-	text-align: center;
-	margin: auto;
+.preview_div .image1_div,.preview_div .image2_div,.preview_div .image3_div,
+.preview_div .embed1_div{
+	width: 95%;text-align: center;margin: 20px auto 0;
 }
 .preview_div .image1_1_img,.preview_div .image1_2_img,.preview_div .image1_3_img,.preview_div .image1_4_img,.preview_div .image1_5_img,
 .preview_div .image2_1_img,.preview_div .image2_2_img,.preview_div .image2_3_img,.preview_div .image2_4_img,.preview_div .image2_5_img,
@@ -309,10 +308,6 @@ body{
 }
 .spxq_tab .item_tr .name_td input,.spxq_tab .item_tr .value_td input{
 	border: 0;
-}
-.preview_div .image2_div,.preview_div .image3_div,
-.preview_div .embed1_div{
-	width: 95%;text-align: center;margin: 20px auto 0;
 }
 .previewBg_div .smck_div{
 	width: 145px;
@@ -532,6 +527,7 @@ body{
 	margin-top:15px;
 	border:1px solid #eee;
 	background-color:#fff;
+	cursor:pointer;
 	border-radius:3px;
 }
 .right_div .save_div{
