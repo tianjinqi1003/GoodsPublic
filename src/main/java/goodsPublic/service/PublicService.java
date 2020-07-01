@@ -135,6 +135,13 @@ public interface PublicService {
 	 * @return
 	 */
 	public int queryHtmlGoodsDMTZLForInt(String accountId);
+
+	/**
+	 * 查询多媒体图书模版内容数量
+	 * @param accountId
+	 * @return
+	 */
+	public int queryHtmlGoodsDMTTSForInt(String accountId);
 	
 	/**
 	 * 查询建筑施工模版内容数量
@@ -191,6 +198,18 @@ public interface PublicService {
 	 * @return
 	 */
 	public List<HtmlGoodsDMTZL> queryHtmlGoodsDMTZLList(String accountId, int page, int rows, String sort,
+			String order);
+
+	/**
+	 * 根据商户编号，查询多媒体图书模版内容
+	 * @param accountId
+	 * @param page
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
+	public List<HtmlGoodsDMTTS> queryHtmlGoodsDMTTSList(String accountId, int page, int rows, String sort,
 			String order);
 	
 	/**
@@ -319,6 +338,14 @@ public interface PublicService {
 	 * @return
 	 */
 	public HtmlGoodsDMTZL getHtmlGoodsDMTZL(String goodsNumber, String accountId);
+
+	/**
+	 * 获得多媒体图书模版内容
+	 * @param goodsNumber
+	 * @param accountId
+	 * @return
+	 */
+	public HtmlGoodsDMTTS getHtmlGoodsDMTTS(String goodsNumber, String accountId);
 	
 	/**
 	 * 获得建筑施工模版内容

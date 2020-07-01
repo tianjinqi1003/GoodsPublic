@@ -22,7 +22,117 @@ $(function(){
 			
 		}
 	});
+	
+	tab1=$("#tab1").datagrid({
+		title:"多媒体图书模版查询",
+		url:"queryHtmlGoodsDMTTSList",
+		toolbar:"#toolbar",
+		width:setFitWidthInParent("body"),
+		pagination:true,
+		pageSize:10,
+		queryParams:{accountId:'${sessionScope.user.id}'},
+		columns:[[
+			{field:"title1",title:"标题",width:200},
+            {field:"gmtCreate",title:"创建时间",width:200},
+            {field:"id",title:"操作",width:150,formatter:function(value,row){
+            	var str="<a href=\"${pageContext.request.contextPath}/merchant/main/goBrowseHtmlGoodsDMTTS?goodsNumber="+row.goodsNumber+"&accountNumber="+row.accountNumber+"\">详情</a>"
+            	+"&nbsp;|&nbsp;<a href=\"${pageContext.request.contextPath}/merchant/main/goEditModule?trade=dmtts&goodsNumber="+row.goodsNumber+"&accountNumber="+row.accountNumber+"\">编辑</a>"
+            	+"&nbsp;|&nbsp;<a onclick=\"deleteByIds("+value+")\">删除</a>";
+            	return str;
+            }}
+	    ]],
+        onLoadSuccess:function(data){
+			if(data.total==0){
+				$(this).datagrid("appendRow",{title1:"<div style=\"text-align:center;\"><a href=\"${pageContext.request.contextPath}/merchant/main/goAddModule?trade=dmtts\">点击生成多媒体图书模版</a><div>"});
+				$(this).datagrid("mergeCells",{index:0,field:"title1",colspan:3});
+				data.total=0;
+			}
+			
+			$(".panel-header .panel-title").css("color","#000");
+			$(".panel-header .panel-title").css("font-size","15px");
+			$(".panel-header .panel-title").css("padding-left","10px");
+			$(".panel-header, .panel-body").css("border-color","#ddd");
+
+			$(".datagrid-header td .datagrid-cell").each(function(){
+				$(this).find("span").eq(0).css("margin-left","11px");
+			});
+			$(".datagrid-body td .datagrid-cell").each(function(){
+				var html=$(this).html();
+				$(this).html("<span style=\"margin-left:11px;\">"+html+"</span>");
+			});
+			reSizeCol();
+		}
+	});
 });
+
+//重设列宽
+function reSizeCol(){
+	var width=$(".panel.datagrid").css("width");
+	width=width.substring(0,width.length-2);
+	var cols=$(".datagrid-htable tr td");
+	var colCount=cols.length;
+	width=width-colCount*2;
+	cols.css("width",width/colCount+"px");
+	cols=$(".datagrid-btable tr").eq(0).find("td");
+	colCount=cols.length;
+	cols.css("width",width/colCount+"px");
+}
+
+function deleteHtmlGoodsDMTZL() {
+	var rows=tab1.datagrid("getSelections");
+	if (rows.length == 0) {
+		$.messager.alert("提示","请选择要删除的信息！","warning");
+		return false;
+	}
+	
+	var ids = "";
+	for (var i = 0; i < rows.length; i++) {
+		ids += "," + rows[i].id;
+	}
+	ids=ids.substring(1);
+	deleteByIds(ids);
+}
+
+function deleteByIds(ids){
+	if(checkIfPaid()){
+		$.messager.confirm("提示","确定要删除吗？",function(r){
+			if(r){
+				$.post("deleteHtmlGoodsDMTZLByIds",
+					{ids:ids,accountNumber:'${sessionScope.user.id}'},
+					function(result){
+						if(result.status==1){
+							tab1.datagrid("reload");
+						}
+						alert(result.msg);
+					}
+				,"json");
+			}
+		});
+	}
+}
+
+function checkIfPaid(){
+	var bool=false;
+	$.ajaxSetup({async:false});
+	$.post("checkIfPaid",
+		{accountNumber:'${sessionScope.user.id}'},
+		function(data){
+			if(data.status=="ok"){
+				bool=true;
+			}
+			else{
+				alert(data.message);
+				bool=false;
+			}
+		}
+	,"json");
+	return bool;
+}
+
+function setFitWidthInParent(o){
+	var width=$(o).css("width");
+	return width.substring(0,width.length-2)-270;
+}
 </script>
 </head>
 <body>

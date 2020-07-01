@@ -2712,6 +2712,9 @@
 	<select id="queryHtmlGoodsDMTZLForInt" resultType="java.lang.Integer">
 		select count(*) from html_goods_dmtzl where accountNumber=#{param1}
 	</select>
+	<select id="queryHtmlGoodsDMTTSForInt" resultType="java.lang.Integer">
+		select count(*) from html_goods_dmtts where accountNumber=#{param1}
+	</select>
 	<select id="queryHtmlGoodsJZSGForInt" resultType="java.lang.Integer">
 		select count(*) from html_goods_jzsg where accountNumber=#{param1}
 	</select>
@@ -2741,6 +2744,9 @@
 	</select>
 	<select id="queryHtmlGoodsDMTZLList" resultType="goodsPublic.entity.HtmlGoodsDMTZL">
 		select * from html_goods_dmtzl where accountNumber=#{param1} limit ${param2},${param3}
+	</select>
+	<select id="queryHtmlGoodsDMTTSList" resultType="goodsPublic.entity.HtmlGoodsDMTTS">
+		select * from html_goods_dmtts where accountNumber=#{param1} limit ${param2},${param3}
 	</select>
 	<select id="queryHtmlGoodsJZSGList" resultType="goodsPublic.entity.HtmlGoodsJZSG">
 		select * from html_goods_jzsg where accountNumber=#{param1} limit ${param2},${param3}
@@ -2938,6 +2944,9 @@
 	</select>
 	<select id="getHtmlGoodsDMTZL" resultType="goodsPublic.entity.HtmlGoodsDMTZL">
 		select * from html_goods_dmtzl where goodsNumber=#{param1} and accountNumber=#{param2}
+	</select>
+	<select id="getHtmlGoodsDMTTS" resultType="goodsPublic.entity.HtmlGoodsDMTTS">
+		select * from html_goods_dmtts where goodsNumber=#{param1} and accountNumber=#{param2}
 	</select>
 	<select id="getHtmlGoodsJZSG" resultType="goodsPublic.entity.HtmlGoodsJZSG">
 		select * from html_goods_jzsg where userNumber=#{param1} and accountNumber=#{param2}

@@ -2338,6 +2338,13 @@ public class MainController {
 		return "/merchant/dmtzl/browseHtmlGoods";
 	}
 	
+	@RequestMapping("/goBrowseHtmlGoodsDMTTS")
+	public String goBrowseHtmlGoodsDMTTS(String goodsNumber, String accountNumber, HttpServletRequest request) {
+		HtmlGoodsDMTTS htmlGoodsDMTTS = publicService.getHtmlGoodsDMTTS(goodsNumber,accountNumber);
+		request.setAttribute("htmlGoodsDMTTS", htmlGoodsDMTTS);
+		return "/merchant/dmtts/browseHtmlGoods";
+	}
+	
 	/**
 	 * 这个是显示建筑施工的模版内容，用于后台商户浏览
 	 * @param userNumber
@@ -2913,6 +2920,11 @@ public class MainController {
 				HtmlGoodsDMTZL htmlGoodsDMTZL = publicService.getHtmlGoodsDMTZL(goodsNumber,accountId);
 				request.setAttribute("htmlGoodsDMTZL", htmlGoodsDMTZL);
 				url = "/merchant/dmtzl/showHtmlGoods";
+				break;
+			case "dmtts":
+				HtmlGoodsDMTTS htmlGoodsDMTTS = publicService.getHtmlGoodsDMTTS(goodsNumber,accountId);
+				request.setAttribute("htmlGoodsDMTTS", htmlGoodsDMTTS);
+				url = "/merchant/dmtts/showHtmlGoods";
 				break;
 			case "jzsg":
 				HtmlGoodsJZSG htmlGoodsJZSG = publicService.getHtmlGoodsJZSG(request.getParameter("userNumber"),accountId);
@@ -3496,6 +3508,28 @@ public class MainController {
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
 		int count = publicService.queryHtmlGoodsDMTZLForInt(accountId);
 		List<HtmlGoodsDMTZL> htmlGoodsList = publicService.queryHtmlGoodsDMTZLList(accountId, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		jsonMap.put("rows", htmlGoodsList);
+		return jsonMap;
+	}
+	
+	/**
+	 * 根据商户编号，查询多媒体图书模版内容
+	 * @param accountId
+	 * @param page
+	 * @param rows
+	 * @param sort
+	 * @param order
+	 * @return
+	 */
+	@RequestMapping(value="/queryHtmlGoodsDMTTSList")
+	@ResponseBody
+	public Map<String, Object> queryHtmlGoodsDMTTSList(String accountId,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count = publicService.queryHtmlGoodsDMTTSForInt(accountId);
+		List<HtmlGoodsDMTTS> htmlGoodsList = publicService.queryHtmlGoodsDMTTSList(accountId, page, rows, sort, order);
 		
 		jsonMap.put("total", count);
 		jsonMap.put("rows", htmlGoodsList);

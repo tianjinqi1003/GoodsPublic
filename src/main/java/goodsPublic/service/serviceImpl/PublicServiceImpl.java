@@ -328,6 +328,12 @@ public class PublicServiceImpl implements PublicService {
 		// TODO Auto-generated method stub
 		return publicDao.queryHtmlGoodsDMTZLForInt(accountId);
 	}
+
+	@Override
+	public int queryHtmlGoodsDMTTSForInt(String accountId) {
+		// TODO Auto-generated method stub
+		return publicDao.queryHtmlGoodsDMTTSForInt(accountId);
+	}
 	
 	@Override
 	public int queryHtmlGoodsJZSGForInt(String accountId) {
@@ -366,6 +372,13 @@ public class PublicServiceImpl implements PublicService {
 			String order) {
 		// TODO Auto-generated method stub
 		return publicDao.queryHtmlGoodsDMTZLList(accountId, (page-1)*rows, rows, sort, order);
+	}
+
+	@Override
+	public List<HtmlGoodsDMTTS> queryHtmlGoodsDMTTSList(String accountId, int page, int rows, String sort,
+			String order) {
+		// TODO Auto-generated method stub
+		return publicDao.queryHtmlGoodsDMTTSList(accountId, (page-1)*rows, rows, sort, order);
 	}
 	
 	@Override
@@ -732,6 +745,12 @@ public class PublicServiceImpl implements PublicService {
 	public HtmlGoodsDMTZL getHtmlGoodsDMTZL(String goodsNumber, String accountId) {
 		// TODO Auto-generated method stub
 		return publicDao.getHtmlGoodsDMTZL(goodsNumber,accountId);
+	}
+
+	@Override
+	public HtmlGoodsDMTTS getHtmlGoodsDMTTS(String goodsNumber, String accountId) {
+		// TODO Auto-generated method stub
+		return publicDao.getHtmlGoodsDMTTS(goodsNumber,accountId);
 	}
 	
 	@Override
