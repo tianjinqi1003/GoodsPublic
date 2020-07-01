@@ -11,6 +11,7 @@ import goodsPublic.entity.AccountPayRecord;
 import goodsPublic.entity.CreatePayCodeRecord;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
+import goodsPublic.entity.HtmlGoodsDMTTS;
 import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsHDQD;
@@ -46,6 +47,13 @@ public interface PublicService {
 	 * @return
 	 */
 	public int addHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoods);
+
+	/**
+	 * 添加多媒体图书模版内容
+	 * @param htmlGoodsDMTTS
+	 * @return
+	 */
+	public int addHtmlGoodsDMTTS(HtmlGoodsDMTTS htmlGoodsDMTTS);
 	
 	/**
 	 * 保存建筑施工模版内容到数据库
@@ -274,6 +282,13 @@ public interface PublicService {
 	 * @return
 	 */
 	public Object getModuleDMTZLByType(String type);
+
+	/**
+	 * 根据类型查询多媒体图书模版
+	 * @param type
+	 * @return
+	 */
+	public Object getModuleDMTTSByType(String type);
 	
 	/**
 	 * 根据类型查询建筑施工模版

@@ -10,6 +10,7 @@ import goodsPublic.entity.AccountPayRecord;
 import goodsPublic.entity.CreatePayCodeRecord;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
+import goodsPublic.entity.HtmlGoodsDMTTS;
 import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsHDQD;
@@ -18,6 +19,7 @@ import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.HtmlGoodsText;
 import goodsPublic.entity.JFDHJPActivity;
 import goodsPublic.entity.JFDHJPCustomer;
+import goodsPublic.entity.ModuleDMTTS;
 import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleHDQD;
 import goodsPublic.entity.ModuleJZSG;
@@ -44,6 +46,13 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public int addHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoods);
+
+	/**
+	 * 添加多媒体图书模版内容
+	 * @param htmlGoodsDMTTS
+	 * @return
+	 */
+	public int addHtmlGoodsDMTTS(HtmlGoodsDMTTS htmlGoodsDMTTS);
 	
 	/**
 	 * 添加建筑施工模版内容
@@ -275,6 +284,13 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public List<ModuleDMTZL> getModuleDMTZLByType(String type);
+
+	/**
+	 * 根据类型，查询多媒体图书模版列表
+	 * @param type
+	 * @return
+	 */
+	public List<ModuleDMTTS> getModuleDMTTSByType(String type);
 	
 	/**
 	 * 根据类型，查询建筑施工模版列表
@@ -332,6 +348,13 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public ModuleDMTZL getModuleDMTZLByMemo(String type);
+
+	/**
+	 * 根据备注类型，获得多媒体图书模版对应的值
+	 * @param type
+	 * @return
+	 */
+	public ModuleDMTTS getModuleDMTTSByMemo(String type);
 
 	public int deleteScoreQrcodeByUuids(List<String> uuidList);
 

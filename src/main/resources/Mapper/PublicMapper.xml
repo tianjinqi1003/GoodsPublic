@@ -717,6 +717,64 @@
 			</if>
 		</trim>
 	</insert>
+	<insert id="addHtmlGoodsDMTTS" parameterType="goodsPublic.entity.HtmlGoodsDMTTS">
+		insert into html_goods_dmtts
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="title1!=null">
+				title1,
+			</if>
+			<if test="title2!=null">
+				title2,
+			</if>
+			<if test="memo1!=null">
+				memo1,
+			</if>
+			<if test="embed1_1!=null">
+				embed1_1,
+			</if>
+			<if test="embed2_1!=null">
+				embed2_1,
+			</if>
+			<if test="qrCode!=null">
+				qrCode,
+			</if>
+				gmtCreate,
+			<if test="goodsNumber!=null">
+				goodsNumber,
+			</if>
+			<if test="accountNumber!=null">
+				accountNumber,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="title1!=null">
+				#{title1},
+			</if>
+			<if test="title2!=null">
+				#{title2},
+			</if>
+			<if test="memo1!=null">
+				#{memo1},
+			</if>
+			<if test="embed1_1!=null">
+				#{embed1_1},
+			</if>
+			<if test="embed2_1!=null">
+				#{embed2_1},
+			</if>
+			<if test="qrCode!=null">
+				#{qrCode},
+			</if>
+				now(),
+			<if test="goodsNumber!=null">
+				#{goodsNumber},
+			</if>
+			<if test="accountNumber!=null">
+				#{accountNumber},
+			</if>
+		</trim>
+	</insert>
 	<insert id="addHtmlGoodsJZSG" parameterType="goodsPublic.entity.HtmlGoodsJZSG">
 		insert into html_goods_jzsg
 		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -2860,6 +2918,9 @@
 	<select id="getModuleDMTZLByType" resultType="goodsPublic.entity.ModuleDMTZL">
 		select * from module_dmtzl where type=#{param1}
 	</select>
+	<select id="getModuleDMTTSByType" resultType="goodsPublic.entity.ModuleDMTTS">
+		select * from module_dmtts where type=#{param1}
+	</select>
 	<select id="getModuleJZSGByType" resultType="goodsPublic.entity.ModuleJZSG">
 		select * from module_jzsg where type=#{param1}
 	</select>
@@ -2868,6 +2929,9 @@
 	</select>
 	<select id="getModuleDMTZLByMemo" resultType="goodsPublic.entity.ModuleDMTZL">
 		select * from module_dmtzl where type=#{param1}
+	</select>
+	<select id="getModuleDMTTSByMemo" resultType="goodsPublic.entity.ModuleDMTTS">
+		select * from module_dmtts where type=#{param1}
 	</select>
 	<select id="getHtmlGoodsSPZS" resultType="goodsPublic.entity.HtmlGoodsSPZS">
 		select * from html_goods_spzs where moduleType=#{param1} and goodsNumber=#{param2} and accountNumber=#{param3}

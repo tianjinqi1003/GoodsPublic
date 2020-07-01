@@ -259,8 +259,8 @@ function checkIfPaidInSide(){
 							活动签到
 						</a>
 					</li>
-					<li class="layui-nav-item" style="display: none;">
-						<a class="second-level-a">
+					<li class="layui-nav-item">
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=dmtts&accountId=${sessionScope.user.id }">
 							多媒体图书
 						</a>
 					</li>

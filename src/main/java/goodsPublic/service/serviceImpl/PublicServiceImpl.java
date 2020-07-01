@@ -33,6 +33,7 @@ import goodsPublic.entity.AccountPayRecord;
 import goodsPublic.entity.CreatePayCodeRecord;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
+import goodsPublic.entity.HtmlGoodsDMTTS;
 import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsHDQD;
@@ -41,6 +42,7 @@ import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.HtmlGoodsText;
 import goodsPublic.entity.JFDHJPActivity;
 import goodsPublic.entity.JFDHJPCustomer;
+import goodsPublic.entity.ModuleDMTTS;
 import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleHDQD;
 import goodsPublic.entity.ModuleJZSG;
@@ -79,6 +81,12 @@ public class PublicServiceImpl implements PublicService {
 	public int addHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoods) {
 		// TODO Auto-generated method stub
 		return publicDao.addHtmlGoodsDMTZL(htmlGoods);
+	}
+
+	@Override
+	public int addHtmlGoodsDMTTS(HtmlGoodsDMTTS htmlGoodsDMTTS) {
+		// TODO Auto-generated method stub
+		return publicDao.addHtmlGoodsDMTTS(htmlGoodsDMTTS);
 	}
 	
 	@Override
@@ -656,6 +664,27 @@ public class PublicServiceImpl implements PublicService {
 		case "memo2":
 			ModuleDMTZL moduleDMTZL = publicDao.getModuleDMTZLByMemo(type);
 			obj=moduleDMTZL.getText();
+			break;
+		}
+		return obj;
+	}
+
+	@Override
+	public Object getModuleDMTTSByType(String type) {
+		// TODO Auto-generated method stub
+
+		Object obj=null;
+		switch (type) {
+		case "title1":
+		case "title2":
+		case "memo1":
+			ModuleDMTTS moduleDMTTS = publicDao.getModuleDMTTSByMemo(type);
+			obj=moduleDMTTS.getText();
+			break;
+		case "embed1":
+		case "embed2":
+			List<ModuleDMTTS> spxqList = publicDao.getModuleDMTTSByType(type);
+			obj=spxqList;
 			break;
 		}
 		return obj;

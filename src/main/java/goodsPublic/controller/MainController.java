@@ -52,13 +52,14 @@ import goodsPublic.entity.CategoryInfo;
 import goodsPublic.entity.CreatePayCodeRecord;
 import goodsPublic.entity.Goods;
 import goodsPublic.entity.GoodsLabelSet;
+import goodsPublic.entity.HtmlGoodsDMTTS;
 import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
 import goodsPublic.entity.HtmlGoodsSPZS;
-import goodsPublic.entity.HtmlGoodsText;
 import goodsPublic.entity.JFDHJPActivity;
 import goodsPublic.entity.JFDHJPCustomer;
+import goodsPublic.entity.ModuleDMTTS;
 import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleHDQD;
 import goodsPublic.entity.ModuleJZSG;
@@ -879,6 +880,83 @@ public class MainController {
 			return "../../merchant/main/goEditModule?trade=dmtzl&goodsNumber="+htmlGoodsDMTZL.getGoodsNumber()+"&accountNumber="+accountNumberCq+"&from="+from;
 		else
 			return "../../merchant/main/goBrowseHtmlGoodsDMTZL?goodsNumber="+htmlGoodsDMTZL.getGoodsNumber()+"&accountNumber="+htmlGoodsDMTZL.getAccountNumber();
+	}
+	
+	/**
+	 * 添加多媒体图书模版内容
+	 * @param htmlGoodsDMTTS
+	 * @param file1_1
+	 * @param file2_1
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/addHtmlGoodsDMTTS",produces="plain/text; charset=UTF-8")
+	public String addHtmlGoodsDMTTS(HtmlGoodsDMTTS htmlGoodsDMTTS,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file2_1",required=false) MultipartFile file2_1,
+			HttpServletRequest request) {
+		
+		try {
+			MultipartFile[] fileArr=new MultipartFile[2];
+			fileArr[0]=file1_1;
+			fileArr[1]=file2_1;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						jsonStr = FileUploadUtils.appUploadContentImg(request,fileArr[i],"");
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								htmlGoodsDMTTS.setEmbed1_1(dataJO.get("src").toString());
+								break;
+							case 1:
+								htmlGoodsDMTTS.setEmbed2_1(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+					else {
+						switch (i) {
+						case 0:
+							htmlGoodsDMTTS.setEmbed1_1("/GoodsPublic/resource/embed/dmtts/40ea2ddfdf5f3a16546520a8c89fb7b7.H_9_3.mp4");
+							break;
+						case 1:
+							htmlGoodsDMTTS.setEmbed2_1("/GoodsPublic/resource/embed/dmtts/notification.mp3");
+							break;
+						}
+					}
+				}
+			}
+			
+			String goodsNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+			htmlGoodsDMTTS.setGoodsNumber(goodsNumber);
+			
+			String addr = request.getLocalAddr();
+			int port = request.getLocalPort();
+			String contextPath = request.getContextPath();
+			//String url = "http://"+addr+":"+port+contextPath+"/merchant/main/goShowHtmlGoods?trade=dmtzl&goodsNumber="+htmlGoodsDMTZL.getGoodsNumber()+"&accountId="+htmlGoodsDMTZL.getAccountNumber();
+			String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/main/goShowHtmlGoods?trade=dmtts&goodsNumber="+htmlGoodsDMTTS.getGoodsNumber()+"&accountId="+htmlGoodsDMTTS.getAccountNumber();
+			
+			String fileName = goodsNumber + ".jpg";
+			String avaPath="/GoodsPublic/upload/"+fileName;
+			String path = "D:/resource";
+			Qrcode.createQrCode(url, path, fileName);
+			
+			htmlGoodsDMTTS.setQrCode(avaPath);
+			
+			int a=publicService.addHtmlGoodsDMTTS(htmlGoodsDMTTS);
+			if(a>0) {
+				int qrcodeCount=1;
+				a=publicService.updateAccountQCById(qrcodeCount,htmlGoodsDMTTS.getAccountNumber());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return "../../merchant/main/goBrowseHtmlGoodsDMTTS?goodsNumber="+htmlGoodsDMTTS.getGoodsNumber()+"&accountNumber="+htmlGoodsDMTTS.getAccountNumber();
 	}
 	
 
@@ -3605,6 +3683,9 @@ public class MainController {
 		case "dmtzl":
 			url="/merchant/dmtzl/htmlGoodsList";
 			break;
+		case "dmtts":
+			url="/merchant/dmtts/htmlGoodsList";
+			break;
 		case "jzsg":
 			url="/merchant/jzsg/htmlGoodsList";
 			break;
@@ -3894,6 +3975,25 @@ public class MainController {
 			request.setAttribute("memo2", dmtzlMemo2);
 			
 			url="/merchant/dmtzl/addModule";
+			break;
+		case "dmtts":
+
+			String dmttsTitle1 = (String)publicService.getModuleDMTTSByType("title1");
+			request.setAttribute("title1", dmttsTitle1);
+			
+			String dmttsTitle2 = (String)publicService.getModuleDMTTSByType("title2");
+			request.setAttribute("title2", dmttsTitle2);
+
+			List<ModuleDMTTS> dmttsEmbed1List = (List<ModuleDMTTS>)publicService.getModuleDMTTSByType("embed1");
+			request.setAttribute("embed1List", dmttsEmbed1List);
+			
+			List<ModuleDMTTS> dmttsEmbed2List = (List<ModuleDMTTS>)publicService.getModuleDMTTSByType("embed2");
+			request.setAttribute("embed2List", dmttsEmbed2List);
+			
+			String dmttsMemo1 = (String)publicService.getModuleDMTTSByType("memo1");
+			request.setAttribute("memo1", dmttsMemo1);
+			
+			url="/merchant/dmtts/addModule";
 			break;
 		case "jzsg":
 			List<ModuleJZSG> ryxxList = (List<ModuleJZSG>)publicService.getModuleJZSGByType("ryxx");
