@@ -4094,6 +4094,11 @@ public class MainController {
 			request.setAttribute("htmlGoodsDMTZL", htmlGoodsDMTZL);
 			url="/merchant/dmtzl/editModule";
 			break;
+		case "dmtts":
+			HtmlGoodsDMTTS htmlGoodsDMTTS = publicService.getHtmlGoodsDMTTS(goodsNumber,accountNumber);
+			request.setAttribute("htmlGoodsDMTTS", htmlGoodsDMTTS);
+			url="/merchant/dmtts/editModule";
+			break;
 		case "jzsg":
 			HtmlGoodsJZSG htmlGoodsJZSG = publicService.getHtmlGoodsJZSG(request.getParameter("userNumber"),accountNumber);
 			request.setAttribute("htmlGoodsJZSG", htmlGoodsJZSG);
