@@ -71,18 +71,19 @@ function previewHtmlGoodsDMTTS(){
 	if(!compareHtmlVal()){//这是已经编辑过内容的情况
 		saveEdithtmlGoodsDMTTS();
 		
-		var goodsNumber='${requestScope.htmlGoodsDMTZL.goodsNumber }';
+		var goodsNumber='${requestScope.htmlGoodsDMTTS.goodsNumber }';
 		var accountId='${sessionScope.user.id }';
 		$.post("getPreviewHtmlGoods",
 			{trade:"dmtts",goodsNumber:goodsNumber,accountId:accountId},
 			function(data){
 				console.log("==="+JSON.stringify(data));
-				var previewDMTZL=data.previewDMTZL;
-				$("#preview_div #title1_div").text(previewDMTZL.title1);
+				var previewDMTTS=data.previewDMTTS;
+				console.log(JSON.stringify(previewDMTTS));
+				$("#preview_div #title1_div").text(previewDMTTS.title1);
 				
-				$("#preview_div #memo1_div").html(previewDMTZL.memo1);
+				$("#preview_div #memo1_div").html(previewDMTTS.memo1);
 				
-				$("#preview_div #title2_div").text(previewDMTZL.title2);
+				$("#preview_div #title2_div").text(previewDMTTS.title2);
 				
 				initDefaultHtmlVal();
 			}
@@ -121,7 +122,6 @@ function saveEdithtmlGoodsDMTTS(){
 	if(checkIfPaid()){
 		resetEditorHtml();
 		renameFile();
-		renameImage();
 		
 		var formData = new FormData($("#form1")[0]);
 		 
@@ -170,9 +170,8 @@ function hideSaveStatusDiv(){
 	$("#saveStatus_div").css("display","none");
 }
 
-function finishEdithtmlGoodsDMTZL(){
+function finishEdithtmlGoodsDMTTS(){
 	renameFile();
-	renameImage();
 	document.getElementById("sub_but").click();
 }
 
@@ -358,7 +357,7 @@ function goBack(){
 </script>
 </head>
 <body>
-<form id="form1" name="form1" method="post" action="finishEditHtmlGoodsDMTZL" onsubmit="return checkIfPaid();" enctype="multipart/form-data">
+<form id="form1" name="form1" method="post" action="finishEditHtmlGoodsDMTTS" onsubmit="return checkIfPaid();" enctype="multipart/form-data">
 <div class="embed1ModBg_div" id="embed1ModBg_div">
 	<div class="embed1Mod_div" id="embed1Mod_div">
 		<div class="title_div">

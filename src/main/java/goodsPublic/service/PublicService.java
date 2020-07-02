@@ -380,6 +380,13 @@ public interface PublicService {
 	 * @return
 	 */
 	public int editHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoodsDMTZL);
+
+	/**
+	 * 编辑多媒体图书模版内容
+	 * @param htmlGoodsDMTTS
+	 * @return
+	 */
+	public int editHtmlGoodsDMTTS(HtmlGoodsDMTTS htmlGoodsDMTTS);
 	
 	/**
 	 * 编辑建筑施工模版内容

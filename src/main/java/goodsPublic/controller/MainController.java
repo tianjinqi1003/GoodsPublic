@@ -1769,6 +1769,25 @@ public class MainController {
 	}
 	
 	/**
+	 * 完成编辑多媒体图书模版内容
+	 * @param htmlGoodsDMTTS
+	 * @param file1_1
+	 * @param file2_1
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/finishEditHtmlGoodsDMTTS",produces="plain/text; charset=UTF-8")
+	public String finishEditHtmlGoodsDMTTS(HtmlGoodsDMTTS htmlGoodsDMTTS,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file2_1",required=false) MultipartFile file2_1,
+			HttpServletRequest request) {
+		
+		editHtmlGoodsDMTTS(htmlGoodsDMTTS,file1_1,file2_1,request);
+		
+		return "../../merchant/main/goBrowseHtmlGoodsDMTTS?goodsNumber="+htmlGoodsDMTTS.getGoodsNumber()+"&accountNumber="+htmlGoodsDMTTS.getAccountNumber();
+	}
+	
+	/**
 	 * 完成编辑建筑施工模版内容
 	 * @param htmlGoodsJZSG
 	 * @param file1_1
@@ -1921,6 +1940,37 @@ public class MainController {
 		return json;
 	}
 	
+	/**
+	 * 保存编辑多媒体图书模版内容
+	 * @param htmlGoodsDMTTS
+	 * @param file1_1
+	 * @param file2_1
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/saveEditHtmlGoodsDMTTS",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String saveEditHtmlGoodsDMTTS(HtmlGoodsDMTTS htmlGoodsDMTTS,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file2_1",required=false) MultipartFile file2_1,
+			HttpServletRequest request) {
+		
+		PlanResult plan=new PlanResult();
+		String json;
+		int count = editHtmlGoodsDMTTS(htmlGoodsDMTTS,file1_1,file2_1,request);
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("内容保存失败！");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("内容保存成功！");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+
 	/**
 	 * 保存编辑建筑施工模版内容
 	 * @param htmlGoodsJZSG
@@ -2185,6 +2235,52 @@ public class MainController {
 				}
 			}
 			count=publicService.editHtmlGoodsDMTZL(htmlGoodsDMTZL);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return count;
+		}
+	}
+	
+	/**
+	 * 编辑多媒体图书模版内容
+	 * @param htmlGoodsDMTTS
+	 * @param file1_1
+	 * @param file2_1
+	 * @param request
+	 * @return
+	 */
+	private int editHtmlGoodsDMTTS(HtmlGoodsDMTTS htmlGoodsDMTTS, MultipartFile file1_1, MultipartFile file2_1,
+			HttpServletRequest request) {
+		// TODO Auto-generated method stub
+		int count = 0;
+		try {
+			MultipartFile[] fileArr=new MultipartFile[2];
+			fileArr[0]=file1_1;
+			fileArr[1]=file2_1;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						jsonStr = FileUploadUtils.appUploadContentImg(request,fileArr[i],"");
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								htmlGoodsDMTTS.setEmbed1_1(dataJO.get("src").toString());
+								break;
+							case 1:
+								htmlGoodsDMTTS.setEmbed2_1(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+				}
+			}
+			count=publicService.editHtmlGoodsDMTTS(htmlGoodsDMTTS);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -2873,6 +2969,10 @@ public class MainController {
 		case "dmtzl":
 			HtmlGoodsDMTZL htmlGoodsDMTZL = publicService.getHtmlGoodsDMTZL(goodsNumber, accountId);
 			jsonMap.put("previewDMTZL", htmlGoodsDMTZL);
+			break;
+		case "dmtts":
+			HtmlGoodsDMTTS htmlGoodsDMTTS = publicService.getHtmlGoodsDMTTS(goodsNumber, accountId);
+			jsonMap.put("previewDMTTS", htmlGoodsDMTTS);
 			break;
 		case "jzsg":
 			HtmlGoodsJZSG htmlGoodsJZSG = publicService.getHtmlGoodsJZSG(request.getParameter("userNumber"), accountId);

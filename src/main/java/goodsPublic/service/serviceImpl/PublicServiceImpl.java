@@ -136,6 +136,12 @@ public class PublicServiceImpl implements PublicService {
 		// TODO Auto-generated method stub
 		return publicDao.editHtmlGoodsDMTZL(htmlGoodsDMTZL);
 	}
+
+	@Override
+	public int editHtmlGoodsDMTTS(HtmlGoodsDMTTS htmlGoodsDMTTS) {
+		// TODO Auto-generated method stub
+		return publicDao.editHtmlGoodsDMTTS(htmlGoodsDMTTS);
+	}
 	
 	@Override
 	public int editHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG) {

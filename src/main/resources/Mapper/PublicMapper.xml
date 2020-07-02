@@ -2067,6 +2067,22 @@
 		gmtModified=now()
 		where id=#{id}
 	</update>
+	<update id="editHtmlGoodsDMTTS" parameterType="goodsPublic.entity.HtmlGoodsDMTTS">
+		update html_goods_dmtts set
+		<if test="title1!=null">
+			title1=#{title1},
+		</if>
+		<if test="title2!=null">
+			title2=#{title2},
+		</if>
+			embed1_1=#{embed1_1},
+			embed2_1=#{embed2_1},
+		<if test="memo1!=null">
+			memo1=#{memo1},
+		</if>
+		gmtModified=now()
+		where id=#{id}
+	</update>
 	<update id="editHtmlGoodsJZSG" parameterType="goodsPublic.entity.HtmlGoodsJZSG">
 		update html_goods_jzsg set
 		<if test="title!=null">

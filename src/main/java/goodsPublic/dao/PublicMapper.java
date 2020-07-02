@@ -68,11 +68,19 @@ public interface PublicMapper {
 	public int addScoreQrcodeHistory(ScoreQrcodeHistory sqh);
 
 	public int addHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);
+	
 	public int editHtmlGoodsGRMP(HtmlGoodsGRMP htmlGoodsGRMP);
+	
 	public int addHtmlGoodsText(HtmlGoodsText htmlGoodsText);
+	
 	public int editHtmlGoodsSPZS(HtmlGoodsSPZS htmlGoodsSPZS);
+	
 	public int editHtmlGoodsDMTZL(HtmlGoodsDMTZL htmlGoodsDMTZL);
+
+	public int editHtmlGoodsDMTTS(HtmlGoodsDMTTS htmlGoodsDMTTS);
+	
 	public int editHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG);
+	
 	public int editHtmlGoodsHDQD(HtmlGoodsHDQD htmlGoodsHDQD);
 	//修改发布的产品信息
 	public int updataGoodsPublic(Goods articleInfo);
