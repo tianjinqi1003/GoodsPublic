@@ -823,6 +823,15 @@ public class PublicServiceImpl implements PublicService {
 		count=publicDao.deleteHtmlGoodsDMTZLByIds(idList);
 		return count;
 	}
+
+	@Override
+	public int deleteHtmlGoodsDMTTSByIds(String ids) {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<String> idList = Arrays.asList(ids.split(","));
+		count=publicDao.deleteHtmlGoodsDMTTSByIds(idList);
+		return count;
+	}
 	
 	@Override
 	public int deleteHtmlGoodsJZSGByIds(String ids) {

@@ -424,6 +424,13 @@ public interface PublicService {
 	 * @return
 	 */
 	public int deleteHtmlGoodsDMTZLByIds(String ids);
+
+	/**
+	 * 根据id删除多媒体图书模版内容
+	 * @param ids
+	 * @return
+	 */
+	public int deleteHtmlGoodsDMTTSByIds(String ids);
 	
 	/**
 	 * 根据id删除建筑施工模版内容
