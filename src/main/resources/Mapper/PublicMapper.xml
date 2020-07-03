@@ -1539,6 +1539,7 @@
 			<if test="avatorUrl!=null">
 				avatorUrl,
 			</if>
+				gmtCreate,
 			<if test="qrcode!=null">
 				qrcode,
 			</if>
@@ -1596,6 +1597,7 @@
 			<if test="avatorUrl!=null">
 				#{avatorUrl},
 			</if>
+				now(),
 			<if test="qrcode!=null">
 				#{qrcode},
 			</if>

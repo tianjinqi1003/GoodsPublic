@@ -77,21 +77,29 @@ public class ChenQiController {
 					htmlGoodsGRMP.setAvatorUrl(dataJO.get("src").toString());
 				}
 			}
+
+			String uuid = UUID.randomUUID().toString().replaceAll("-", "");
 			String userNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-			String url = "http://www.iot-mes.com:8081/";
+			
+			String locationHref = request.getParameter("locationHref");
+			String serverName = null;
+			if(locationHref.indexOf("www.qrcodesy.com")!=-1)
+				serverName="http://www.qrcodesy.com/";
+			else
+				serverName="http://cqcode.qdhualing.com/";
+			String url = serverName+"qrcodeCreate/showVCard.html?uuid="+uuid;
 			String fileName = userNumber + ".jpg";
 			String avaPath="/GoodsPublic/upload/ChenQiQrcode/"+fileName;
 			String path = "D:/resource/ChenQiQrcode/";
 			Qrcode.createQrCode(url, path, fileName);
-
-			String uuid = UUID.randomUUID().toString().replaceAll("-", "");
+			
 			htmlGoodsGRMP.setUuid(uuid);
 			htmlGoodsGRMP.setQrcode(avaPath);
 			int a=publicService.addHtmlGoodsGRMP(htmlGoodsGRMP);
 			
 	        //String jsonpCallback="jsonpCallback(\"{\\\"qrcode\\\":\\\"1111111111\\\"}\")";
 			//response.getWriter().print(jsonpCallback);
-			response.sendRedirect("http://www.qrcodesy.com/qrcodeCreate/vcard.html?type=1&uuid="+uuid);
+			response.sendRedirect(serverName+"qrcodeCreate/vcard.html?type=1&uuid="+uuid);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -111,7 +119,13 @@ public class ChenQiController {
 				}
 			}
 			int a=publicService.editHtmlGoodsGRMP(htmlGoodsGRMP);
-			response.sendRedirect("http://www.qrcodesy.com/qrcodeCreate/vcard.html?type=1");
+			String locationHref = request.getParameter("locationHref");
+			String serverName = null;
+			if(locationHref.indexOf("www.qrcodesy.com")!=-1)
+				serverName="http://www.qrcodesy.com/";
+			else
+				serverName="http://cqcode.qdhualing.com/";
+			response.sendRedirect(serverName+"qrcodeCreate/vcard.html?type=1&uuid="+htmlGoodsGRMP.getUuid());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
