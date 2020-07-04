@@ -692,10 +692,6 @@ function renameImage(){
 		$(this).attr("name","image2_"+(i+1));
 		//console.log($(this).attr("name"));
 	});
-	$("#uploadFile3_div input[type='text']").each(function(i){
-		$(this).attr("name","embed1_"+(i+1));
-		//console.log($(this).attr("name"));
-	});
 }
 
 function closeImage1ModBgDiv(){
@@ -735,6 +731,13 @@ function uploadImage2(){
 	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\"/>");
 	$("#uploadFile2_div").append("<input type=\"text\" id=\"image"+uuid+"\" name=\"image"+uuid+"\" />");
 	document.getElementById("uploadFile2_inp").click();
+}
+
+function uploadEmbed1(){
+	var uuid=createUUID();
+	$("#uuid_hid3").val(uuid);
+	$("#uploadFile3_div").html("<input type=\"file\" id=\"uploadFile3_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodeEmbed1(this)\"/>");
+	document.getElementById("uploadFile3_inp").click();
 }
 
 function deleteImage1(o){
@@ -881,6 +884,48 @@ function showQrcodePic2(obj){
         setTimeout(function(){
         	resetDivPosition();
         },"100")
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
+}
+
+function showQrcodeEmbed1(obj){
+	var uuid=$("#uuid_hid3").val();
+	var file=$(obj);
+	file.attr("id","file"+uuid);
+	file.attr("name","file"+uuid);
+	file.removeAttr("onchange");
+	file.css("display","none");
+	var fileHtml=file.prop("outerHTML");
+	
+	var embedShowDiv=$("#embed1Mod_div #embedShow_div");
+	var embedTag;
+	if (!!window.ActiveXObject || "ActiveXObject" in window)
+		embedTag="embed";
+	else
+		embedTag="iframe";
+	embedShowDiv.html("<"+embedTag+" class=\"item_embed\" id=\"embed"+uuid+"\" alt=\"\">"
+			+fileHtml);
+
+	var $file = $(obj);
+    var fileObj = $file[0];
+    file=$file;
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var $embed = $("#embed"+uuid);
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        $embed.attr("src", dataURL);
+        
+        $("#embed1_div #embed1_1").replaceWith("<"+embedTag+" class=\"item_embed\" id=\"embed1_1\" src=\""+dataURL+"\"/>");
     } else {
         dataURL = $file.val();
         var imgObj = document.getElementById("preview");

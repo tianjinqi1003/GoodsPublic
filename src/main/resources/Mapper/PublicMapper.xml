@@ -2037,6 +2037,7 @@
 			image4_3=#{image4_3},
 			image4_4=#{image4_4},
 			image4_5=#{image4_5},
+			embed1_1=#{embed1_1},
 		<if test="memo1!=null">
 			memo1=#{memo1},
 		</if>

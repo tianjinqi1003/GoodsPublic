@@ -2134,9 +2134,9 @@ public class MainController {
 								break;
 							case 10:
 								if("productExplain".equals(moduleType))
-									htmlGoodsSPZS.setImage3_1(dataJO.get("src").toString());
-								else
 									htmlGoodsSPZS.setEmbed1_1(dataJO.get("src").toString());
+								else
+									htmlGoodsSPZS.setImage3_1(dataJO.get("src").toString());
 								break;
 							case 11:
 								htmlGoodsSPZS.setImage3_2(dataJO.get("src").toString());
