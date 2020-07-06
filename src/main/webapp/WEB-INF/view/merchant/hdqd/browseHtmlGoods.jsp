@@ -6,14 +6,50 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>预览</title>
 <%@include file="../js.jsp"%>
+<script type="text/javascript" src="<%=basePath %>resource/js/pdf/jspdf.debug.js"></script>
+<script type="text/javascript" src="<%=basePath %>resource/js/pdf/html2canvas.min.js"></script>
 <link rel="stylesheet" href="<%=basePath %>/resource/css/hdqd/browseHtmlGoods.css" />
 <script type="text/javascript">
 function editContent(goodsNumber,accountNumber){
 	location.href="${pageContext.request.contextPath}/merchant/main/goEditModule?trade=hdqd&goodsNumber="+goodsNumber+"&accountNumber="+accountNumber;
 }
+
+function openXzewmBgDiv(flag){
+	$("#xzewmBg_div").css("display",flag==1?"block":"none");
+}
+
+function downloadQrocdeImg(){
+	//使用html2canvas 转换html为canvas
+    html2canvas($("#xzewmBg_div #qrcodeImg_div")).then(function (canvas) {
+       var imgUri = canvas.toDataURL("image/jpg").replace("image/jpg", "image/octet-stream"); // 获取生成的图片的url 　
+       var saveLink = document.createElement('a');
+       saveLink.href = imgUri;
+       saveLink.download = '${requestScope.htmlGoodsHDQD.title }'+'.png';
+       saveLink.click();
+    });
+}
 </script>
 </head>
 <body>
+<div class="xzewmBg_div" id="xzewmBg_div">
+	<div class="xzewm_div">
+		<div class="close_div">
+			<span class="close_span" onclick="openXzewmBgDiv(0)">关闭</span>
+		</div>
+		<div class="qrcodeImg_div" id="qrcodeImg_div">
+			<img class="qrcode_img" alt="" src="${requestScope.htmlGoodsHDQD.qrCode }" />
+		</div>
+		<div class="xzBut_div" onclick="downloadQrocdeImg()">
+			<div>
+				<span class="xz_text_span">下载</span>
+			</div>
+			<div>
+				<span class="xs_text_span">230*230像素</span>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div class="main_div" id="main_div">
 	<div class="top_div">
 		<img class="createSuccess_img" alt="" src="/GoodsPublic/resource/images/006.png">
@@ -178,7 +214,7 @@ function editContent(goodsNumber,accountNumber){
 		<div class="qrcode_div">
 			<div class="downloadQrcode1_div">
 				<img class="qrcode_img" alt="" src="${requestScope.htmlGoodsHDQD.qrCode }" />
-				<div class="downloadQrcode2_div">下载二维码</div>
+				<div class="downloadQrcode2_div" onclick="openXzewmBgDiv(1)">下载二维码</div>
 			</div>
 		</div>
 		<div class="line1_div"></div>
