@@ -52,12 +52,13 @@ $(function(){
     setTimeout(function(){
     	resetDivPosition();
     },"1000")
+    
+	initDefaultHtmlVal();
 });
 
 var dpn;
 var disArr1=[];
 var disArr2=[];
-var disArr3=[];
 var dm1Html,dm2Html,dm3Html;
 var dSpxqIfShowArr=[];
 var dSpxqNameArr=[];
@@ -68,7 +69,6 @@ function initDefaultHtmlVal(){
 		disArr1[i]="";
 		disArr1[i]=$("#image1_div #list_div img[id^='img']").eq(i).attr("src");
 	}
-	console.log(disArr1);
 	$("#spxq_tab input[id^='spxqIfShow']").each(function(i){
 		dSpxqIfShowArr[i]=$(this).val();
 		var spxqName=$("#spxq_tab input[name^='spxqName']").eq(i).val();
@@ -78,9 +78,6 @@ function initDefaultHtmlVal(){
 	});
 	$("#uploadFile2_div input[id^='image']").each(function(i){
 		disArr2[i]=$(this).val();
-	});
-	$("#uploadFile3_div input[id^='image']").each(function(i){
-		disArr3[i]=$(this).val();
 	});
 	setTimeout(function(){
 		dm1Html=editor1.html();
@@ -287,56 +284,6 @@ function previewHtmlGoodsSPZS(){
 					$("#preview_div #image2_5_img").attr("src",image2_5);
 				}
 				
-				var image3_1=previewSPZS.image3_1;
-				if(image3_1==null){
-					$("#preview_div #image3_1_img").css("display","none");
-					$("#preview_div #image3_1_img").attr("src","");
-				}
-				else{
-					$("#preview_div #image3_1_img").css("display","block");
-					$("#preview_div #image3_1_img").attr("src",image3_1);
-				}
-				
-				var image3_2=previewSPZS.image3_2;
-				if(image3_2==null){
-					$("#preview_div #image3_2_img").css("display","none");
-					$("#preview_div #image3_2_img").attr("src","");
-				}
-				else{
-					$("#preview_div #image3_2_img").css("display","block");
-					$("#preview_div #image3_2_img").attr("src",image3_2);
-				}
-				
-				var image3_3=previewSPZS.image3_3;
-				if(image3_3==null){
-					$("#preview_div #image3_3_img").css("display","none");
-					$("#preview_div #image3_3_img").attr("src","");
-				}
-				else{
-					$("#preview_div #image3_3_img").css("display","block");
-					$("#preview_div #image3_3_img").attr("src",image3_3);
-				}
-				
-				var image3_4=previewSPZS.image3_4;
-				if(image3_4==null){
-					$("#preview_div #image3_4_img").css("display","none");
-					$("#preview_div #image3_4_img").attr("src","");
-				}
-				else{
-					$("#preview_div #image3_4_img").css("display","block");
-					$("#preview_div #image3_4_img").attr("src",image3_4);
-				}
-				
-				var image3_5=previewSPZS.image3_5;
-				if(image3_5==null){
-					$("#preview_div #image3_5_img").css("display","none");
-					$("#preview_div #image3_5_img").attr("src","");
-				}
-				else{
-					$("#preview_div #image3_5_img").css("display","block");
-					$("#preview_div #image3_5_img").attr("src",image3_5);
-				}
-				
 				$("#preview_div #memo3_div").html(previewSPZS.memo3);
 				
 				initDefaultHtmlVal();
@@ -445,56 +392,6 @@ function previewHtmlGoodsSPZS(){
 			$("#preview_div #image2_div #image2_5_img").css("display","block");
 			$("#preview_div #image2_div #image2_5_img").attr("src",image2_5_src);
 		}
-		
-		var image3_1_src=disArr3[0];
-		if(image3_1_src==undefined||image3_1_src==""){
-			$("#preview_div #image3_div #image3_1_img").css("display","none");
-			$("#preview_div #image3_div #image3_1_img").attr("src","");
-		}
-		else{
-			$("#preview_div #image3_div #image3_1_img").css("display","block");
-			$("#preview_div #image3_div #image3_1_img").attr("src",image3_1_src);
-		}
-		
-		var image3_2_src=disArr3[1];
-		if(image3_2_src==undefined||image3_2_src==""){
-			$("#preview_div #image3_div #image3_2_img").css("display","none");
-			$("#preview_div #image3_div #image3_2_img").attr("src","");
-		}
-		else{
-			$("#preview_div #image3_div #image3_2_img").css("display","block");
-			$("#preview_div #image3_div #image3_2_img").attr("src",image3_2_src);
-		}
-		
-		var image3_3_src=disArr3[2];
-		if(image3_3_src==undefined||image3_3_src==""){
-			$("#preview_div #image3_div #image3_3_img").css("display","none");
-			$("#preview_div #image3_div #image3_3_img").attr("src","");
-		}
-		else{
-			$("#preview_div #image3_div #image3_3_img").css("display","block");
-			$("#preview_div #image3_div #image3_3_img").attr("src",image3_3_src);
-		}
-		
-		var image3_4_src=disArr3[3];
-		if(image3_4_src==undefined||image3_4_src==""){
-			$("#preview_div #image3_div #image3_4_img").css("display","none");
-			$("#preview_div #image3_div #image3_4_img").attr("src","");
-		}
-		else{
-			$("#preview_div #image3_div #image3_4_img").css("display","block");
-			$("#preview_div #image3_div #image3_4_img").attr("src",image3_4_src);
-		}
-		
-		var image3_5_src=disArr3[4];
-		if(image3_5_src==undefined||image3_5_src==""){
-			$("#preview_div #image3_div #image3_5_img").css("display","none");
-			$("#preview_div #image3_div #image3_5_img").attr("src","");
-		}
-		else{
-			$("#preview_div #image3_div #image3_5_img").css("display","block");
-			$("#preview_div #image3_div #image3_5_img").attr("src",image3_5_src);
-		}
 	}
 	openPreviewBgDiv(1);
 }
@@ -506,7 +403,7 @@ function compareHtmlVal(){
 		flag=false;
 		return flag;
 	}
-	
+
 	var cisArr1=[];
 	for(var i=0;i<5;i++){
 		var imgSrc=$("#uploadFile1_div input[id^='image']").eq(i).val();
@@ -547,15 +444,6 @@ function compareHtmlVal(){
 		}
 	});
 
-	var cisArr3=[];
-	$("#uploadFile3_div input[id^='image']").each(function(i){
-		var imgSrc=$(this).val();
-		if(disArr3[i]!=imgSrc){
-			flag=false;
-			return flag;
-		}
-	});
-	
 	var cm3Html=editor3.html();
 	/*
 	console.log("dm3Html==="+dm3Html);
@@ -1266,13 +1154,6 @@ function goBack(){
 			<img class="image2_3_img" id="image2_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_3 }">
 			<img class="image2_4_img" id="image2_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_4 }">
 			<img class="image2_5_img" id="image2_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image2_5 }">
-		</div>
-		<div class="image3_div" id="image3_div">
-			<img class="image3_1_img" id="image3_1_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_1 }">
-			<img class="image3_2_img" id="image3_2_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_2 }">
-			<img class="image3_3_img" id="image3_3_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_3 }">
-			<img class="image3_4_img" id="image3_4_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_4 }">
-			<img class="image3_5_img" id="image3_5_img" alt="" src="${requestScope.htmlGoodsSPZS.image3_5 }">
 		</div>
 		<div class="memo3_div" id="memo3_div">
 			${requestScope.htmlGoodsSPZS.memo3 }
