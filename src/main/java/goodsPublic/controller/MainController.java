@@ -1736,6 +1736,7 @@ public class MainController {
 			@RequestParam(value="file4_5",required=false) MultipartFile file4_5,
 			HttpServletRequest request) {
 		
+		//https://blog.csdn.net/a18729216266/article/details/53291041?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.compare&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.compare
 		editHtmlGoodsSPZS(htmlGoodsSPZS,file1_1,file1_2,file1_3,file1_4,file1_5,file2_1,file2_2,file2_3,file2_4,file2_5,file3_1,file3_2,file3_3,file3_4,file3_5,file4_1,file4_2,file4_3,file4_4,file4_5,request);
 		
 		return "../../merchant/main/goBrowseHtmlGoodsSPZS?moduleType="+htmlGoodsSPZS.getModuleType()+"&goodsNumber="+htmlGoodsSPZS.getGoodsNumber()+"&accountNumber="+htmlGoodsSPZS.getAccountNumber();
