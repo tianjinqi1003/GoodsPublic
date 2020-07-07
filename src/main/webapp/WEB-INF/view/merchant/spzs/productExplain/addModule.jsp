@@ -581,6 +581,20 @@ function checkIfPaid(){
 				</td>
 			</tr>
 			</c:forEach>
+			<c:forEach begin="8" end="10" varStatus="status">
+			<tr class="item_tr" id="tr${status.index }" height="50">
+				<td class="name_td">
+					<input type="text" name="spxqName${status.index }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="spxqValue${status.index }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="spxqIfShow${status.index }" name="spxqIfShow${status.index }" value="true" />
+					<input type="button" class="spxqIfShow_inp" value="显示" onclick="changeSPXQTrIfShow(${status.index },this)"/>
+				</td>
+			</tr>
+			</c:forEach>
 		</table>
 	</div>
 	<div class="memo2_div">
