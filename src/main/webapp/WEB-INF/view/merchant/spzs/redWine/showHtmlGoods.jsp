@@ -102,6 +102,46 @@
 				</td>
 			</tr>
 			</c:if>
+			<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow7 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsSPZS.spxqName7 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsSPZS.spxqValue7 }
+				</td>
+			</tr>
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow8 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsSPZS.spxqName8 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsSPZS.spxqValue8 }
+				</td>
+			</tr>
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow9 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsSPZS.spxqName9 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsSPZS.spxqValue9 }
+				</td>
+			</tr>
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow10 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsSPZS.spxqName10 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsSPZS.spxqValue10 }
+				</td>
+			</tr>
+			</c:if>
 		</table>
 	</div>
 	<div class="memo2_div">

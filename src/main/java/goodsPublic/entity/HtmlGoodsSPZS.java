@@ -33,10 +33,13 @@ public class HtmlGoodsSPZS implements Serializable {
 	private Boolean spxqIfShow7=false;
 	private String spxqName8;
 	private String spxqValue8;
+	private Boolean spxqIfShow8=false;
 	private String spxqName9;
 	private String spxqValue9;
+	private Boolean spxqIfShow9=false;
 	private String spxqName10;
 	private String spxqValue10;
+	private Boolean spxqIfShow10=false;
 	private String image1_1;
 	private String image1_2;
 	private String image1_3;
@@ -218,6 +221,12 @@ public class HtmlGoodsSPZS implements Serializable {
 	public void setSpxqValue8(String spxqValue8) {
 		this.spxqValue8 = spxqValue8;
 	}
+	public Boolean getSpxqIfShow8() {
+		return spxqIfShow8;
+	}
+	public void setSpxqIfShow8(Boolean spxqIfShow8) {
+		this.spxqIfShow8 = spxqIfShow8;
+	}
 	public String getSpxqName9() {
 		return spxqName9;
 	}
@@ -230,6 +239,12 @@ public class HtmlGoodsSPZS implements Serializable {
 	public void setSpxqValue9(String spxqValue9) {
 		this.spxqValue9 = spxqValue9;
 	}
+	public Boolean getSpxqIfShow9() {
+		return spxqIfShow9;
+	}
+	public void setSpxqIfShow9(Boolean spxqIfShow9) {
+		this.spxqIfShow9 = spxqIfShow9;
+	}
 	public String getSpxqName10() {
 		return spxqName10;
 	}
@@ -241,6 +256,12 @@ public class HtmlGoodsSPZS implements Serializable {
 	}
 	public void setSpxqValue10(String spxqValue10) {
 		this.spxqValue10 = spxqValue10;
+	}
+	public Boolean getSpxqIfShow10() {
+		return spxqIfShow10;
+	}
+	public void setSpxqIfShow10(Boolean spxqIfShow10) {
+		this.spxqIfShow10 = spxqIfShow10;
 	}
 	public String getImage1_1() {
 		return image1_1;

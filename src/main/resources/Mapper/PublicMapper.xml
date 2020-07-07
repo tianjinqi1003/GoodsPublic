@@ -394,6 +394,33 @@
 			<if test="spxqIfShow7!=null">
 				spxqIfShow7,
 			</if>
+			<if test="spxqName8!=null">
+				spxqName8,
+			</if>
+			<if test="spxqValue8!=null">
+				spxqValue8,
+			</if>
+			<if test="spxqIfShow8!=null">
+				spxqIfShow8,
+			</if>
+			<if test="spxqName9!=null">
+				spxqName9,
+			</if>
+			<if test="spxqValue9!=null">
+				spxqValue9,
+			</if>
+			<if test="spxqIfShow9!=null">
+				spxqIfShow9,
+			</if>
+			<if test="spxqName10!=null">
+				spxqName10,
+			</if>
+			<if test="spxqValue10!=null">
+				spxqValue10,
+			</if>
+			<if test="spxqIfShow10!=null">
+				spxqIfShow10,
+			</if>
 			<if test="image1_1!=null">
 				image1_1,
 			</if>
@@ -547,6 +574,33 @@
 			</if>
 			<if test="spxqIfShow7!=null">
 				#{spxqIfShow7},
+			</if>
+			<if test="spxqName8!=null">
+				#{spxqName8},
+			</if>
+			<if test="spxqValue8!=null">
+				#{spxqValue8},
+			</if>
+			<if test="spxqIfShow8!=null">
+				#{spxqIfShow8},
+			</if>
+			<if test="spxqName9!=null">
+				#{spxqName9},
+			</if>
+			<if test="spxqValue9!=null">
+				#{spxqValue9},
+			</if>
+			<if test="spxqIfShow9!=null">
+				#{spxqIfShow9},
+			</if>
+			<if test="spxqName10!=null">
+				#{spxqName10},
+			</if>
+			<if test="spxqValue10!=null">
+				#{spxqValue10},
+			</if>
+			<if test="spxqIfShow10!=null">
+				#{spxqIfShow10},
 			</if>
 			<if test="image1_1!=null">
 				#{image1_1},
@@ -2016,6 +2070,33 @@
 		</if>
 		<if test="spxqIfShow7!=null">
 			spxqIfShow7=#{spxqIfShow7},
+		</if>
+		<if test="spxqName8!=null">
+			spxqName8=#{spxqName8},
+		</if>
+		<if test="spxqValue8!=null">
+			spxqValue8=#{spxqValue8},
+		</if>
+		<if test="spxqIfShow8!=null">
+			spxqIfShow8=#{spxqIfShow8},
+		</if>
+		<if test="spxqName9!=null">
+			spxqName9=#{spxqName9},
+		</if>
+		<if test="spxqValue9!=null">
+			spxqValue9=#{spxqValue9},
+		</if>
+		<if test="spxqIfShow9!=null">
+			spxqIfShow9=#{spxqIfShow9},
+		</if>
+		<if test="spxqName10!=null">
+			spxqName10=#{spxqName10},
+		</if>
+		<if test="spxqValue10!=null">
+			spxqValue10=#{spxqValue10},
+		</if>
+		<if test="spxqIfShow10!=null">
+			spxqIfShow10=#{spxqIfShow10},
 		</if>
 			image1_1=#{image1_1},
 			image1_2=#{image1_2},
