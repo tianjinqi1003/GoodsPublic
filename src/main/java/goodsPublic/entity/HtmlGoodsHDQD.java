@@ -47,15 +47,15 @@ public class HtmlGoodsHDQD implements Serializable {
 	private String hdapName8;
 	private String hdapValue8_1;
 	private String hdapValue8_2;
-	private Boolean hdapIfShow8;
+	private Boolean hdapIfShow8=false;
 	private String hdapName9;
 	private String hdapValue9_1;
 	private String hdapValue9_2;
-	private Boolean hdapIfShow9;
+	private Boolean hdapIfShow9=false;
 	private String hdapName10;
 	private String hdapValue10_1;
 	private String hdapValue10_2;
-	private Boolean hdapIfShow10;
+	private Boolean hdapIfShow10=false;
 	private String qrCode;
 	private String gmtCreate;
 	private String gmtModified;

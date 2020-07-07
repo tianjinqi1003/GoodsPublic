@@ -49,19 +49,22 @@ var dm1Html;
 var dHdapIfShowArr=[];
 var dHdapNameArr=[];
 var dHdapValueArr=[];
+var dHdapValue2Arr=[];
 function initDefaultHtmlVal(){
 	dpn=$("#middle_div #title").val();
 	$("#uploadFile1_div input[id^='image']").each(function(i){
 		disArr1[i]=$(this).val();
 	});
 	
-	$("#hdap_tab input[id^='hdapIfShow']").each(function(i){
+	$("#middle_div #hdap_tab input[id^='hdapIfShow']").each(function(i){
 		dHdapIfShowArr[i]=$(this).val();
-		var hdapName=$("#hdap_tab input[name^='hdapName']").eq(i).val();
+		var hdapName=$("#middle_div #hdap_tab input[name^='hdapName']").eq(i).val();
 		dHdapNameArr[i]=hdapName;
-		var hdapValue=$("#hdap_tab input[name^='hdapValue']").eq(i).val();
-		//console.log("hdapValue==="+hdapValue);
+		var hdapValue=$("#middle_div #hdap_tab td[class='value_td']").eq(i).find("input").val();
 		dHdapValueArr[i]=hdapValue;
+		var hdapValue2=$("#middle_div #hdap_tab td[class='value2_td']").eq(i).find("input").val();
+		//console.log("hdapValue2==="+hdapValue2);
+		dHdapValue2Arr[i]=hdapValue2;
 	});
 	
 	setTimeout(function(){
@@ -199,6 +202,56 @@ function previewHtmlGoodsHDQD(){
 				tds.eq(1).text(previewHDQD.hdapValue5_1);
 				tds.eq(2).text(previewHDQD.hdapValue5_2);
 				
+				tr=trs.eq(5);
+				if(previewHDQD.hdapIfShow6)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewHDQD.hdapName6);
+				tds.eq(1).text(previewHDQD.hdapValue6_1);
+				tds.eq(2).text(previewHDQD.hdapValue6_2);
+				
+				tr=trs.eq(6);
+				if(previewHDQD.hdapIfShow7)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewHDQD.hdapName7);
+				tds.eq(1).text(previewHDQD.hdapValue7_1);
+				tds.eq(2).text(previewHDQD.hdapValue7_2);
+				
+				tr=trs.eq(7);
+				if(previewHDQD.hdapIfShow8)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewHDQD.hdapName8);
+				tds.eq(1).text(previewHDQD.hdapValue8_1);
+				tds.eq(2).text(previewHDQD.hdapValue8_2);
+				
+				tr=trs.eq(8);
+				if(previewHDQD.hdapIfShow9)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewHDQD.hdapName9);
+				tds.eq(1).text(previewHDQD.hdapValue9_1);
+				tds.eq(2).text(previewHDQD.hdapValue9_2);
+				
+				tr=trs.eq(9);
+				if(previewHDQD.hdapIfShow10)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewHDQD.hdapName10);
+				tds.eq(1).text(previewHDQD.hdapValue10_1);
+				tds.eq(2).text(previewHDQD.hdapValue10_2);
+				
 				initDefaultHtmlVal();
 			}
 		,"json");
@@ -255,6 +308,16 @@ function previewHtmlGoodsHDQD(){
 			$("#preview_div #image1_div #image1_5_img").css("display","block");
 			$("#preview_div #image1_div #image1_5_img").attr("src",image1_5_src);
 		}
+		
+		var trs=$("#preview_div #hdap_tab tr");
+		
+		for(var i=0;i<dHdapIfShowArr.length;i++){
+			var tr=trs.eq(i);
+			if(dHdapIfShowArr[i]=="true")
+				tr.css("display","table-row");
+			else
+				tr.css("display","none");
+		}
 	}
 	openPreviewBgDiv(1);
 }
@@ -282,11 +345,12 @@ function compareHtmlVal(){
 		return flag;
 	}
 
-	$("#hdap_tab input[id^='hdapIfShow']").each(function(i){
+	$("#middle_div #hdap_tab input[id^='hdapIfShow']").each(function(i){
 		var hdapIfShow=$(this).val();
-		var hdapName=$("#hdap_tab input[name^='hdapName']").eq(i).val();
-		var hdapValue=$("#hdap_tab input[name^='hdapValue']").eq(i).val();
-		if(hdapIfShow!=dHdapIfShowArr[i]||hdapName!=dHdapNameArr[i]||hdapValue!=dHdapValueArr[i]){
+		var hdapName=$("#middle_div #hdap_tab input[name^='hdapName']").eq(i).val();
+		var hdapValue=$("#middle_div #hdap_tab td[class='value_td']").eq(i).find("input").val();
+		var hdapValue2=$("#middle_div #hdap_tab td[class='value2_td']").eq(i).find("input").val();
+		if(hdapIfShow!=dHdapIfShowArr[i]||hdapName!=dHdapNameArr[i]||hdapValue!=dHdapValueArr[i]||hdapValue2!=dHdapValue2Arr[i]){
 			flag=false;
 			return flag;
 		}
@@ -665,6 +729,61 @@ function goBack(){
 						${requestScope.htmlGoodsHDQD.hdapValue5_2 }
 					</td>
 				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsHDQD.hdapName6 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsHDQD.hdapValue6_1 }
+					</td>
+					<td class="value2_td">
+						${requestScope.htmlGoodsHDQD.hdapValue6_2 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsHDQD.hdapName7 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsHDQD.hdapValue7_1 }
+					</td>
+					<td class="value2_td">
+						${requestScope.htmlGoodsHDQD.hdapValue7_2 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsHDQD.hdapName8 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsHDQD.hdapValue8_1 }
+					</td>
+					<td class="value2_td">
+						${requestScope.htmlGoodsHDQD.hdapValue8_2 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsHDQD.hdapName9 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsHDQD.hdapValue9_1 }
+					</td>
+					<td class="value2_td">
+						${requestScope.htmlGoodsHDQD.hdapValue9_2 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsHDQD.hdapName10 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsHDQD.hdapValue10_1 }
+					</td>
+					<td class="value2_td">
+						${requestScope.htmlGoodsHDQD.hdapValue10_2 }
+					</td>
+				</tr>
 			</table>
 		</div>
 		<div style="width: 100%;height:40px;"></div>
@@ -794,6 +913,86 @@ function goBack(){
 				<td class="cz_td">
 					<input type="hidden" id="hdapIfShow5" name="hdapIfShow5" value="${requestScope.htmlGoodsHDQD.hdapIfShow5 }" />
 					<input type="button" class="hdapIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow5?'显示':'隐藏' }" onclick="changeHdapTrIfShow(5,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr6" height="50">
+				<td class="name_td">
+					<input type="text" name="hdapName6" value="${requestScope.htmlGoodsHDQD.hdapName6 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="hdapValue6_1" value="${requestScope.htmlGoodsHDQD.hdapValue6_1 }" />
+				</td>
+				<td class="value2_td">
+					<input type="text" name="hdapValue6_2" value="${requestScope.htmlGoodsHDQD.hdapValue6_2 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="hdapIfShow6" name="hdapIfShow6" value="${requestScope.htmlGoodsHDQD.hdapIfShow6 }" />
+					<input type="button" class="hdapIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow6?'显示':'隐藏' }" onclick="changeHdapTrIfShow(6,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr7" height="50">
+				<td class="name_td">
+					<input type="text" name="hdapName7" value="${requestScope.htmlGoodsHDQD.hdapName7 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="hdapValue7_1" value="${requestScope.htmlGoodsHDQD.hdapValue7_1 }" />
+				</td>
+				<td class="value2_td">
+					<input type="text" name="hdapValue7_2" value="${requestScope.htmlGoodsHDQD.hdapValue7_2 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="hdapIfShow7" name="hdapIfShow7" value="${requestScope.htmlGoodsHDQD.hdapIfShow7 }" />
+					<input type="button" class="hdapIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow7?'显示':'隐藏' }" onclick="changeHdapTrIfShow(7,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr8" height="50">
+				<td class="name_td">
+					<input type="text" name="hdapName8" value="${requestScope.htmlGoodsHDQD.hdapName8 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="hdapValue8_1" value="${requestScope.htmlGoodsHDQD.hdapValue8_1 }" />
+				</td>
+				<td class="value2_td">
+					<input type="text" name="hdapValue8_2" value="${requestScope.htmlGoodsHDQD.hdapValue8_2 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="hdapIfShow8" name="hdapIfShow8" value="${requestScope.htmlGoodsHDQD.hdapIfShow8 }" />
+					<input type="button" class="hdapIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow8?'显示':'隐藏' }" onclick="changeHdapTrIfShow(8,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr9" height="50">
+				<td class="name_td">
+					<input type="text" name="hdapName9" value="${requestScope.htmlGoodsHDQD.hdapName9 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="hdapValue9_1" value="${requestScope.htmlGoodsHDQD.hdapValue9_1 }" />
+				</td>
+				<td class="value2_td">
+					<input type="text" name="hdapValue9_2" value="${requestScope.htmlGoodsHDQD.hdapValue9_2 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="hdapIfShow9" name="hdapIfShow9" value="${requestScope.htmlGoodsHDQD.hdapIfShow9 }" />
+					<input type="button" class="hdapIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow9?'显示':'隐藏' }" onclick="changeHdapTrIfShow(9,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr10" height="50">
+				<td class="name_td">
+					<input type="text" name="hdapName10" value="${requestScope.htmlGoodsHDQD.hdapName10 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="hdapValue10_1" value="${requestScope.htmlGoodsHDQD.hdapValue10_1 }" />
+				</td>
+				<td class="value2_td">
+					<input type="text" name="hdapValue10_2" value="${requestScope.htmlGoodsHDQD.hdapValue10_2 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="hdapIfShow10" name="hdapIfShow10" value="${requestScope.htmlGoodsHDQD.hdapIfShow10 }" />
+					<input type="button" class="hdapIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow10?'显示':'隐藏' }" onclick="changeHdapTrIfShow(10,this)"/>
 				</td>
 			</tr>
 			

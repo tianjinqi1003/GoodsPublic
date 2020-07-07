@@ -322,6 +322,23 @@ function checkIfPaid(){
 				</td>
 			</tr>
 			</c:forEach>
+			<c:forEach begin="6" end="10" varStatus="status">
+			<tr class="item_tr" id="tr${status.index+1 }" height="50">
+				<td class="name_td">
+					<input type="text" name="hdapName${status.index }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="hdapValue${status.index }_1" />
+				</td>
+				<td class="value2_td">
+					<input type="text" name="hdapValue${status.index }_2" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="hdapIfShow${status.index }" name="hdapIfShow${status.index }" value="true" />
+					<input type="button" class="hdapIfShow_inp" value="显示" onclick="changeHDAPTrIfShow(${status.index },this)"/>
+				</td>
+			</tr>
+			</c:forEach>
 		</table>
 	</div>
 </div>
