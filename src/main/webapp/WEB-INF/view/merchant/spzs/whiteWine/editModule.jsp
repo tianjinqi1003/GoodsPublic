@@ -366,6 +366,16 @@ function previewHtmlGoodsSPZS(){
 			$("#preview_div #image1_div #image1_5_img").attr("src",image1_5_src);
 		}
 		
+		var trs=$("#preview_div #spxq_tab tr");
+		
+		for(var i=0;i<dSpxqIfShowArr.length;i++){
+			var tr=trs.eq(i+1);
+			if(dSpxqIfShowArr[i]=="true")
+				tr.css("display","table-row");
+			else
+				tr.css("display","none");
+		}
+		
 		var image2_1_src=disArr2[0];
 		if(image2_1_src==undefined||image2_1_src==""){
 			$("#preview_div #image2_div #image2_1_img").css("display","none");
