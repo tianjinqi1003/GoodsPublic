@@ -229,6 +229,42 @@ function previewHtmlGoodsSPZS(){
 				tds.eq(0).text(previewSPZS.spxqName6);
 				tds.eq(1).text(previewSPZS.spxqValue6);
 				
+				tr=trs.eq(7);
+				if(previewSPZS.spxqIfShow7)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName7);
+				tds.eq(1).text(previewSPZS.spxqValue7);
+				
+				tr=trs.eq(8);
+				if(previewSPZS.spxqIfShow8)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName8);
+				tds.eq(1).text(previewSPZS.spxqValue8);
+				
+				tr=trs.eq(9);
+				if(previewSPZS.spxqIfShow9)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName9);
+				tds.eq(1).text(previewSPZS.spxqValue9);
+				
+				tr=trs.eq(10);
+				if(previewSPZS.spxqIfShow10)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName10);
+				tds.eq(1).text(previewSPZS.spxqValue10);
+				
 				$("#preview_div #memo2_div").html(previewSPZS.memo2);
 				
 				var image2_1=previewSPZS.image2_1;
@@ -1349,6 +1385,38 @@ function goBack(){
 					</td>
 					<td class="value_td">
 						${requestScope.htmlGoodsSPZS.spxqValue6 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName7 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue7 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName8 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue8 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName9 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue9 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName10 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue10 }
 					</td>
 				</tr>
 			</table>

@@ -203,6 +203,60 @@ function previewHtmlGoodsSPZS(){
 				tds.eq(0).text(previewSPZS.spxqName4);
 				tds.eq(1).text(previewSPZS.spxqValue4);
 				
+				tr=trs.eq(5);
+				if(previewSPZS.spxqIfShow5)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName5);
+				tds.eq(1).text(previewSPZS.spxqValue5);
+				
+				tr=trs.eq(6);
+				if(previewSPZS.spxqIfShow6)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName6);
+				tds.eq(1).text(previewSPZS.spxqValue6);
+				
+				tr=trs.eq(7);
+				if(previewSPZS.spxqIfShow7)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName7);
+				tds.eq(1).text(previewSPZS.spxqValue7);
+				
+				tr=trs.eq(8);
+				if(previewSPZS.spxqIfShow8)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName8);
+				tds.eq(1).text(previewSPZS.spxqValue8);
+				
+				tr=trs.eq(9);
+				if(previewSPZS.spxqIfShow9)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName9);
+				tds.eq(1).text(previewSPZS.spxqValue9);
+				
+				tr=trs.eq(10);
+				if(previewSPZS.spxqIfShow10)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSPZS.spxqName10);
+				tds.eq(1).text(previewSPZS.spxqValue10);
+				
 				$("#preview_div #memo2_div").html(previewSPZS.memo2);
 				
 				var image2_1=previewSPZS.image2_1;
@@ -1001,6 +1055,54 @@ function goBack(){
 						${requestScope.htmlGoodsSPZS.spxqValue4 }
 					</td>
 				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName5 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue5 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName6 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue6 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName7 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue7 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName8 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue8 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName9 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue9 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsSPZS.spxqName10 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsSPZS.spxqValue10 }
+					</td>
+				</tr>
 			</table>
 		</div>
 		<div class="memo2_div" id="memo2_div">
@@ -1117,6 +1219,84 @@ function goBack(){
 				<td class="cz_td">
 					<input type="hidden" id="spxqIfShow4" name="spxqIfShow4" value="${requestScope.htmlGoodsSPZS.spxqIfShow4 }" />
 					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsSPZS.spxqIfShow4?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(4,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr5" height="50">
+				<td class="name_td">
+					<input type="text" name="spxqName5" value="${requestScope.htmlGoodsSPZS.spxqName5 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="spxqValue5" value="${requestScope.htmlGoodsSPZS.spxqValue5 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="spxqIfShow5" name="spxqIfShow5" value="${requestScope.htmlGoodsSPZS.spxqIfShow5 }" />
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsSPZS.spxqIfShow5?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(5,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr6" height="50">
+				<td class="name_td">
+					<input type="text" name="spxqName6" value="${requestScope.htmlGoodsSPZS.spxqName6 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="spxqValue6" value="${requestScope.htmlGoodsSPZS.spxqValue6 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="spxqIfShow6" name="spxqIfShow6" value="${requestScope.htmlGoodsSPZS.spxqIfShow6 }" />
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsSPZS.spxqIfShow6?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(6,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr7" height="50">
+				<td class="name_td">
+					<input type="text" name="spxqName7" value="${requestScope.htmlGoodsSPZS.spxqName7 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="spxqValue7" value="${requestScope.htmlGoodsSPZS.spxqValue7 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="spxqIfShow7" name="spxqIfShow7" value="${requestScope.htmlGoodsSPZS.spxqIfShow7 }" />
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsSPZS.spxqIfShow7?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(7,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr8" height="50">
+				<td class="name_td">
+					<input type="text" name="spxqName8" value="${requestScope.htmlGoodsSPZS.spxqName8 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="spxqValue8" value="${requestScope.htmlGoodsSPZS.spxqValue8 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="spxqIfShow8" name="spxqIfShow8" value="${requestScope.htmlGoodsSPZS.spxqIfShow8 }" />
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsSPZS.spxqIfShow8?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(8,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr9" height="50">
+				<td class="name_td">
+					<input type="text" name="spxqName9" value="${requestScope.htmlGoodsSPZS.spxqName9 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="spxqValue9" value="${requestScope.htmlGoodsSPZS.spxqValue9 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="spxqIfShow9" name="spxqIfShow9" value="${requestScope.htmlGoodsSPZS.spxqIfShow9 }" />
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsSPZS.spxqIfShow9?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(9,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr10" height="50">
+				<td class="name_td">
+					<input type="text" name="spxqName10" value="${requestScope.htmlGoodsSPZS.spxqName10 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="spxqValue10" value="${requestScope.htmlGoodsSPZS.spxqValue10 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="spxqIfShow10" name="spxqIfShow10" value="${requestScope.htmlGoodsSPZS.spxqIfShow10 }" />
+					<input type="button" class="spxqIfShow_inp" value="${requestScope.htmlGoodsSPZS.spxqIfShow10?'显示':'隐藏' }" onclick="changeSPXQTrIfShow(10,this)"/>
 				</td>
 			</tr>
 		</table>
