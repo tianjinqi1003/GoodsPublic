@@ -2188,6 +2188,51 @@
 		<if test="spxqIfShow10!=null">
 			spxqIfShow10=#{spxqIfShow10},
 		</if>
+		<if test="spxqName11!=null">
+			spxqName11=#{spxqName11},
+		</if>
+		<if test="spxqValue11!=null">
+			spxqValue11=#{spxqValue11},
+		</if>
+		<if test="spxqIfShow11!=null">
+			spxqIfShow11=#{spxqIfShow11},
+		</if>
+		<if test="spxqName12!=null">
+			spxqName12=#{spxqName12},
+		</if>
+		<if test="spxqValue12!=null">
+			spxqValue12=#{spxqValue12},
+		</if>
+		<if test="spxqIfShow12!=null">
+			spxqIfShow12=#{spxqIfShow12},
+		</if>
+		<if test="spxqName13!=null">
+			spxqName13=#{spxqName13},
+		</if>
+		<if test="spxqValue13!=null">
+			spxqValue13=#{spxqValue13},
+		</if>
+		<if test="spxqIfShow13!=null">
+			spxqIfShow13=#{spxqIfShow13},
+		</if>
+		<if test="spxqName14!=null">
+			spxqName14=#{spxqName14},
+		</if>
+		<if test="spxqValue14!=null">
+			spxqValue14=#{spxqValue14},
+		</if>
+		<if test="spxqIfShow14!=null">
+			spxqIfShow14=#{spxqIfShow14},
+		</if>
+		<if test="spxqName15!=null">
+			spxqName15=#{spxqName15},
+		</if>
+		<if test="spxqValue15!=null">
+			spxqValue15=#{spxqValue15},
+		</if>
+		<if test="spxqIfShow15!=null">
+			spxqIfShow15=#{spxqIfShow15},
+		</if>
 			image1_1=#{image1_1},
 			image1_2=#{image1_2},
 			image1_3=#{image1_3},
