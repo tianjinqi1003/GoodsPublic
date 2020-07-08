@@ -142,6 +142,56 @@
 				</td>
 			</tr>
 			</c:if>
+			<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow11 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsSPZS.spxqName11 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsSPZS.spxqValue11 }
+				</td>
+			</tr>
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow12 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsSPZS.spxqName12 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsSPZS.spxqValue12 }
+				</td>
+			</tr>
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow13 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsSPZS.spxqName13 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsSPZS.spxqValue13 }
+				</td>
+			</tr>
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow14 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsSPZS.spxqName14 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsSPZS.spxqValue14 }
+				</td>
+			</tr>
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsSPZS.spxqIfShow15 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsSPZS.spxqName15 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsSPZS.spxqValue15 }
+				</td>
+			</tr>
+			</c:if>
 		</table>
 	</div>
 	<div class="memo2_div">

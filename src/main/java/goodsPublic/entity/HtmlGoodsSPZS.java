@@ -40,6 +40,21 @@ public class HtmlGoodsSPZS implements Serializable {
 	private String spxqName10;
 	private String spxqValue10;
 	private Boolean spxqIfShow10=false;
+	private String spxqName11;
+	private String spxqValue11;
+	private Boolean spxqIfShow11=false;
+	private String spxqName12;
+	private String spxqValue12;
+	private Boolean spxqIfShow12=false;
+	private String spxqName13;
+	private String spxqValue13;
+	private Boolean spxqIfShow13=false;
+	private String spxqName14;
+	private String spxqValue14;
+	private Boolean spxqIfShow14=false;
+	private String spxqName15;
+	private String spxqValue15;
+	private Boolean spxqIfShow15=false;
 	private String image1_1;
 	private String image1_2;
 	private String image1_3;
@@ -262,6 +277,96 @@ public class HtmlGoodsSPZS implements Serializable {
 	}
 	public void setSpxqIfShow10(Boolean spxqIfShow10) {
 		this.spxqIfShow10 = spxqIfShow10;
+	}
+	public String getSpxqName11() {
+		return spxqName11;
+	}
+	public void setSpxqName11(String spxqName11) {
+		this.spxqName11 = spxqName11;
+	}
+	public String getSpxqValue11() {
+		return spxqValue11;
+	}
+	public void setSpxqValue11(String spxqValue11) {
+		this.spxqValue11 = spxqValue11;
+	}
+	public Boolean getSpxqIfShow11() {
+		return spxqIfShow11;
+	}
+	public void setSpxqIfShow11(Boolean spxqIfShow11) {
+		this.spxqIfShow11 = spxqIfShow11;
+	}
+	public String getSpxqName12() {
+		return spxqName12;
+	}
+	public void setSpxqName12(String spxqName12) {
+		this.spxqName12 = spxqName12;
+	}
+	public String getSpxqValue12() {
+		return spxqValue12;
+	}
+	public void setSpxqValue12(String spxqValue12) {
+		this.spxqValue12 = spxqValue12;
+	}
+	public Boolean getSpxqIfShow12() {
+		return spxqIfShow12;
+	}
+	public void setSpxqIfShow12(Boolean spxqIfShow12) {
+		this.spxqIfShow12 = spxqIfShow12;
+	}
+	public String getSpxqName13() {
+		return spxqName13;
+	}
+	public void setSpxqName13(String spxqName13) {
+		this.spxqName13 = spxqName13;
+	}
+	public String getSpxqValue13() {
+		return spxqValue13;
+	}
+	public void setSpxqValue13(String spxqValue13) {
+		this.spxqValue13 = spxqValue13;
+	}
+	public Boolean getSpxqIfShow13() {
+		return spxqIfShow13;
+	}
+	public void setSpxqIfShow13(Boolean spxqIfShow13) {
+		this.spxqIfShow13 = spxqIfShow13;
+	}
+	public String getSpxqName14() {
+		return spxqName14;
+	}
+	public void setSpxqName14(String spxqName14) {
+		this.spxqName14 = spxqName14;
+	}
+	public String getSpxqValue14() {
+		return spxqValue14;
+	}
+	public void setSpxqValue14(String spxqValue14) {
+		this.spxqValue14 = spxqValue14;
+	}
+	public Boolean getSpxqIfShow14() {
+		return spxqIfShow14;
+	}
+	public void setSpxqIfShow14(Boolean spxqIfShow14) {
+		this.spxqIfShow14 = spxqIfShow14;
+	}
+	public String getSpxqName15() {
+		return spxqName15;
+	}
+	public void setSpxqName15(String spxqName15) {
+		this.spxqName15 = spxqName15;
+	}
+	public String getSpxqValue15() {
+		return spxqValue15;
+	}
+	public void setSpxqValue15(String spxqValue15) {
+		this.spxqValue15 = spxqValue15;
+	}
+	public Boolean getSpxqIfShow15() {
+		return spxqIfShow15;
+	}
+	public void setSpxqIfShow15(Boolean spxqIfShow15) {
+		this.spxqIfShow15 = spxqIfShow15;
 	}
 	public String getImage1_1() {
 		return image1_1;
