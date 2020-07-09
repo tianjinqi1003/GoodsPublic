@@ -15,7 +15,7 @@ $(function(){
 	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
 	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
 
-    //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+    //这里必须延迟1s，等图片加载完再重新设定右边div位置
     setTimeout(function(){
     	resetDivPosition();
     },"1000")
@@ -891,6 +891,20 @@ function chooseExcel(){
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow${status.index+1 }" name="ryxxIfShow${status.index+1 }" value="true" />
 					<input type="button" class="ryxxIfShow_inp" value="显示" onclick="changeRYXXTrIfShow(${status.index+1 },this)"/>
+				</td>
+			</tr>
+			</c:forEach>
+			<c:forEach begin="11" end="15" varStatus="status">
+			<tr class="item_tr" id="tr${status.index }" height="50">
+				<td class="name_td">
+					<input type="text" name="ryxxName${status.index }" value="字段名未设置" size="10" />
+				</td>
+				<td class="value_td">
+					默认显示Excel导入内容
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="ryxxIfShow${status.index }" name="ryxxIfShow${status.index }" value="true" />
+					<input type="button" class="ryxxIfShow_inp" value="显示" onclick="changeRYXXTrIfShow(${status.index },this)"/>
 				</td>
 			</tr>
 			</c:forEach>

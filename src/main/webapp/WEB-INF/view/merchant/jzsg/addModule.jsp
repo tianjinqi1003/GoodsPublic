@@ -419,6 +419,20 @@ function checkIfPaid(){
 				</td>
 			</tr>
 			</c:forEach>
+			<c:forEach begin="11" end="15" varStatus="status">
+			<tr class="item_tr" id="tr${status.index }" height="50">
+				<td class="name_td">
+					<input type="text" name="ryxxName${status.index }" value="${ryxx.name }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="ryxxValue${status.index }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="ryxxIfShow${status.index }" name="ryxxIfShow${status.index }" value="true" />
+					<input type="button" class="ryxxIfShow_inp" value="显示" onclick="changeRYXXTrIfShow(${status.index },this)"/>
+				</td>
+			</tr>
+			</c:forEach>
 		</table>
 	</div>
 	<div class="image2_div" id="image2_div">

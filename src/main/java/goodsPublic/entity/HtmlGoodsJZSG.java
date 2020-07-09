@@ -40,6 +40,21 @@ public class HtmlGoodsJZSG implements Serializable {
 	private String ryxxName10;
 	private String ryxxValue10;
 	private Boolean ryxxIfShow10;
+	private String ryxxName11;
+	private String ryxxValue11;
+	private Boolean ryxxIfShow11;
+	private String ryxxName12;
+	private String ryxxValue12;
+	private Boolean ryxxIfShow12;
+	private String ryxxName13;
+	private String ryxxValue13;
+	private Boolean ryxxIfShow13;
+	private String ryxxName14;
+	private String ryxxValue14;
+	private Boolean ryxxIfShow14;
+	private String ryxxName15;
+	private String ryxxValue15;
+	private Boolean ryxxIfShow15;
 	private String image1_1;
 	private String image1_2;
 	private String image1_3;
@@ -243,6 +258,96 @@ public class HtmlGoodsJZSG implements Serializable {
 	}
 	public void setRyxxIfShow10(Boolean ryxxIfShow10) {
 		this.ryxxIfShow10 = ryxxIfShow10;
+	}
+	public String getRyxxName11() {
+		return ryxxName11;
+	}
+	public void setRyxxName11(String ryxxName11) {
+		this.ryxxName11 = ryxxName11;
+	}
+	public String getRyxxValue11() {
+		return ryxxValue11;
+	}
+	public void setRyxxValue11(String ryxxValue11) {
+		this.ryxxValue11 = ryxxValue11;
+	}
+	public Boolean getRyxxIfShow11() {
+		return ryxxIfShow11;
+	}
+	public void setRyxxIfShow11(Boolean ryxxIfShow11) {
+		this.ryxxIfShow11 = ryxxIfShow11;
+	}
+	public String getRyxxName12() {
+		return ryxxName12;
+	}
+	public void setRyxxName12(String ryxxName12) {
+		this.ryxxName12 = ryxxName12;
+	}
+	public String getRyxxValue12() {
+		return ryxxValue12;
+	}
+	public void setRyxxValue12(String ryxxValue12) {
+		this.ryxxValue12 = ryxxValue12;
+	}
+	public Boolean getRyxxIfShow12() {
+		return ryxxIfShow12;
+	}
+	public void setRyxxIfShow12(Boolean ryxxIfShow12) {
+		this.ryxxIfShow12 = ryxxIfShow12;
+	}
+	public String getRyxxName13() {
+		return ryxxName13;
+	}
+	public void setRyxxName13(String ryxxName13) {
+		this.ryxxName13 = ryxxName13;
+	}
+	public String getRyxxValue13() {
+		return ryxxValue13;
+	}
+	public void setRyxxValue13(String ryxxValue13) {
+		this.ryxxValue13 = ryxxValue13;
+	}
+	public Boolean getRyxxIfShow13() {
+		return ryxxIfShow13;
+	}
+	public void setRyxxIfShow13(Boolean ryxxIfShow13) {
+		this.ryxxIfShow13 = ryxxIfShow13;
+	}
+	public String getRyxxName14() {
+		return ryxxName14;
+	}
+	public void setRyxxName14(String ryxxName14) {
+		this.ryxxName14 = ryxxName14;
+	}
+	public String getRyxxValue14() {
+		return ryxxValue14;
+	}
+	public void setRyxxValue14(String ryxxValue14) {
+		this.ryxxValue14 = ryxxValue14;
+	}
+	public Boolean getRyxxIfShow14() {
+		return ryxxIfShow14;
+	}
+	public void setRyxxIfShow14(Boolean ryxxIfShow14) {
+		this.ryxxIfShow14 = ryxxIfShow14;
+	}
+	public String getRyxxName15() {
+		return ryxxName15;
+	}
+	public void setRyxxName15(String ryxxName15) {
+		this.ryxxName15 = ryxxName15;
+	}
+	public String getRyxxValue15() {
+		return ryxxValue15;
+	}
+	public void setRyxxValue15(String ryxxValue15) {
+		this.ryxxValue15 = ryxxValue15;
+	}
+	public Boolean getRyxxIfShow15() {
+		return ryxxIfShow15;
+	}
+	public void setRyxxIfShow15(Boolean ryxxIfShow15) {
+		this.ryxxIfShow15 = ryxxIfShow15;
 	}
 	public String getImage1_1() {
 		return image1_1;

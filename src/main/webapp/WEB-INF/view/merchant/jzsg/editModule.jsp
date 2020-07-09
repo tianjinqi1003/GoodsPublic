@@ -35,12 +35,11 @@ function initDefaultHtmlVal(){
 		disArr1[i]=$("#image1_div #list_div img[id^='img']").eq(i).attr("src");
 		console.log("reset"+i+"==="+disArr1[i]);
 	}
-	console.log(disArr1);
 	$("#ryxx_tab input[id^='ryxxIfShow']").each(function(i){
 		dRyxxIfShowArr[i]=$(this).val();
-		var spxqName=$("#ryxx_tab input[name^='spxqName']").eq(i).val();
+		var spxqName=$("#ryxx_tab input[name^='ryxxName']").eq(i).val();
 		dRyxxNameArr[i]=spxqName;
-		var spxqValue=$("#ryxx_tab input[name^='spxqValue']").eq(i).val();
+		var spxqValue=$("#ryxx_tab input[name^='ryxxValue']").eq(i).val();
 		//console.log("spxqValue==="+spxqValue);
 		dRyxxValueArr[i]=spxqValue;
 	});
@@ -197,6 +196,51 @@ function previewhtmlGoodsJZSG(){
 				tds.eq(0).text(previewJZSG.ryxxName10);
 				tds.eq(1).text(previewJZSG.ryxxValue10);
 				
+				tr=trs.eq(11);
+				if(previewJZSG.ryxxIfShow11)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewJZSG.ryxxName11);
+				tds.eq(1).text(previewJZSG.ryxxValue11);
+				
+				tr=trs.eq(12);
+				if(previewJZSG.ryxxIfShow12)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewJZSG.ryxxName12);
+				tds.eq(1).text(previewJZSG.ryxxValue12);
+				
+				tr=trs.eq(13);
+				if(previewJZSG.ryxxIfShow13)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewJZSG.ryxxName13);
+				tds.eq(1).text(previewJZSG.ryxxValue13);
+				
+				tr=trs.eq(14);
+				if(previewJZSG.ryxxIfShow14)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewJZSG.ryxxName14);
+				tds.eq(1).text(previewJZSG.ryxxValue14);
+				
+				tr=trs.eq(15);
+				if(previewJZSG.ryxxIfShow15)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewJZSG.ryxxName15);
+				tds.eq(1).text(previewJZSG.ryxxValue15);
+				
 				var image2_1=previewJZSG.image2_1;
 				if(image2_1==null){
 					$("#preview_div #image2_1_img").css("display","none");
@@ -262,6 +306,16 @@ function previewhtmlGoodsJZSG(){
 		else{
 			$("#preview_div #image1_div #image1_3_img").css("display","block");
 			$("#preview_div #image1_div #image1_3_img").attr("src",image1_3_src);
+		}
+		
+		var trs=$("#preview_div #ryxx_tab tr");
+		
+		for(var i=0;i<dRyxxIfShowArr.length;i++){
+			var tr=trs.eq(i+1);
+			if(dRyxxIfShowArr[i]=="true")
+				tr.css("display","table-row");
+			else
+				tr.css("display","none");
 		}
 		
 		var image2_1_src=disArr2[0];
@@ -861,6 +915,46 @@ function goBack(){
 						${requestScope.htmlGoodsJZSG.ryxxValue10 }
 					</td>
 				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJZSG.ryxxName11 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJZSG.ryxxValue11 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJZSG.ryxxName12 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJZSG.ryxxValue12 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJZSG.ryxxName13 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJZSG.ryxxValue13 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJZSG.ryxxName14 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJZSG.ryxxValue14 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsJZSG.ryxxName15 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsJZSG.ryxxValue15 }
+					</td>
+				</tr>
 			</table>
 		</div>
 		<div class="image2_div" id="image2_div">
@@ -1036,6 +1130,71 @@ function goBack(){
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow10" name="ryxxIfShow10" value="${requestScope.htmlGoodsJZSG.ryxxIfShow10 }" />
 					<input type="button" class="ryxxIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow10?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(10,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr11" height="50">
+				<td class="name_td">
+					<input type="text" name="ryxxName11" value="${requestScope.htmlGoodsJZSG.ryxxName11 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="ryxxValue11" value="${requestScope.htmlGoodsJZSG.ryxxValue11 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="ryxxIfShow11" name="ryxxIfShow11" value="${requestScope.htmlGoodsJZSG.ryxxIfShow11 }" />
+					<input type="button" class="ryxxIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow11?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(11,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr12" height="50">
+				<td class="name_td">
+					<input type="text" name="ryxxName12" value="${requestScope.htmlGoodsJZSG.ryxxName12 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="ryxxValue12" value="${requestScope.htmlGoodsJZSG.ryxxValue12 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="ryxxIfShow12" name="ryxxIfShow12" value="${requestScope.htmlGoodsJZSG.ryxxIfShow12 }" />
+					<input type="button" class="ryxxIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow12?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(12,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr13" height="50">
+				<td class="name_td">
+					<input type="text" name="ryxxName13" value="${requestScope.htmlGoodsJZSG.ryxxName13 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="ryxxValue13" value="${requestScope.htmlGoodsJZSG.ryxxValue13 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="ryxxIfShow13" name="ryxxIfShow13" value="${requestScope.htmlGoodsJZSG.ryxxIfShow13 }" />
+					<input type="button" class="ryxxIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow13?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(13,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr14" height="50">
+				<td class="name_td">
+					<input type="text" name="ryxxName14" value="${requestScope.htmlGoodsJZSG.ryxxName14 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="ryxxValue14" value="${requestScope.htmlGoodsJZSG.ryxxValue14 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="ryxxIfShow14" name="ryxxIfShow14" value="${requestScope.htmlGoodsJZSG.ryxxIfShow14 }" />
+					<input type="button" class="ryxxIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow14?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(14,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr15" height="50">
+				<td class="name_td">
+					<input type="text" name="ryxxName15" value="${requestScope.htmlGoodsJZSG.ryxxName15 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="ryxxValue15" value="${requestScope.htmlGoodsJZSG.ryxxValue15 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="ryxxIfShow15" name="ryxxIfShow15" value="${requestScope.htmlGoodsJZSG.ryxxIfShow15 }" />
+					<input type="button" class="ryxxIfShow_inp" value="${requestScope.htmlGoodsJZSG.ryxxIfShow15?'显示':'隐藏' }" onclick="changeRYXXTrIfShow(15,this)"/>
 				</td>
 			</tr>
 			

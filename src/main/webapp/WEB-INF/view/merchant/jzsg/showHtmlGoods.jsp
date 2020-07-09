@@ -134,6 +134,56 @@ $(function(){
 				</td>
 			</tr>
 			</c:if>
+			<c:if test="${requestScope.htmlGoodsJZSG.ryxxIfShow11 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsJZSG.ryxxName11 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsJZSG.ryxxValue11 }
+				</td>
+			</tr>
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsJZSG.ryxxIfShow12 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsJZSG.ryxxName12 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsJZSG.ryxxValue12 }
+				</td>
+			</tr>
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsJZSG.ryxxIfShow13 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsJZSG.ryxxName13 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsJZSG.ryxxValue13 }
+				</td>
+			</tr>
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsJZSG.ryxxIfShow14 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsJZSG.ryxxName14 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsJZSG.ryxxValue14 }
+				</td>
+			</tr>
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsJZSG.ryxxIfShow15 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsJZSG.ryxxName15 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsJZSG.ryxxValue15 }
+				</td>
+			</tr>
+			</c:if>
 		</table>
 	</div>
 	<div class="image2_div" id="image2_div">
