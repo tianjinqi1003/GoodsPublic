@@ -473,7 +473,7 @@ function checkIfPaid(){
 				</td>
 			</tr>
 			</c:forEach>
-			<c:forEach begin="6" end="10" varStatus="status">
+			<c:forEach begin="6" end="15" varStatus="status">
 			<tr class="item_tr" id="tr${status.index }" height="50">
 				<td class="name_td">
 					<input type="text" name="spxqName${status.index }" size="10" />
