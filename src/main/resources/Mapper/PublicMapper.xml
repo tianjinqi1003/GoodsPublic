@@ -1403,6 +1403,66 @@
 			<if test="hdapIfShow10!=null">
 				hdapIfShow10,
 			</if>
+			<if test="hdapName11!=null">
+				hdapName11,
+			</if>
+			<if test="hdapValue11_1!=null">
+				hdapValue11_1,
+			</if>
+			<if test="hdapValue11_2!=null">
+				hdapValue11_2,
+			</if>
+			<if test="hdapIfShow11!=null">
+				hdapIfShow11,
+			</if>
+			<if test="hdapName12!=null">
+				hdapName12,
+			</if>
+			<if test="hdapValue12_1!=null">
+				hdapValue12_1,
+			</if>
+			<if test="hdapValue12_2!=null">
+				hdapValue12_2,
+			</if>
+			<if test="hdapIfShow12!=null">
+				hdapIfShow12,
+			</if>
+			<if test="hdapName13!=null">
+				hdapName13,
+			</if>
+			<if test="hdapValue13_1!=null">
+				hdapValue13_1,
+			</if>
+			<if test="hdapValue13_2!=null">
+				hdapValue13_2,
+			</if>
+			<if test="hdapIfShow13!=null">
+				hdapIfShow13,
+			</if>
+			<if test="hdapName14!=null">
+				hdapName14,
+			</if>
+			<if test="hdapValue14_1!=null">
+				hdapValue14_1,
+			</if>
+			<if test="hdapValue14_2!=null">
+				hdapValue14_2,
+			</if>
+			<if test="hdapIfShow14!=null">
+				hdapIfShow14,
+			</if>
+			<if test="hdapName15!=null">
+				hdapName15,
+			</if>
+			<if test="hdapValue15_1!=null">
+				hdapValue15_1,
+			</if>
+			<if test="hdapValue15_2!=null">
+				hdapValue15_2,
+			</if>
+			<if test="hdapIfShow15!=null">
+				hdapIfShow15,
+			</if>
 			<if test="qrCode!=null">
 				qrCode,
 			</if>
@@ -1556,6 +1616,66 @@
 			</if>
 			<if test="hdapIfShow10!=null">
 				#{hdapIfShow10},
+			</if>
+			<if test="hdapName11!=null">
+				#{hdapName11},
+			</if>
+			<if test="hdapValue11_1!=null">
+				#{hdapValue11_1},
+			</if>
+			<if test="hdapValue11_2!=null">
+				#{hdapValue11_2},
+			</if>
+			<if test="hdapIfShow11!=null">
+				#{hdapIfShow11},
+			</if>
+			<if test="hdapName12!=null">
+				#{hdapName12},
+			</if>
+			<if test="hdapValue12_1!=null">
+				#{hdapValue12_1},
+			</if>
+			<if test="hdapValue12_2!=null">
+				#{hdapValue12_2},
+			</if>
+			<if test="hdapIfShow12!=null">
+				#{hdapIfShow12},
+			</if>
+			<if test="hdapName13!=null">
+				#{hdapName13},
+			</if>
+			<if test="hdapValue13_1!=null">
+				#{hdapValue13_1},
+			</if>
+			<if test="hdapValue13_2!=null">
+				#{hdapValue13_2},
+			</if>
+			<if test="hdapIfShow13!=null">
+				#{hdapIfShow13},
+			</if>
+			<if test="hdapName14!=null">
+				#{hdapName14},
+			</if>
+			<if test="hdapValue14_1!=null">
+				#{hdapValue14_1},
+			</if>
+			<if test="hdapValue14_2!=null">
+				#{hdapValue14_2},
+			</if>
+			<if test="hdapIfShow14!=null">
+				#{hdapIfShow14},
+			</if>
+			<if test="hdapName15!=null">
+				#{hdapName15},
+			</if>
+			<if test="hdapValue15_1!=null">
+				#{hdapValue15_1},
+			</if>
+			<if test="hdapValue15_2!=null">
+				#{hdapValue15_2},
+			</if>
+			<if test="hdapIfShow15!=null">
+				#{hdapIfShow15},
 			</if>
 			<if test="qrCode!=null">
 				#{qrCode},
@@ -2673,6 +2793,66 @@
 		</if>
 		<if test="hdapIfShow10!=null">
 			hdapIfShow10=#{hdapIfShow10},
+		</if>
+		<if test="hdapName11!=null">
+			hdapName11=#{hdapName11},
+		</if>
+		<if test="hdapValue11_1!=null">
+			hdapValue11_1=#{hdapValue11_1},
+		</if>
+		<if test="hdapValue11_2!=null">
+			hdapValue11_2=#{hdapValue11_2},
+		</if>
+		<if test="hdapIfShow11!=null">
+			hdapIfShow11=#{hdapIfShow11},
+		</if>
+		<if test="hdapName12!=null">
+			hdapName12=#{hdapName12},
+		</if>
+		<if test="hdapValue12_1!=null">
+			hdapValue12_1=#{hdapValue12_1},
+		</if>
+		<if test="hdapValue12_2!=null">
+			hdapValue12_2=#{hdapValue12_2},
+		</if>
+		<if test="hdapIfShow12!=null">
+			hdapIfShow12=#{hdapIfShow12},
+		</if>
+		<if test="hdapName13!=null">
+			hdapName13=#{hdapName13},
+		</if>
+		<if test="hdapValue13_1!=null">
+			hdapValue13_1=#{hdapValue13_1},
+		</if>
+		<if test="hdapValue13_2!=null">
+			hdapValue13_2=#{hdapValue13_2},
+		</if>
+		<if test="hdapIfShow13!=null">
+			hdapIfShow13=#{hdapIfShow13},
+		</if>
+		<if test="hdapName14!=null">
+			hdapName14=#{hdapName14},
+		</if>
+		<if test="hdapValue14_1!=null">
+			hdapValue14_1=#{hdapValue14_1},
+		</if>
+		<if test="hdapValue14_2!=null">
+			hdapValue14_2=#{hdapValue14_2},
+		</if>
+		<if test="hdapIfShow14!=null">
+			hdapIfShow14=#{hdapIfShow14},
+		</if>
+		<if test="hdapName15!=null">
+			hdapName15=#{hdapName15},
+		</if>
+		<if test="hdapValue15_1!=null">
+			hdapValue15_1=#{hdapValue15_1},
+		</if>
+		<if test="hdapValue15_2!=null">
+			hdapValue15_2=#{hdapValue15_2},
+		</if>
+		<if test="hdapIfShow15!=null">
+			hdapIfShow15=#{hdapIfShow15},
 		</if>
 		gmtModified=now()
 		where id=#{id}

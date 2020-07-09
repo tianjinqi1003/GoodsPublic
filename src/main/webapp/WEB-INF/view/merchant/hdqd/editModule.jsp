@@ -252,6 +252,56 @@ function previewHtmlGoodsHDQD(){
 				tds.eq(1).text(previewHDQD.hdapValue10_1);
 				tds.eq(2).text(previewHDQD.hdapValue10_2);
 				
+				tr=trs.eq(10);
+				if(previewHDQD.hdapIfShow11)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewHDQD.hdapName11);
+				tds.eq(1).text(previewHDQD.hdapValue11_1);
+				tds.eq(2).text(previewHDQD.hdapValue11_2);
+				
+				tr=trs.eq(11);
+				if(previewHDQD.hdapIfShow12)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewHDQD.hdapName12);
+				tds.eq(1).text(previewHDQD.hdapValue12_1);
+				tds.eq(2).text(previewHDQD.hdapValue12_2);
+				
+				tr=trs.eq(12);
+				if(previewHDQD.hdapIfShow13)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewHDQD.hdapName13);
+				tds.eq(1).text(previewHDQD.hdapValue13_1);
+				tds.eq(2).text(previewHDQD.hdapValue13_2);
+				
+				tr=trs.eq(13);
+				if(previewHDQD.hdapIfShow14)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewHDQD.hdapName14);
+				tds.eq(1).text(previewHDQD.hdapValue14_1);
+				tds.eq(2).text(previewHDQD.hdapValue14_2);
+				
+				tr=trs.eq(14);
+				if(previewHDQD.hdapIfShow15)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewHDQD.hdapName15);
+				tds.eq(1).text(previewHDQD.hdapValue15_1);
+				tds.eq(2).text(previewHDQD.hdapValue15_2);
+				
 				initDefaultHtmlVal();
 			}
 		,"json");
@@ -784,6 +834,61 @@ function goBack(){
 						${requestScope.htmlGoodsHDQD.hdapValue10_2 }
 					</td>
 				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsHDQD.hdapName11 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsHDQD.hdapValue11_1 }
+					</td>
+					<td class="value2_td">
+						${requestScope.htmlGoodsHDQD.hdapValue11_2 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsHDQD.hdapName12 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsHDQD.hdapValue12_1 }
+					</td>
+					<td class="value2_td">
+						${requestScope.htmlGoodsHDQD.hdapValue12_2 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsHDQD.hdapName13 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsHDQD.hdapValue13_1 }
+					</td>
+					<td class="value2_td">
+						${requestScope.htmlGoodsHDQD.hdapValue13_2 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsHDQD.hdapName14 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsHDQD.hdapValue14_1 }
+					</td>
+					<td class="value2_td">
+						${requestScope.htmlGoodsHDQD.hdapValue14_2 }
+					</td>
+				</tr>
+				<tr height="50">
+					<td class="name_td">
+						${requestScope.htmlGoodsHDQD.hdapName15 }
+					</td>
+					<td class="value_td">
+						${requestScope.htmlGoodsHDQD.hdapValue15_1 }
+					</td>
+					<td class="value2_td">
+						${requestScope.htmlGoodsHDQD.hdapValue15_2 }
+					</td>
+				</tr>
 			</table>
 		</div>
 		<div style="width: 100%;height:40px;"></div>
@@ -993,6 +1098,86 @@ function goBack(){
 				<td class="cz_td">
 					<input type="hidden" id="hdapIfShow10" name="hdapIfShow10" value="${requestScope.htmlGoodsHDQD.hdapIfShow10 }" />
 					<input type="button" class="hdapIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow10?'显示':'隐藏' }" onclick="changeHdapTrIfShow(10,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr11" height="50">
+				<td class="name_td">
+					<input type="text" name="hdapName11" value="${requestScope.htmlGoodsHDQD.hdapName11 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="hdapValue11_1" value="${requestScope.htmlGoodsHDQD.hdapValue11_1 }" />
+				</td>
+				<td class="value2_td">
+					<input type="text" name="hdapValue11_2" value="${requestScope.htmlGoodsHDQD.hdapValue11_2 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="hdapIfShow11" name="hdapIfShow11" value="${requestScope.htmlGoodsHDQD.hdapIfShow11 }" />
+					<input type="button" class="hdapIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow11?'显示':'隐藏' }" onclick="changeHdapTrIfShow(11,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr12" height="50">
+				<td class="name_td">
+					<input type="text" name="hdapName12" value="${requestScope.htmlGoodsHDQD.hdapName12 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="hdapValue12_1" value="${requestScope.htmlGoodsHDQD.hdapValue12_1 }" />
+				</td>
+				<td class="value2_td">
+					<input type="text" name="hdapValue12_2" value="${requestScope.htmlGoodsHDQD.hdapValue12_2 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="hdapIfShow12" name="hdapIfShow12" value="${requestScope.htmlGoodsHDQD.hdapIfShow12 }" />
+					<input type="button" class="hdapIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow12?'显示':'隐藏' }" onclick="changeHdapTrIfShow(12,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr13" height="50">
+				<td class="name_td">
+					<input type="text" name="hdapName13" value="${requestScope.htmlGoodsHDQD.hdapName13 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="hdapValue13_1" value="${requestScope.htmlGoodsHDQD.hdapValue13_1 }" />
+				</td>
+				<td class="value2_td">
+					<input type="text" name="hdapValue13_2" value="${requestScope.htmlGoodsHDQD.hdapValue13_2 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="hdapIfShow13" name="hdapIfShow13" value="${requestScope.htmlGoodsHDQD.hdapIfShow13 }" />
+					<input type="button" class="hdapIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow13?'显示':'隐藏' }" onclick="changeHdapTrIfShow(13,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr14" height="50">
+				<td class="name_td">
+					<input type="text" name="hdapName14" value="${requestScope.htmlGoodsHDQD.hdapName14 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="hdapValue14_1" value="${requestScope.htmlGoodsHDQD.hdapValue14_1 }" />
+				</td>
+				<td class="value2_td">
+					<input type="text" name="hdapValue14_2" value="${requestScope.htmlGoodsHDQD.hdapValue14_2 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="hdapIfShow14" name="hdapIfShow14" value="${requestScope.htmlGoodsHDQD.hdapIfShow14 }" />
+					<input type="button" class="hdapIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow14?'显示':'隐藏' }" onclick="changeHdapTrIfShow(14,this)"/>
+				</td>
+			</tr>
+			
+			<tr class="item_tr" id="tr15" height="50">
+				<td class="name_td">
+					<input type="text" name="hdapName15" value="${requestScope.htmlGoodsHDQD.hdapName15 }" size="10" />
+				</td>
+				<td class="value_td">
+					<input type="text" name="hdapValue15_1" value="${requestScope.htmlGoodsHDQD.hdapValue15_1 }" />
+				</td>
+				<td class="value2_td">
+					<input type="text" name="hdapValue15_2" value="${requestScope.htmlGoodsHDQD.hdapValue15_2 }" />
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="hdapIfShow15" name="hdapIfShow15" value="${requestScope.htmlGoodsHDQD.hdapIfShow15 }" />
+					<input type="button" class="hdapIfShow_inp" value="${requestScope.htmlGoodsHDQD.hdapIfShow14?'显示':'隐藏' }" onclick="changeHdapTrIfShow(15,this)"/>
 				</td>
 			</tr>
 			

@@ -168,6 +168,71 @@ $(function(){
 				</td>
 			</tr>
 			</c:if>
+			<c:if test="${requestScope.htmlGoodsHDQD.hdapIfShow11 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsHDQD.hdapName11 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsHDQD.hdapValue11_1 }
+				</td>
+				<td class="value2_td">
+					${requestScope.htmlGoodsHDQD.hdapValue11_2 }
+				</td>
+			</tr>
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsHDQD.hdapIfShow12 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsHDQD.hdapName12 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsHDQD.hdapValue12_1 }
+				</td>
+				<td class="value2_td">
+					${requestScope.htmlGoodsHDQD.hdapValue12_2 }
+				</td>
+			</tr>
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsHDQD.hdapIfShow13 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsHDQD.hdapName13 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsHDQD.hdapValue13_1 }
+				</td>
+				<td class="value2_td">
+					${requestScope.htmlGoodsHDQD.hdapValue13_2 }
+				</td>
+			</tr>
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsHDQD.hdapIfShow14 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsHDQD.hdapName14 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsHDQD.hdapValue14_1 }
+				</td>
+				<td class="value2_td">
+					${requestScope.htmlGoodsHDQD.hdapValue14_2 }
+				</td>
+			</tr>
+			</c:if>
+			<c:if test="${requestScope.htmlGoodsHDQD.hdapIfShow15 }">
+			<tr height="50">
+				<td class="name_td">
+					${requestScope.htmlGoodsHDQD.hdapName15 }
+				</td>
+				<td class="value_td">
+					${requestScope.htmlGoodsHDQD.hdapValue15_1 }
+				</td>
+				<td class="value2_td">
+					${requestScope.htmlGoodsHDQD.hdapValue15_2 }
+				</td>
+			</tr>
+			</c:if>
 		</table>
 	</div>
 </div>

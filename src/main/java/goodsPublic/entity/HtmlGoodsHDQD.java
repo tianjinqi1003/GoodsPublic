@@ -56,6 +56,26 @@ public class HtmlGoodsHDQD implements Serializable {
 	private String hdapValue10_1;
 	private String hdapValue10_2;
 	private Boolean hdapIfShow10=false;
+	private String hdapName11;
+	private String hdapValue11_1;
+	private String hdapValue11_2;
+	private Boolean hdapIfShow11=false;
+	private String hdapName12;
+	private String hdapValue12_1;
+	private String hdapValue12_2;
+	private Boolean hdapIfShow12=false;
+	private String hdapName13;
+	private String hdapValue13_1;
+	private String hdapValue13_2;
+	private Boolean hdapIfShow13=false;
+	private String hdapName14;
+	private String hdapValue14_1;
+	private String hdapValue14_2;
+	private Boolean hdapIfShow14=false;
+	private String hdapName15;
+	private String hdapValue15_1;
+	private String hdapValue15_2;
+	private Boolean hdapIfShow15=false;
 	private String qrCode;
 	private String gmtCreate;
 	private String gmtModified;
@@ -348,6 +368,126 @@ public class HtmlGoodsHDQD implements Serializable {
 	}
 	public void setHdapIfShow10(Boolean hdapIfShow10) {
 		this.hdapIfShow10 = hdapIfShow10;
+	}
+	public String getHdapName11() {
+		return hdapName11;
+	}
+	public void setHdapName11(String hdapName11) {
+		this.hdapName11 = hdapName11;
+	}
+	public String getHdapValue11_1() {
+		return hdapValue11_1;
+	}
+	public void setHdapValue11_1(String hdapValue11_1) {
+		this.hdapValue11_1 = hdapValue11_1;
+	}
+	public String getHdapValue11_2() {
+		return hdapValue11_2;
+	}
+	public void setHdapValue11_2(String hdapValue11_2) {
+		this.hdapValue11_2 = hdapValue11_2;
+	}
+	public Boolean getHdapIfShow11() {
+		return hdapIfShow11;
+	}
+	public void setHdapIfShow11(Boolean hdapIfShow11) {
+		this.hdapIfShow11 = hdapIfShow11;
+	}
+	public String getHdapName12() {
+		return hdapName12;
+	}
+	public void setHdapName12(String hdapName12) {
+		this.hdapName12 = hdapName12;
+	}
+	public String getHdapValue12_1() {
+		return hdapValue12_1;
+	}
+	public void setHdapValue12_1(String hdapValue12_1) {
+		this.hdapValue12_1 = hdapValue12_1;
+	}
+	public String getHdapValue12_2() {
+		return hdapValue12_2;
+	}
+	public void setHdapValue12_2(String hdapValue12_2) {
+		this.hdapValue12_2 = hdapValue12_2;
+	}
+	public Boolean getHdapIfShow12() {
+		return hdapIfShow12;
+	}
+	public void setHdapIfShow12(Boolean hdapIfShow12) {
+		this.hdapIfShow12 = hdapIfShow12;
+	}
+	public String getHdapName13() {
+		return hdapName13;
+	}
+	public void setHdapName13(String hdapName13) {
+		this.hdapName13 = hdapName13;
+	}
+	public String getHdapValue13_1() {
+		return hdapValue13_1;
+	}
+	public void setHdapValue13_1(String hdapValue13_1) {
+		this.hdapValue13_1 = hdapValue13_1;
+	}
+	public String getHdapValue13_2() {
+		return hdapValue13_2;
+	}
+	public void setHdapValue13_2(String hdapValue13_2) {
+		this.hdapValue13_2 = hdapValue13_2;
+	}
+	public Boolean getHdapIfShow13() {
+		return hdapIfShow13;
+	}
+	public void setHdapIfShow13(Boolean hdapIfShow13) {
+		this.hdapIfShow13 = hdapIfShow13;
+	}
+	public String getHdapName14() {
+		return hdapName14;
+	}
+	public void setHdapName14(String hdapName14) {
+		this.hdapName14 = hdapName14;
+	}
+	public String getHdapValue14_1() {
+		return hdapValue14_1;
+	}
+	public void setHdapValue14_1(String hdapValue14_1) {
+		this.hdapValue14_1 = hdapValue14_1;
+	}
+	public String getHdapValue14_2() {
+		return hdapValue14_2;
+	}
+	public void setHdapValue14_2(String hdapValue14_2) {
+		this.hdapValue14_2 = hdapValue14_2;
+	}
+	public Boolean getHdapIfShow14() {
+		return hdapIfShow14;
+	}
+	public void setHdapIfShow14(Boolean hdapIfShow14) {
+		this.hdapIfShow14 = hdapIfShow14;
+	}
+	public String getHdapName15() {
+		return hdapName15;
+	}
+	public void setHdapName15(String hdapName15) {
+		this.hdapName15 = hdapName15;
+	}
+	public String getHdapValue15_1() {
+		return hdapValue15_1;
+	}
+	public void setHdapValue15_1(String hdapValue15_1) {
+		this.hdapValue15_1 = hdapValue15_1;
+	}
+	public String getHdapValue15_2() {
+		return hdapValue15_2;
+	}
+	public void setHdapValue15_2(String hdapValue15_2) {
+		this.hdapValue15_2 = hdapValue15_2;
+	}
+	public Boolean getHdapIfShow15() {
+		return hdapIfShow15;
+	}
+	public void setHdapIfShow15(Boolean hdapIfShow15) {
+		this.hdapIfShow15 = hdapIfShow15;
 	}
 	public String getQrCode() {
 		return qrCode;

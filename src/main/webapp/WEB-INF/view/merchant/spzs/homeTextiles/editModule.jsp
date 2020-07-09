@@ -43,7 +43,7 @@ function initDefaultHtmlVal(){
 		disArr1[i]=$("#image1_div #list_div img[id^='img']").eq(i).attr("src");
 		console.log("reset"+i+"==="+disArr1[i]);
 	}
-	console.log(disArr1);
+	//console.log(disArr1);
 	$("#spxq_tab input[id^='spxqIfShow']").each(function(i){
 		dSpxqIfShowArr[i]=$(this).val();
 		var spxqName=$("#spxq_tab input[name^='spxqName']").eq(i).val();
