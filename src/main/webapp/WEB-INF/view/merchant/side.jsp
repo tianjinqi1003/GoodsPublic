@@ -274,6 +274,11 @@ function checkIfPaidInSide(){
 							设备管理
 						</a>
 					</li>
+					<li class="layui-nav-item">
+						<a class="second-level-a" href="<%=basePath%>merchant/main/goHtmlGoodsList?trade=smyl&accountId=${sessionScope.user.id }">
+							树木园林
+						</a>
+					</li>
 				</div>
 				<div style="width: 100%; margin: 0 auto; margin-top: 20px;background-color: #F5FAFE;">
 					<li class="layui-nav-item first-level">

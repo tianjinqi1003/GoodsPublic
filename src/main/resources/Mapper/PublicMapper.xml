@@ -3271,6 +3271,9 @@
 	<select id="queryHtmlGoodsHDQDForInt" resultType="java.lang.Integer">
 		select count(*) from html_goods_hdqd where accountNumber=#{param1}
 	</select>
+	<select id="queryHtmlGoodsSMYLForInt" resultType="java.lang.Integer">
+		select count(*) from html_goods_smyl where accountNumber=#{param1}
+	</select>
 	<select id="getJCCountByOpenId" resultType="java.lang.Integer">
 		select count(*) from jfdhjp_customer where openId=#{openId}
 	</select>
@@ -3303,6 +3306,9 @@
 	</select>
 	<select id="queryHtmlGoodsHDQDList" resultType="goodsPublic.entity.HtmlGoodsHDQD">
 		select * from html_goods_hdqd where accountNumber=#{param1} limit ${param2},${param3}
+	</select>
+	<select id="queryHtmlGoodsSMYLList" resultType="goodsPublic.entity.HtmlGoodsHDQD">
+		select * from html_goods_smyl where accountNumber=#{param1} limit ${param2},${param3}
 	</select>
 	<select id="queryGoodsListByCateId" resultType="goodsPublic.entity.Goods">
 		select goodsNumber,title,imgUrl,category_id from public_goods where category_id=#{param1} and accountNumber=#{param2}

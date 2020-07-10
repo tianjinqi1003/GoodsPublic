@@ -3702,6 +3702,19 @@ public class MainController {
 		return jsonMap;
 	}
 	
+	@RequestMapping(value="/queryHtmlGoodsSMYLList")
+	@ResponseBody
+	public Map<String, Object> queryHtmlGoodsSMYLList(String accountId,int page,int rows,String sort,String order) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		int count = publicService.queryHtmlGoodsSMYLForInt(accountId);
+		List<HtmlGoodsHDQD> htmlGoodsList = publicService.queryHtmlGoodsSMYLList(accountId, page, rows, sort, order);
+		
+		jsonMap.put("total", count);
+		jsonMap.put("rows", htmlGoodsList);
+		return jsonMap;
+	}
+	
 	/**
 	 * 跳转至编辑商品页面
 	 * @param request
@@ -3856,6 +3869,9 @@ public class MainController {
 			break;
 		case "hdqd":
 			url="/merchant/hdqd/htmlGoodsList";
+			break;
+		case "smyl":
+			url="/merchant/smyl/htmlGoodsList";
 			break;
 		case "jfdhjp":
 			String nav = request.getParameter("nav");
@@ -4182,6 +4198,10 @@ public class MainController {
 			request.setAttribute("memo1", ((List<ModuleHDQD>)publicService.getModuleHDQDByType("memo1")).get(0).getValue());
 			
 			url="/merchant/hdqd/addModule";
+			break;
+		case "smyl":
+			
+			url="/merchant/smyl/addModule";
 			break;
 		case "jfdhjp":
 			
