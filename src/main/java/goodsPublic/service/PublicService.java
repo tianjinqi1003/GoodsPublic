@@ -16,6 +16,7 @@ import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
+import goodsPublic.entity.HtmlGoodsSMYL;
 import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.HtmlGoodsText;
 import goodsPublic.entity.JFDHJPActivity;
@@ -64,6 +65,8 @@ public interface PublicService {
 	public int addHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoods);
 
 	public int addHtmlGoodsHDQD(HtmlGoodsHDQD htmlGoodsHDQD);
+
+	public int addHtmlGoodsSMYL(HtmlGoodsSMYL htmlGoodsSMYL);
 
 	public int addScoreQrcode(ScoreQrcode scoreQrcode);
 
@@ -374,6 +377,14 @@ public interface PublicService {
 	 * @return
 	 */
 	public HtmlGoodsHDQD getHtmlGoodsHDQD(String goodsNumber, String accountNumber);
+
+	/**
+	 * 获得树木园林模版内容
+	 * @param goodsNumber
+	 * @param accountNumber
+	 * @return
+	 */
+	public HtmlGoodsSMYL getHtmlGoodsSMYL(String goodsNumber, String accountNumber);
 
 	public HtmlGoodsText getHtmlGoodsText(String textType, String uuid, String accountNumber);
 

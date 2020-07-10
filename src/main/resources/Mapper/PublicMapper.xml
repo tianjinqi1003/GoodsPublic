@@ -1689,6 +1689,622 @@
 			</if>
 		</trim>
 	</insert>
+	<insert id="addHtmlGoodsSMYL" parameterType="goodsPublic.entity.HtmlGoodsSMYL">
+		insert into html_goods_smyl
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="productName!=null">
+				productName,
+			</if>
+			<if test="spxqName1!=null">
+				spxqName1,
+			</if>
+			<if test="spxqValue1!=null">
+				spxqValue1,
+			</if>
+			<if test="spxqIfShow1!=null">
+				spxqIfShow1,
+			</if>
+			<if test="spxqName2!=null">
+				spxqName2,
+			</if>
+			<if test="spxqValue2!=null">
+				spxqValue2,
+			</if>
+			<if test="spxqIfShow2!=null">
+				spxqIfShow2,
+			</if>
+			<if test="spxqName3!=null">
+				spxqName3,
+			</if>
+			<if test="spxqValue3!=null">
+				spxqValue3,
+			</if>
+			<if test="spxqIfShow3!=null">
+				spxqIfShow3,
+			</if>
+			<if test="spxqName4!=null">
+				spxqName4,
+			</if>
+			<if test="spxqValue4!=null">
+				spxqValue4,
+			</if>
+			<if test="spxqIfShow4!=null">
+				spxqIfShow4,
+			</if>
+			<if test="spxqName5!=null">
+				spxqName5,
+			</if>
+			<if test="spxqValue5!=null">
+				spxqValue5,
+			</if>
+			<if test="spxqIfShow5!=null">
+				spxqIfShow5,
+			</if>
+			<if test="spxqName6!=null">
+				spxqName6,
+			</if>
+			<if test="spxqValue6!=null">
+				spxqValue6,
+			</if>
+			<if test="spxqIfShow6!=null">
+				spxqIfShow6,
+			</if>
+			<if test="spxqName7!=null">
+				spxqName7,
+			</if>
+			<if test="spxqValue7!=null">
+				spxqValue7,
+			</if>
+			<if test="spxqIfShow7!=null">
+				spxqIfShow7,
+			</if>
+			<if test="spxqName8!=null">
+				spxqName8,
+			</if>
+			<if test="spxqValue8!=null">
+				spxqValue8,
+			</if>
+			<if test="spxqIfShow8!=null">
+				spxqIfShow8,
+			</if>
+			<if test="spxqName9!=null">
+				spxqName9,
+			</if>
+			<if test="spxqValue9!=null">
+				spxqValue9,
+			</if>
+			<if test="spxqIfShow9!=null">
+				spxqIfShow9,
+			</if>
+			<if test="spxqName10!=null">
+				spxqName10,
+			</if>
+			<if test="spxqValue10!=null">
+				spxqValue10,
+			</if>
+			<if test="spxqIfShow10!=null">
+				spxqIfShow10,
+			</if>
+			<if test="spxqName11!=null">
+				spxqName11,
+			</if>
+			<if test="spxqValue11!=null">
+				spxqValue11,
+			</if>
+			<if test="spxqIfShow11!=null">
+				spxqIfShow11,
+			</if>
+			<if test="spxqName12!=null">
+				spxqName12,
+			</if>
+			<if test="spxqValue12!=null">
+				spxqValue12,
+			</if>
+			<if test="spxqIfShow12!=null">
+				spxqIfShow12,
+			</if>
+			<if test="spxqName13!=null">
+				spxqName13,
+			</if>
+			<if test="spxqValue13!=null">
+				spxqValue13,
+			</if>
+			<if test="spxqIfShow13!=null">
+				spxqIfShow13,
+			</if>
+			<if test="spxqName14!=null">
+				spxqName14,
+			</if>
+			<if test="spxqValue14!=null">
+				spxqValue14,
+			</if>
+			<if test="spxqIfShow14!=null">
+				spxqIfShow14,
+			</if>
+			<if test="spxqName15!=null">
+				spxqName15,
+			</if>
+			<if test="spxqValue15!=null">
+				spxqValue15,
+			</if>
+			<if test="spxqIfShow15!=null">
+				spxqIfShow15,
+			</if>
+			<if test="yhxxName1!=null">
+				yhxxName1,
+			</if>
+			<if test="yhxxValue1!=null">
+				yhxxValue1,
+			</if>
+			<if test="yhxxIfShow1!=null">
+				yhxxIfShow1,
+			</if>
+			<if test="yhxxName2!=null">
+				yhxxName2,
+			</if>
+			<if test="yhxxValue2!=null">
+				yhxxValue2,
+			</if>
+			<if test="yhxxIfShow2!=null">
+				yhxxIfShow2,
+			</if>
+			<if test="yhxxName3!=null">
+				yhxxName3,
+			</if>
+			<if test="yhxxValue3!=null">
+				yhxxValue3,
+			</if>
+			<if test="yhxxIfShow3!=null">
+				yhxxIfShow3,
+			</if>
+			<if test="yhxxName4!=null">
+				yhxxName4,
+			</if>
+			<if test="yhxxValue4!=null">
+				yhxxValue4,
+			</if>
+			<if test="yhxxIfShow4!=null">
+				yhxxIfShow4,
+			</if>
+			<if test="yhxxName5!=null">
+				yhxxName5,
+			</if>
+			<if test="yhxxValue5!=null">
+				yhxxValue5,
+			</if>
+			<if test="yhxxIfShow5!=null">
+				yhxxIfShow5,
+			</if>
+			<if test="yhxxName6!=null">
+				yhxxName6,
+			</if>
+			<if test="yhxxValue6!=null">
+				yhxxValue6,
+			</if>
+			<if test="yhxxIfShow6!=null">
+				yhxxIfShow6,
+			</if>
+			<if test="yhxxName7!=null">
+				yhxxName7,
+			</if>
+			<if test="yhxxValue7!=null">
+				yhxxValue7,
+			</if>
+			<if test="yhxxIfShow7!=null">
+				yhxxIfShow7,
+			</if>
+			<if test="yhxxName8!=null">
+				yhxxName8,
+			</if>
+			<if test="yhxxValue8!=null">
+				yhxxValue8,
+			</if>
+			<if test="yhxxIfShow8!=null">
+				yhxxIfShow8,
+			</if>
+			<if test="yhxxName9!=null">
+				yhxxName9,
+			</if>
+			<if test="yhxxValue9!=null">
+				yhxxValue9,
+			</if>
+			<if test="yhxxIfShow9!=null">
+				yhxxIfShow9,
+			</if>
+			<if test="yhxxName10!=null">
+				yhxxName10,
+			</if>
+			<if test="yhxxValue10!=null">
+				yhxxValue10,
+			</if>
+			<if test="yhxxIfShow10!=null">
+				yhxxIfShow10,
+			</if>
+			<if test="yhxxName11!=null">
+				yhxxName11,
+			</if>
+			<if test="yhxxValue11!=null">
+				yhxxValue11,
+			</if>
+			<if test="yhxxIfShow11!=null">
+				yhxxIfShow11,
+			</if>
+			<if test="yhxxName12!=null">
+				yhxxName12,
+			</if>
+			<if test="yhxxValue12!=null">
+				yhxxValue12,
+			</if>
+			<if test="yhxxIfShow12!=null">
+				yhxxIfShow12,
+			</if>
+			<if test="yhxxName13!=null">
+				yhxxName13,
+			</if>
+			<if test="yhxxValue13!=null">
+				yhxxValue13,
+			</if>
+			<if test="yhxxIfShow13!=null">
+				yhxxIfShow13,
+			</if>
+			<if test="yhxxName14!=null">
+				yhxxName14,
+			</if>
+			<if test="yhxxValue14!=null">
+				yhxxValue14,
+			</if>
+			<if test="yhxxIfShow14!=null">
+				yhxxIfShow14,
+			</if>
+			<if test="yhxxName15!=null">
+				yhxxName15,
+			</if>
+			<if test="yhxxValue15!=null">
+				yhxxValue15,
+			</if>
+			<if test="yhxxIfShow15!=null">
+				yhxxIfShow15,
+			</if>
+			<if test="image1_1!=null">
+				image1_1,
+			</if>
+			<if test="image1_2!=null">
+				image1_2,
+			</if>
+			<if test="image1_3!=null">
+				image1_3,
+			</if>
+			<if test="image1_4!=null">
+				image1_4,
+			</if>
+			<if test="image1_5!=null">
+				image1_5,
+			</if>
+			<if test="memo1!=null">
+				memo1,
+			</if>
+			<if test="memo2!=null">
+				memo2,
+			</if>
+			<if test="qrCode!=null">
+				qrCode,
+			</if>
+				gmtCreate,
+			<if test="goodsNumber!=null">
+				goodsNumber,
+			</if>
+			<if test="accountNumber!=null">
+				accountNumber,
+			</if>
+		</trim>
+		values
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="productName!=null">
+				#{productName},
+			</if>
+			<if test="spxqName1!=null">
+				#{spxqName1},
+			</if>
+			<if test="spxqValue1!=null">
+				#{spxqValue1},
+			</if>
+			<if test="spxqIfShow1!=null">
+				#{spxqIfShow1},
+			</if>
+			<if test="spxqName2!=null">
+				#{spxqName2},
+			</if>
+			<if test="spxqValue2!=null">
+				#{spxqValue2},
+			</if>
+			<if test="spxqIfShow2!=null">
+				#{spxqIfShow2},
+			</if>
+			<if test="spxqName3!=null">
+				#{spxqName3},
+			</if>
+			<if test="spxqValue3!=null">
+				#{spxqValue3},
+			</if>
+			<if test="spxqIfShow3!=null">
+				#{spxqIfShow3},
+			</if>
+			<if test="spxqName4!=null">
+				#{spxqName4},
+			</if>
+			<if test="spxqValue4!=null">
+				#{spxqValue4},
+			</if>
+			<if test="spxqIfShow4!=null">
+				#{spxqIfShow4},
+			</if>
+			<if test="spxqName5!=null">
+				#{spxqName5},
+			</if>
+			<if test="spxqValue5!=null">
+				#{spxqValue5},
+			</if>
+			<if test="spxqIfShow5!=null">
+				#{spxqIfShow5},
+			</if>
+			<if test="spxqName6!=null">
+				#{spxqName6},
+			</if>
+			<if test="spxqValue6!=null">
+				#{spxqValue6},
+			</if>
+			<if test="spxqIfShow6!=null">
+				#{spxqIfShow6},
+			</if>
+			<if test="spxqName7!=null">
+				#{spxqName7},
+			</if>
+			<if test="spxqValue7!=null">
+				#{spxqValue7},
+			</if>
+			<if test="spxqIfShow7!=null">
+				#{spxqIfShow7},
+			</if>
+			<if test="spxqName8!=null">
+				#{spxqName8},
+			</if>
+			<if test="spxqValue8!=null">
+				#{spxqValue8},
+			</if>
+			<if test="spxqIfShow8!=null">
+				#{spxqIfShow8},
+			</if>
+			<if test="spxqName9!=null">
+				#{spxqName9},
+			</if>
+			<if test="spxqValue9!=null">
+				#{spxqValue9},
+			</if>
+			<if test="spxqIfShow9!=null">
+				#{spxqIfShow9},
+			</if>
+			<if test="spxqName10!=null">
+				#{spxqName10},
+			</if>
+			<if test="spxqValue10!=null">
+				#{spxqValue10},
+			</if>
+			<if test="spxqIfShow10!=null">
+				#{spxqIfShow10},
+			</if>
+			<if test="spxqName11!=null">
+				#{spxqName11},
+			</if>
+			<if test="spxqValue11!=null">
+				#{spxqValue11},
+			</if>
+			<if test="spxqIfShow11!=null">
+				#{spxqIfShow11},
+			</if>
+			<if test="spxqName12!=null">
+				#{spxqName12},
+			</if>
+			<if test="spxqValue12!=null">
+				#{spxqValue12},
+			</if>
+			<if test="spxqIfShow12!=null">
+				#{spxqIfShow12},
+			</if>
+			<if test="spxqName13!=null">
+				#{spxqName13},
+			</if>
+			<if test="spxqValue13!=null">
+				#{spxqValue13},
+			</if>
+			<if test="spxqIfShow13!=null">
+				#{spxqIfShow13},
+			</if>
+			<if test="spxqName14!=null">
+				#{spxqName14},
+			</if>
+			<if test="spxqValue14!=null">
+				#{spxqValue14},
+			</if>
+			<if test="spxqIfShow14!=null">
+				#{spxqIfShow14},
+			</if>
+			<if test="spxqName15!=null">
+				#{spxqName15},
+			</if>
+			<if test="spxqValue15!=null">
+				#{spxqValue15},
+			</if>
+			<if test="spxqIfShow15!=null">
+				#{spxqIfShow15},
+			</if>
+			<if test="yhxxName1!=null">
+				#{yhxxName1},
+			</if>
+			<if test="yhxxValue1!=null">
+				#{yhxxValue1},
+			</if>
+			<if test="yhxxIfShow1!=null">
+				#{yhxxIfShow1},
+			</if>
+			<if test="yhxxName2!=null">
+				#{yhxxName2},
+			</if>
+			<if test="yhxxValue2!=null">
+				#{yhxxValue2},
+			</if>
+			<if test="yhxxIfShow2!=null">
+				#{yhxxIfShow2},
+			</if>
+			<if test="yhxxName3!=null">
+				#{yhxxName3},
+			</if>
+			<if test="yhxxValue3!=null">
+				#{yhxxValue3},
+			</if>
+			<if test="yhxxIfShow3!=null">
+				#{yhxxIfShow3},
+			</if>
+			<if test="yhxxName4!=null">
+				#{yhxxName4},
+			</if>
+			<if test="yhxxValue4!=null">
+				#{yhxxValue4},
+			</if>
+			<if test="yhxxIfShow4!=null">
+				#{yhxxIfShow4},
+			</if>
+			<if test="yhxxName5!=null">
+				#{yhxxName5},
+			</if>
+			<if test="yhxxValue5!=null">
+				#{yhxxValue5},
+			</if>
+			<if test="yhxxIfShow5!=null">
+				#{yhxxIfShow5},
+			</if>
+			<if test="yhxxName6!=null">
+				#{yhxxName6},
+			</if>
+			<if test="yhxxValue6!=null">
+				#{yhxxValue6},
+			</if>
+			<if test="yhxxIfShow6!=null">
+				#{yhxxIfShow6},
+			</if>
+			<if test="yhxxName7!=null">
+				#{yhxxName7},
+			</if>
+			<if test="yhxxValue7!=null">
+				#{yhxxValue7},
+			</if>
+			<if test="yhxxIfShow7!=null">
+				#{yhxxIfShow7},
+			</if>
+			<if test="yhxxName8!=null">
+				#{yhxxName8},
+			</if>
+			<if test="yhxxValue8!=null">
+				#{yhxxValue8},
+			</if>
+			<if test="yhxxIfShow8!=null">
+				#{yhxxIfShow8},
+			</if>
+			<if test="yhxxName9!=null">
+				#{yhxxName9},
+			</if>
+			<if test="yhxxValue9!=null">
+				#{yhxxValue9},
+			</if>
+			<if test="yhxxIfShow9!=null">
+				#{yhxxIfShow9},
+			</if>
+			<if test="yhxxName10!=null">
+				#{yhxxName10},
+			</if>
+			<if test="yhxxValue10!=null">
+				#{yhxxValue10},
+			</if>
+			<if test="yhxxIfShow10!=null">
+				#{yhxxIfShow10},
+			</if>
+			<if test="yhxxName11!=null">
+				#{yhxxName11},
+			</if>
+			<if test="yhxxValue11!=null">
+				#{yhxxValue11},
+			</if>
+			<if test="yhxxIfShow11!=null">
+				#{yhxxIfShow11},
+			</if>
+			<if test="yhxxName12!=null">
+				#{yhxxName12},
+			</if>
+			<if test="yhxxValue12!=null">
+				#{yhxxValue12},
+			</if>
+			<if test="yhxxIfShow12!=null">
+				#{yhxxIfShow12},
+			</if>
+			<if test="yhxxName13!=null">
+				#{yhxxName13},
+			</if>
+			<if test="yhxxValue13!=null">
+				#{yhxxValue13},
+			</if>
+			<if test="yhxxIfShow13!=null">
+				#{yhxxIfShow13},
+			</if>
+			<if test="yhxxName14!=null">
+				#{yhxxName14},
+			</if>
+			<if test="yhxxValue14!=null">
+				#{yhxxValue14},
+			</if>
+			<if test="yhxxIfShow14!=null">
+				#{yhxxIfShow14},
+			</if>
+			<if test="yhxxName15!=null">
+				#{yhxxName15},
+			</if>
+			<if test="yhxxValue15!=null">
+				#{yhxxValue15},
+			</if>
+			<if test="yhxxIfShow15!=null">
+				#{yhxxIfShow15},
+			</if>
+			<if test="image1_1!=null">
+				#{image1_1},
+			</if>
+			<if test="image1_2!=null">
+				#{image1_2},
+			</if>
+			<if test="image1_3!=null">
+				#{image1_3},
+			</if>
+			<if test="image1_4!=null">
+				#{image1_4},
+			</if>
+			<if test="image1_5!=null">
+				#{image1_5},
+			</if>
+			<if test="memo1!=null">
+				#{memo1},
+			</if>
+			<if test="memo2!=null">
+				#{memo2},
+			</if>
+			<if test="qrCode!=null">
+				#{qrCode},
+			</if>
+				now(),
+			<if test="goodsNumber!=null">
+				#{goodsNumber},
+			</if>
+			<if test="accountNumber!=null">
+				#{accountNumber},
+			</if>
+		</trim>
+	</insert>
 	<insert id="addScoreQrcode" parameterType="goodsPublic.entity.ScoreQrcode">
 		insert into score_qrcode
 		<trim prefix="(" suffix=")" suffixOverrides=",">
@@ -3512,6 +4128,9 @@
 	</select>
 	<select id="getHtmlGoodsHDQD" resultType="goodsPublic.entity.HtmlGoodsHDQD">
 		select * from html_goods_hdqd where goodsNumber=#{param1} and accountNumber=#{param2}
+	</select>
+	<select id="getHtmlGoodsSMYL" resultType="goodsPublic.entity.HtmlGoodsSMYL">
+		select * from html_goods_smyl where goodsNumber=#{param1} and accountNumber=#{param2}
 	</select>
 	<select id="getHtmlGoodsText" resultType="goodsPublic.entity.HtmlGoodsText">
 		select * from html_goods_text where textType=#{textType} and uuid=#{uuid}

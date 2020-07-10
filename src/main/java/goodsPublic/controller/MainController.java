@@ -56,6 +56,7 @@ import goodsPublic.entity.HtmlGoodsDMTTS;
 import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
+import goodsPublic.entity.HtmlGoodsSMYL;
 import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.JFDHJPActivity;
 import goodsPublic.entity.JFDHJPCustomer;
@@ -1576,6 +1577,96 @@ public class MainController {
 		return "../../merchant/main/goBrowseHtmlGoodsHDQD?goodsNumber="+htmlGoodsHDQD.getGoodsNumber()+"&accountNumber="+htmlGoodsHDQD.getAccountNumber();
 	}
 	
+	@RequestMapping(value="/addHtmlGoodsSMYL",produces="plain/text; charset=UTF-8")
+	public String addHtmlGoodsSMYL(HtmlGoodsSMYL htmlGoodsSMYL,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file1_2",required=false) MultipartFile file1_2,
+			@RequestParam(value="file1_3",required=false) MultipartFile file1_3,
+			@RequestParam(value="file1_4",required=false) MultipartFile file1_4,
+			@RequestParam(value="file1_5",required=false) MultipartFile file1_5,
+			HttpServletRequest request) {
+		
+		String accountNumberCq = null;
+		String from=htmlGoodsSMYL.getFrom();
+        if("cq".equals(from)) {
+        	accountNumberCq=getCQAccountNumber(request);
+        	htmlGoodsSMYL.setAccountNumber(accountNumberCq);
+        }
+		try {
+			MultipartFile[] fileArr=new MultipartFile[5];
+			fileArr[0]=file1_1;
+			fileArr[1]=file1_2;
+			fileArr[2]=file1_3;
+			fileArr[3]=file1_4;
+			fileArr[4]=file1_5;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						jsonStr = FileUploadUtils.appUploadContentImg(request,fileArr[i],"");
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								htmlGoodsSMYL.setImage1_1(dataJO.get("src").toString());
+								break;
+							case 1:
+								htmlGoodsSMYL.setImage1_2(dataJO.get("src").toString());
+								break;
+							case 2:
+								htmlGoodsSMYL.setImage1_3(dataJO.get("src").toString());
+								break;
+							case 3:
+								htmlGoodsSMYL.setImage1_4(dataJO.get("src").toString());
+								break;
+							case 4:
+								htmlGoodsSMYL.setImage1_5(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+					else {
+						switch (i) {
+						case 0:
+							htmlGoodsSMYL.setImage1_1("/GoodsPublic/resource/images/smyl/HPQ2Y6D[SU{S8I~8U1[XQGP.png");
+							break;
+						}
+					}
+				}
+			}
+			
+			String goodsNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+			htmlGoodsSMYL.setGoodsNumber(goodsNumber);
+			
+			String addr = request.getLocalAddr();
+			int port = request.getLocalPort();
+			String contextPath = request.getContextPath();
+			String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/main/goShowHtmlGoods?trade=smyl&goodsNumber="+htmlGoodsSMYL.getGoodsNumber()+"&accountId="+htmlGoodsSMYL.getAccountNumber();
+			
+			String fileName = goodsNumber + ".jpg";
+			String avaPath="/GoodsPublic/upload/"+fileName;
+			String path = "D:/resource";
+			Qrcode.createQrCode(url, path, fileName);
+			
+			htmlGoodsSMYL.setQrCode(avaPath);
+			
+			int a=publicService.addHtmlGoodsSMYL(htmlGoodsSMYL);
+			if(a>0) {
+				int qrcodeCount=1;
+				a=publicService.updateAccountQCById(qrcodeCount,htmlGoodsSMYL.getAccountNumber());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if("cq".equals(from))
+			return "../../merchant/main/goEditModule?trade=smyl&goodsNumber="+htmlGoodsSMYL.getGoodsNumber()+"&accountNumber="+accountNumberCq+"&from="+from;
+		else
+			return "../../merchant/main/goBrowseHtmlGoodsSMYL?goodsNumber="+htmlGoodsSMYL.getGoodsNumber()+"&accountNumber="+htmlGoodsSMYL.getAccountNumber();
+	}
+	
 	@RequestMapping(value="/addBatchScoreQrcode")
 	@ResponseBody
 	public Map<String, Object> addBatchScoreQrcode(ScoreQrcode scoreQrcode,String qrcodeUuidsStr,String qrcodeUrlsStr) {
@@ -2459,7 +2550,7 @@ public class MainController {
 	
 	/**
 	 * 这个是显示活动签到的模版内容，用于后台商户浏览
-	 * @param userNumber
+	 * @param goodsNumber
 	 * @param accountNumber
 	 * @param request
 	 * @return
@@ -2469,6 +2560,20 @@ public class MainController {
 		HtmlGoodsHDQD htmlGoodsHDQD = publicService.getHtmlGoodsHDQD(goodsNumber,accountNumber);
 		request.setAttribute("htmlGoodsHDQD", htmlGoodsHDQD);
 		return "/merchant/hdqd/browseHtmlGoods";
+	}
+	
+	/**
+	 * 这个是显示树木园林的模版内容，用于后台商户浏览
+	 * @param goodsNumber
+	 * @param accountNumber
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/goBrowseHtmlGoodsSMYL")
+	public String goBrowseHtmlGoodsSMYL(String goodsNumber, String accountNumber, HttpServletRequest request) {
+		HtmlGoodsSMYL htmlGoodsSMYL = publicService.getHtmlGoodsSMYL(goodsNumber,accountNumber);
+		request.setAttribute("htmlGoodsSMYL", htmlGoodsSMYL);
+		return "/merchant/smyl/browseHtmlGoods";
 	}
 	
 	/**

@@ -64,6 +64,212 @@ function addHtmlGoodsSMYL(){
 	document.getElementById("sub_but").click();
 }
 
+function openImage1ModBgDiv(){
+	$("#image1ModBg_div").css("display","block");
+}
+
+function deleteImage1Div(){
+	$("#image1_div").remove();
+	$("#uploadFile1_div input[type='file']").remove();
+	resetDivPosition();
+}
+
+function renameFile(){
+	$("#uploadFile1_div input[type='file']").each(function(i){
+		$(this).attr("name","file1_"+(i+1));
+		//console.log($(this).attr("name"));
+	});
+}
+
+function closeImage1ModBgDiv(){
+	$("#image1ModBg_div").css("display","none");
+}
+
+function changeButStyle(o,flag){
+	if(flag==1){
+		$(o).css("color","#4caf50");
+		$(o).css("border-color","#4caf50");
+	}
+	else{
+		$(o).css("color","#999");
+		$(o).css("border-color","#999");
+	}
+}
+
+function uploadImage1(){
+	if($("#image1Mod_div table td[class='file_td']").length>=5){
+		alert("最多上传5张图片!");
+		return false;
+	}
+	var uuid=createUUID();
+	$("#uuid_hid1").val(uuid);
+	$("#uploadFile1_div").append("<input type=\"file\" id=\"uploadFile1_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic1(this)\"/>");
+	document.getElementById("uploadFile1_inp").click();
+}
+
+function deleteImage1(o){
+	var td=$(o).parent();
+	var uuid=td.attr("id").substring(7);
+	$("#image1_div #list_div img[id='img"+uuid+"']").remove();
+	td.remove();
+	$("#uploadFile1_div input[type='file'][name='file"+uuid+"']").remove();
+	
+	var imageTab=$("#image1Mod_div table");
+	var tdArr1=imageTab.find("td");
+	imageTab.empty();
+	for(var i=0;i<tdArr1.length;i++){
+		var tdArr2=imageTab.find("td");
+		if(tdArr2.length==0||tdArr2.length%4==0)
+			imageTab.append("<tr></tr>");
+		imageTab.find("tr").eq(imageTab.find("tr").length-1).append(tdArr1[i]);
+	}
+	
+	resetDivPosition();
+}
+
+function showQrcodePic1(obj){
+	var uuid=$("#uuid_hid1").val();
+	var file=$(obj);
+	file.attr("id","file"+uuid);
+	file.attr("name","file"+uuid);
+	file.removeAttr("onchange");
+	file.css("display","none");
+	var fileHtml=file.prop("outerHTML");
+	var tdHtml="<td class=\"file_td\" id=\"file_td"+uuid+"\">"
+				+"<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteImage1(this);\">"
+				+"<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\">"
+				+fileHtml
+			+"</td>";
+	
+	var imageTab=$("#image1Mod_div table");
+	//var length=imageTab.find("td[id^='file_td']").length;
+    var tdLength=imageTab.find("td").length;
+    if(tdLength%4==0){
+    	var tr=imageTab.find("tr").eq(imageTab.find("tr").length-1);
+    	tr.append(tdHtml)
+    	imageTab.append("<tr>"+$("#image1Mod_div table #upload_td").prop("outerHTML")+"</tr>");
+    	tr.find("td[id^='upload_td']").remove();
+    }
+    else{
+		imageTab.find("#upload_td").before(tdHtml);
+    }
+
+	var $file = $(obj);
+    var fileObj = $file[0];
+    file=$file;
+    var windowURL = window.URL || window.webkitURL;
+    var dataURL;
+    var $img = $("#image1Mod_div table #img"+uuid);
+
+    if (fileObj && fileObj.files && fileObj.files[0]) {
+        dataURL = windowURL.createObjectURL(fileObj.files[0]);
+        $img.attr("src", dataURL);
+        
+        var listDiv=$("#image1_div #list_div");
+        listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
+        
+        //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+        setTimeout(function(){
+        	resetDivPosition();
+        },"100")
+    } else {
+        dataURL = $file.val();
+        var imgObj = document.getElementById("preview");
+        // 两个坑:
+        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
+        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
+        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
+        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+
+    }
+}
+
+function createUUID() {
+    var s = [];
+    var hexDigits = "0123456789abcdef";
+    for (var i = 0; i < 36; i++) {
+        s[i] = hexDigits.substr(Math.floor(Math.random() * 0x10), 1);
+    }
+    s[14] = "4";  // bits 12-15 of the time_hi_and_version field to 0010
+    s[19] = hexDigits.substr((s[19] & 0x3) | 0x8, 1);  // bits 6-7 of the clock_seq_hi_and_reserved to 01
+    s[8] = s[13] = s[18] = s[23] = "-";
+ 
+    var uuid = s.join("");
+    return uuid;
+}
+
+function changeSPXQTrIfShow(index,o){
+	var ifShow=$("#spxqIfShow"+index).val();
+	if(ifShow=="true"){
+		$("#spxqIfShow"+index).val(false);
+		$(o).val("隐藏");
+	}
+	else{
+		$("#spxqIfShow"+index).val(true);
+		$(o).val("显示");
+	}
+}
+
+function changeYHXXTrIfShow(index,o){
+	var ifShow=$("#yhxxIfShow"+index).val();
+	if(ifShow=="true"){
+		$("#yhxxIfShow"+index).val(false);
+		$(o).val("隐藏");
+	}
+	else{
+		$("#yhxxIfShow"+index).val(true);
+		$(o).val("显示");
+	}
+}
+
+function goBack(){
+	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=smyl";
+}
+
+function checkForm(){
+	if(checkIfLogined()){
+		if(checkIfPaid()){
+			return true;
+		}
+	}
+	return false;
+}
+
+function checkIfLogined(){
+	var bool=false;
+	$.ajaxSetup({async:false});
+	$.post("checkIfLogined",
+		function(data){
+			if(data.status=="ok"){
+				bool=true;
+			}
+			else{
+				//alert(data.message);
+				$("#login_bg_div").css("display","block");
+				bool=false;
+			}
+		}
+	,"json");
+	return bool;
+}
+
+function checkIfPaid(){
+	var bool=false;
+	$.ajaxSetup({async:false});
+	$.post("checkIfPaid",
+		{accountNumber:'${sessionScope.user.id}'},
+		function(data){
+			if(data.status=="ok"){
+				bool=true;
+			}
+			else{
+				alert(data.message);
+				bool=false;
+			}
+		}
+	,"json");
+	return bool;
+}
 </script>
 </head>
 <body>

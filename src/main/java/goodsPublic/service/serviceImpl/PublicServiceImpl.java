@@ -31,6 +31,7 @@ import goodsPublic.entity.HtmlGoodsDMTZL;
 import goodsPublic.entity.HtmlGoodsGRMP;
 import goodsPublic.entity.HtmlGoodsHDQD;
 import goodsPublic.entity.HtmlGoodsJZSG;
+import goodsPublic.entity.HtmlGoodsSMYL;
 import goodsPublic.entity.HtmlGoodsSPZS;
 import goodsPublic.entity.HtmlGoodsText;
 import goodsPublic.entity.JFDHJPActivity;
@@ -92,6 +93,12 @@ public class PublicServiceImpl implements PublicService {
 	public int addHtmlGoodsHDQD(HtmlGoodsHDQD htmlGoodsHDQD) {
 		// TODO Auto-generated method stub
 		return publicDao.addHtmlGoodsHDQD(htmlGoodsHDQD);
+	}
+
+	@Override
+	public int addHtmlGoodsSMYL(HtmlGoodsSMYL htmlGoodsSMYL) {
+		// TODO Auto-generated method stub
+		return publicDao.addHtmlGoodsSMYL(htmlGoodsSMYL);
 	}
 
 	@Override
@@ -793,6 +800,12 @@ public class PublicServiceImpl implements PublicService {
 	public HtmlGoodsHDQD getHtmlGoodsHDQD(String goodsNumber, String accountNumber) {
 		// TODO Auto-generated method stub
 		return publicDao.getHtmlGoodsHDQD(goodsNumber,accountNumber);
+	}
+
+	@Override
+	public HtmlGoodsSMYL getHtmlGoodsSMYL(String goodsNumber, String accountNumber) {
+		// TODO Auto-generated method stub
+		return publicDao.getHtmlGoodsSMYL(goodsNumber,accountNumber);
 	}
 
 	@Override
