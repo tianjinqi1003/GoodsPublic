@@ -3489,6 +3489,9 @@
 	<select id="getModuleHDQDByType" resultType="goodsPublic.entity.ModuleHDQD">
 		select * from module_hdqd where type=#{param1}
 	</select>
+	<select id="getModuleSMYLByType" resultType="goodsPublic.entity.ModuleSMYL">
+		select * from module_smyl where type=#{param1}
+	</select>
 	<select id="getModuleDMTZLByMemo" resultType="goodsPublic.entity.ModuleDMTZL">
 		select * from module_dmtzl where type=#{param1}
 	</select>

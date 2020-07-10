@@ -23,6 +23,7 @@ import goodsPublic.entity.ModuleDMTTS;
 import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleHDQD;
 import goodsPublic.entity.ModuleJZSG;
+import goodsPublic.entity.ModuleSMYL;
 import goodsPublic.entity.ModuleSPZS;
 import goodsPublic.entity.PrizeCode;
 import goodsPublic.entity.ScoreQrcode;
@@ -336,6 +337,13 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public List<ModuleHDQD> getModuleHDQDByType(String type);
+
+	/**
+	 * 根据类型，查询树木园林模版列表
+	 * @param type
+	 * @return
+	 */
+	public List<ModuleSMYL> getModuleSMYLByType(String type);
 	
 	/**
 	 * 获得商品展示模版内容

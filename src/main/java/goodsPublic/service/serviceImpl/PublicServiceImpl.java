@@ -1,7 +1,5 @@
 package goodsPublic.service.serviceImpl;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -10,20 +8,15 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSessionFactory;
-import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.goodsPublic.util.PlanResult;
-import com.goodsPublic.util.StringUtils;
 import com.goodsPublic.util.qrcode.Qrcode;
 
 import goodsPublic.dao.PublicMapper;
@@ -46,7 +39,7 @@ import goodsPublic.entity.ModuleDMTTS;
 import goodsPublic.entity.ModuleDMTZL;
 import goodsPublic.entity.ModuleHDQD;
 import goodsPublic.entity.ModuleJZSG;
-import goodsPublic.entity.ModuleSPZS;
+import goodsPublic.entity.ModuleSMYL;
 import goodsPublic.entity.PrizeCode;
 import goodsPublic.entity.ScoreQrcode;
 import goodsPublic.entity.ScoreQrcodeHistory;
@@ -748,6 +741,25 @@ public class PublicServiceImpl implements PublicService {
 		case "memo1":
 			List<ModuleHDQD> hdqdList = publicDao.getModuleHDQDByType(type);
 			obj=hdqdList;
+			break;
+		}
+		return obj;
+	}
+
+	@Override
+	public Object getModuleSMYLByType(String type) {
+		// TODO Auto-generated method stub
+
+		Object obj=null;
+		switch (type) {
+		case "productName":
+		case "spxq":
+		case "yhxx":
+		case "image1":
+		case "memo1":
+		case "memo2":
+			List<ModuleSMYL> smylList = publicDao.getModuleSMYLByType(type);
+			obj=smylList;
 			break;
 		}
 		return obj;

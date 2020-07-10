@@ -21,6 +21,7 @@ import goodsPublic.entity.HtmlGoodsText;
 import goodsPublic.entity.JFDHJPActivity;
 import goodsPublic.entity.JFDHJPCustomer;
 import goodsPublic.entity.ModuleHDQD;
+import goodsPublic.entity.ModuleSMYL;
 import goodsPublic.entity.PrizeCode;
 import goodsPublic.entity.ScoreQrcode;
 import goodsPublic.entity.ScoreTakeRecord;
@@ -326,6 +327,13 @@ public interface PublicService {
 	 * @return
 	 */
 	public Object getModuleHDQDByType(String type);
+
+	/**
+	 * 根据类型查询树木园林模版
+	 * @param type
+	 * @return
+	 */
+	public Object getModuleSMYLByType(String type);
 
 	/**
 	 * 获得商品展示模版内容
