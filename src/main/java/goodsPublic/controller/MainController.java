@@ -2139,9 +2139,9 @@ public class MainController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="/saveEdithtmlGoodsHDQD",produces="plain/text; charset=UTF-8")
+	@RequestMapping(value="/saveEditHtmlGoodsHDQD",produces="plain/text; charset=UTF-8")
 	@ResponseBody
-	public String saveEdithtmlGoodsHDQD(HtmlGoodsHDQD htmlGoodsHDQD,
+	public String saveEditHtmlGoodsHDQD(HtmlGoodsHDQD htmlGoodsHDQD,
 			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
 			@RequestParam(value="file1_2",required=false) MultipartFile file1_2,
 			@RequestParam(value="file1_3",required=false) MultipartFile file1_3,
@@ -2152,6 +2152,43 @@ public class MainController {
 		PlanResult plan=new PlanResult();
 		String json;
 		int count = editHtmlGoodsHDQD(htmlGoodsHDQD,file1_1,file1_2,file1_3,file1_4,file1_5,request);
+		if(count==0) {
+			plan.setStatus(0);
+			plan.setMsg("内容保存失败！");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		else {
+			plan.setStatus(1);
+			plan.setMsg("内容保存成功！");
+			json=JsonUtil.getJsonFromObject(plan);
+		}
+		return json;
+	}
+	
+	/**
+	 * 保存编辑树木园林模版内容
+	 * @param htmlGoodsSMYL
+	 * @param file1_1
+	 * @param file1_2
+	 * @param file1_3
+	 * @param file1_4
+	 * @param file1_5
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/saveEditHtmlGoodsSMYL",produces="plain/text; charset=UTF-8")
+	@ResponseBody
+	public String saveEdithtmlGoodsSMYL(HtmlGoodsSMYL htmlGoodsSMYL,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file1_2",required=false) MultipartFile file1_2,
+			@RequestParam(value="file1_3",required=false) MultipartFile file1_3,
+			@RequestParam(value="file1_4",required=false) MultipartFile file1_4,
+			@RequestParam(value="file1_5",required=false) MultipartFile file1_5,
+			HttpServletRequest request) {
+		
+		PlanResult plan=new PlanResult();
+		String json;
+		int count = editHtmlGoodsSMYL(htmlGoodsSMYL,file1_1,file1_2,file1_3,file1_4,file1_5,request);
 		if(count==0) {
 			plan.setStatus(0);
 			plan.setMsg("内容保存失败！");

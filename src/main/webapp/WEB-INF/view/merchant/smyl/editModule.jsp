@@ -56,6 +56,9 @@ var dm1Html,dm2Html;
 var dSpxqIfShowArr=[];
 var dSpxqNameArr=[];
 var dSpxqValueArr=[];
+var dYhxxIfShowArr=[];
+var dYhxxNameArr=[];
+var dYhxxValueArr=[];
 function initDefaultHtmlVal(){
 	dpn=$("#productName").val();
 	for(var i=0;i<5;i++){
@@ -64,6 +67,7 @@ function initDefaultHtmlVal(){
 		console.log("reset"+i+"==="+disArr1[i]);
 	}
 	console.log(disArr1);
+	
 	$("#spxq_tab input[id^='spxqIfShow']").each(function(i){
 		dSpxqIfShowArr[i]=$(this).val();
 		var spxqName=$("#spxq_tab input[name^='spxqName']").eq(i).val();
@@ -72,6 +76,15 @@ function initDefaultHtmlVal(){
 		//console.log("spxqValue==="+spxqValue);
 		dSpxqValueArr[i]=spxqValue;
 	});
+	
+	$("#yhxx_tab input[id^='yhxxIfShow']").each(function(i){
+		dYhxxIfShowArr[i]=$(this).val();
+		var yhxxName=$("#yhxx_tab input[name^='yhxxName']").eq(i).val();
+		dYhxxNameArr[i]=yhxxName;
+		var yhxxValue=$("#yhxx_tab input[name^='yhxxValue']").eq(i).val();
+		dYhxxValueArr[i]=yhxxValue;
+	});
+	
 	setTimeout(function(){
 		dm1Html=editor1.html();
 		dm2Html=editor2.html();
@@ -154,8 +167,6 @@ function previewHtmlGoodsSMYL(){
 					$("#preview_div #image1_5_img").css("display","block");
 					$("#preview_div #image1_5_img").attr("src",image1_5);
 				}
-				
-				$("#preview_div #memo1_div").html(previewSMYL.memo1);
 				
 				var trs=$("#preview_div #spxq_tab tr");
 				
@@ -294,6 +305,145 @@ function previewHtmlGoodsSMYL(){
 				tds.eq(0).text(previewSMYL.spxqName15);
 				tds.eq(1).text(previewSMYL.spxqValue15);
 				
+				$("#preview_div #memo1_div").html(previewSMYL.memo1);
+				
+				var trs=$("#preview_div #yhxx_tab tr");
+				
+				var tr=trs.eq(1);
+				if(previewSMYL.yhxxIfShow1)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				var tds=trs.eq(1).find("td");
+				tds.eq(0).text(previewSMYL.yhxxName1);
+				tds.eq(1).text(previewSMYL.yhxxValue1);
+				
+				tr=trs.eq(2);
+				if(previewSMYL.yhxxIfShow2)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSMYL.yhxxName2);
+				tds.eq(1).text(previewSMYL.yhxxValue2);
+				
+				tr=trs.eq(3);
+				if(previewSMYL.yhxxIfShow3)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSMYL.yhxxName3);
+				tds.eq(1).text(previewSMYL.yhxxValue3);
+				
+				tr=trs.eq(4);
+				if(previewSMYL.yhxxIfShow4)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSMYL.yhxxName4);
+				tds.eq(1).text(previewSMYL.yhxxValue4);
+				
+				tr=trs.eq(5);
+				if(previewSMYL.yhxxIfShow5)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSMYL.yhxxName5);
+				tds.eq(1).text(previewSMYL.yhxxValue5);
+				
+				tr=trs.eq(6);
+				if(previewSMYL.yhxxIfShow6)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSMYL.yhxxName6);
+				tds.eq(1).text(previewSMYL.yhxxValue6);
+				
+				tr=trs.eq(7);
+				if(previewSMYL.yhxxIfShow7)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSMYL.yhxxName7);
+				tds.eq(1).text(previewSMYL.yhxxValue7);
+				
+				tr=trs.eq(8);
+				if(previewSMYL.yhxxIfShow8)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSMYL.yhxxName8);
+				tds.eq(1).text(previewSMYL.yhxxValue8);
+				
+				tr=trs.eq(9);
+				if(previewSMYL.yhxxIfShow9)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSMYL.yhxxName9);
+				tds.eq(1).text(previewSMYL.yhxxValue9);
+				
+				tr=trs.eq(10);
+				if(previewSMYL.yhxxIfShow10)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSMYL.yhxxName10);
+				tds.eq(1).text(previewSMYL.yhxxValue10);
+				
+				tr=trs.eq(11);
+				if(previewSMYL.yhxxIfShow11)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSMYL.yhxxName11);
+				tds.eq(1).text(previewSMYL.yhxxValue11);
+				
+				tr=trs.eq(12);
+				if(previewSMYL.yhxxIfShow12)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSMYL.yhxxName12);
+				tds.eq(1).text(previewSMYL.yhxxValue12);
+				
+				tr=trs.eq(13);
+				if(previewSMYL.yhxxIfShow13)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSMYL.yhxxName13);
+				tds.eq(1).text(previewSMYL.yhxxValue13);
+				
+				tr=trs.eq(14);
+				if(previewSMYL.yhxxIfShow14)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSMYL.yhxxName14);
+				tds.eq(1).text(previewSMYL.yhxxValue14);
+				
+				tr=trs.eq(15);
+				if(previewSMYL.yhxxIfShow15)
+					tr.css("display","table-row");
+				else
+					tr.css("display","none");
+				tds=tr.find("td");
+				tds.eq(0).text(previewSMYL.yhxxName15);
+				tds.eq(1).text(previewSMYL.yhxxValue15);
+				
 				$("#preview_div #memo2_div").html(previewSMYL.memo2);
 				
 				initDefaultHtmlVal();
@@ -399,6 +549,16 @@ function compareHtmlVal(){
 		return flag;
 	}
 
+	$("#yhxx_tab input[id^='yhxxIfShow']").each(function(i){
+		var yhxxIfShow=$(this).val();
+		var yhxxName=$("#yhxx_tab input[name^='yhxxName']").eq(i).val();
+		var yhxxValue=$("#yhxx_tab input[name^='yhxxValue']").eq(i).val();
+		if(yhxxIfShow!=dYhxxIfShowArr[i]||yhxxName!=dYhxxNameArr[i]||yhxxValue!=dYhxxValueArr[i]){
+			flag=false;
+			return flag;
+		}
+	});
+	
 	var cm2Html=editor2.html();
 	if(dm2Html!=cm2Html){
 		flag=false;
@@ -461,7 +621,7 @@ function hideSaveStatusDiv(){
 	$("#saveStatus_div").css("display","none");
 }
 
-function finishEditHtmlGoodsSPZS(){
+function finishEditHtmlGoodsSMYL(){
 	renameFile();
 	renameImage();
 	document.getElementById("sub_but").click();
@@ -640,7 +800,7 @@ function goBack(){
 </script>
 </head>
 <body>
-<form id="form1" name="form1" method="post" action="finishEdithtmlGoodsSMYL" onsubmit="return checkIfPaid();" enctype="multipart/form-data">
+<form id="form1" name="form1" method="post" action="finishEditHtmlGoodsSMYL" onsubmit="return checkIfPaid();" enctype="multipart/form-data">
 <div class="image1ModBg_div" id="image1ModBg_div">
 	<div class="image1Mod_div" id="image1Mod_div">
 		<div class="title_div">
@@ -1462,8 +1622,8 @@ function goBack(){
 <div class="right_div" id="right_div">
 	<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsSMYL.qrCode }">
 	<div class="preview_div" onclick="previewHtmlGoodsSMYL();">预览</div>
-	<div class="save_div" onclick="saveEdithtmlGoodsSMYL();">保存</div>
-	<div class="finishEdit_div" onclick="finishEdithtmlGoodsSMYL();">完成编辑</div>
+	<div class="save_div" onclick="saveEditHtmlGoodsSMYL();">保存</div>
+	<div class="finishEdit_div" onclick="finishEditHtmlGoodsSMYL();">完成编辑</div>
 	<div class="saveStatus_div" id="saveStatus_div"></div>
 </div>
 	<input type="hidden" id="id" name="id" value="${requestScope.htmlGoodsSMYL.id }" />

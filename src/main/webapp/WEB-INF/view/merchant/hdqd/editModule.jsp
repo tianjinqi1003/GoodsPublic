@@ -87,7 +87,7 @@ function hideOptionDiv(o){
 
 function previewHtmlGoodsHDQD(){
 	if(!compareHtmlVal()){//这是已经编辑过内容的情况
-		saveEdithtmlGoodsHDQD();
+		saveEditHtmlGoodsHDQD();
 		
 		var goodsNumber='${requestScope.htmlGoodsHDQD.goodsNumber }';
 		var accountId='${sessionScope.user.id }';
@@ -409,7 +409,7 @@ function compareHtmlVal(){
 	return flag;
 }
 
-function saveEdithtmlGoodsHDQD(){
+function saveEditHtmlGoodsHDQD(){
 	if(checkIfPaid()){
 		resetEditorHtml();
 		renameFile();
@@ -419,7 +419,7 @@ function saveEdithtmlGoodsHDQD(){
 		 
 		$.ajax({
 			type:"post",
-			url:"saveEdithtmlGoodsHDQD",
+			url:"saveEditHtmlGoodsHDQD",
 			dataType: "json",
 			data:formData,
 			cache: false,
@@ -1187,7 +1187,7 @@ function goBack(){
 <div class="right_div" id="right_div">
 	<img class="qrCode_img" alt="" src="${requestScope.htmlGoodsHDQD.qrCode }">
 	<div class="preview_div" onclick="previewHtmlGoodsHDQD();">预览</div>
-	<div class="save_div" onclick="saveEdithtmlGoodsHDQD();">保存</div>
+	<div class="save_div" onclick="saveEditHtmlGoodsHDQD();">保存</div>
 	<div class="finishEdit_div" onclick="finishEditHtmlGoodsHDQD();">完成编辑</div>
 	<div class="saveStatus_div" id="saveStatus_div"></div>
 </div>
