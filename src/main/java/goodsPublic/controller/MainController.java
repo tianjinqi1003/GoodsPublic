@@ -3119,6 +3119,10 @@ public class MainController {
 			HtmlGoodsHDQD htmlGoodsHDQD = publicService.getHtmlGoodsHDQD(goodsNumber, accountId);
 			jsonMap.put("previewHDQD", htmlGoodsHDQD);
 			break;
+		case "smyl":
+			HtmlGoodsSMYL htmlGoodsSMYL = publicService.getHtmlGoodsSMYL(goodsNumber, accountId);
+			jsonMap.put("previewSMYL", htmlGoodsSMYL);
+			break;
 		}
 		return jsonMap;
 	}
@@ -4379,6 +4383,11 @@ public class MainController {
 			HtmlGoodsHDQD htmlGoodsHDQD = publicService.getHtmlGoodsHDQD(goodsNumber,accountNumber);
 			request.setAttribute("htmlGoodsHDQD", htmlGoodsHDQD);
 			url="/merchant/hdqd/editModule";
+			break;
+		case "smyl":
+			HtmlGoodsSMYL htmlGoodsSMYL = publicService.getHtmlGoodsSMYL(goodsNumber,accountNumber);
+			request.setAttribute("htmlGoodsSMYL", htmlGoodsSMYL);
+			url="/merchant/smyl/editModule";
 			break;
 		}
 		return url;
