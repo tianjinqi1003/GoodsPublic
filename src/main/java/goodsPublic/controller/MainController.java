@@ -3287,6 +3287,11 @@ public class MainController {
 				request.setAttribute("htmlGoodsHDQD", htmlGoodsHDQD);
 				url = "/merchant/hdqd/showHtmlGoods";
 				break;
+			case "smyl":
+				HtmlGoodsSMYL htmlGoodsSMYL = publicService.getHtmlGoodsSMYL(goodsNumber,accountId);
+				request.setAttribute("htmlGoodsSMYL", htmlGoodsSMYL);
+				url = "/merchant/smyl/showHtmlGoods";
+				break;
 				/*
 			case "text":
 				uuid = request.getParameter("uuid");
