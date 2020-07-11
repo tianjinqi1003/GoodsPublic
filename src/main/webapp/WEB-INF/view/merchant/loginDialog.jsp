@@ -118,6 +118,8 @@ function login(){
 				 addHtmlGoodsDMTZL();
 			  else if(trade=="jzsg")
 				  addHtmlGoodsJZSG();
+			  else if(trade=="smyl")
+				  addHtmlGoodsSMYL();
 		   }
 		   else{
 			  alert(json.msg);

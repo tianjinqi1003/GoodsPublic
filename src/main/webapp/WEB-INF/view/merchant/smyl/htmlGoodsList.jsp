@@ -21,14 +21,14 @@ $(function(){
 		iconCls:"icon-add",
 		onClick:function(){
 			if(checkIfPaid())
-				location.href=path+"merchant/main/goBatchAddModule?trade=jzsg";
+				location.href=path+"merchant/main/goBatchAddModule?trade=smyl";
 		}
 	});
 	
 	$("#remove_but").linkbutton({
 		iconCls:"icon-remove",
 		onClick:function(){
-			deleteHtmlGoodsJZSG();
+			deleteHtmlGoodsSMYL();
 		}
 	});
 	
@@ -87,7 +87,7 @@ function reSizeCol(){
 	cols.css("width",width/colCount+"px");
 }
 
-function deleteHtmlGoodsJZSG() {
+function deleteHtmlGoodsSMYL() {
 	var rows=tab1.datagrid("getSelections");
 	if (rows.length == 0) {
 		$.messager.alert("提示","请选择要删除的信息！","warning");
@@ -106,7 +106,7 @@ function deleteByIds(ids){
 	if(checkIfPaid()){
 		$.messager.confirm("提示","确定要删除吗？",function(r){
 			if(r){
-				$.post("deleteHtmlGoodsJZSGByIds",
+				$.post("deleteHtmlGoodsSMYLByIds",
 					{ids:ids,accountNumber:'${sessionScope.user.id}'},
 					function(result){
 						if(result.status==1){

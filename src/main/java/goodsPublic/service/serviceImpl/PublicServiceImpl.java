@@ -857,6 +857,15 @@ public class PublicServiceImpl implements PublicService {
 		count=publicDao.deleteHtmlGoodsHDQDByIds(idList);
 		return count;
 	}
+
+	@Override
+	public int deleteHtmlGoodsSMYLByIds(String ids) {
+		// TODO Auto-generated method stub
+		int count=0;
+		List<String> idList = Arrays.asList(ids.split(","));
+		count=publicDao.deleteHtmlGoodsSMYLByIds(idList);
+		return count;
+	}
 	
 	@Override
 	public int deleteHtmlGoodsDMTZLByIds(String ids) {

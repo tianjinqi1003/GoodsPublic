@@ -437,6 +437,13 @@ public interface PublicMapper {
 	 * @return
 	 */
 	public int deleteHtmlGoodsHDQDByIds(List<String> idList);
+
+	/**
+	 * 根据id删除树木园林模版内容
+	 * @param idList
+	 * @return
+	 */
+	public int deleteHtmlGoodsSMYLByIds(List<String> idList);
 	
 	/**
 	 * 根据id删除多媒体资料模版内容

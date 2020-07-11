@@ -4477,6 +4477,12 @@
 		#{id}
 		</foreach>
 	</delete>
+	<delete id="deleteHtmlGoodsSMYLByIds">
+		delete from html_goods_smyl where 1=1
+		<foreach collection="list" item="id" open=" and cast(id as char) in (" separator="," close=")">
+		#{id}
+		</foreach>
+	</delete>
 	<delete id="deleteHtmlGoodsDMTZLByIds">
 		delete from html_goods_dmtzl where 1=1
 		<foreach collection="list" item="id" open=" and cast(id as char) in (" separator="," close=")">
