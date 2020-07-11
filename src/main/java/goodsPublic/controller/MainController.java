@@ -1933,6 +1933,31 @@ public class MainController {
 	}
 	
 	/**
+	 * 完成编辑树木园林模版内容
+	 * @param htmlGoodsSMYL
+	 * @param file1_1
+	 * @param file1_2
+	 * @param file1_3
+	 * @param file1_4
+	 * @param file1_5
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/finishEditHtmlGoodsSMYL",produces="plain/text; charset=UTF-8")
+	public String finishEditHtmlGoodsSMYL(HtmlGoodsSMYL htmlGoodsSMYL,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file1_2",required=false) MultipartFile file1_2,
+			@RequestParam(value="file1_3",required=false) MultipartFile file1_3,
+			@RequestParam(value="file1_4",required=false) MultipartFile file1_4,
+			@RequestParam(value="file1_5",required=false) MultipartFile file1_5,
+			HttpServletRequest request) {
+		
+		editHtmlGoodsSMYL(htmlGoodsSMYL,file1_1,file1_2,file1_3,file1_4,file1_5,request);
+		
+		return "../../merchant/main/goBrowseHtmlGoodsSMYL?goodsNumber="+htmlGoodsSMYL.getGoodsNumber()+"&accountNumber="+htmlGoodsSMYL.getAccountNumber();
+	}
+	
+	/**
 	 * 保存编辑商品展示模版内容
 	 * @param htmlGoodsSPZS
 	 * @param file1_1
@@ -2486,6 +2511,54 @@ public class MainController {
 				}
 			}
 			count=publicService.editHtmlGoodsHDQD(htmlGoodsHDQD);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally {
+			return count;
+		}
+	}
+	
+	public int editHtmlGoodsSMYL(HtmlGoodsSMYL htmlGoodsSMYL, MultipartFile file1_1, MultipartFile file1_2, MultipartFile file1_3, MultipartFile file1_4, MultipartFile file1_5, HttpServletRequest request) {
+		int count = 0;
+		try {
+			MultipartFile[] fileArr=new MultipartFile[6];
+			fileArr[0]=file1_1;
+			fileArr[1]=file1_2;
+			fileArr[2]=file1_3;
+			fileArr[3]=file1_4;
+			fileArr[4]=file1_5;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						jsonStr = FileUploadUtils.appUploadContentImg(request,fileArr[i],"");
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								htmlGoodsSMYL.setImage1_1(dataJO.get("src").toString());
+								break;
+							case 1:
+								htmlGoodsSMYL.setImage1_2(dataJO.get("src").toString());
+								break;
+							case 2:
+								htmlGoodsSMYL.setImage1_3(dataJO.get("src").toString());
+								break;
+							case 3:
+								htmlGoodsSMYL.setImage1_4(dataJO.get("src").toString());
+								break;
+							case 4:
+								htmlGoodsSMYL.setImage1_5(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+				}
+			}
+			count=publicService.editHtmlGoodsSMYL(htmlGoodsSMYL);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

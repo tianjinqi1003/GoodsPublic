@@ -3473,6 +3473,295 @@
 		gmtModified=now()
 		where id=#{id}
 	</update>
+	<update id="editHtmlGoodsSMYL" parameterType="goodsPublic.entity.HtmlGoodsSMYL">
+		update html_goods_smyl set
+		<if test="productName!=null">
+			productName=#{productName},
+		</if>		
+		<if test="spxqName1!=null">
+			spxqName1=#{spxqName1},
+		</if>
+		<if test="spxqValue1!=null">
+			spxqValue1=#{spxqValue1},
+		</if>
+		<if test="spxqIfShow1!=null">
+			spxqIfShow1=#{spxqIfShow1},
+		</if>
+		<if test="spxqName2!=null">
+			spxqName2=#{spxqName2},
+		</if>
+		<if test="spxqValue2!=null">
+			spxqValue2=#{spxqValue2},
+		</if>
+		<if test="spxqIfShow2!=null">
+			spxqIfShow2=#{spxqIfShow2},
+		</if>
+		<if test="spxqName3!=null">
+			spxqName3=#{spxqName3},
+		</if>
+		<if test="spxqValue3!=null">
+			spxqValue3=#{spxqValue3},
+		</if>
+		<if test="spxqIfShow3!=null">
+			spxqIfShow3=#{spxqIfShow3},
+		</if>
+		<if test="spxqName4!=null">
+			spxqName4=#{spxqName4},
+		</if>
+		<if test="spxqValue4!=null">
+			spxqValue4=#{spxqValue4},
+		</if>
+		<if test="spxqIfShow4!=null">
+			spxqIfShow4=#{spxqIfShow4},
+		</if>
+		<if test="spxqName5!=null">
+			spxqName5=#{spxqName5},
+		</if>
+		<if test="spxqValue5!=null">
+			spxqValue5=#{spxqValue5},
+		</if>
+		<if test="spxqIfShow5!=null">
+			spxqIfShow5=#{spxqIfShow5},
+		</if>
+		<if test="spxqName6!=null">
+			spxqName6=#{spxqName6},
+		</if>
+		<if test="spxqValue6!=null">
+			spxqValue6=#{spxqValue6},
+		</if>
+		<if test="spxqIfShow6!=null">
+			spxqIfShow6=#{spxqIfShow6},
+		</if>
+		<if test="spxqName7!=null">
+			spxqName7=#{spxqName7},
+		</if>
+		<if test="spxqValue7!=null">
+			spxqValue7=#{spxqValue7},
+		</if>
+		<if test="spxqIfShow7!=null">
+			spxqIfShow7=#{spxqIfShow7},
+		</if>
+		<if test="spxqName8!=null">
+			spxqName8=#{spxqName8},
+		</if>
+		<if test="spxqValue8!=null">
+			spxqValue8=#{spxqValue8},
+		</if>
+		<if test="spxqIfShow8!=null">
+			spxqIfShow8=#{spxqIfShow8},
+		</if>
+		<if test="spxqName9!=null">
+			spxqName9=#{spxqName9},
+		</if>
+		<if test="spxqValue9!=null">
+			spxqValue9=#{spxqValue9},
+		</if>
+		<if test="spxqIfShow9!=null">
+			spxqIfShow9=#{spxqIfShow9},
+		</if>
+		<if test="spxqName10!=null">
+			spxqName10=#{spxqName10},
+		</if>
+		<if test="spxqValue10!=null">
+			spxqValue10=#{spxqValue10},
+		</if>
+		<if test="spxqIfShow10!=null">
+			spxqIfShow10=#{spxqIfShow10},
+		</if>
+		<if test="spxqName11!=null">
+			spxqName11=#{spxqName11},
+		</if>
+		<if test="spxqValue11!=null">
+			spxqValue11=#{spxqValue11},
+		</if>
+		<if test="spxqIfShow11!=null">
+			spxqIfShow11=#{spxqIfShow11},
+		</if>
+		<if test="spxqName12!=null">
+			spxqName12=#{spxqName12},
+		</if>
+		<if test="spxqValue12!=null">
+			spxqValue12=#{spxqValue12},
+		</if>
+		<if test="spxqIfShow12!=null">
+			spxqIfShow12=#{spxqIfShow12},
+		</if>
+		<if test="spxqName13!=null">
+			spxqName13=#{spxqName13},
+		</if>
+		<if test="spxqValue13!=null">
+			spxqValue13=#{spxqValue13},
+		</if>
+		<if test="spxqIfShow13!=null">
+			spxqIfShow13=#{spxqIfShow13},
+		</if>
+		<if test="spxqName14!=null">
+			spxqName14=#{spxqName14},
+		</if>
+		<if test="spxqValue14!=null">
+			spxqValue14=#{spxqValue14},
+		</if>
+		<if test="spxqIfShow14!=null">
+			spxqIfShow14=#{spxqIfShow14},
+		</if>
+		<if test="spxqName15!=null">
+			spxqName15=#{spxqName15},
+		</if>
+		<if test="spxqValue15!=null">
+			spxqValue15=#{spxqValue15},
+		</if>
+		<if test="spxqIfShow15!=null">
+			spxqIfShow15=#{spxqIfShow15},
+		</if>
+		<if test="yhxxName1!=null">
+			yhxxName1=#{yhxxName1},
+		</if>
+		<if test="yhxxValue1!=null">
+			yhxxValue1=#{yhxxValue1},
+		</if>
+		<if test="yhxxIfShow1!=null">
+			yhxxIfShow1=#{yhxxIfShow1},
+		</if>
+		<if test="yhxxName2!=null">
+			yhxxName2=#{yhxxName2},
+		</if>
+		<if test="yhxxValue2!=null">
+			yhxxValue2=#{yhxxValue2},
+		</if>
+		<if test="yhxxIfShow2!=null">
+			yhxxIfShow2=#{yhxxIfShow2},
+		</if>
+		<if test="yhxxName3!=null">
+			yhxxName3=#{yhxxName3},
+		</if>
+		<if test="yhxxValue3!=null">
+			yhxxValue3=#{yhxxValue3},
+		</if>
+		<if test="yhxxIfShow3!=null">
+			yhxxIfShow3=#{yhxxIfShow3},
+		</if>
+		<if test="yhxxName4!=null">
+			yhxxName4=#{yhxxName4},
+		</if>
+		<if test="yhxxValue4!=null">
+			yhxxValue4=#{yhxxValue4},
+		</if>
+		<if test="yhxxIfShow4!=null">
+			yhxxIfShow4=#{yhxxIfShow4},
+		</if>
+		<if test="yhxxName5!=null">
+			yhxxName5=#{yhxxName5},
+		</if>
+		<if test="yhxxValue5!=null">
+			yhxxValue5=#{yhxxValue5},
+		</if>
+		<if test="yhxxIfShow5!=null">
+			yhxxIfShow5=#{yhxxIfShow5},
+		</if>
+		<if test="yhxxName6!=null">
+			yhxxName6=#{yhxxName6},
+		</if>
+		<if test="yhxxValue6!=null">
+			yhxxValue6=#{yhxxValue6},
+		</if>
+		<if test="yhxxIfShow6!=null">
+			yhxxIfShow6=#{yhxxIfShow6},
+		</if>
+		<if test="yhxxName7!=null">
+			yhxxName7=#{yhxxName7},
+		</if>
+		<if test="yhxxValue7!=null">
+			yhxxValue7=#{yhxxValue7},
+		</if>
+		<if test="yhxxIfShow7!=null">
+			yhxxIfShow7=#{yhxxIfShow7},
+		</if>
+		<if test="yhxxName8!=null">
+			yhxxName8=#{yhxxName8},
+		</if>
+		<if test="yhxxValue8!=null">
+			yhxxValue8=#{yhxxValue8},
+		</if>
+		<if test="yhxxIfShow8!=null">
+			yhxxIfShow8=#{yhxxIfShow8},
+		</if>
+		<if test="yhxxName9!=null">
+			yhxxName9=#{yhxxName9},
+		</if>
+		<if test="yhxxValue9!=null">
+			yhxxValue9=#{yhxxValue9},
+		</if>
+		<if test="yhxxIfShow9!=null">
+			yhxxIfShow9=#{yhxxIfShow9},
+		</if>
+		<if test="yhxxName10!=null">
+			yhxxName10=#{yhxxName10},
+		</if>
+		<if test="yhxxValue10!=null">
+			yhxxValue10=#{yhxxValue10},
+		</if>
+		<if test="yhxxIfShow10!=null">
+			yhxxIfShow10=#{yhxxIfShow10},
+		</if>
+		<if test="yhxxName11!=null">
+			yhxxName11=#{yhxxName11},
+		</if>
+		<if test="yhxxValue11!=null">
+			yhxxValue11=#{yhxxValue11},
+		</if>
+		<if test="yhxxIfShow11!=null">
+			yhxxIfShow11=#{yhxxIfShow11},
+		</if>
+		<if test="yhxxName12!=null">
+			yhxxName12=#{yhxxName12},
+		</if>
+		<if test="yhxxValue12!=null">
+			yhxxValue12=#{yhxxValue12},
+		</if>
+		<if test="yhxxIfShow12!=null">
+			yhxxIfShow12=#{yhxxIfShow12},
+		</if>
+		<if test="yhxxName13!=null">
+			yhxxName13=#{yhxxName13},
+		</if>
+		<if test="yhxxValue13!=null">
+			yhxxValue13=#{yhxxValue13},
+		</if>
+		<if test="yhxxIfShow13!=null">
+			yhxxIfShow13=#{yhxxIfShow13},
+		</if>
+		<if test="yhxxName14!=null">
+			yhxxName14=#{yhxxName14},
+		</if>
+		<if test="yhxxValue14!=null">
+			yhxxValue14=#{yhxxValue14},
+		</if>
+		<if test="yhxxIfShow14!=null">
+			yhxxIfShow14=#{yhxxIfShow14},
+		</if>
+		<if test="yhxxName15!=null">
+			yhxxName15=#{yhxxName15},
+		</if>
+		<if test="yhxxValue15!=null">
+			yhxxValue15=#{yhxxValue15},
+		</if>
+		<if test="yhxxIfShow15!=null">
+			yhxxIfShow15=#{yhxxIfShow15},
+		</if>
+			image1_1=#{image1_1},
+			image1_2=#{image1_2},
+			image1_3=#{image1_3},
+			image1_4=#{image1_4},
+			image1_5=#{image1_5},
+		<if test="memo1!=null">
+			memo1=#{memo1},
+		</if>
+		<if test="memo2!=null">
+			memo2=#{memo2},
+		</if>
+		gmtModified=now()
+		where id=#{id}
+	</update>
 	<update id="updateQrcode" parameterType="java.lang.String">
 		update public_goods set qrCode=#{param1} where goodsNumber=#{param2} and accountNumber=#{param3}
 	</update>

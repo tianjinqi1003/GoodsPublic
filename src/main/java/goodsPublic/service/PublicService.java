@@ -425,6 +425,13 @@ public interface PublicService {
 	 */
 	public int editHtmlGoodsHDQD(HtmlGoodsHDQD htmlGoodsHDQD);
 
+	/**
+	 * 编辑树木园林模版内容
+	 * @param htmlGoodsSMYL
+	 * @return
+	 */
+	public int editHtmlGoodsSMYL(HtmlGoodsSMYL htmlGoodsSMYL);
+
 	public int deleteScoreQrcodeByUuids(String uuids);
 
 	/**
