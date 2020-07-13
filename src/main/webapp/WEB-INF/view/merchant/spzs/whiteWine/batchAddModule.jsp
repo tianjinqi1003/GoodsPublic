@@ -679,6 +679,7 @@ function checkExcelKey(jo){
 function downloadExcelModule(){
 	var jsonStr="[";
 	var rowCount=4;
+	jsonStr+="{\"sheetName\":\"商品详情\",\"sheetContent\":[";
 	for(var i=0;i<rowCount;i++){
 		jsonStr+="{";
 		$("input[id^='spxqIfShow']").each(function(j){
@@ -696,6 +697,7 @@ function downloadExcelModule(){
 		else
 			jsonStr+="}";
 	}
+	jsonStr+="]}";
 	jsonStr+="]";
 	console.log(jsonStr);
 	location.href=path+"merchant/excel/downloadExcelModule?trade=spzs&moduleType=whiteWine&jsonStr="+encodeURI(jsonStr);

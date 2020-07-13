@@ -46,27 +46,34 @@ public class ExcelController {
 			String trade = request.getParameter("trade");
 			String moduleType = request.getParameter("moduleType");
 			String jsonStr = request.getParameter("jsonStr");
-			JSONArray ja = JSONArray.fromObject(jsonStr);
+			JSONArray excelJA = JSONArray.fromObject(jsonStr);
 			String fileName = null;
-			
 			HSSFWorkbook wb=new HSSFWorkbook();
-			HSSFSheet sheet = wb.createSheet("excel模版生成码");
 			HSSFCellStyle style = wb.createCellStyle();
-			for (int i = 0; i < ja.size(); i++) {
-				JSONObject jo = ja.getJSONObject(i);
-				HSSFRow row = sheet.createRow(i);
-				Iterator<String> it = jo.keys();
-				int colIndex=0;
-				while (it.hasNext()) {
-					String key = it.next().toString();
-					String value = jo.getString(key);
-					HSSFCell cell = row.createCell(colIndex);
-					cell.setCellValue(value);
-					cell.setCellStyle(style);
-					colIndex++;
+			
+			for(int i = 0; i < excelJA.size(); i++) {
+				JSONObject excelJO = excelJA.getJSONObject(i);
+				String sheetName = excelJO.getString("sheetName");
+				String sheetContentStr = excelJO.getString("sheetContent");
+				JSONArray sheetContentJA = JSONArray.fromObject(sheetContentStr);
+				
+				HSSFSheet sheet = wb.createSheet(sheetName);
+				for (int j = 0; j < sheetContentJA.size(); j++) {
+					JSONObject sheetContentJO = sheetContentJA.getJSONObject(j);
+					HSSFRow row = sheet.createRow(j);
+					Iterator<String> it = sheetContentJO.keys();
+					int colIndex=0;
+					while (it.hasNext()) {
+						String key = it.next().toString();
+						String value = sheetContentJO.getString(key);
+						HSSFCell cell = row.createCell(colIndex);
+						cell.setCellValue(value);
+						cell.setCellStyle(style);
+						colIndex++;
+					}
 				}
 			}
-		
+			
 			switch (trade) {
 			case "spzs":
 				if(ModuleSPZS.RED_WINE.equals(moduleType)) {
@@ -90,6 +97,9 @@ public class ExcelController {
 				break;
 			case "hdqd":
 				fileName="活动签到_excel模版";
+				break;
+			case "smyl":
+				fileName="树木园林_excel模版";
 				break;
 			}
 			download(fileName, wb, response);

@@ -630,6 +630,7 @@ function checkExcelKey(jo){
 function downloadExcelModule(){
 	var jsonStr="[";
 	var rowCount=4;
+	jsonStr+="{\"sheetName\":\"属性\",\"sheetContent\":[";
 	for(var i=0;i<rowCount;i++){
 		jsonStr+="{";
 		$("input[id^='ryxxIfShow']").each(function(j){
@@ -647,6 +648,7 @@ function downloadExcelModule(){
 		else
 			jsonStr+="}";
 	}
+	jsonStr+="]}";
 	jsonStr+="]";
 	console.log(jsonStr);
 	location.href=path+"merchant/excel/downloadExcelModule?trade=jzsg&jsonStr="+encodeURI(jsonStr);

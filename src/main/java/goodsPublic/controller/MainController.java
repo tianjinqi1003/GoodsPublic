@@ -4276,6 +4276,24 @@ public class MainController {
 			
 			url="/merchant/hdqd/batchAddModule";
 			break;
+		case "smyl":
+			request.setAttribute("productName", ((List<ModuleSMYL>)publicService.getModuleSMYLByType("productName")).get(0).getValue());
+
+			List<ModuleSMYL> smylImage1List = (List<ModuleSMYL>)publicService.getModuleSMYLByType("image1");
+			request.setAttribute("image1List", smylImage1List);
+			
+			List<ModuleSMYL> spxqList = (List<ModuleSMYL>)publicService.getModuleSMYLByType("spxq");
+			request.setAttribute("spxqList", spxqList);
+
+			request.setAttribute("memo1", ((List<ModuleSMYL>)publicService.getModuleSMYLByType("memo1")).get(0).getValue());
+
+			List<ModuleSMYL> yhxxList = (List<ModuleSMYL>)publicService.getModuleSMYLByType("yhxx");
+			request.setAttribute("yhxxList", yhxxList);
+
+			request.setAttribute("memo2", ((List<ModuleSMYL>)publicService.getModuleSMYLByType("memo2")).get(0).getValue());
+			
+			url="/merchant/smyl/batchAddModule";
+			break;
 		}
 		return url;
 	}

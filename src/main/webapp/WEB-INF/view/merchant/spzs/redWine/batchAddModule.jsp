@@ -49,10 +49,10 @@ $(function(){
 	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
 	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
 
-    //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+    //这里必须延迟1s，等图片加载完再重新设定右边div位置
     setTimeout(function(){
     	resetDivPosition();
-    },"100")
+    },"1000")
 });
 
 function resetDivPosition(){
@@ -791,6 +791,7 @@ function checkExcelKey(jo){
 function downloadExcelModule(){
 	var jsonStr="[";
 	var rowCount=4;
+	jsonStr+="{\"sheetName\":\"商品详情\",\"sheetContent\":[";
 	for(var i=0;i<rowCount;i++){
 		jsonStr+="{";
 		$("input[id^='spxqIfShow']").each(function(j){
@@ -808,6 +809,7 @@ function downloadExcelModule(){
 		else
 			jsonStr+="}";
 	}
+	jsonStr+="]}";
 	jsonStr+="]";
 	console.log(jsonStr);
 	location.href=path+"merchant/excel/downloadExcelModule?trade=spzs&moduleType=redWine&jsonStr="+encodeURI(jsonStr);

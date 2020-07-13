@@ -1,21 +1,20 @@
-<%@page import="com.goodsPublic.util.StringUtils"%>
-<%@ page language="java" contentType="text/html; charset=utf-8" 
+<%@ page import="com.goodsPublic.util.StringUtils"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	String memo1=(String)request.getAttribute("memo1");
 	String memo2=(String)request.getAttribute("memo2");
-	String memo3=(String)request.getAttribute("memo3");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>编辑</title>
-<%@include file="../../js.jsp"%>
+<%@include file="../js.jsp"%>
 <link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/themes/default/default.css" />
 <link rel="stylesheet" href="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css" />
-<link rel="stylesheet" href="<%=basePath %>/resource/css/spzs/productExplain/batchAddModule.css" />
+<link rel="stylesheet" href="<%=basePath %>/resource/css/smyl/batchAddModule.css" />
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/kindeditor.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/lang/zh_CN.js"></script>
 <script charset="utf-8" src="<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.js"></script>
@@ -35,12 +34,6 @@ KindEditor.ready(function(K) {
 		fileManagerJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/file_manager_json.jsp',
 		allowFileManager : true
 	});
-	var editor3 = K.create('textarea[name="memo3"]', {
-		cssPath : '<%=basePath %>/resource/js/kindeditor-4.1.10/plugins/code/prettify.css',
-		uploadJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/upload_json.jsp',
-		fileManagerJson : '<%=basePath %>/resource/js/kindeditor-4.1.10/jsp/file_manager_json.jsp',
-		allowFileManager : true
-	});
 	prettyPrint();
 });
 
@@ -49,7 +42,7 @@ $(function(){
 	var middleDivWidth=$("#middle_div").css("width").substring(0,$("#middle_div").css("width").length-2);
 	$("#right_div").css("margin-left",(parseInt(bodyWidth)+parseInt(middleDivWidth))/2+20+"px");
 
-    //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
+    //这里必须延迟1s，等图片加载完再重新设定右边div位置
     setTimeout(function(){
     	resetDivPosition();
     },"1000")
@@ -68,7 +61,7 @@ function hideOptionDiv(o){
 	$(o).parent().find("#but_div").css("display","none");
 }
 
-function addBatchHtmlGoodsSPZS(){
+function addBatchHtmlGoodsSMYL(){
 	var jsonStr="[";
 	jsonStr+="{";
 	var colCount;
@@ -109,7 +102,7 @@ function addBatchHtmlGoodsSPZS(){
 	 
 	$.ajax({
 		type:"post",
-		url:"addBatchHtmlGoodsSPZS",
+		url:"addBatchHtmlGoodsSMYL",
 		//dataType: "json",
 		data:formData,
 		cache: false,
@@ -125,19 +118,10 @@ function addBatchHtmlGoodsSPZS(){
 			}
 		}
 	});
-	//document.getElementById("sub_but").click();
 }
 
 function openImage1ModBgDiv(){
 	$("#image1ModBg_div").css("display","block");
-}
-
-function openImage2ModBgDiv(){
-	$("#image2ModBg_div").css("display","block");
-}
-
-function openEmbed1ModBgDiv(){
-	$("#embed1ModBg_div").css("display","block");
 }
 
 function deleteImage1Div(){
@@ -146,43 +130,14 @@ function deleteImage1Div(){
 	resetDivPosition();
 }
 
-function deleteImage2Div(){
-	$("#image2_div").remove();
-	$("#uploadFile2_div input[type='file']").remove();
-	resetDivPosition();
-}
-
-function deleteEmbed1Div(){
-	$("#embed1_div").remove();
-	$("#uploadFile3_div input[type='file']").remove();
-	resetDivPosition();
-}
-
 function renameFile(){
 	$("#uploadFile1_div input[type='file']").each(function(i){
 		$(this).attr("name","file1_"+(i+1));
-		//console.log($(this).attr("name"));
-	});
-	$("#uploadFile2_div input[type='file']").each(function(i){
-		$(this).attr("name","file2_"+(i+1));
-		//console.log($(this).attr("name"));
-	});
-	$("#uploadFile3_div input[type='file']").each(function(i){
-		$(this).attr("name","file3_"+(i+1));
-		//console.log($(this).attr("name"));
 	});
 }
 
 function closeImage1ModBgDiv(){
 	$("#image1ModBg_div").css("display","none");
-}
-
-function closeImage2ModBgDiv(){
-	$("#image2ModBg_div").css("display","none");
-}
-
-function closeEmbed1ModBgDiv(){
-	$("#embed1ModBg_div").css("display","none");
 }
 
 function changeButStyle(o,flag){
@@ -207,24 +162,6 @@ function uploadImage1(){
 	document.getElementById("uploadFile1_inp").click();
 }
 
-function uploadImage2(){
-	if($("#image2Mod_div table td[class='file_td']").length>=5){
-		alert("最多上传5张图片!");
-		return false;
-	}
-	var uuid=createUUID();
-	$("#uuid_hid2").val(uuid);
-	$("#uploadFile2_div").append("<input type=\"file\" id=\"uploadFile2_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodePic2(this)\"/>");
-	document.getElementById("uploadFile2_inp").click();
-}
-
-function uploadEmbed1(){
-	var uuid=createUUID();
-	$("#uuid_hid3").val(uuid);
-	$("#uploadFile3_div").html("<input type=\"file\" id=\"uploadFile3_inp\" name=\"file"+uuid+"\" onchange=\"showQrcodeEmbed1(this)\"/>");
-	document.getElementById("uploadFile3_inp").click();
-}
-
 function deleteImage1(o){
 	var td=$(o).parent();
 	var uuid=td.attr("id").substring(7);
@@ -233,26 +170,6 @@ function deleteImage1(o){
 	$("#uploadFile1_div input[type='file'][name='file"+uuid+"']").remove();
 	
 	var imageTab=$("#image1Mod_div table");
-	var tdArr1=imageTab.find("td");
-	imageTab.empty();
-	for(var i=0;i<tdArr1.length;i++){
-		var tdArr2=imageTab.find("td");
-		if(tdArr2.length==0||tdArr2.length%4==0)
-			imageTab.append("<tr></tr>");
-		imageTab.find("tr").eq(imageTab.find("tr").length-1).append(tdArr1[i]);
-	}
-	
-	resetDivPosition();
-}
-
-function deleteImage2(o){
-	var td=$(o).parent();
-	var uuid=td.attr("id").substring(7);
-	$("#image2_div #list_div img[id='img"+uuid+"']").remove();
-	td.remove();
-	$("#uploadFile2_div input[type='file'][name='file"+uuid+"']").remove();
-	
-	var imageTab=$("#image2Mod_div table");
 	var tdArr1=imageTab.find("td");
 	imageTab.empty();
 	for(var i=0;i<tdArr1.length;i++){
@@ -322,105 +239,6 @@ function showQrcodePic1(obj){
     }
 }
 
-function showQrcodePic2(obj){
-	var uuid=$("#uuid_hid2").val();
-	var file=$(obj);
-	file.attr("id","file"+uuid);
-	file.attr("name","file"+uuid);
-	file.removeAttr("onchange");
-	file.css("display","none");
-	var fileHtml=file.prop("outerHTML");
-	var tdHtml="<td class=\"file_td\" id=\"file_td"+uuid+"\">"
-				+"<img class=\"delete_img\" alt=\"\" src=\"/GoodsPublic/resource/images/004.png\" onclick=\"deleteImage2(this);\">"
-				+"<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\">"
-				+fileHtml
-			+"</td>";
-	
-	var imageTab=$("#image2Mod_div table");
-	//var length=imageTab.find("td[id^='file_td']").length;
-	var tdLength=imageTab.find("td").length;
-    if(tdLength%4==0){
-    	var tr=imageTab.find("tr").eq(imageTab.find("tr").length-1);
-    	tr.append(tdHtml)
-    	imageTab.append("<tr>"+$("#image2Mod_div table #upload_td").prop("outerHTML")+"</tr>");
-    	tr.find("td[id^='upload_td']").remove();
-    }
-    else{
-		imageTab.find("#upload_td").before(tdHtml);
-    }
-
-	var $file = $(obj);
-    var fileObj = $file[0];
-    file=$file;
-    var windowURL = window.URL || window.webkitURL;
-    var dataURL;
-    var $img = $("#image2Mod_div table #img"+uuid);
-
-    if (fileObj && fileObj.files && fileObj.files[0]) {
-        dataURL = windowURL.createObjectURL(fileObj.files[0]);
-        $img.attr("src", dataURL);
-        
-        var listDiv=$("#image2_div #list_div");
-        listDiv.append("<img class=\"item_img\" id=\"img"+uuid+"\" alt=\"\" src=\""+dataURL+"\">");
-
-        //这里必须延迟0.1s，等图片加载完再重新设定右边div位置
-        setTimeout(function(){
-        	resetDivPosition();
-        },"100")
-    } else {
-        dataURL = $file.val();
-        var imgObj = document.getElementById("preview");
-        // 两个坑:
-        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
-        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
-        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
-        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
-
-    }
-}
-
-function showQrcodeEmbed1(obj){
-	var uuid=$("#uuid_hid3").val();
-	var file=$(obj);
-	file.attr("id","file"+uuid);
-	file.attr("name","file"+uuid);
-	file.removeAttr("onchange");
-	file.css("display","none");
-	var fileHtml=file.prop("outerHTML");
-	
-	var embedShowDiv=$("#embed1Mod_div #embedShow_div");
-	var embedTag;
-	if (!!window.ActiveXObject || "ActiveXObject" in window)
-		embedTag="embed";
-	else
-		embedTag="iframe";
-	embedShowDiv.html("<"+embedTag+" class=\"item_embed\" id=\"embed"+uuid+"\" alt=\"\">"
-			+fileHtml);
-
-	var $file = $(obj);
-    var fileObj = $file[0];
-    file=$file;
-    var windowURL = window.URL || window.webkitURL;
-    var dataURL;
-    var $embed = $("#embed"+uuid);
-
-    if (fileObj && fileObj.files && fileObj.files[0]) {
-        dataURL = windowURL.createObjectURL(fileObj.files[0]);
-        $embed.attr("src", dataURL);
-        
-        $("#embed1_div #embed1_1").replaceWith("<"+embedTag+" class=\"item_embed\" id=\"embed1_1\" src=\""+dataURL+"\"/>");
-    } else {
-        dataURL = $file.val();
-        var imgObj = document.getElementById("preview");
-        // 两个坑:
-        // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
-        // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
-        imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
-        imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
-
-    }
-}
-
 function createUUID() {
     var s = [];
     var hexDigits = "0123456789abcdef";
@@ -447,6 +265,18 @@ function changeSPXQTrIfShow(index,o){
 	}
 }
 
+function changeYHXXTrIfShow(index,o){
+	var ifShow=$("#yhxxIfShow"+index).val();
+	if(ifShow=="true"){
+		$("#yhxxIfShow"+index).val(false);
+		$(o).val("隐藏");
+	}
+	else{
+		$("#yhxxIfShow"+index).val(true);
+		$(o).val("显示");
+	}
+}
+
 function goBack(){
 	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=spzs&moduleType="+'${param.moduleType}';
 }
@@ -469,6 +299,7 @@ function checkIfLogined(){
 				bool=true;
 			}
 			else{
+				//alert(data.message);
 				$("#login_bg_div").css("display","block");
 				bool=false;
 			}
@@ -588,7 +419,7 @@ function nextStep(flag){
 		
 		$("#xzmb_div").css("display","none");
 		$("#scwj_div").css("display","block");
-		
+
 		$("#scwj_div #main_div").css("display","block");
 		$("#scwj_div #but_div").css("display","block");
 		$("#scwj_div #warn_div").css("display","none");
@@ -751,7 +582,7 @@ function checkExcelKey(jo){
 function downloadExcelModule(){
 	var jsonStr="[";
 	var rowCount=4;
-	jsonStr+="{\"sheetName\":\"产品参数\",\"sheetContent\":[";
+	jsonStr+="{\"sheetName\":\"商品详情\",\"sheetContent\":[";
 	for(var i=0;i<rowCount;i++){
 		jsonStr+="{";
 		$("input[id^='spxqIfShow']").each(function(j){
@@ -769,10 +600,29 @@ function downloadExcelModule(){
 		else
 			jsonStr+="}";
 	}
+	jsonStr+="]},";
+	jsonStr+="{\"sheetName\":\"养护信息\",\"sheetContent\":[";
+	for(var i=0;i<rowCount;i++){
+		jsonStr+="{";
+		$("input[id^='yhxxIfShow']").each(function(j){
+			var checked=$(this).val();
+			if(!(checked=="true"))
+				return true;
+			
+			if(j<$("input[id^='yhxxIfShow']").length-1)
+				jsonStr+="\"value"+j+"\":\""+$("input[name^='yhxxName']").eq(j).val()+(i==0?"":i)+"\",";
+			else
+				jsonStr+="\"value"+j+"\":\""+$("input[name^='yhxxName']").eq(j).val()+(i==0?"":i)+"\"";
+		});
+		if(i<rowCount-1)
+			jsonStr+="},";
+		else
+			jsonStr+="}";
+	}
 	jsonStr+="]}";
 	jsonStr+="]";
 	console.log(jsonStr);
-	location.href=path+"merchant/excel/downloadExcelModule?trade=spzs&moduleType=productExplain&jsonStr="+encodeURI(jsonStr);
+	location.href=path+"merchant/excel/downloadExcelModule?trade=smyl&jsonStr="+encodeURI(jsonStr);
 }
 
 function chooseExcel(){
@@ -917,8 +767,8 @@ function chooseExcel(){
 	</div>
 </div>
 
-<%@include file="../../loginDialog.jsp"%>
-<form id="form2" name="form2" method="post" action="addHtmlGoodsSPZS" onsubmit="return checkForm();" enctype="multipart/form-data">
+<%@include file="../loginDialog.jsp"%>
+<form id="form2" name="form2" method="post" action="addHtmlGoodsSMYL" onsubmit="return checkForm();" enctype="multipart/form-data">
 <div class="image1ModBg_div" id="image1ModBg_div">
 	<div class="image1Mod_div" id="image1Mod_div">
 		<div class="title_div">
@@ -930,7 +780,7 @@ function chooseExcel(){
 				<tr>
 					<td class="file_td" id="file_td1_1">
 						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
-						<img class="item_img" id="img1_1" alt="" src="/GoodsPublic/resource/images/spzs/81a5d69b81bda7b772771e31b57e4fae.png">
+						<img class="item_img" id="img1_1" alt="" src="/GoodsPublic/resource/images/smyl/HPQ2Y6D[SU{S8I~8U1[XQGP.png">
 					</td>
 					<td id="upload_td">
 						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
@@ -949,80 +799,15 @@ function chooseExcel(){
 	</div>
 </div>
 
-<div class="image2ModBg_div" id="image2ModBg_div">
-	<div class="image2Mod_div" id="image2Mod_div">
-		<div class="title_div">
-			<span class="title_span">图片模块</span>
-			<span class="close_span" onclick="closeImage2ModBgDiv();">关闭</span>
-		</div>
-		<div id="tab_div">
-			<table>
-				<tr>
-					<td class="file_td" id="file_td2_1">
-						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
-						<img class="item_img" id="img2_1" alt="" src="/GoodsPublic/resource/images/spzs/59a9157e809d046c12699bc4f431266c.png">
-						<!-- 
-						<input type="file" id="file2_1" name="file2_1" onchange="showQrcodePic2(this)" style="display: none;"/>
-						 -->
-					</td>
-					<td class="file_td" id="file_td2_2">
-						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage2(this);">
-						<img class="item_img" id="img2_2" alt="" src="/GoodsPublic/resource/images/spzs/594c03f1f5e93d78248d9d268f8070b6.png">
-					</td>
-					<!-- 
-					<td style="width: 25%;">
-						<img alt="" src="/GoodsPublic/resource/images/004.png" style="position: absolute;margin-top: 5px;margin-left: 80px;" onclick="deleteImage(this);">
-						<img alt="" src="/GoodsPublic/resource/images/spzs/573ab1fc91d98528915519d96dc2e6ec.png">
-						<input type="file" id="image2_2" onchange="showQrcodePic2(this)" style="display: none;"/>
-					</td>
-					 -->
-					<td id="upload_td">
-						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage2();">
-					</td>
-				</tr>
-			</table>
-			<div class="uploadFile2_div" id="uploadFile2_div">
-				<input type="file" id="file2_1" name="file2_1" onchange="showQrcodePic2(this)" />
-				<input type="file" id="file2_2" name="file2_2" onchange="showQrcodePic2(this)" />
-			</div>
-			<input type="hidden" id="uuid_hid2"/>
-		</div>
-		<div class="but_div" id="but_div">
-			<div class="confirm_div" onclick="closeImage2ModBgDiv();">确&nbsp;认</div>
-			<div class="cancel_div" onclick="closeImage2ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
-		</div>
-	</div>
-</div>
-
-<div class="embed1ModBg_div" id="embed1ModBg_div">
-	<div class="embed1Mod_div" id="embed1Mod_div">
-		<div class="title_div">
-			<span class="title_span">视频模块</span>
-			<span class="close_span" onclick="closeEmbed1ModBgDiv();">关闭</span>
-		</div>
-		<div>
-			<div class="embedShow_div" id="embedShow_div">
-				<embed class="item_embed" id="embed1_1" alt="" src="/GoodsPublic/resource/embed/spzs/4c4a6999823cc4088a4996896ae136c2.mp4">
-			</div>
-			<div class="reupload_div" onclick="uploadEmbed1();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">重新上传</div>
-			<div class="uploadFile3_div" id="uploadFile3_div">
-				<input type="file" id="file3_1" name="file3_1" onchange="showQrcodeEmbed1(this)" />
-			</div>
-			<input type="hidden" id="uuid_hid3"/>
-		</div>
-		<div class="but_div" id="but_div">
-			<div class="confirm_div" onclick="closeEmbed1ModBgDiv();">确&nbsp;认</div>
-			<div class="cancel_div" onclick="closeEmbed1ModBgDiv();" onmousemove="changeButStyle(this,1);" onmouseout="changeButStyle(this,0);">取&nbsp;消</div>
-		</div>
-	</div>
-</div>
-
 <div class="top_div">
 	<div class="return_div" onclick="goBack();">&lt返回</div>
-	<div class="title_div">说明书-案例</div>
+	<div class="title_div">红酒-案例</div>
 	<div class="myQrcode_div">我的二维码&nbsp;${sessionScope.user.userName }</div>
 </div>
 <div class="middle_div" id="middle_div">
+	<div>
+		<input class="productName_input" type="text" id="productName" name="productName" placeholder="请输入标题"/>
+	</div>
 	<div class="image1_div" id="image1_div">
 		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
 			<div class="but_div" id="but_div">
@@ -1036,16 +821,15 @@ function chooseExcel(){
 			</c:forEach>
 		</div>
 	</div>
-	<div class="productName_div">
-		<input class="productName_input" type="text" id="productName" name="productName" placeholder="请输入标题"/>
-	</div>
-	<div class="memo1_div">
-		<textarea class="memo1_ta" id="memo1" name="memo1" cols="100" rows="8"><%=htmlspecialchars(memo1) %></textarea>
-	</div>
 	<div class="spxq_div" id="spxq_div">
 		<table class="spxq_tab" id="spxq_tab">
+			<tr class="head_tr">
+				<td class="spxq_td" colspan="2">商品详情</td>
+				<td class="cz_td">操作</td>
+			</tr>
 			<c:forEach items="${requestScope.spxqList }" var="spxq" varStatus="status">
 			<tr class="item_tr" id="tr${status.index+1 }" height="50">
+				
 				<td class="name_td">
 					<input type="text" name="spxqName${status.index+1 }" value="${spxq.name }" size="10" />
 				</td>
@@ -1074,37 +858,48 @@ function chooseExcel(){
 			</c:forEach>
 		</table>
 	</div>
+	<div class="memo1_div">
+		<textarea class="memo1_ta" id="memo1" name="memo1" cols="100" rows="8"><%=htmlspecialchars(memo1) %></textarea>
+	</div>
+	<div class="yhxx_div" id="yhxx_div">
+		<table class="yhxx_tab" id="yhxx_tab">
+			<tr class="head_tr">
+				<td class="yhxx_td" colspan="2">养护信息</td>
+				<td class="cz_td">操作</td>
+			</tr>
+			<c:forEach items="${requestScope.yhxxList }" var="yhxx" varStatus="status">
+			<tr class="item_tr" id="tr${status.index+1 }" height="50">
+				
+				<td class="name_td">
+					<input type="text" name="yhxxName${status.index+1 }" value="${yhxx.name }" size="10" />
+				</td>
+				<td class="value_td">
+					默认显示Excel导入内容
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="yhxxIfShow${status.index+1 }" name="yhxxIfShow${status.index+1 }" value="true" />
+					<input type="button" class="yhxxIfShow_inp" value="显示" onclick="changeYHXXTrIfShow(${status.index+1 },this)"/>
+				</td>
+			</tr>
+			</c:forEach>
+			<c:forEach begin="4" end="15" varStatus="status">
+			<tr class="item_tr" id="tr${status.index }" height="50">
+				<td class="name_td">
+					<input type="text" name="yhxxName${status.index }" value="字段名未设置" size="10" />
+				</td>
+				<td class="value_td">
+					默认显示Excel导入内容
+				</td>
+				<td class="cz_td">
+					<input type="hidden" id="yhxxIfShow${status.index }" name="yhxxIfShow${status.index }" value="true" />
+					<input type="button" class="yhxxIfShow_inp" value="显示" onclick="changeYHXXTrIfShow(${status.index },this)"/>
+				</td>
+			</tr>
+			</c:forEach>
+		</table>
+	</div>
 	<div class="memo2_div">
 		<textarea class="memo2_ta" id="memo2" name="memo2" cols="100" rows="8" ><%=htmlspecialchars(memo2) %></textarea>
-	</div>
-	<div class="image2_div" id="image2_div">
-		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<div class="but_div" id="but_div">
-				<a onclick="openImage2ModBgDiv();">编辑</a>|
-				<a onclick="deleteImage2Div();">删除</a>
-			</div>
-		</div>
-		<div class="list_div" id="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<c:forEach items="${requestScope.image2List }" var="image2" varStatus="status">
-			<img class="item_img" id="img2_1" alt="" src="${image2.value }">
-			</c:forEach>
-		</div>
-	</div>
-	<div class="memo3_div">
-		<textarea class="memo3_ta" id="memo3" name="memo3" cols="100" rows="8"><%=htmlspecialchars(memo3) %></textarea>
-	</div>
-	<div class="embed1_div" id="embed1_div">
-		<div class="option_div" id="option_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<div class="but_div" id="but_div">
-				<a onclick="openEmbed1ModBgDiv();">编辑</a>|
-				<a onclick="deleteEmbed1Div();">删除</a>
-			</div>
-		</div>
-		<div class="list_div" onmousemove="showOptionDiv(this);" onmouseout="hideOptionDiv(this);">
-			<c:forEach items="${requestScope.embed1List }" var="embed1" varStatus="status">
-			<embed class="item_embed" id="embed1_1" src="${embed1.value }"/>
-			</c:forEach>
-		</div>
 	</div>
 </div>
 <div class="right_div" id="right_div">
@@ -1112,11 +907,9 @@ function chooseExcel(){
 	<div class="scscypm_div" onclick="openUploadExcelDialog(1);">上传Excel生成一批码</div>
 </div>
 	<input type="hidden" id="accountNumber_hid" name="accountNumber" value="${sessionScope.user.id }" />
+	<input type="hidden" name="from" value="${param.from}"/>
 	<input type="hidden" name="moduleType" value="${param.moduleType}"/>
 	<input type="hidden" id="jaStr" name="jaStr"/>
-	<!-- 
-	<input type="submit" id="sub_but" name="button" value="提交内容" style="display: none;" />
-	 -->
 </form>
 </body>
 </html>

@@ -514,6 +514,7 @@ function downloadExcelModule(){
 	
 	var jsonStr="[";
 	var rowCount=hdsjArr.length;
+	jsonStr+="{\"sheetName\":\"活动安排\",\"sheetContent\":[";
 	for(var i=0;i<rowCount;i++){
 		jsonStr+="{";
 		jsonStr+="\"value0\":\""+hdsjArr[i]+"\",";
@@ -525,6 +526,7 @@ function downloadExcelModule(){
 		else
 			jsonStr+="}";
 	}
+	jsonStr+="]}";
 	jsonStr+="]";
 	console.log(jsonStr);
 	//return false;
