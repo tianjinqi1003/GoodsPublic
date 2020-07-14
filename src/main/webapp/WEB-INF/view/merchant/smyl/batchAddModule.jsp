@@ -62,39 +62,72 @@ function hideOptionDiv(o){
 }
 
 function addBatchHtmlGoodsSMYL(){
-	var jsonStr="[";
-	jsonStr+="{";
-	var colCount;
-	var valTds=$("#qrsjbsc_div #excel_tab .tit_tr .val_td");
-	colCount=valTds.length;
-	//val_td
-	valTds.each(function(i){
-		if(i<colCount-1)
-			jsonStr+="\"value"+(i+1)+"\":\""+$(this).text()+"\",";
+	var spxqJsonStr="[";
+	spxqJsonStr+="{";
+	var spxqColCount;
+	var spxqValTds=$("#qrsjbsc_div #excel_tab1 .tit_tr .val_td");
+	spxqColCount=spxqValTds.length;
+	spxqValTds.each(function(i){
+		if(i<spxqColCount-1)
+			spxqJsonStr+="\"value"+(i+1)+"\":\""+$(this).text()+"\",";
 		else
-			jsonStr+="\"value"+(i+1)+"\":\""+$(this).text()+"\"";
+			spxqJsonStr+="\"value"+(i+1)+"\":\""+$(this).text()+"\"";
 	});
-	jsonStr+="},";
+	spxqJsonStr+="},";
 	
-	var rowCount=$("#qrsjbsc_div #excel_tab .content_tr").length;
-	$("#qrsjbsc_div #excel_tab .content_tr").each(function(i){
-		jsonStr+="{";
-		valTds=$(this).find(".val_td");
-		colCount=valTds.length;
-		valTds.each(function(j){
-			if(j<colCount-1)
-				jsonStr+="\"value"+(j+1)+"\":\""+$(this).text()+"\",";
+	var spxqRowCount=$("#qrsjbsc_div #excel_tab1 .content_tr").length;
+	$("#qrsjbsc_div #excel_tab1 .content_tr").each(function(i){
+		spxqJsonStr+="{";
+		spxqValTds=$(this).find(".val_td");
+		spxqColCount=spxqValTds.length;
+		spxqValTds.each(function(j){
+			if(j<spxqColCount-1)
+				spxqJsonStr+="\"value"+(j+1)+"\":\""+$(this).text()+"\",";
 			else
-				jsonStr+="\"value"+(j+1)+"\":\""+$(this).text()+"\"";
+				spxqJsonStr+="\"value"+(j+1)+"\":\""+$(this).text()+"\"";
 		});
-		if(i<rowCount-1)
-			jsonStr+="},";
+		if(i<spxqRowCount-1)
+			spxqJsonStr+="},";
 		else
-			jsonStr+="}";
+			spxqJsonStr+="}";
 	});
-	jsonStr+="]";
-	$("#jaStr").val(jsonStr);
-	console.log(jsonStr);
+	spxqJsonStr+="]";
+	$("#spxqJAStr").val(spxqJsonStr);
+	console.log(spxqJsonStr);
+	//return false;
+	
+	var yhxxJAStr="[";
+	yhxxJAStr+="{";
+	var yhxxColCount;
+	var yhxxValTds=$("#qrsjbsc_div #excel_tab2 .tit_tr .val_td");
+	yhxxColCount=yhxxValTds.length;
+	yhxxValTds.each(function(i){
+		if(i<yhxxColCount-1)
+			yhxxJAStr+="\"value"+(i+1)+"\":\""+$(this).text()+"\",";
+		else
+			yhxxJAStr+="\"value"+(i+1)+"\":\""+$(this).text()+"\"";
+	});
+	yhxxJAStr+="},";
+	
+	var yhxxRowCount=$("#qrsjbsc_div #excel_tab2 .content_tr").length;
+	$("#qrsjbsc_div #excel_tab1 .content_tr").each(function(i){
+		yhxxJAStr+="{";
+		yhxxValTds=$(this).find(".val_td");
+		yhxxColCount=yhxxValTds.length;
+		yhxxValTds.each(function(j){
+			if(j<yhxxColCount-1)
+				yhxxJAStr+="\"value"+(j+1)+"\":\""+$(this).text()+"\",";
+			else
+				yhxxJAStr+="\"value"+(j+1)+"\":\""+$(this).text()+"\"";
+		});
+		if(i<yhxxRowCount-1)
+			yhxxJAStr+="},";
+		else
+			yhxxJAStr+="}";
+	});
+	yhxxJAStr+="]";
+	$("#yhxxJAStr").val(yhxxJAStr);
+	console.log(yhxxJAStr);
 	//return false;
 	
 	renameFile();
@@ -278,7 +311,7 @@ function changeYHXXTrIfShow(index,o){
 }
 
 function goBack(){
-	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=spzs&moduleType="+'${param.moduleType}';
+	location.href="${pageContext.request.contextPath}/merchant/main/goHtmlGoodsList?trade=smyl";
 }
 
 function checkForm(){
@@ -380,7 +413,56 @@ function nextStep(flag){
 			conStr+=txtTdStr+noTxtTdStr;
 			conStr+="</tr>";
 		}
-		var excelTab=$("#xzmb_div #excel_tab");
+		var excelTab=$("#xzmb_div #excel_tab1");
+		excelTab.empty();
+		excelTab.append(titTrStr+conStr);
+		
+		txtColIndex=0;
+		titTrStr="<tr class=\"tit_tr\">";
+		txtTdStr="";
+		noTxtTdStr="";
+		$("input[id^='yhxxIfShow']").each(function(i){
+			if(txtColIndex>=6)
+				return false;
+			var checked=$(this).val();
+			if(checked=="true"){
+				txtTdStr+="<td>"+$("input[name^='yhxxName']").eq(i).val()+"</td>";
+				txtColIndex++;
+			}
+			else{
+				noTxtTdStr+="<td></td>";
+			}
+		});
+		titTrStr+=txtTdStr+noTxtTdStr;
+		titTrStr+="</tr>";
+		var conStr="";
+		for(var i=1;i<=3;i++){
+			txtColIndex=0;
+			txtTdStr="";
+			noTxtTdStr="";
+			conStr+="<tr class=\"content_tr\">";
+			$("input[id^='yhxxIfShow']").each(function(j){
+				if(txtColIndex>=6)
+					return false;
+				var checked=$(this).val();
+				if(checked=="true"){
+					if(txtColIndex==0)
+						txtTdStr+="<td class=\"num_td\">"+$("input[name^='yhxxName']").eq(j).val()+i+"</td>";
+					else
+						txtTdStr+="<td>"+$("input[name^='yhxxName']").eq(j).val()+i+"</td>";
+					txtColIndex++;
+				}
+				else{
+					if(txtColIndex==0)
+						noTxtTdStr+="<td class=\"num_td\"></td>";
+					else
+						noTxtTdStr+="<td></td>";
+				}
+			});
+			conStr+=txtTdStr+noTxtTdStr;
+			conStr+="</tr>";
+		}
+		excelTab=$("#xzmb_div #excel_tab2");
 		excelTab.empty();
 		excelTab.append(titTrStr+conStr);
 		
@@ -447,7 +529,7 @@ function openUploadExcelDialog(flag){
 	nextStep(0);
 }
 
-var ja;
+var spxqJA,yhxxJA;
 function uploadExcel(){
 	var formData = new FormData($("#form1")[0]);
 	 
@@ -460,11 +542,15 @@ function uploadExcel(){
 		processData: false,
 		contentType: false,
 		success: function (result){
+			console.log(result);
 			var resultJO=JSON.parse(result);
-			ja=resultJO.data;
+			var ja=resultJO.data;
 			if(resultJO.status==1){
-				if(checkExcelKey(ja[0]))
-					initQrsjbscExcelTab();
+				if(checkSPXQSheetKey(ja[0])){
+					if(checkYHXXSheetKey(ja[1])){
+						initQrsjbscExcelTab();
+					}
+				}
 			}
 			else{
 				alert(resultJO.msg);
@@ -475,9 +561,9 @@ function uploadExcel(){
 
 function initQrsjbscExcelTab(){
 	nextStep(1);
-	var excelTab=$("#qrsjbsc_div #excel_tab");
+	var excelTab=$("#qrsjbsc_div #excel_tab1");
 	excelTab.empty();
-	var jo=ja[0];
+	var jo=spxqJA[0];
 	var trStr="<thead><tr class=\"xh_tr\"><th></th>";
 	for(var it in jo){
 		//console.log(it.substring(5));
@@ -488,8 +574,8 @@ function initQrsjbscExcelTab(){
 	console.log(trStr);
 	trStr+="<tbody>";
 	
-	for(var i=0;i<ja.length;i++){
-		var jo=ja[i];
+	for(var i=0;i<spxqJA.length;i++){
+		var jo=spxqJA[i];
 		if(i==0){
 			trStr+="<tr class=\"tit_tr\">";
 			trStr+="<td><div style=\"width:55px;height:25px;line-height:25px;text-align:center;margin:2px auto 0; background: #4caf50;color: #fff;border-radius: 4px;\">标题行</div></td>";
@@ -512,23 +598,60 @@ function initQrsjbscExcelTab(){
 	trStr+="</tbody>";
 	excelTab.append(trStr);
 	
-	var dataCount=$("#qrsjbsc_div #excel_tab .content_tr").length;
+	var dataCount=$("#qrsjbsc_div #excel_tab1 .content_tr").length;
 	$("#qrsjbsc_div #dataCount_span").text(dataCount);
 	$("#qrsjbsc_div #qrcodeCount_span").text(dataCount);
+	
+	excelTab=$("#qrsjbsc_div #excel_tab2");
+	excelTab.empty();
+	jo=yhxxJA[0];
+	var trStr="<thead><tr class=\"xh_tr\"><th></th>";
+	for(var it in jo){
+		//console.log(it.substring(5));
+		//console.log(jo[it]);
+		trStr+="<th>"+String.fromCharCode(65+parseInt(it.substring(5)))+"</th>";
+	}
+	trStr+="</tr></thead>";
+	console.log(trStr);
+	trStr+="<tbody>";
+	
+	for(var i=0;i<yhxxJA.length;i++){
+		var jo=yhxxJA[i];
+		if(i==0){
+			trStr+="<tr class=\"tit_tr\">";
+			trStr+="<td><div style=\"width:55px;height:25px;line-height:25px;text-align:center;margin:2px auto 0; background: #4caf50;color: #fff;border-radius: 4px;\">标题行</div></td>";
+			for(var key in jo){
+				//console.log(key.substring(5));
+				//console.log(jo[key]);
+				trStr+="<td class=\"val_td\">"+jo[key]+"</td>";
+			}
+			trStr+="</tr>";
+		}
+		else{
+			trStr+="<tr class=\"content_tr\">";
+			trStr+="<td class=\"num_td\">"+(i+1)+"</td>";
+			for(var key in jo){
+				trStr+="<td class=\"val_td\">"+jo[key]+"</td>";
+			}
+			trStr+="</tr>";
+		}
+	}
+	trStr+="</tbody>";
+	excelTab.append(trStr);
 	
 	resetQrsjbscExcelTabStyle();
 }
 
 function resetQrsjbscExcelTabStyle(){
-	var colCount=$("#qrsjbsc_div #excel_tab .tit_tr .val_td").length;
+	var colCount=$("#qrsjbsc_div #excel_tab1 .tit_tr .val_td").length;
 	if(colCount<6){
-		$("#qrsjbsc_div #excel_tab .tit_tr .val_td").css("width",(650/colCount)+"px");
+		$("#qrsjbsc_div #excel_tab1 .tit_tr .val_td").css("width",(650/colCount)+"px");
 	}
-	var rowCount=$("#qrsjbsc_div #excel_tab .content_tr").length;
+	var rowCount=$("#qrsjbsc_div #excel_tab1 .content_tr").length;
 	if(rowCount<6){
-		var tbody=$("#qrsjbsc_div #excel_tab tbody");
+		var tbody=$("#qrsjbsc_div #excel_tab1 tbody");
 		var trStr="";
-		var jo=ja[0];
+		var jo=spxqJA[0];
 		for(var i=0;i<6-rowCount;i++){
 			trStr+="<tr class=\"noContent_tr\">";
 			trStr+="<td class=\"num_td\"></td>";
@@ -540,16 +663,44 @@ function resetQrsjbscExcelTabStyle(){
 		}
 		tbody.append(trStr);
 	}
-	var tdCount=$("#qrsjbsc_div #excel_tab .tit_tr td").length;
-	$("#qrsjbsc_div #excel_tab").css("width",93*tdCount+"px");
+	var tdCount=$("#qrsjbsc_div #excel_tab1 .tit_tr td").length;
+	$("#qrsjbsc_div #excel_tab1").css("width",93*tdCount+"px");
+	
+	colCount=$("#qrsjbsc_div #excel_tab2 .tit_tr .val_td").length;
+	if(colCount<6){
+		$("#qrsjbsc_div #excel_tab2 .tit_tr .val_td").css("width",(650/colCount)+"px");
+	}
+	rowCount=$("#qrsjbsc_div #excel_tab2 .content_tr").length;
+	if(rowCount<6){
+		var tbody=$("#qrsjbsc_div #excel_tab2 tbody");
+		var trStr="";
+		var jo=spxqJA[0];
+		for(var i=0;i<6-rowCount;i++){
+			trStr+="<tr class=\"noContent_tr\">";
+			trStr+="<td class=\"num_td\"></td>";
+			for(var key in jo){
+				trStr+="<td class=\"val_td\"></td>";
+			}
+			trStr+="</tr>";
+			trStr+="";
+		}
+		tbody.append(trStr);
+	}
+	tdCount=$("#qrsjbsc_div #excel_tab2 .tit_tr td").length;
+	$("#qrsjbsc_div #excel_tab2").css("width",93*tdCount+"px");
 }
 
-function checkExcelKey(jo){
+function checkSPXQSheetKey(jo){
+	if(jo==undefined){
+		return false;
+	}
+	spxqJA=jo["sheetContentJA"];
 	var colCount=$("input[id^='spxqIfShow'][value='true']").length;
 	var keyCount=0;
-	var mbezdStr="模版Excel字段：";
+	var mbezdStr="模版"+jo["sheetName"]+"Excel字段：";
 	var scezdStr="上传Excel字段：";
-	for(var key in jo){
+	var sheetJO=jo["sheetContentJA"][0];
+	for(var key in sheetJO){
 		keyCount++;
 		scezdStr+=jo[key]+"、";
 	}
@@ -566,6 +717,63 @@ function checkExcelKey(jo){
 			var checked=$(this).val();
 			if(checked=="true"){
 				mbezdStr+=$("input[name^='spxqName']").eq(i).val()+"、";
+			}
+		});
+		mbezdStr=mbezdStr.substring(0,mbezdStr.length-1);
+		scezdStr=scezdStr.substring(0,scezdStr.length-1);
+		mbezdStr+="等"+colCount+"个字段";
+		scezdStr+="等"+keyCount+"个字段";
+		
+		$("#scwj_div #mbezd_div").text(mbezdStr);
+		$("#scwj_div #scezd_div").text(scezdStr);
+		return false;
+	}
+}
+
+function checkYHXXSheetKey(jo){
+	var mbezdStr="模版养护信息Excel字段：";
+	var scezdStr="上传养护信息Excel字段：";
+	var colCount=$("input[id^='yhxxIfShow'][value='true']").length;
+	var keyCount=0;
+	if(jo==undefined){
+		$("#scwj_div #main_div").css("display","none");
+		$("#scwj_div #but_div").css("display","none");
+		$("#scwj_div #warn_div").css("display","block");
+		$("#scwj_div #sffgmb_div").css("display","block");
+
+		$("input[id^='yhxxIfShow']").each(function(i){
+			var checked=$(this).val();
+			if(checked=="true"){
+				mbezdStr+=$("input[name^='yhxxName']").eq(i).val()+"、";
+			}
+		});
+		mbezdStr=mbezdStr.substring(0,mbezdStr.length-1);
+		mbezdStr+="等"+colCount+"个字段";
+		scezdStr+="暂无字段";
+
+		$("#scwj_div #mbezd_div").text(mbezdStr);
+		$("#scwj_div #scezd_div").text(scezdStr);
+		return false;
+	}
+	yhxxJA=jo["sheetContentJA"];
+	var sheetJO=jo["sheetContentJA"][0];
+	for(var key in sheetJO){
+		keyCount++;
+		scezdStr+=jo[key]+"、";
+	}
+	//console.log(colCount+","+keyCount);
+	if(colCount==keyCount)
+		return true;
+	else{
+		$("#scwj_div #main_div").css("display","none");
+		$("#scwj_div #but_div").css("display","none");
+		$("#scwj_div #warn_div").css("display","block");
+		$("#scwj_div #sffgmb_div").css("display","block");
+		
+		$("input[id^='yhxxIfShow']").each(function(i){
+			var checked=$(this).val();
+			if(checked=="true"){
+				mbezdStr+=$("input[name^='yhxxName']").eq(i).val()+"、";
 			}
 		});
 		mbezdStr=mbezdStr.substring(0,mbezdStr.length-1);
@@ -650,7 +858,43 @@ function chooseExcel(){
 			<div class="mbxgContent_div">
 				<div class="left_div">
 					<img class="excel_img" src="<%=basePath %>/resource/images/spzs/excel_bg.19fbdf2a.jpg" alt="">
-					<table class="excel_tab" id="excel_tab">
+					<table class="excel_tab1" id="excel_tab1">
+						<tr class="tit_tr">
+							<td>品牌</td>
+							<td>系列</td>
+							<td>产地</td>
+							<td>葡萄品种</td>
+							<td>醒酒时间</td>
+							<td>采摘年份</td>
+						</tr>
+						<tr class="content_tr">
+							<td>品牌</td>
+							<td>系列</td>
+							<td>产地</td>
+							<td>葡萄品种</td>
+							<td>醒酒时间</td>
+							<td>采摘年份</td>
+						</tr>
+						<tr class="content_tr">
+							<td>品牌</td>
+							<td>系列</td>
+							<td>产地</td>
+							<td>葡萄品种</td>
+							<td>醒酒时间</td>
+							<td>采摘年份</td>
+						</tr>
+						<tr class="content_tr">
+							<td>品牌</td>
+							<td>系列</td>
+							<td>产地</td>
+							<td>葡萄品种</td>
+							<td>醒酒时间</td>
+							<td>采摘年份</td>
+						</tr>
+					</table>
+					
+					<img class="excel_img" src="<%=basePath %>/resource/images/spzs/excel_bg.19fbdf2a.jpg" alt="">
+					<table class="excel_tab2" id="excel_tab2">
 						<tr class="tit_tr">
 							<td>品牌</td>
 							<td>系列</td>
@@ -722,7 +966,7 @@ function chooseExcel(){
 				<div class="sffg_div">是否将上传的Excel字段覆盖模版Excel字段?</div>
 				<div class="but_div">
 					<div class="cxscBut_div" onclick="chooseExcel()">否，重新上传</div>
-					<div class="fgmbnrBut_div" onclick="initQrsjbscExcelTab()">是，覆盖Excel模版内容</div>
+					<div class="fgmbnrBut_div" onclick="initQrsjbscExcelTab1()">是，覆盖Excel模版内容</div>
 				</div>
 			</div>
 		</div>
@@ -732,8 +976,8 @@ function chooseExcel(){
 				预览数据：本次共上传<span class="num_span" id="dataCount_span">4</span>条数据， 将生成<span class="num_span" id="qrcodeCount_span">4</span>个二维码
 				<span class="reUpload_span" onclick="nextStep(0)">重新上传</span>
 			</div>
-			<div class="tab_div">
-				<table class="excel_tab" id="excel_tab">
+			<div class="tab1_div">
+				<table class="excel_tab1" id="excel_tab1">
 					<thead>
 						<tr class="xh_tr">
 							<th>1</th>
@@ -762,7 +1006,37 @@ function chooseExcel(){
 					</tbody>
 				</table>
 			</div>
-			<div class="ksscBut_div" onclick="addBatchHtmlGoodsSPZS()">开始生成</div>
+			<div class="tab2_div">
+				<table class="excel_tab2" id="excel_tab2">
+					<thead>
+						<tr class="xh_tr">
+							<th>1</th>
+							<th>1</th>
+							<th>1</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr class="tit_tr">
+							<td>
+								<div style="width:55px;height:25px;line-height:25px;text-align:center;margin:2px auto 0; background: #4caf50;color: #fff;border-radius: 4px;">标题行</div>
+    						</td>
+							<td>2</td>
+							<td>2</td>
+						</tr>
+						<tr class="content_tr">
+							<td class="num_td">3</td>
+							<td class="val_td">3</td>
+							<td>3</td>
+						</tr>
+						<tr class="content_tr">
+							<td class="num_td">3</td>
+							<td class="val_td">3</td>
+							<td>3</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="ksscBut_div" onclick="addBatchHtmlGoodsSMYL()">开始生成</div>
 		</div>
 	</div>
 </div>
@@ -801,7 +1075,7 @@ function chooseExcel(){
 
 <div class="top_div">
 	<div class="return_div" onclick="goBack();">&lt返回</div>
-	<div class="title_div">红酒-案例</div>
+	<div class="title_div">树木园林-案例</div>
 	<div class="myQrcode_div">我的二维码&nbsp;${sessionScope.user.userName }</div>
 </div>
 <div class="middle_div" id="middle_div">
@@ -909,7 +1183,8 @@ function chooseExcel(){
 	<input type="hidden" id="accountNumber_hid" name="accountNumber" value="${sessionScope.user.id }" />
 	<input type="hidden" name="from" value="${param.from}"/>
 	<input type="hidden" name="moduleType" value="${param.moduleType}"/>
-	<input type="hidden" id="jaStr" name="jaStr"/>
+	<input type="hidden" id="spxqJAStr" name="spxqJAStr"/>
+	<input type="hidden" id="yhxxJAStr" name="yhxxJAStr"/>
 </form>
 </body>
 </html>

@@ -1,7 +1,12 @@
 package goodsPublic.controller;
 
+import java.beans.IntrospectionException;
+import java.beans.PropertyDescriptor;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -961,7 +966,6 @@ public class MainController {
 		return "../../merchant/main/goBrowseHtmlGoodsDMTTS?goodsNumber="+htmlGoodsDMTTS.getGoodsNumber()+"&accountNumber="+htmlGoodsDMTTS.getAccountNumber();
 	}
 	
-
 	@RequestMapping(value="/addBatchHtmlGoodsJZSG")
 	@ResponseBody
 	public Map<String, Object> addBatchHtmlGoodsJZSG(HtmlGoodsJZSG htmlGoodsJZSG,
@@ -1141,6 +1145,375 @@ public class MainController {
 		}
 	}
 	
+	@RequestMapping(value="/addBatchHtmlGoodsSMYL")
+	@ResponseBody
+	public Map<String, Object> addBatchHtmlGoodsSMYL(HtmlGoodsSMYL htmlGoodsSMYL,
+			String spxqJAStr,
+			String yhxxJAStr,
+			@RequestParam(value="file1_1",required=false) MultipartFile file1_1,
+			@RequestParam(value="file1_2",required=false) MultipartFile file1_2,
+			@RequestParam(value="file1_3",required=false) MultipartFile file1_3,
+			@RequestParam(value="file1_4",required=false) MultipartFile file1_4,
+			@RequestParam(value="file1_5",required=false) MultipartFile file1_5,
+			HttpServletRequest request) {
+		
+		Map<String, Object> jsonMap = new HashMap<String, Object>();
+		//System.out.println("==="+jaStr);
+		JSONArray spxqJA = JSONArray.fromObject(spxqJAStr);
+		JSONArray yhxxJA = JSONArray.fromObject(yhxxJAStr);
+		try {
+			MultipartFile[] fileArr=new MultipartFile[5];
+			fileArr[0]=file1_1;
+			fileArr[1]=file1_2;
+			fileArr[2]=file1_3;
+			fileArr[3]=file1_4;
+			fileArr[4]=file1_5;
+			for (int i = 0; i < fileArr.length; i++) {
+				String jsonStr = null;
+				if(fileArr[i]!=null) {
+					if(fileArr[i].getSize()>0) {
+						jsonStr = FileUploadUtils.appUploadContentImg(request,fileArr[i],"");
+						JSONObject fileJson = JSONObject.fromObject(jsonStr);
+						if("成功".equals(fileJson.get("msg"))) {
+							JSONObject dataJO = (JSONObject)fileJson.get("data");
+							switch (i) {
+							case 0:
+								htmlGoodsSMYL.setImage1_1(dataJO.get("src").toString());
+								break;
+							case 1:
+								htmlGoodsSMYL.setImage1_2(dataJO.get("src").toString());
+								break;
+							case 2:
+								htmlGoodsSMYL.setImage1_3(dataJO.get("src").toString());
+								break;
+							case 3:
+								htmlGoodsSMYL.setImage1_4(dataJO.get("src").toString());
+								break;
+							case 4:
+								htmlGoodsSMYL.setImage1_5(dataJO.get("src").toString());
+								break;
+							}
+						}
+					}
+					else {
+						switch (i) {
+						case 0:
+							htmlGoodsSMYL.setImage1_1("/GoodsPublic/resource/images/smyl/HPQ2Y6D[SU{S8I~8U1[XQGP.png");
+							break;
+						}
+					}
+				}
+			}
+			
+			JSONObject spxqJO = spxqJA.getJSONObject(0);
+			Iterator<String> it = spxqJO.keys();
+			while (it.hasNext()) {
+				String key = it.next();
+				String value = spxqJO.getString(key);
+				Integer colIndex = Integer.valueOf(key.substring(5));
+				switch (colIndex) {
+				case 1:
+					htmlGoodsSMYL.setSpxqName1(value);
+					break;
+				case 2:
+					htmlGoodsSMYL.setSpxqName2(value);
+					break;
+				case 3:
+					htmlGoodsSMYL.setSpxqName3(value);
+					break;
+				case 4:
+					htmlGoodsSMYL.setSpxqName4(value);
+					break;
+				case 5:
+					htmlGoodsSMYL.setSpxqName5(value);
+					break;
+				case 6:
+					htmlGoodsSMYL.setSpxqName6(value);
+					break;
+				case 7:
+					htmlGoodsSMYL.setSpxqName7(value);
+					break;
+				case 8:
+					htmlGoodsSMYL.setSpxqName8(value);
+					break;
+				case 9:
+					htmlGoodsSMYL.setSpxqName9(value);
+					break;
+				case 10:
+					htmlGoodsSMYL.setSpxqName10(value);
+					break;
+				case 11:
+					htmlGoodsSMYL.setSpxqName11(value);
+					break;
+				case 12:
+					htmlGoodsSMYL.setSpxqName12(value);
+					break;
+				case 13:
+					htmlGoodsSMYL.setSpxqName13(value);
+					break;
+				case 14:
+					htmlGoodsSMYL.setSpxqName14(value);
+					break;
+				case 15:
+					htmlGoodsSMYL.setSpxqName15(value);
+					break;
+				}
+			}
+			
+			JSONObject yhxxJO = yhxxJA.getJSONObject(0);
+			it = yhxxJO.keys();
+			while (it.hasNext()) {
+				String key = it.next();
+				String value = yhxxJO.getString(key);
+				Integer colIndex = Integer.valueOf(key.substring(5));
+				switch (colIndex) {
+				case 1:
+					htmlGoodsSMYL.setYhxxName1(value);
+					break;
+				case 2:
+					htmlGoodsSMYL.setYhxxName2(value);
+					break;
+				case 3:
+					htmlGoodsSMYL.setYhxxName3(value);
+					break;
+				case 4:
+					htmlGoodsSMYL.setYhxxName4(value);
+					break;
+				case 5:
+					htmlGoodsSMYL.setYhxxName5(value);
+					break;
+				case 6:
+					htmlGoodsSMYL.setYhxxName6(value);
+					break;
+				case 7:
+					htmlGoodsSMYL.setYhxxName7(value);
+					break;
+				case 8:
+					htmlGoodsSMYL.setYhxxName8(value);
+					break;
+				case 9:
+					htmlGoodsSMYL.setYhxxName9(value);
+					break;
+				case 10:
+					htmlGoodsSMYL.setYhxxName10(value);
+					break;
+				case 11:
+					htmlGoodsSMYL.setYhxxName11(value);
+					break;
+				case 12:
+					htmlGoodsSMYL.setYhxxName12(value);
+					break;
+				case 13:
+					htmlGoodsSMYL.setYhxxName13(value);
+					break;
+				case 14:
+					htmlGoodsSMYL.setYhxxName14(value);
+					break;
+				case 15:
+					htmlGoodsSMYL.setYhxxName15(value);
+					break;
+				}
+			}
+			
+			List<HtmlGoodsSMYL> smylList=new ArrayList<HtmlGoodsSMYL>();
+			for(int i=1;i<spxqJA.size();i++) {
+				String goodsNumber = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date())+i;
+				htmlGoodsSMYL.setGoodsNumber(goodsNumber);
+				spxqJO = spxqJA.getJSONObject(i);
+				it = spxqJO.keys();
+				while (it.hasNext()) {
+					String key = it.next();
+					String value = spxqJO.getString(key);
+					Integer colIndex = Integer.valueOf(key.substring(5));
+					//System.out.println("key==="+key);
+					switch (colIndex) {
+					case 1:
+						htmlGoodsSMYL.setSpxqValue1(value);
+						break;
+					case 2:
+						htmlGoodsSMYL.setSpxqValue2(value);
+						break;
+					case 3:
+						htmlGoodsSMYL.setSpxqValue3(value);
+						break;
+					case 4:
+						htmlGoodsSMYL.setSpxqValue4(value);
+						break;
+					case 5:
+						htmlGoodsSMYL.setSpxqValue5(value);
+						break;
+					case 6:
+						htmlGoodsSMYL.setSpxqValue6(value);
+						break;
+					case 7:
+						htmlGoodsSMYL.setSpxqValue7(value);
+						break;
+					case 8:
+						htmlGoodsSMYL.setSpxqValue8(value);
+						break;
+					case 9:
+						htmlGoodsSMYL.setSpxqValue9(value);
+						break;
+					case 10:
+						htmlGoodsSMYL.setSpxqValue10(value);
+						break;
+					case 11:
+						htmlGoodsSMYL.setSpxqValue11(value);
+						break;
+					case 12:
+						htmlGoodsSMYL.setSpxqValue12(value);
+						break;
+					case 13:
+						htmlGoodsSMYL.setSpxqValue13(value);
+						break;
+					case 14:
+						htmlGoodsSMYL.setSpxqValue14(value);
+						break;
+					case 15:
+						htmlGoodsSMYL.setSpxqValue15(value);
+						break;
+					}
+				}
+				
+				HtmlGoodsSMYL smyl = createHtmlGoodsSMYL(htmlGoodsSMYL);
+				smylList.add(smyl);
+			}
+			
+			for(int i=0;i<yhxxJA.size()-1;i++) {
+				yhxxJO = yhxxJA.getJSONObject(i+1);
+				it = yhxxJO.keys();
+				while (it.hasNext()) {
+					String key = it.next();
+					String value = yhxxJO.getString(key);
+					Integer colIndex = Integer.valueOf(key.substring(5));
+					//System.out.println("key==="+key);
+					switch (colIndex) {
+					case 1:
+						smylList.get(i).setYhxxValue1(value);
+						break;
+					case 2:
+						smylList.get(i).setYhxxValue2(value);
+						break;
+					case 3:
+						smylList.get(i).setYhxxValue3(value);
+						break;
+					case 4:
+						smylList.get(i).setYhxxValue4(value);
+						break;
+					case 5:
+						smylList.get(i).setYhxxValue5(value);
+						break;
+					case 6:
+						smylList.get(i).setYhxxValue6(value);
+						break;
+					case 7:
+						smylList.get(i).setYhxxValue7(value);
+						break;
+					case 8:
+						smylList.get(i).setYhxxValue8(value);
+						break;
+					case 9:
+						smylList.get(i).setYhxxValue9(value);
+						break;
+					case 10:
+						smylList.get(i).setYhxxValue10(value);
+						break;
+					case 11:
+						smylList.get(i).setYhxxValue11(value);
+						break;
+					case 12:
+						smylList.get(i).setYhxxValue12(value);
+						break;
+					case 13:
+						smylList.get(i).setYhxxValue13(value);
+						break;
+					case 14:
+						smylList.get(i).setYhxxValue14(value);
+						break;
+					case 15:
+						smylList.get(i).setYhxxValue15(value);
+						break;
+					}
+				}
+			}
+			
+			for(int i=0;i<smylList.size();i++) {
+				HtmlGoodsSMYL smyl = smylList.get(i);
+
+				String addr = request.getLocalAddr();
+				int port = request.getLocalPort();
+				String contextPath = request.getContextPath();
+				String url = com.goodsPublic.util.StringUtils.REALM_NAME+"GoodsPublic/merchant/main/goShowHtmlGoods?trade=smyl&goodsNumber="+smyl.getGoodsNumber()+"&accountId="+smyl.getAccountNumber();
+				
+				String fileName = smyl.getGoodsNumber() + ".jpg";
+				String avaPath="/GoodsPublic/upload/"+fileName;
+				String path = "D:/resource";
+				Qrcode.createQrCode(url, path, fileName);
+				
+				smyl.setQrCode(avaPath);
+				
+				int a=publicService.addHtmlGoodsSMYL(smyl);
+			}
+			
+			jsonMap.put("message", "ok");
+			jsonMap.put("info", "批量导入成功！");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			jsonMap.put("message", "no");
+			jsonMap.put("info", "批量导入失败！");
+		}
+		finally {
+			return jsonMap;
+		}
+	}
+	
+	private HtmlGoodsSMYL createHtmlGoodsSMYL(HtmlGoodsSMYL htmlGoodsSMYL) throws Exception {
+		// TODO Auto-generated method stub
+		Map<String, Object> smylMap=new HashMap<String, Object>();
+		Class clazz1 = htmlGoodsSMYL.getClass();
+		Field[] fields1 = clazz1.getDeclaredFields();
+		//获得Object对象中的所有方法
+	    for(Field field:fields1){
+	    	//System.out.println("name=="+field.getName());
+	    	if("serialVersionUID".equals(field.getName()))
+	    		continue;
+	        PropertyDescriptor pd = new PropertyDescriptor(field.getName(), clazz1);
+	        Method getMethod = pd.getReadMethod();//获得get方法
+	        //System.out.println("getMethod==="+getMethod.invoke(htmlGoodsSMYL));
+	        //getMethod.invoke(obj);//此处为执行该Object对象的get方法
+	        Method setMethod = pd.getWriteMethod();//获得set方法    
+	        //setMethod.invoke(obj,"参数");//此处为执行该Object对象的set方法
+	        smylMap.put(field.getName(), getMethod.invoke(htmlGoodsSMYL));
+	    }
+	    
+		HtmlGoodsSMYL smyl = new HtmlGoodsSMYL();
+		Class clazz2 = smyl.getClass();
+		Field[] fields2 = clazz2.getDeclaredFields();
+		for(Field field:fields2) {
+			if("serialVersionUID".equals(field.getName()))
+	    		continue;
+			PropertyDescriptor pd = new PropertyDescriptor(field.getName(), clazz2);
+			//Method getMethod = pd.getReadMethod();
+			Method setMethod = pd.getWriteMethod();
+			setMethod.invoke(smyl,smylMap.get(field.getName()));
+			//System.out.println("getMethod==="+getMethod.invoke(smyl));
+		}
+		return smyl;
+	}
+	
+	public static void main(String[] args) {
+		MainController m =new MainController();
+		HtmlGoodsSMYL h=new HtmlGoodsSMYL();
+		h.setAccountNumber("aaaaaaaaaa");
+		try {
+			m.createHtmlGoodsSMYL(h);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	@RequestMapping(value="/addBatchHtmlGoodsHDQD")
 	@ResponseBody
 	public Map<String, Object> addBatchHtmlGoodsHDQD(HtmlGoodsHDQD htmlGoodsHDQD,

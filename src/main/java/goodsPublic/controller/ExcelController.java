@@ -123,21 +123,25 @@ public class ExcelController {
 			// Excel的页签数量  
 			int sheet_size = wb.getNumberOfSheets();  
 			
-			JSONArray ja = new JSONArray();
-			JSONObject jo = null;
+			JSONArray excelJA = new JSONArray();
+			JSONObject sheetContentJO = null;
 			for (int index = 0; index < sheet_size; index++) {  
+				JSONObject excelJO = new JSONObject();
 			    // 每个页签创建一个Sheet对象  
 			    Sheet sheet = wb.getSheet(index);  
+			    System.out.println("name==="+sheet.getName());
+			    excelJO.put("sheetName", sheet.getName());
+			    JSONArray sheetContentJA = new JSONArray();
 			    // sheet.getRows()返回该页的总行数  
 			    for (int i = 0; i < sheet.getRows(); i++) {  
 			        // sheet.getColumns()返回该页的总列数  
-			    	jo = new JSONObject();
+			    	sheetContentJO = new JSONObject();
 			        for (int j = 0; j < sheet.getColumns(); j++) {  
 			            String value = sheet.getCell(j, i).getContents();  
-			            jo.put("value"+j, value);
+			            sheetContentJO.put("value"+j, value);
 			            System.out.print(value+"   ");
 			        }
-			        ja.add(jo);
+			        sheetContentJA.add(sheetContentJO);
 			        System.out.println("  ");
 			    	/*
 			    	String cpxh_qc = sheet.getCell(0, i).getContents();
@@ -153,9 +157,11 @@ public class ExcelController {
 			        */
 			        
 			    }  
+			    excelJO.put("sheetContentJA", sheetContentJA);
+			    excelJA.add(excelJO);
 			}
 			plan.setStatus(1);
-			plan.setData(ja);
+			plan.setData(excelJA);
 			json=JsonUtil.getJsonFromObject(plan);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

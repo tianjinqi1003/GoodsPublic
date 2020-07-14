@@ -6,7 +6,7 @@ body{
 	width: 100%;height:100%;background: rgba(0,0,0,0.65);position: fixed;display:none;z-index: 1;
 }
 .uploadExcel_div{
-	width:800px;height:503px;margin:145px auto;padding-top: 40px;background-color: #fff;border: 0;border-radius: 4px;
+	width:800px;height:825px;margin:50px auto;padding-top: 40px;background-color: #fff;border: 0;border-radius: 4px;
 }
 .uploadExcel_div .close_span{
 	float: right;margin-top: -25px;margin-right: 20px;color: rgba(0,0,0,.45);font-size: 25px;cursor: pointer;
@@ -46,31 +46,31 @@ body{
 	width:740px;margin: 35px auto 12px;color: #9b9b9b;font-size: 12px;font-weight: 700;
 }
 .xzmb_div .mbxgContent_div{
-	width:740px;height:300px;margin: auto;
+	width:740px;height:575px;margin: auto;
 }
 .xzmb_div .left_div{
-	width:405px;height:275px;
+	width:405px;height:575px;
 }
 .xzmb_div .excel_img{
 	width: 419px;height: 249px;margin-left: -14px;
 }
-.xzmb_div .excel_tab{
+.xzmb_div .excel_tab1,.xzmb_div .excel_tab2{
 	width: 378px;height:56px;margin-top: -194px;margin-left: 14px;font-size: 12px;text-align: center;position: absolute;
 }
-.xzmb_div .excel_tab .tit_tr{
+.xzmb_div .excel_tab1 .tit_tr,.xzmb_div .excel_tab2 .tit_tr{
 	height: 14px;line-height: 14px;background: rgba(245,166,35,.1);
 }
-.xzmb_div .excel_tab .tit_tr td{
+.xzmb_div .excel_tab1 .tit_tr td,.xzmb_div .excel_tab2 .tit_tr td{
 	width: 63px;font-weight: 700;
 }
-.xzmb_div .excel_tab .content_tr{
+.xzmb_div .excel_tab1 .content_tr,.xzmb_div .excel_tab2 .content_tr{
 	height: 14px;line-height: 14px;
 }
 .xzmb_div .ckxgBut_div{
 	margin-top: 8px;text-align: center;font-size: 12px;color: #357bb3;font-weight: 600;cursor: default;
 }
 .xzmb_div .right_div{
-	width: 331px;height:237px;border: 1px dashed #9b9b9b;margin-top: -275px;float: right;
+	width: 331px;height:237px;border: 1px dashed #9b9b9b;margin-top: -575px;float: right;
 }
 .xzmb_div .qxz_div{
 	margin-top: 20px;margin-bottom: 8px;font-size: 16px;font-weight: 500;line-height: 2em;text-align: center;
@@ -161,28 +161,28 @@ body{
 .qrsjbsc_div .reUpload_span{
 	margin-left: 19px;color: #357bb3;cursor: pointer;
 }
-.qrsjbsc_div .tab_div{
+.qrsjbsc_div .tab1_div,.qrsjbsc_div .tab2_div{
 	width: 736px;height:331px;margin: auto;overflow-x: scroll;
 }
-.qrsjbsc_div .excel_tab td{
+.qrsjbsc_div .excel_tab1 td,.qrsjbsc_div .excel_tab2 td{
 	border-right: 1px solid #e8e8e8;border-bottom: 1px solid #e8e8e8;
 }
-.qrsjbsc_div .excel_tab .xh_tr{
+.qrsjbsc_div .excel_tab1 .xh_tr,.qrsjbsc_div .excel_tab2 .xh_tr{
 	height:30px;background: #fafafa;
 }
-.qrsjbsc_div .excel_tab .xh_tr th{
+.qrsjbsc_div .excel_tab1 .xh_tr th,.qrsjbsc_div .excel_tab2 .xh_tr th{
 	width: 90px;border-right: 1px solid #e8e8e8;
 }
-.qrsjbsc_div .excel_tab .tit_tr{
+.qrsjbsc_div .excel_tab1 .tit_tr,.qrsjbsc_div .excel_tab2 .tit_tr{
 	height:40px;background: #edf7ee;
 }
-.qrsjbsc_div .excel_tab .val_td{
+.qrsjbsc_div .excel_tab1 .val_td,.qrsjbsc_div .excel_tab2 .val_td{
 	padding-left:10px;
 }
-.qrsjbsc_div .excel_tab .content_tr,.qrsjbsc_div .excel_tab .noContent_tr{
+.qrsjbsc_div .excel_tab1 .content_tr,.qrsjbsc_div .excel_tab1 .noContent_tr,.qrsjbsc_div .excel_tab2 .content_tr,.qrsjbsc_div .excel_tab2 .noContent_tr{
 	height:40px;
 }
-.qrsjbsc_div .excel_tab .content_tr .num_td{
+.qrsjbsc_div .excel_tab1 .content_tr .num_td,.qrsjbsc_div .excel_tab2 .content_tr .num_td{
 	text-align:center;font-weight:bold;background: #fafafa;
 }
 .qrsjbsc_div .ksscBut_div{
