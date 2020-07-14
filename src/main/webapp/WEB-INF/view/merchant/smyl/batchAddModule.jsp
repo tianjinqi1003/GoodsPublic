@@ -702,7 +702,7 @@ function checkSPXQSheetKey(jo){
 	var sheetJO=jo["sheetContentJA"][0];
 	for(var key in sheetJO){
 		keyCount++;
-		scezdStr+=jo[key]+"、";
+		scezdStr+=sheetJO[key]+"、";
 	}
 	//console.log(colCount+","+keyCount);
 	if(colCount==keyCount)
@@ -759,7 +759,7 @@ function checkYHXXSheetKey(jo){
 	var sheetJO=jo["sheetContentJA"][0];
 	for(var key in sheetJO){
 		keyCount++;
-		scezdStr+=jo[key]+"、";
+		scezdStr+=sheetJO[key]+"、";
 	}
 	//console.log(colCount+","+keyCount);
 	if(colCount==keyCount)
@@ -966,7 +966,7 @@ function chooseExcel(){
 				<div class="sffg_div">是否将上传的Excel字段覆盖模版Excel字段?</div>
 				<div class="but_div">
 					<div class="cxscBut_div" onclick="chooseExcel()">否，重新上传</div>
-					<div class="fgmbnrBut_div" onclick="initQrsjbscExcelTab1()">是，覆盖Excel模版内容</div>
+					<div class="fgmbnrBut_div" onclick="initQrsjbscExcelTab()">是，覆盖Excel模版内容</div>
 				</div>
 			</div>
 		</div>

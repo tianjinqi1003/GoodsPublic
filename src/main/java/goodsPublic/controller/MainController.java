@@ -438,6 +438,21 @@ public class MainController {
 				case 10:
 					htmlGoodsSPZS.setSpxqName10(value);
 					break;
+				case 11:
+					htmlGoodsSPZS.setSpxqName11(value);
+					break;
+				case 12:
+					htmlGoodsSPZS.setSpxqName12(value);
+					break;
+				case 13:
+					htmlGoodsSPZS.setSpxqName13(value);
+					break;
+				case 14:
+					htmlGoodsSPZS.setSpxqName14(value);
+					break;
+				case 15:
+					htmlGoodsSPZS.setSpxqName15(value);
+					break;
 				}
 			}
 			
@@ -481,6 +496,21 @@ public class MainController {
 						break;
 					case 10:
 						htmlGoodsSPZS.setSpxqValue10(value);
+						break;
+					case 11:
+						htmlGoodsSPZS.setSpxqValue11(value);
+						break;
+					case 12:
+						htmlGoodsSPZS.setSpxqValue12(value);
+						break;
+					case 13:
+						htmlGoodsSPZS.setSpxqValue13(value);
+						break;
+					case 14:
+						htmlGoodsSPZS.setSpxqValue14(value);
+						break;
+					case 15:
+						htmlGoodsSPZS.setSpxqValue15(value);
 						break;
 					}
 				}
@@ -1502,18 +1532,6 @@ public class MainController {
 		return smyl;
 	}
 	
-	public static void main(String[] args) {
-		MainController m =new MainController();
-		HtmlGoodsSMYL h=new HtmlGoodsSMYL();
-		h.setAccountNumber("aaaaaaaaaa");
-		try {
-			m.createHtmlGoodsSMYL(h);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
 	@RequestMapping(value="/addBatchHtmlGoodsHDQD")
 	@ResponseBody
 	public Map<String, Object> addBatchHtmlGoodsHDQD(HtmlGoodsHDQD htmlGoodsHDQD,
