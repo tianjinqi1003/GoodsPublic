@@ -43,9 +43,9 @@ function addBatchHtmlGoodsJZSG(){
 	//val_td
 	valTds.each(function(i){
 		if(i<colCount-1)
-			jsonStr+="\"value"+(i+1)+"\":\""+$(this).text()+"\",";
+			jsonStr+="\"value"+(i+1)+"\":\""+$(this).attr("text")+"\",";
 		else
-			jsonStr+="\"value"+(i+1)+"\":\""+$(this).text()+"\"";
+			jsonStr+="\"value"+(i+1)+"\":\""+$(this).attr("text")+"\"";
 	});
 	jsonStr+="},";
 	
@@ -56,9 +56,9 @@ function addBatchHtmlGoodsJZSG(){
 		colCount=valTds.length;
 		valTds.each(function(j){
 			if(j<colCount-1)
-				jsonStr+="\"value"+(j+1)+"\":\""+$(this).text()+"\",";
+				jsonStr+="\"value"+(j+1)+"\":\""+$(this).attr("text")+"\",";
 			else
-				jsonStr+="\"value"+(j+1)+"\":\""+$(this).text()+"\"";
+				jsonStr+="\"value"+(j+1)+"\":\""+$(this).attr("text")+"\"";
 		});
 		if(i<rowCount-1)
 			jsonStr+="},";
@@ -392,7 +392,7 @@ function nextStep(flag){
 				return false;
 			var checked=$(this).val();
 			if(checked=="true"){
-				txtTdStr+="<td>"+$("input[name^='ryxxName']").eq(i).val()+"</td>";
+				txtTdStr+="<td>"+substringName($("input[name^='ryxxName']").eq(i).val())+"</td>";
 				txtColIndex++;
 			}
 			else{
@@ -413,9 +413,9 @@ function nextStep(flag){
 				var checked=$(this).val();
 				if(checked=="true"){
 					if(txtColIndex==0)
-						txtTdStr+="<td class=\"num_td\">"+$("input[name^='ryxxName']").eq(j).val()+i+"</td>";
+						txtTdStr+="<td class=\"num_td\">"+substringName($("input[name^='ryxxName']").eq(j).val()+i)+"</td>";
 					else
-						txtTdStr+="<td>"+$("input[name^='ryxxName']").eq(j).val()+i+"</td>";
+						txtTdStr+="<td>"+substringName($("input[name^='ryxxName']").eq(j).val()+i)+"</td>";
 					txtColIndex++;
 				}
 				else{
@@ -490,12 +490,19 @@ function nextStep(flag){
 	}
 }
 
+function substringName(name){
+	if(name.length>4){
+		name=name.substring(0,4)+"...";
+	}
+	return name;
+}
+
 function openUploadExcelDialog(flag){
 	$("#uploadExcelBg_div").css("display",flag==1?"block":"none");
 	nextStep(0);
 }
 
-var ja;
+var csJA;
 function uploadExcel(){
 	var formData = new FormData($("#form1")[0]);
 	 
@@ -509,7 +516,7 @@ function uploadExcel(){
 		contentType: false,
 		success: function (result){
 			var resultJO=JSON.parse(result);
-			ja=resultJO.data;
+			var ja=resultJO.data;
 			if(resultJO.status==1){
 				if(checkExcelKey(ja[0]))
 					initQrsjbscExcelTab();
@@ -525,7 +532,7 @@ function initQrsjbscExcelTab(){
 	nextStep(1);
 	var excelTab=$("#qrsjbsc_div #excel_tab");
 	excelTab.empty();
-	var jo=ja[0];
+	var jo=csJA[0];
 	var trStr="<thead><tr class=\"xh_tr\"><th></th>";
 	for(var it in jo){
 		//console.log(it.substring(5));
@@ -536,15 +543,15 @@ function initQrsjbscExcelTab(){
 	console.log(trStr);
 	trStr+="<tbody>";
 	
-	for(var i=0;i<ja.length;i++){
-		var jo=ja[i];
+	for(var i=0;i<csJA.length;i++){
+		var jo=csJA[i];
 		if(i==0){
 			trStr+="<tr class=\"tit_tr\">";
 			trStr+="<td><div style=\"width:55px;height:25px;line-height:25px;text-align:center;margin:2px auto 0; background: #4caf50;color: #fff;border-radius: 4px;\">标题行</div></td>";
 			for(var key in jo){
 				//console.log(key.substring(5));
 				//console.log(jo[key]);
-				trStr+="<td class=\"val_td\">"+jo[key]+"</td>";
+				trStr+="<td class=\"val_td\" text=\""+jo[key]+"\">"+substringName(jo[key])+"</td>";
 			}
 			trStr+="</tr>";
 		}
@@ -552,7 +559,7 @@ function initQrsjbscExcelTab(){
 			trStr+="<tr class=\"content_tr\">";
 			trStr+="<td class=\"num_td\">"+(i+1)+"</td>";
 			for(var key in jo){
-				trStr+="<td class=\"val_td\">"+jo[key]+"</td>";
+				trStr+="<td class=\"val_td\" text=\""+jo[key]+"\">"+substringName(jo[key])+"</td>";
 			}
 			trStr+="</tr>";
 		}
@@ -576,7 +583,7 @@ function resetQrsjbscExcelTabStyle(){
 	if(rowCount<6){
 		var tbody=$("#qrsjbsc_div #excel_tab tbody");
 		var trStr="";
-		var jo=ja[0];
+		var jo=csJA[0];
 		for(var i=0;i<6-rowCount;i++){
 			trStr+="<tr class=\"noContent_tr\">";
 			trStr+="<td class=\"num_td\"></td>";
@@ -593,13 +600,15 @@ function resetQrsjbscExcelTabStyle(){
 }
 
 function checkExcelKey(jo){
+	csJA=jo["sheetContentJA"];
 	var colCount=$("input[id^='ryxxIfShow'][value='true']").length;
 	var keyCount=0;
 	var mbezdStr="模版Excel字段：";
 	var scezdStr="上传Excel字段：";
-	for(var key in jo){
+	var sheetJO=jo["sheetContentJA"][0];
+	for(var key in sheetJO){
 		keyCount++;
-		scezdStr+=jo[key]+"、";
+		scezdStr+=sheetJO[key]+"、";
 	}
 	//console.log(colCount+","+keyCount);
 	if(colCount==keyCount)

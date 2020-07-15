@@ -64,9 +64,9 @@ function addBatchHtmlGoodsHDQD(){
 		colCount=valTds.length;
 		valTds.each(function(j){
 			if(j<colCount-1)
-				jsonStr+="\"value"+(j+1)+"\":\""+$(this).text()+"\",";
+				jsonStr+="\"value"+(j+1)+"\":\""+$(this).attr("text")+"\",";
 			else
-				jsonStr+="\"value"+(j+1)+"\":\""+$(this).text()+"\"";
+				jsonStr+="\"value"+(j+1)+"\":\""+$(this).attr("text")+"\"";
 		});
 		if(i<rowCount-1)
 			jsonStr+="},";
@@ -313,7 +313,7 @@ function nextStep(flag){
 			txtTdStr="";
 			noTxtTdStr="";
 			conStr+="<tr class=\"content_tr\">";
-				txtTdStr+="<td>"+hdsjArr[i-1]+"</td>";
+				txtTdStr+="<td>"+substringName(hdsjArr[i-1])+"</td>";
 				txtTdStr+="<td>项目"+i+"</td>";
 				txtTdStr+="<td>地点"+i+"</td>";
 				noTxtTdStr+="<td></td><td></td><td></td>";
@@ -384,12 +384,19 @@ function nextStep(flag){
 	}
 }
 
+function substringName(name){
+	if(name.length>4){
+		name=name.substring(0,4)+"...";
+	}
+	return name;
+}
+
 function openUploadExcelDialog(flag){
 	$("#uploadExcelBg_div").css("display",flag==1?"block":"none");
 	nextStep(0);
 }
 
-var ja;
+var hdapJA;
 function uploadExcel(){
 	var formData = new FormData($("#form1")[0]);
 	 
@@ -403,7 +410,7 @@ function uploadExcel(){
 		contentType: false,
 		success: function (result){
 			var resultJO=JSON.parse(result);
-			ja=resultJO.data;
+			var ja=resultJO.data;
 			if(resultJO.status==1){
 				if(checkExcelKey(ja[0]))
 					initQrsjbscExcelTab();
@@ -419,7 +426,7 @@ function initQrsjbscExcelTab(){
 	nextStep(1);
 	var excelTab=$("#qrsjbsc_div #excel_tab");
 	excelTab.empty();
-	var jo=ja[0];
+	var jo=hdapJA[0];
 	var trStr="<thead><tr class=\"xh_tr\"><th></th>";
 	for(var it in jo){
 		//console.log(it.substring(5));
@@ -430,12 +437,12 @@ function initQrsjbscExcelTab(){
 	console.log(trStr);
 	trStr+="<tbody>";
 	
-	for(var i=0;i<ja.length;i++){
-		var jo=ja[i];
+	for(var i=0;i<hdapJA.length;i++){
+		var jo=hdapJA[i];
 		trStr+="<tr class=\"content_tr\">";
 		trStr+="<td class=\"num_td\">"+(i+1)+"</td>";
 		for(var key in jo){
-			trStr+="<td class=\"val_td\">"+jo[key]+"</td>";
+			trStr+="<td class=\"val_td\" text=\""+jo[key]+"\">"+substringName(jo[key])+"</td>";
 		}
 		trStr+="</tr>";
 	}
@@ -458,7 +465,7 @@ function resetQrsjbscExcelTabStyle(){
 	if(rowCount<6){
 		var tbody=$("#qrsjbsc_div #excel_tab tbody");
 		var trStr="";
-		var jo=ja[0];
+		var jo=hdapJA[0];
 		for(var i=0;i<6-rowCount;i++){
 			trStr+="<tr class=\"noContent_tr\">";
 			trStr+="<td class=\"num_td\"></td>";
@@ -475,13 +482,15 @@ function resetQrsjbscExcelTabStyle(){
 }
 
 function checkExcelKey(jo){
+	hdapJA=jo["sheetContentJA"];
 	var colCount=3;
 	var keyCount=0;
 	var mbezdStr="模版Excel字段：时间、项目、地点";
 	var scezdStr="上传Excel字段：";
-	for(var key in jo){
+	var sheetJO=jo["sheetContentJA"][0];
+	for(var key in sheetJO){
 		keyCount++;
-		scezdStr+=jo[key]+"、";
+		scezdStr+=sheetJO[key]+"、";
 	}
 	//console.log(colCount+","+keyCount);
 	if(colCount==keyCount)
