@@ -616,10 +616,10 @@ function checkIfPaid(){
 			<c:forEach items="${requestScope.spxqList }" var="spxq" varStatus="status">
 			<tr class="item_tr" id="tr${status.index+1 }" height="50">
 				<td class="name_td">
-					<input type="text" name="spxqName${status.index+1 }" value="${spxq.name }" size="10" />
+					<input type="text" name="spxqName${status.index+1 }" value="${spxq.name }" size="10" maxlength="80" />
 				</td>
 				<td class="value_td">
-					<input type="text" name="spxqValue${status.index+1 }" />
+					<input type="text" name="spxqValue${status.index+1 }" maxlength="80" />
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="spxqIfShow${status.index+1 }" name="spxqIfShow${status.index+1 }" value="true" />
@@ -630,10 +630,10 @@ function checkIfPaid(){
 			<c:forEach begin="7" end="15" varStatus="status">
 			<tr class="item_tr" id="tr${status.index }" height="50">
 				<td class="name_td">
-					<input type="text" name="spxqName${status.index }" size="10" />
+					<input type="text" name="spxqName${status.index }" size="10" maxlength="80" />
 				</td>
 				<td class="value_td">
-					<input type="text" name="spxqValue${status.index }" />
+					<input type="text" name="spxqValue${status.index }" maxlength="80" />
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="spxqIfShow${status.index }" name="spxqIfShow${status.index }" value="true" />

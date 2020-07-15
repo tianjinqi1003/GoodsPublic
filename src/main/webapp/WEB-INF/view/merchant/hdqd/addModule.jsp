@@ -308,13 +308,13 @@ function checkIfPaid(){
 			<c:forEach items="${requestScope.hdapList }" var="hdap" varStatus="status">
 			<tr class="item_tr" id="tr${status.index+1 }" height="50">
 				<td class="name_td">
-					<input type="text" name="hdapName${status.index+1 }" value="${hdap.name }" size="10" />
+					<input type="text" name="hdapName${status.index+1 }" value="${hdap.name }" size="10" maxlength="80" />
 				</td>
 				<td class="value_td">
-					<input type="text" name="hdapValue${status.index+1 }_1" value="${hdap.value }" />
+					<input type="text" name="hdapValue${status.index+1 }_1" value="${hdap.value }" maxlength="80" />
 				</td>
 				<td class="value2_td">
-					<input type="text" name="hdapValue${status.index+1 }_2" value="${hdap.value2 }" />
+					<input type="text" name="hdapValue${status.index+1 }_2" value="${hdap.value2 }" maxlength="80" />
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="hdapIfShow${status.index+1 }" name="hdapIfShow${status.index+1 }" value="true" />
@@ -325,13 +325,13 @@ function checkIfPaid(){
 			<c:forEach begin="6" end="15" varStatus="status">
 			<tr class="item_tr" id="tr${status.index+1 }" height="50">
 				<td class="name_td">
-					<input type="text" name="hdapName${status.index }" size="10" />
+					<input type="text" name="hdapName${status.index }" size="10" maxlength="80" />
 				</td>
 				<td class="value_td">
-					<input type="text" name="hdapValue${status.index }_1" />
+					<input type="text" name="hdapValue${status.index }_1" maxlength="80" />
 				</td>
 				<td class="value2_td">
-					<input type="text" name="hdapValue${status.index }_2" />
+					<input type="text" name="hdapValue${status.index }_2" maxlength="80" />
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="hdapIfShow${status.index }" name="hdapIfShow${status.index }" value="true" />

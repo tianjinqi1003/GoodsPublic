@@ -408,10 +408,10 @@ function checkIfPaid(){
 			<c:forEach items="${requestScope.ryxxList }" var="ryxx" varStatus="status">
 			<tr class="item_tr" id="tr${status.index+1 }" height="50">
 				<td class="name_td">
-					<input type="text" name="ryxxName${status.index+1 }" value="${ryxx.name }" size="10" />
+					<input type="text" name="ryxxName${status.index+1 }" value="${ryxx.name }" size="10" maxlength="80" />
 				</td>
 				<td class="value_td">
-					<input type="text" name="ryxxValue${status.index+1 }" />
+					<input type="text" name="ryxxValue${status.index+1 }" maxlength="80" />
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow${status.index+1 }" name="ryxxIfShow${status.index+1 }" value="true" />
@@ -422,10 +422,10 @@ function checkIfPaid(){
 			<c:forEach begin="11" end="15" varStatus="status">
 			<tr class="item_tr" id="tr${status.index }" height="50">
 				<td class="name_td">
-					<input type="text" name="ryxxName${status.index }" value="${ryxx.name }" size="10" />
+					<input type="text" name="ryxxName${status.index }" value="${ryxx.name }" size="10" maxlength="80" />
 				</td>
 				<td class="value_td">
-					<input type="text" name="ryxxValue${status.index }" />
+					<input type="text" name="ryxxValue${status.index }" maxlength="80" />
 				</td>
 				<td class="cz_td">
 					<input type="hidden" id="ryxxIfShow${status.index }" name="ryxxIfShow${status.index }" value="true" />

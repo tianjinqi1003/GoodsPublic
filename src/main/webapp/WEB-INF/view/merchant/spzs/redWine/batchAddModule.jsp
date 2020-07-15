@@ -1102,7 +1102,7 @@ function chooseExcel(){
 			<tr class="item_tr" id="tr${status.index+1 }" height="50">
 				
 				<td class="name_td">
-					<input type="text" name="spxqName${status.index+1 }" value="${spxq.name }" size="10" maxlength="10" />
+					<input type="text" name="spxqName${status.index+1 }" value="${spxq.name }" size="10" maxlength="80" />
 				</td>
 				<td class="value_td">
 					默认显示Excel导入内容
@@ -1116,7 +1116,7 @@ function chooseExcel(){
 			<c:forEach begin="7" end="15" varStatus="status">
 			<tr class="item_tr" id="tr${status.index }" height="50">
 				<td class="name_td">
-					<input type="text" name="spxqName${status.index }" value="字段名未设置" size="10" maxlength="10"  />
+					<input type="text" name="spxqName${status.index }" value="字段名未设置" size="10" maxlength="80"  />
 				</td>
 				<td class="value_td">
 					默认显示Excel导入内容

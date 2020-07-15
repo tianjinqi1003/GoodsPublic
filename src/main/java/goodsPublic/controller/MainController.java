@@ -1099,6 +1099,21 @@ public class MainController {
 				case 10:
 					htmlGoodsJZSG.setRyxxName10(value);
 					break;
+				case 11:
+					htmlGoodsJZSG.setRyxxName11(value);
+					break;
+				case 12:
+					htmlGoodsJZSG.setRyxxName12(value);
+					break;
+				case 13:
+					htmlGoodsJZSG.setRyxxName13(value);
+					break;
+				case 14:
+					htmlGoodsJZSG.setRyxxName14(value);
+					break;
+				case 15:
+					htmlGoodsJZSG.setRyxxName15(value);
+					break;
 				}
 			}
 			
@@ -1142,6 +1157,21 @@ public class MainController {
 						break;
 					case 10:
 						htmlGoodsJZSG.setRyxxValue10(value);
+						break;
+					case 11:
+						htmlGoodsJZSG.setRyxxValue11(value);
+						break;
+					case 12:
+						htmlGoodsJZSG.setRyxxValue12(value);
+						break;
+					case 13:
+						htmlGoodsJZSG.setRyxxValue13(value);
+						break;
+					case 14:
+						htmlGoodsJZSG.setRyxxValue14(value);
+						break;
+					case 15:
+						htmlGoodsJZSG.setRyxxValue15(value);
 						break;
 					}
 				}
@@ -1738,6 +1768,76 @@ public class MainController {
 							break;
 						case 3:
 							htmlGoodsHDQD.setHdapValue10_2(value);
+							break;
+						}
+						break;
+					case 11:
+						switch (colIndex) {
+						case 1:
+							htmlGoodsHDQD.setHdapIfShow11(true);
+							htmlGoodsHDQD.setHdapName11(value);
+							break;
+						case 2:
+							htmlGoodsHDQD.setHdapValue11_1(value);
+							break;
+						case 3:
+							htmlGoodsHDQD.setHdapValue11_2(value);
+							break;
+						}
+						break;
+					case 12:
+						switch (colIndex) {
+						case 1:
+							htmlGoodsHDQD.setHdapIfShow12(true);
+							htmlGoodsHDQD.setHdapName12(value);
+							break;
+						case 2:
+							htmlGoodsHDQD.setHdapValue12_1(value);
+							break;
+						case 3:
+							htmlGoodsHDQD.setHdapValue12_2(value);
+							break;
+						}
+						break;
+					case 13:
+						switch (colIndex) {
+						case 1:
+							htmlGoodsHDQD.setHdapIfShow13(true);
+							htmlGoodsHDQD.setHdapName13(value);
+							break;
+						case 2:
+							htmlGoodsHDQD.setHdapValue13_1(value);
+							break;
+						case 3:
+							htmlGoodsHDQD.setHdapValue13_2(value);
+							break;
+						}
+						break;
+					case 14:
+						switch (colIndex) {
+						case 1:
+							htmlGoodsHDQD.setHdapIfShow14(true);
+							htmlGoodsHDQD.setHdapName14(value);
+							break;
+						case 2:
+							htmlGoodsHDQD.setHdapValue14_1(value);
+							break;
+						case 3:
+							htmlGoodsHDQD.setHdapValue14_2(value);
+							break;
+						}
+						break;
+					case 15:
+						switch (colIndex) {
+						case 1:
+							htmlGoodsHDQD.setHdapIfShow15(true);
+							htmlGoodsHDQD.setHdapName15(value);
+							break;
+						case 2:
+							htmlGoodsHDQD.setHdapValue15_1(value);
+							break;
+						case 3:
+							htmlGoodsHDQD.setHdapValue15_2(value);
 							break;
 						}
 						break;

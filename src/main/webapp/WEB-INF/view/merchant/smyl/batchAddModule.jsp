@@ -69,9 +69,9 @@ function addBatchHtmlGoodsSMYL(){
 	spxqColCount=spxqValTds.length;
 	spxqValTds.each(function(i){
 		if(i<spxqColCount-1)
-			spxqJsonStr+="\"value"+(i+1)+"\":\""+$(this).text()+"\",";
+			spxqJsonStr+="\"value"+(i+1)+"\":\""+$(this).attr("text")+"\",";
 		else
-			spxqJsonStr+="\"value"+(i+1)+"\":\""+$(this).text()+"\"";
+			spxqJsonStr+="\"value"+(i+1)+"\":\""+$(this).attr("text")+"\"";
 	});
 	spxqJsonStr+="},";
 	
@@ -82,9 +82,9 @@ function addBatchHtmlGoodsSMYL(){
 		spxqColCount=spxqValTds.length;
 		spxqValTds.each(function(j){
 			if(j<spxqColCount-1)
-				spxqJsonStr+="\"value"+(j+1)+"\":\""+$(this).text()+"\",";
+				spxqJsonStr+="\"value"+(j+1)+"\":\""+$(this).attr("text")+"\",";
 			else
-				spxqJsonStr+="\"value"+(j+1)+"\":\""+$(this).text()+"\"";
+				spxqJsonStr+="\"value"+(j+1)+"\":\""+$(this).attr("text")+"\"";
 		});
 		if(i<spxqRowCount-1)
 			spxqJsonStr+="},";
@@ -103,9 +103,9 @@ function addBatchHtmlGoodsSMYL(){
 	yhxxColCount=yhxxValTds.length;
 	yhxxValTds.each(function(i){
 		if(i<yhxxColCount-1)
-			yhxxJAStr+="\"value"+(i+1)+"\":\""+$(this).text()+"\",";
+			yhxxJAStr+="\"value"+(i+1)+"\":\""+$(this).attr("text")+"\",";
 		else
-			yhxxJAStr+="\"value"+(i+1)+"\":\""+$(this).text()+"\"";
+			yhxxJAStr+="\"value"+(i+1)+"\":\""+$(this).attr("text")+"\"";
 	});
 	yhxxJAStr+="},";
 	
@@ -116,9 +116,9 @@ function addBatchHtmlGoodsSMYL(){
 		yhxxColCount=yhxxValTds.length;
 		yhxxValTds.each(function(j){
 			if(j<yhxxColCount-1)
-				yhxxJAStr+="\"value"+(j+1)+"\":\""+$(this).text()+"\",";
+				yhxxJAStr+="\"value"+(j+1)+"\":\""+$(this).attr("text")+"\",";
 			else
-				yhxxJAStr+="\"value"+(j+1)+"\":\""+$(this).text()+"\"";
+				yhxxJAStr+="\"value"+(j+1)+"\":\""+$(this).attr("text")+"\"";
 		});
 		if(i<yhxxRowCount-1)
 			yhxxJAStr+="},";
@@ -377,7 +377,7 @@ function nextStep(flag){
 				return false;
 			var checked=$(this).val();
 			if(checked=="true"){
-				txtTdStr+="<td>"+$("input[name^='spxqName']").eq(i).val()+"</td>";
+				txtTdStr+="<td>"+substringName($("input[name^='spxqName']").eq(i).val())+"</td>";
 				txtColIndex++;
 			}
 			else{
@@ -398,9 +398,9 @@ function nextStep(flag){
 				var checked=$(this).val();
 				if(checked=="true"){
 					if(txtColIndex==0)
-						txtTdStr+="<td class=\"num_td\">"+$("input[name^='spxqName']").eq(j).val()+i+"</td>";
+						txtTdStr+="<td class=\"num_td\">"+substringName($("input[name^='spxqName']").eq(j).val()+i)+"</td>";
 					else
-						txtTdStr+="<td>"+$("input[name^='spxqName']").eq(j).val()+i+"</td>";
+						txtTdStr+="<td>"+substringName($("input[name^='spxqName']").eq(j).val()+i)+"</td>";
 					txtColIndex++;
 				}
 				else{
@@ -426,7 +426,7 @@ function nextStep(flag){
 				return false;
 			var checked=$(this).val();
 			if(checked=="true"){
-				txtTdStr+="<td>"+$("input[name^='yhxxName']").eq(i).val()+"</td>";
+				txtTdStr+="<td>"+substringName($("input[name^='yhxxName']").eq(i).val())+"</td>";
 				txtColIndex++;
 			}
 			else{
@@ -447,9 +447,9 @@ function nextStep(flag){
 				var checked=$(this).val();
 				if(checked=="true"){
 					if(txtColIndex==0)
-						txtTdStr+="<td class=\"num_td\">"+$("input[name^='yhxxName']").eq(j).val()+i+"</td>";
+						txtTdStr+="<td class=\"num_td\">"+substringName($("input[name^='yhxxName']").eq(j).val()+i)+"</td>";
 					else
-						txtTdStr+="<td>"+$("input[name^='yhxxName']").eq(j).val()+i+"</td>";
+						txtTdStr+="<td>"+substringName($("input[name^='yhxxName']").eq(j).val()+i)+"</td>";
 					txtColIndex++;
 				}
 				else{
@@ -524,6 +524,13 @@ function nextStep(flag){
 	}
 }
 
+function substringName(name){
+	if(name.length>4){
+		name=name.substring(0,4)+"...";
+	}
+	return name;
+}
+
 function openUploadExcelDialog(flag){
 	$("#uploadExcelBg_div").css("display",flag==1?"block":"none");
 	nextStep(0);
@@ -582,7 +589,7 @@ function initQrsjbscExcelTab(){
 			for(var key in jo){
 				//console.log(key.substring(5));
 				//console.log(jo[key]);
-				trStr+="<td class=\"val_td\">"+jo[key]+"</td>";
+				trStr+="<td class=\"val_td\" text=\""+jo[key]+"\">"+substringName(jo[key])+"</td>";
 			}
 			trStr+="</tr>";
 		}
@@ -590,7 +597,7 @@ function initQrsjbscExcelTab(){
 			trStr+="<tr class=\"content_tr\">";
 			trStr+="<td class=\"num_td\">"+(i+1)+"</td>";
 			for(var key in jo){
-				trStr+="<td class=\"val_td\">"+jo[key]+"</td>";
+				trStr+="<td class=\"val_td\" text=\""+jo[key]+"\">"+substringName(jo[key])+"</td>";
 			}
 			trStr+="</tr>";
 		}
@@ -623,7 +630,7 @@ function initQrsjbscExcelTab(){
 			for(var key in jo){
 				//console.log(key.substring(5));
 				//console.log(jo[key]);
-				trStr+="<td class=\"val_td\">"+jo[key]+"</td>";
+				trStr+="<td class=\"val_td\" text=\""+jo[key]+"\">"+substringName(jo[key])+"</td>";
 			}
 			trStr+="</tr>";
 		}
@@ -631,7 +638,7 @@ function initQrsjbscExcelTab(){
 			trStr+="<tr class=\"content_tr\">";
 			trStr+="<td class=\"num_td\">"+(i+1)+"</td>";
 			for(var key in jo){
-				trStr+="<td class=\"val_td\">"+jo[key]+"</td>";
+				trStr+="<td class=\"val_td\" text=\""+jo[key]+"\">"+substringName(jo[key])+"</td>";
 			}
 			trStr+="</tr>";
 		}
@@ -1105,7 +1112,7 @@ function chooseExcel(){
 			<tr class="item_tr" id="tr${status.index+1 }" height="50">
 				
 				<td class="name_td">
-					<input type="text" name="spxqName${status.index+1 }" value="${spxq.name }" size="10" />
+					<input type="text" name="spxqName${status.index+1 }" value="${spxq.name }" size="10" maxlength="80" />
 				</td>
 				<td class="value_td">
 					默认显示Excel导入内容
@@ -1119,7 +1126,7 @@ function chooseExcel(){
 			<c:forEach begin="8" end="15" varStatus="status">
 			<tr class="item_tr" id="tr${status.index }" height="50">
 				<td class="name_td">
-					<input type="text" name="spxqName${status.index }" value="字段名未设置" size="10" />
+					<input type="text" name="spxqName${status.index }" value="字段名未设置" size="10" maxlength="80" />
 				</td>
 				<td class="value_td">
 					默认显示Excel导入内容

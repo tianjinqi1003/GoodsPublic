@@ -894,7 +894,7 @@ function chooseExcel(){
 			<c:forEach items="${requestScope.ryxxList }" var="ryxx" varStatus="status">
 			<tr class="item_tr" id="tr${status.index+1 }" height="50">
 				<td class="name_td">
-					<input type="text" name="ryxxName${status.index+1 }" value="${ryxx.name }" size="10" />
+					<input type="text" name="ryxxName${status.index+1 }" value="${ryxx.name }" size="10" maxlength="80" />
 				</td>
 				<td class="value_td">
 					默认显示Excel导入内容
@@ -908,7 +908,7 @@ function chooseExcel(){
 			<c:forEach begin="11" end="15" varStatus="status">
 			<tr class="item_tr" id="tr${status.index }" height="50">
 				<td class="name_td">
-					<input type="text" name="ryxxName${status.index }" value="字段名未设置" size="10" />
+					<input type="text" name="ryxxName${status.index }" value="字段名未设置" size="10" maxlength="80" />
 				</td>
 				<td class="value_td">
 					默认显示Excel导入内容
