@@ -1258,7 +1258,7 @@ public class MainController {
 					else {
 						switch (i) {
 						case 0:
-							htmlGoodsSMYL.setImage1_1("/GoodsPublic/resource/images/smyl/HPQ2Y6D[SU{S8I~8U1[XQGP.png");
+							htmlGoodsSMYL.setImage1_1("/GoodsPublic/resource/images/smyl/202007150001.png");
 							break;
 						}
 					}
@@ -2120,7 +2120,7 @@ public class MainController {
 					else {
 						switch (i) {
 						case 0:
-							htmlGoodsSMYL.setImage1_1("/GoodsPublic/resource/images/smyl/HPQ2Y6D[SU{S8I~8U1[XQGP.png");
+							htmlGoodsSMYL.setImage1_1("/GoodsPublic/resource/images/smyl/202007150001.png");
 							break;
 						}
 					}

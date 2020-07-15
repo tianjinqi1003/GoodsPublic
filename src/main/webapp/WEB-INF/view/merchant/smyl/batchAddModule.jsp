@@ -1061,7 +1061,7 @@ function chooseExcel(){
 				<tr>
 					<td class="file_td" id="file_td1_1">
 						<img class="delete_img" alt="" src="/GoodsPublic/resource/images/004.png" onclick="deleteImage1(this);">
-						<img class="item_img" id="img1_1" alt="" src="/GoodsPublic/resource/images/smyl/HPQ2Y6D[SU{S8I~8U1[XQGP.png">
+						<img class="item_img" id="img1_1" alt="" src="/GoodsPublic/resource/images/smyl/202007150001.png">
 					</td>
 					<td id="upload_td">
 						<img class="upload_img" alt="" src="/GoodsPublic/resource/images/005.png" onclick="uploadImage1();">
