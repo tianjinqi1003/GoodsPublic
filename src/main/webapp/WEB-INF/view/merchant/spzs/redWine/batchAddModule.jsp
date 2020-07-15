@@ -74,7 +74,6 @@ function addBatchHtmlGoodsSPZS(){
 	var colCount;
 	var valTds=$("#qrsjbsc_div #excel_tab .tit_tr .val_td");
 	colCount=valTds.length;
-	//val_td
 	valTds.each(function(i){
 		if(i<colCount-1)
 			jsonStr+="\"value"+(i+1)+"\":\""+$(this).attr("text")+"\",";
