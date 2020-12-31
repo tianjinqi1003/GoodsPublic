@@ -77,9 +77,7 @@
 	</bean>
 
 	<mvc:annotation-driven />
-     <mvc:default-servlet-handler />
-         <!-- 静态资源过滤 -->
-         <mvc:resources location="/resource/" mapping="/resource/**"/>
-	
-
+    <mvc:default-servlet-handler />
+    <!-- 静态资源过滤 -->
+    <mvc:resources location="/resource/" mapping="/resource/**"/>
 </beans>
